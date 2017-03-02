@@ -1,0 +1,49 @@
+# for CharMM36 --> OpenMM ffxml conversion
+# Author: Chaya D. Stern, choderalab
+# The include files structure is based on the file structure of unzipped toppar_c36_aug15.tgz
+# excluded files include files that need to be excluded from the conversion because of duplicate parameters with different
+# values. In addition, toppar_hbond.str and toppar_all36_lipid_list.str are not standard stream files.
+
+- sourcePackage: charmm36
+  sourcePackageVersion: toppar_c36_aug15.tgz
+- Source:
+    include:
+     - toppar/top_all36_lipid.rtf
+     - toppar/par_all36_lipid.prm
+    stream:
+     - toppar/toppar_water_ions.str
+     - toppar/stream/lipid/toppar_all36_lipid_miscellaneous.str
+     - toppar/stream/lipid/toppar_all36_lipid_model.str
+     - toppar/stream/lipid/toppar_all36_lipid_yeast.str
+  References:
+   lipids:
+     - >-
+       Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos
+       Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM
+       All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843
+     - PUFA modifications:
+       - >-
+         Jeffery B. Klauda, Viviana Monje, Taehoon Kim, and Wonpil Im. "Improving the CHARMM Force Field for
+         Polyunsaturated Fatty Acid Chains" J. Phys. Chem. B. 2012 ASAP http://dx.doi.org/10.1021/jp304056p
+     - atom nomenclature:
+       - >-
+         Sundaralingan, M., Ann. N.Y. Acad. Sci. USA, 195:324-355, 1972
+     - bacterial:
+       - >-
+         Lim, J.B. and Klauda, J.B. Branching at the Iso- and Anteiso- Positions in Complex Chlamydia Membranes: A
+         Molecular Dynamics Study. Biochimica et Biophysica Acta (BBA) - Biomembranes 1808:323-331 (2011).
+       - >-
+         Pandit, K.R. and Klauda, J.B. Membrane models of E. coli containing cyclic moieties in the aliphatic lipid
+         chain. Biochimica et Biophysica Acta (BBA) - Biomembranes 1818:1205-1210 (2012).
+     - cholesterol:
+       - >-
+         Lim, J.B., Rogaski, B. and Klauda, J.B.. "Update of the Cholesterol Force Field Parameters in CHARMM" 116:
+         203-210 (2012).
+       - >-
+         Suits, F., Pitman, M., MacKerell, A.D., Jr., Feller, S.E. "Molecular Level Organization of Saturated and
+         Polyunsaturated Fatty Acids in a Phosphatidylcholine Bilayer Containing Cholesterol" Biochemistry, 43(49):
+         15318-28, 2004
+     - sphingomyelin:
+       - >-
+         Venable, R.M., B. Rogaski, H. Rui, A.D. MacKerell, Jr., R.W. Pastor, and J.B. Klauda. An Experimentally Validated
+         All-atom Force Field for Sphingomyelin. In prep. (2013).
