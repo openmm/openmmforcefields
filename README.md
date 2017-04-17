@@ -1,2 +1,3 @@
 # openmm-forcefields
-CHARMM and AMBER forcefields for OpenMM
+
+Conversion tools for and repository of CHARMM and AMBER forcefields for OpenMM.

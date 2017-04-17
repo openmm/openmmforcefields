@@ -1,0 +1,30 @@
+package:
+  name: openmm-forcefields
+  version: 0.0.0
+
+source:
+  path: ../..
+
+build:
+  preserve_egg_dir: True
+  number: 0
+
+requirements:
+  build:
+    - python
+    - openmm
+
+  run:
+    - python
+    - openmm
+
+test:
+  requires:
+    - nose
+    - nose-timer
+  imports:
+    - simtk.openmm
+
+about:
+  home: https://github.com/choderalab/openmm-forcefields
+  license: MIT License
