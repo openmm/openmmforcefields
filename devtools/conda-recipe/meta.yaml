@@ -12,11 +12,13 @@ build:
 requirements:
   build:
     - python
-    - openmm
+    - openmm >=7.2.0
+    - parmed >=2.7.3
 
   run:
     - python
-    - openmm
+    - openmm >=7.2.0
+    - parmed >=2.7.3
 
 test:
   requires:
