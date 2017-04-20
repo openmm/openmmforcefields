@@ -1,5 +1,7 @@
 **Summary**: call `python amber2omm.py -v`. Requires the `files/` dir. Outputs `ffxml/` containing all converted XMLs and `log.csv` - log of the validation energies.
 
+**Dependencies**: `ParmEd`, `OpenMM`, `Amber` or `AmberTools` or `ambermini`.
+
 **General**
 
 Script supports command line arguments, and so `python amber2omm.py -h`:
@@ -182,3 +184,7 @@ As I've said before already, the system is:
 * naming of the water atom types has stayed as was (`tip3p-O`)
 
 * naming of the ion atom types is `name_of_set (dash) amber_atom_type_name`, e.g. `tip3p_standard-Na+`, `tip3p_HFE_multivalent-Zn2+`.
+
+**Tests**
+
+Run `test/test.py` with `nosetests`.
