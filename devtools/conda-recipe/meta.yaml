@@ -12,6 +12,7 @@ build:
 requirements:
   build:
     - python
+    - openmm >=7.2.0
 
   run:
     - python
