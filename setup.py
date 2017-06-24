@@ -12,33 +12,48 @@ def find_package_data(data_root, package_root):
             files.append(relpath(join(root, fn), package_root))
     return files
 
-setup(
-    name = "openmm-forcefields",
-    version = "0.0.0",
-    author = "Rafal P. Wiewiora, Chaya Stern, Peter Eastman, and John D. Chodera",
-    author_email = "john.chodera@choderalab.org",
-    description = ("Biomolecular forcefields and small molecule support for OpenMM"),
-    license = "MIT",
-    keywords = "molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
-    url = "http://github.com/choderalab/openmm-forcefields",
-    packages=[
-        'openmmforcefields',
-        ],
-    long_description=read('README.md'),
-    install_requires=[
-        'openmm>=7.2',
-    ],
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: MIT",
-    ],
-    entry_points={
-        'console_scripts': [],
-        'openmm.forcefielddir' : [
-            'amber = openmmforcefields.utils.get_amber_directory',
-            'charmm = openmmforcefields.utils.get_charmm_directory'
+try:
+    # Symlink converted ffxml directories so we don't need to copy files
+    os.makedirs('openmmforcefields/ffxml')
+    os.symlink('../../amber/ffxml/', 'openmmforcefields/ffxml/amber')
+    os.symlink('../../charmm/ffxml/', 'openmmforcefields/ffxml/charmm')
+
+    setup(
+        name = "openmmforcefields",
+        version = "0.0.0",
+        author = "Rafal P. Wiewiora, Chaya Stern, Peter Eastman, and John D. Chodera",
+        author_email = "john.chodera@choderalab.org",
+        description = ("Biomolecular forcefields and small molecule support for OpenMM"),
+        license = "MIT",
+        keywords = "molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
+        url = "http://github.com/choderalab/openmm-forcefields",
+        packages=[
+            'openmmforcefields',
             ],
+        package_dir={
+            'openmmforcefields': 'openmmforcefields'
         },
-    package_data={'openmmforcefields': ['amber/ffxml/*.xml', 'charmm/ffxml/*.xml']},
-)
+        long_description=read('README.md'),
+        install_requires=[
+            'openmm>=7.2',
+        ],
+        classifiers=[
+            "Development Status :: 3 - Alpha",
+            "Topic :: Utilities",
+            "License :: OSI Approved :: MIT",
+        ],
+        entry_points={
+            'console_scripts': [],
+            'openmm.forcefielddir' : [
+                'ffxml = openmmforcefields.utils:get_ffxml_path',
+                ],
+            },
+        package_data={
+            'openmmforcefields': ['ffxml/amber/*.xml', 'ffxml/charmm/*.xml']
+            },
+    )
+finally:
+    # Clean up temporary symlinks
+    os.unlink('openmmforcefields/ffxml/amber')
+    os.unlink('openmmforcefields/ffxml/charmm')
+    os.removedirs('openmmforcefields/ffxml')

@@ -1,5 +1,5 @@
 package:
-  name: openmm-forcefields
+  name: openmmforcefields
   version: 0.0.0
 
 source:

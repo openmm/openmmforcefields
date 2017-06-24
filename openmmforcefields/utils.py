@@ -1,9 +1,12 @@
 from pkg_resources import resource_filename
 
-def get_amber_directory():
-    # TODO: Modify this to reflect where we install amber ffxml files
-    return resource_filename('openmmforcefield', 'amber')
+def get_ffxml_path():
+    """
+    Return the path where OpenMM ffxml forcefield files are stored in this package.
 
-def get_charmm_directory():
-    # TODO: Modify this to reflect where we install charmm ffxml files
-    return resource_filename('openmmforcefield', 'charmm')
+    Returns
+    -------
+    path : str
+        The absolute path where OpenMM ffxml forcefield files are stored in this package
+    """
+    return resource_filename('openmmforcefields', 'ffxml')
