@@ -31,7 +31,7 @@ script:
   - conda install --yes --use-local ${PACKAGENAME}
   # Test the openmmforcefields package to make sure installed ffxml files are working
   - echo "Testing the installed openmmforcefields ffxml files..."
-  - cd devtools && nosetests ${PACKAGEMNAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
+  - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
   - cd amber && python convert_amber.py && cd ..
