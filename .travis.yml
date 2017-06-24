@@ -24,14 +24,20 @@ script:
   # Install extras for testing
   - conda install --yes --quiet pip nose nose-timer
   # Build the recipe
+  - echo "Building the recipe..."
   - conda build devtools/conda-recipe
   # Install the package
+  - echo "Installing the ${PACKAGENAME} package..."
   - conda install --yes --use-local ${PACKAGENAME}
+  # Test the openmmforcefields package to make sure installed ffxml files are working
+  - echo "Testing the installed openmmforcefields ffxml files..."
+  - cd devtools && nosetests $PACKAGENAME --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
+  # Test AMBER conversion
+  - echo "Testing AMBER conversion..."
+  - cd amber && python convert_amber.py && cd ..
   # Test CHARMM conversion
+  - echo "Testing CHARMM conversion..."
   - cd charmm && python convert_charmm.py && cd ..
-  # Test the package
-  #- cd devtools && nosetests $PACKAGENAME --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
-  #- nosetests $PACKAGENAME --nocapture --verbosity=2 --with-timer
 
 os:
   - osx
@@ -45,4 +51,4 @@ env:
 
   global:
     - ORGNAME="omnia"
-    - PACKAGENAME="openmm-forcefields"
+    - PACKAGENAME="openmmforcefields"
