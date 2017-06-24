@@ -22,7 +22,7 @@ script:
   - conda config --add channels omnia
   - conda config --add channels https://conda.anaconda.org/omnia/label/dev
   # Install extras for testing
-  - conda install --yes --quiet pip nose nose-timer
+  - conda install --yes --quiet pip nose nose-timer parmed
   # Build the recipe
   - echo "Building the recipe..."
   - conda build devtools/conda-recipe
