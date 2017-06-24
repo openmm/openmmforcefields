@@ -12,20 +12,17 @@ build:
 requirements:
   build:
     - python
-    - openmm >=7.2.0
-    - parmed >=2.7.3
 
   run:
     - python
     - openmm >=7.2.0
-    - parmed >=2.7.3
 
 test:
   requires:
     - nose
     - nose-timer
   imports:
-    - simtk.openmm
+    - openmmforcefields
 
 about:
   home: https://github.com/choderalab/openmm-forcefields

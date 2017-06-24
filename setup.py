@@ -1,6 +1,6 @@
 import os
 from os.path import relpath, join
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -27,9 +27,7 @@ try:
         license = "MIT",
         keywords = "molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
         url = "http://github.com/choderalab/openmm-forcefields",
-        packages=[
-            'openmmforcefields', 'openmmforcefields.tests',
-            ],
+        packages=['openmmforcefields', 'openmmforcefields.tests'],
         package_dir={
             'openmmforcefields': 'openmmforcefields',
         },
