@@ -28,10 +28,10 @@ try:
         keywords = "molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
         url = "http://github.com/choderalab/openmm-forcefields",
         packages=[
-            'openmmforcefields',
+            'openmmforcefields', 'openmmforcefields.tests',
             ],
         package_dir={
-            'openmmforcefields': 'openmmforcefields'
+            'openmmforcefields': 'openmmforcefields',
         },
         long_description=read('README.md'),
         install_requires=[
