@@ -4,11 +4,11 @@
 
 **General**
 
-Script supports command line arguments, and so `python amber2omm.py -h`:
+Script supports command line arguments, and so `python convert_amber.py -h`:
 ```
-usage: amber2omm.py [-h] [--input INPUT] [--input-format INPUT_FORMAT]
-                    [--verbose] [--no-log] [--protein-test] [--nucleic-test]
-                    [--protein-ua-test] [--phospho-protein-test] [--gaff-test]
+usage: convert_amber.py [-h] [--input INPUT] [--input-format INPUT_FORMAT]
+                        [--verbose] [--no-log] [--protein-test] [--nucleic-test]
+                        [--protein-ua-test] [--phospho-protein-test] [--gaff-test]
 
 AMBER --> OpenMM forcefield conversion script
 
@@ -32,7 +32,7 @@ optional arguments:
                         test
 ```
 
-With the defaults as set, all you need to do is have the script and the `files/` directory and call `python amber2omm.py`. `-v` or `--no-log` as wanted.
+With the defaults as set, all you need to do is have the script and the `files/` directory and call `python convert_amber.py`. `-v` or `--no-log` as wanted.
 
 Output:
 * `ffxml/` with all output XMLs
@@ -158,14 +158,14 @@ An 'overloading' set: HFE +2, +3 and +4 ions for tip3p water.
 
 Should you want to provide a different YAML (shorter version, different completely, whatever you want), script will take it with:
 ```
-python amber2omm.py --input name_of_your_yaml.yaml
+python convert_amber.py --input name_of_your_yaml.yaml
 ```
 
 The outputs of any YAML will be written to `ffxml/`.
 
 You can also provide a leaprc of your choosing via:
 ```
-python amber2omm.py --input name_of_your_leaprc --input-format leaprc
+python convert_amber.py --input name_of_your_leaprc --input-format leaprc
 ```
 
 The output of any leaprc will be written to the `./`.
