@@ -1,0 +1,55 @@
+language: c
+sudo: false
+
+branches:
+  only:
+    - master
+
+install:
+  - source devtools/travis-ci/install.sh
+  - export PYTHONUNBUFFERED=true
+  # Add org channel
+  - conda config --add channels ${ORGNAME}
+
+script:
+  # Create a test environment
+  - conda create --yes -n test python=$python
+  # Activate the test environment
+  - source activate test
+  # Add conda channels, using old priority scheme where most recent versions win
+  - conda config --set channel_priority false
+  - conda config --add channels conda-forge
+  - conda config --add channels omnia
+  - conda config --add channels https://conda.anaconda.org/omnia/label/dev
+  # Install extras for testing
+  - conda install --yes --quiet pip nose nose-timer
+  # Build the recipe
+  - echo "Building the recipe..."
+  - conda build devtools/conda-recipe
+  # Install the package
+  - echo "Installing the ${PACKAGENAME} package..."
+  - conda install --yes --use-local ${PACKAGENAME}
+  # Test the openmmforcefields package to make sure installed ffxml files are working
+  - echo "Testing the installed openmmforcefields ffxml files..."
+  - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
+  # Test AMBER conversion
+  - conda install --yes --quiet parmed yaml  
+  - echo "Testing AMBER conversion..."
+  - cd amber && python convert_amber.py && cd ..
+  # Test CHARMM conversion
+  - echo "Testing CHARMM conversion..."
+  - cd charmm && python convert_charmm.py && cd ..
+
+os:
+  - osx
+  - linux
+
+env:
+  matrix:
+    - python=2.7  CONDA_PY=2.7
+    - python=3.5  CONDA_PY=3.5
+    - python=3.5  CONDA_PY=3.6
+
+  global:
+    - ORGNAME="omnia"
+    - PACKAGENAME="openmmforcefields"

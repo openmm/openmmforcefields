@@ -37,7 +37,7 @@ for fi in charmm_files:
     source.append(OrderedDict())
     source[-1]['Source'] = fi
     md5 = hashlib.md5()
-    with open(fi) as f:
+    with open(fi, 'rb') as f:
         md5.update(f.read())
     md5 = md5.hexdigest()
     source[-1]['md5hash'] = md5
@@ -64,5 +64,3 @@ for ff in charmm_references:
 params = CharmmParameterSet(*charmm_files)
 params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
 params_omm.write('ffxml/charmm36.xml', provenance=provenance)
-
-
