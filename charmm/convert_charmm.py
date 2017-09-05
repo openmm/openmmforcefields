@@ -9,6 +9,11 @@ import simtk.openmm.app as app
 import simtk.openmm as mm
 import simtk.unit as u
 
+import logging
+# create logger
+logger = logging.getLogger('parmed.openmm')
+logger.setLevel(logging.DEBUG)
+
 data = yaml.safe_load(open('charmm36.yaml'))
 source_pack = data[0]['sourcePackage']
 source_pack_ver = data[0]['sourcePackageVersion']
