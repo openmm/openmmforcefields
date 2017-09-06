@@ -9,7 +9,10 @@ import simtk.openmm.app as app
 import simtk.openmm as mm
 import simtk.unit as u
 
-data = yaml.safe_load(open('charmm36.yaml'))
+yaml_filename = 'charmm36.yaml'
+ffxml_filename = 'ffxml/charmm36.xml'
+
+data = yaml.safe_load(open(yaml_filename, 'r'))
 source_pack = data[0]['sourcePackage']
 source_pack_ver = data[0]['sourcePackageVersion']
 
@@ -61,6 +64,16 @@ for ff in charmm_references:
 
 
 #generate recommended combination for charmm36
+print('Loading CHARMM parameter sets...')
 params = CharmmParameterSet(*charmm_files)
+
+print('Converting parameters to OpenMM...')
 params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
-params_omm.write('ffxml/charmm36.xml', provenance=provenance)
+
+print('Writing parameter set and compatible patches. This may take several minutes...')
+params_omm.write(ffxml_filename, provenance=provenance)
+
+# Try reading the forcefield back in to make sure it is valid
+print('Verifying ffxml file integrity...')
+forcefield = app.ForceField(ffxml_filename)
+print('Verified.')
