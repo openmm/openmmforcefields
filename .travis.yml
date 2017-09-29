@@ -34,7 +34,6 @@ script:
   - echo "Testing the installed openmmforcefields ffxml files..."
   - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
   # Test AMBER conversion
-  - conda install --yes --quiet parmed yaml
   - echo "Testing AMBER conversion..."
   - cd amber && python convert_amber.py && cd ..
   # Test CHARMM conversion

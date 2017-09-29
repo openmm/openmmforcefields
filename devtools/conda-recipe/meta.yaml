@@ -17,7 +17,7 @@ requirements:
     - python
     - openmm >=7.2.0
     - parmed
-    - yaml
+    - pyyaml
     - ambertools ==17
 
 test:
