@@ -18,7 +18,7 @@ requirements:
     - openmm >=7.2.0
     - parmed
     - yaml
-    - ambermini
+    - ambertools ==17
 
 test:
   requires:
