@@ -181,15 +181,14 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
         new_lines += fil_new_lines
     leaprc = StringIO(''.join(new_lines))
     if verbose: print('Converting to ffxml %s...' % ffxml_name)
-    print(leaprc)
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params)
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=write_unused)
+            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
     else:
-        params.write(ffxml_name, provenance=provenance, write_unused=write_unused)
+        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
@@ -219,11 +218,11 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
             residue.overload_level = 1
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=False)
+            params.write(ffxml_name, provenance=provenance, write_unused=False, improper_dihedrals_ordering='amber')
     else:
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_temp_stringio, provenance=provenance, write_unused=False)
+            params.write(ffxml_temp_stringio, provenance=provenance, write_unused=False, improper_dihedrals_ordering='amber')
         ffxml_temp_stringio.seek(0)
         if verbose: print('Modifying converted ffxml to append solvent parameters')
         tree_main = et.parse(ffxml_temp_stringio)
@@ -331,7 +330,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             source.append(OrderedDict())
             source[-1]['Source'] = recipe_source2
             md5 = hashlib.md5()
-            with open(_filename) as f:
+            with open(_filename, 'rb') as f:
                 md5.update(f.read())
             md5 = md5.hexdigest()
             source[-1]['md5hash'] = md5
