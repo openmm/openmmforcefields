@@ -5551,7 +5551,7 @@
   <Angle type1="H1" type2="3C" type3="OH" angle="1.911135530933791" k="418.40000000000003"/>
   <Angle type1="HC" type2="3C" type3="2C" angle="1.911135530933791" k="418.40000000000003"/>
  </HarmonicAngleForce>
- <PeriodicTorsionForce>
+ <PeriodicTorsionForce ordering="amber">
   <Proper type1="" type2="C" type3="C" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
   <Proper type1="" type2="C" type3="CA" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
   <Proper type1="" type2="C" type3="CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>

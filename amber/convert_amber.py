@@ -229,39 +229,39 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
         tree_water = et.parse(solvent_file)
         root_main = tree_main.getroot()
         root_water = tree_water.getroot()
-        with open(ffxml_name, 'w') as f:
-            f.write('<ForceField>\n ')
+        with open(ffxml_name, 'wb') as f:
+            f.write(b'<ForceField>\n ')
             f.write(et.tostring(root_main.findall('Info')[0]))
-            f.write('<AtomTypes>\n  ')
+            f.write(b'<AtomTypes>\n  ')
             for subelement in root_main.findall('AtomTypes')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('AtomTypes')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</AtomTypes>\n <Residues>\n  ')
+            f.write(b'</AtomTypes>\n <Residues>\n  ')
             for subelement in root_main.findall('Residues')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('Residues')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</Residues>\n <HarmonicBondForce>\n  ')
+            f.write(b'</Residues>\n <HarmonicBondForce>\n  ')
             for subelement in root_water.findall('HarmonicBondForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</HarmonicBondForce>\n <HarmonicAngleForce>\n  ')
+            f.write(b'</HarmonicBondForce>\n <HarmonicAngleForce>\n  ')
             for subelement in root_water.findall('HarmonicAngleForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</HarmonicAngleForce>\n ')
-            f.write('<NonbondedForce coulomb14scale="%s" lj14scale="%s">\n  ' %
+            f.write(b'</HarmonicAngleForce>\n ')
+            f.write(('<NonbondedForce coulomb14scale="%s" lj14scale="%s">\n  ' %
                    (root_main.findall('NonbondedForce')[0].attrib['coulomb14scale'],
                     root_main.findall('NonbondedForce')[0].attrib['lj14scale'])
-                   )
+                   ).encode('utf-8'))
             for subelement in root_main.findall('NonbondedForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('NonbondedForce')[0]:
                 if subelement.tag == 'UseAttributeFromResidue': continue
                 f.write(et.tostring(subelement))
-            f.write('</NonbondedForce>\n</ForceField>')
+            f.write(b'</NonbondedForce>\n</ForceField>')
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 

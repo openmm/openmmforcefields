@@ -1,6 +1,6 @@
 <ForceField>
  <Info>
-  <DateGenerated>2016-08-24</DateGenerated>
+  <DateGenerated>2017-09-29</DateGenerated>
   <Source md5hash="576c159afdaa5f4f6b05250ce4326bd3" sourcePackage="AmberTools" sourcePackageVersion="16">parm/frcmod.ionsjc_spce</Source>
   <Source md5hash="11ef85dfcf07639646dd361590b76166" sourcePackage="AmberTools" sourcePackageVersion="16">parm/frcmod.ions234lm_126_spce</Source>
   <Source md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="16">lib/atomic_ions.lib</Source>
@@ -257,65 +257,65 @@
  <HarmonicAngleForce>
   <Angle type1="spce-H" type2="spce-O" type3="spce-H" angle="1.91061193216" k="836.8"/>
  </HarmonicAngleForce>
- <NonbondedForce coulomb14scale="0.833333333333" lj14scale="0.5">
+ <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
   <UseAttributeFromResidue name="charge"/>
-  <Atom type="spce_standard-Li+" sigma="0.14094017721" epsilon="1.4088967296"/>
-  <Atom type="spce_standard-Na+" sigma="0.215953849277" epsilon="1.4754532912"/>
-  <Atom type="spce_standard-K+" sigma="0.2838403316" epsilon="1.7978873936"/>
-  <Atom type="spce_standard-Rb+" sigma="0.309498214682" epsilon="1.8623134624"/>
-  <Atom type="spce_standard-Cs+" sigma="0.360101261872" epsilon="0.375959596"/>
-  <Atom type="spce_standard-F-" sigma="0.402151681369" epsilon="0.030963692"/>
-  <Atom type="spce_standard-Cl-" sigma="0.483045284976" epsilon="0.05349244"/>
-  <Atom type="spce_standard-Br-" sigma="0.490172474721" epsilon="0.1127947824"/>
-  <Atom type="spce_standard-I-" sigma="0.52010667165" epsilon="0.179010348"/>
-  <Atom type="spce_standard-Be2+" sigma="0.171230733627" epsilon="1.92464e-05"/>
-  <Atom type="spce_standard-Cu2+" sigma="0.217913826457" epsilon="0.0067303824"/>
-  <Atom type="spce_standard-Ni2+" sigma="0.223259218766" epsilon="0.01065702456"/>
-  <Atom type="spce_standard-Pt2+" sigma="0.226644633895" epsilon="0.014015354"/>
-  <Atom type="spce_standard-Zn2+" sigma="0.227357352869" epsilon="0.01482336808"/>
-  <Atom type="spce_standard-Co2+" sigma="0.232524565435" epsilon="0.0218984284"/>
-  <Atom type="spce_standard-Pd2+" sigma="0.232524565435" epsilon="0.0218984284"/>
-  <Atom type="spce_standard-Ag2+" sigma="0.238226317231" epsilon="0.03264699888"/>
-  <Atom type="spce_standard-Cr2+" sigma="0.240186294411" epsilon="0.03718454688"/>
-  <Atom type="spce_standard-Fe2+" sigma="0.241255372872" epsilon="0.03986113536"/>
-  <Atom type="spce_standard-Mg2+" sigma="0.242324451334" epsilon="0.04268671608"/>
-  <Atom type="spce_standard-V2+" sigma="0.243215350052" epsilon="0.045158958"/>
-  <Atom type="spce_standard-Mn2+" sigma="0.250520719541" epsilon="0.0698627584"/>
-  <Atom type="spce_standard-Hg2+" sigma="0.250520719541" epsilon="0.0698627584"/>
-  <Atom type="spce_standard-Cd2+" sigma="0.251589798003" epsilon="0.07419972544"/>
-  <Atom type="spce_standard-Yb2+" sigma="0.291145701088" epsilon="0.40718273784"/>
-  <Atom type="spce_standard-Ca2+" sigma="0.291323880832" epsilon="0.40953067312"/>
-  <Atom type="spce_standard-Sn2+" sigma="0.29417475673" epsilon="0.44813803104"/>
-  <Atom type="spce_standard-Pb2+" sigma="0.30842913622" epsilon="0.669006956"/>
-  <Atom type="spce_standard-Eu2+" sigma="0.31822902212" epsilon="0.8445052544"/>
-  <Atom type="spce_standard-Sr2+" sigma="0.319654460069" epsilon="0.87137682704"/>
-  <Atom type="spce_standard-Sm2+" sigma="0.320723538531" epsilon="0.89173069"/>
-  <Atom type="spce_standard-Ba2+" sigma="0.352795892384" epsilon="1.55336865968"/>
-  <Atom type="spce_standard-Ra2+" sigma="0.352795892384" epsilon="1.55336865968"/>
-  <Atom type="spce_standard-Al3+" sigma="0.230920947742" epsilon="0.01945869616"/>
-  <Atom type="spce_standard-Fe3+" sigma="0.246957124669" epsilon="0.05678093848"/>
-  <Atom type="spce_standard-Cr3+" sigma="0.239295395692" epsilon="0.03506409568"/>
-  <Atom type="spce_standard-In3+" sigma="0.260320605441" epsilon="0.11751709584"/>
-  <Atom type="spce_standard-Tl3+" sigma="0.269585952109" epsilon="0.18079185336"/>
-  <Atom type="spce_standard-Y3+" sigma="0.285443949292" epsilon="0.33615222504"/>
-  <Atom type="spce_standard-La3+" sigma="0.306112799553" epsilon="0.63014479248"/>
-  <Atom type="spce_standard-Ce3+" sigma="0.310210933656" epsilon="0.69962078192"/>
-  <Atom type="spce_standard-Pr3+" sigma="0.308963675451" epsilon="0.67812656976"/>
-  <Atom type="spce_standard-Nd3+" sigma="0.299520149039" epsilon="0.52569060488"/>
-  <Atom type="spce_standard-Sm3+" sigma="0.295600194679" epsilon="0.46816830344"/>
-  <Atom type="spce_standard-Eu3+" sigma="0.296847452884" epsilon="0.48608615792"/>
-  <Atom type="spce_standard-Gd3+" sigma="0.289185723908" epsilon="0.38186547936"/>
-  <Atom type="spce_standard-Tb3+" sigma="0.290432982114" epsilon="0.39786810784"/>
-  <Atom type="spce_standard-Dy3+" sigma="0.286691207498" epsilon="0.3510058016"/>
-  <Atom type="spce_standard-Er3+" sigma="0.285443949292" epsilon="0.33615222504"/>
-  <Atom type="spce_standard-Tm3+" sigma="0.285443949292" epsilon="0.33615222504"/>
-  <Atom type="spce_standard-Lu3+" sigma="0.282949432881" epsilon="0.30760316128"/>
-  <Atom type="spce_standard-Hf4+" sigma="0.267447795186" epsilon="0.16448090592"/>
-  <Atom type="spce_standard-Zr4+" sigma="0.271011390058" epsilon="0.1922585656"/>
-  <Atom type="spce_standard-Ce4+" sigma="0.300945586988" epsilon="0.5474740988"/>
-  <Atom type="spce_standard-U4+" sigma="0.300945586988" epsilon="0.5474740988"/>
-  <Atom type="spce_standard-Pu4+" sigma="0.296847452884" epsilon="0.48608615792"/>
-  <Atom type="spce_standard-Th4+" sigma="0.305221900835" epsilon="0.61548811496"/>
+  <Atom type="spce_standard-Li+" sigma="0.14094017720980168" epsilon="1.4088967296000001"/>
+  <Atom type="spce_standard-Na+" sigma="0.21595384927721822" epsilon="1.4754532912"/>
+  <Atom type="spce_standard-K+" sigma="0.2838403315995121" epsilon="1.7978873936000002"/>
+  <Atom type="spce_standard-Rb+" sigma="0.3094982146819539" epsilon="1.8623134624"/>
+  <Atom type="spce_standard-Cs+" sigma="0.36010126187232516" epsilon="0.37595959600000006"/>
+  <Atom type="spce_standard-F-" sigma="0.4021516813685492" epsilon="0.030963692"/>
+  <Atom type="spce_standard-Cl-" sigma="0.48304528497569194" epsilon="0.05349244"/>
+  <Atom type="spce_standard-Br-" sigma="0.4901724747208147" epsilon="0.1127947824"/>
+  <Atom type="spce_standard-I-" sigma="0.5201066716503301" epsilon="0.179010348"/>
+  <Atom type="spce_standard-Be2+" sigma="0.1712307336265732" epsilon="1.92464e-05"/>
+  <Atom type="spce_standard-Cu2+" sigma="0.21791382645712698" epsilon="0.0067303824"/>
+  <Atom type="spce_standard-Ni2+" sigma="0.223259218765969" epsilon="0.01065702456"/>
+  <Atom type="spce_standard-Pt2+" sigma="0.22664463389490233" epsilon="0.014015354"/>
+  <Atom type="spce_standard-Zn2+" sigma="0.2273573528694146" epsilon="0.014823368080000001"/>
+  <Atom type="spce_standard-Co2+" sigma="0.23252456543462854" epsilon="0.0218984284"/>
+  <Atom type="spce_standard-Pd2+" sigma="0.23252456543462854" epsilon="0.0218984284"/>
+  <Atom type="spce_standard-Ag2+" sigma="0.23822631723072674" epsilon="0.03264699888"/>
+  <Atom type="spce_standard-Cr2+" sigma="0.2401862944106355" epsilon="0.03718454688"/>
+  <Atom type="spce_standard-Fe2+" sigma="0.2412553728724039" epsilon="0.03986113536"/>
+  <Atom type="spce_standard-Mg2+" sigma="0.2423244513341723" epsilon="0.042686716080000006"/>
+  <Atom type="spce_standard-V2+" sigma="0.24321535005231262" epsilon="0.045158958000000006"/>
+  <Atom type="spce_standard-Mn2+" sigma="0.2505207195410634" epsilon="0.0698627584"/>
+  <Atom type="spce_standard-Hg2+" sigma="0.2505207195410634" epsilon="0.0698627584"/>
+  <Atom type="spce_standard-Cd2+" sigma="0.2515897980028318" epsilon="0.07419972544"/>
+  <Atom type="spce_standard-Yb2+" sigma="0.2911457010882629" epsilon="0.40718273784000003"/>
+  <Atom type="spce_standard-Ca2+" sigma="0.2913238808318909" epsilon="0.40953067312"/>
+  <Atom type="spce_standard-Sn2+" sigma="0.29417475672994003" epsilon="0.44813803104000005"/>
+  <Atom type="spce_standard-Pb2+" sigma="0.3084291362201855" epsilon="0.669006956"/>
+  <Atom type="spce_standard-Eu2+" sigma="0.31822902211972925" epsilon="0.8445052544000001"/>
+  <Atom type="spce_standard-Sr2+" sigma="0.31965446006875375" epsilon="0.8713768270400001"/>
+  <Atom type="spce_standard-Sm2+" sigma="0.32072353853052216" epsilon="0.89173069"/>
+  <Atom type="spce_standard-Ba2+" sigma="0.35279589238357434" epsilon="1.55336865968"/>
+  <Atom type="spce_standard-Ra2+" sigma="0.35279589238357434" epsilon="1.55336865968"/>
+  <Atom type="spce_standard-Al3+" sigma="0.23092094774197594" epsilon="0.019458696160000004"/>
+  <Atom type="spce_standard-Fe3+" sigma="0.24695712466850203" epsilon="0.05678093848"/>
+  <Atom type="spce_standard-Cr3+" sigma="0.23929539569249514" epsilon="0.035064095680000004"/>
+  <Atom type="spce_standard-In3+" sigma="0.26032060544060714" epsilon="0.11751709584"/>
+  <Atom type="spce_standard-Tl3+" sigma="0.26958595210926667" epsilon="0.18079185336"/>
+  <Atom type="spce_standard-Y3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+  <Atom type="spce_standard-La3+" sigma="0.3061127995530206" epsilon="0.63014479248"/>
+  <Atom type="spce_standard-Ce3+" sigma="0.3102109336564662" epsilon="0.69962078192"/>
+  <Atom type="spce_standard-Pr3+" sigma="0.3089636754510697" epsilon="0.6781265697600001"/>
+  <Atom type="spce_standard-Nd3+" sigma="0.2995201490387821" epsilon="0.52569060488"/>
+  <Atom type="spce_standard-Sm3+" sigma="0.2956001946789646" epsilon="0.46816830344000004"/>
+  <Atom type="spce_standard-Eu3+" sigma="0.29684745288436104" epsilon="0.48608615792"/>
+  <Atom type="spce_standard-Gd3+" sigma="0.2891857239083541" epsilon="0.38186547936"/>
+  <Atom type="spce_standard-Tb3+" sigma="0.29043298211375057" epsilon="0.39786810784"/>
+  <Atom type="spce_standard-Dy3+" sigma="0.28669120749756116" epsilon="0.35100580160000006"/>
+  <Atom type="spce_standard-Er3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+  <Atom type="spce_standard-Tm3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+  <Atom type="spce_standard-Lu3+" sigma="0.28294943288137175" epsilon="0.30760316128000004"/>
+  <Atom type="spce_standard-Hf4+" sigma="0.26744779518572986" epsilon="0.16448090592"/>
+  <Atom type="spce_standard-Zr4+" sigma="0.2710113900582912" epsilon="0.19225856560000001"/>
+  <Atom type="spce_standard-Ce4+" sigma="0.3009455869878066" epsilon="0.5474740988000001"/>
+  <Atom type="spce_standard-U4+" sigma="0.3009455869878066" epsilon="0.5474740988000001"/>
+  <Atom type="spce_standard-Pu4+" sigma="0.29684745288436104" epsilon="0.48608615792"/>
+  <Atom type="spce_standard-Th4+" sigma="0.30522190083488027" epsilon="0.61548811496"/>
   <Atom type="spce-O" sigma="0.31657195050398818" epsilon="0.6497752"/>
   <Atom type="spce-H" sigma="1" epsilon="0"/>
  </NonbondedForce>
