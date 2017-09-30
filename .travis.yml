@@ -16,11 +16,12 @@ script:
   - conda create --yes -n test python=$python
   # Activate the test environment
   - source activate test
-  # Add conda channels, using old priority scheme where most recent versions win
-  - conda config --set channel_priority false
-  - conda config --add channels conda-forge
-  - conda config --add channels omnia
-  - conda config --add channels https://conda.anaconda.org/omnia/label/dev
+  # Add conda channels
+  - conda config --add channels omnia --add channels conda-forge
+  # Add openmm dev build
+  - conda config --add channels omnia/label/dev
+  # Add AMBER channel
+  - conda config --add channels http://ambermd.org/downloads/ambertools/conda/
   # Install extras for testing
   - conda install --yes --quiet pip nose nose-timer
   # Build the recipe
@@ -32,8 +33,9 @@ script:
   # Test the openmmforcefields package to make sure installed ffxml files are working
   - echo "Testing the installed openmmforcefields ffxml files..."
   - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
+  # TODO: Install parmed dev version; replace with parmed dependency in meta.yaml
+  - pip install git+https://github.com/jchodera/ParmEd.git@charmm-patches-2
   # Test AMBER conversion
-  - conda install --yes --quiet parmed yaml  
   - echo "Testing AMBER conversion..."
   - cd amber && python convert_amber.py && cd ..
   # Test CHARMM conversion

@@ -44,7 +44,7 @@ no_log = False
 # set files that are ignored in leaprc's
 # solvents and ions converted separately; leaprc.ff10 calls phosphoaa10.lib
 # which does not exist anymore, LeAP skips it on error so we do too
-ignore = {'solvents.lib', 'atomic_ions.lib', 'ions94.lib', 'ions91.lib', 
+ignore = {'solvents.lib', 'atomic_ions.lib', 'ions94.lib', 'ions91.lib',
           'phosphoaa10.lib'}
 
 # define NEARLYZERO to replace numerical comparisons to zero
@@ -111,6 +111,34 @@ def main():
 
     if not no_log: logger.close()
 
+def read_lines(filename):
+    """
+    Read lines from file, stripping comments and newlines.
+
+    """
+    with open(filename, 'rt') as f:
+        lines = [ line if '#' not in line else line[:line.index('#')] for line in f.readlines() ]
+    return lines
+
+def write_file(file, contents):
+    """
+    Write text to file.
+
+    Parameters
+    ----------
+    filename : str
+       The file to write to
+    contents : str
+       Text contents to be written to file
+
+    """
+    if type(file) == str:
+        outfile = open(file, 'w')
+    else:
+        outfile = os.fdopen(file, 'w')
+    outfile.write(contents)
+    outfile.close()
+
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     provenance=None, write_unused=False, filter_warnings='error'):
     if verbose: print('Converting %s to ffxml...' % files)
@@ -135,9 +163,7 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     # do source processing
     new_files = []
     for fil in files:
-        with open(fil) as f:
-            lines = map(lambda line:
-                    line if '#' not in line else line[:line.index('#')], f)
+        lines = read_lines(fil)
         for line in lines:
             if _sourcere.findall(line):
                 replace_leaprc = _sourcere.findall(line)[0]
@@ -149,9 +175,7 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     files = new_files
     new_lines = []
     for fil in files:
-        with open(fil) as f:
-            lines = map(lambda line:
-                    line if '#' not in line else line[:line.index('#')], f)
+        lines = read_lines(fil)
         fil_new_lines = []
         for line in lines:
             if (ignore is not None and _loadoffre.findall(line) and
@@ -166,9 +190,9 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=write_unused)
+            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
     else:
-        params.write(ffxml_name, provenance=provenance, write_unused=write_unused)
+        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
@@ -198,50 +222,50 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
             residue.overload_level = 1
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=False)
+            params.write(ffxml_name, provenance=provenance, write_unused=False, improper_dihedrals_ordering='amber')
     else:
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_temp_stringio, provenance=provenance, write_unused=False)
+            params.write(ffxml_temp_stringio, provenance=provenance, write_unused=False, improper_dihedrals_ordering='amber')
         ffxml_temp_stringio.seek(0)
         if verbose: print('Modifying converted ffxml to append solvent parameters')
         tree_main = et.parse(ffxml_temp_stringio)
         tree_water = et.parse(solvent_file)
         root_main = tree_main.getroot()
         root_water = tree_water.getroot()
-        with open(ffxml_name, 'w') as f:
-            f.write('<ForceField>\n ')
+        with open(ffxml_name, 'wb') as f:
+            f.write(b'<ForceField>\n ')
             f.write(et.tostring(root_main.findall('Info')[0]))
-            f.write('<AtomTypes>\n  ')
+            f.write(b'<AtomTypes>\n  ')
             for subelement in root_main.findall('AtomTypes')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('AtomTypes')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</AtomTypes>\n <Residues>\n  ')
+            f.write(b'</AtomTypes>\n <Residues>\n  ')
             for subelement in root_main.findall('Residues')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('Residues')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</Residues>\n <HarmonicBondForce>\n  ')
+            f.write(b'</Residues>\n <HarmonicBondForce>\n  ')
             for subelement in root_water.findall('HarmonicBondForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</HarmonicBondForce>\n <HarmonicAngleForce>\n  ')
+            f.write(b'</HarmonicBondForce>\n <HarmonicAngleForce>\n  ')
             for subelement in root_water.findall('HarmonicAngleForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write('</HarmonicAngleForce>\n ')
-            f.write('<NonbondedForce coulomb14scale="%s" lj14scale="%s">\n  ' %
+            f.write(b'</HarmonicAngleForce>\n ')
+            f.write(('<NonbondedForce coulomb14scale="%s" lj14scale="%s">\n  ' %
                    (root_main.findall('NonbondedForce')[0].attrib['coulomb14scale'],
                     root_main.findall('NonbondedForce')[0].attrib['lj14scale'])
-                   )
+                   ).encode('utf-8'))
             for subelement in root_main.findall('NonbondedForce')[0]:
                 f.write(et.tostring(subelement))
-            f.write(' ')
+            f.write(b' ')
             for subelement in root_water.findall('NonbondedForce')[0]:
                 if subelement.tag == 'UseAttributeFromResidue': continue
                 f.write(et.tostring(subelement))
-            f.write('</NonbondedForce>\n</ForceField>')
+            f.write(b'</NonbondedForce>\n</ForceField>')
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
@@ -286,7 +310,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 source.append(OrderedDict())
                 source[-1]['Source'] = leaprc
                 md5 = hashlib.md5()
-                with open(_filename) as f:
+                with open(_filename, 'rb') as f:
                     md5.update(f.read())
                 md5 = md5.hexdigest()
                 source[-1]['md5hash'] = md5
@@ -297,7 +321,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             source = provenance['Source'] = OrderedDict()
             source['Source'] = leaprc_name
             md5 = hashlib.md5()
-            with open(files) as f:
+            with open(files, 'rb') as f:
                 md5.update(f.read())
             md5 = md5.hexdigest()
             source['md5hash'] = md5
@@ -310,7 +334,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             source.append(OrderedDict())
             source[-1]['Source'] = recipe_source2
             md5 = hashlib.md5()
-            with open(_filename) as f:
+            with open(_filename, 'rb') as f:
                 md5.update(f.read())
             md5 = md5.hexdigest()
             source[-1]['md5hash'] = md5
@@ -370,7 +394,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 tested = True
             elif test == 'rna':
                 validate_rna(ffxml_name, leaprc_name)
-                tested = True        
+                tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
                                 leaprc_name)
@@ -412,18 +436,18 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
     for i in rel_energies:
         if i[0] != 'PeriodicTorsionForce':
             if i[1] > tolerance:
-                raise AssertionError('%s energies (%s) outside of allowed tolerance for %s' %
-                                     (system_name, i[0], ffxml))
+                raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
+                                     (system_name, i[0], i[1], tolerance, ffxml))
         else:
             if not dihedrals_done:
                 if i[1] > tolerance:
-                    raise AssertionError('%s energies (%s) outside of allowed tolerance for %s' %
-                                         (system_name, i[0], ffxml))
+                    raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
+                                         (system_name, i[0], i[1], tolerance, ffxml))
                 dihedrals_done = True
             else: #impropers
                 if i[1] > improper_tolerance:
-                    raise AssertionError('%s energies (%s-impropers) outside of allowed tolerance for %s' %
-                                         (system_name, i[0], ffxml))
+                    raise AssertionError('%s energies (%s-impropers, %f) outside of allowed tolerance (%f) for %s' %
+                                         (system_name, i[0], i[1], improper_tolerance, ffxml))
 
     # logging
     if not no_log:
@@ -509,8 +533,8 @@ x = loadPdb files/villin_ua.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, villin_top[1], villin_crd[1])
 
-    os.write(leap_script_ala3_file[0], leap_script_ala3_string)
-    os.write(leap_script_villin_file[0], leap_script_villin_string)
+    write_file(leap_script_ala3_file[0], leap_script_ala3_string)
+    write_file(leap_script_villin_file[0], leap_script_villin_string)
 
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_ala3_file[1], os.devnull))
@@ -534,7 +558,6 @@ quit""" % (leaprc_name, villin_top[1], villin_crd[1])
         if verbose: print('Deleting temp files...')
         for f in (ala3_top, ala3_crd, villin_top, villin_crd, leap_script_ala3_file,
                  leap_script_villin_file):
-            os.close(f[0])
             os.unlink(f[1])
     if verbose: print('Protein energy validation for %s done!' % ffxml_name)
 
@@ -544,7 +567,7 @@ def validate_dna(ffxml_name, leaprc_name):
     dna_top = tempfile.mkstemp()
     dna_crd = tempfile.mkstemp()
     leap_script_dna_file = tempfile.mkstemp()
-    
+
     if verbose: print('Preparing LeaP scripts...')
     leap_script_dna_string = """addPdbAtomMap {
 { "H1'" "H1*" }
@@ -571,7 +594,7 @@ x = loadPdb files/4rzn_dna.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, dna_top[1], dna_crd[1])
 
-    os.write(leap_script_dna_file[0], leap_script_dna_string)
+    write_file(leap_script_dna_file[0], leap_script_dna_string)
 
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_dna_file[1], os.devnull))
@@ -587,10 +610,9 @@ quit""" % (leaprc_name, dna_top[1], dna_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (dna_top, dna_crd, leap_script_dna_file):
-            os.close(f[0])
             os.unlink(f[1])
     if verbose: print('DNA energy validation for %s done!' % ffxml_name)
-    
+
 def validate_rna(ffxml_name, leaprc_name):
     if verbose: print('RNA energy validation for %s' % ffxml_name)
     if verbose: print('Preparing temporary files for validation...')
@@ -653,8 +675,8 @@ x = loadPdb files/5c5w_rna.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, rna_top[1], rna_crd[1])
 
-    os.write(leap_script_rna_file[0], leap_script_rna_string)
-    os.write(leap_script_rna_file_alt[0], leap_script_rna_string_alt)
+    write_file(leap_script_rna_file[0], leap_script_rna_string)
+    write_file(leap_script_rna_file_alt[0], leap_script_rna_string_alt)
 
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_rna_file[1], os.devnull))
@@ -673,7 +695,6 @@ quit""" % (leaprc_name, rna_top[1], rna_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (rna_top, rna_crd, leap_script_rna_file, leap_script_rna_file_alt):
-            os.close(f[0])
             os.unlink(f[1])
     if verbose: print('RNA energy validation for %s done!' % ffxml_name)
 
@@ -690,7 +711,7 @@ loadamberparams files/frcmod.imatinib
 x = loadMol2 files/imatinib.mol2
 saveAmberParm x %s %s
 quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
-    os.write(leap_script_imatinib_file[0], leap_script_imatinib_string)
+    write_file(leap_script_imatinib_file[0], leap_script_imatinib_string)
 
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_imatinib_file[1], os.devnull))
@@ -706,7 +727,6 @@ quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (imatinib_top, imatinib_crd, leap_script_imatinib_file):
-            os.close(f[0])
             os.unlink(f[1])
     if verbose: print('GAFF energy validation for %s done!' % ffxml_name)
 
@@ -730,7 +750,7 @@ x = loadPdb %s
 saveAmberParm x %s %s
 quit""" % (supp_leaprc_name, leaprc_name, pdbname, top[1], crd[1])
 
-        os.write(leap_script_file[0], leap_script_string)
+        write_file(leap_script_file[0], leap_script_string)
 
         if verbose: print('Running LEaP...')
         os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
@@ -746,7 +766,6 @@ quit""" % (supp_leaprc_name, leaprc_name, pdbname, top[1], crd[1])
         finally:
             if verbose: print('Deleting temp files...')
             for f in (top, crd, leap_script_file):
-                os.close(f[0])
                 os.unlink(f[1])
         if verbose: print('Phosphorylated protein energy validation for %s done!'
                           % ffxml_name)
@@ -789,7 +808,7 @@ quit""" % (HOH, pdb_name, top[1], crd[1])
     else:
         leap_script_string = leap_script_string_part1 + leap_script_string_part2
 
-    os.write(leap_script_file[0], leap_script_string)
+    write_file(leap_script_file[0], leap_script_string)
 
     # this test does it's own energy assertion because of differences
     if verbose: print('Running LEaP...')
@@ -821,14 +840,13 @@ quit""" % (HOH, pdb_name, top[1], crd[1])
         rel_nonbonded = abs((amber_nonbonded-omm_nonbonded) / amber_nonbonded)
 
         if rel_nonbonded > 1e-5:
-            raise AssertionError('NonbondedForce Water and ions energy outside of '
-                                 'allowed tolerance for %s' % ffxml_name)
+            raise AssertionError('NonbondedForce Water and ions energy (%f) outside of '
+                                 'allowed tolerance (%f) for %s:' % (rel_nonbonded, 1e-5, ffxml_name))
         if verbose: print('Energy validation successful!')
 
     finally:
         if verbose: print('Deleting temp files...')
         for f in (top, crd, leap_script_file):
-            os.close(f[0])
             os.unlink(f[1])
     # logging
     if not no_log:
@@ -876,7 +894,7 @@ saveAmberParm y %s %s
 saveAmberParm z %s %s
 quit""" % (leaprc_name, top_villin[1], crd_villin[1], top_dna[1], crd_dna[1],
            top_rna[1], crd_rna[1])
-    os.write(leap_script_file[0], leap_script_string)
+    write_file(leap_script_file[0], leap_script_string)
 
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
@@ -944,7 +962,6 @@ quit""" % (leaprc_name, top_villin[1], crd_villin[1], top_dna[1], crd_dna[1],
         if verbose: print('Deleting temp files...')
         for f in (top_villin, crd_villin, top_dna, crd_dna, top_rna, crd_rna,
                   leap_script_file):
-            os.close(f[0])
             os.unlink(f[1])
     if verbose: print('Improper validation for %s done!' % ffxml_name)
 

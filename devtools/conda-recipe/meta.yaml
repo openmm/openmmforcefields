@@ -12,11 +12,13 @@ build:
 requirements:
   build:
     - python
-    - openmm >=7.2.0
 
   run:
     - python
     - openmm >=7.2.0
+    - pyyaml
+    - ambertools ==17
+    - lxml
 
 test:
   requires:

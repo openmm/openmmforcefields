@@ -33,7 +33,7 @@ try:
         },
         long_description=read('README.md'),
         install_requires=[
-            'openmm>=7.2',
+        #    'openmm>=7.2',
         ],
         classifiers=[
             "Development Status :: 3 - Alpha",
