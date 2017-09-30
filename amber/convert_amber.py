@@ -132,7 +132,10 @@ def write_file(file, contents):
        Text contents to be written to file
 
     """
-    outfile = open(file, 'w')
+    if type(file) == str:
+        outfile = open(file, 'w')
+    else:
+        outfile = os.fdopen(file, 'w')
     outfile.write(contents)
     outfile.close()
 
