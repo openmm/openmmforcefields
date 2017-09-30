@@ -19,6 +19,7 @@ requirements:
     - parmed
     - pyyaml
     - ambertools ==17
+    - lxml
 
 test:
   requires:
