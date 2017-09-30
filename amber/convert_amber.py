@@ -120,7 +120,7 @@ def read_lines(filename):
         lines = [ line if '#' not in line else line[:line.index('#')] for line in f.readlines() ]
     return lines
 
-def write_file(filename, contents):
+def write_file(file, contents):
     """
     Write text to file.
 
@@ -132,8 +132,9 @@ def write_file(filename, contents):
        Text contents to be written to file
 
     """
-    with open(filename, 'wt') as outfile:
-        outfile.write(contents)
+    outfile = open(file, 'w')
+    outfile.write(contents)
+    outfile.close()
 
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     provenance=None, write_unused=False, filter_warnings='error'):
@@ -554,7 +555,6 @@ quit""" % (leaprc_name, villin_top[1], villin_crd[1])
         if verbose: print('Deleting temp files...')
         for f in (ala3_top, ala3_crd, villin_top, villin_crd, leap_script_ala3_file,
                  leap_script_villin_file):
-            #os.close(f[0])
             os.unlink(f[1])
     if verbose: print('Protein energy validation for %s done!' % ffxml_name)
 
@@ -607,7 +607,6 @@ quit""" % (leaprc_name, dna_top[1], dna_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (dna_top, dna_crd, leap_script_dna_file):
-            #os.close(f[0])
             os.unlink(f[1])
     if verbose: print('DNA energy validation for %s done!' % ffxml_name)
 
@@ -693,7 +692,6 @@ quit""" % (leaprc_name, rna_top[1], rna_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (rna_top, rna_crd, leap_script_rna_file, leap_script_rna_file_alt):
-            #os.close(f[0])
             os.unlink(f[1])
     if verbose: print('RNA energy validation for %s done!' % ffxml_name)
 
@@ -726,7 +724,6 @@ quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (imatinib_top, imatinib_crd, leap_script_imatinib_file):
-            #os.close(f[0])
             os.unlink(f[1])
     if verbose: print('GAFF energy validation for %s done!' % ffxml_name)
 
@@ -766,7 +763,6 @@ quit""" % (supp_leaprc_name, leaprc_name, pdbname, top[1], crd[1])
         finally:
             if verbose: print('Deleting temp files...')
             for f in (top, crd, leap_script_file):
-                #os.close(f[0])
                 os.unlink(f[1])
         if verbose: print('Phosphorylated protein energy validation for %s done!'
                           % ffxml_name)
@@ -848,7 +844,6 @@ quit""" % (HOH, pdb_name, top[1], crd[1])
     finally:
         if verbose: print('Deleting temp files...')
         for f in (top, crd, leap_script_file):
-            #os.close(f[0])
             os.unlink(f[1])
     # logging
     if not no_log:
@@ -964,7 +959,6 @@ quit""" % (leaprc_name, top_villin[1], crd_villin[1], top_dna[1], crd_dna[1],
         if verbose: print('Deleting temp files...')
         for f in (top_villin, crd_villin, top_dna, crd_dna, top_rna, crd_rna,
                   leap_script_file):
-            #os.close(f[0])
             os.unlink(f[1])
     if verbose: print('Improper validation for %s done!' % ffxml_name)
 
