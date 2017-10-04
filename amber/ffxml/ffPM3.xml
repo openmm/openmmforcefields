@@ -1,7 +1,7 @@
 <ForceField>
  <Info>
-  <DateGenerated>2017-09-29</DateGenerated>
-  <Source md5hash="a7627494b5bf7ccf58ac17734c520ce8" sourcePackage="AmberTools" sourcePackageVersion="16">leaprc.ffPM3</Source>
+  <DateGenerated>2017-10-04</DateGenerated>
+  <Source md5hash="a7627494b5bf7ccf58ac17734c520ce8" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.ffPM3</Source>
   <Reference>Wollacott, A.M., and Merz, K.M. (2006). Development of a Parametrized Force Field To Reproduce Semiempirical Geometries. J. Chem. Theory Comput. 2, 1070-1077.</Reference>
  </Info>
  <AtomTypes>

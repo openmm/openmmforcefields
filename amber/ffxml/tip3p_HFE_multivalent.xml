@@ -1,8 +1,8 @@
 <ForceField>
  <Info>
-  <DateGenerated>2017-09-29</DateGenerated>
-  <Source md5hash="4db3ea62100b95fa9d992ac0875db7f5" sourcePackage="AmberTools" sourcePackageVersion="16">parm/frcmod.ions234lm_hfe_tip3p</Source>
-  <Source md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="16">lib/atomic_ions.lib</Source>
+  <DateGenerated>2017-10-04</DateGenerated>
+  <Source md5hash="4db3ea62100b95fa9d992ac0875db7f5" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ions234lm_hfe_tip3p</Source>
+  <Source md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17">lib/atomic_ions.lib</Source>
   <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
   <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
  </Info>
@@ -57,148 +57,148 @@
   <Type name="tip3p_HFE_multivalent-Th4+" class="tip3p_HFE_multivalent-Th4+" element="Th" mass="232.04"/>
  </AtomTypes>
  <Residues>
-  <Residue name="AL">
+  <Residue name="AL" override="1">
    <Atom name="AL" type="tip3p_HFE_multivalent-Al3+" charge="3.0"/>
   </Residue>
-  <Residue name="Ag">
+  <Residue name="Ag" override="1">
    <Atom name="Ag" type="tip3p_HFE_multivalent-Ag2+" charge="2.0"/>
   </Residue>
-  <Residue name="BA">
+  <Residue name="BA" override="1">
    <Atom name="BA" type="tip3p_HFE_multivalent-Ba2+" charge="2.0"/>
   </Residue>
-  <Residue name="Be">
+  <Residue name="Be" override="1">
    <Atom name="Be" type="tip3p_HFE_multivalent-Be2+" charge="2.0"/>
   </Residue>
-  <Residue name="CA">
+  <Residue name="CA" override="1">
    <Atom name="CA" type="tip3p_HFE_multivalent-Ca2+" charge="2.0"/>
   </Residue>
-  <Residue name="CD">
+  <Residue name="CD" override="1">
    <Atom name="CD" type="tip3p_HFE_multivalent-Cd2+" charge="2.0"/>
   </Residue>
-  <Residue name="CE">
+  <Residue name="CE" override="1">
    <Atom name="CE" type="tip3p_HFE_multivalent-Ce3+" charge="3.0"/>
   </Residue>
-  <Residue name="CO">
+  <Residue name="CO" override="1">
    <Atom name="CO" type="tip3p_HFE_multivalent-Co2+" charge="2.0"/>
   </Residue>
-  <Residue name="CR">
+  <Residue name="CR" override="1">
    <Atom name="CR" type="tip3p_HFE_multivalent-Cr3+" charge="3.0"/>
   </Residue>
-  <Residue name="CU">
+  <Residue name="CU" override="1">
    <Atom name="CU" type="tip3p_HFE_multivalent-Cu2+" charge="2.0"/>
   </Residue>
-  <Residue name="Ce">
+  <Residue name="Ce" override="1">
    <Atom name="Ce" type="tip3p_HFE_multivalent-Ce4+" charge="4.0"/>
   </Residue>
-  <Residue name="Cr">
+  <Residue name="Cr" override="1">
    <Atom name="Cr" type="tip3p_HFE_multivalent-Cr2+" charge="2.0"/>
   </Residue>
-  <Residue name="Dy">
+  <Residue name="Dy" override="1">
    <Atom name="Dy" type="tip3p_HFE_multivalent-Dy3+" charge="3.0"/>
   </Residue>
-  <Residue name="EU">
+  <Residue name="EU" override="1">
    <Atom name="EU" type="tip3p_HFE_multivalent-Eu2+" charge="2.0"/>
   </Residue>
-  <Residue name="EU3">
+  <Residue name="EU3" override="1">
    <Atom name="EU3" type="tip3p_HFE_multivalent-Eu3+" charge="3.0"/>
   </Residue>
-  <Residue name="Er">
+  <Residue name="Er" override="1">
    <Atom name="Er" type="tip3p_HFE_multivalent-Er3+" charge="3.0"/>
   </Residue>
-  <Residue name="FE">
+  <Residue name="FE" override="1">
    <Atom name="FE" type="tip3p_HFE_multivalent-Fe3+" charge="3.0"/>
   </Residue>
-  <Residue name="FE2">
+  <Residue name="FE2" override="1">
    <Atom name="FE2" type="tip3p_HFE_multivalent-Fe2+" charge="2.0"/>
   </Residue>
-  <Residue name="GD3">
+  <Residue name="GD3" override="1">
    <Atom name="GD" type="tip3p_HFE_multivalent-Gd3+" charge="3.0"/>
   </Residue>
-  <Residue name="HG">
+  <Residue name="HG" override="1">
    <Atom name="HG" type="tip3p_HFE_multivalent-Hg2+" charge="2.0"/>
   </Residue>
-  <Residue name="Hf">
+  <Residue name="Hf" override="1">
    <Atom name="Hf" type="tip3p_HFE_multivalent-Hf4+" charge="4.0"/>
   </Residue>
-  <Residue name="IN">
+  <Residue name="IN" override="1">
    <Atom name="IN" type="tip3p_HFE_multivalent-In3+" charge="3.0"/>
   </Residue>
-  <Residue name="LA">
+  <Residue name="LA" override="1">
    <Atom name="LA" type="tip3p_HFE_multivalent-La3+" charge="3.0"/>
   </Residue>
-  <Residue name="LU">
+  <Residue name="LU" override="1">
    <Atom name="LU" type="tip3p_HFE_multivalent-Lu3+" charge="3.0"/>
   </Residue>
-  <Residue name="MG">
+  <Residue name="MG" override="1">
    <Atom name="MG" type="tip3p_HFE_multivalent-Mg2+" charge="2.0"/>
   </Residue>
-  <Residue name="MN">
+  <Residue name="MN" override="1">
    <Atom name="MN" type="tip3p_HFE_multivalent-Mn2+" charge="2.0"/>
   </Residue>
-  <Residue name="NI">
+  <Residue name="NI" override="1">
    <Atom name="NI" type="tip3p_HFE_multivalent-Ni2+" charge="2.0"/>
   </Residue>
-  <Residue name="Nd">
+  <Residue name="Nd" override="1">
    <Atom name="Nd" type="tip3p_HFE_multivalent-Nd3+" charge="3.0"/>
   </Residue>
-  <Residue name="PB">
+  <Residue name="PB" override="1">
    <Atom name="PB" type="tip3p_HFE_multivalent-Pb2+" charge="2.0"/>
   </Residue>
-  <Residue name="PD">
+  <Residue name="PD" override="1">
    <Atom name="PD" type="tip3p_HFE_multivalent-Pd2+" charge="2.0"/>
   </Residue>
-  <Residue name="PR">
+  <Residue name="PR" override="1">
    <Atom name="PR" type="tip3p_HFE_multivalent-Pr3+" charge="3.0"/>
   </Residue>
-  <Residue name="PT">
+  <Residue name="PT" override="1">
    <Atom name="PT" type="tip3p_HFE_multivalent-Pt2+" charge="2.0"/>
   </Residue>
-  <Residue name="Pu">
+  <Residue name="Pu" override="1">
    <Atom name="Pu" type="tip3p_HFE_multivalent-Pu4+" charge="4.0"/>
   </Residue>
-  <Residue name="Ra">
+  <Residue name="Ra" override="1">
    <Atom name="Ra" type="tip3p_HFE_multivalent-Ra2+" charge="2.0"/>
   </Residue>
-  <Residue name="SM">
+  <Residue name="SM" override="1">
    <Atom name="SM" type="tip3p_HFE_multivalent-Sm3+" charge="3.0"/>
   </Residue>
-  <Residue name="SR">
+  <Residue name="SR" override="1">
    <Atom name="SR" type="tip3p_HFE_multivalent-Sr2+" charge="2.0"/>
   </Residue>
-  <Residue name="Sm">
+  <Residue name="Sm" override="1">
    <Atom name="Sm" type="tip3p_HFE_multivalent-Sm2+" charge="2.0"/>
   </Residue>
-  <Residue name="Sn">
+  <Residue name="Sn" override="1">
    <Atom name="Sn" type="tip3p_HFE_multivalent-Sn2+" charge="2.0"/>
   </Residue>
-  <Residue name="TB">
+  <Residue name="TB" override="1">
    <Atom name="TB" type="tip3p_HFE_multivalent-Tb3+" charge="3.0"/>
   </Residue>
-  <Residue name="Th">
+  <Residue name="Th" override="1">
    <Atom name="Th" type="tip3p_HFE_multivalent-Th4+" charge="4.0"/>
   </Residue>
-  <Residue name="Tl">
+  <Residue name="Tl" override="1">
    <Atom name="Tl" type="tip3p_HFE_multivalent-Tl3+" charge="3.0"/>
   </Residue>
-  <Residue name="Tm">
+  <Residue name="Tm" override="1">
    <Atom name="Tm" type="tip3p_HFE_multivalent-Tm3+" charge="3.0"/>
   </Residue>
-  <Residue name="U4+">
+  <Residue name="U4+" override="1">
    <Atom name="U" type="tip3p_HFE_multivalent-U4+" charge="4.0"/>
   </Residue>
-  <Residue name="V2+">
+  <Residue name="V2+" override="1">
    <Atom name="V2+" type="tip3p_HFE_multivalent-V2+" charge="2.0"/>
   </Residue>
-  <Residue name="Y">
+  <Residue name="Y" override="1">
    <Atom name="Y" type="tip3p_HFE_multivalent-Y3+" charge="3.0"/>
   </Residue>
-  <Residue name="YB2">
+  <Residue name="YB2" override="1">
    <Atom name="YB2" type="tip3p_HFE_multivalent-Yb2+" charge="2.0"/>
   </Residue>
-  <Residue name="ZN">
+  <Residue name="ZN" override="1">
    <Atom name="ZN" type="tip3p_HFE_multivalent-Zn2+" charge="2.0"/>
   </Residue>
-  <Residue name="Zr">
+  <Residue name="Zr" override="1">
    <Atom name="Zr" type="tip3p_HFE_multivalent-Zr4+" charge="4.0"/>
   </Residue>
  </Residues>

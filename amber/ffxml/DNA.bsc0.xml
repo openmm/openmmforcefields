@@ -1,8 +1,8 @@
 <ForceField>
  <Info>
-  <DateGenerated>2017-09-29</DateGenerated>
-  <Source md5hash="df21eaacd7bc5d43b089774a3598cdd1" sourcePackage="AmberTools" sourcePackageVersion="16">oldff/leaprc.DNA.bsc0</Source>
-  <Reference>Placeholder Placeholder</Reference>
+  <DateGenerated>2017-10-04</DateGenerated>
+  <Source md5hash="df21eaacd7bc5d43b089774a3598cdd1" sourcePackage="AmberTools" sourcePackageVersion="17">oldff/leaprc.DNA.bsc0</Source>
+  <Reference>Perez, A.; Marchan, I.; Svozil, D.; Sponer, J.; Cheatham, T.E.; Laughton, C.A.; Orozco, M.  Refinement of the AMBER Force Field for Nucleic Acids: Improving the Description of alpha/gamma Conformers. Biophys. J., 2007, 92, 3817–3829.</Reference>
  </Info>
  <AtomTypes>
   <Type name="C" class="C" element="C" mass="12.01"/>
