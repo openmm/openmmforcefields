@@ -1,7 +1,7 @@
 <ForceField>
  <Info>
-  <DateGenerated>2017-09-29</DateGenerated>
-  <Source md5hash="1ec3413c17124b03b76884d9d3322845" sourcePackage="AmberTools" sourcePackageVersion="16">leaprc.gaff</Source>
+  <DateGenerated>2017-10-05</DateGenerated>
+  <Source md5hash="1ec3413c17124b03b76884d9d3322845" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.gaff</Source>
   <Reference>Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004). Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.</Reference>
  </Info>
  <AtomTypes>

@@ -217,9 +217,9 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
             atom.type = new_type
     if solvent_file is None:
     # this means this file does not include a water model - hard-coded assumption it is
-    # then a 'multivalent' file - set overloadLevel to 1 for all residue templates
+    # then a 'multivalent' file - set overrideLevel to 1 for all residue templates
         for name, residue in iteritems(params.residues):
-            residue.overload_level = 1
+            residue.override_level = 1
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
             params.write(ffxml_name, provenance=provenance, write_unused=False, improper_dihedrals_ordering='amber')
