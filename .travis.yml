@@ -18,6 +18,8 @@ script:
   - source activate test
   # Add conda channels
   - conda config --add channels omnia --add channels conda-forge
+  # Force update now that conda-forge has been added
+  - conda update --yes conda
   # Add openmm dev build
   - conda config --add channels omnia/label/dev
   # Add AMBER channel
