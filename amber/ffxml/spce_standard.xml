@@ -1,6 +1,6 @@
 <ForceField>
  <Info>
-  <DateGenerated>2017-10-04</DateGenerated>
+  <DateGenerated>2017-10-05</DateGenerated>
   <Source md5hash="576c159afdaa5f4f6b05250ce4326bd3" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ionsjc_spce</Source>
   <Source md5hash="11ef85dfcf07639646dd361590b76166" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ions234lm_126_spce</Source>
   <Source md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17">lib/atomic_ions.lib</Source>
