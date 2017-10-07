@@ -31,6 +31,7 @@
      - toppar/stream/prot/toppar_all36_prot_aldehydes.str
      - toppar/stream/na/toppar_all36_na_modifications.str
      - toppar/stream/misc/toppar_hbond.str
+     - toppar/stream/prot/toppar_all36_prot_d_aminoacids.str
   References:
    protein:
      - >-
