@@ -50,6 +50,16 @@ ignore = {'solvents.lib', 'atomic_ions.lib', 'ions94.lib', 'ions91.lib',
 # define NEARLYZERO to replace numerical comparisons to zero
 NEARLYZERO = 1e-10
 
+class LeapException(Exception):
+    def __init__(self, leaprc_filename):
+        msg = 'Something went wrong in processing this LEaP input file:\n'
+        msg += '\n'
+        infile = open(leaprc_filename, 'rt')
+        contents = infile.read()
+        msg += contents
+        msg += '\n'
+        super(LeapException, self).__init__(msg)
+
 def main():
     global verbose
     global no_log
@@ -546,10 +556,10 @@ quit""" % (leaprc_name, villin_top[1], villin_crd[1])
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_ala3_file[1], os.devnull))
     if os.path.getsize(ala3_top[1]) == 0 or os.path.getsize(ala3_crd[1]) == 0:
-        raise Exception('Ala_ala_ala LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_ala3_file[1])
     os.system('tleap -f %s > %s' % (leap_script_villin_file[1], os.devnull))
     if os.path.getsize(villin_top[1]) == 0 or os.path.getsize(villin_crd[1]) == 0:
-        raise Exception('Villin headpiece LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_villin_file[1])
 
     try:
         if verbose: print('Calculating and validating ala_ala_ala energies...')
@@ -606,7 +616,7 @@ quit""" % (leaprc_name, dna_top[1], dna_crd[1])
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_dna_file[1], os.devnull))
     if os.path.getsize(dna_top[1]) == 0 or os.path.getsize(dna_crd[1]) == 0:
-        raise Exception('DNA LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_dna_file[1])
 
     try:
         if verbose: print('Calculating and validating DNA energies...')
@@ -691,7 +701,7 @@ quit""" % (leaprc_name, rna_top[1], rna_crd[1])
         # try alternative name mappings
         os.system('tleap -f %s > %s' % (leap_script_rna_file_alt[1], os.devnull))
     if os.path.getsize(rna_top[1]) == 0 or os.path.getsize(rna_crd[1]) == 0:
-        raise Exception('RNA LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_rna_file_alt[1])
 
     try:
         if verbose: print('Calculating and validating RNA energies...')
@@ -723,7 +733,7 @@ quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_imatinib_file[1], os.devnull))
     if os.path.getsize(imatinib_top[1]) == 0 or os.path.getsize(imatinib_crd[1]) == 0:
-        raise Exception('imatinib LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_imatinib_file[1])
 
     try:
         if verbose: print('Calculating and validating imatinib energies...')
@@ -762,7 +772,7 @@ quit""" % (supp_leaprc_name, leaprc_name, pdbname, top[1], crd[1])
         if verbose: print('Running LEaP...')
         os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
         if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
-            raise Exception('LEaP fail for %s' % leaprc_name)
+            raise LeapException(leap_script_file[1])
 
         try:
             if verbose: print('Calculating and validating energies...')
@@ -821,7 +831,7 @@ quit""" % (HOH, pdb_name, top[1], crd[1])
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
     if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
-        raise Exception('LEaP fail for %s' % ffxml_name)
+        raise LeapException(leap_script_file[1])
     try:
         if verbose: print('Calculating and validating energies...')
         pdb = app.PDBFile(pdb_name, extraParticleIdentifier='')
@@ -906,11 +916,11 @@ quit""" % (leaprc_name, top_villin[1], crd_villin[1], top_dna[1], crd_dna[1],
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
     if os.path.getsize(top_villin[1]) == 0 or os.path.getsize(crd_villin[1]) == 0:
-        raise Exception('LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_file[1])
     if os.path.getsize(top_dna[1]) == 0 or os.path.getsize(crd_dna[1]) == 0:
-        raise Exception('LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_file[1])
     if os.path.getsize(top_rna[1]) == 0 or os.path.getsize(crd_rna[1]) == 0:
-        raise Exception('LEaP fail for %s' % leaprc_name)
+        raise LeapException(leap_script_file[1])
 
     # load into parmed
     parm_amber_villin = parmed.load_file(top_villin[1])
@@ -989,7 +999,7 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     if verbose: print('Running LEaP...')
     os.system('tleap -f %s > %s' % (leap_script_lipids_file[1], os.devnull))
     if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
-        raise Exception('Lipids LEaP fail for %s because prmtop or inpcrd file was empty; check leap.log' % leaprc_name)
+        raise LeapException(leap_script_lipids_file[1])
 
     try:
         if verbose: print('Calculating and validating lipids energies...')
