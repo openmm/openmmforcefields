@@ -1,10 +1,17 @@
 import xml.etree.ElementTree as etree
 from copy import deepcopy
 
+# Define file paths
+
+charmm_ffxml_filename = '../charmm/ffxml/charmm36.xml' # input CHARMM ffxml file containing lipid definitions
+amber_unmerged_lipid_ffxml_filename = 'ffxml/lipid17_unmerged.xml' # input AMBER ffxml file for unmerged lipids
+charmmlipid2amber_filename = 'files/charmmlipid2amber.csv' # AMBER to CHARMM lipid residue conversion table
+amber_merged_lipid_ffxml_filename = 'ffxml/lipid17.xml' # output AMBER ffxml file for merged lipids
+
 # Read the input files.
 
-charmmff = etree.parse('charmm36.xml')
-amberff = etree.parse('lipid17.xml')
+charmmff = etree.parse(charmm_ffxml_filename)
+amberff = etree.parse(amber_unmerged_lipid_ffxml_filename)
 charmmResidues = charmmff.getroot().find('Residues').findall('Residue')
 amberResidues = amberff.getroot().find('Residues').findall('Residue')
 amberResMap = {}
@@ -12,7 +19,7 @@ for res in amberResidues:
     atoms = dict((atom.attrib['name'], atom) for atom in res.findall('Atom'))
     amberResMap[res.attrib['name']] = atoms
 translations = {}
-with open('charmmlipid2amber.csv') as input:
+with open(charmmlipid2amber_filename) as input:
     # Skip the first two lines.
     input.readline()
     input.readline()
@@ -50,4 +57,7 @@ for residue in charmmResidues:
     copy = translateResidue(residue)
     if copy is not None:
         parentNode.append(copy)
-amberff.write('output.xml')
+
+# Write merged lipid ffxml file
+
+amberff.write(amber_merged_lipid_ffxml_filename)
