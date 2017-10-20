@@ -5,6 +5,12 @@
 - sourcePackage: AmberTools
   sourcePackageVersion: 17
 - MODE: LEAPRC
+- Source: leaprc.lipid17
+  Reference:
+  - >-
+    Lipids
+  Test:
+  - lipids
 - Source: leaprc.protein.ff14SB
   Reference:
   - >-
@@ -85,7 +91,7 @@
 - Source: leaprc.DNA.OL15
   Reference:
   - >-
-    Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P. 
+    Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P.
     Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA.
     J. Chem. Theor. and Comp., 2015, 12, 5723–5736.
   Test:
