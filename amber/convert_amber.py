@@ -77,6 +77,8 @@ def main():
                         help='validate resulting XML through phosphorylated protein tests')
     parser.add_argument('--gaff-test', action='store_true',
                         help='validate resulting XML through small-molecule (GAFF) test')
+    parser.add_argument('--lipids-test', action='store_true',
+                        help='validate resulting XML through lipids tests')
     args = parser.parse_args()
     verbose = args.verbose
     no_log = args.no_log
@@ -106,6 +108,8 @@ def main():
             validate_phospho_protein(ffxml_name, args.input)
         if args.gaff_test:
             validate_gaff(ffxml_name, args.input)
+        if args.lipids_test:
+            validate_lipids(ffxml_name, args.input)
     else:
         sys.exit('Wrong input_format chosen.')
 
@@ -394,6 +398,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 tested = True
             elif test == 'rna':
                 validate_rna(ffxml_name, leaprc_name)
+                tested = True
+            elif test == 'lipids':
+                validate_lipids(ffxml_name, leaprc_name)
                 tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
@@ -964,6 +971,36 @@ quit""" % (leaprc_name, top_villin[1], crd_villin[1], top_dna[1], crd_dna[1],
                   leap_script_file):
             os.unlink(f[1])
     if verbose: print('Improper validation for %s done!' % ffxml_name)
+
+def validate_lipids(ffxml_name, leaprc_name):
+    if verbose: print('Lipids energy validation for %s' % ffxml_name)
+    if verbose: print('Preparing temporary files for validation...')
+    lipids_top = tempfile.mkstemp()
+    lipids_crd = tempfile.mkstemp()
+    leap_script_lipids_file = tempfile.mkstemp()
+
+    if verbose: print('Preparing LeaP scripts...')
+    leap_script_lipids_string = """source %s
+x = loadPdb files/DOPC_128.pdb
+saveAmberParm x %s %s
+quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
+    write_file(leap_script_lipids_file[0], leap_script_lipids_string)
+
+    if verbose: print('Running LEaP...')
+    os.system('tleap -f %s > %s' % (leap_script_lipids_file[1], os.devnull))
+    if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
+        raise Exception('Lipids LEaP fail for %s because prmtop or inpcrd file was empty; check leap.log' % leaprc_name)
+
+    try:
+        if verbose: print('Calculating and validating lipids energies...')
+        assert_energies(lipids_top[1], lipids_crd[1], ffxml_name,
+                        system_name='lipids')
+        if verbose: print('Lipids energy validation successful!')
+    finally:
+        if verbose: print('Deleting temp files...')
+        for f in (lipids_top, lipids_crd, leap_script_lipids_file):
+            os.unlink(f[1])
+    if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
 
 class Logger():
     # logs testing energies into csv
