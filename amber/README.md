@@ -1,3 +1,15 @@
+# Amber forcefield conversion utilities for OpenMM
+
+## Manifest
+
+* `convert_amber.py` - Amber forcefield conversion drive
+* `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
+* `files/` - Amber input forcefield files and YAML conversion driver
+* `ffxml/` - converted OpenMM `ffxml` forcefields
+* `test/` - input files for testing conversion produces correct energies
+
+## Amber forcefield conversion: `convert_amber.py`
+
 **Summary**: call `python amber2omm.py -v`. Requires the `files/` dir. Outputs `ffxml/` containing all converted XMLs and `log.csv` - log of the validation energies.
 
 **Dependencies**: `ParmEd`, `OpenMM`, `Amber` or `AmberTools` or `ambermini`.
@@ -157,14 +169,14 @@ An 'overloading' set: HFE +2, +3 and +4 ions for tip3p water.
 * Name - the desired name of the ffxml. (For proteins and nucleic this is done by the script, which a product of `leaprc.ff14SB` will call `ff14SB.xml` etc.)
 
 Should you want to provide a different YAML (shorter version, different completely, whatever you want), script will take it with:
-```
+```bash
 python convert_amber.py --input name_of_your_yaml.yaml
 ```
 
 The outputs of any YAML will be written to `ffxml/`.
 
 You can also provide a leaprc of your choosing via:
-```
+```bash
 python convert_amber.py --input name_of_your_leaprc --input-format leaprc
 ```
 
@@ -188,3 +200,9 @@ As I've said before already, the system is:
 **Tests**
 
 Run `test/test.py` with `nosetests`.
+
+## Merging Amber split-residue lipids into single residues for OpenMM: `merge_lipids.py`
+
+```bash
+python merge_lipids.py
+```

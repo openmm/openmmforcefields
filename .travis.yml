@@ -36,10 +36,11 @@ script:
   - echo "Testing the installed openmmforcefields ffxml files..."
   - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
   # TODO: Install parmed dev version; replace with parmed dependency in meta.yaml
+  - conda remove --yes parmed
   - pip install git+https://github.com/jchodera/ParmEd.git@charmm-patches-2
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
-  - cd amber && python convert_amber.py --verbose && cd ..
+  - cd amber && python convert_amber.py --verbose && python merge_lipids.py && cd ..
   # Test CHARMM conversion
   - echo "Testing CHARMM conversion..."
   - cd charmm && python convert_charmm.py && cd ..
