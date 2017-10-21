@@ -4,9 +4,9 @@ from copy import deepcopy
 # Define file paths
 
 charmm_ffxml_filename = '../charmm/ffxml/charmm36.xml' # input CHARMM ffxml file containing lipid definitions
-amber_unmerged_lipid_ffxml_filename = 'ffxml/lipid17_unmerged.xml' # input AMBER ffxml file for unmerged lipids
+amber_unmerged_lipid_ffxml_filename = 'ffxml/lipid17.xml' # input AMBER ffxml file for unmerged lipids
 charmmlipid2amber_filename = 'files/charmmlipid2amber.csv' # AMBER to CHARMM lipid residue conversion table
-amber_merged_lipid_ffxml_filename = 'ffxml/lipid17.xml' # output AMBER ffxml file for merged lipids
+amber_merged_lipid_ffxml_filename = 'ffxml/lipid17_merged.xml' # output AMBER ffxml file for merged lipids
 
 # Read the input files.
 
