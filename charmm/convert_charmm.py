@@ -48,11 +48,14 @@ def convert_yaml(yaml_filename, ffxml_dir):
         source_files = entry['Source']
 
         # files that should be excluded from conversion.
-        exclude_files = source_files['exclude'] or set()
-        exclude_files = set(exclude_files)
+        exclude_files = set()
+        if ('exclude' in source_files) and (source_files['exclude'] is not None):
+            exclude_files = set(source_files['exclude'])
 
         # charmm36 main top and par files
-        charmm_files = source_files['include'] or list()
+        charmm_files = list()
+        if ('include' in source_files) and (source_files['include'] is not None):
+            charmm_files = source_files['include']
 
         # add stream files
         for files in source_files['stream']:

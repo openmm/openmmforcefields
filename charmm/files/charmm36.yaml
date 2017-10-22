@@ -6,7 +6,7 @@
 
 - sourcePackage: charmm36
   sourcePackageVersion: toppar_c36_aug15.tgz
-- Destination: charmm36.xml
+- Destination: charmm36_nowaters.xml
   Source:
     include:
      - toppar/top_all36_carb.rtf
@@ -33,6 +33,9 @@
      - toppar/stream/na/toppar_all36_na_modifications.str
      - toppar/stream/misc/toppar_hbond.str
      - toppar/stream/prot/toppar_all36_prot_d_aminoacids.str
+     # Exclude default waters and ions, since we split these out:
+     - toppar/toppar_water_ions.str
+     - toppar/stream/misc/toppar_ions_won.str
   References:
    protein:
      - >-
@@ -172,22 +175,6 @@
        Vorobyov and A. D. Mackerell Jr., J. Comput. Chem. 2010, 31, 671-690.
      - >-
        W. Yu, X. He, K. Vanommeslaeghe, A. D. MacKerell Jr., J. Comput. Chem. 2012, 33, 2451-2468.
-   tip3p:
-     - >-
-       W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; "Comparison of simple potential functions for
-       simulating liquid water", J. Chem. Phys. 79 926-935 (1983).
-   ions:
-     - >-
-       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
-       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-     - cations:
-       - >-
-         Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
-         Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
    amines:
      - >-
        Chen, I.-J., Yin, D. and MacKerell, Jr., A.D., "Combined Ab initio/Empirical Approach for Optimization of
