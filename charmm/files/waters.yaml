@@ -1,0 +1,179 @@
+- sourcePackage: charmm36
+  sourcePackageVersion: toppar_c36_aug15.tgz
+- Destination: waters_ions_spc_e.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_spc_e.str
+    exclude:
+  References:
+   spc-e:
+     - >-
+       H.J.C. Berendsen, J. R. Grigera, and T. P. Straatsma.
+       The Missing Term in Effective Pair Potentials.
+       J. Phys. Chem 91:6269-6271, 1987.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_spc.str
+    exclude:
+  References:
+   spc:
+     - >-
+       H.J.C. Berendsen, J.P.M. Postma, W.F. van Gunsteren, and J. Hermans.
+       INTERACTION MODELS FOR WATER IN RELATION TO PROTEIN HYDRATION
+       In Intermolecular Forces, edited by B. Pullman (Reidel, Dordrecht, 1981), p. 331
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip3p_pme_b.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str
+    exclude:
+  References:
+   tip3p-pme-b:
+     - >-
+       D.J. Price and C.L. Brooks III.
+       A modified TIP3P water potential for simulation with Ewald summation.
+       J. Chem. Phys. 121:10096-10103, 2004.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip3p_pme_f.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str
+    exclude:
+  References:
+   tip3p-pme-f:
+     - >-
+       D.J. Price and C.L. Brooks III.
+       A modified TIP3P water potential for simulation with Ewald summation.
+       J. Chem. Phys. 121:10096-10103, 2004.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip4p_2005.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip4p_2005.str
+    exclude:
+  References:
+   tip4p-2005:
+     - >-
+       J.L.F. Abascal and C. Vega.
+       A general purpose model for the condensed phases of water: TIP4P/2005
+       J. Chem. Phys. 123:234505, 2005.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip4p_ew.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip4p_ew.str
+    exclude:
+  References:
+   tip4p-ew:
+     - >-
+       H.W. Horn; W.C Swope; J.W. Pitera; J.D. Madura; T.J. Dick; G.L. Hura; T. Head-Gordon.
+       J. Chem. Phys. 120:9665-9678, 2004.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip4p.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip4p.str
+    exclude:
+  References:
+   tip4p:
+     - >-
+       W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; "Comparison of simple potential functions for
+       simulating liquid water", J. Chem. Phys. 79 926-935 (1983).
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip5p_ew.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip5p_ew.str
+    exclude:
+  References:
+   tip5p-ew:
+     - >-
+       Rick, S.W.
+       A reoptimization of the five-site water potential (TIP5P) for use with Ewald sums.
+       J Chem Phys 120: 6085-93, 2004.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+- Destination: waters_ions_tip5p.xml
+  Source:
+    include:
+    stream:
+     - toppar/non_charmm/toppar_water_ions_tip5p.str
+    exclude:
+  References:
+   tip5p:
+     - >-
+       M.W. Mahoney and W.L. Jorgensen.
+       A five-site model for liquid water and the reproduction of the density anomaly by rigid, nonpolarizable potential functions.
+       J. Chem Phys. 112:8910-8922, 2000.
+   ions:
+     - >-
+       Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
+       Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
+     - zinc:
+       - >-
+         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
