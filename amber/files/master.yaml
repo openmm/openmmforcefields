@@ -381,7 +381,7 @@
     Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
   - >-
     Li, P., Song, L.F., and Merz, K.M. (2015).
-    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.
+    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-8s95.
   Test:
   - water_ion
 - Source:
@@ -450,6 +450,110 @@
   Standard: spce_standard
   Solvent: spce
   Name: spce_IOD_multivalent
+  Reference:
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Li, P., Song, L.F., and Merz, K.M. (2015).
+    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ionsjc_tip3p
+  - parm/frcmod.ions234lm_126_tip3p
+  - lib/atomic_ions.lib
+  Solvent_source: tip3pfb.xml
+  Solvent: tip3pfb
+  Name: tip3pfb_standard
+  Reference:
+  - >-
+    Joung, I.S., and Cheatham, Thomas E. (2008).
+    Determination of Alkali and Halide Monovalent Ion Parameters for Use in Explicitly Solvated Biomolecular Simulations. J. Phys. Chem. B 112, 9020-9041.
+  - >-
+    Joung, I.S., and Cheatham, T.E. (2009).
+    Molecular Dynamics Simulations of the Dynamic and Energetic Properties of Alkali and Halide Ions Using Water-Model-Specific Ion Parameters. J. Phys. Chem. B 113, 13279-13290.
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Lee-Ping Wang, Todd J. Martinez and Vijay S. Pande. (2014).
+    Building force fields - an automatic, systematic and reproducible approach. Journal of Physical Chemistry Letters, 5, 1885-1891.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ions234lm_hfe_tip3p
+  - lib/atomic_ions.lib
+  Standard: tip3pfb_standard
+  Solvent: tip3pfb
+  Name: tip3pfb_HFE_multivalent
+  Reference:
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Li, P., Song, L.F., and Merz, K.M. (2015).
+    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-8s95.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ions234lm_iod_tip3p
+  - lib/atomic_ions.lib
+  Standard: tip3pfb_standard
+  Solvent: tip3pfb
+  Name: tip3pfb_IOD_multivalent
+  Reference:
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Li, P., Song, L.F., and Merz, K.M. (2015).
+    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ionsjc_tip4pew
+  - parm/frcmod.ions234lm_126_tip4pew
+  - lib/atomic_ions.lib
+  Solvent_source: tip4pfb.xml
+  Solvent: tip4pfb
+  Name: tip4pfb_standard
+  Reference:
+  - >-
+    Joung, I.S., and Cheatham, Thomas E. (2008).
+    Determination of Alkali and Halide Monovalent Ion Parameters for Use in Explicitly Solvated Biomolecular Simulations. J. Phys. Chem. B 112, 9020-9041.
+  - >-
+    Joung, I.S., and Cheatham, T.E. (2009).
+    Molecular Dynamics Simulations of the Dynamic and Energetic Properties of Alkali and Halide Ions Using Water-Model-Specific Ion Parameters. J. Phys. Chem. B 113, 13279q13290.
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Lee-Ping Wang, Todd J. Martinez and Vijay S. Pande. (2014).
+    Building force fields - an automatic, systematic and reproducible approach. Journal of Physical Chemistry Letters, 5, 1885-1891.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ions234lm_hfe_tip4pew
+  - lib/atomic_ions.lib
+  Standard: tip4pfb_standard
+  Solvent: tip4pfb
+  Name: tip4pfb_HFE_multivalent
+  Reference:
+  - >-
+    Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
+    Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.
+  - >-
+    Li, P., Song, L.F., and Merz, K.M. (2015).
+    Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.
+  Test:
+  - water_ion
+- Source:
+  - parm/frcmod.ions234lm_iod_tip4pew
+  - lib/atomic_ions.lib
+  Standard: tip4pfb_standard
+  Solvent: tip4pfb
+  Name: tip4pfb_IOD_multivalent
   Reference:
   - >-
     Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013).
