@@ -800,6 +800,12 @@ def validate_water_ion(ffxml_name, source_recipe_files, solvent_name, recipe_nam
     elif solvent_name == 'spce':
         HOH = 'SPC'
         solvent_frcmod = 'frcmod.spce'
+    elif solvent_name == 'tip3pfb':
+        HOH = 'FB3'
+        solvent_frcmod = 'frcmod.tip3pfb'
+    elif solvent_name == 'tip4pfb':
+        HOH = 'FB4'
+        solvent_frcmod = 'frcmod.tip4pfb' 
     pdb_name = 'files/water_ion/' + recipe_name + '.pdb'
     if verbose: print('Preparing temporary files for validation...')
     top = tempfile.mkstemp()

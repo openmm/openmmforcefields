@@ -1,0 +1,34 @@
+<ForceField>
+ <Info>
+  <DateGenerated>2014-05-28</DateGenerated>
+  <Reference>Lee-Ping Wang, Todd J. Martinez and Vijay S. Pande. Building force fields - an automatic, systematic and reproducible approach.  Journal of Physical Chemistry Letters, 2014, 5, pp 1885-1891.  DOI:10.1021/jz500737m</Reference>
+ </Info>
+ <AtomTypes>
+  <Type name="tip4p-fb-O" class="tip4p-fb-O" element="O" mass="15.99943"/>
+  <Type name="tip4p-fb-H" class="tip4p-fb-H" element="H" mass="1.007947"/>
+  <Type name="tip4p-fb-M" class="tip4p-fb-M" mass="0"/>
+ </AtomTypes>
+ <Residues>
+  <Residue name="HOH">
+   <Atom name="O" type="tip4p-fb-O" charge="0"/>
+   <Atom name="H1" type="tip4p-fb-H" charge="5.258681106763e-01" />
+   <Atom name="H2" type="tip4p-fb-H" charge="5.258681106763e-01" />
+   <Atom name="M" type="tip4p-fb-M" charge="-1.0517362213526e+00"/>
+   <VirtualSite type="average3" index="3" atom1="0" atom2="1" atom3="2" weight1="8.203146574531e-01" weight2="8.984267127345e-02" weight3="8.984267127345e-02" />
+   <Bond atomName1="O" atomName2="H1"/>
+   <Bond atomName1="O" atomName2="H2"/>
+  </Residue>
+ </Residues>
+ <HarmonicBondForce>
+  <Bond type1="tip4p-fb-O" type2="tip4p-fb-H" length="0.09572" k="462750.4"/>
+ </HarmonicBondForce>
+ <HarmonicAngleForce>
+  <Angle type1="tip4p-fb-H" type2="tip4p-fb-O" type3="tip4p-fb-H" angle="1.82421813418" k="836.8"/>
+ </HarmonicAngleForce>
+ <NonbondedForce coulomb14scale="0.833333" lj14scale="0.5">
+  <UseAttributeFromResidue name="charge"/>
+  <Atom type="tip4p-fb-O" sigma="3.165552430462e-01" epsilon="7.492790213533e-01" />
+  <Atom type="tip4p-fb-H" sigma="1" epsilon="0" />
+  <Atom type="tip4p-fb-M" sigma="1" epsilon="0" />
+ </NonbondedForce>
+</ForceField>
