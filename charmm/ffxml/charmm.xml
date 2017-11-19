@@ -1,0 +1,4 @@
+<ForceField>
+  <Include file="charmm36_nowaters.xml"/>
+  <Include file="waters_ions_default.xml"/>
+</ForceField>
