@@ -21,6 +21,7 @@ requirements:
     - ambertools ==17
     - lxml
     - networkx
+    - parmed
 
 test:
   requires:
