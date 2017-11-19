@@ -4,7 +4,7 @@
   Source:
     stream:
      - toppar/toppar_water_ions.str
-     - toppar/stream/misc/toppar_ions_won.str
+     #- toppar/stream/misc/toppar_ions_won.str # Contains ion Tm3p (Thulium +3 ion) that conflicts with TM3P
   References:
    tip3p:
      - >-
