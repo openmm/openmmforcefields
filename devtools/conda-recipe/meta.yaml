@@ -16,6 +16,7 @@ requirements:
   run:
     - python
     - openmm >=7.2.0
+    - yaml
     - pyyaml
     - ambertools ==17
     - lxml
