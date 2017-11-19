@@ -13,6 +13,9 @@ import csv
 import logging
 import warnings
 
+# define NEARLYZERO to replace numerical comparisons to zero
+NEARLYZERO = 1e-10
+
 def main():
     global verbose
     global no_log
@@ -47,13 +50,13 @@ def test_charmm():
         print('Testing %s' % name)
         compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames)
 
-def compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, system_kwargs=None, tolerance=1e-5, units=u.kilojoules_per_mole):
+def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, system_kwargs=None, tolerance=1e-5, units=u.kilojoules_per_mole):
     """
     Compare energies between (pdb, psf, toppar) loaded via ParmEd and (pdb, ffxml) loaded by OpenMM ForceField
 
     Parameters
     ----------
-    name : str
+    system_name : str
         Name of the test system
     pdb_filename : str
         Name of PDB file that should contain CRYST entry and PDB format compliant CONECT records for HETATM residues.
@@ -86,18 +89,107 @@ def compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_f
     structure = CharmmPsfFile(psf_filename)
     structure.positions = pdbfile.positions
     system_charmm = structure.createSystem(toppar, **system_kwargs)
+    with open('system_charmm.xml', 'w') as f:
+        f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
 
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
     system_openmm = ff.createSystem(pdbfile.topology, **system_kwargs)
+    with open('system_openmm.xml', 'w') as f:
+        f.write(mm.XmlSerializer.serialize(system_openmm))
     topology = openmm.load_topology(pdbfile.topology, system_openmm, xyz=pdbfile.positions)
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
 
     print('charmm_energies')
     print(charmm_energies)
-    print('omm_energies')
+    print('openmm_energies')
     print(omm_energies)
+
+    # calc rel energies and assert
+    rel_energies = []
+    for i, j in zip(charmm_energies, omm_energies):
+        if i[0] != j[0]:
+            raise Exception('Mismatch in energy tuples naming.')
+        if abs(i[1]) > NEARLYZERO:
+            rel_energies.append((i[0], abs((i[1]-j[1])/i[1])))
+        else:
+            if abs(j[1]) > NEARLYZERO:
+                raise AssertionError('One of the CHARMM %s energies (%s) for %s is zero, '
+                      'while the corresponding OpenMM energy is non-zero' %
+                      (system_name, i[0], ffxml))
+            rel_energies.append((i[0], 0))
+
+    dihedrals_done = False
+    for i in rel_energies:
+        if i[0] != 'PeriodicTorsionForce':
+            if i[1] > tolerance:
+                raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
+                                     (system_name, i[0], i[1], tolerance, ffxml))
+        else:
+            if not dihedrals_done:
+                if i[1] > tolerance:
+                    raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
+                                         (system_name, i[0], i[1], tolerance, ffxml))
+                dihedrals_done = True
+            else: #impropers
+                if i[1] > improper_tolerance:
+                    raise AssertionError('%s energies (%s-impropers, %f) outside of allowed tolerance (%f) for %s' %
+                                         (system_name, i[0], i[1], improper_tolerance, ffxml))
+
+    # logging
+    if not no_log:
+        charmm_energies_log = dict()
+        omm_energies_log = dict()
+        rel_energies_log = dict()
+        charmm_energies_log['ffxml_name'] = ffxml
+        charmm_energies_log['test_system'] = system_name
+        charmm_energies_log['data_type'] = 'CHARMM'
+        charmm_energies_log['units'] = units
+        omm_energies_log['ffxml_name'] = ffxml
+        omm_energies_log['test_system'] = system_name
+        omm_energies_log['data_type'] = 'OpenMM'
+        omm_energies_log['units'] = units
+        rel_energies_log['ffxml_name'] = ffxml
+        rel_energies_log['test_system'] = system_name
+        rel_energies_log['data_type'] = 'abs((CHARMM-OpenMM)/CHARMM)'
+        dihedrals_done = False
+        for item in amber_energies:
+            if item[0] == 'PeriodicTorsionForce' and not dihedrals_done:
+                charmm_energies_log['PeriodicTorsionForce_dihedrals'] = item[1]
+                dihedrals_done = True
+            elif item[0] == 'PeriodicTorsionForce' and dihedrals_done:
+                charmm_energies_log['PeriodicTorsionForce_impropers'] = item[1]
+            elif item[0] == 'CMMotionRemover':
+                continue
+            else:
+                charmm_energies_log[item[0]] = item[1]
+        dihedrals_done = False
+        for item in omm_energies:
+            if item[0] == 'PeriodicTorsionForce' and not dihedrals_done:
+                omm_energies_log['PeriodicTorsionForce_dihedrals'] = item[1]
+                dihedrals_done = True
+            elif item[0] == 'PeriodicTorsionForce' and dihedrals_done:
+                omm_energies_log['PeriodicTorsionForce_impropers'] = item[1]
+            elif item[0] == 'CMMotionRemover':
+                continue
+            else:
+                omm_energies_log[item[0]] = item[1]
+        dihedrals_done = False
+        for item in rel_energies:
+            if item[0] == 'PeriodicTorsionForce' and not dihedrals_done:
+                rel_energies_log['PeriodicTorsionForce_dihedrals'] = item[1]
+                dihedrals_done = True
+            elif item[0] == 'PeriodicTorsionForce' and dihedrals_done:
+                rel_energies_log['PeriodicTorsionForce_impropers'] = item[1]
+            elif item[0] == 'CMMotionRemover':
+                continue
+            else:
+                rel_energies_log[item[0]] = item[1]
+
+        logger.log(charmm_energies_log)
+        logger.log(omm_energies_log)
+        logger.log(rel_energies_log)
 
     # TODO: Check if discrepancies are larger than tolerance
 
