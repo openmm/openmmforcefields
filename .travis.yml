@@ -12,10 +12,8 @@ install:
   - conda config --add channels ${ORGNAME}
 
 script:
-  # Create a test environment
-  - conda create --yes -n test python=$python
-  # Activate the test environment
-  - source activate test
+  # Select the desired python version
+  - conda install python=$python
   # Add conda channels
   - conda config --add channels omnia --add channels conda-forge
   # Force update now that conda-forge has been added
