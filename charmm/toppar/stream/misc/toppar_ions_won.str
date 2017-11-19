@@ -2,14 +2,14 @@
 *
 
 !This is a comprehensive set of ions developed using stochastic boundary
-!conditions. It is strongly recommended that ion parameters in 
+!conditions. It is strongly recommended that ion parameters in
 !toppar_water_ions.str be used if available, as they are more highly
 !optimized.  Accordingly, those ions have been commented in this
 !file.
 !
 !reference
 !Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations
-!Developed under the Solvent Boundary Potential," Journal of Physical 
+!Developed under the Solvent Boundary Potential," Journal of Physical
 !Chemistry A., 116: 11763-11767, 2012.
 
 

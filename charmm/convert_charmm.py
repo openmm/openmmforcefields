@@ -93,7 +93,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                     references[-1]['forcefield'] = ff
 
         #generate recommended combination for charmm36
-        if verbose: print('Loading CHARMM parameter sets...')
+        if verbose: print('Loading CHARMM parameter sets %s...' % charmm_files)
         params = CharmmParameterSet(*charmm_files)
 
         if verbose: print('Converting parameters to OpenMM...')
