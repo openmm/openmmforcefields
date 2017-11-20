@@ -5,6 +5,20 @@
 - sourcePackage: AmberTools
   sourcePackageVersion: 17
 - MODE: LEAPRC
+- Source: leaprc.protein.ff15ipq
+  Reference:
+  - >-
+    Placeholder
+    Placeholder
+  Test:
+  - protein
+- Source: leaprc.protein.ff15ipq-vac
+  Reference:
+  - >-
+    Placeholder
+    Placeholder
+  Test:
+  - protein
 - Source: leaprc.lipid17
   Reference:
   - >-
@@ -275,20 +289,6 @@
 #  Test:
 #  - protein_phospho
 # Torsion problem
-#- Source: leaprc.protein.ff15ipq
-#  Reference:
-#  - >-
-#    Placeholder
-#    Placeholder
-#  Test:
-#  - protein
-#- Source: leaprc.protein.ff15ipq-vac
-#  Reference:
-#  - >-
-#    Placeholder
-#    Placeholder
-#  Test:
-#  - protein
 #- Source: oldff/leaprc.ff14ipq
 #  Reference:
 #  - >-

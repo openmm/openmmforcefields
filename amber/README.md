@@ -7,6 +7,7 @@
 * `files/` - Amber input forcefield files and YAML conversion driver
 * `ffxml/` - converted OpenMM `ffxml` forcefields
 * `test/` - input files for testing conversion produces correct energies
+* `parm15ipq_10.3.dat` - updated file from David S. Cerutti that will be added to a near-term AmberTools update, but for now must be overwritten manually
 
 ## Amber forcefield conversion: `convert_amber.py`
 
