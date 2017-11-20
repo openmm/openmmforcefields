@@ -1129,7 +1129,7 @@ def validate_lipids(ffxml_name, leaprc_name):
 
     if verbose: print('Preparing LeaP scripts...')
     leap_script_lipids_string = """source %s
-x = loadPdb files/lipids.pdb
+x = loadPdb files/lipids_amber.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
@@ -1160,7 +1160,7 @@ def validate_merged_lipids(ffxml_name, leaprc_name):
 
     if verbose: print('Preparing LeaP scripts...')
     leap_script_lipids_string = """source %s
-x = loadPdb files/lipids.pdb
+x = loadPdb files/lipids_amber.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
