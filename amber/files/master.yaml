@@ -22,6 +22,8 @@
   Test:
   - protein
 - Source: leaprc.lipid17
+  CharmmFFXMLFilename: ../charmm/ffxml/charmm36_nowaters.xml
+  CharmmLipid2AmberFilename: files/charmmlipid2amber.csv
   Reference:
   - >-
     Skjevik, A.A.; Madej, Benjamin D.; Walker, R.C.; Teigen, K.

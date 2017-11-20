@@ -20,6 +20,8 @@ from lxml import etree as et
 import csv
 import logging
 import warnings
+import xml.etree.ElementTree as etree
+from copy import deepcopy
 from parmed.exceptions import ParameterWarning
 warnings.filterwarnings('error', category=ParameterWarning)
 
@@ -380,9 +382,14 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
                          ffxml_dir=ffxml_dir, provenance=provenance,
                          ffxml_basename=recipe_name)
+        if 'CharmmFFXMLFilename' in entry:
+            charmm_ffxml_filename = entry['CharmmFFXMLFilename']
+            charmm_lipid2amber_filename = entry['CharmmLipid2AmberFilename']
+            print('Merging lipid entries...')
+            merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename)
         if 'Prefix' in entry:
             prefix = entry['Prefix']
-            print('Rewriting %s to append prefix "%s"' % (ffxml_name, prefix))
+            if verbose: print('Rewriting %s to append prefix "%s"...' % (ffxml_name, prefix))
             add_prefix_to_ffxml(ffxml_name, prefix)
         if verbose: print('Validating the conversion...')
         tested = False
@@ -414,11 +421,81 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 validate_rna(ffxml_name, leaprc_name)
                 tested = True
             elif test == 'lipids':
-                validate_lipids(ffxml_name, leaprc_name)
+                #validate_lipids(ffxml_name, leaprc_name)
+                validate_merged_lipids(ffxml_name, leaprc_name)
                 tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
                                 leaprc_name)
+
+def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename):
+    """
+    Merge lipid residue definitions in AMBER ffxml file according to entries in a CHARMM ffxml file.
+
+    Parameters
+    ----------
+    ffxml_filename : str
+       AMBER lipids ffxml filename with AMBER split lipids.
+    charmm_ffxml_filename : str
+       CHARMM ffxml lipids
+    charmmlipid2amber_filename : str
+       CHARMM CSV file containing translation from CHARMM -> AMBER
+
+    """
+    # Read the input files.
+    charmmff = etree.parse(charmm_ffxml_filename)
+    amberff = etree.parse(ffxml_filename)
+    charmmResidues = charmmff.getroot().find('Residues').findall('Residue')
+    amberResidues = amberff.getroot().find('Residues').findall('Residue')
+    amberResMap = {}
+    for res in amberResidues:
+        atoms = dict((atom.attrib['name'], atom) for atom in res.findall('Atom'))
+        amberResMap[res.attrib['name']] = atoms
+    translations = {}
+    with open(charmm_lipid2amber_filename) as input:
+        # Skip the first two lines.
+        input.readline()
+        input.readline()
+        for line in input:
+            fields = line.split(',')
+            mergedRes = fields[0]
+            mergedAtom = fields[2].split()[0]
+            originalAtom, originalRes = fields[3].split()
+            translations[(mergedRes, mergedAtom)] = (originalRes, originalAtom)
+
+    # Remove all residues from the Amber file.
+    parentNode = amberff.getroot().find('Residues')
+    for res in amberResidues:
+        parentNode.remove(res)
+
+    # Copy over the CHARMM residues, making appropriate replacements.
+    def translateResidue(residue):
+        newres = deepcopy(residue)
+        # Translate atom properties
+        for atom in newres.findall('Atom'):
+            key = (residue.attrib['name'], atom.attrib['name'])
+            if key not in translations:
+                return None # We don't have a translation.
+            amberResName, amberAtomName = translations[key]
+            if amberResName not in amberResMap or amberAtomName not in amberResMap[amberResName]:
+                return None # We don't have a translation.
+            amberAtom = amberResMap[amberResName][amberAtomName]
+            for attrib in amberAtom.attrib:
+                if attrib != 'name':
+                    atom.attrib[attrib] = amberAtom.attrib[attrib]
+        # Remove Patches from CHARMM residues
+        for patch in newres.findall('AllowPatch'):
+            newres.remove(patch)
+
+        return newres
+
+    for residue in charmmResidues:
+        copy = translateResidue(residue)
+        if copy is not None:
+            parentNode.append(copy)
+
+    # Write merged lipid ffxml file (overwriting original file)
+    amberff.write(ffxml_filename)
 
 def add_prefix_to_ffxml(ffxml_filename, prefix):
     """
@@ -469,7 +546,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
         outfile.write(modified_contents)
 
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5,
-                    improper_tolerance=1e-2, units=u.kilojoules_per_mole):
+                    improper_tolerance=1e-2, units=u.kilojoules_per_mole, topology=None):
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem(splitDihedrals=True)
@@ -480,7 +557,10 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
         ff = app.ForceField(ffxml)
     else:
         ff = app.ForceField(*ffxml)
-    system_omm = ff.createSystem(parm_amber.topology)
+    if topology is not None:
+        system_omm = ff.createSystem(topology)
+    else:
+        system_omm = ff.createSystem(parm_amber.topology)
     parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
                                            xyz=parm_amber.positions)
     system_omm = parm_omm.createSystem(splitDihedrals=True)
@@ -1063,6 +1143,37 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
         if verbose: print('Calculating and validating lipids energies...')
         assert_energies(lipids_top[1], lipids_crd[1], ffxml_name,
                         system_name='lipids')
+        if verbose: print('Lipids energy validation successful!')
+    finally:
+        if verbose: print('Deleting temp files...')
+        for f in (lipids_top, lipids_crd, leap_script_lipids_file):
+            os.unlink(f[1])
+    if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
+
+def validate_merged_lipids(ffxml_name, leaprc_name):
+    if verbose: print('Lipids (merged) energy validation for %s' % ffxml_name)
+    if verbose: print('Preparing temporary files for validation...')
+    lipids_top = tempfile.mkstemp()
+    lipids_crd = tempfile.mkstemp()
+    leap_script_lipids_file = tempfile.mkstemp()
+    pdbfile = app.PDBFile('files/lipids_charmm.pdb')
+
+    if verbose: print('Preparing LeaP scripts...')
+    leap_script_lipids_string = """source %s
+x = loadPdb files/lipids.pdb
+saveAmberParm x %s %s
+quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
+    write_file(leap_script_lipids_file[0], leap_script_lipids_string)
+
+    if verbose: print('Running LEaP...')
+    os.system('tleap -f %s > %s' % (leap_script_lipids_file[1], os.devnull))
+    if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
+        raise LeapException(leap_script_lipids_file[1])
+
+    try:
+        if verbose: print('Calculating and validating lipids energies...')
+        assert_energies(lipids_top[1], lipids_crd[1], ffxml_name,
+                        system_name='lipids', topology=pdbfile.topology)
         if verbose: print('Lipids energy validation successful!')
     finally:
         if verbose: print('Deleting temp files...')
