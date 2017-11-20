@@ -6,6 +6,7 @@
   sourcePackageVersion: 17
 - MODE: LEAPRC
 - Source: leaprc.protein.ff15ipq
+  Prefix: protein
   Reference:
   - >-
     Placeholder
@@ -13,6 +14,7 @@
   Test:
   - protein
 - Source: leaprc.protein.ff15ipq-vac
+  Prefix: protein
   Reference:
   - >-
     Placeholder
@@ -42,6 +44,7 @@
   Test:
   - lipids
 - Source: leaprc.protein.ff14SB
+  Prefix: protein
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -57,6 +60,7 @@
   - protein
   - nucleic
 - Source: leaprc.protein.ff14SBonlysc
+  Prefix: protein
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -67,6 +71,7 @@
   Test:
   - protein
 - Source: leaprc.protein.ff03.r1
+  Prefix: protein
   Reference:
   - >-
     Duan, Y., Wu, C., Chowdhury, S., Lee, M.C., Xiong, G., Zhang, W., Yang, R., Cieplak, P., Luo, R., Lee, T., et al. (2003).
@@ -78,20 +83,13 @@
   Test:
   - protein
 - Source: leaprc.protein.ff03ua
+  Prefix: protein
   Reference:
   - >-
     Yang, L., Tan, C., Hsieh, M.-J., Wang, J., Duan, Y., Cieplak, P., Caldwell, J., Kollman, P.A., and Luo, R. (2006).
     New-Generation Amber United-Atom Force Field. J. Phys. Chem. B 110, 13166-13176.
   Test:
   - protein_ua
-- Source: leaprc.ffAM1
-  Reference:
-  - >-
-    Wollacott, A.M., and Merz, K.M. (2006). Development of a Parametrized Force Field To Reproduce Semiempirical Geometries.
-    J. Chem. Theory Comput. 2, 1070-1077.
-  Test:
-  - protein
-  - nucleic
 - Source: leaprc.ffPM3
   Reference:
   - >-
@@ -119,6 +117,7 @@
   Test:
   - gaff
 - Source: leaprc.DNA.OL15
+  Prefix: DNA
   Reference:
   - >-
     Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P.
@@ -127,6 +126,7 @@
   Test:
   - dna
 - Source: leaprc.DNA.bsc1
+  Prefix: DNA
   Reference:
   - >-
     Ivani, I.; Dans, P.D.; Noy, A.; Perez, A.; Faustino, I.; Hopsital, A.; Walther, J.; Andrio, P.; Goni, R.;
@@ -135,6 +135,7 @@
   Test:
   - dna
 - Source: leaprc.RNA.OL3
+  Prefix: RNA
   Reference:
   - >-
     Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P.
@@ -143,6 +144,7 @@
   Test:
   - rna
 - Source: leaprc.RNA.YIL
+  Prefix: RNA
   Reference:
   - >-
     Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P.
@@ -151,6 +153,7 @@
   Test:
   - rna
 - Source: leaprc.RNA.ROC
+  Prefix: RNA
   Reference:
   - >-
     Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P.
@@ -159,6 +162,7 @@
   Test:
   - rna
 - Source: leaprc.protein.fb15
+  Prefix: protein
   Reference:
   - >-
     Wang, L.-P., McKiernan, K.A., Gomes, J., Beauchamp, K.A., Head-Gordon, T., Rice, J.E., Swope, W.C., Martinez, T.J., and Pande, V.S. (2017).
@@ -263,6 +267,7 @@
   - protein
   - nucleic
 - Source: oldff/leaprc.DNA.bsc0
+  Prefix: DNA
   Reference:
   - >-
     Perez, A.; Marchan, I.; Svozil, D.; Sponer, J.; Cheatham, T.E.; Laughton, C.A.; Orozco, M.
@@ -274,6 +279,14 @@
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
     ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.
+  Test:
+  - protein
+  - nucleic
+- Source: leaprc.ffAM1
+  Reference:
+  - >-
+    Wollacott, A.M., and Merz, K.M. (2006). Development of a Parametrized Force Field To Reproduce Semiempirical Geometries.
+    J. Chem. Theory Comput. 2, 1070-1077.
   Test:
   - protein
   - nucleic
