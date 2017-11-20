@@ -24,6 +24,8 @@ script:
   - conda config --add channels http://ambermd.org/downloads/ambertools/conda/
   # Install extras for testing
   - conda install --yes --quiet pip nose nose-timer
+  # Workaround for failure to install these when installing local package
+  - conda install --yes openmm>=7.2.0 yaml pyyaml ambertools==17 lxml networkx parmed
   # Build the recipe
   - echo "Building the recipe..."
   - conda build devtools/conda-recipe
