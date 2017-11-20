@@ -1,1 +1,13 @@
 ffxml_name,data_type,test_system,units,HarmonicBondForce,HarmonicAngleForce,PeriodicTorsionForce_dihedrals,PeriodicTorsionForce_impropers,NonbondedForce
+ffxml/protein.ff15ipq.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.08820152282715,71.0853500366211,-49.16811752319336,0.5143800377845764,251.2607421875
+ffxml/protein.ff15ipq.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.08820152282715,71.08523559570312,-49.168067932128906,0.5143767595291138,251.260498046875
+ffxml/protein.ff15ipq.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,1.6099086226598503e-06,1.0086020566016613e-06,6.373216730505054e-06,9.716624366961923e-07
+ffxml/protein.ff15ipq.xml,AMBER,protein-villin headpiece,kilojoule/mole,542.2650756835938,1544.3046875,-739.4564208984375,84.44351196289062,-3310.922607421875
+ffxml/protein.ff15ipq.xml,OpenMM,protein-villin headpiece,kilojoule/mole,542.2650756835938,1544.302490234375,-739.4566040039062,84.44383239746094,-3310.9228515625
+ffxml/protein.ff15ipq.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.4228187240414628e-06,2.4762171721698943e-07,3.7946618143181626e-06,7.373794375402379e-08
+ffxml/protein.ff15ipq-vac.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.08820152282715,71.0853500366211,-49.16811752319336,0.5143800377845764,352.15625
+ffxml/protein.ff15ipq-vac.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.08820152282715,71.08523559570312,-49.168067932128906,0.5143767595291138,352.1561279296875
+ffxml/protein.ff15ipq-vac.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,1.6099086226598503e-06,1.0086020566016613e-06,6.373216730505054e-06,3.4663679119708937e-07
+ffxml/protein.ff15ipq-vac.xml,AMBER,protein-villin headpiece,kilojoule/mole,542.2650756835938,1544.3046875,-739.4564208984375,84.44351196289062,-1742.5938720703125
+ffxml/protein.ff15ipq-vac.xml,OpenMM,protein-villin headpiece,kilojoule/mole,542.2650756835938,1544.302490234375,-739.4566040039062,84.44383239746094,-1742.59375
+ffxml/protein.ff15ipq-vac.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.4228187240414628e-06,2.4762171721698943e-07,3.7946618143181626e-06,7.005092492088975e-08
