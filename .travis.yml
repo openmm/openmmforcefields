@@ -13,7 +13,7 @@ install:
 
 script:
   # Select the desired python version
-  - conda install python=$python
+  - conda install --yes python=$python
   # Add conda channels
   - conda config --add channels omnia --add channels conda-forge
   # Force update now that conda-forge has been added
