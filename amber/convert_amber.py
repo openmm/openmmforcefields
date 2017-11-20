@@ -380,6 +380,10 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
                          ffxml_dir=ffxml_dir, provenance=provenance,
                          ffxml_basename=recipe_name)
+        if 'Prefix' in entry:
+            prefix = entry['Prefix']
+            print('Rewriting %s to append prefix "%s"' % (ffxml_name, prefix))
+            add_prefix_to_ffxml(ffxml_name, prefix)
         if verbose: print('Validating the conversion...')
         tested = False
         for test in leaprc_test:
@@ -415,6 +419,54 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if not tested:
             raise Exception('No validation tests have been run for %s' %
                                 leaprc_name)
+
+def add_prefix_to_ffxml(ffxml_filename, prefix):
+    """
+    Replace the contents of an ffxml file with a modified version in which every atom type is prefixed with `prefix`.
+
+    Parameters
+    ----------
+    ffxml_filename : str
+       OpenMM ffxml filename (will be overwritten)
+    prefix : str
+       Prefix
+
+    """
+
+    import re
+    import sys
+
+    inTypes = False
+    replacements = {}
+
+    modified_contents = ''
+    with open(ffxml_filename, 'r') as infile:
+        for line in infile:
+            if '<AtomTypes>' in line:
+                inTypes = True
+            if '</AtomTypes>' in line:
+                inTypes = False
+            if inTypes:
+                match = re.search('name="(.*?)"', line)
+                if match is not None:
+                    name = match.group(1)
+                    newName = prefix + '-' + name
+                    line = line.replace('name="%s"' % name, 'name="%s"' % newName)
+                    replacements['type="%s"' % name] = 'type="%s"' % newName
+                    replacements['type1="%s"' % name] = 'type1="%s"' % newName
+                    replacements['type2="%s"' % name] = 'type2="%s"' % newName
+                    replacements['type3="%s"' % name] = 'type3="%s"' % newName
+                    replacements['type4="%s"' % name] = 'type4="%s"' % newName
+            else:
+                for key in replacements:
+                    if key in line:
+                        line = line.replace(key, replacements[key])
+            if line.endswith('\n'):
+                line = line[:-1]
+            modified_contents += line + '\n'
+
+    with open(ffxml_filename, 'w') as outfile:
+        outfile.write(modified_contents)
 
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5,
                     improper_tolerance=1e-2, units=u.kilojoules_per_mole):
@@ -805,7 +857,7 @@ def validate_water_ion(ffxml_name, source_recipe_files, solvent_name, recipe_nam
         solvent_frcmod = 'frcmod.tip3pfb'
     elif solvent_name == 'tip4pfb':
         HOH = 'FB4'
-        solvent_frcmod = 'frcmod.tip4pfb' 
+        solvent_frcmod = 'frcmod.tip4pfb'
     pdb_name = 'files/water_ion/' + recipe_name + '.pdb'
     if verbose: print('Preparing temporary files for validation...')
     top = tempfile.mkstemp()
