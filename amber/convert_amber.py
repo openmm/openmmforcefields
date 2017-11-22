@@ -385,7 +385,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if 'CharmmFFXMLFilename' in entry:
             charmm_ffxml_filename = entry['CharmmFFXMLFilename']
             charmm_lipid2amber_filename = entry['CharmmLipid2AmberFilename']
-            print('Merging lipid entries...')
+            if verbose: print('Merging lipid entries...')
             merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename)
         if 'Prefix' in entry:
             prefix = entry['Prefix']
@@ -1129,7 +1129,7 @@ def validate_lipids(ffxml_name, leaprc_name):
 
     if verbose: print('Preparing LeaP scripts...')
     leap_script_lipids_string = """source %s
-x = loadPdb files/lipids_amber.pdb
+x = loadPdb files/POPC-nowater-amber.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
@@ -1156,11 +1156,11 @@ def validate_merged_lipids(ffxml_name, leaprc_name):
     lipids_top = tempfile.mkstemp()
     lipids_crd = tempfile.mkstemp()
     leap_script_lipids_file = tempfile.mkstemp()
-    pdbfile = app.PDBFile('files/lipids_charmm.pdb')
+    pdbfile = app.PDBFile('files/POPC-nowater-charmm.pdb')
 
     if verbose: print('Preparing LeaP scripts...')
     leap_script_lipids_string = """source %s
-x = loadPdb files/lipids_amber.pdb
+x = loadPdb files/POPC-nowater-amber.pdb
 saveAmberParm x %s %s
 quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
