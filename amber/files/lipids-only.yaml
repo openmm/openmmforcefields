@@ -1,0 +1,31 @@
+# AMBER --> OpenMM-ffxml conversion YAML
+# Author: Rafal P. Wiewiora, ChoderaLab
+# Structure: list - first entry - source package info, further entries - 1/resulting ffxml file
+
+- sourcePackage: AmberTools
+  sourcePackageVersion: 17
+- MODE: LEAPRC
+- Source: leaprc.lipid17
+  CharmmFFXMLFilename: ../charmm/ffxml/charmm36_nowaters.xml
+  CharmmLipid2AmberFilename: files/charmmlipid2amber.csv
+  Reference:
+  - >-
+    Skjevik, A.A.; Madej, Benjamin D.; Walker, R.C.; Teigen, K.
+    Lipid11: A modular framework for lipid simulations using amber. J. Phys. Chem. B, 2012, 116, 11124-11136.
+  - >-
+    Dickson, C.J.; Rosso, L.; Betz, R.M.; Walker, R.C.; Gould, I.R.
+    GAFFlipid: a General Amber Force Field for the accurate molecular dynamics simulation of phospholipid. Soft Matter, 2012, 8, 9617.
+  - >-
+    Dickson, C.J.; Madej, B.D.; Skjevik, A.A..; Betz, R.M.; Teigen, K.; Gould, I.R.; Walker, R.C.
+    Lipid14: The Amber Lipid Force Field. J. Chem. Theory Comput., 2014, 10, 865-879.
+  - >-
+    Skjevik, A.A.; Madej, B.D.; Dickson, C.J.; Teigen, K.; Walker, R.C.; Gould, I.R.
+    All-atom lipid bilayer self-assembly with the amber and charmm lipid force fields. Chem. Commun., 2015, 51, 4402-4405.
+  - >-
+    Skjevik, A.A.; Madej, B.D.; Dickson, C.J.; Lin, C.; Teigen, K.; Walker, R.C.; Gould, I.R.
+    Simulations of lipid bilayer self-assembly using all-atom lipid force fields. Phys. Chem. Chem. Phys., 2016, 18, 10573-10584.
+  - >-
+    Madej, B.D.; Gould, I.R.; Walker, R.C.
+    A Parameterization of Cholesterol for Mixed Lipid Bilayer Simulation within the Amber Lipid14 Force Field. J Phys Chem B, 2015, 119, 12424-12435.
+  Test:
+  - lipids
