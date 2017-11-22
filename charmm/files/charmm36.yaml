@@ -35,6 +35,8 @@
      # Exclude default waters and ions, since we split these out:
      - toppar/toppar_water_ions.str
      - toppar/stream/misc/toppar_ions_won.str
+     # Exclude model amino acid sidechain analogues
+     - toppar/stream/prot/toppar_all36_prot_model.str           
   References:
    protein:
      - >-
@@ -178,3 +180,19 @@
      - >-
        Chen, I.-J., Yin, D. and MacKerell, Jr., A.D., "Combined Ab initio/Empirical Approach for Optimization of
        Lennard-Jones Parameters for Polar-Neutral Compounds," Journal of Computational Chemistry, 2002, 23:199-213.
+- Destination: toppar_all36_prot_model.xml
+  Override: 1
+  Source:
+    include:
+    stream:
+     - toppar/stream/prot/toppar_all36_prot_model.str
+  TestInclude:
+     - ffxml/charmm36.xml
+  References:
+   protein:
+     - >-
+       MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.;
+       Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.;
+       Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub,
+       J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular
+       modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616

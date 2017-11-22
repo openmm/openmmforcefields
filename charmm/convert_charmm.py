@@ -99,12 +99,25 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose: print('Converting parameters to OpenMM...')
         params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
 
+        # Set override level
+        if 'Override' in entry:
+            override_level = int(entry['Override'])
+            if verbose: print('Setting residues and patches to override level %d...' % override_level)
+            for name, residue in params_omm.residues.items():
+                residue.override_level = override_level
+            for name, patch in params_omm.patches.items():
+                patch.override_level = override_level
+
         if verbose: print('Writing parameter set and compatible patches. This may take several minutes...')
         params_omm.write(ffxml_filename, provenance=provenance)
 
         # Try reading the forcefield back in to make sure it is valid
         if verbose: print('Verifying ffxml file integrity...')
-        forcefield = app.ForceField(ffxml_filename)
+        if 'TestInclude' in entry:
+            ffxml_include = entry['TestInclude']
+            forcefield = app.ForceField(*ffxml_include, ffxml_filename)
+        else:
+            forcefield = app.ForceField(ffxml_filename)
         if verbose: print('Verified.')
 
 class Logger():
