@@ -559,15 +559,18 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
         ff = app.ForceField(*ffxml)
     if topology is not None:
         system_omm = ff.createSystem(topology)
+        parm_omm = parmed.openmm.load_topology(topology, system_omm,
+                                               xyz=parm_amber.positions)
     else:
         system_omm = ff.createSystem(parm_amber.topology)
-    parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
-                                           xyz=parm_amber.positions)
+        parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
+                                               xyz=parm_amber.positions)
     system_omm = parm_omm.createSystem(splitDihedrals=True)
     omm_energies = parmed.openmm.energy_decomposition_system(parm_omm,
                    system_omm, nrg=units)
 
     # calc rel energies and assert
+    energies = []
     rel_energies = []
     for i, j in zip(amber_energies, omm_energies):
         if i[0] != j[0]:
@@ -582,21 +585,21 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
             rel_energies.append((i[0], 0))
 
     dihedrals_done = False
-    for i in rel_energies:
+    for (i, amber_energy, openmm_energy) in zip(rel_energies, amber_energies, omm_energies):
         if i[0] != 'PeriodicTorsionForce':
             if i[1] > tolerance:
-                raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
-                                     (system_name, i[0], i[1], tolerance, ffxml))
+                raise AssertionError('%s relative energy error (%s, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s' %
+                                     (system_name, i[0], i[1], tolerance, ffxml, amber_energy, openmm_energy))
         else:
             if not dihedrals_done:
                 if i[1] > tolerance:
-                    raise AssertionError('%s energies (%s, %f) outside of allowed tolerance (%f) for %s' %
-                                         (system_name, i[0], i[1], tolerance, ffxml))
+                    raise AssertionError('%s relative energy error (%s, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s' %
+                                         (system_name, i[0], i[1], tolerance, ffxml, amber_energy, openmm_energy))
                 dihedrals_done = True
             else: #impropers
                 if i[1] > improper_tolerance:
-                    raise AssertionError('%s energies (%s-impropers, %f) outside of allowed tolerance (%f) for %s' %
-                                         (system_name, i[0], i[1], improper_tolerance, ffxml))
+                    raise AssertionError('%s relative energy error (%s-impropers, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s' %
+                                         (system_name, i[0], i[1], improper_tolerance, ffxml, amber_energy, openmm_energy))
 
     # logging
     if not no_log:
