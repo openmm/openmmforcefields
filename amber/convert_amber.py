@@ -489,6 +489,7 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
 
         return newres
 
+    # Iterate over CHARMM lipid residue templates and replace components with AMBER parameters
     for residue in charmmResidues:
         copy = translateResidue(residue)
         if copy is not None:
@@ -546,7 +547,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
         outfile.write(modified_contents)
 
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5,
-                    improper_tolerance=1e-2, units=u.kilojoules_per_mole, topology=None):
+                    improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem(splitDihedrals=True)
@@ -557,10 +558,14 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
         ff = app.ForceField(ffxml)
     else:
         ff = app.ForceField(*ffxml)
-    if topology is not None:
-        system_omm = ff.createSystem(topology)
-        parm_omm = parmed.openmm.load_topology(topology, system_omm,
-                                               xyz=parm_amber.positions)
+
+    if openmm_positions is None:
+        openmm_positions = parm_amber.positions
+
+    if openmm_topology is not None:
+        system_omm = ff.createSystem(openmm_topology)
+        parm_omm = parmed.openmm.load_topology(openmm_topology, system_omm,
+                                               xyz=openmm_positions)
     else:
         system_omm = ff.createSystem(parm_amber.topology)
         parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
@@ -1176,7 +1181,8 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     try:
         if verbose: print('Calculating and validating lipids energies...')
         assert_energies(lipids_top[1], lipids_crd[1], ffxml_name,
-                        system_name='lipids', topology=pdbfile.topology)
+                        system_name='lipids',
+                        openmm_topology=pdbfile.topology, openmm_positions=pdbfile.positions)
         if verbose: print('Lipids energy validation successful!')
     finally:
         if verbose: print('Deleting temp files...')

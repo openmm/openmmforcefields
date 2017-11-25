@@ -1,1 +1,4 @@
 ffxml_name,data_type,test_system,units,HarmonicBondForce,HarmonicAngleForce,PeriodicTorsionForce_dihedrals,PeriodicTorsionForce_impropers,NonbondedForce
+ffxml/lipid17.xml,AMBER,lipids,kilojoule/mole,5988.36572265625,37683.96875,23311.400390625,432.53350830078125,-130962.6484375
+ffxml/lipid17.xml,OpenMM,lipids,kilojoule/mole,5988.36572265625,37683.81640625,23311.3984375,432.53302001953125,-130962.6875
+ffxml/lipid17.xml,abs((AMBER-OpenMM)/AMBER),lipids,,0.0,4.042667347769733e-06,8.37841128062592e-08,1.1288865270074107e-06,2.9827206815111107e-07
