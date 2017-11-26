@@ -1,216 +1,216 @@
 <ForceField>
- <Info>
-  <DateGenerated>2017-10-28</DateGenerated>
-  <Source md5hash="46f388bbebb3c57346f7ba20ddc2db66" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ions234lm_iod_tip3p</Source>
-  <Source md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17">lib/atomic_ions.lib</Source>
-  <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
-  <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
- </Info>
- <AtomTypes>
-  <Type name="tip3pfb_IOD_multivalent-Be2+" class="tip3pfb_IOD_multivalent-Be2+" element="Be" mass="9.01"/>
-  <Type name="tip3pfb_IOD_multivalent-Cu2+" class="tip3pfb_IOD_multivalent-Cu2+" element="Cu" mass="63.55"/>
-  <Type name="tip3pfb_IOD_multivalent-Ni2+" class="tip3pfb_IOD_multivalent-Ni2+" element="Ni" mass="58.69"/>
-  <Type name="tip3pfb_IOD_multivalent-Zn2+" class="tip3pfb_IOD_multivalent-Zn2+" element="Zn" mass="65.4"/>
-  <Type name="tip3pfb_IOD_multivalent-Co2+" class="tip3pfb_IOD_multivalent-Co2+" element="Co" mass="58.93"/>
-  <Type name="tip3pfb_IOD_multivalent-Cr2+" class="tip3pfb_IOD_multivalent-Cr2+" element="Cr" mass="52.0"/>
-  <Type name="tip3pfb_IOD_multivalent-Fe2+" class="tip3pfb_IOD_multivalent-Fe2+" element="Fe" mass="55.85"/>
-  <Type name="tip3pfb_IOD_multivalent-Mg2+" class="tip3pfb_IOD_multivalent-Mg2+" element="Mg" mass="24.305"/>
-  <Type name="tip3pfb_IOD_multivalent-V2+" class="tip3pfb_IOD_multivalent-V2+" element="V" mass="50.94"/>
-  <Type name="tip3pfb_IOD_multivalent-Mn2+" class="tip3pfb_IOD_multivalent-Mn2+" element="Mn" mass="54.94"/>
-  <Type name="tip3pfb_IOD_multivalent-Hg2+" class="tip3pfb_IOD_multivalent-Hg2+" element="Hg" mass="200.59"/>
-  <Type name="tip3pfb_IOD_multivalent-Cd2+" class="tip3pfb_IOD_multivalent-Cd2+" element="Cd" mass="112.41"/>
-  <Type name="tip3pfb_IOD_multivalent-Ca2+" class="tip3pfb_IOD_multivalent-Ca2+" element="Ca" mass="40.08"/>
-  <Type name="tip3pfb_IOD_multivalent-Sn2+" class="tip3pfb_IOD_multivalent-Sn2+" element="Sn" mass="118.71"/>
-  <Type name="tip3pfb_IOD_multivalent-Sr2+" class="tip3pfb_IOD_multivalent-Sr2+" element="Sr" mass="87.62"/>
-  <Type name="tip3pfb_IOD_multivalent-Ba2+" class="tip3pfb_IOD_multivalent-Ba2+" element="Ba" mass="137.33"/>
-  <Type name="tip3pfb_IOD_multivalent-Al3+" class="tip3pfb_IOD_multivalent-Al3+" element="Al" mass="26.98"/>
-  <Type name="tip3pfb_IOD_multivalent-Fe3+" class="tip3pfb_IOD_multivalent-Fe3+" element="Fe" mass="55.85"/>
-  <Type name="tip3pfb_IOD_multivalent-Cr3+" class="tip3pfb_IOD_multivalent-Cr3+" element="Cr" mass="52.0"/>
-  <Type name="tip3pfb_IOD_multivalent-In3+" class="tip3pfb_IOD_multivalent-In3+" element="In" mass="114.82"/>
-  <Type name="tip3pfb_IOD_multivalent-Tl3+" class="tip3pfb_IOD_multivalent-Tl3+" element="Tl" mass="204.38"/>
-  <Type name="tip3pfb_IOD_multivalent-Y3+" class="tip3pfb_IOD_multivalent-Y3+" element="Y" mass="88.91"/>
-  <Type name="tip3pfb_IOD_multivalent-La3+" class="tip3pfb_IOD_multivalent-La3+" element="La" mass="138.91"/>
-  <Type name="tip3pfb_IOD_multivalent-Ce3+" class="tip3pfb_IOD_multivalent-Ce3+" element="Ce" mass="140.12"/>
-  <Type name="tip3pfb_IOD_multivalent-Pr3+" class="tip3pfb_IOD_multivalent-Pr3+" element="Pr" mass="140.91"/>
-  <Type name="tip3pfb_IOD_multivalent-Nd3+" class="tip3pfb_IOD_multivalent-Nd3+" element="Nd" mass="144.24"/>
-  <Type name="tip3pfb_IOD_multivalent-Sm3+" class="tip3pfb_IOD_multivalent-Sm3+" element="Sm" mass="150.36"/>
-  <Type name="tip3pfb_IOD_multivalent-Eu3+" class="tip3pfb_IOD_multivalent-Eu3+" element="Eu" mass="151.96"/>
-  <Type name="tip3pfb_IOD_multivalent-Gd3+" class="tip3pfb_IOD_multivalent-Gd3+" element="Gd" mass="157.25"/>
-  <Type name="tip3pfb_IOD_multivalent-Tb3+" class="tip3pfb_IOD_multivalent-Tb3+" element="Tb" mass="158.93"/>
-  <Type name="tip3pfb_IOD_multivalent-Dy3+" class="tip3pfb_IOD_multivalent-Dy3+" element="Dy" mass="162.5"/>
-  <Type name="tip3pfb_IOD_multivalent-Er3+" class="tip3pfb_IOD_multivalent-Er3+" element="Er" mass="167.26"/>
-  <Type name="tip3pfb_IOD_multivalent-Tm3+" class="tip3pfb_IOD_multivalent-Tm3+" element="Tm" mass="168.93"/>
-  <Type name="tip3pfb_IOD_multivalent-Lu3+" class="tip3pfb_IOD_multivalent-Lu3+" element="Lu" mass="174.97"/>
-  <Type name="tip3pfb_IOD_multivalent-Hf4+" class="tip3pfb_IOD_multivalent-Hf4+" element="Hf" mass="178.49"/>
-  <Type name="tip3pfb_IOD_multivalent-Zr4+" class="tip3pfb_IOD_multivalent-Zr4+" element="Zr" mass="91.22"/>
-  <Type name="tip3pfb_IOD_multivalent-Ce4+" class="tip3pfb_IOD_multivalent-Ce4+" element="Ce" mass="140.12"/>
-  <Type name="tip3pfb_IOD_multivalent-U4+" class="tip3pfb_IOD_multivalent-U4+" element="U" mass="238.03"/>
-  <Type name="tip3pfb_IOD_multivalent-Pu4+" class="tip3pfb_IOD_multivalent-Pu4+" element="Pu" mass="244.06"/>
-  <Type name="tip3pfb_IOD_multivalent-Th4+" class="tip3pfb_IOD_multivalent-Th4+" element="Th" mass="232.04"/>
- </AtomTypes>
- <Residues>
-  <Residue name="AL" override="1">
-   <Atom name="AL" type="tip3pfb_IOD_multivalent-Al3+" charge="3.0"/>
-  </Residue>
-  <Residue name="BA" override="1">
-   <Atom name="BA" type="tip3pfb_IOD_multivalent-Ba2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Be" override="1">
-   <Atom name="Be" type="tip3pfb_IOD_multivalent-Be2+" charge="2.0"/>
-  </Residue>
-  <Residue name="CA" override="1">
-   <Atom name="CA" type="tip3pfb_IOD_multivalent-Ca2+" charge="2.0"/>
-  </Residue>
-  <Residue name="CD" override="1">
-   <Atom name="CD" type="tip3pfb_IOD_multivalent-Cd2+" charge="2.0"/>
-  </Residue>
-  <Residue name="CE" override="1">
-   <Atom name="CE" type="tip3pfb_IOD_multivalent-Ce3+" charge="3.0"/>
-  </Residue>
-  <Residue name="CO" override="1">
-   <Atom name="CO" type="tip3pfb_IOD_multivalent-Co2+" charge="2.0"/>
-  </Residue>
-  <Residue name="CR" override="1">
-   <Atom name="CR" type="tip3pfb_IOD_multivalent-Cr3+" charge="3.0"/>
-  </Residue>
-  <Residue name="CU" override="1">
-   <Atom name="CU" type="tip3pfb_IOD_multivalent-Cu2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Ce" override="1">
-   <Atom name="Ce" type="tip3pfb_IOD_multivalent-Ce4+" charge="4.0"/>
-  </Residue>
-  <Residue name="Cr" override="1">
-   <Atom name="Cr" type="tip3pfb_IOD_multivalent-Cr2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Dy" override="1">
-   <Atom name="Dy" type="tip3pfb_IOD_multivalent-Dy3+" charge="3.0"/>
-  </Residue>
-  <Residue name="EU3" override="1">
-   <Atom name="EU3" type="tip3pfb_IOD_multivalent-Eu3+" charge="3.0"/>
-  </Residue>
-  <Residue name="Er" override="1">
-   <Atom name="Er" type="tip3pfb_IOD_multivalent-Er3+" charge="3.0"/>
-  </Residue>
-  <Residue name="FE" override="1">
-   <Atom name="FE" type="tip3pfb_IOD_multivalent-Fe3+" charge="3.0"/>
-  </Residue>
-  <Residue name="FE2" override="1">
-   <Atom name="FE2" type="tip3pfb_IOD_multivalent-Fe2+" charge="2.0"/>
-  </Residue>
-  <Residue name="GD3" override="1">
-   <Atom name="GD" type="tip3pfb_IOD_multivalent-Gd3+" charge="3.0"/>
-  </Residue>
-  <Residue name="HG" override="1">
-   <Atom name="HG" type="tip3pfb_IOD_multivalent-Hg2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Hf" override="1">
-   <Atom name="Hf" type="tip3pfb_IOD_multivalent-Hf4+" charge="4.0"/>
-  </Residue>
-  <Residue name="IN" override="1">
-   <Atom name="IN" type="tip3pfb_IOD_multivalent-In3+" charge="3.0"/>
-  </Residue>
-  <Residue name="LA" override="1">
-   <Atom name="LA" type="tip3pfb_IOD_multivalent-La3+" charge="3.0"/>
-  </Residue>
-  <Residue name="LU" override="1">
-   <Atom name="LU" type="tip3pfb_IOD_multivalent-Lu3+" charge="3.0"/>
-  </Residue>
-  <Residue name="MG" override="1">
-   <Atom name="MG" type="tip3pfb_IOD_multivalent-Mg2+" charge="2.0"/>
-  </Residue>
-  <Residue name="MN" override="1">
-   <Atom name="MN" type="tip3pfb_IOD_multivalent-Mn2+" charge="2.0"/>
-  </Residue>
-  <Residue name="NI" override="1">
-   <Atom name="NI" type="tip3pfb_IOD_multivalent-Ni2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Nd" override="1">
-   <Atom name="Nd" type="tip3pfb_IOD_multivalent-Nd3+" charge="3.0"/>
-  </Residue>
-  <Residue name="PR" override="1">
-   <Atom name="PR" type="tip3pfb_IOD_multivalent-Pr3+" charge="3.0"/>
-  </Residue>
-  <Residue name="Pu" override="1">
-   <Atom name="Pu" type="tip3pfb_IOD_multivalent-Pu4+" charge="4.0"/>
-  </Residue>
-  <Residue name="SM" override="1">
-   <Atom name="SM" type="tip3pfb_IOD_multivalent-Sm3+" charge="3.0"/>
-  </Residue>
-  <Residue name="SR" override="1">
-   <Atom name="SR" type="tip3pfb_IOD_multivalent-Sr2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Sn" override="1">
-   <Atom name="Sn" type="tip3pfb_IOD_multivalent-Sn2+" charge="2.0"/>
-  </Residue>
-  <Residue name="TB" override="1">
-   <Atom name="TB" type="tip3pfb_IOD_multivalent-Tb3+" charge="3.0"/>
-  </Residue>
-  <Residue name="Th" override="1">
-   <Atom name="Th" type="tip3pfb_IOD_multivalent-Th4+" charge="4.0"/>
-  </Residue>
-  <Residue name="Tl" override="1">
-   <Atom name="Tl" type="tip3pfb_IOD_multivalent-Tl3+" charge="3.0"/>
-  </Residue>
-  <Residue name="Tm" override="1">
-   <Atom name="Tm" type="tip3pfb_IOD_multivalent-Tm3+" charge="3.0"/>
-  </Residue>
-  <Residue name="U4+" override="1">
-   <Atom name="U" type="tip3pfb_IOD_multivalent-U4+" charge="4.0"/>
-  </Residue>
-  <Residue name="V2+" override="1">
-   <Atom name="V2+" type="tip3pfb_IOD_multivalent-V2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Y" override="1">
-   <Atom name="Y" type="tip3pfb_IOD_multivalent-Y3+" charge="3.0"/>
-  </Residue>
-  <Residue name="ZN" override="1">
-   <Atom name="ZN" type="tip3pfb_IOD_multivalent-Zn2+" charge="2.0"/>
-  </Residue>
-  <Residue name="Zr" override="1">
-   <Atom name="Zr" type="tip3pfb_IOD_multivalent-Zr4+" charge="4.0"/>
-  </Residue>
- </Residues>
- <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
-  <UseAttributeFromResidue name="charge"/>
-  <Atom type="tip3pfb_IOD_multivalent-Be2+" sigma="0.20811394055758325" epsilon="0.0026385977600000003"/>
-  <Atom type="tip3pfb_IOD_multivalent-Cu2+" sigma="0.2510552587719476" epsilon="0.07200664"/>
-  <Atom type="tip3pfb_IOD_multivalent-Ni2+" sigma="0.24464078800133718" epsilon="0.04934496632"/>
-  <Atom type="tip3pfb_IOD_multivalent-Zn2+" sigma="0.24856074236115466" epsilon="0.062412728"/>
-  <Atom type="tip3pfb_IOD_multivalent-Co2+" sigma="0.25016436005380727" epsilon="0.06846053264"/>
-  <Atom type="tip3pfb_IOD_multivalent-Cr2+" sigma="0.24731348415575818" epsilon="0.05799739464"/>
-  <Atom type="tip3pfb_IOD_multivalent-Fe2+" sigma="0.2510552587719476" epsilon="0.07200664"/>
-  <Atom type="tip3pfb_IOD_multivalent-Mg2+" sigma="0.24856074236115466" epsilon="0.062412728"/>
-  <Atom type="tip3pfb_IOD_multivalent-V2+" sigma="0.26299330159502815" epsilon="0.1338302608"/>
-  <Atom type="tip3pfb_IOD_multivalent-Mn2+" sigma="0.26138968390237555" epsilon="0.12386075112"/>
-  <Atom type="tip3pfb_IOD_multivalent-Hg2+" sigma="0.2806330962142069" epsilon="0.28247819944"/>
-  <Atom type="tip3pfb_IOD_multivalent-Cd2+" sigma="0.2683386939038702" epsilon="0.17114857016"/>
-  <Atom type="tip3pfb_IOD_multivalent-Ca2+" sigma="0.2865130277539331" epsilon="0.34886028824000004"/>
-  <Atom type="tip3pfb_IOD_multivalent-Sn2+" sigma="0.309676394425582" epsilon="0.6903723846400001"/>
-  <Atom type="tip3pfb_IOD_multivalent-Sr2+" sigma="0.31234909058000293" epsilon="0.73715046696"/>
-  <Atom type="tip3pfb_IOD_multivalent-Ba2+" sigma="0.34085784956049386" epsilon="1.2995585169600001"/>
-  <Atom type="tip3pfb_IOD_multivalent-Al3+" sigma="0.2439280690268249" epsilon="0.04721589608000001"/>
-  <Atom type="tip3pfb_IOD_multivalent-Fe3+" sigma="0.25711337005530194" epsilon="0.09989325104"/>
-  <Atom type="tip3pfb_IOD_multivalent-Cr3+" sigma="0.252124337233716" epsilon="0.07644268416000001"/>
-  <Atom type="tip3pfb_IOD_multivalent-In3+" sigma="0.2656659977494492" epsilon="0.15168878616"/>
-  <Atom type="tip3pfb_IOD_multivalent-Tl3+" sigma="0.2799203772396946" epsilon="0.27501557520000003"/>
-  <Atom type="tip3pfb_IOD_multivalent-Y3+" sigma="0.29043298211375057" epsilon="0.39786810784"/>
-  <Atom type="tip3pfb_IOD_multivalent-La3+" sigma="0.3132399892981433" epsilon="0.7530346464"/>
-  <Atom type="tip3pfb_IOD_multivalent-Ce3+" sigma="0.31751630314521695" epsilon="0.83118754056"/>
-  <Atom type="tip3pfb_IOD_multivalent-Pr3+" sigma="0.31715994365796085" epsilon="0.8245589130400001"/>
-  <Atom type="tip3pfb_IOD_multivalent-Nd3+" sigma="0.307181878014789" epsilon="0.64794725224"/>
-  <Atom type="tip3pfb_IOD_multivalent-Sm3+" sigma="0.3048655413476241" epsilon="0.60967151816"/>
-  <Atom type="tip3pfb_IOD_multivalent-Eu3+" sigma="0.3057564400657644" epsilon="0.62426246504"/>
-  <Atom type="tip3pfb_IOD_multivalent-Gd3+" sigma="0.29542201493533654" epsilon="0.46563832232"/>
-  <Atom type="tip3pfb_IOD_multivalent-Tb3+" sigma="0.2977383516025014" epsilon="0.4991058036"/>
-  <Atom type="tip3pfb_IOD_multivalent-Dy3+" sigma="0.29168024031914713" epsilon="0.41424963936000003"/>
-  <Atom type="tip3pfb_IOD_multivalent-Er3+" sigma="0.2913238808318909" epsilon="0.40953067312"/>
-  <Atom type="tip3pfb_IOD_multivalent-Tm3+" sigma="0.29346203775542773" epsilon="0.43830358088"/>
-  <Atom type="tip3pfb_IOD_multivalent-Lu3+" sigma="0.2895420833956103" epsilon="0.38639884336"/>
-  <Atom type="tip3pfb_IOD_multivalent-Hf4+" sigma="0.2850875898049086" epsilon="0.33197918711999996"/>
-  <Atom type="tip3pfb_IOD_multivalent-Zr4+" sigma="0.28669120749756116" epsilon="0.35100580160000006"/>
-  <Atom type="tip3pfb_IOD_multivalent-Ce4+" sigma="0.31466542724716784" epsilon="0.77874118424"/>
-  <Atom type="tip3pfb_IOD_multivalent-U4+" sigma="0.31929810058149766" epsilon="0.8646299178400001"/>
-  <Atom type="tip3pfb_IOD_multivalent-Pu4+" sigma="0.3121709108363749" epsilon="0.73399083568"/>
-  <Atom type="tip3pfb_IOD_multivalent-Th4+" sigma="0.31537814622168014" epsilon="0.7917259353600001"/>
- </NonbondedForce>
+  <Info>
+    <DateGenerated>2017-11-25</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_iod_tip3p" md5hash="46f388bbebb3c57346f7ba20ddc2db66" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ions234lm_iod_tip3p</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17">lib/atomic_ions.lib</Source>
+    <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
+    <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
+  </Info>
+  <AtomTypes>
+    <Type class="tip3pfb_IOD_multivalent-Be2+" element="Be" mass="9.01" name="tip3pfb_IOD_multivalent-Be2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Cu2+" element="Cu" mass="63.55" name="tip3pfb_IOD_multivalent-Cu2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Ni2+" element="Ni" mass="58.69" name="tip3pfb_IOD_multivalent-Ni2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Zn2+" element="Zn" mass="65.4" name="tip3pfb_IOD_multivalent-Zn2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Co2+" element="Co" mass="58.93" name="tip3pfb_IOD_multivalent-Co2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Cr2+" element="Cr" mass="52.0" name="tip3pfb_IOD_multivalent-Cr2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Fe2+" element="Fe" mass="55.85" name="tip3pfb_IOD_multivalent-Fe2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Mg2+" element="Mg" mass="24.305" name="tip3pfb_IOD_multivalent-Mg2+"/>
+    <Type class="tip3pfb_IOD_multivalent-V2+" element="V" mass="50.94" name="tip3pfb_IOD_multivalent-V2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Mn2+" element="Mn" mass="54.94" name="tip3pfb_IOD_multivalent-Mn2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Hg2+" element="Hg" mass="200.59" name="tip3pfb_IOD_multivalent-Hg2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Cd2+" element="Cd" mass="112.41" name="tip3pfb_IOD_multivalent-Cd2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Ca2+" element="Ca" mass="40.08" name="tip3pfb_IOD_multivalent-Ca2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Sn2+" element="Sn" mass="118.71" name="tip3pfb_IOD_multivalent-Sn2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Sr2+" element="Sr" mass="87.62" name="tip3pfb_IOD_multivalent-Sr2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Ba2+" element="Ba" mass="137.33" name="tip3pfb_IOD_multivalent-Ba2+"/>
+    <Type class="tip3pfb_IOD_multivalent-Al3+" element="Al" mass="26.98" name="tip3pfb_IOD_multivalent-Al3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Fe3+" element="Fe" mass="55.85" name="tip3pfb_IOD_multivalent-Fe3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Cr3+" element="Cr" mass="52.0" name="tip3pfb_IOD_multivalent-Cr3+"/>
+    <Type class="tip3pfb_IOD_multivalent-In3+" element="In" mass="114.82" name="tip3pfb_IOD_multivalent-In3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Tl3+" element="Tl" mass="204.38" name="tip3pfb_IOD_multivalent-Tl3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Y3+" element="Y" mass="88.91" name="tip3pfb_IOD_multivalent-Y3+"/>
+    <Type class="tip3pfb_IOD_multivalent-La3+" element="La" mass="138.91" name="tip3pfb_IOD_multivalent-La3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Ce3+" element="Ce" mass="140.12" name="tip3pfb_IOD_multivalent-Ce3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Pr3+" element="Pr" mass="140.91" name="tip3pfb_IOD_multivalent-Pr3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Nd3+" element="Nd" mass="144.24" name="tip3pfb_IOD_multivalent-Nd3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Sm3+" element="Sm" mass="150.36" name="tip3pfb_IOD_multivalent-Sm3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Eu3+" element="Eu" mass="151.96" name="tip3pfb_IOD_multivalent-Eu3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Gd3+" element="Gd" mass="157.25" name="tip3pfb_IOD_multivalent-Gd3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Tb3+" element="Tb" mass="158.93" name="tip3pfb_IOD_multivalent-Tb3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Dy3+" element="Dy" mass="162.5" name="tip3pfb_IOD_multivalent-Dy3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Er3+" element="Er" mass="167.26" name="tip3pfb_IOD_multivalent-Er3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Tm3+" element="Tm" mass="168.93" name="tip3pfb_IOD_multivalent-Tm3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Lu3+" element="Lu" mass="174.97" name="tip3pfb_IOD_multivalent-Lu3+"/>
+    <Type class="tip3pfb_IOD_multivalent-Hf4+" element="Hf" mass="178.49" name="tip3pfb_IOD_multivalent-Hf4+"/>
+    <Type class="tip3pfb_IOD_multivalent-Zr4+" element="Zr" mass="91.22" name="tip3pfb_IOD_multivalent-Zr4+"/>
+    <Type class="tip3pfb_IOD_multivalent-Ce4+" element="Ce" mass="140.12" name="tip3pfb_IOD_multivalent-Ce4+"/>
+    <Type class="tip3pfb_IOD_multivalent-U4+" element="U" mass="238.03" name="tip3pfb_IOD_multivalent-U4+"/>
+    <Type class="tip3pfb_IOD_multivalent-Pu4+" element="Pu" mass="244.06" name="tip3pfb_IOD_multivalent-Pu4+"/>
+    <Type class="tip3pfb_IOD_multivalent-Th4+" element="Th" mass="232.04" name="tip3pfb_IOD_multivalent-Th4+"/>
+  </AtomTypes>
+  <Residues>
+    <Residue name="AL" override="1">
+      <Atom charge="3.0" name="AL" type="tip3pfb_IOD_multivalent-Al3+"/>
+    </Residue>
+    <Residue name="BA" override="1">
+      <Atom charge="2.0" name="BA" type="tip3pfb_IOD_multivalent-Ba2+"/>
+    </Residue>
+    <Residue name="Be" override="1">
+      <Atom charge="2.0" name="Be" type="tip3pfb_IOD_multivalent-Be2+"/>
+    </Residue>
+    <Residue name="CA" override="1">
+      <Atom charge="2.0" name="CA" type="tip3pfb_IOD_multivalent-Ca2+"/>
+    </Residue>
+    <Residue name="CD" override="1">
+      <Atom charge="2.0" name="CD" type="tip3pfb_IOD_multivalent-Cd2+"/>
+    </Residue>
+    <Residue name="CE" override="1">
+      <Atom charge="3.0" name="CE" type="tip3pfb_IOD_multivalent-Ce3+"/>
+    </Residue>
+    <Residue name="CO" override="1">
+      <Atom charge="2.0" name="CO" type="tip3pfb_IOD_multivalent-Co2+"/>
+    </Residue>
+    <Residue name="CR" override="1">
+      <Atom charge="3.0" name="CR" type="tip3pfb_IOD_multivalent-Cr3+"/>
+    </Residue>
+    <Residue name="CU" override="1">
+      <Atom charge="2.0" name="CU" type="tip3pfb_IOD_multivalent-Cu2+"/>
+    </Residue>
+    <Residue name="Ce" override="1">
+      <Atom charge="4.0" name="Ce" type="tip3pfb_IOD_multivalent-Ce4+"/>
+    </Residue>
+    <Residue name="Cr" override="1">
+      <Atom charge="2.0" name="Cr" type="tip3pfb_IOD_multivalent-Cr2+"/>
+    </Residue>
+    <Residue name="Dy" override="1">
+      <Atom charge="3.0" name="Dy" type="tip3pfb_IOD_multivalent-Dy3+"/>
+    </Residue>
+    <Residue name="EU3" override="1">
+      <Atom charge="3.0" name="EU3" type="tip3pfb_IOD_multivalent-Eu3+"/>
+    </Residue>
+    <Residue name="Er" override="1">
+      <Atom charge="3.0" name="Er" type="tip3pfb_IOD_multivalent-Er3+"/>
+    </Residue>
+    <Residue name="FE" override="1">
+      <Atom charge="3.0" name="FE" type="tip3pfb_IOD_multivalent-Fe3+"/>
+    </Residue>
+    <Residue name="FE2" override="1">
+      <Atom charge="2.0" name="FE2" type="tip3pfb_IOD_multivalent-Fe2+"/>
+    </Residue>
+    <Residue name="GD3" override="1">
+      <Atom charge="3.0" name="GD" type="tip3pfb_IOD_multivalent-Gd3+"/>
+    </Residue>
+    <Residue name="HG" override="1">
+      <Atom charge="2.0" name="HG" type="tip3pfb_IOD_multivalent-Hg2+"/>
+    </Residue>
+    <Residue name="Hf" override="1">
+      <Atom charge="4.0" name="Hf" type="tip3pfb_IOD_multivalent-Hf4+"/>
+    </Residue>
+    <Residue name="IN" override="1">
+      <Atom charge="3.0" name="IN" type="tip3pfb_IOD_multivalent-In3+"/>
+    </Residue>
+    <Residue name="LA" override="1">
+      <Atom charge="3.0" name="LA" type="tip3pfb_IOD_multivalent-La3+"/>
+    </Residue>
+    <Residue name="LU" override="1">
+      <Atom charge="3.0" name="LU" type="tip3pfb_IOD_multivalent-Lu3+"/>
+    </Residue>
+    <Residue name="MG" override="1">
+      <Atom charge="2.0" name="MG" type="tip3pfb_IOD_multivalent-Mg2+"/>
+    </Residue>
+    <Residue name="MN" override="1">
+      <Atom charge="2.0" name="MN" type="tip3pfb_IOD_multivalent-Mn2+"/>
+    </Residue>
+    <Residue name="NI" override="1">
+      <Atom charge="2.0" name="NI" type="tip3pfb_IOD_multivalent-Ni2+"/>
+    </Residue>
+    <Residue name="Nd" override="1">
+      <Atom charge="3.0" name="Nd" type="tip3pfb_IOD_multivalent-Nd3+"/>
+    </Residue>
+    <Residue name="PR" override="1">
+      <Atom charge="3.0" name="PR" type="tip3pfb_IOD_multivalent-Pr3+"/>
+    </Residue>
+    <Residue name="Pu" override="1">
+      <Atom charge="4.0" name="Pu" type="tip3pfb_IOD_multivalent-Pu4+"/>
+    </Residue>
+    <Residue name="SM" override="1">
+      <Atom charge="3.0" name="SM" type="tip3pfb_IOD_multivalent-Sm3+"/>
+    </Residue>
+    <Residue name="SR" override="1">
+      <Atom charge="2.0" name="SR" type="tip3pfb_IOD_multivalent-Sr2+"/>
+    </Residue>
+    <Residue name="Sn" override="1">
+      <Atom charge="2.0" name="Sn" type="tip3pfb_IOD_multivalent-Sn2+"/>
+    </Residue>
+    <Residue name="TB" override="1">
+      <Atom charge="3.0" name="TB" type="tip3pfb_IOD_multivalent-Tb3+"/>
+    </Residue>
+    <Residue name="Th" override="1">
+      <Atom charge="4.0" name="Th" type="tip3pfb_IOD_multivalent-Th4+"/>
+    </Residue>
+    <Residue name="Tl" override="1">
+      <Atom charge="3.0" name="Tl" type="tip3pfb_IOD_multivalent-Tl3+"/>
+    </Residue>
+    <Residue name="Tm" override="1">
+      <Atom charge="3.0" name="Tm" type="tip3pfb_IOD_multivalent-Tm3+"/>
+    </Residue>
+    <Residue name="U4+" override="1">
+      <Atom charge="4.0" name="U" type="tip3pfb_IOD_multivalent-U4+"/>
+    </Residue>
+    <Residue name="V2+" override="1">
+      <Atom charge="2.0" name="V2+" type="tip3pfb_IOD_multivalent-V2+"/>
+    </Residue>
+    <Residue name="Y" override="1">
+      <Atom charge="3.0" name="Y" type="tip3pfb_IOD_multivalent-Y3+"/>
+    </Residue>
+    <Residue name="ZN" override="1">
+      <Atom charge="2.0" name="ZN" type="tip3pfb_IOD_multivalent-Zn2+"/>
+    </Residue>
+    <Residue name="Zr" override="1">
+      <Atom charge="4.0" name="Zr" type="tip3pfb_IOD_multivalent-Zr4+"/>
+    </Residue>
+  </Residues>
+  <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
+    <UseAttributeFromResidue name="charge"/>
+    <Atom epsilon="0.0026385977600000003" sigma="0.20811394055758325" type="tip3pfb_IOD_multivalent-Be2+"/>
+    <Atom epsilon="0.07200664" sigma="0.2510552587719476" type="tip3pfb_IOD_multivalent-Cu2+"/>
+    <Atom epsilon="0.04934496632" sigma="0.24464078800133718" type="tip3pfb_IOD_multivalent-Ni2+"/>
+    <Atom epsilon="0.062412728" sigma="0.24856074236115466" type="tip3pfb_IOD_multivalent-Zn2+"/>
+    <Atom epsilon="0.06846053264" sigma="0.25016436005380727" type="tip3pfb_IOD_multivalent-Co2+"/>
+    <Atom epsilon="0.05799739464" sigma="0.24731348415575818" type="tip3pfb_IOD_multivalent-Cr2+"/>
+    <Atom epsilon="0.07200664" sigma="0.2510552587719476" type="tip3pfb_IOD_multivalent-Fe2+"/>
+    <Atom epsilon="0.062412728" sigma="0.24856074236115466" type="tip3pfb_IOD_multivalent-Mg2+"/>
+    <Atom epsilon="0.1338302608" sigma="0.26299330159502815" type="tip3pfb_IOD_multivalent-V2+"/>
+    <Atom epsilon="0.12386075112" sigma="0.26138968390237555" type="tip3pfb_IOD_multivalent-Mn2+"/>
+    <Atom epsilon="0.28247819944" sigma="0.2806330962142069" type="tip3pfb_IOD_multivalent-Hg2+"/>
+    <Atom epsilon="0.17114857016" sigma="0.2683386939038702" type="tip3pfb_IOD_multivalent-Cd2+"/>
+    <Atom epsilon="0.34886028824000004" sigma="0.2865130277539331" type="tip3pfb_IOD_multivalent-Ca2+"/>
+    <Atom epsilon="0.6903723846400001" sigma="0.309676394425582" type="tip3pfb_IOD_multivalent-Sn2+"/>
+    <Atom epsilon="0.73715046696" sigma="0.31234909058000293" type="tip3pfb_IOD_multivalent-Sr2+"/>
+    <Atom epsilon="1.2995585169600001" sigma="0.34085784956049386" type="tip3pfb_IOD_multivalent-Ba2+"/>
+    <Atom epsilon="0.04721589608000001" sigma="0.2439280690268249" type="tip3pfb_IOD_multivalent-Al3+"/>
+    <Atom epsilon="0.09989325104" sigma="0.25711337005530194" type="tip3pfb_IOD_multivalent-Fe3+"/>
+    <Atom epsilon="0.07644268416000001" sigma="0.252124337233716" type="tip3pfb_IOD_multivalent-Cr3+"/>
+    <Atom epsilon="0.15168878616" sigma="0.2656659977494492" type="tip3pfb_IOD_multivalent-In3+"/>
+    <Atom epsilon="0.27501557520000003" sigma="0.2799203772396946" type="tip3pfb_IOD_multivalent-Tl3+"/>
+    <Atom epsilon="0.39786810784" sigma="0.29043298211375057" type="tip3pfb_IOD_multivalent-Y3+"/>
+    <Atom epsilon="0.7530346464" sigma="0.3132399892981433" type="tip3pfb_IOD_multivalent-La3+"/>
+    <Atom epsilon="0.83118754056" sigma="0.31751630314521695" type="tip3pfb_IOD_multivalent-Ce3+"/>
+    <Atom epsilon="0.8245589130400001" sigma="0.31715994365796085" type="tip3pfb_IOD_multivalent-Pr3+"/>
+    <Atom epsilon="0.64794725224" sigma="0.307181878014789" type="tip3pfb_IOD_multivalent-Nd3+"/>
+    <Atom epsilon="0.60967151816" sigma="0.3048655413476241" type="tip3pfb_IOD_multivalent-Sm3+"/>
+    <Atom epsilon="0.62426246504" sigma="0.3057564400657644" type="tip3pfb_IOD_multivalent-Eu3+"/>
+    <Atom epsilon="0.46563832232" sigma="0.29542201493533654" type="tip3pfb_IOD_multivalent-Gd3+"/>
+    <Atom epsilon="0.4991058036" sigma="0.2977383516025014" type="tip3pfb_IOD_multivalent-Tb3+"/>
+    <Atom epsilon="0.41424963936000003" sigma="0.29168024031914713" type="tip3pfb_IOD_multivalent-Dy3+"/>
+    <Atom epsilon="0.40953067312" sigma="0.2913238808318909" type="tip3pfb_IOD_multivalent-Er3+"/>
+    <Atom epsilon="0.43830358088" sigma="0.29346203775542773" type="tip3pfb_IOD_multivalent-Tm3+"/>
+    <Atom epsilon="0.38639884336" sigma="0.2895420833956103" type="tip3pfb_IOD_multivalent-Lu3+"/>
+    <Atom epsilon="0.33197918711999996" sigma="0.2850875898049086" type="tip3pfb_IOD_multivalent-Hf4+"/>
+    <Atom epsilon="0.35100580160000006" sigma="0.28669120749756116" type="tip3pfb_IOD_multivalent-Zr4+"/>
+    <Atom epsilon="0.77874118424" sigma="0.31466542724716784" type="tip3pfb_IOD_multivalent-Ce4+"/>
+    <Atom epsilon="0.8646299178400001" sigma="0.31929810058149766" type="tip3pfb_IOD_multivalent-U4+"/>
+    <Atom epsilon="0.73399083568" sigma="0.3121709108363749" type="tip3pfb_IOD_multivalent-Pu4+"/>
+    <Atom epsilon="0.7917259353600001" sigma="0.31537814622168014" type="tip3pfb_IOD_multivalent-Th4+"/>
+  </NonbondedForce>
 </ForceField>

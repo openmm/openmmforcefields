@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2017-11-19</DateGenerated>
+    <DateGenerated>2017-11-25</DateGenerated>
     <Source Source="leaprc.DNA.bsc1" md5hash="8c9b56948dc597f8d8930bb798c3e090" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.DNA.bsc1</Source>
     <Reference>Ivani, I.; Dans, P.D.; Noy, A.; Perez, A.; Faustino, I.; Hopsital, A.; Walther, J.; Andrio, P.; Goni, R.; Balaceanu, A.; Portella, G.; Battistini, F.; GelpA, J.L.; Gonzalez, C.; Vendruscolo, M.; Laughton, C.A.; Harris, S.; Case, D.A.; Orozco, M. Parmbsc1: A refined force field for DNA simulations. Nature Meth., 2016, 13, 55-58.</Reference>
   </Info>
