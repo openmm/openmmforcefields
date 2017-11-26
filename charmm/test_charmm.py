@@ -92,6 +92,7 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     with open('system_charmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
+    charmm_total_energy = sum([element[1] for element in charmm_energies])
 
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
@@ -100,11 +101,14 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
         f.write(mm.XmlSerializer.serialize(system_openmm))
     topology = openmm.load_topology(pdbfile.topology, system_openmm, xyz=pdbfile.positions)
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
+    openmm_total_energy = sum([element[1] for element in omm_energies])
 
-    print('charmm_energies')
+    print('CHARMM total energy: %f' % charmm_total_energy)
     print(charmm_energies)
-    print('openmm_energies')
+    print('')
+    print('OPENMM total energy: %f' % openmm_total_energy)
     print(omm_energies)
+    print('TOTAL ERROR: %f' % (openmm_total_energy - charmm_total_energy))
 
     # calc rel energies and assert
     rel_energies = []
