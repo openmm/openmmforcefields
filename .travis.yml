@@ -40,12 +40,12 @@ script:
   - pip install git+https://github.com/jchodera/ParmEd.git@charmm-patches-2
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
-  - cd amber && python convert_amber.py --verbose && python merge_lipids.py && cd ..
+  - cd amber && python convert_amber.py --verbose && cd ..
   # Test CHARMM conversion
   - echo "Testing CHARMM conversion..."
   # TODO: Find a way to avoid timing out on travis when running full charmm36.yaml conversion below
   #- cd charmm && python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml && cd ..
-  - cd charmm && python convert_charmm.py --verbose --in files/waters.yaml && cd ..
+  - cd charmm && python convert_charmm.py --verbose && cd ..
   - cd charmm && python test_charmm.py --verbose && cd ..
 
 os:

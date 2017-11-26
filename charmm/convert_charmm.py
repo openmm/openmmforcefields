@@ -20,7 +20,7 @@ def main():
     # Set up parser
     parser = argparse.ArgumentParser(description='CHARMM --> OpenMM forcefield conversion script')
     parser.add_argument('--input', '-i', default='files/waters.yaml',
-                        help='path of the input file. Default: "files/master.yaml"')
+                        help='path of the input file. Default: "files/waters.yaml"')
     parser.add_argument('--output-dir', '-od', help='path of the output directory. '
                         'Default: "ffxml/" for yaml, "./" for leaprc', default='ffxml/')
     parser.add_argument('--verbose', '-v', action='store_true',
