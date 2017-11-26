@@ -84,11 +84,26 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # Load PDB file
     pdbfile = app.PDBFile(pdb_filename)
 
+    # Load CHARMM system through OpenMM
+    openmm_toppar = app.CharmmParameterSet(*toppar_filenames)
+    openmm_psf = app.CharmmPsfFile(psf_filename)
+    openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs)
+    with open('system_openmm_charmm_reader.xml', 'w') as f:
+        f.write(mm.XmlSerializer.serialize(openmm_system))
+    integrator = mm.VerletIntegrator(1.0)
+    context = mm.Context(openmm_system, integrator)
+    context.setPositions(pdbfile.positions)
+    openmm_total_energy = context.getState(getEnergy=True).getPotentialEnergy() / units
+    del context, integrator
+
     # Load CHARMM system through ParmEd
     toppar = CharmmParameterSet(*toppar_filenames)
     structure = CharmmPsfFile(psf_filename)
+    #structure.load_parameters(toppar)
     structure.positions = pdbfile.positions
     system_charmm = structure.createSystem(toppar, **system_kwargs)
+    print('structure.urey_bradleys:')
+    print(structure.urey_bradleys)
     with open('system_charmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
@@ -97,18 +112,26 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
     system_openmm = ff.createSystem(pdbfile.topology, **system_kwargs)
+    print('OpenMM pdbfile.topology bonds:')
+    for bond in pdbfile.topology.bonds():
+        print(bond)
+    print('OpenMM system HarmonicBondForceEnergies')
     with open('system_openmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_openmm))
     topology = openmm.load_topology(pdbfile.topology, system_openmm, xyz=pdbfile.positions)
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
-    openmm_total_energy = sum([element[1] for element in omm_energies])
+    ffxml_tootal_energy = sum([element[1] for element in omm_energies])
 
-    print('CHARMM total energy: %f' % charmm_total_energy)
-    print(charmm_energies)
-    print('')
-    print('OPENMM total energy: %f' % openmm_total_energy)
-    print(omm_energies)
+    print('OpenMM CHARMM reader total energy: %f' % openmm_total_energy)
+    print('ParmEd CHARMM reader total energy: %f' % charmm_total_energy)
+    print('OPENMM ffxml total energy: %f' % openmm_total_energy)
     print('TOTAL ERROR: %f' % (openmm_total_energy - charmm_total_energy))
+
+    print('ParmEd CHARMM reader energy decomposition:')
+    print(charmm_energies)
+    print('OpenMM ffxml ForceField energy decomposition:')
+    print(omm_energies)
+
 
     # calc rel energies and assert
     rel_energies = []
