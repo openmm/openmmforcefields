@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2017-11-19</DateGenerated>
+    <DateGenerated>2017-11-25</DateGenerated>
     <Source Source="leaprc.protein.ff15ipq" md5hash="b7e40247370a8e75ff03a5c9b0c3368a" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.protein.ff15ipq</Source>
     <Reference>Placeholder Placeholder</Reference>
   </Info>
