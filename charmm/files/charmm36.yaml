@@ -35,8 +35,11 @@
      # Exclude default waters and ions, since we split these out:
      - toppar/toppar_water_ions.str
      - toppar/stream/misc/toppar_ions_won.str
-     # Exclude model amino acid sidechain analogues
-     - toppar/stream/prot/toppar_all36_prot_model.str           
+     # Exclude model compounds
+     - toppar/stream/prot/toppar_all36_prot_model.str
+     - toppar/stream/na/toppar_all36_na_model.str
+     - toppar/stream/lipid/toppar_all36_lipid_model.str
+     - toppar/stream/carb/toppar_all36_carb_model.str
   References:
    protein:
      - >-
@@ -191,8 +194,125 @@
   References:
    protein:
      - >-
+       >> All-hydrogen topology for small model compounds used in the <<
+       >> development of the CHARMM22 protein all-hydrogen parameters <<
        MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.;
        Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.;
        Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub,
        J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular
        modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616
+- Destination: toppar_all36_na_model.xml
+  Override: 1
+  Source:
+    include:
+    stream:
+      - toppar/stream/na/toppar_all36_na_model.str
+  TestInclude:
+     - ffxml/charmm36.xml
+  References:
+   nucleic acids:
+     - >-
+       CHARMM27 All-Hydrogen Nucleic Acid Force Toppar Stream File
+       Collection of residues and patches for model compounds used
+       in the optimization the Charmm27 all-atom nucleic acid
+       force field.
+       N. Foloppe and A.D. MacKerell, Jr., July 2001
+- Destination: toppar_all36_lipid_model.xml
+  Override: 1
+  Source:
+    include:
+    stream:
+      - toppar/stream/lipid/toppar_all36_lipid_model.str
+  TestInclude:
+     - ffxml/charmm36.xml
+  References:
+   lipids:
+     - >-
+       CHARMM36 All-Hydrogen Lipid Force Field Toppar Stream File
+       Collection of residues and patches for model compounds used
+       in the optimization the lipid force field.
+     - >-
+       Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos
+       Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM
+       All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843
+     - PUFA modifications:
+       - >-
+         Jeffery B. Klauda, Viviana Monje, Taehoon Kim, and Wonpil Im. "Improving the CHARMM Force Field for
+         Polyunsaturated Fatty Acid Chains" J. Phys. Chem. B. 2012 ASAP http://dx.doi.org/10.1021/jp304056p
+     - atom nomenclature:
+       - >-
+         Sundaralingan, M., Ann. N.Y. Acad. Sci. USA, 195:324-355, 1972
+     - bacterial:
+       - >-
+         Lim, J.B. and Klauda, J.B. Branching at the Iso- and Anteiso- Positions in Complex Chlamydia Membranes: A
+         Molecular Dynamics Study. Biochimica et Biophysica Acta (BBA) - Biomembranes 1808:323-331 (2011).
+       - >-
+         Pandit, K.R. and Klauda, J.B. Membrane models of E. coli containing cyclic moieties in the aliphatic lipid
+         chain. Biochimica et Biophysica Acta (BBA) - Biomembranes 1818:1205-1210 (2012).
+     - cholesterol:
+       - >-
+         Lim, J.B., Rogaski, B. and Klauda, J.B.. "Update of the Cholesterol Force Field Parameters in CHARMM" 116:
+         203-210 (2012).
+       - >-
+         Suits, F., Pitman, M., MacKerell, A.D., Jr., Feller, S.E. "Molecular Level Organization of Saturated and
+         Polyunsaturated Fatty Acids in a Phosphatidylcholine Bilayer Containing Cholesterol" Biochemistry, 43(49):
+         15318-28, 2004
+     - sphingomyelin:
+       - >-
+         Venable, R.M., B. Rogaski, H. Rui, A.D. MacKerell, Jr., R.W. Pastor, and J.B. Klauda. An Experimentally Validated
+         All-atom Force Field for Sphingomyelin. In prep. (2013).
+- Destination: toppar_all36_carb_model.xml
+  Override: 1
+  Source:
+    include:
+    stream:
+      - toppar/stream/carb/toppar_all36_carb_model.str
+  TestInclude:
+     - ffxml/charmm36.xml
+  References:
+   carbohydrates:
+     - pyranose monosaccharides:
+       - >-
+         Guvench, O., Greene, S.N., Kamath, G., Brady, J.W., Venable, R.M., Pastor, R.W., MacKerell, Jr., A.D.
+         "Additive empirical force field for hexopyranose monosaccharides," Journal of Computational Chemistry, 29:
+         2543-2564, 2008. PMID: 18470966
+     - linear sugars inositol sugar alcohols:
+       - >-
+         Hatcher, E., Guvench, O., and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Acyclic
+         Polyalcohols, Acyclic Carbohydrates and Inositol," Journal of Chemical Theory and Computation, 5: 1315-1327,
+         2009, DOI: 10.1021/ct9000608.
+     - hexopyranose glycosidic linkages:
+       - >-
+         Guvench, O., Hatcher, E. R., Venable, R. M., Pastor, R. W., MacKerell, Jr., A. D. "Additive Empirical CHARMM
+         Force Field for glycosyl linked hexopyranoses," Journal of Chemical Theory and Computation, 5, 2353-2370, 2009,
+         DOI: 10.1021/ct900242e
+     - furanose monosaccharides:
+       - >-
+         Hatcher, E. R.; Guvench, O. and MacKerell, Jr., A.D. "CHARMM Additive All-Atom Force Field for
+         Aldopentofuranose Carbohydrates and Fructofuranose." Journal of Physical Chemistry B. 113:12466-76, 2009,
+         PMID: 19694450
+     - glycosidic linkages involving furanoses:
+       - >-
+         Raman, E. P., Guvench, O., MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Glycosidic Linkages
+         in Carbohydrates Involving Furanoses," Journal of Physical Chemistry B, 114: 12981-12994, 2010, PMID: 20845956
+     - carbohydrate derivatives and glycosidic linkages for glycoproteins:
+       - >-
+         Guvench, O.; Mallajosyula, S. S.; Raman, E. P.; Hatcher, E. R.; Vanommeslaeghe, K.; Foster, T. J.; Jamison,
+         F. W. and MacKerell, Jr., A.D., "CHARMM additive all-atom force field for carbohydrate derivatives and its
+         utility in polysaccharide and carbohydrate-protein modeling," Journal of Chemical Theory and Computation 2011
+         7 (10), 3162-3180
+     - O-glycan linkages:
+       - >-
+         Mallajosyula, S. S. and MacKerell, Jr., A.D., "Influence of Solvent and Intramolecular Hydrogen Bonding on the
+         Conformational Properties of O-Linked Glycopeptides," The Journal of Physical Chemistry B 2011 115 (38),
+         11215-11229.
+     - phosphates and sulfates:
+       - >-
+         Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field
+         for Phosphate and Sulfate Linked to Carbohydrates" Journal of Chemical Theory and Computation 2012 8 (2),
+         759-776.
+     - glycolipids:
+       - >-
+         Kern, N. R., Lee, H. S., Wu, E. L., Park, S., Vanommeslaeghe, K., MacKerell, A. D., ... Im, W. (2014). Lipid-
+         Linked Oligosaccharides in Membrane Sample Conformations That Faciliate Binding to Oligosaccharyltransferase.
+         Biophysical Journal, 107(8), 1885-1895.
