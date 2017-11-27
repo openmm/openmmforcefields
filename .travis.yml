@@ -41,7 +41,7 @@ script:
   # Hack in replacement ff15ipq file from David S. Cerutti that will be included in next AmberTools minor version release
   # TODO: Remove this once AmberTools minor version release has been made
   - echo "Ugly hack to copy in unreleased ff15ipq bugfix at the sole insistence of Peter Eastman under strong objections..."
-  - mv parm15ipq_10.3.dat $HOME/miniconda3/dat/leap/parm/parm15ipq_10.3.dat
+  - mv amber/parm15ipq_10.3.dat $HOME/miniconda3/dat/leap/parm/parm15ipq_10.3.dat
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
   - cd amber && python convert_amber.py --verbose && cd ..
