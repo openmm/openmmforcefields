@@ -12,10 +12,8 @@ install:
   - conda config --add channels ${ORGNAME}
 
 script:
-  # Create a test environment
-  - conda create --yes -n test python=$python
-  # Activate the test environment
-  - source activate test
+  # Select the desired python version
+  - conda install --yes python=$python
   # Add conda channels
   - conda config --add channels omnia --add channels conda-forge
   # Force update now that conda-forge has been added
@@ -26,6 +24,8 @@ script:
   - conda config --add channels http://ambermd.org/downloads/ambertools/conda/
   # Install extras for testing
   - conda install --yes --quiet pip nose nose-timer
+  # Workaround for failure to install these when installing local package
+  - conda install --yes openmm>=7.2.0 yaml pyyaml ambertools==17 lxml networkx parmed
   # Build the recipe
   - echo "Building the recipe..."
   - conda build devtools/conda-recipe
@@ -38,6 +38,10 @@ script:
   # TODO: Install parmed dev version; replace with parmed dependency in meta.yaml
   - conda remove --yes parmed || true
   - pip install git+https://github.com/jchodera/ParmEd.git@charmm-patches-2
+  # Hack in replacement ff15ipq file from David S. Cerutti that will be included in next AmberTools minor version release
+  # TODO: Remove this once AmberTools minor version release has been made
+  - echo "Ugly hack to copy in unreleased ff15ipq bugfix at the sole insistence of Peter Eastman under strong objections..."
+  - mv parm15ipq_10.3.dat $HOME/miniconda3/dat/leap/parm/parm15ipq_10.3.dat
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
   - cd amber && python convert_amber.py --verbose && cd ..

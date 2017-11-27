@@ -1,0 +1,256 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2017-11-25</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_hfe_tip4pew" md5hash="777381aafd22653c6aecc9fe826ad97e" sourcePackage="AmberTools" sourcePackageVersion="17">parm/frcmod.ions234lm_hfe_tip4pew</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17">lib/atomic_ions.lib</Source>
+    <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
+    <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
+  </Info>
+  <AtomTypes>
+    <Type class="tip4pfb_HFE_multivalent-Be2+" element="Be" mass="9.01" name="tip4pfb_HFE_multivalent-Be2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Cu2+" element="Cu" mass="63.55" name="tip4pfb_HFE_multivalent-Cu2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ni2+" element="Ni" mass="58.69" name="tip4pfb_HFE_multivalent-Ni2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Pt2+" element="Pt" mass="195.08" name="tip4pfb_HFE_multivalent-Pt2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Zn2+" element="Zn" mass="65.4" name="tip4pfb_HFE_multivalent-Zn2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Co2+" element="Co" mass="58.93" name="tip4pfb_HFE_multivalent-Co2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Pd2+" element="Pd" mass="106.42" name="tip4pfb_HFE_multivalent-Pd2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ag2+" element="Ag" mass="107.87" name="tip4pfb_HFE_multivalent-Ag2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Cr2+" element="Cr" mass="52.0" name="tip4pfb_HFE_multivalent-Cr2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Fe2+" element="Fe" mass="55.85" name="tip4pfb_HFE_multivalent-Fe2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Mg2+" element="Mg" mass="24.305" name="tip4pfb_HFE_multivalent-Mg2+"/>
+    <Type class="tip4pfb_HFE_multivalent-V2+" element="V" mass="50.94" name="tip4pfb_HFE_multivalent-V2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Mn2+" element="Mn" mass="54.94" name="tip4pfb_HFE_multivalent-Mn2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Hg2+" element="Hg" mass="200.59" name="tip4pfb_HFE_multivalent-Hg2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Cd2+" element="Cd" mass="112.41" name="tip4pfb_HFE_multivalent-Cd2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Yb2+" element="Yb" mass="173.05" name="tip4pfb_HFE_multivalent-Yb2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ca2+" element="Ca" mass="40.08" name="tip4pfb_HFE_multivalent-Ca2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Sn2+" element="Sn" mass="118.71" name="tip4pfb_HFE_multivalent-Sn2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Pb2+" element="Pb" mass="207.2" name="tip4pfb_HFE_multivalent-Pb2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Eu2+" element="Eu" mass="151.96" name="tip4pfb_HFE_multivalent-Eu2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Sr2+" element="Sr" mass="87.62" name="tip4pfb_HFE_multivalent-Sr2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Sm2+" element="Sm" mass="150.36" name="tip4pfb_HFE_multivalent-Sm2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ba2+" element="Ba" mass="137.33" name="tip4pfb_HFE_multivalent-Ba2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ra2+" element="Ra" mass="226.03" name="tip4pfb_HFE_multivalent-Ra2+"/>
+    <Type class="tip4pfb_HFE_multivalent-Al3+" element="Al" mass="26.98" name="tip4pfb_HFE_multivalent-Al3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Fe3+" element="Fe" mass="55.85" name="tip4pfb_HFE_multivalent-Fe3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Cr3+" element="Cr" mass="52.0" name="tip4pfb_HFE_multivalent-Cr3+"/>
+    <Type class="tip4pfb_HFE_multivalent-In3+" element="In" mass="114.82" name="tip4pfb_HFE_multivalent-In3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Tl3+" element="Tl" mass="204.38" name="tip4pfb_HFE_multivalent-Tl3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Y3+" element="Y" mass="88.91" name="tip4pfb_HFE_multivalent-Y3+"/>
+    <Type class="tip4pfb_HFE_multivalent-La3+" element="La" mass="138.91" name="tip4pfb_HFE_multivalent-La3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ce3+" element="Ce" mass="140.12" name="tip4pfb_HFE_multivalent-Ce3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Pr3+" element="Pr" mass="140.91" name="tip4pfb_HFE_multivalent-Pr3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Nd3+" element="Nd" mass="144.24" name="tip4pfb_HFE_multivalent-Nd3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Sm3+" element="Sm" mass="150.36" name="tip4pfb_HFE_multivalent-Sm3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Eu3+" element="Eu" mass="151.96" name="tip4pfb_HFE_multivalent-Eu3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Gd3+" element="Gd" mass="157.25" name="tip4pfb_HFE_multivalent-Gd3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Tb3+" element="Tb" mass="158.93" name="tip4pfb_HFE_multivalent-Tb3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Dy3+" element="Dy" mass="162.5" name="tip4pfb_HFE_multivalent-Dy3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Er3+" element="Er" mass="167.26" name="tip4pfb_HFE_multivalent-Er3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Tm3+" element="Tm" mass="168.93" name="tip4pfb_HFE_multivalent-Tm3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Lu3+" element="Lu" mass="174.97" name="tip4pfb_HFE_multivalent-Lu3+"/>
+    <Type class="tip4pfb_HFE_multivalent-Hf4+" element="Hf" mass="178.49" name="tip4pfb_HFE_multivalent-Hf4+"/>
+    <Type class="tip4pfb_HFE_multivalent-Zr4+" element="Zr" mass="91.22" name="tip4pfb_HFE_multivalent-Zr4+"/>
+    <Type class="tip4pfb_HFE_multivalent-Ce4+" element="Ce" mass="140.12" name="tip4pfb_HFE_multivalent-Ce4+"/>
+    <Type class="tip4pfb_HFE_multivalent-U4+" element="U" mass="238.03" name="tip4pfb_HFE_multivalent-U4+"/>
+    <Type class="tip4pfb_HFE_multivalent-Pu4+" element="Pu" mass="244.06" name="tip4pfb_HFE_multivalent-Pu4+"/>
+    <Type class="tip4pfb_HFE_multivalent-Th4+" element="Th" mass="232.04" name="tip4pfb_HFE_multivalent-Th4+"/>
+  </AtomTypes>
+  <Residues>
+    <Residue name="AL" override="1">
+      <Atom charge="3.0" name="AL" type="tip4pfb_HFE_multivalent-Al3+"/>
+    </Residue>
+    <Residue name="Ag" override="1">
+      <Atom charge="2.0" name="Ag" type="tip4pfb_HFE_multivalent-Ag2+"/>
+    </Residue>
+    <Residue name="BA" override="1">
+      <Atom charge="2.0" name="BA" type="tip4pfb_HFE_multivalent-Ba2+"/>
+    </Residue>
+    <Residue name="Be" override="1">
+      <Atom charge="2.0" name="Be" type="tip4pfb_HFE_multivalent-Be2+"/>
+    </Residue>
+    <Residue name="CA" override="1">
+      <Atom charge="2.0" name="CA" type="tip4pfb_HFE_multivalent-Ca2+"/>
+    </Residue>
+    <Residue name="CD" override="1">
+      <Atom charge="2.0" name="CD" type="tip4pfb_HFE_multivalent-Cd2+"/>
+    </Residue>
+    <Residue name="CE" override="1">
+      <Atom charge="3.0" name="CE" type="tip4pfb_HFE_multivalent-Ce3+"/>
+    </Residue>
+    <Residue name="CO" override="1">
+      <Atom charge="2.0" name="CO" type="tip4pfb_HFE_multivalent-Co2+"/>
+    </Residue>
+    <Residue name="CR" override="1">
+      <Atom charge="3.0" name="CR" type="tip4pfb_HFE_multivalent-Cr3+"/>
+    </Residue>
+    <Residue name="CU" override="1">
+      <Atom charge="2.0" name="CU" type="tip4pfb_HFE_multivalent-Cu2+"/>
+    </Residue>
+    <Residue name="Ce" override="1">
+      <Atom charge="4.0" name="Ce" type="tip4pfb_HFE_multivalent-Ce4+"/>
+    </Residue>
+    <Residue name="Cr" override="1">
+      <Atom charge="2.0" name="Cr" type="tip4pfb_HFE_multivalent-Cr2+"/>
+    </Residue>
+    <Residue name="Dy" override="1">
+      <Atom charge="3.0" name="Dy" type="tip4pfb_HFE_multivalent-Dy3+"/>
+    </Residue>
+    <Residue name="EU" override="1">
+      <Atom charge="2.0" name="EU" type="tip4pfb_HFE_multivalent-Eu2+"/>
+    </Residue>
+    <Residue name="EU3" override="1">
+      <Atom charge="3.0" name="EU3" type="tip4pfb_HFE_multivalent-Eu3+"/>
+    </Residue>
+    <Residue name="Er" override="1">
+      <Atom charge="3.0" name="Er" type="tip4pfb_HFE_multivalent-Er3+"/>
+    </Residue>
+    <Residue name="FE" override="1">
+      <Atom charge="3.0" name="FE" type="tip4pfb_HFE_multivalent-Fe3+"/>
+    </Residue>
+    <Residue name="FE2" override="1">
+      <Atom charge="2.0" name="FE2" type="tip4pfb_HFE_multivalent-Fe2+"/>
+    </Residue>
+    <Residue name="GD3" override="1">
+      <Atom charge="3.0" name="GD" type="tip4pfb_HFE_multivalent-Gd3+"/>
+    </Residue>
+    <Residue name="HG" override="1">
+      <Atom charge="2.0" name="HG" type="tip4pfb_HFE_multivalent-Hg2+"/>
+    </Residue>
+    <Residue name="Hf" override="1">
+      <Atom charge="4.0" name="Hf" type="tip4pfb_HFE_multivalent-Hf4+"/>
+    </Residue>
+    <Residue name="IN" override="1">
+      <Atom charge="3.0" name="IN" type="tip4pfb_HFE_multivalent-In3+"/>
+    </Residue>
+    <Residue name="LA" override="1">
+      <Atom charge="3.0" name="LA" type="tip4pfb_HFE_multivalent-La3+"/>
+    </Residue>
+    <Residue name="LU" override="1">
+      <Atom charge="3.0" name="LU" type="tip4pfb_HFE_multivalent-Lu3+"/>
+    </Residue>
+    <Residue name="MG" override="1">
+      <Atom charge="2.0" name="MG" type="tip4pfb_HFE_multivalent-Mg2+"/>
+    </Residue>
+    <Residue name="MN" override="1">
+      <Atom charge="2.0" name="MN" type="tip4pfb_HFE_multivalent-Mn2+"/>
+    </Residue>
+    <Residue name="NI" override="1">
+      <Atom charge="2.0" name="NI" type="tip4pfb_HFE_multivalent-Ni2+"/>
+    </Residue>
+    <Residue name="Nd" override="1">
+      <Atom charge="3.0" name="Nd" type="tip4pfb_HFE_multivalent-Nd3+"/>
+    </Residue>
+    <Residue name="PB" override="1">
+      <Atom charge="2.0" name="PB" type="tip4pfb_HFE_multivalent-Pb2+"/>
+    </Residue>
+    <Residue name="PD" override="1">
+      <Atom charge="2.0" name="PD" type="tip4pfb_HFE_multivalent-Pd2+"/>
+    </Residue>
+    <Residue name="PR" override="1">
+      <Atom charge="3.0" name="PR" type="tip4pfb_HFE_multivalent-Pr3+"/>
+    </Residue>
+    <Residue name="PT" override="1">
+      <Atom charge="2.0" name="PT" type="tip4pfb_HFE_multivalent-Pt2+"/>
+    </Residue>
+    <Residue name="Pu" override="1">
+      <Atom charge="4.0" name="Pu" type="tip4pfb_HFE_multivalent-Pu4+"/>
+    </Residue>
+    <Residue name="Ra" override="1">
+      <Atom charge="2.0" name="Ra" type="tip4pfb_HFE_multivalent-Ra2+"/>
+    </Residue>
+    <Residue name="SM" override="1">
+      <Atom charge="3.0" name="SM" type="tip4pfb_HFE_multivalent-Sm3+"/>
+    </Residue>
+    <Residue name="SR" override="1">
+      <Atom charge="2.0" name="SR" type="tip4pfb_HFE_multivalent-Sr2+"/>
+    </Residue>
+    <Residue name="Sm" override="1">
+      <Atom charge="2.0" name="Sm" type="tip4pfb_HFE_multivalent-Sm2+"/>
+    </Residue>
+    <Residue name="Sn" override="1">
+      <Atom charge="2.0" name="Sn" type="tip4pfb_HFE_multivalent-Sn2+"/>
+    </Residue>
+    <Residue name="TB" override="1">
+      <Atom charge="3.0" name="TB" type="tip4pfb_HFE_multivalent-Tb3+"/>
+    </Residue>
+    <Residue name="Th" override="1">
+      <Atom charge="4.0" name="Th" type="tip4pfb_HFE_multivalent-Th4+"/>
+    </Residue>
+    <Residue name="Tl" override="1">
+      <Atom charge="3.0" name="Tl" type="tip4pfb_HFE_multivalent-Tl3+"/>
+    </Residue>
+    <Residue name="Tm" override="1">
+      <Atom charge="3.0" name="Tm" type="tip4pfb_HFE_multivalent-Tm3+"/>
+    </Residue>
+    <Residue name="U4+" override="1">
+      <Atom charge="4.0" name="U" type="tip4pfb_HFE_multivalent-U4+"/>
+    </Residue>
+    <Residue name="V2+" override="1">
+      <Atom charge="2.0" name="V2+" type="tip4pfb_HFE_multivalent-V2+"/>
+    </Residue>
+    <Residue name="Y" override="1">
+      <Atom charge="3.0" name="Y" type="tip4pfb_HFE_multivalent-Y3+"/>
+    </Residue>
+    <Residue name="YB2" override="1">
+      <Atom charge="2.0" name="YB2" type="tip4pfb_HFE_multivalent-Yb2+"/>
+    </Residue>
+    <Residue name="ZN" override="1">
+      <Atom charge="2.0" name="ZN" type="tip4pfb_HFE_multivalent-Zn2+"/>
+    </Residue>
+    <Residue name="Zr" override="1">
+      <Atom charge="4.0" name="Zr" type="tip4pfb_HFE_multivalent-Zr4+"/>
+    </Residue>
+  </Residues>
+  <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
+    <UseAttributeFromResidue name="charge"/>
+    <Atom epsilon="9.24664e-08" sigma="0.14521649105687529" type="tip4pfb_HFE_multivalent-Be2+"/>
+    <Atom epsilon="0.00042103592" sigma="0.19207776363105716" type="tip4pfb_HFE_multivalent-Cu2+"/>
+    <Atom epsilon="0.0007001087200000001" sigma="0.19617589773450272" type="tip4pfb_HFE_multivalent-Ni2+"/>
+    <Atom epsilon="0.0009216096800000001" sigma="0.19849223440166763" type="tip4pfb_HFE_multivalent-Pt2+"/>
+    <Atom epsilon="0.0009409816" sigma="0.19867041414529565" type="tip4pfb_HFE_multivalent-Zn2+"/>
+    <Atom epsilon="0.0015870330400000001" sigma="0.20330308747962544" type="tip4pfb_HFE_multivalent-Co2+"/>
+    <Atom epsilon="0.0017148542400000002" sigma="0.20401580645413772" type="tip4pfb_HFE_multivalent-Pd2+"/>
+    <Atom epsilon="0.0027861674400000004" sigma="0.20864847978846748" type="tip4pfb_HFE_multivalent-Ag2+"/>
+    <Atom epsilon="0.00333071504" sigma="0.21043027722474816" type="tip4pfb_HFE_multivalent-Cr2+"/>
+    <Atom epsilon="0.00417358184" sigma="0.21274661389191302" type="tip4pfb_HFE_multivalent-Fe2+"/>
+    <Atom epsilon="0.005279036480000001" sigma="0.21524113030270597" type="tip4pfb_HFE_multivalent-Mg2+"/>
+    <Atom epsilon="0.00545564312" sigma="0.2155974897899621" type="tip4pfb_HFE_multivalent-V2+"/>
+    <Atom epsilon="0.014823368080000001" sigma="0.2273573528694146" type="tip4pfb_HFE_multivalent-Mn2+"/>
+    <Atom epsilon="0.014823368080000001" sigma="0.2273573528694146" type="tip4pfb_HFE_multivalent-Hg2+"/>
+    <Atom epsilon="0.015454189760000002" sigma="0.22789189210029878" type="tip4pfb_HFE_multivalent-Cd2+"/>
+    <Atom epsilon="0.12065898696" sigma="0.26085514467149135" type="tip4pfb_HFE_multivalent-Yb2+"/>
+    <Atom epsilon="0.12386075112" sigma="0.26138968390237555" type="tip4pfb_HFE_multivalent-Ca2+"/>
+    <Atom epsilon="0.13727645424" sigma="0.2635278408259124" type="tip4pfb_HFE_multivalent-Sn2+"/>
+    <Atom epsilon="0.23958713680000002" sigma="0.27635678236713324" type="tip4pfb_HFE_multivalent-Pb2+"/>
+    <Atom epsilon="0.32372762784000003" sigma="0.2843748708303963" type="tip4pfb_HFE_multivalent-Eu2+"/>
+    <Atom epsilon="0.34459281744000003" sigma="0.286156668266677" type="tip4pfb_HFE_multivalent-Sr2+"/>
+    <Atom epsilon="0.34459281744000003" sigma="0.286156668266677" type="tip4pfb_HFE_multivalent-Sm2+"/>
+    <Atom epsilon="0.78522274416" sigma="0.315021786734424" type="tip4pfb_HFE_multivalent-Ba2+"/>
+    <Atom epsilon="0.78522274416" sigma="0.315021786734424" type="tip4pfb_HFE_multivalent-Ra2+"/>
+    <Atom epsilon="0.01678206584" sigma="0.22896097056206718" type="tip4pfb_HFE_multivalent-Al3+"/>
+    <Atom epsilon="0.05043699032" sigma="0.2449971474885933" type="tip4pfb_HFE_multivalent-Fe3+"/>
+    <Atom epsilon="0.03111050856" sigma="0.23751359825621443" type="tip4pfb_HFE_multivalent-Cr3+"/>
+    <Atom epsilon="0.10650049832000001" sigma="0.2583606282606984" type="tip4pfb_HFE_multivalent-In3+"/>
+    <Atom epsilon="0.16579982824" sigma="0.2676259749293579" type="tip4pfb_HFE_multivalent-Tl3+"/>
+    <Atom epsilon="0.31158691504" sigma="0.2833057923686279" type="tip4pfb_HFE_multivalent-Y3+"/>
+    <Atom epsilon="0.59811815528" sigma="0.30415282237311186" type="tip4pfb_HFE_multivalent-La3+"/>
+    <Atom epsilon="0.66295839824" sigma="0.3080727767329294" type="tip4pfb_HFE_multivalent-Ce3+"/>
+    <Atom epsilon="0.64198735344" sigma="0.30682551852753287" type="tip4pfb_HFE_multivalent-Pr3+"/>
+    <Atom epsilon="0.49387597096" sigma="0.2973819921152453" type="tip4pfb_HFE_multivalent-Nd3+"/>
+    <Atom epsilon="0.43830358088" sigma="0.29346203775542773" type="tip4pfb_HFE_multivalent-Sm3+"/>
+    <Atom epsilon="0.4580931896" sigma="0.29488747570445234" type="tip4pfb_HFE_multivalent-Eu3+"/>
+    <Atom epsilon="0.35748949536" sigma="0.2872257467284454" type="tip4pfb_HFE_multivalent-Gd3+"/>
+    <Atom epsilon="0.37289213824" sigma="0.28847300493384187" type="tip4pfb_HFE_multivalent-Tb3+"/>
+    <Atom epsilon="0.32577870832" sigma="0.28455305057402436" type="tip4pfb_HFE_multivalent-Dy3+"/>
+    <Atom epsilon="0.31158691504" sigma="0.2833057923686279" type="tip4pfb_HFE_multivalent-Er3+"/>
+    <Atom epsilon="0.31158691504" sigma="0.2833057923686279" type="tip4pfb_HFE_multivalent-Tm3+"/>
+    <Atom epsilon="0.28625681168" sigma="0.280989455701463" type="tip4pfb_HFE_multivalent-Lu3+"/>
+    <Atom epsilon="0.14196839183999999" sigma="0.26424055980042466" type="tip4pfb_HFE_multivalent-Hf4+"/>
+    <Atom epsilon="0.16712607256" sigma="0.26780415467298596" type="tip4pfb_HFE_multivalent-Zr4+"/>
+    <Atom epsilon="0.48867542632000005" sigma="0.29702563262798914" type="tip4pfb_HFE_multivalent-Ce4+"/>
+    <Atom epsilon="0.48867542632000005" sigma="0.29702563262798914" type="tip4pfb_HFE_multivalent-U4+"/>
+    <Atom epsilon="0.43343181496" sigma="0.29310567826817163" type="tip4pfb_HFE_multivalent-Pu4+"/>
+    <Atom epsilon="0.5502288444000001" sigma="0.3011237667314347" type="tip4pfb_HFE_multivalent-Th4+"/>
+  </NonbondedForce>
+</ForceField>

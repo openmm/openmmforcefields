@@ -1,7 +1,19 @@
 ffxml_name,data_type,test_system,units,HarmonicBondForce,HarmonicAngleForce,PeriodicTorsionForce_dihedrals,PeriodicTorsionForce_impropers,NonbondedForce
-ffxml/lipid17.xml,AMBER,lipids,kilojoule/mole,15464.6044921875,39135.69921875,26454.939453125,497.7227478027344,6.141820583573486e+21
-ffxml/lipid17.xml,OpenMM,lipids,kilojoule/mole,15464.6044921875,39135.5625,26454.939453125,497.72247314453125,6.141820583573486e+21
-ffxml/lipid17.xml,abs((AMBER-OpenMM)/AMBER),lipids,,0.0,3.493453617266604e-06,0.0,5.518297171216635e-07,0.0
+ffxml/protein.ff15ipq.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,71.08538055419922,-49.168121337890625,0.5143807530403137,251.26055908203125
+ffxml/protein.ff15ipq.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,71.08525848388672,-49.168087005615234,0.5143774151802063,251.26080322265625
+ffxml/protein.ff15ipq.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,1.7172351269460701e-06,6.982629080881189e-07,6.4890843751307235e-06,9.716631447926264e-07
+ffxml/protein.ff15ipq.xml,AMBER,protein-villin headpiece,kilojoule/mole,542.2655029296875,1544.304931640625,-739.4564819335938,84.44344329833984,-3310.92431640625
+ffxml/protein.ff15ipq.xml,OpenMM,protein-villin headpiece,kilojoule/mole,542.2655029296875,1544.3026123046875,-739.4566650390625,84.44374084472656,-3310.92431640625
+ffxml/protein.ff15ipq.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.501863971279302e-06,2.476216967781528e-07,3.5236174070675273e-06,0.0
+ffxml/protein.ff15ipq-vac.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,71.08538055419922,-49.168121337890625,0.5143807530403137,352.15594482421875
+ffxml/protein.ff15ipq-vac.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,71.08525848388672,-49.168087005615234,0.5143774151802063,352.15606689453125
+ffxml/protein.ff15ipq-vac.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,1.7172351269460701e-06,6.982629080881189e-07,6.4890843751307235e-06,3.466370915900122e-07
+ffxml/protein.ff15ipq-vac.xml,AMBER,protein-villin headpiece,kilojoule/mole,542.2655029296875,1544.304931640625,-739.4564819335938,84.44344329833984,-1742.5938720703125
+ffxml/protein.ff15ipq-vac.xml,OpenMM,protein-villin headpiece,kilojoule/mole,542.2655029296875,1544.3026123046875,-739.4566650390625,84.44374084472656,-1742.5946044921875
+ffxml/protein.ff15ipq-vac.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.501863971279302e-06,2.476216967781528e-07,3.5236174070675273e-06,4.2030554952533845e-07
+ffxml/lipid17.xml,AMBER,lipids,kilojoule/mole,5988.37255859375,37683.96875,23311.3984375,432.5334167480469,-130962.84375
+ffxml/lipid17.xml,OpenMM,lipids,kilojoule/mole,5988.37255859375,37683.8203125,23311.3984375,432.5328369140625,-130962.6875
+ffxml/lipid17.xml,abs((AMBER-OpenMM)/AMBER),lipids,,0.0,3.939009210647432e-06,0.0,1.3405530345710989e-06,1.1930864932825652e-06
 ffxml/protein.ff14SB.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,70.43392944335938,83.8058853149414,0.5143807530403137,-130.98843383789062
 ffxml/protein.ff14SB.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.088274002075195,70.43386840820312,83.805908203125,0.5143774151802063,-130.98849487304688
 ffxml/protein.ff14SB.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,8.665590111521812e-07,2.7310950188923497e-07,6.4890843751307235e-06,4.659583633585254e-07
@@ -38,18 +50,6 @@ ffxml/protein.ff03ua.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,4.02
 ffxml/protein.ff03ua.xml,AMBER,protein-villin headpiece,kilojoule/mole,540.402099609375,876.9868774414062,1643.87939453125,109.95240020751953,-3774.118896484375
 ffxml/protein.ff03ua.xml,OpenMM,protein-villin headpiece,kilojoule/mole,540.402099609375,876.9857177734375,1643.8790283203125,109.95337677001953,-3774.119384765625
 ffxml/protein.ff03ua.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.322332179169329e-06,2.2277238751108293e-07,8.881684239333357e-06,1.29376223535204e-07
-ffxml/ffAM1.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,25.65033721923828,62.545257568359375,52.938446044921875,0.47217729687690735,-161.36956787109375
-ffxml/ffAM1.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,25.65033721923828,62.54529571533203,52.938472747802734,0.472173810005188,-161.3695068359375
-ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,6.099099138660823e-07,5.044137645581018e-07,7.384666188788297e-06,3.782321354343372e-07
-ffxml/ffAM1.xml,AMBER,protein-villin headpiece,kilojoule/mole,1088.79638671875,1198.25,755.4901733398438,83.13085174560547,-3291.91015625
-ffxml/ffAM1.xml,OpenMM,protein-villin headpiece,kilojoule/mole,1088.79638671875,1198.24853515625,755.4898681640625,83.38431549072266,-3291.909423828125
-ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.2224859169622365e-06,4.039440776587337e-07,0.003048973272796839,2.224914533616382e-07
-ffxml/ffAM1.xml,AMBER,nucleic-DNA,kilojoule/mole,13611.138671875,82515.546875,8677.953125,248.0640869140625,83590.9140625
-ffxml/ffAM1.xml,OpenMM,nucleic-DNA,kilojoule/mole,13611.138671875,82515.546875,8677.9521484375,248.0641326904297,83590.90625
-ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),nucleic-DNA,,0.0,0.0,1.1253373761453684e-07,1.8453443929333644e-07,9.346111461538369e-08
-ffxml/ffAM1.xml,AMBER,nucleic-RNA,kilojoule/mole,1977.947265625,7641.25,2540.50341796875,75.00700378417969,880.0891723632812
-ffxml/ffAM1.xml,OpenMM,nucleic-RNA,kilojoule/mole,1977.947265625,7641.2578125,2540.503662109375,75.00878143310547,880.0888061523438
-ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),nucleic-RNA,,0.0,1.0224112547030917e-06,9.609930979553718e-08,2.3699772502527127e-05,4.1610662760072713e-07
 ffxml/ffPM3.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,28.85064697265625,73.50068664550781,52.938446044921875,0.47217729687690735,-182.00967407226562
 ffxml/ffPM3.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,28.85064697265625,73.50077819824219,52.938472747802734,0.472173810005188,-182.00970458984375
 ffxml/ffPM3.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,1.245603797098615e-06,5.044137645581018e-07,7.384666188788297e-06,1.6767008831015882e-07
@@ -224,6 +224,18 @@ ffxml/ff14SB.xml,abs((AMBER-OpenMM)/AMBER),nucleic-DNA,,0.0,0.0,0.0,4.3058009349
 ffxml/ff14SB.xml,AMBER,nucleic-RNA,kilojoule/mole,1922.0869140625,7738.2490234375,2753.918212890625,75.0081787109375,890.8147583007812
 ffxml/ff14SB.xml,OpenMM,nucleic-RNA,kilojoule/mole,1922.0869140625,7738.2548828125,2753.91845703125,75.00810241699219,890.8157958984375
 ffxml/ff14SB.xml,abs((AMBER-OpenMM)/AMBER),nucleic-RNA,,0.0,7.571964900913899e-07,8.865209716730841e-08,1.0171416853956356e-06,1.1647737608537217e-06
+ffxml/ffAM1.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,25.65033721923828,62.545257568359375,52.938446044921875,0.47217729687690735,-161.36956787109375
+ffxml/ffAM1.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,25.65033721923828,62.54529571533203,52.938472747802734,0.472173810005188,-161.3695068359375
+ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,0.0,6.099099138660823e-07,5.044137645581018e-07,7.384666188788297e-06,3.782321354343372e-07
+ffxml/ffAM1.xml,AMBER,protein-villin headpiece,kilojoule/mole,1088.79638671875,1198.25,755.4901733398438,83.13085174560547,-3291.91015625
+ffxml/ffAM1.xml,OpenMM,protein-villin headpiece,kilojoule/mole,1088.79638671875,1198.24853515625,755.4898681640625,83.38431549072266,-3291.909423828125
+ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),protein-villin headpiece,,0.0,1.2224859169622365e-06,4.039440776587337e-07,0.003048973272796839,2.224914533616382e-07
+ffxml/ffAM1.xml,AMBER,nucleic-DNA,kilojoule/mole,13611.138671875,82515.546875,8677.953125,248.0640869140625,83590.9140625
+ffxml/ffAM1.xml,OpenMM,nucleic-DNA,kilojoule/mole,13611.138671875,82515.546875,8677.9521484375,248.0641326904297,83590.90625
+ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),nucleic-DNA,,0.0,0.0,1.1253373761453684e-07,1.8453443929333644e-07,9.346111461538369e-08
+ffxml/ffAM1.xml,AMBER,nucleic-RNA,kilojoule/mole,1977.947265625,7641.25,2540.50341796875,75.00700378417969,880.0891723632812
+ffxml/ffAM1.xml,OpenMM,nucleic-RNA,kilojoule/mole,1977.947265625,7641.2578125,2540.503662109375,75.00878143310547,880.0888061523438
+ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),nucleic-RNA,,0.0,1.0224112547030917e-06,9.609930979553718e-08,2.3699772502527127e-05,4.1610662760072713e-07
 ffxml/tip3p_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25439.75390625
 ffxml/tip3p_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25439.75390625
 ffxml/tip3p_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
@@ -251,3 +263,21 @@ ffxml/spce_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
 ffxml/spce_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,123374.6796875
 ffxml/spce_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,123374.6796875
 ffxml/spce_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip3pfb_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25402.20703125
+ffxml/tip3pfb_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25402.201171875
+ffxml/tip3pfb_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,2.3066401249276292e-07
+ffxml/tip3pfb_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,156127.734375
+ffxml/tip3pfb_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,156127.71875
+ffxml/tip3pfb_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,1.0007831127857549e-07
+ffxml/tip3pfb_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125260.078125
+ffxml/tip3pfb_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125260.046875
+ffxml/tip3pfb_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,2.4948092375301636e-07
+ffxml/tip4pfb_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25818.576171875
+ffxml/tip4pfb_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25818.681640625
+ffxml/tip4pfb_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,4.0849948230255425e-06
+ffxml/tip4pfb_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,163894.40625
+ffxml/tip4pfb_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,163894.46875
+ffxml/tip4pfb_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,3.8134309419117226e-07
+ffxml/tip4pfb_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125834.59375
+ffxml/tip4pfb_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125834.703125
+ffxml/tip4pfb_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,8.691965916566565e-07
