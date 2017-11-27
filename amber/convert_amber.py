@@ -155,7 +155,7 @@ def write_file(file, contents):
 
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     provenance=None, write_unused=False, filter_warnings='error'):
-    if verbose: print('Converting %s to ffxml...' % files)
+    if verbose: print('\nConverting %s to ffxml...' % files)
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
         files = [files]
@@ -212,7 +212,7 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
 
 def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ffxml_basename=None,
                    filter_warnings='always'):
-    if verbose: print('Converting %s to ffxml...' % files)
+    if verbose: print('\nConverting %s to ffxml...' % files)
     ffxml_name = os.path.join(ffxml_dir, (ffxml_basename + '.xml'))
     ffxml_temp_stringio = StringIO()
     params = parmed.amber.AmberParameterSet(files)

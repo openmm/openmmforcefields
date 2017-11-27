@@ -115,7 +115,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose: print('Verifying ffxml file integrity...')
         if 'TestInclude' in entry:
             ffxml_include = entry['TestInclude']
-            forcefield = app.ForceField(*ffxml_include, ffxml_filename)
+            forcefield = app.ForceField(ffxml_filename, *ffxml_include)
         else:
             forcefield = app.ForceField(ffxml_filename)
         if verbose: print('Verified.')
