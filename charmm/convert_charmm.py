@@ -20,7 +20,7 @@ def main():
     # Set up parser
     parser = argparse.ArgumentParser(description='CHARMM --> OpenMM forcefield conversion script')
     parser.add_argument('--input', '-i', default='files/waters.yaml',
-                        help='path of the input file. Default: "files/master.yaml"')
+                        help='path of the input file. Default: "files/waters.yaml"')
     parser.add_argument('--output-dir', '-od', help='path of the output directory. '
                         'Default: "ffxml/" for yaml, "./" for leaprc', default='ffxml/')
     parser.add_argument('--verbose', '-v', action='store_true',
@@ -99,12 +99,25 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose: print('Converting parameters to OpenMM...')
         params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
 
+        # Set override level
+        if 'Override' in entry:
+            override_level = int(entry['Override'])
+            if verbose: print('Setting residues and patches to override level %d...' % override_level)
+            for name, residue in params_omm.residues.items():
+                residue.override_level = override_level
+            for name, patch in params_omm.patches.items():
+                patch.override_level = override_level
+
         if verbose: print('Writing parameter set and compatible patches. This may take several minutes...')
         params_omm.write(ffxml_filename, provenance=provenance)
 
         # Try reading the forcefield back in to make sure it is valid
         if verbose: print('Verifying ffxml file integrity...')
-        forcefield = app.ForceField(ffxml_filename)
+        if 'TestInclude' in entry:
+            ffxml_include = entry['TestInclude']
+            forcefield = app.ForceField(ffxml_filename, *ffxml_include)
+        else:
+            forcefield = app.ForceField(ffxml_filename)
         if verbose: print('Verified.')
 
 class Logger():

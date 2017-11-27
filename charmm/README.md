@@ -5,8 +5,10 @@ This directory contains files and scripts needed to convert the CHARMM forcefiel
 ## Manifest
 * `toppar/` - CHARMM36 `toppar` files taken and unzipped from (http://mackerell.umaryland.edu/charmm_ff.html) Jan 2016.
 * `ffxml/` - converted OpenMM `ffxml` files for CHARMM36
+* `tests/` - test systems for CHARMM36
 * `charmm36.yaml` - yaml input file needed to drive bundling by `convert_charmm.py`
 * `convert_charmm.py` - script to convert CHARMM `top` and `par` files to `ffxml`
+* `test_charmm.py` - script to test CHARMM conversion after `convert_charmm.py` has been run
 
 ## Dependencies
 * [`ParmEd`](https://github.com/parmed/parmed) - for parameter/topology conversion

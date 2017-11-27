@@ -1,0 +1,508 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2017-11-26</DateGenerated>
+    <Source Source="toppar/stream/carb/toppar_all36_carb_model.str" md5hash="957bb69d6988d46fb92f919c2108caa7" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_aug15.tgz">toppar/stream/carb/toppar_all36_carb_model.str</Source>
+    <Reference Reference="['Guvench, O., Greene, S.N., Kamath, G., Brady, J.W., Venable, R.M., Pastor, R.W., MacKerell, Jr., A.D. &quot;Additive empirical force field for hexopyranose monosaccharides,&quot; Journal of Computational Chemistry, 29: 2543-2564, 2008. PMID: 18470966']" forcefield="carbohydrates" type="pyranose monosaccharides">['Guvench, O., Greene, S.N., Kamath, G., Brady, J.W., Venable, R.M., Pastor, R.W., MacKerell, Jr., A.D. "Additive empirical force field for hexopyranose monosaccharides," Journal of Computational Chemistry, 29: 2543-2564, 2008. PMID: 18470966']</Reference>
+    <Reference Reference="['Hatcher, E., Guvench, O., and MacKerell, Jr., A.D., &quot;CHARMM Additive All-Atom Force Field for Acyclic Polyalcohols, Acyclic Carbohydrates and Inositol,&quot; Journal of Chemical Theory and Computation, 5: 1315-1327, 2009, DOI: 10.1021/ct9000608.']" forcefield="carbohydrates" type="linear sugars inositol sugar alcohols">['Hatcher, E., Guvench, O., and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Acyclic Polyalcohols, Acyclic Carbohydrates and Inositol," Journal of Chemical Theory and Computation, 5: 1315-1327, 2009, DOI: 10.1021/ct9000608.']</Reference>
+    <Reference Reference="['Guvench, O., Hatcher, E. R., Venable, R. M., Pastor, R. W., MacKerell, Jr., A. D. &quot;Additive Empirical CHARMM Force Field for glycosyl linked hexopyranoses,&quot; Journal of Chemical Theory and Computation, 5, 2353-2370, 2009, DOI: 10.1021/ct900242e']" forcefield="carbohydrates" type="hexopyranose glycosidic linkages">['Guvench, O., Hatcher, E. R., Venable, R. M., Pastor, R. W., MacKerell, Jr., A. D. "Additive Empirical CHARMM Force Field for glycosyl linked hexopyranoses," Journal of Chemical Theory and Computation, 5, 2353-2370, 2009, DOI: 10.1021/ct900242e']</Reference>
+    <Reference Reference="['Hatcher, E. R.; Guvench, O. and MacKerell, Jr., A.D. &quot;CHARMM Additive All-Atom Force Field for Aldopentofuranose Carbohydrates and Fructofuranose.&quot; Journal of Physical Chemistry B. 113:12466-76, 2009, PMID: 19694450']" forcefield="carbohydrates" type="furanose monosaccharides">['Hatcher, E. R.; Guvench, O. and MacKerell, Jr., A.D. "CHARMM Additive All-Atom Force Field for Aldopentofuranose Carbohydrates and Fructofuranose." Journal of Physical Chemistry B. 113:12466-76, 2009, PMID: 19694450']</Reference>
+    <Reference Reference="['Raman, E. P., Guvench, O., MacKerell, Jr., A.D., &quot;CHARMM Additive All-Atom Force Field for Glycosidic Linkages in Carbohydrates Involving Furanoses,&quot; Journal of Physical Chemistry B, 114: 12981-12994, 2010, PMID: 20845956']" forcefield="carbohydrates" type="glycosidic linkages involving furanoses">['Raman, E. P., Guvench, O., MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Glycosidic Linkages in Carbohydrates Involving Furanoses," Journal of Physical Chemistry B, 114: 12981-12994, 2010, PMID: 20845956']</Reference>
+    <Reference Reference="['Guvench, O.; Mallajosyula, S. S.; Raman, E. P.; Hatcher, E. R.; Vanommeslaeghe, K.; Foster, T. J.; Jamison, F. W. and MacKerell, Jr., A.D., &quot;CHARMM additive all-atom force field for carbohydrate derivatives and its utility in polysaccharide and carbohydrate-protein modeling,&quot; Journal of Chemical Theory and Computation 2011 7 (10), 3162-3180']" forcefield="carbohydrates" type="carbohydrate derivatives and glycosidic linkages for glycoproteins">['Guvench, O.; Mallajosyula, S. S.; Raman, E. P.; Hatcher, E. R.; Vanommeslaeghe, K.; Foster, T. J.; Jamison, F. W. and MacKerell, Jr., A.D., "CHARMM additive all-atom force field for carbohydrate derivatives and its utility in polysaccharide and carbohydrate-protein modeling," Journal of Chemical Theory and Computation 2011 7 (10), 3162-3180']</Reference>
+    <Reference Reference="['Mallajosyula, S. S. and MacKerell, Jr., A.D., &quot;Influence of Solvent and Intramolecular Hydrogen Bonding on the Conformational Properties of O-Linked Glycopeptides,&quot; The Journal of Physical Chemistry B 2011 115 (38), 11215-11229.']" forcefield="carbohydrates" type="O-glycan linkages">['Mallajosyula, S. S. and MacKerell, Jr., A.D., "Influence of Solvent and Intramolecular Hydrogen Bonding on the Conformational Properties of O-Linked Glycopeptides," The Journal of Physical Chemistry B 2011 115 (38), 11215-11229.']</Reference>
+    <Reference Reference="['Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D., &quot;CHARMM Additive All-Atom Force Field for Phosphate and Sulfate Linked to Carbohydrates&quot; Journal of Chemical Theory and Computation 2012 8 (2), 759-776.']" forcefield="carbohydrates" type="phosphates and sulfates">['Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Phosphate and Sulfate Linked to Carbohydrates" Journal of Chemical Theory and Computation 2012 8 (2), 759-776.']</Reference>
+    <Reference Reference="['Kern, N. R., Lee, H. S., Wu, E. L., Park, S., Vanommeslaeghe, K., MacKerell, A. D., ... Im, W. (2014). Lipid- Linked Oligosaccharides in Membrane Sample Conformations That Faciliate Binding to Oligosaccharyltransferase. Biophysical Journal, 107(8), 1885-1895.']" forcefield="carbohydrates" type="glycolipids">['Kern, N. R., Lee, H. S., Wu, E. L., Park, S., Vanommeslaeghe, K., MacKerell, A. D., ... Im, W. (2014). Lipid- Linked Oligosaccharides in Membrane Sample Conformations That Faciliate Binding to Oligosaccharyltransferase. Biophysical Journal, 107(8), 1885-1895.']</Reference>
+  </Info>
+  <Residues>
+    <Residue name="MEOH" override="1">
+      <Atom charge="-0.04" name="CB" type="CC331"/>
+      <Atom charge="-0.65" name="OG" type="OC311M"/>
+      <Atom charge="0.42" name="HG1" type="HCP1"/>
+      <Atom charge="0.09" name="HB1" type="HCA3"/>
+      <Atom charge="0.09" name="HB2" type="HCA3"/>
+      <Atom charge="0.09" name="HB3" type="HCA3"/>
+      <Bond atomName1="CB" atomName2="OG"/>
+      <Bond atomName1="OG" atomName2="HG1"/>
+      <Bond atomName1="CB" atomName2="HB1"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+    </Residue>
+    <Residue name="ETOH" override="1">
+      <Atom charge="0.05" name="C1" type="CC321"/>
+      <Atom charge="-0.65" name="O1" type="OC311M"/>
+      <Atom charge="0.42" name="HO1" type="HCP1"/>
+      <Atom charge="0.09" name="H11" type="HCA2"/>
+      <Atom charge="0.09" name="H12" type="HCA2"/>
+      <Atom charge="-0.27" name="C2" type="CC331"/>
+      <Atom charge="0.09" name="H21" type="HCA3"/>
+      <Atom charge="0.09" name="H22" type="HCA3"/>
+      <Atom charge="0.09" name="H23" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C1" atomName2="O1"/>
+      <Bond atomName1="C1" atomName2="H11"/>
+      <Bond atomName1="C1" atomName2="H12"/>
+      <Bond atomName1="O1" atomName2="HO1"/>
+      <Bond atomName1="C2" atomName2="H21"/>
+      <Bond atomName1="C2" atomName2="H22"/>
+      <Bond atomName1="C2" atomName2="H23"/>
+    </Residue>
+    <Residue name="PRO2" override="1">
+      <Atom charge="0.14" name="C2" type="CC311"/>
+      <Atom charge="-0.65" name="O2" type="OC311M"/>
+      <Atom charge="0.42" name="HO2" type="HCP1"/>
+      <Atom charge="0.09" name="H21" type="HCA1"/>
+      <Atom charge="-0.27" name="C1" type="CC331"/>
+      <Atom charge="0.09" name="H11" type="HCA3"/>
+      <Atom charge="0.09" name="H12" type="HCA3"/>
+      <Atom charge="0.09" name="H13" type="HCA3"/>
+      <Atom charge="-0.27" name="C3" type="CC331"/>
+      <Atom charge="0.09" name="H31" type="HCA3"/>
+      <Atom charge="0.09" name="H32" type="HCA3"/>
+      <Atom charge="0.09" name="H33" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="C2" atomName2="H21"/>
+      <Bond atomName1="O2" atomName2="HO2"/>
+      <Bond atomName1="C1" atomName2="H11"/>
+      <Bond atomName1="C1" atomName2="H12"/>
+      <Bond atomName1="C1" atomName2="H13"/>
+      <Bond atomName1="C3" atomName2="H31"/>
+      <Bond atomName1="C3" atomName2="H32"/>
+      <Bond atomName1="C3" atomName2="H33"/>
+    </Residue>
+    <Residue name="EGLY" override="1">
+      <Atom charge="0.05" name="C1" type="CC321"/>
+      <Atom charge="0.09" name="H11" type="HCA2"/>
+      <Atom charge="0.09" name="H12" type="HCA2"/>
+      <Atom charge="-0.65" name="O1" type="OC311M"/>
+      <Atom charge="0.42" name="HO1" type="HCP1M"/>
+      <Atom charge="0.05" name="C2" type="CC321"/>
+      <Atom charge="0.09" name="H21" type="HCA2"/>
+      <Atom charge="0.09" name="H22" type="HCA2"/>
+      <Atom charge="-0.65" name="O2" type="OC311M"/>
+      <Atom charge="0.42" name="HO2" type="HCP1M"/>
+      <Bond atomName1="C1" atomName2="O1"/>
+      <Bond atomName1="C1" atomName2="H11"/>
+      <Bond atomName1="C1" atomName2="H12"/>
+      <Bond atomName1="O1" atomName2="HO1"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="C2" atomName2="H21"/>
+      <Bond atomName1="C2" atomName2="H22"/>
+      <Bond atomName1="O2" atomName2="HO2"/>
+    </Residue>
+    <Residue name="CYHX" override="1">
+      <Atom charge="-0.18" name="C1" type="CC321C"/>
+      <Atom charge="0.09" name="H1A" type="HCA2"/>
+      <Atom charge="0.09" name="H1B" type="HCA2"/>
+      <Atom charge="-0.18" name="C2" type="CC321C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2"/>
+      <Atom charge="-0.18" name="C3" type="CC321C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2"/>
+      <Atom charge="-0.18" name="C4" type="CC321C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2"/>
+      <Atom charge="-0.18" name="C5" type="CC321C"/>
+      <Atom charge="0.09" name="H5A" type="HCA2"/>
+      <Atom charge="0.09" name="H5B" type="HCA2"/>
+      <Atom charge="-0.18" name="C6" type="CC321C"/>
+      <Atom charge="0.09" name="H6A" type="HCA2"/>
+      <Atom charge="0.09" name="H6B" type="HCA2"/>
+      <Bond atomName1="C1" atomName2="H1A"/>
+      <Bond atomName1="C1" atomName2="H1B"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C6" atomName2="H6A"/>
+      <Bond atomName1="C6" atomName2="H6B"/>
+      <Bond atomName1="C6" atomName2="C1"/>
+    </Residue>
+    <Residue name="ACO" override="1">
+      <Atom charge="-0.48" name="O1" type="OC2D3"/>
+      <Atom charge="0.4" name="C1" type="CC2O3"/>
+      <Atom charge="-0.23" name="C2" type="CC331"/>
+      <Atom charge="-0.23" name="C3" type="CC331"/>
+      <Atom charge="0.09" name="H21" type="HCA3"/>
+      <Atom charge="0.09" name="H22" type="HCA3"/>
+      <Atom charge="0.09" name="H23" type="HCA3"/>
+      <Atom charge="0.09" name="H31" type="HCA3"/>
+      <Atom charge="0.09" name="H32" type="HCA3"/>
+      <Atom charge="0.09" name="H33" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C1" atomName2="C3"/>
+      <Bond atomName1="C2" atomName2="H21"/>
+      <Bond atomName1="C2" atomName2="H22"/>
+      <Bond atomName1="C2" atomName2="H23"/>
+      <Bond atomName1="C3" atomName2="H31"/>
+      <Bond atomName1="C3" atomName2="H32"/>
+      <Bond atomName1="C3" atomName2="H33"/>
+      <Bond atomName1="O1" atomName2="C1"/>
+    </Residue>
+    <Residue name="AALD" override="1">
+      <Atom charge="0.09" name="HA" type="HCR1"/>
+      <Atom charge="0.2" name="C" type="CC2O4"/>
+      <Atom charge="-0.4" name="O" type="OC2D4"/>
+      <Atom charge="-0.16" name="CB" type="CC331"/>
+      <Atom charge="0.09" name="HB1" type="HCA3"/>
+      <Atom charge="0.09" name="HB2" type="HCA3"/>
+      <Atom charge="0.09" name="HB3" type="HCA3"/>
+      <Bond atomName1="HA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="CB"/>
+      <Bond atomName1="CB" atomName2="HB1"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+    </Residue>
+    <Residue name="THP" override="1">
+      <Atom charge="-0.4" name="O1" type="OC3C61"/>
+      <Atom charge="0.02" name="C1" type="CC321C"/>
+      <Atom charge="0.09" name="H1A" type="HCA2"/>
+      <Atom charge="0.09" name="H1B" type="HCA2"/>
+      <Atom charge="0.02" name="C5" type="CC321C"/>
+      <Atom charge="0.09" name="H5A" type="HCA2"/>
+      <Atom charge="0.09" name="H5B" type="HCA2"/>
+      <Atom charge="-0.18" name="C2" type="CC321C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2"/>
+      <Atom charge="-0.18" name="C3" type="CC321C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2"/>
+      <Atom charge="-0.18" name="C4" type="CC321C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2"/>
+      <Bond atomName1="O1" atomName2="C1"/>
+      <Bond atomName1="C1" atomName2="H1A"/>
+      <Bond atomName1="C1" atomName2="H1B"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C5" atomName2="O1"/>
+    </Residue>
+    <Residue name="NMA" override="1">
+      <Atom charge="-0.27" name="CL" type="CC331"/>
+      <Atom charge="0.09" name="HL1" type="HCA3"/>
+      <Atom charge="0.09" name="HL2" type="HCA3"/>
+      <Atom charge="0.09" name="HL3" type="HCA3"/>
+      <Atom charge="0.51" name="C" type="CC2O1"/>
+      <Atom charge="-0.51" name="O" type="OC2D1"/>
+      <Atom charge="-0.47" name="N" type="NC2D1"/>
+      <Atom charge="0.31" name="H" type="HCP1"/>
+      <Atom charge="-0.11" name="CR" type="CC331"/>
+      <Atom charge="0.09" name="HR1" type="HCA3"/>
+      <Atom charge="0.09" name="HR2" type="HCA3"/>
+      <Atom charge="0.09" name="HR3" type="HCA3"/>
+      <Bond atomName1="HL1" atomName2="CL"/>
+      <Bond atomName1="HL2" atomName2="CL"/>
+      <Bond atomName1="HL3" atomName2="CL"/>
+      <Bond atomName1="CL" atomName2="C"/>
+      <Bond atomName1="C" atomName2="N"/>
+      <Bond atomName1="N" atomName2="CR"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="HR1" atomName2="CR"/>
+      <Bond atomName1="HR2" atomName2="CR"/>
+      <Bond atomName1="HR3" atomName2="CR"/>
+      <Bond atomName1="C" atomName2="O"/>
+    </Residue>
+    <Residue name="IPAA" override="1">
+      <Atom charge="-0.27" name="CL" type="CC331"/>
+      <Atom charge="0.09" name="HL1" type="HCA3"/>
+      <Atom charge="0.09" name="HL2" type="HCA3"/>
+      <Atom charge="0.09" name="HL3" type="HCA3"/>
+      <Atom charge="0.51" name="C" type="CC2O1"/>
+      <Atom charge="-0.51" name="O" type="OC2D1"/>
+      <Atom charge="-0.47" name="N" type="NC2D1"/>
+      <Atom charge="0.31" name="H" type="HCP1"/>
+      <Atom charge="0.07" name="CR" type="CC311"/>
+      <Atom charge="0.09" name="HR" type="HCA1"/>
+      <Atom charge="-0.27" name="C21" type="CC331"/>
+      <Atom charge="0.09" name="H211" type="HCA3"/>
+      <Atom charge="0.09" name="H212" type="HCA3"/>
+      <Atom charge="0.09" name="H213" type="HCA3"/>
+      <Atom charge="-0.27" name="C22" type="CC331"/>
+      <Atom charge="0.09" name="H221" type="HCA3"/>
+      <Atom charge="0.09" name="H222" type="HCA3"/>
+      <Atom charge="0.09" name="H223" type="HCA3"/>
+      <Bond atomName1="HL1" atomName2="CL"/>
+      <Bond atomName1="HL2" atomName2="CL"/>
+      <Bond atomName1="HL3" atomName2="CL"/>
+      <Bond atomName1="CL" atomName2="C"/>
+      <Bond atomName1="C" atomName2="N"/>
+      <Bond atomName1="N" atomName2="CR"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="HR" atomName2="CR"/>
+      <Bond atomName1="C21" atomName2="CR"/>
+      <Bond atomName1="C22" atomName2="CR"/>
+      <Bond atomName1="C21" atomName2="H211"/>
+      <Bond atomName1="C21" atomName2="H212"/>
+      <Bond atomName1="C21" atomName2="H213"/>
+      <Bond atomName1="C22" atomName2="H221"/>
+      <Bond atomName1="C22" atomName2="H222"/>
+      <Bond atomName1="C22" atomName2="H223"/>
+      <Bond atomName1="C" atomName2="O"/>
+    </Residue>
+    <Residue name="PROA" override="1">
+      <Atom charge="-0.28" name="C1" type="CC321"/>
+      <Atom charge="0.62" name="C2" type="CC2O2"/>
+      <Atom charge="0.09" name="H1" type="HCA2"/>
+      <Atom charge="0.09" name="H2" type="HCA2"/>
+      <Atom charge="-0.76" name="O1" type="OC2D2"/>
+      <Atom charge="-0.76" name="O2" type="OC2D2"/>
+      <Atom charge="-0.27" name="C0" type="CC331"/>
+      <Atom charge="0.09" name="H01" type="HCA3"/>
+      <Atom charge="0.09" name="H02" type="HCA3"/>
+      <Atom charge="0.09" name="H03" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="H2"/>
+      <Bond atomName1="C1" atomName2="C0"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O1"/>
+      <Bond atomName1="C0" atomName2="H01"/>
+      <Bond atomName1="C0" atomName2="H02"/>
+      <Bond atomName1="C0" atomName2="H03"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+    </Residue>
+    <Residue name="AMOP" override="1">
+      <Atom charge="-0.02" name="C1" type="CC311"/>
+      <Atom charge="0.62" name="C2" type="CC2O2"/>
+      <Atom charge="0.09" name="H1" type="HCA1"/>
+      <Atom charge="-0.34" name="OM" type="OC301"/>
+      <Atom charge="-0.1" name="CM" type="CC331"/>
+      <Atom charge="0.09" name="HM1" type="HCA3"/>
+      <Atom charge="0.09" name="HM2" type="HCA3"/>
+      <Atom charge="0.09" name="HM3" type="HCA3"/>
+      <Atom charge="-0.76" name="O1" type="OC2D2"/>
+      <Atom charge="-0.76" name="O2" type="OC2D2"/>
+      <Atom charge="-0.27" name="C0" type="CC331"/>
+      <Atom charge="0.09" name="H01" type="HCA3"/>
+      <Atom charge="0.09" name="H02" type="HCA3"/>
+      <Atom charge="0.09" name="H03" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="OM"/>
+      <Bond atomName1="C1" atomName2="C0"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O1"/>
+      <Bond atomName1="C0" atomName2="H01"/>
+      <Bond atomName1="C0" atomName2="H02"/>
+      <Bond atomName1="C0" atomName2="H03"/>
+      <Bond atomName1="OM" atomName2="CM"/>
+      <Bond atomName1="CM" atomName2="HM1"/>
+      <Bond atomName1="CM" atomName2="HM2"/>
+      <Bond atomName1="CM" atomName2="HM3"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+    </Residue>
+    <Residue name="AMOL" override="1">
+      <Atom charge="0.3" name="C1" type="CC301"/>
+      <Atom charge="0.3" name="C2" type="CC2O2"/>
+      <Atom charge="-0.65" name="OH" type="OC311"/>
+      <Atom charge="0.42" name="HO" type="HCP1"/>
+      <Atom charge="-0.34" name="OM" type="OC301"/>
+      <Atom charge="-0.1" name="CM" type="CC331"/>
+      <Atom charge="0.09" name="HM1" type="HCA3"/>
+      <Atom charge="0.09" name="HM2" type="HCA3"/>
+      <Atom charge="0.09" name="HM3" type="HCA3"/>
+      <Atom charge="-0.6" name="O1" type="OC2D2"/>
+      <Atom charge="-0.6" name="O2" type="OC2D2"/>
+      <Atom charge="-0.27" name="C0" type="CC331"/>
+      <Atom charge="0.09" name="H01" type="HCA3"/>
+      <Atom charge="0.09" name="H02" type="HCA3"/>
+      <Atom charge="0.09" name="H03" type="HCA3"/>
+      <Bond atomName1="C1" atomName2="OH"/>
+      <Bond atomName1="OH" atomName2="HO"/>
+      <Bond atomName1="C1" atomName2="OM"/>
+      <Bond atomName1="C1" atomName2="C0"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O1"/>
+      <Bond atomName1="C0" atomName2="H01"/>
+      <Bond atomName1="C0" atomName2="H02"/>
+      <Bond atomName1="C0" atomName2="H03"/>
+      <Bond atomName1="OM" atomName2="CM"/>
+      <Bond atomName1="CM" atomName2="HM1"/>
+      <Bond atomName1="CM" atomName2="HM2"/>
+      <Bond atomName1="CM" atomName2="HM3"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+    </Residue>
+    <Residue name="THF" override="1">
+      <Atom charge="-0.4" name="O1" type="OC3C5M"/>
+      <Atom charge="0.02" name="C1" type="CC322C"/>
+      <Atom charge="0.09" name="H1A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H1B" type="HCA2C2"/>
+      <Atom charge="-0.18" name="C2" type="CC322C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2C2"/>
+      <Atom charge="-0.18" name="C3" type="CC322C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2C2"/>
+      <Atom charge="0.02" name="C4" type="CC322C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2C2"/>
+      <Bond atomName1="O1" atomName2="C1"/>
+      <Bond atomName1="C1" atomName2="H1A"/>
+      <Bond atomName1="C1" atomName2="H1B"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="O1"/>
+    </Residue>
+    <Residue name="TF2M" override="1">
+      <Atom charge="-0.4" name="O1" type="OC3C5M"/>
+      <Atom charge="0.11" name="C1" type="CC312C"/>
+      <Atom charge="0.09" name="H1" type="HCA1C2"/>
+      <Atom charge="-0.18" name="C2" type="CC322C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2C2"/>
+      <Atom charge="-0.18" name="C3" type="CC322C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2C2"/>
+      <Atom charge="0.02" name="C4" type="CC322C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2C2"/>
+      <Atom charge="-0.27" name="C5" type="CC331"/>
+      <Atom charge="0.09" name="H5A" type="HCA3"/>
+      <Atom charge="0.09" name="H5B" type="HCA3"/>
+      <Atom charge="0.09" name="H5C" type="HCA3"/>
+      <Bond atomName1="O1" atomName2="C1"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C1" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C5" atomName2="H5C"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="O1"/>
+    </Residue>
+    <Residue name="CYHX2" override="1">
+      <Atom charge="-0.18" name="C1" type="CC321C"/>
+      <Atom charge="0.09" name="H1A" type="HCA2"/>
+      <Atom charge="0.09" name="H1B" type="HCA2"/>
+      <Atom charge="-0.18" name="C2" type="CC321C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2"/>
+      <Atom charge="-0.18" name="C3" type="CC321C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2"/>
+      <Atom charge="-0.18" name="C4" type="CC321C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2"/>
+      <Atom charge="-0.18" name="C5" type="CC321C"/>
+      <Atom charge="0.09" name="H5A" type="HCA2"/>
+      <Atom charge="0.09" name="H5B" type="HCA2"/>
+      <Atom charge="-0.18" name="C5O" type="CC321C"/>
+      <Atom charge="0.09" name="H5OA" type="HCA2"/>
+      <Atom charge="0.09" name="H5OB" type="HCA2"/>
+      <Bond atomName1="C1" atomName2="H1B"/>
+      <Bond atomName1="C1" atomName2="H1A"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C5" atomName2="C5O"/>
+      <Bond atomName1="C5O" atomName2="H5OA"/>
+      <Bond atomName1="C5O" atomName2="H5OB"/>
+      <Bond atomName1="C5O" atomName2="C1"/>
+    </Residue>
+    <Residue name="THP2" override="1">
+      <Atom charge="0.02" name="C1" type="CC321D"/>
+      <Atom charge="0.09" name="H1A" type="HCA2"/>
+      <Atom charge="0.09" name="H1B" type="HCA2"/>
+      <Atom charge="-0.4" name="O5" type="OC3C61"/>
+      <Atom charge="0.02" name="C5" type="CC321C"/>
+      <Atom charge="0.09" name="H5A" type="HCA2"/>
+      <Atom charge="0.09" name="H5B" type="HCA2"/>
+      <Atom charge="-0.18" name="C2" type="CC321C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2"/>
+      <Atom charge="-0.18" name="C3" type="CC321C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2"/>
+      <Atom charge="-0.18" name="C4" type="CC321C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2"/>
+      <Bond atomName1="C1" atomName2="H1B"/>
+      <Bond atomName1="C1" atomName2="H1A"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+    </Residue>
+    <Residue name="THF2" override="1">
+      <Atom charge="-0.4" name="O5" type="OC3C5M"/>
+      <Atom charge="0.02" name="C2" type="CC322C"/>
+      <Atom charge="0.09" name="H2A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H2B" type="HCA2C2"/>
+      <Atom charge="-0.18" name="C3" type="CC322C"/>
+      <Atom charge="0.09" name="H3A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H3B" type="HCA2C2"/>
+      <Atom charge="-0.18" name="C4" type="CC322C"/>
+      <Atom charge="0.09" name="H4A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H4B" type="HCA2C2"/>
+      <Atom charge="0.02" name="C5" type="CC322C"/>
+      <Atom charge="0.09" name="H5A" type="HCA2C2"/>
+      <Atom charge="0.09" name="H5B" type="HCA2C2"/>
+      <Bond atomName1="O5" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2A"/>
+      <Bond atomName1="C2" atomName2="H2B"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C3" atomName2="H3A"/>
+      <Bond atomName1="C3" atomName2="H3B"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="H4A"/>
+      <Bond atomName1="C4" atomName2="H4B"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5A"/>
+      <Bond atomName1="C5" atomName2="H5B"/>
+      <Bond atomName1="C5" atomName2="O5"/>
+    </Residue>
+  </Residues>
+  <Patches/>
+</ForceField>
