@@ -37,6 +37,7 @@ script:
   - cd devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow' && cd ..
   # TODO: Install parmed dev version; replace with parmed dependency in meta.yaml
   - conda remove --yes parmed || true
+  # - pip install git+https://github.com/ParmEd/ParmEd.git
   - pip install git+https://github.com/jchodera/ParmEd.git@fix-charmm-openmm-water-conversion
   # Hack in replacement ff15ipq file from David S. Cerutti that will be included in next AmberTools minor version release
   # TODO: Remove this once AmberTools minor version release has been made

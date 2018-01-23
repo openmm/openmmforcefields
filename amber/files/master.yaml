@@ -1,5 +1,5 @@
 # AMBER --> OpenMM-ffxml conversion YAML
-# Author: Rafal P. Wiewiora, ChoderaLab
+# Author: Rafal P. Wiewiora, Chodera Lab
 # Structure: list - first entry - source package info, further entries - 1/resulting ffxml file
 
 - sourcePackage: AmberTools
@@ -11,7 +11,7 @@
   - >-
     Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T.
     Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model.
-    J. Chem. Theory Comput., 2016, 12, 3926–3947.
+    J. Chem. Theory Comput., 2016, 12, 3926-3947.
   Test:
   - protein
 - Source: leaprc.protein.ff15ipq-vac
@@ -20,7 +20,7 @@
   - >-
     Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T.
     Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model.
-    J. Chem. Theory Comput., 2016, 12, 3926–3947.
+    J. Chem. Theory Comput., 2016, 12, 3926-3947.
   Test:
   - protein
 - Source: leaprc.lipid17
