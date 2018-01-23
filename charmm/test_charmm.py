@@ -43,6 +43,13 @@ def test_charmm():
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
+        # three-site water models
+        ('waterbox', 'tests/waterbox.pdb', 'tests/waterbox.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str']),
+        ('waterbox', 'tests/waterbox.pdb', 'tests/waterbox.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str']),
+        ('waterbox', 'tests/waterbox.pdb', 'tests/waterbox.psf', ['ffxml/waters_ions_spc_e.xml'], ['toppar/non_charmm/toppar_water_ions_spc_e.str']),
+        ('waterbox', 'tests/waterbox.pdb', 'tests/waterbox.psf', ['ffxml/waters_ions_tip3p_pme_b.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str']),
+        ('waterbox', 'tests/waterbox.pdb', 'tests/waterbox.psf', ['ffxml/waters_ions_tip3p_pme_f.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str']),
+        # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str']),
     ]
 
@@ -102,8 +109,6 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     #structure.load_parameters(toppar)
     structure.positions = pdbfile.positions
     system_charmm = structure.createSystem(toppar, **system_kwargs)
-    print('structure.urey_bradleys:')
-    print(structure.urey_bradleys)
     with open('system_charmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
@@ -112,9 +117,6 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
     system_openmm = ff.createSystem(pdbfile.topology, **system_kwargs)
-    print('OpenMM pdbfile.topology bonds:')
-    for bond in pdbfile.topology.bonds():
-        print(bond)
     print('OpenMM system HarmonicBondForceEnergies')
     with open('system_openmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_openmm))
