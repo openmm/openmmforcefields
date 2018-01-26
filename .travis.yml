@@ -38,7 +38,7 @@ script:
   # TODO: Install parmed dev version; replace with parmed dependency in meta.yaml
   - conda remove --yes parmed || true
   # - pip install git+https://github.com/ParmEd/ParmEd.git
-  - pip install git+https://github.com/jchodera/ParmEd.git@fix-charmm-openmm-water-conversion
+  - pip install git+https://github.com/jchodera/ParmEd.git
   # Hack in replacement ff15ipq file from David S. Cerutti that will be included in next AmberTools minor version release
   # TODO: Remove this once AmberTools minor version release has been made
   - echo "Ugly hack to copy in unreleased ff15ipq bugfix at the sole insistence of Peter Eastman under strong objections..."
