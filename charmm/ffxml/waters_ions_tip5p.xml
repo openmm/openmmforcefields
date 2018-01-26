@@ -33,8 +33,6 @@
       <Atom charge="-0.241" name="LP2" type="LP"/>
       <Bond atomName1="OH2" atomName2="H1"/>
       <Bond atomName1="OH2" atomName2="H2"/>
-      <Bond atomName1="OH2" atomName2="LP1"/>
-      <Bond atomName1="OH2" atomName2="LP2"/>
       <VirtualSite atomName1="OH2" atomName2="H1" atomName3="H2" index="0" p1="-0.04041512765608711" p2="0" p3="0.057154330164408206" siteName="LP1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1"/>
       <VirtualSite atomName1="OH2" atomName2="H1" atomName3="H2" index="1" p1="-0.04041512765608711" p2="0" p3="-0.057154330164408206" siteName="LP2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1"/>
     </Residue>
