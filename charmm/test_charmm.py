@@ -43,6 +43,10 @@ def test_charmm():
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
+        # CGenFF
+        ('1LE1', 'tests/charmm-gui/1LE1/step3_pbcsetup.pdb', 'tests/charmm-gui/1LE1/step3_pbcsetup.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
+        ('1VII', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
+        ('7FDR', 'tests/charmm-gui/7FDR/step2_solvator.pdb', 'tests/charmm-gui/7FDR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         # three-site water models
         ('waterbox TIP3P', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str']),
         ('waterbox SPC', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str']),
@@ -57,6 +61,7 @@ def test_charmm():
         #('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
         # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str']),
+
     ]
 
     for (name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames) in testsystems:
