@@ -43,10 +43,24 @@ def test_charmm():
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
+        # three-site water models
+        ('waterbox TIP3P', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str']),
+        ('waterbox SPC', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str']),
+        ('waterbox SPC/E', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc_e.xml'], ['toppar/non_charmm/toppar_water_ions_spc_e.str']),
+        ('waterbox TIP3P PME B', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_b.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str']),
+        ('waterbox TIP3P PME F', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_f.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str']),
+        # multi-site water models
+        ('waterbox TIP4P', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p.str']),
+        ('waterbox TIP4P 2005', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_2005.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_2005.str']),
+        ('waterbox TIP4P-Ew', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_ew.str']),
+        ('waterbox TIP5P', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p.str']),
+        ('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
+        # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str']),
     ]
 
     for (name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames) in testsystems:
+        print('')
         print('Testing %s' % name)
         compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames)
 
@@ -102,8 +116,6 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     #structure.load_parameters(toppar)
     structure.positions = pdbfile.positions
     system_charmm = structure.createSystem(toppar, **system_kwargs)
-    print('structure.urey_bradleys:')
-    print(structure.urey_bradleys)
     with open('system_charmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
@@ -112,9 +124,6 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
     system_openmm = ff.createSystem(pdbfile.topology, **system_kwargs)
-    print('OpenMM pdbfile.topology bonds:')
-    for bond in pdbfile.topology.bonds():
-        print(bond)
     print('OpenMM system HarmonicBondForceEnergies')
     with open('system_openmm.xml', 'w') as f:
         f.write(mm.XmlSerializer.serialize(system_openmm))

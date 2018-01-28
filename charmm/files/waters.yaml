@@ -4,7 +4,8 @@
   Source:
     stream:
      - toppar/toppar_water_ions.str
-     #- toppar/stream/misc/toppar_ions_won.str # Contains ion Tm3p (Thulium +3 ion) that conflicts with TM3P
+    exclude_residues:
+     - TP3M
   References:
    tip3p:
      - >-
@@ -22,6 +23,8 @@
        - >-
          Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
          Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+  Test:
+    - tests/watbox216.pdb
 - Destination: waters_ions_spc_e.xml
   Source:
     include:
@@ -42,6 +45,9 @@
        - >-
          Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
          Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+  Test:
+    - tests/watbox216.pdb
+- Destination: waters_ions_spc.xml
   Source:
     include:
     stream:
@@ -61,6 +67,8 @@
        - >-
          Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
          Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+  Test:
+    - tests/watbox216.pdb
 - Destination: waters_ions_tip3p_pme_b.xml
   Source:
     include:
@@ -81,6 +89,8 @@
        - >-
          Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
          Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+  Test:
+    - tests/watbox216.pdb
 - Destination: waters_ions_tip3p_pme_f.xml
   Source:
     include:
@@ -101,6 +111,8 @@
        - >-
          Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
          Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+  Test:
+    - tests/watbox216.pdb
 - Destination: waters_ions_tip4p_2005.xml
   Source:
     include:

@@ -61,6 +61,12 @@ def convert_yaml(yaml_filename, ffxml_dir):
         for files in source_files['stream']:
             charmm_files.extend(glob.glob(files))
 
+        # compile residue template names to exclude
+        exclude_residues = list()
+        if 'exclude_residues' in source_files:
+            for resname in source_files['exclude_residues']:
+                exclude_residues.append(resname)
+
         # exclude files from conversion
         charmm_files = set(charmm_files) - exclude_files
 
@@ -96,6 +102,11 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose: print('Loading CHARMM parameter sets %s...' % charmm_files)
         params = CharmmParameterSet(*charmm_files)
 
+        if len(exclude_residues) > 0:
+            if verbose: print('Excluding residues: %s' % exclude_residues)
+            for resname in exclude_residues:
+                del params.residues[resname]
+
         if verbose: print('Converting parameters to OpenMM...')
         params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
 
@@ -118,6 +129,13 @@ def convert_yaml(yaml_filename, ffxml_dir):
             forcefield = app.ForceField(ffxml_filename, *ffxml_include)
         else:
             forcefield = app.ForceField(ffxml_filename)
+
+        if 'Test' in entry:
+            for filename in entry['Test']:
+                if verbose: print('Testing with %s ...' % filename)
+                pdbfile = app.PDBFile(filename)
+                system = forcefield.createSystem(pdbfile.topology)
+
         if verbose: print('Verified.')
 
 class Logger():
