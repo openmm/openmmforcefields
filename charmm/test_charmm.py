@@ -50,11 +50,11 @@ def test_charmm():
         ('waterbox TIP3P PME B', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_b.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str']),
         ('waterbox TIP3P PME F', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_f.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str']),
         # multi-site water models
-        ('waterbox TIP4P', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p.str']),
-        ('waterbox TIP4P 2005', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_2005.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_2005.str']),
-        ('waterbox TIP4P-Ew', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_ew.str']),
-        ('waterbox TIP5P', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p.str']),
-        ('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
+        #('waterbox TIP4P', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p.str']),
+        #('waterbox TIP4P 2005', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_2005.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_2005.str']),
+        #('waterbox TIP4P-Ew', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_ew.str']),
+        #('waterbox TIP5P', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p.str']),
+        #('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
         # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str']),
     ]
