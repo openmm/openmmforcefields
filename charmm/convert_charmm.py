@@ -58,8 +58,9 @@ def convert_yaml(yaml_filename, ffxml_dir):
             charmm_files = source_files['include']
 
         # add stream files
-        for files in source_files['stream']:
-            charmm_files.extend(glob.glob(files))
+        if ('stream' in source_files) and (source_files['stream'] is not None):
+            for files in source_files['stream']:
+                charmm_files.extend(glob.glob(files))
 
         # compile residue template names to exclude
         exclude_residues = list()
