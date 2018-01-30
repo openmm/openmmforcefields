@@ -43,6 +43,10 @@ def test_charmm():
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
+        # CGenFF
+        ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
+        ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
+        ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         # three-site water models
         ('waterbox TIP3P', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str']),
         ('waterbox SPC', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str']),
@@ -50,13 +54,14 @@ def test_charmm():
         ('waterbox TIP3P PME B', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_b.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str']),
         ('waterbox TIP3P PME F', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_f.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str']),
         # multi-site water models
-        ('waterbox TIP4P', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p.str']),
-        ('waterbox TIP4P 2005', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_2005.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_2005.str']),
-        ('waterbox TIP4P-Ew', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_ew.str']),
-        ('waterbox TIP5P', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p.str']),
-        ('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
+        #('waterbox TIP4P', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p.str']),
+        #('waterbox TIP4P 2005', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_2005.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_2005.str']),
+        #('waterbox TIP4P-Ew', 'tests/waterboxes/waterbox-4-site.pdb', 'tests/waterboxes/waterbox-4-site.psf', ['ffxml/waters_ions_tip4p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip4p_ew.str']),
+        #('waterbox TIP5P', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p.str']),
+        #('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str']),
         # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str']),
+
     ]
 
     for (name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames) in testsystems:
@@ -131,16 +136,20 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
     ffxml_tootal_energy = sum([element[1] for element in omm_energies])
 
-    print('OpenMM CHARMM reader total energy: %f' % openmm_total_energy)
-    print('ParmEd CHARMM reader total energy: %f' % charmm_total_energy)
-    print('OPENMM ffxml total energy: %f' % openmm_total_energy)
-    print('TOTAL ERROR: %f' % (openmm_total_energy - charmm_total_energy))
+    print('-' * 100)
+    print('')
+    print('OpenMM CHARMM reader total energy: %14.3f' % openmm_total_energy)
+    print('ParmEd CHARMM reader total energy: %14.3f' % charmm_total_energy)
+    print('OPENMM ffxml total energy:         %14.3f' % openmm_total_energy)
+    print('TOTAL ERROR:                       %14.3f' % (openmm_total_energy - charmm_total_energy))
+    print('')
 
     print('ParmEd CHARMM reader energy decomposition:')
     print(charmm_energies)
     print('OpenMM ffxml ForceField energy decomposition:')
     print(omm_energies)
-
+    print('-' * 100)
+    
     # TODO : Automate comparison
     return
 

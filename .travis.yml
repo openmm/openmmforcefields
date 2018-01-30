@@ -54,7 +54,7 @@ script:
   - cd charmm && python test_charmm.py --verbose && cd ..
 
 os:
-  - osx
+  #- osx # LEaP segfaults on osx under some conditions
   - linux
 
 env:
