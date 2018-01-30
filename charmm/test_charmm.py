@@ -46,7 +46,7 @@ def test_charmm():
         # CGenFF
         ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
-        ('7DFR', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
+        ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         # three-site water models
         ('waterbox TIP3P', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str']),
         ('waterbox SPC', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str']),
@@ -136,16 +136,20 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
     ffxml_tootal_energy = sum([element[1] for element in omm_energies])
 
-    print('OpenMM CHARMM reader total energy: %f' % openmm_total_energy)
-    print('ParmEd CHARMM reader total energy: %f' % charmm_total_energy)
-    print('OPENMM ffxml total energy: %f' % openmm_total_energy)
-    print('TOTAL ERROR: %f' % (openmm_total_energy - charmm_total_energy))
+    print('-' * 100)
+    print('')
+    print('OpenMM CHARMM reader total energy: %14.3f' % openmm_total_energy)
+    print('ParmEd CHARMM reader total energy: %14.3f' % charmm_total_energy)
+    print('OPENMM ffxml total energy:         %14.3f' % openmm_total_energy)
+    print('TOTAL ERROR:                       %14.3f' % (openmm_total_energy - charmm_total_energy))
+    print('')
 
     print('ParmEd CHARMM reader energy decomposition:')
     print(charmm_energies)
     print('OpenMM ffxml ForceField energy decomposition:')
     print(omm_energies)
-
+    print('-' * 100)
+    
     # TODO : Automate comparison
     return
 
