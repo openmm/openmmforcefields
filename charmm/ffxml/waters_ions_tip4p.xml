@@ -32,7 +32,7 @@
       <Atom charge="0.52" name="H2" type="HT"/>
       <Bond atomName1="OH2" atomName2="H1"/>
       <Bond atomName1="OH2" atomName2="H2"/>
-      <Bond atomName1="OH2" atomName2="OM"/>
+      <VirtualSite atomName1="OH2" atomName2="H1" atomName3="H2" index="0" p1="0.015" p2="0" p3="0" siteName="OM" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1"/>
     </Residue>
     <Residue name="OH">
       <Atom charge="-1.32" name="O1" type="OX"/>

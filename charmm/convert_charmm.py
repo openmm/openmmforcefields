@@ -121,7 +121,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 patch.override_level = override_level
 
         if verbose: print('Writing parameter set and compatible patches. This may take several minutes...')
-        params_omm.write(ffxml_filename, provenance=provenance)
+        params_omm.write(ffxml_filename, provenance=provenance, charmm_imp=True)
 
         # Try reading the forcefield back in to make sure it is valid
         if verbose: print('Verifying ffxml file integrity...')

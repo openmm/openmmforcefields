@@ -49,11 +49,6 @@
     <Proper k1="0.46024000000000004" k2="4.10032" k3="6.694400000000001" periodicity1="1" periodicity2="2" periodicity3="3" phase1="0.0" phase2="3.141592653589793" phase3="3.141592653589793" type1="C" type2="CT1" type3="CT2A" type4="CT1"/>
     <Proper k1="3.6819200000000003" k2="0.0" k3="7.9496" periodicity1="1" periodicity2="2" periodicity3="3" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" type1="CT1" type2="CT2A" type3="CT1" type4="NH1"/>
   </PeriodicTorsionForce>
-  <CustomTorsionForce energy="k*(theta-theta0)^2">
-    <PerTorsionParameter name="k"/>
-    <PerTorsionParameter name="theta0"/>
-    <Improper k="447.68800000000005" theta0="0.0" type1="CD" type2="OC" type3="OC" type4="OC"/>
-  </CustomTorsionForce>
   <NonbondedForce coulomb14scale="1.0" lj14scale="1.0">
     <UseAttributeFromResidue name="charge"/>
     <Atom epsilon="0.08368" sigma="0.4053589167538544" type="C3"/>
