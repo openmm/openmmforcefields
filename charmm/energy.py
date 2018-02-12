@@ -138,16 +138,22 @@ for line in lines:
         fftz = int(tokens[3])
 
 # Load topology and coordinates
-#psf = app.CharmmPsfFile(os.path.join(prefix, filename + '.psf'))
+psf = app.CharmmPsfFile(os.path.join(prefix, filename + '.psf'))
 # Taken from output of CHARMM run
-#psf.setBox(a, b, c)
-#crd = app.CharmmCrdFile(os.path.join(prefix, filename + '.crd'))
+psf.setBox(a, b, c)
+crd = app.CharmmCrdFile(os.path.join(prefix, filename + '.crd'))
 #params = app.CharmmParameterSet(
 #    os.path.join(prefix, 'toppar/par_all36_prot.prm'),
 #    os.path.join(prefix, 'toppar/par_all36_na.prm'),
 #    os.path.join(prefix, 'toppar/toppar_water_ions.str'))
+#pdb = app.PDBFile(os.path.join(prefix, filename + '.pdb'))
+topology, positions = psf.topology, crd.positions
 
-pdb = app.PDBFile(os.path.join(prefix, filename + '.pdb'))
+# Delete H-H bonds from waters and retreive updated topology and positions
+modeller = app.Modeller(topology, positions)
+hhbonds = [b for b in modeller.topology.bonds() if b[0].element == app.element.hydrogen and b[1].element == app.element.hydrogen]
+modeller.delete(hhbonds)
+topology, positions = modeller.topology, modeller.positions
 
 #app.PDBFile.writeFile(psf.topology, crd.positions, open('step3_pbcsetup.pdb', 'w')) # DEBUG
 
@@ -159,7 +165,7 @@ print('Loading ForceField with charmm36.xml...')
 forcefield = app.ForceField('charmm36.xml', 'charmm36/water.xml')
 print('Creating System...')
 initial_time = time.time()
-system = forcefield.createSystem(pdb.topology, nonbondedMethod=app.PME,
+system = forcefield.createSystem(topology, nonbondedMethod=app.PME,
         constraints=app.HBonds, rigidWater=True,
         nonbondedCutoff=12*u.angstroms, switchDistance=10*u.angstroms)
 final_time = time.time()
@@ -176,15 +182,15 @@ for force in system.getForces():
         #print('LRC? %s' % force.getUseDispersionCorrection())
         force.setUseDispersionCorrection(False)
         force.setPMEParameters(1.0/0.34, fftx, ffty, fftz) # NOTE: These are hard-coded!
-pmdparm = pmd.load_file(os.path.join(prefix,'step3_pbcsetup.pdb'))
-pmdparm.positions = pdb.positions
+pmdparm = pmd.load_file(os.path.join(prefix,'step3_pbcsetup.psf'))
+pmdparm.positions = positions
 pmdparm.box = [a/u.angstroms, b/u.angstroms, c/u.angstroms, 90, 90, 90]
 
 # Get OpenMM forces.
 force_unit = u.kilocalories_per_mole/u.angstroms
 integrator = mm.VerletIntegrator(1.0 * u.femtoseconds)
 context = mm.Context(system, integrator)
-context.setPositions(pdb.positions)
+context.setPositions(positions)
 omm_forces = context.getState(getForces=True).getForces(asNumpy=True)
 
 # Form CHARMM energy components
