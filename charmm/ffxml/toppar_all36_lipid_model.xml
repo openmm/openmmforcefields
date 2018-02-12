@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-28</DateGenerated>
+    <DateGenerated>2018-02-12</DateGenerated>
     <Source Source="toppar/stream/lipid/toppar_all36_lipid_model.str" md5hash="4444e195bda389119c0e4fb5a7057209" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_aug15.tgz">toppar/stream/lipid/toppar_all36_lipid_model.str</Source>
     <Reference Reference="CHARMM36 All-Hydrogen Lipid Force Field Toppar Stream File Collection of residues and patches for model compounds used in the optimization the lipid force field." forcefield="lipids">CHARMM36 All-Hydrogen Lipid Force Field Toppar Stream File Collection of residues and patches for model compounds used in the optimization the lipid force field.</Reference>
     <Reference Reference="Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor &quot;Update of the CHARMM All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types&quot; J. Phys. Chem. B 2010, 114, 7830-7843" forcefield="lipids">Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843</Reference>
