@@ -191,6 +191,8 @@ force_unit = u.kilocalories_per_mole/u.angstroms
 integrator = mm.VerletIntegrator(1.0 * u.femtoseconds)
 context = mm.Context(system, integrator)
 context.setPositions(positions)
+omm_energy = context.getState(getEnergy=True).getPotentialEnergy()
+print('OpenMM total energy: %f kcal/mol' % (omm_energy / u.kilocalories_per_mole))
 omm_forces = context.getState(getForces=True).getForces(asNumpy=True)
 
 # Form CHARMM energy components
@@ -221,7 +223,7 @@ else:
     force_terms = ['Bond', 'Angle', 'Urey-Bradley', 'Dihedrals', 'Impropers', 'Nonbonded']
 for key in force_terms:
     total += charmm_energy[key]
-print(charmm_energy['Total'], total)
+print('CHARMM total energy: ', charmm_energy['Total'], total)
 
 # Get OpenMM energies as an ordered list of tuples
 omm_e = pmd.openmm.energy_decomposition_system(pmdparm, system, nrg=u.kilocalories_per_mole)
