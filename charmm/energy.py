@@ -148,8 +148,8 @@ topology, positions = psf.topology, crd.positions
 #    os.path.join(prefix, 'toppar/par_all36_prot.prm'),
 #    os.path.join(prefix, 'toppar/par_all36_na.prm'),
 #    os.path.join(prefix, 'toppar/toppar_water_ions.str'))
-pdb = app.PDBFile(os.path.join(prefix, filename + '.pdb'))
-topology, positions = pdb.topology, pdb.positions # DEBUG
+#pdb = app.PDBFile(os.path.join(prefix, filename + '.pdb'))
+#topology, positions = pdb.topology, pdb.positions # DEBUG
 
 # Delete H-H bonds from waters and retreive updated topology and positions
 modeller = app.Modeller(topology, positions)
@@ -164,7 +164,7 @@ topology, positions = modeller.topology, modeller.positions
 
 # Load forcefield
 print('Loading ForceField with charmm36.xml...')
-#ffxml_filenames = ['charmm36.xml', 'charmm36/water.xml'] # OpenMM install path
+ffxml_filenames = ['charmm36.xml', 'charmm36/water.xml'] # OpenMM install path
 ffxml_filenames = ['ffxml/charmm36_nowaters.xml', 'ffxml/waters_ions_default.xml'] # Local path
 forcefield = app.ForceField(*ffxml_filenames)
 print('Creating System...')

@@ -9,16 +9,17 @@
 - Destination: charmm36_nowaters.xml
   Source:
     include:
-     - toppar/top_all36_carb.rtf
-     - toppar/par_all36_carb.prm
-     - toppar/top_all36_cgenff.rtf
-     - toppar/par_all36_cgenff.prm
-     - toppar/top_all36_lipid.rtf
-     - toppar/par_all36_lipid.prm
-     - toppar/top_all36_na.rtf
-     - toppar/par_all36_na.prm
+     # Proteins should be listed first so patches can be tested on amino acids first
      - toppar/top_all36_prot.rtf
      - toppar/par_all36_prot.prm
+     - toppar/top_all36_na.rtf
+     - toppar/par_all36_na.prm
+     - toppar/top_all36_cgenff.rtf
+     - toppar/par_all36_cgenff.prm
+     - toppar/top_all36_carb.rtf
+     - toppar/par_all36_carb.prm
+     - toppar/top_all36_lipid.rtf
+     - toppar/par_all36_lipid.prm
     stream:
      - toppar/stream/carb/*.str
      - toppar/stream/lipid/*.str
