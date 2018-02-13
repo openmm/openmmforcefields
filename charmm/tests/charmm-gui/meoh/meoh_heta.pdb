@@ -1,0 +1,8 @@
+ATOM      1   CB MEOHM   1       1.351   1.365   0.009  1.00  0.00      HETA C
+ATOM      2   OG MEOHM   1       0.963  -0.007   0.005  1.00  0.00      HETA O
+ATOM      3  HG1 MEOHM   1       1.320  -0.420   0.797  1.00  0.00      HETA H
+ATOM      4  HB1 MEOHM   1       0.947   1.882   0.907  1.00  0.00      HETA H
+ATOM      5  HB2 MEOHM   1       0.949   1.867  -0.899  1.00  0.00      HETA H
+ATOM      6  HB3 MEOHM   1       2.460   1.456   0.001  1.00  0.00      HETA H
+TER       7      MEOH     1
+TER
