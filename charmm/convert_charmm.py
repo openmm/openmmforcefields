@@ -68,8 +68,12 @@ def convert_yaml(yaml_filename, ffxml_dir):
             for resname in source_files['exclude_residues']:
                 exclude_residues.append(resname)
 
-        # exclude files from conversion
-        charmm_files = set(charmm_files) - exclude_files
+        # exclude files from conversion, maintaining deterministic order
+        for filename in exclude_files:
+            try:
+                charmm_files.remove(filename)
+            except Exception as e:
+                print('Specified excluded file "%s" does not appear in list of files' % filename)
 
         provenance = OrderedDict()
         source = provenance['Source'] = []
