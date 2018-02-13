@@ -164,7 +164,7 @@ topology, positions = modeller.topology, modeller.positions
 
 # Load forcefield
 print('Loading ForceField with charmm36.xml...')
-ffxml_filenames = ['charmm36.xml', 'charmm36/water.xml'] # OpenMM install path
+#ffxml_filenames = ['charmm36.xml', 'charmm36/water.xml'] # OpenMM install path
 ffxml_filenames = ['ffxml/charmm36_nowaters.xml', 'ffxml/waters_ions_default.xml'] # Local path
 forcefield = app.ForceField(*ffxml_filenames)
 print('Creating System...')
@@ -209,10 +209,11 @@ charmm_energy['Dihedrals'] = charmm_energy_components['DIHEdrals'] * u.kilocalor
 charmm_energy['Impropers'] = charmm_energy_components['IMPRopers'] * u.kilocalories_per_mole
 if 'CMAPs' in charmm_energy_components:
     charmm_energy['CMAP'] = charmm_energy_components['CMAPs'] * u.kilocalories_per_mole
-charmm_energy['Nonbonded'] = \
+charmm_energy['Lennard-Jones'] = \
     + charmm_energy_components['VDWaals'] * u.kilocalories_per_mole \
+    + charmm_energy_components['IMNBvdw'] * u.kilocalories_per_mole
+charmm_energy['Electrostatics'] = \
     + charmm_energy_components['ELEC'] * u.kilocalories_per_mole \
-    + charmm_energy_components['IMNBvdw'] * u.kilocalories_per_mole \
     + charmm_energy_components['IMELec'] * u.kilocalories_per_mole \
     + charmm_energy_components['EWKSum'] * u.kilocalories_per_mole \
     + charmm_energy_components['EWSElf'] * u.kilocalories_per_mole \
@@ -223,9 +224,9 @@ charmm_energy['Total'] = charmm_energy_components['ENERgy'] * u.kilocalories_per
 
 total = 0.0 * u.kilocalories_per_mole
 if 'CMAPs' in charmm_energy_components:
-    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'CMAP', 'Nonbonded']
+    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'CMAP', 'Lennard-Jones', 'Electrostatics']
 else:
-    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'Nonbonded']
+    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'Lennard-Jones', 'Electrostatics']
 for key in force_terms:
     total += charmm_energy[key]
 print('CHARMM total energy: ', charmm_energy['Total'], total)
@@ -244,7 +245,8 @@ openmm_energy['Dihedrals'] = omm_e[2][1]
 openmm_energy['Impropers'] = omm_e[3][1]
 if 'CMAP' in force_terms:
     openmm_energy['CMAP'] = omm_e[4][1]
-openmm_energy['Nonbonded'] = omm_e[5][1] + omm_e[6][1] + omm_e[7][1]
+openmm_energy['Electrostatics'] = omm_e[5][1]
+openmm_energy['Lennard-Jones'] = omm_e[6][1] + omm_e[7][1]
 openmm_energy['Total'] = 0.0 * u.kilojoules_per_mole
 for term in force_terms:
     openmm_energy['Total'] += openmm_energy[term]
