@@ -201,9 +201,10 @@ omm_forces = context.getState(getForces=True).getForces(asNumpy=True)
 
 # Form CHARMM energy components
 charmm_energy = dict()
-charmm_energy['Bond'] = charmm_energy_components['BONDs'] * u.kilocalories_per_mole
+charmm_energy['Bond + UB'] = \
+    + charmm_energy_components['BONDs'] * u.kilocalories_per_mole \
+    + charmm_energy_components['UREY-b'] * u.kilocalories_per_mole
 charmm_energy['Angle'] = charmm_energy_components['ANGLes'] * u.kilocalories_per_mole
-charmm_energy['Urey-Bradley'] = charmm_energy_components['UREY-b'] * u.kilocalories_per_mole
 charmm_energy['Dihedrals'] = charmm_energy_components['DIHEdrals'] * u.kilocalories_per_mole
 charmm_energy['Impropers'] = charmm_energy_components['IMPRopers'] * u.kilocalories_per_mole
 if 'CMAPs' in charmm_energy_components:
@@ -222,9 +223,9 @@ charmm_energy['Total'] = charmm_energy_components['ENERgy'] * u.kilocalories_per
 
 total = 0.0 * u.kilocalories_per_mole
 if 'CMAPs' in charmm_energy_components:
-    force_terms = ['Bond', 'Angle', 'Urey-Bradley', 'Dihedrals', 'Impropers', 'CMAP', 'Nonbonded']
+    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'CMAP', 'Nonbonded']
 else:
-    force_terms = ['Bond', 'Angle', 'Urey-Bradley', 'Dihedrals', 'Impropers', 'Nonbonded']
+    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'Nonbonded']
 for key in force_terms:
     total += charmm_energy[key]
 print('CHARMM total energy: ', charmm_energy['Total'], total)
@@ -237,14 +238,13 @@ for (index, (name, e)) in enumerate(omm_e):
 
 # Compile OpenMM energy components
 openmm_energy = dict()
-openmm_energy['Bond'] = omm_e[0][1]
+openmm_energy['Bond + UB'] = omm_e[0][1]
 openmm_energy['Angle'] = omm_e[1][1]
-openmm_energy['Urey-Bradley'] = omm_e[2][1]
-openmm_energy['Dihedrals'] = omm_e[3][1]
-openmm_energy['Impropers'] = omm_e[4][1]
+openmm_energy['Dihedrals'] = omm_e[2][1]
+openmm_energy['Impropers'] = omm_e[3][1]
 if 'CMAP' in force_terms:
-    openmm_energy['CMAP'] = omm_e[5][1]
-openmm_energy['Nonbonded'] = omm_e[6][1] + omm_e[7][1]
+    openmm_energy['CMAP'] = omm_e[4][1]
+openmm_energy['Nonbonded'] = omm_e[5][1] + omm_e[6][1] + omm_e[7][1]
 openmm_energy['Total'] = 0.0 * u.kilojoules_per_mole
 for term in force_terms:
     openmm_energy['Total'] += openmm_energy[term]
