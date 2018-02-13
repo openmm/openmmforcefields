@@ -10,7 +10,8 @@ import os, re
 
 prefix = sys.argv[1] # Directory where CHARMM input files are stored
 filename = 'step3_pbcsetup'
-#filename = 'step1_pdbreader'
+
+filename = 'step1_pdbreader'
 
 # Run CHARMM energy and force calculation
 import subprocess
@@ -186,7 +187,7 @@ for force in system.getForces():
         #print('LRC? %s' % force.getUseDispersionCorrection())
         force.setUseDispersionCorrection(False)
         force.setPMEParameters(1.0/0.34, fftx, ffty, fftz) # NOTE: These are hard-coded!
-pmdparm = pmd.load_file(os.path.join(prefix,'step3_pbcsetup.psf'))
+pmdparm = pmd.load_file(os.path.join(prefix, filename + '.psf'))
 pmdparm.positions = positions
 pmdparm.box = [a/u.angstroms, b/u.angstroms, c/u.angstroms, 90, 90, 90]
 
@@ -200,33 +201,26 @@ print('OpenMM total energy: %f kcal/mol' % (omm_energy / u.kilocalories_per_mole
 omm_forces = context.getState(getForces=True).getForces(asNumpy=True)
 
 # Form CHARMM energy components
-charmm_energy = dict()
-charmm_energy['Bond + UB'] = \
-    + charmm_energy_components['BONDs'] * u.kilocalories_per_mole \
-    + charmm_energy_components['UREY-b'] * u.kilocalories_per_mole
-charmm_energy['Angle'] = charmm_energy_components['ANGLes'] * u.kilocalories_per_mole
-charmm_energy['Dihedrals'] = charmm_energy_components['DIHEdrals'] * u.kilocalories_per_mole
-charmm_energy['Impropers'] = charmm_energy_components['IMPRopers'] * u.kilocalories_per_mole
-if 'CMAPs' in charmm_energy_components:
-    charmm_energy['CMAP'] = charmm_energy_components['CMAPs'] * u.kilocalories_per_mole
-charmm_energy['Lennard-Jones'] = \
-    + charmm_energy_components['VDWaals'] * u.kilocalories_per_mole \
-    + charmm_energy_components['IMNBvdw'] * u.kilocalories_per_mole
-charmm_energy['Electrostatics'] = \
-    + charmm_energy_components['ELEC'] * u.kilocalories_per_mole \
-    + charmm_energy_components['IMELec'] * u.kilocalories_per_mole \
-    + charmm_energy_components['EWKSum'] * u.kilocalories_per_mole \
-    + charmm_energy_components['EWSElf'] * u.kilocalories_per_mole \
-    + charmm_energy_components['EWEXcl'] * u.kilocalories_per_mole
+def add_charmm_energy_component(charmm_energy, name, sources):
+    for sourcename in sources:
+        if sourcename in charmm_energy_components:
+            if name not in charmm_energy:
+                charmm_energy[name] = 0.0 * u.kilocalories_per_mole
+            charmm_energy[name] += charmm_energy_components[sourcename] * u.kilocalories_per_mole
 
+from collections import OrderedDict
+charmm_energy = OrderedDict()
+add_charmm_energy_component(charmm_energy, 'Bond + UB', ['BONDs', 'UREY-b'])
+add_charmm_energy_component(charmm_energy, 'Angle', ['ANGLes'])
+add_charmm_energy_component(charmm_energy, 'Dihedrals', ['DIHEdrals'])
+add_charmm_energy_component(charmm_energy, 'Impropers', ['IMPRopers'])
+add_charmm_energy_component(charmm_energy, 'CMAP', ['CMAPs'])
+add_charmm_energy_component(charmm_energy, 'Lennard-Jones', ['VDWaals', 'IMNBvdw'])
+add_charmm_energy_component(charmm_energy, 'Electrostatics', ['ELEC', 'IMELec', 'EWKSum', 'EWSElf', 'EWEXcl'])
 charmm_energy['Total'] = charmm_energy_components['ENERgy'] * u.kilocalories_per_mole
 
-
 total = 0.0 * u.kilocalories_per_mole
-if 'CMAPs' in charmm_energy_components:
-    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'CMAP', 'Lennard-Jones', 'Electrostatics']
-else:
-    force_terms = ['Bond + UB', 'Angle', 'Dihedrals', 'Impropers', 'Lennard-Jones', 'Electrostatics']
+force_terms = charmm_energy.keys()
 for key in force_terms:
     total += charmm_energy[key]
 print('CHARMM total energy: ', charmm_energy['Total'], total)
@@ -246,10 +240,8 @@ openmm_energy['Impropers'] = omm_e[3][1]
 if 'CMAP' in force_terms:
     openmm_energy['CMAP'] = omm_e[4][1]
 openmm_energy['Electrostatics'] = omm_e[5][1]
-openmm_energy['Lennard-Jones'] = omm_e[6][1] + omm_e[7][1]
-openmm_energy['Total'] = 0.0 * u.kilojoules_per_mole
-for term in force_terms:
-    openmm_energy['Total'] += openmm_energy[term]
+openmm_energy['Lennard-Jones'] = omm_e[6][1] + omm_e[8][1]
+openmm_energy['Total'] = omm_energy
 
 print('OpenMM Energy is %s' % omm_e)
 
@@ -259,7 +251,8 @@ print('%-20s | %-15s | %-15s' % ('Component', 'CHARMM', 'OpenMM'))
 print('-'*56)
 total = 0
 for name in force_terms:
-    print('%-20s | %15.2f | %15.2f' % (name, charmm_energy[name] / u.kilojoules_per_mole, openmm_energy[name] / u.kilojoules_per_mole))
+    if name != 'Total':
+        print('%-20s | %15.2f | %15.2f' % (name, charmm_energy[name] / u.kilojoules_per_mole, openmm_energy[name] / u.kilojoules_per_mole))
 print('-'*56)
 print('%-20s | %15.2f | %15.2f' % ('Total', charmm_energy['Total'] / u.kilojoules_per_mole, openmm_energy['Total'] / u.kilojoules_per_mole))
 print('-'*56)
