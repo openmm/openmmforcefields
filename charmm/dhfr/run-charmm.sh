@@ -8,4 +8,4 @@ cd /mnt
 export PATH="/charmm/c40b1_gnu/exec/gnu:$PATH"
 
 # Run comparison
-charmm < dhfr.inp
+charmm < $1/charmm.inp

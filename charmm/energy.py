@@ -15,7 +15,7 @@ filename = 'step3_pbcsetup'
 # Run CHARMM energy and force calculation
 import subprocess
 print('Running CHARMM in docker container (may take a minute)...')
-command = "docker run -i -v `pwd`:/mnt -t omnia/charmm-lite:c40b1 /mnt/%s.sh" % prefix
+command = "docker run -i -v `pwd`:/mnt -t omnia/charmm-lite:c40b1 /mnt/%s/run-charmm.sh %s" % (prefix, prefix)
 charmm_output = subprocess.check_output(command, shell=True, universal_newlines=True)
 
 # Parse CHARMM energy and force output
