@@ -170,7 +170,7 @@ forcefield = app.ForceField(*ffxml_filenames)
 print('Creating System...')
 initial_time = time.time()
 system = forcefield.createSystem(topology, nonbondedMethod=app.PME,
-        constraints=app.HBonds, rigidWater=True,
+        rigidWater=True,
         nonbondedCutoff=12*u.angstroms, switchDistance=10*u.angstroms)
 final_time = time.time()
 elapsed_time = final_time - initial_time
