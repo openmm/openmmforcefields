@@ -9,14 +9,15 @@ import time
 import os, re
 
 prefix = sys.argv[1] # Directory where CHARMM input files are stored
-filename = 'step3_pbcsetup'
 
-filename = 'step1_pdbreader'
+filename = 'step3_pbcsetup'
+if not os.path.exists(os.path.join(prefix, filename + '.psf')):
+    filename = 'step1_pdbreader'
 
 # Run CHARMM energy and force calculation
 import subprocess
 print('Running CHARMM in docker container (may take a minute)...')
-command = "docker run -i -v `pwd`:/mnt -t omnia/charmm-lite:c40b1 /mnt/%s/run-charmm.sh %s" % (prefix, prefix)
+command = "docker run -i -v `pwd`:/mnt -t jchodera/charmm-lite:c40b1 /mnt/%s/run-charmm.sh %s" % (prefix, prefix)
 charmm_output = subprocess.check_output(command, shell=True, universal_newlines=True)
 
 # Parse CHARMM energy and force output
@@ -172,16 +173,18 @@ print('Creating System...')
 initial_time = time.time()
 system = forcefield.createSystem(topology, nonbondedMethod=app.PME,
         rigidWater=True,
-        nonbondedCutoff=12*u.angstroms, switchDistance=10*u.angstroms)
+        nonbondedCutoff=12*u.angstroms)
 final_time = time.time()
 elapsed_time = final_time - initial_time
 print('   System creation took %.3f s' % elapsed_time)
 
 for force in system.getForces():
     if isinstance(force, mm.CustomNonbondedForce):
-        #print('CustomNonbondedForce: %s' % force.getUseSwitchingFunction())
-        #print('LRC? %s' % force.getUseLongRangeCorrection())
+        # Turn off LRC
         force.setUseLongRangeCorrection(False)
+        # Use switching function
+        force.setUseSwitchingFunction(True)
+        force.setSwitchingDistance(10.0*u.angstroms)
     elif isinstance(force, mm.NonbondedForce):
         #print('NonbondedForce: %s' % force.getUseSwitchingFunction())
         #print('LRC? %s' % force.getUseDispersionCorrection())
