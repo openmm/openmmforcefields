@@ -26,24 +26,33 @@ def main():
                         help='turns verbosity on')
     parser.add_argument('--no-log', action='store_true',
                         help='turns logging of energies to log.csv off')
+    parser.add_argument('--write-serialized-xml', action='store_true',
+                        help="writes serialized XML files for all OpenMM systems")
     args = parser.parse_args()
     verbose = args.verbose
     no_log = args.no_log
 
     if not no_log: logger = Logger('log.csv')
-    test_charmm()
+    test_charmm(write_serialized_xml=args.write_serialized_xml)
     if not no_log: logger.close()
 
-def test_charmm():
+def test_charmm(write_serialized_xml=False):
     """
     Test CHARMM ffxml conversion by computing energy discrepancies between (pdb, psf, toppar) loaded via ParmEd and (pdb, ffxml) loaded via OpenMM ForceField
+
+    Parameters
+    ----------
+    write_serialized_xml : bool, optional, default=False
+        If True, will write out serialized System XML files for OpenMM systems to aid debugging.
 
     """
     # Test systems
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
-        # CGenFF
+        # CHARMM-GUI small molecules
+        ('butane', 'tests/charmm-gui/butane/step1_pdbreader.pdb', 'tests/charmm-gui/butane/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf']),
+        # CHARMM-GUI solvated protein systems
         ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
         ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str']),
@@ -67,9 +76,24 @@ def test_charmm():
     for (name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames) in testsystems:
         print('')
         print('Testing %s' % name)
-        compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames)
+        compare_energies(name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, write_serialized_xml=write_serialized_xml)
 
-def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, system_kwargs=None, tolerance=1e-5, units=u.kilojoules_per_mole):
+def write_serialized_system(filename, system):
+    """
+    Serlialize an OpenMM System to a file
+
+    Parameters
+    ----------
+    filename : str
+        The name of the file to be written
+    system : simtk.openmm.System
+        The System object to be written
+
+    """
+    with open(filename, 'w') as outfile:
+        outfile.write(mm.XmlSerializer.serialize(system))
+
+def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, system_kwargs=None, tolerance=1e-5, units=u.kilojoules_per_mole, write_serialized_xml=False):
     """
     Compare energies between (pdb, psf, toppar) loaded via ParmEd and (pdb, ffxml) loaded by OpenMM ForceField
 
@@ -91,6 +115,8 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
         Relative energy discrepancy tolerance
     units : simtk.unit.Unit
         Unit to use for energy comparison
+    write_serialized_xml : bool, optional, default=False
+        If True, will write out serialized System XML files for OpenMM systems to aid debugging.
 
     """
     # Defaults
@@ -106,9 +132,7 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # Load CHARMM system through OpenMM
     openmm_toppar = app.CharmmParameterSet(*toppar_filenames)
     openmm_psf = app.CharmmPsfFile(psf_filename)
-    openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs)
-    with open('system_openmm_charmm_reader.xml', 'w') as f:
-        f.write(mm.XmlSerializer.serialize(openmm_system))
+    openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs) # TODO: Use more distinctive names
     integrator = mm.VerletIntegrator(1.0)
     context = mm.Context(openmm_system, integrator)
     context.setPositions(pdbfile.positions)
@@ -121,27 +145,29 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     #structure.load_parameters(toppar)
     structure.positions = pdbfile.positions
     system_charmm = structure.createSystem(toppar, **system_kwargs)
-    with open('system_charmm.xml', 'w') as f:
-        f.write(mm.XmlSerializer.serialize(system_charmm))
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
     charmm_total_energy = sum([element[1] for element in charmm_energies])
 
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
-    system_openmm = ff.createSystem(pdbfile.topology, **system_kwargs)
+    system_openmm = ff.createSystem(openmm_psf.topology, **system_kwargs)
     print('OpenMM system HarmonicBondForceEnergies')
-    with open('system_openmm.xml', 'w') as f:
-        f.write(mm.XmlSerializer.serialize(system_openmm))
-    topology = openmm.load_topology(pdbfile.topology, system_openmm, xyz=pdbfile.positions)
+    topology = openmm.load_topology(openmm_psf.topology, system_openmm, xyz=pdbfile.positions)
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
-    ffxml_tootal_energy = sum([element[1] for element in omm_energies])
+    ffxml_total_energy = sum([element[1] for element in omm_energies])
+
+    if write_serialized_xml:
+        print('Writing serialized XML files...')
+        write_serialized_system(system_name + '.charmm.system.xml', openmm_system)
+        write_serialized_system(system_name + '.parmed.system.xml', system_charmm)
+        write_serialized_system(system_name + '.openmm.system.xml', system_openmm)
 
     print('-' * 100)
     print('')
     print('OpenMM CHARMM reader total energy: %14.3f' % openmm_total_energy)
     print('ParmEd CHARMM reader total energy: %14.3f' % charmm_total_energy)
-    print('OPENMM ffxml total energy:         %14.3f' % openmm_total_energy)
-    print('TOTAL ERROR:                       %14.3f' % (openmm_total_energy - charmm_total_energy))
+    print('OPENMM ffxml total energy:         %14.3f' % ffxml_total_energy)
+    print('TOTAL ERROR:                       %14.3f' % (ffxml_total_energy - charmm_total_energy))
     print('')
 
     print('ParmEd CHARMM reader energy decomposition:')
@@ -149,7 +175,7 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     print('OpenMM ffxml ForceField energy decomposition:')
     print(omm_energies)
     print('-' * 100)
-    
+
     # TODO : Automate comparison
     return
 

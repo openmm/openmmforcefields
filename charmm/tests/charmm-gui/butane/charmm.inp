@@ -63,4 +63,12 @@ energy
 coor force comp
 print coor comp
 
+inte sele atom * * C1 end sele atom * * C2 end
+inte sele atom * * C1 end sele atom * * C3 end
+inte sele atom * * C1 end sele atom * * C4 end
+inte sele atom * * C1 end sele atom * * H11 end
+inte sele atom * * C1 end sele atom * * H21 end
+inte sele atom * * C1 end sele atom * * H31 end
+inte sele atom * * C1 end sele atom * * H41 end
+
 stop
