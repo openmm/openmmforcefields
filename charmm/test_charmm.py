@@ -148,11 +148,16 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
     charmm_total_energy = sum([element[1] for element in charmm_energies])
 
+    # Delete H-H bonds from waters and retreive updated topology and positions
+    modeller = app.Modeller(openmm_psf.topology, pdbfile.positions)
+    hhbonds = [b for b in modeller.topology.bonds() if b[0].element == app.element.hydrogen and b[1].element == app.element.hydrogen]
+    modeller.delete(hhbonds)
+
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
-    system_openmm = ff.createSystem(openmm_psf.topology, **system_kwargs)
+    system_openmm = ff.createSystem(modeller.topology, **system_kwargs)
     print('OpenMM system HarmonicBondForceEnergies')
-    topology = openmm.load_topology(openmm_psf.topology, system_openmm, xyz=pdbfile.positions)
+    topology = openmm.load_topology(modeller.topology, system_openmm, xyz=pdbfile.positions)
     omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
     ffxml_total_energy = sum([element[1] for element in omm_energies])
 
