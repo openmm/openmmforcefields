@@ -139,7 +139,15 @@ for line in lines:
     if tokens[1] == 'FFTZ':
         fftz = int(tokens[3])
 
-# Load topology and coordinates
+box_vectors = u.Quantity(np.zeros([3,3], np.float32), u.angstroms)
+box_vectors[0][0] = a
+box_vectors[1][1] = b
+box_vectors[2][2] = c
+
+# Load positions
+#pdb = app.PDBFile(os.path.join(prefix, filename + '.pdb'))
+#pdb.topology.setPeriodicBoxVectors(box_vectors)
+# Load topology
 psf = app.CharmmPsfFile(os.path.join(prefix, filename + '.psf'))
 # Taken from output of CHARMM run
 psf.setBox(a, b, c)
