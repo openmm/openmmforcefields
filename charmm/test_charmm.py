@@ -155,6 +155,30 @@ def read_box_vectors(filename):
     box_vectors[2][2] = c * SCALING
     return box_vectors
 
+def compute_potential(system, positions):
+    """
+    Compute potential energy
+
+    Parameters
+    ----------
+    system : simtk.openmm.System
+        System
+    positions : simtk.unit.Quantity of shape [nparticles,3] with units compatible with angstroms
+        Positions
+
+    Returns
+    -------
+    potential : simtk.unit.Quantity with units of kJ/mol
+        The potential energy
+
+    """
+    integrator = mm.VerletIntegrator(1.0)
+    context = mm.Context(system, integrator)
+    context.setPositions(positions)
+    potential = context.getState(getEnergy=True).getPotentialEnergy()
+    del context, integrator
+    return potential
+
 def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, toppar_filenames, box_vectors_filename=None, system_kwargs=None, tolerance=1e-5, units=u.kilojoules_per_mole, write_serialized_xml=False):
     """
     Compare energies between (pdb, psf, toppar) loaded via ParmEd and (pdb, ffxml) loaded by OpenMM ForceField
@@ -204,27 +228,23 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # Set box vectors
     if is_periodic:
         openmm_psf.setBox(box_vectors[0][0], box_vectors[1][1], box_vectors[2][2])
-    openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs) # TODO: Use more distinctive names
-    integrator = mm.VerletIntegrator(1.0)
-    context = mm.Context(openmm_system, integrator)
-    context.setPositions(pdbfile.positions)
-    openmm_total_energy = context.getState(getEnergy=True).getPotentialEnergy() / units
-    del context, integrator
+    openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs)
+    openmm_total_energy = compute_potential(openmm_system, pdbfile.positions) / units
 
     # Load CHARMM system through ParmEd
-    toppar = CharmmParameterSet(*toppar_filenames)
-    structure = CharmmPsfFile(psf_filename)
+    parmed_toppar = CharmmParameterSet(*toppar_filenames)
+    parmed_structure = CharmmPsfFile(psf_filename)
     #structure.load_parameters(toppar)
-    structure.positions = pdbfile.positions
+    parmed_structure.positions = pdbfile.positions
     # Set box vectors
     if is_periodic:
-        structure.box = (
+        parmed_structure.box = (
             box_vectors[0][0] / u.angstroms, box_vectors[1][1] / u.angstroms, box_vectors[1][1] / u.angstroms,
             90, 90, 90
             )
-    system_charmm = structure.createSystem(toppar, **system_kwargs)
-    charmm_energies = openmm.energy_decomposition_system(structure, system_charmm, nrg=units)
-    charmm_total_energy = sum([element[1] for element in charmm_energies])
+    parmed_system = parmed_structure.createSystem(parmed_toppar, **system_kwargs)
+    parmed_energies = openmm.energy_decomposition_system(parmed_structure, parmed_system, nrg=units)
+    parmed_total_energy = compute_potential(parmed_system, pdbfile.positions) / units
 
     # Delete H-H bonds from waters and retreive updated topology and positions
     modeller = app.Modeller(openmm_psf.topology, pdbfile.positions)
@@ -233,30 +253,25 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
 
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
-    system_openmm = ff.createSystem(modeller.topology, **system_kwargs)
-    print('OpenMM system HarmonicBondForceEnergies')
-    topology = openmm.load_topology(modeller.topology, system_openmm, xyz=pdbfile.positions)
-    omm_energies = openmm.energy_decomposition_system(topology, system_openmm, nrg=units)
-    ffxml_total_energy = sum([element[1] for element in omm_energies])
+    ffxml_system = ff.createSystem(modeller.topology, **system_kwargs)
+    ffxml_topology = openmm.load_topology(modeller.topology, ffxml_system, xyz=pdbfile.positions)
+    ffxml_energies = openmm.energy_decomposition_system(ffxml_topology, ffxml_system, nrg=units)
+    ffxml_total_energy = compute_potential(ffxml_system, pdbfile.positions) / units
 
     if write_serialized_xml:
         print('Writing serialized XML files...')
         write_serialized_system(system_name + '.charmm.system.xml', openmm_system)
-        write_serialized_system(system_name + '.parmed.system.xml', system_charmm)
-        write_serialized_system(system_name + '.openmm.system.xml', system_openmm)
+        write_serialized_system(system_name + '.parmed.system.xml', parmed_system)
+        write_serialized_system(system_name + '.openmm.system.xml', ffxml_system)
 
     print('-' * 100)
     print('')
     print('OpenMM CHARMM reader total energy: %14.3f' % openmm_total_energy)
-    print('ParmEd CHARMM reader total energy: %14.3f' % charmm_total_energy)
+    print('ParmEd CHARMM reader total energy: %14.3f' % parmed_total_energy)
     print('OPENMM ffxml total energy:         %14.3f' % ffxml_total_energy)
-    print('TOTAL ERROR:                       %14.3f' % (ffxml_total_energy - charmm_total_energy))
+    print('TOTAL ERROR:                       %14.3f' % (ffxml_total_energy - openmm_total_energy))
     print('')
 
-    print('ParmEd CHARMM reader energy decomposition:')
-    print(charmm_energies)
-    print('OpenMM ffxml ForceField energy decomposition:')
-    print(omm_energies)
     print('-' * 100)
 
     # TODO : Automate comparison
@@ -264,7 +279,7 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
 
     # calc rel energies and assert
     rel_energies = []
-    for i, j in zip(charmm_energies, omm_energies):
+    for i, j in zip(ffxml_energies, parmed_energies):
         if i[0] != j[0]:
             raise Exception('Mismatch in energy tuples naming.')
         if abs(i[1]) > NEARLYZERO:
