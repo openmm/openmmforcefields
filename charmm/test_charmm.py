@@ -53,10 +53,10 @@ def test_charmm(write_serialized_xml=False):
     }
 
     SOLVENT_KWARGS = {
-        'nonbondedMethod' : app.CutoffPeriodic,
+        'nonbondedMethod' : app.PME,
         'constraints' : None,
         'rigidWater' : True,
-        'nonbondedCutoff' : 9.0 * u.angstroms,
+        'nonbondedCutoff' : 12.0 * u.angstroms,
     }
 
     # Test systems
@@ -229,6 +229,9 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     if is_periodic:
         openmm_psf.setBox(box_vectors[0][0], box_vectors[1][1], box_vectors[2][2])
     openmm_system = openmm_psf.createSystem(openmm_toppar, **system_kwargs)
+    openmm_structure = openmm.load_topology(openmm_psf.topology, openmm_system, xyz=pdbfile.positions)
+    openmm_energies = openmm.energy_decomposition_system(openmm_structure, openmm_system, nrg=units)
+    print(openmm_energies)
     openmm_total_energy = compute_potential(openmm_system, pdbfile.positions) / units
 
     # Load CHARMM system through ParmEd
@@ -239,11 +242,12 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # Set box vectors
     if is_periodic:
         parmed_structure.box = (
-            box_vectors[0][0] / u.angstroms, box_vectors[1][1] / u.angstroms, box_vectors[1][1] / u.angstroms,
+            box_vectors[0][0] / u.angstroms, box_vectors[1][1] / u.angstroms, box_vectors[2][2] / u.angstroms,
             90, 90, 90
             )
     parmed_system = parmed_structure.createSystem(parmed_toppar, **system_kwargs)
     parmed_energies = openmm.energy_decomposition_system(parmed_structure, parmed_system, nrg=units)
+    print(parmed_energies)
     parmed_total_energy = compute_potential(parmed_system, pdbfile.positions) / units
 
     # Delete H-H bonds from waters and retreive updated topology and positions
@@ -254,8 +258,9 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
     ffxml_system = ff.createSystem(modeller.topology, **system_kwargs)
-    ffxml_topology = openmm.load_topology(modeller.topology, ffxml_system, xyz=pdbfile.positions)
-    ffxml_energies = openmm.energy_decomposition_system(ffxml_topology, ffxml_system, nrg=units)
+    ffxml_structure = openmm.load_topology(modeller.topology, ffxml_system, xyz=pdbfile.positions)
+    ffxml_energies = openmm.energy_decomposition_system(ffxml_structure, ffxml_system, nrg=units)
+    print(ffxml_energies)
     ffxml_total_energy = compute_potential(ffxml_system, pdbfile.positions) / units
 
     if write_serialized_xml:
