@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-23</DateGenerated>
-    <Source Source="oldff/leaprc.ff99bsc0" md5hash="38973b71d67cb5f3bb4d798c5802964e" sourcePackage="AmberTools" sourcePackageVersion="17">oldff/leaprc.ff99bsc0</Source>
+    <DateGenerated>2018-03-02</DateGenerated>
+    <Source Source="oldff/leaprc.ff99bsc0" md5hash="38973b71d67cb5f3bb4d798c5802964e" sourcePackage="AmberTools" sourcePackageVersion="17.6">oldff/leaprc.ff99bsc0</Source>
     <Reference>Perez, A., Marchan, I., Svozil, D., Sponer, J., Cheatham, T.E., Laughton, C.A., and Orozco, M. (2007). Refinement of the AMBER Force Field for Nucleic Acids: Improving the Description of alpha/gamma Conformers. Biophysical Journal 92, 3817-3829.</Reference>
   </Info>
   <AtomTypes>
@@ -2426,6 +2426,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
       <ExternalBond atomName="C"/>
     </Residue>
@@ -3328,6 +3329,7 @@
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
       <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="CGLN">
@@ -4214,6 +4216,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="NGLN">

@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-23</DateGenerated>
-    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.DNA.OL15</Source>
+    <DateGenerated>2018-03-02</DateGenerated>
+    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.DNA.OL15</Source>
     <Reference>Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P. Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA. J. Chem. Theor. and Comp., 2015, 12, 5723-5736.</Reference>
   </Info>
   <AtomTypes>
