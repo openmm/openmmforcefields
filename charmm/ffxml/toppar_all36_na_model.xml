@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-28</DateGenerated>
+    <DateGenerated>2018-02-18</DateGenerated>
     <Source Source="toppar/stream/na/toppar_all36_na_model.str" md5hash="205a173d1357c8c9d77f13e4ac553974" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_aug15.tgz">toppar/stream/na/toppar_all36_na_model.str</Source>
     <Reference Reference="CHARMM27 All-Hydrogen Nucleic Acid Force Toppar Stream File Collection of residues and patches for model compounds used in the optimization the Charmm27 all-atom nucleic acid force field. N. Foloppe and A.D. MacKerell, Jr., July 2001" forcefield="nucleic acids">CHARMM27 All-Hydrogen Nucleic Acid Force Toppar Stream File Collection of residues and patches for model compounds used in the optimization the Charmm27 all-atom nucleic acid force field. N. Foloppe and A.D. MacKerell, Jr., July 2001</Reference>
   </Info>
@@ -90,8 +90,13 @@
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="1.0" lj14scale="1.0">
     <UseAttributeFromResidue name="charge"/>
-    <Atom epsilon="0.08368" sigma="0.4053589167538544" type="CN7C"/>
-    <Atom epsilon="0.08368" sigma="0.4053589167538544" type="CN7D"/>
-    <Atom epsilon="0.37656" sigma="0.30290556416771536" type="FN1"/>
+    <Atom epsilon="0.0" sigma="1.0" type="CN7C"/>
+    <Atom epsilon="0.0" sigma="1.0" type="CN7D"/>
+    <Atom epsilon="0.0" sigma="1.0" type="FN1"/>
   </NonbondedForce>
+  <LennardJonesForce lj14scale="1.0">
+    <Atom epsilon="0.08368" epsilon14="0.04184" sigma="0.4053589167538544" sigma14="0.3385415128933289" type="CN7C"/>
+    <Atom epsilon="0.08368" epsilon14="0.04184" sigma="0.4053589167538544" sigma14="0.3385415128933289" type="CN7D"/>
+    <Atom epsilon="0.37656" sigma="0.30290556416771536" type="FN1"/>
+  </LennardJonesForce>
 </ForceField>
