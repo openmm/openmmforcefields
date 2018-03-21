@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-23</DateGenerated>
-    <Source Source="oldff/leaprc.ff99SBildn" md5hash="0fe6670b9380968bcd1d31dea6ecb7cc" sourcePackage="AmberTools" sourcePackageVersion="17">oldff/leaprc.ff99SBildn</Source>
+    <DateGenerated>2018-03-02</DateGenerated>
+    <Source Source="oldff/leaprc.ff99SBildn" md5hash="0fe6670b9380968bcd1d31dea6ecb7cc" sourcePackage="AmberTools" sourcePackageVersion="17.6">oldff/leaprc.ff99SBildn</Source>
     <Reference>Lindorff-Larsen, K., Piana, S., Palmo, K., Maragakis, P., Klepeis, J.L., Dror, R.O., and Shaw, D.E. (2010). Improved side-chain torsion potentials for the Amber ff99SB protein force field. Proteins 78, 1950-1958.</Reference>
   </Info>
   <AtomTypes>
@@ -2429,6 +2429,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
       <ExternalBond atomName="C"/>
     </Residue>
@@ -3331,6 +3332,7 @@
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
       <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="CGLN">
@@ -4217,6 +4219,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="NGLN">

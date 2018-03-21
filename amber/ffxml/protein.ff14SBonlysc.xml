@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-01-23</DateGenerated>
-    <Source Source="leaprc.protein.ff14SBonlysc" md5hash="90a6e56450fc04da9136e90e25d04cf5" sourcePackage="AmberTools" sourcePackageVersion="17">leaprc.protein.ff14SBonlysc</Source>
+    <DateGenerated>2018-03-02</DateGenerated>
+    <Source Source="leaprc.protein.ff14SBonlysc" md5hash="90a6e56450fc04da9136e90e25d04cf5" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.protein.ff14SBonlysc</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
     <Reference>Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006). Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.</Reference>
   </Info>
@@ -271,6 +271,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
       <ExternalBond atomName="C"/>
     </Residue>
@@ -1207,6 +1208,7 @@
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
       <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="CGLN">
@@ -2128,6 +2130,7 @@
       <Bond atomName1="CB" atomName2="HB3"/>
       <Bond atomName1="CB" atomName2="SG"/>
       <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="SG"/>
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="NGLN">
