@@ -63,10 +63,15 @@ def test_charmm(write_serialized_xml=False):
     # TODO: Add more test systems generated with CHARMM-GUI.
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
+        # CHARMM-GUI solvated protein systems
+        ('1BNG protein', 'tests/charmm-gui/1BNG/step1_pdbreader.pdb', 'tests/charmm-gui/1BNG/step1_pdbreader.psf', ['ffxml/charmm36_protein.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
+        ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
+        ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/1VII/step2.1_waterbox.prm', SOLVENT_KWARGS),
+        ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/7DFR/step2.1_waterbox.prm', SOLVENT_KWARGS),
         # three-site water models
         ('waterbox TIP3P', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_default.xml'], ['toppar/toppar_water_ions.str'], None, SOLVENT_KWARGS),
         ('waterbox SPC', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc.xml'], ['toppar/non_charmm/toppar_water_ions_spc.str'], None, SOLVENT_KWARGS),
-        ('waterbox SPC/E', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc_e.xml'], ['toppar/non_charmm/toppar_water_ions_spc_e.str'], None, SOLVENT_KWARGS),
+        ('waterbox SPCE', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_spc_e.xml'], ['toppar/non_charmm/toppar_water_ions_spc_e.str'], None, SOLVENT_KWARGS),
         ('waterbox TIP3P PME B', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_b.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str'], None, SOLVENT_KWARGS),
         ('waterbox TIP3P PME F', 'tests/waterboxes/waterbox-3-site.pdb', 'tests/waterboxes/waterbox-3-site.psf', ['ffxml/waters_ions_tip3p_pme_f.xml'], ['toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str'], None, SOLVENT_KWARGS),
         # multi-site water models
@@ -77,10 +82,6 @@ def test_charmm(write_serialized_xml=False):
         ('waterbox TIP5P-Ew', 'tests/waterboxes/waterbox-5-site.pdb', 'tests/waterboxes/waterbox-5-site.psf', ['ffxml/waters_ions_tip5p_ew.xml'], ['toppar/non_charmm/toppar_water_ions_tip5p_ew.str'], None, SOLVENT_KWARGS),
         # CHARMM-GUI small molecules
         ('butane', 'tests/charmm-gui/butane/step1_pdbreader.pdb', 'tests/charmm-gui/butane/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf'], None, VACUUM_KWARGS),
-        # CHARMM-GUI solvated protein systems
-        ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
-        ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/1VII/step2.1_waterbox.prm', SOLVENT_KWARGS),
-        ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/7DFR/step2.1_waterbox.prm', SOLVENT_KWARGS),
         # CGenFF
         ('methanol with ions', 'tests/methanol_ions.pdb', 'tests/methanol_ions.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_cgenff.prm', 'toppar/top_all36_cgenff.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
 
@@ -254,11 +255,12 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
     modeller = app.Modeller(openmm_psf.topology, pdbfile.positions)
     hhbonds = [b for b in modeller.topology.bonds() if b[0].element == app.element.hydrogen and b[1].element == app.element.hydrogen]
     modeller.delete(hhbonds)
+    ffxml_topology = modeller.topology
 
     # OpenMM system with ffxml
     ff = app.ForceField(*ffxml_filenames)
-    ffxml_system = ff.createSystem(modeller.topology, **system_kwargs)
-    ffxml_structure = openmm.load_topology(modeller.topology, ffxml_system, xyz=pdbfile.positions)
+    ffxml_system = ff.createSystem(ffxml_topology, **system_kwargs)
+    ffxml_structure = openmm.load_topology(ffxml_topology, ffxml_system, xyz=pdbfile.positions)
     #ffxml_energies = openmm.energy_decomposition_system(ffxml_structure, ffxml_system, nrg=units)
     #print('ffxml energy components : %s' % str(ffxml_energies))
     ffxml_total_energy = compute_potential(ffxml_system, pdbfile.positions) / units
