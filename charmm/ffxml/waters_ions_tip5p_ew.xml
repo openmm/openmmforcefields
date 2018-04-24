@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-02-14</DateGenerated>
+    <DateGenerated>2018-04-23</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip5p_ew.str" md5hash="a632f2616c2d3d500b76696074f9527c" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_aug15.tgz">toppar/non_charmm/toppar_water_ions_tip5p_ew.str</Source>
     <Reference Reference="Rick, S.W. A reoptimization of the five-site water potential (TIP5P) for use with Ewald sums. J Chem Phys 120: 6085-93, 2004." forcefield="tip5p-ew">Rick, S.W. A reoptimization of the five-site water potential (TIP5P) for use with Ewald sums. J Chem Phys 120: 6085-93, 2004.</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
