@@ -64,7 +64,7 @@ def test_charmm(write_serialized_xml=False):
     testsystems = [
         # name, PDB filename, PSF filename, ffxml filenames, CHARMM toppar filenames
         # CHARMM-GUI solvated protein systems
-        ('1BNG protein', 'tests/charmm-gui/1BNG/step1_pdbreader.pdb', 'tests/charmm-gui/1BNG/step1_pdbreader.psf', ['ffxml/charmm36_protein.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
+        ('1BNG protein', 'tests/charmm-gui/1BNG/step1_pdbreader.pdb', 'tests/charmm-gui/1BNG/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
         ('1VII protein', 'tests/charmm-gui/1VII/step1_pdbreader.pdb', 'tests/charmm-gui/1VII/step1_pdbreader.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], None, VACUUM_KWARGS),
         ('1VII solvated', 'tests/charmm-gui/1VII/step2_solvator.pdb', 'tests/charmm-gui/1VII/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/1VII/step2.1_waterbox.prm', SOLVENT_KWARGS),
         ('7DFR solvated', 'tests/charmm-gui/7DFR/step2_solvator.pdb', 'tests/charmm-gui/7DFR/step2_solvator.psf', ['ffxml/charmm36.xml'], ['toppar/par_all36_prot.prm', 'toppar/top_all36_prot.rtf','toppar/toppar_water_ions.str'], 'tests/charmm-gui/7DFR/step2.1_waterbox.prm', SOLVENT_KWARGS),
