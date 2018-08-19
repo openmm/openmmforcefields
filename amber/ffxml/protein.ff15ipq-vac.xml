@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-03-02</DateGenerated>
+    <DateGenerated>2018-08-19</DateGenerated>
     <Source Source="leaprc.protein.ff15ipq-vac" md5hash="3cc3737dc4dbd2205267da0eabbc5d4f" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.protein.ff15ipq-vac</Source>
     <Reference>Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T. Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model. J. Chem. Theory Comput., 2016, 12, 3926-3947.</Reference>
   </Info>
@@ -2093,15 +2093,15 @@
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="ACE">
-      <Atom charge="0.01" name="HH31" type="protein-HC"/>
+      <Atom charge="0.01" name="H1" type="protein-HC"/>
       <Atom charge="-0.00842" name="CH3" type="protein-CT"/>
-      <Atom charge="0.01" name="HH32" type="protein-HC"/>
-      <Atom charge="0.01" name="HH33" type="protein-HC"/>
+      <Atom charge="0.01" name="H2" type="protein-HC"/>
+      <Atom charge="0.01" name="H3" type="protein-HC"/>
       <Atom charge="0.49664" name="C" type="protein-C"/>
       <Atom charge="-0.51822" name="O" type="protein-OD"/>
-      <Bond atomName1="HH31" atomName2="CH3"/>
-      <Bond atomName1="CH3" atomName2="HH32"/>
-      <Bond atomName1="CH3" atomName2="HH33"/>
+      <Bond atomName1="H1" atomName2="CH3"/>
+      <Bond atomName1="CH3" atomName2="H2"/>
+      <Bond atomName1="CH3" atomName2="H3"/>
       <Bond atomName1="CH3" atomName2="C"/>
       <Bond atomName1="C" atomName2="O"/>
       <ExternalBond atomName="C"/>
