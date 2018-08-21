@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-03-02</DateGenerated>
+    <DateGenerated>2018-08-21</DateGenerated>
     <Source Source="oldff/leaprc.ff14SB" md5hash="7f016ac76ca64b68cb03725d6d370de8" sourcePackage="AmberTools" sourcePackageVersion="17.6">oldff/leaprc.ff14SB</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
@@ -1933,15 +1933,15 @@
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="ACE">
-      <Atom charge="0.1123" name="HH31" type="HC"/>
+      <Atom charge="0.1123" name="H1" type="HC"/>
       <Atom charge="-0.3662" name="CH3" type="CT"/>
-      <Atom charge="0.1123" name="HH32" type="HC"/>
-      <Atom charge="0.1123" name="HH33" type="HC"/>
+      <Atom charge="0.1123" name="H2" type="HC"/>
+      <Atom charge="0.1123" name="H3" type="HC"/>
       <Atom charge="0.5972" name="C" type="C"/>
       <Atom charge="-0.5679" name="O" type="O"/>
-      <Bond atomName1="HH31" atomName2="CH3"/>
-      <Bond atomName1="CH3" atomName2="HH32"/>
-      <Bond atomName1="CH3" atomName2="HH33"/>
+      <Bond atomName1="H1" atomName2="CH3"/>
+      <Bond atomName1="CH3" atomName2="H2"/>
+      <Bond atomName1="CH3" atomName2="H3"/>
       <Bond atomName1="CH3" atomName2="C"/>
       <Bond atomName1="C" atomName2="O"/>
       <ExternalBond atomName="C"/>

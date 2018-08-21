@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-03-02</DateGenerated>
+    <DateGenerated>2018-08-21</DateGenerated>
     <Source Source="oldff/leaprc.ff99SB" md5hash="85de6ec9f96bd4ddf3b43161444cbc16" sourcePackage="AmberTools" sourcePackageVersion="17.6">oldff/leaprc.ff99SB</Source>
     <Reference>Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006). Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.</Reference>
   </Info>
