@@ -1,6 +1,6 @@
 <ForceField>
  <Info>
-    <DateGenerated>2018-08-21</DateGenerated>
+    <DateGenerated>2018-08-22</DateGenerated>
     <Source Source="parm/frcmod.ionsjc_tip3p" md5hash="0e5e74a17e42382511afd4116f70ff16" sourcePackage="AmberTools" sourcePackageVersion="17.6">parm/frcmod.ionsjc_tip3p</Source>
     <Source Source="parm/frcmod.ions234lm_126_tip3p" md5hash="69bb41a7702e76fb9f5ef041d063dfae" sourcePackage="AmberTools" sourcePackageVersion="17.6">parm/frcmod.ions234lm_126_tip3p</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17.6">lib/atomic_ions.lib</Source>
@@ -114,9 +114,6 @@
     <Residue name="Ce">
       <Atom charge="4.0" name="Ce" type="tip3p_standard-Ce4+"/>
     </Residue>
-    <Residue name="Cl-">
-      <Atom charge="-1.0" name="Cl-" type="tip3p_standard-Cl-"/>
-    </Residue>
     <Residue name="Cr">
       <Atom charge="2.0" name="Cr" type="tip3p_standard-Cr2+"/>
     </Residue>
@@ -159,9 +156,6 @@
     <Residue name="K">
       <Atom charge="1.0" name="K" type="tip3p_standard-K+"/>
     </Residue>
-    <Residue name="K+">
-      <Atom charge="1.0" name="K+" type="tip3p_standard-K+"/>
-    </Residue>
     <Residue name="LA">
       <Atom charge="3.0" name="LA" type="tip3p_standard-La3+"/>
     </Residue>
@@ -182,9 +176,6 @@
     </Residue>
     <Residue name="NI">
       <Atom charge="2.0" name="NI" type="tip3p_standard-Ni2+"/>
-    </Residue>
-    <Residue name="Na+">
-      <Atom charge="1.0" name="Na+" type="tip3p_standard-Na+"/>
     </Residue>
     <Residue name="Nd">
       <Atom charge="3.0" name="Nd" type="tip3p_standard-Nd3+"/>
