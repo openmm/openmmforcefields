@@ -12,6 +12,7 @@ install:
   - conda config --add channels ${ORGNAME}
 
 script:
+  - export WORK=`pwd`
   # Select the desired python version
   - conda install --yes python=$python
   # Add conda channels
@@ -40,16 +41,16 @@ script:
   - conda install --yes --use-local ${PACKAGENAME}
   # Test the openmmforcefields package to make sure installed ffxml files are working
   - echo "Testing the installed openmmforcefields ffxml files..."
-  - cd /home/travis/devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow'
+  - cd $WORK/devtools && nosetests ${PACKAGENAME}.tests.test_amber_import --nocapture --verbosity=2 --with-timer -a '!slow'
   # Test AMBER conversion
   - echo "Testing AMBER conversion..."
-  - cd /home/travis/amber && python convert_amber.py --verbose
+  - cd $WORK/amber && python convert_amber.py --verbose
   # Test CHARMM conversion
   - echo "Testing CHARMM conversion..."
   # TODO: Find a way to avoid timing out on travis when running full charmm36.yaml conversion below
-  - cd /home/travis/charmm && python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+  - cd $WORK/charmm && python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
   #- cd charmm && python convert_charmm.py --verbose && cd ..
-  - cd /home/travis/charmm && python test_charmm.py --verbose
+  - cd $WORK/charmm && python test_charmm.py --verbose
 
 os:
   #- osx # LEaP segfaults on osx under some conditions
