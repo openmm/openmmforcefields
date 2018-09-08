@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-03-02</DateGenerated>
+    <DateGenerated>2018-08-22</DateGenerated>
     <Source Source="leaprc.protein.fb15" md5hash="50fb6c8edfa5238267eb0513d9bb504e" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.protein.fb15</Source>
     <Reference>Wang, L.-P., McKiernan, K.A., Gomes, J., Beauchamp, K.A., Head-Gordon, T., Rice, J.E., Swope, W.C., Martinez, T.J., and Pande, V.S. (2017). Building a More Predictive Protein Force Field: A Systematic and Reproducible Route to AMBER-FB15. J. Phys. Chem. B 121, 4023-4039.</Reference>
   </Info>

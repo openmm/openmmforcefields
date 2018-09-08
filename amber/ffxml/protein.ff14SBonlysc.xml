@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-03-02</DateGenerated>
+    <DateGenerated>2018-08-22</DateGenerated>
     <Source Source="leaprc.protein.ff14SBonlysc" md5hash="90a6e56450fc04da9136e90e25d04cf5" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.protein.ff14SBonlysc</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
     <Reference>Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006). Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.</Reference>
@@ -1921,15 +1921,15 @@
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="ACE">
-      <Atom charge="0.1123" name="HH31" type="protein-HC"/>
+      <Atom charge="0.1123" name="H1" type="protein-HC"/>
       <Atom charge="-0.3662" name="CH3" type="protein-CT"/>
-      <Atom charge="0.1123" name="HH32" type="protein-HC"/>
-      <Atom charge="0.1123" name="HH33" type="protein-HC"/>
+      <Atom charge="0.1123" name="H2" type="protein-HC"/>
+      <Atom charge="0.1123" name="H3" type="protein-HC"/>
       <Atom charge="0.5972" name="C" type="protein-C"/>
       <Atom charge="-0.5679" name="O" type="protein-O"/>
-      <Bond atomName1="HH31" atomName2="CH3"/>
-      <Bond atomName1="CH3" atomName2="HH32"/>
-      <Bond atomName1="CH3" atomName2="HH33"/>
+      <Bond atomName1="H1" atomName2="CH3"/>
+      <Bond atomName1="CH3" atomName2="H2"/>
+      <Bond atomName1="CH3" atomName2="H3"/>
       <Bond atomName1="CH3" atomName2="C"/>
       <Bond atomName1="C" atomName2="O"/>
       <ExternalBond atomName="C"/>

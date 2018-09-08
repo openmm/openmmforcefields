@@ -6,6 +6,7 @@ from parmed.utils.six import iteritems
 from parmed.utils.six.moves import StringIO, zip
 import simtk.openmm.app as app
 import simtk.unit as u
+import simtk
 import os
 import sys
 import re
@@ -553,6 +554,7 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
     system_amber = parm_amber.createSystem(splitDihedrals=True)
     amber_energies = parmed.openmm.energy_decomposition_system(parm_amber,
                      system_amber, nrg=units)
+
     # OpenMM-ffxml
     if isinstance(ffxml, str):
         ff = app.ForceField(ffxml)
@@ -572,7 +574,7 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5
                                                xyz=parm_amber.positions)
     system_omm = parm_omm.createSystem(splitDihedrals=True)
     omm_energies = parmed.openmm.energy_decomposition_system(parm_omm,
-                   system_omm, nrg=units)
+                   system_omm, nrg=units, platform='Reference')
 
     # calc rel energies and assert
     energies = []
