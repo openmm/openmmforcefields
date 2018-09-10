@@ -248,3 +248,54 @@ ffxml/ffAM1.xml,abs((AMBER-OpenMM)/AMBER),nucleic-RNA,,1.0157742073774716e-06,5.
 "('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",AMBER,phospho_protein: 4y5u_Y1P.pdb,kilojoule/mole,3690890.25,10931.40625,21497.2890625,476.3034362792969,18106.03125
 "('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",OpenMM,phospho_protein: 4y5u_Y1P.pdb,kilojoule/mole,3690890.385465446,10931.389375055152,21497.281553120396,476.3038925775269,18106.256383369484
 "('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",abs((AMBER-OpenMM)/AMBER),phospho_protein: 4y5u_Y1P.pdb,,3.670264807474988e-08,1.5437121685589581e-06,3.493175154403928e-07,9.579990301355872e-07,1.2434164416012257e-05
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",AMBER,phospho_protein: 5dfp_T1P.pdb,kilojoule/mole,526.2587280273438,2112.4482421875,12225.3232421875,18.191797256469727,-28922.62890625
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",OpenMM,phospho_protein: 5dfp_T1P.pdb,kilojoule/mole,526.2576380048174,2112.4411514349563,12225.320126743123,18.192070434572393,-28922.667542811396
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",abs((AMBER-OpenMM)/AMBER),phospho_protein: 5dfp_T1P.pdb,,2.071267360119937e-06,3.356651491908342e-06,2.5483533769205027e-07,1.5016553824534932e-05,1.3358592512827956e-06
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",AMBER,phospho_protein: 5dfp_TPO.pdb,kilojoule/mole,553.9481201171875,2058.18310546875,12225.4130859375,18.191797256469727,-29049.11328125
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",OpenMM,phospho_protein: 5dfp_TPO.pdb,kilojoule/mole,553.9473957108427,2058.1756715052943,12225.410566326793,18.192070434572393,-29049.140103933383
+"('ffxml/ff99SBildn.xml', 'ffxml/phosaa10.xml')",abs((AMBER-OpenMM)/AMBER),phospho_protein: 5dfp_TPO.pdb,,1.3077151424875008e-06,3.611905780367037e-06,2.0609616128767973e-07,1.5016553824534932e-05,9.233563559590251e-07
+ffxml/tip3p_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25439.740234375
+ffxml/tip3p_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25439.740234375
+ffxml/tip3p_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip4pew_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25693.359375
+ffxml/tip4pew_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25693.3671875
+ffxml/tip4pew_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,3.040668947168377e-07
+ffxml/spce_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,24567.45703125
+ffxml/spce_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,24567.45703125
+ffxml/spce_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip3p_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,156174.0
+ffxml/tip3p_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,156174.0
+ffxml/tip3p_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip3p_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125304.828125
+ffxml/tip3p_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125304.828125
+ffxml/tip3p_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip4pew_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,163773.453125
+ffxml/tip4pew_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,163773.453125
+ffxml/tip4pew_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip4pew_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125710.9375
+ffxml/tip4pew_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125710.9453125
+ffxml/tip4pew_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,6.214654154496302e-08
+ffxml/spce_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,156760.0625
+ffxml/spce_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,156760.0625
+ffxml/spce_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/spce_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,123374.6796875
+ffxml/spce_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,123374.6796875
+ffxml/spce_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,0.0
+ffxml/tip3pfb_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25402.2109375
+ffxml/tip3pfb_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25402.18359375
+ffxml/tip3pfb_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,1.0764318927701605e-06
+ffxml/tip3pfb_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,156127.71875
+ffxml/tip3pfb_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,156127.6875
+ffxml/tip3pfb_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,2.0015664258848975e-07
+ffxml/tip3pfb_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125260.0390625
+ffxml/tip3pfb_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125260.0546875
+ffxml/tip3pfb_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,1.247405007769774e-07
+ffxml/tip4pfb_standard.xml,AMBER,water_ion,kilojoule/mole,,,,,25818.57421875
+ffxml/tip4pfb_standard.xml,OpenMM,water_ion,kilojoule/mole,,,,,25818.69921875
+ffxml/tip4pfb_standard.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,4.841475712056258e-06
+ffxml/tip4pfb_HFE_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,163894.4375
+ffxml/tip4pfb_HFE_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,163894.515625
+ffxml/tip4pfb_HFE_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,4.7667877684988545e-07
+ffxml/tip4pfb_IOD_multivalent.xml,AMBER,water_ion,kilojoule/mole,,,,,125834.609375
+ffxml/tip4pfb_IOD_multivalent.xml,OpenMM,water_ion,kilojoule/mole,,,,,125834.734375
+ffxml/tip4pfb_IOD_multivalent.xml,abs((AMBER-OpenMM)/AMBER),water_ion,,,,,,9.933674099745264e-07

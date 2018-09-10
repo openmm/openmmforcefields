@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-08-22</DateGenerated>
+    <DateGenerated>2018-09-10</DateGenerated>
     <Source Source="parm/frcmod.ions234lm_hfe_tip4pew" md5hash="777381aafd22653c6aecc9fe826ad97e" sourcePackage="AmberTools" sourcePackageVersion="17.6">parm/frcmod.ions234lm_hfe_tip4pew</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="17.6">lib/atomic_ions.lib</Source>
     <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>

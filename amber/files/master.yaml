@@ -297,6 +297,8 @@
 - Source: leaprc.phosaa10
   Reference:
   - >-
+    Homeyer N., Horn A. H. C., Lanig H., Sticht H. (2006). MBER force-field parameters for phosphorylated amino acids in different protonation states: phosphoserine, phosphothreonine, phosphotyrosine, and phosphohistidine.
+    J. Mol. Model. 12, 281.
     Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates.
     J. Chem. Theory Comput. 8, 4405-4412.
   Options:
