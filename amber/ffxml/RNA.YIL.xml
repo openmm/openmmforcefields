@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-08-22</DateGenerated>
+    <DateGenerated>2018-09-10</DateGenerated>
     <Source Source="leaprc.RNA.YIL" md5hash="86a5bbb23f9e57f4a285fee56b343bc3" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.RNA.YIL</Source>
     <Reference>Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P. Refinement of the Cornell et al. Nucleic Acids Force Field Based on Reference Quantum Chemical Calculations of Glycosidic Torsion Profiles. J. Chem. Theory Comput., 2011, 7, 2886-2902.</Reference>
   </Info>

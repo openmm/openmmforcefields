@@ -294,26 +294,27 @@
   Test:
   - protein
   - nucleic
+- Source: leaprc.phosaa10
+  Reference:
+  - >-
+    Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates.
+    J. Chem. Theory Comput. 8, 4405-4412.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein_phospho
 # FFs that couldn't be converted yet due to problems
-#- Source: leaprc.phosaa10
-#  Reference:
-#  - >-
-#    Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates.
-#    J. Chem. Theory Comput. 8, 4405-4412.
-#  Options:
-#    filter_warnings: always
-#    write_unused: True
-#  Test:
-#  - protein_phospho
 # Torsion problem
 #- Source: oldff/leaprc.ff14ipq
-#  Reference:
-#  - >-
-#    Placeholder
-#    Placeholder
-#  Test:
-#  - protein
-#  - nucleic
+  # Reference:
+  # - >-
+  #   Placeholder
+  #   Placeholder
+  # Test:
+  # - protein
+  # - nucleic
+  #
 # IONS & SOLVENTS
 - MODE: RECIPE
 - sourcePackage2: OpenMM
