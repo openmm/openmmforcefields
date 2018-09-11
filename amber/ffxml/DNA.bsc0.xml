@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-08-22</DateGenerated>
+    <DateGenerated>2018-09-10</DateGenerated>
     <Source Source="oldff/leaprc.DNA.bsc0" md5hash="df21eaacd7bc5d43b089774a3598cdd1" sourcePackage="AmberTools" sourcePackageVersion="17.6">oldff/leaprc.DNA.bsc0</Source>
     <Reference>Perez, A.; Marchan, I.; Svozil, D.; Sponer, J.; Cheatham, T.E.; Laughton, C.A.; Orozco, M. Refinement of the AMBER Force Field for Nucleic Acids: Improving the Description of alpha/gamma Conformers. Biophys. J., 2007, 92, 3817-3829.</Reference>
   </Info>

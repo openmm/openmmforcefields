@@ -203,7 +203,7 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     leaprc = StringIO(''.join(new_lines))
     if verbose: print('Converting to ffxml %s...' % ffxml_name)
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
-    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params)
+    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
@@ -547,7 +547,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     with open(ffxml_filename, 'w') as outfile:
         outfile.write(modified_contents)
 
-def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=1e-5,
+def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.0e-5,
                     improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
@@ -890,8 +890,8 @@ quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
     if verbose: print('GAFF energy validation for %s done!' % ffxml_name)
 
 def validate_phospho_protein(ffxml_name, leaprc_name,
-                             supp_leaprc_name = 'leaprc.ff14SB',
-                             supp_ffxml_name='ffxml/ff14SB.xml'):
+                             supp_leaprc_name = 'oldff/leaprc.ff99SBildn',
+                             supp_ffxml_name='ffxml/ff99SBildn.xml'):
     # this function assumes ffxml/ff14SB.xml already exists
     if verbose: print('Phosphorylated protein energy validation for %s' %
                       ffxml_name)
