@@ -15,24 +15,12 @@ script:
   - export WORK=`pwd`
   # Select the desired python version
   - conda install --yes python=$python
-  # Add conda channels
-  - conda config --add channels omnia --add channels conda-forge
+  # Add omnia conda channels
+  - conda config --add channels omnia-dev --add channels omnia --add channels conda-forge
   # Force update now that conda-forge has been added
   - conda update --yes conda
-  # Add openmm dev build
-  - conda config --add channels omnia/label/dev
-  # Add AMBER channel
-  - conda config --add channels http://ambermd.org/downloads/ambertools/conda/
   # Install extras for testing
   - conda install --yes --quiet pip nose nose-timer
-  # Workaround for failure to install these when installing local package
-  - conda install --yes openmm>=7.2.0 yaml pyyaml ambertools==18 lxml networkx
-  # Install AmberTools18
-  - conda install ambertools=18 -c http://ambermd.org/downloads/ambertools/conda/
-  # Update parmed
-  # TODO: Update this when branch is merged
-  - pip uninstall --yes parmed
-  - pip install git+https://github.com/jchodera/ParmEd.git@fix-template-hasher
   # Build the recipe
   - echo "Building the recipe..."
   - conda build devtools/conda-recipe
@@ -60,7 +48,8 @@ env:
   matrix:
     - python=2.7  CONDA_PY=2.7
     - python=3.5  CONDA_PY=3.5
-    - python=3.5  CONDA_PY=3.6
+    - python=3.6  CONDA_PY=3.6
+    - python=3.7  CONDA_PY=3.7
 
   global:
     - ORGNAME="omnia"
