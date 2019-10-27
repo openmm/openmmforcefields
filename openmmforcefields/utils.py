@@ -9,4 +9,6 @@ def get_ffxml_path():
     path : str
         The absolute path where OpenMM ffxml forcefield files are stored in this package
     """
-    return resource_filename('openmmforcefields', 'ffxml')
+    filename = resource_filename('openmmforcefields', 'ffxml')
+    print(filename) # DEBUG
+    return filename

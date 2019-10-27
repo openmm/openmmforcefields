@@ -5,10 +5,14 @@ Test AMBER forcefield imports.
 
 import os
 import glob
-from functools import partial
 from pkg_resources import resource_filename
+import pytest
 
-def check_ffxml_import(filename):
+from openmmforcefields.utils import get_ffxml_path
+amber_ffxml_filenames = glob.glob(os.path.join(get_ffxml_path(), 'amber', '*.xml'))
+
+@pytest.mark.parametrize("filename", amber_ffxml_filenames, ids=lambda filename : f'Importing ffxml file {filename}')
+def test_ffxml_import(filename):
     """
     Attempt to load OpenMM ffxml forcefield file.
 
@@ -52,16 +56,3 @@ def test_amber_parameterize_ff94():
     """
     pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')
-
-def test_all_amber_imports():
-    """
-    Test all available AMBER ffxml files.
-
-    """
-    from openmmforcefields.utils import get_ffxml_path
-    amber_ffxml_filenames = glob.glob(os.path.join(get_ffxml_path(), 'amber', '*.xml'))
-    # Try to import all ffxml files
-    for filename in amber_ffxml_filenames:
-        f = partial(check_ffxml_import, filename)
-        f.description = "Importing ffxml file '%s'" % filename
-        yield f

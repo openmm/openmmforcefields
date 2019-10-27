@@ -32,7 +32,7 @@ try:
         description = ("Biomolecular forcefields and small molecule support for OpenMM"),
         license = "MIT",
     )
-    
+
     setup(
         # Self-descriptive entries which should always be present
         name='openmmforcefields',
@@ -52,6 +52,9 @@ try:
             "Topic :: Utilities",
             "License :: OSI Approved :: MIT",
         ],
+
+        # Don't install as an egg, since OpenMM can't find ffxml files if we do
+        zip_safe=False,
 
         # Which Python importable modules should be included when your package is installed
         # Handled automatically by setuptools. Use 'exclude' to prevent some specific
