@@ -5,7 +5,6 @@ Test AMBER forcefield imports.
 
 import os
 import glob
-from pkg_resources import resource_filename
 import pytest
 
 from openmmforcefields.utils import get_ffxml_path
@@ -54,5 +53,6 @@ def test_amber_parameterize_ff94():
     Test parameterizing explicit villin with ff94
 
     """
+    from pkg_resources import resource_filename
     pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')

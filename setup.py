@@ -25,15 +25,6 @@ try:
     os.symlink('../../charmm/ffxml/', 'openmmforcefields/ffxml/charmm')
 
     setup(
-        name = "openmmforcefields",
-        version = "0.0.0",
-        author = "Rafal P. Wiewiora, Chaya Stern, Peter Eastman, and John D. Chodera",
-        author_email = "john.chodera@choderalab.org",
-        description = ("Biomolecular forcefields and small molecule support for OpenMM"),
-        license = "MIT",
-    )
-
-    setup(
         # Self-descriptive entries which should always be present
         name='openmmforcefields',
         author='Chodera lab @ MSKCC',
