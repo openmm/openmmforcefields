@@ -3,7 +3,7 @@
 # Structure: list - first entry - source package info, further entries - 1/resulting ffxml file
 
 - sourcePackage: AmberTools
-  sourcePackageVersion: 18.0
+  sourcePackageVersion: 19.0
 - MODE: LEAPRC
 - Source: leaprc.protein.ff15ipq
   Prefix: protein

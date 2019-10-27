@@ -7,7 +7,6 @@
 * `files/` - Amber input forcefield files and YAML conversion driver
 * `ffxml/` - converted OpenMM `ffxml` forcefields
 * `test/` - input files for testing conversion produces correct energies
-* `parm15ipq_10.3.dat` - updated file from David S. Cerutti that will be added to a near-term AmberTools update, but for now must be overwritten manually
 
 ## Amber forcefield conversion: `convert_amber.py`
 
@@ -28,7 +27,7 @@ AMBER --> OpenMM forcefield conversion script
 optional arguments:
   -h, --help            show this help message and exit
   --input INPUT, -i INPUT
-                        path of the input file. Default: "files/master.yaml"
+                        path of the input file. Default: "master.yaml"
   --input-format INPUT_FORMAT, -if INPUT_FORMAT
                         format of the input file: "yaml" or "leaprc". Default:
                         "yaml"
