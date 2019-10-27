@@ -49,14 +49,14 @@ script:
 
     # Test AMBER conversion
   - echo "Testing AMBER conversion..."
-  - cd $WORK/amber && python convert_amber.py --input gaff.yaml --verbose
+  - cd $HOME/amber && python convert_amber.py --input gaff.yaml --verbose
 
     # Test CHARMM conversion
   - echo "Testing CHARMM conversion..."
     # TODO: Find a way to avoid timing out on travis when running full charmm36.yaml conversion below
-  - cd $WORK/charmm && python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+  - cd $HOME/charmm && python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
     #- cd charmm && python convert_charmm.py --verbose && cd ..
-  - cd $WORK/charmm && python test_charmm.py --verbose
+  - cd $HOME/charmm && python test_charmm.py --verbose
 
 
 notifications:
