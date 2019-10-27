@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2018-09-10</DateGenerated>
-    <Source Source="leaprc.protein.ff15ipq" md5hash="b7e40247370a8e75ff03a5c9b0c3368a" sourcePackage="AmberTools" sourcePackageVersion="17.6">leaprc.protein.ff15ipq</Source>
+    <DateGenerated>2018-12-27</DateGenerated>
+    <Source Source="leaprc.protein.ff15ipq" md5hash="b7e40247370a8e75ff03a5c9b0c3368a" sourcePackage="AmberTools" sourcePackageVersion="18.0">leaprc.protein.ff15ipq</Source>
     <Reference>Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T. Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model. J. Chem. Theory Comput., 2016, 12, 3926-3947.</Reference>
   </Info>
   <AtomTypes>
@@ -3721,24 +3721,12 @@
     <Proper k1="-1.22762744" periodicity1="3" phase1="0.0" type1="" type2="protein-C8" type3="protein-NL" type4=""/>
     <Proper k1="10.12733016" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-C" type3="protein-OH" type4=""/>
     <Proper k1="1.0649116800000002" periodicity1="3" phase1="0.0" type1="" type2="protein-CT" type3="protein-S" type4=""/>
-    <Proper k1="27.380974639999998" periodicity1="2" phase1="3.141592653589793" type1="protein-C8" type2="protein-CC" type3="protein-NA" type4="protein-CR"/>
-    <Proper k1="27.380974639999998" periodicity1="2" phase1="3.141592653589793" type1="protein-CW" type2="protein-CC" type3="protein-NA" type4="protein-CR"/>
-    <Proper k1="27.380974639999998" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-NA" type4="protein-CR"/>
-    <Proper k1="27.380974639999998" periodicity1="2" phase1="3.141592653589793" type1="protein-CV" type2="protein-CC" type3="protein-NA" type4="protein-CR"/>
-    <Proper k1="35.712197280000005" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-NB" type4="protein-CR"/>
-    <Proper k1="35.712197280000005" periodicity1="2" phase1="3.141592653589793" type1="protein-CW" type2="protein-CC" type3="protein-NB" type4="protein-CR"/>
-    <Proper k1="24.568113280000002" periodicity1="2" phase1="3.141592653589793" type1="protein-NA" type2="protein-CC" type3="protein-CV" type4="protein-H4"/>
-    <Proper k1="24.568113280000002" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-CV" type4="protein-H4"/>
-    <Proper k1="21.67282712" periodicity1="2" phase1="3.141592653589793" type1="protein-NB" type2="protein-CC" type3="protein-CW" type4="protein-H4"/>
-    <Proper k1="21.67282712" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-CW" type4="protein-H4"/>
-    <Proper k1="21.67282712" periodicity1="2" phase1="3.141592653589793" type1="protein-NA" type2="protein-CC" type3="protein-CW" type4="protein-H4"/>
-    <Proper k1="21.67282712" periodicity1="2" phase1="3.141592653589793" type1="protein-C8" type2="protein-CC" type3="protein-CW" type4="protein-H4"/>
-    <Proper k1="37.98097128" periodicity1="2" phase1="3.141592653589793" type1="protein-NA" type2="protein-CC" type3="protein-CV" type4="protein-NB"/>
-    <Proper k1="37.98097128" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-CV" type4="protein-NB"/>
-    <Proper k1="21.91332344" periodicity1="2" phase1="3.141592653589793" type1="protein-NB" type2="protein-CC" type3="protein-CW" type4="protein-NA"/>
-    <Proper k1="21.91332344" periodicity1="2" phase1="3.141592653589793" type1="protein-TA" type2="protein-CC" type3="protein-CW" type4="protein-NA"/>
-    <Proper k1="21.91332344" periodicity1="2" phase1="3.141592653589793" type1="protein-NA" type2="protein-CC" type3="protein-CW" type4="protein-NA"/>
-    <Proper k1="21.91332344" periodicity1="2" phase1="3.141592653589793" type1="protein-C8" type2="protein-CC" type3="protein-CW" type4="protein-NA"/>
+    <Proper k1="27.380974639999998" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-NA" type4="protein-CR"/>
+    <Proper k1="35.712197280000005" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-NB" type4="protein-CR"/>
+    <Proper k1="24.568113280000002" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-CV" type4="protein-H4"/>
+    <Proper k1="21.67282712" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-CW" type4="protein-H4"/>
+    <Proper k1="37.98097128" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-CV" type4="protein-NB"/>
+    <Proper k1="21.91332344" periodicity1="2" phase1="3.141592653589793" type1="" type2="protein-CC" type3="protein-CW" type4="protein-NA"/>
     <Proper k1="0.0" k2="1.6736000000000002" k3="8.368" k4="8.368" periodicity1="4" periodicity2="3" periodicity3="2" periodicity4="1" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" type1="protein-CT" type2="protein-CT" type3="protein-N" type4="protein-C"/>
     <Proper k1="0.0" k2="1.6736000000000002" k3="0.8368000000000001" k4="0.8368000000000001" periodicity1="4" periodicity2="3" periodicity3="2" periodicity4="1" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" type1="protein-CT" type2="protein-CT" type3="protein-C" type4="protein-N"/>
     <Proper k1="10.46" k2="8.368" periodicity1="2" periodicity2="1" phase1="3.141592653589793" phase2="0.0" type1="protein-H" type2="protein-N" type3="protein-C" type4="protein-O"/>

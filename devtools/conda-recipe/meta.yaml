@@ -15,10 +15,10 @@ requirements:
 
   run:
     - python
-    - openmm >=7.2.0
+    - openmm >=7.3.0
     - yaml
     - pyyaml
-    - ambertools ==18
+    - ambertools
     - lxml
     - networkx
     - parmed
