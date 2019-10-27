@@ -38,7 +38,9 @@ install:
     # Activate the test environment
   - conda activate test
     # Build and install package
-  - python setup.py develop --no-deps
+    # Can't use 'develop' mode because we remove symlinks after install is complete
+    #- python setup.py develop --no-deps
+    - python setup.py install --no-deps
 
 
 script:
