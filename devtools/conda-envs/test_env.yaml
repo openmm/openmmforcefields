@@ -18,7 +18,7 @@ dependencies:
     # Requirements
   - openmm >=7.3.0
   - pyyaml
-  - ambertools ==19.9
+  - ambertools >=18.0
   - lxml
   - networkx
   - parmed
