@@ -1,0 +1,24 @@
+name: test
+
+channels:
+  - conda-forge
+  - omnia
+  - defaults
+
+dependencies:
+    # Base depends
+  - python
+  - pip
+
+    # Testing
+  - pytest
+  - pytest-cov
+  - codecov
+
+    # Requirements
+  - openmm >=7.3.0
+  - pyyaml
+  - ambertools ==19.9
+  - lxml
+  - networkx
+  - parmed
