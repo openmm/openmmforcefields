@@ -3,9 +3,12 @@
 ## Manifest
 
 * `convert_amber.py` - Amber forcefield conversion drive
+* `master.yaml` - YAML file directing the conversion of non-GAFF force fields
+* `gaff.yaml` - YAML file directing conversion of GAFF versions
 * `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
 * `files/` - Amber input forcefield files and YAML conversion driver
 * `ffxml/` - converted OpenMM `ffxml` forcefields
+* `gaff/` - historical versions of GAFF `.dat` force fields
 * `test/` - input files for testing conversion produces correct energies
 
 ## Amber forcefield conversion: `convert_amber.py`
