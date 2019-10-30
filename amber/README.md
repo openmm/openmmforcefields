@@ -8,7 +8,7 @@
 * `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
 * `files/` - Amber input forcefield files and YAML conversion driver
 * `ffxml/` - converted OpenMM `ffxml` forcefields
-* `gaff/` - historical versions of GAFF `.dat` force fields
+* `gaff/` - historical versions of GAFF `.dat` force field parameter files
 * `test/` - input files for testing conversion produces correct energies
 
 ## Amber forcefield conversion: `convert_amber.py`
