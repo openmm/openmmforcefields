@@ -73,6 +73,7 @@ try:
     )
 
 finally:
+    # TODO: Don't clean these up if `python setup.py develop`
     # Clean up temporary symlinks
     os.unlink('openmmforcefields/ffxml/amber')
     os.unlink('openmmforcefields/ffxml/charmm')

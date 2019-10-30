@@ -15,10 +15,16 @@ dependencies:
   - pytest-cov
   - codecov
 
-    # Requirements
+    # Requirements for converted force field installer
   - openmm >=7.3.0
+
+    # Requirements for conversion tools
   - pyyaml
   - ambertools >=18.0
   - lxml
   - networkx
   - parmed
+
+    # GAFF template generator
+  - mdtraj
+  - tinydb
