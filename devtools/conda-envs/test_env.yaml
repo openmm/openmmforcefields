@@ -28,3 +28,6 @@ dependencies:
     # GAFF template generator
   - mdtraj
   - tinydb
+
+    # openforcefield toolkit
+  - openforcefield
