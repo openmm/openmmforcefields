@@ -95,8 +95,8 @@ class GAFFTemplateGenerator(object):
         >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
 
         """
-        if not gaff_version in SUPPORTED_GAFF_VERSIONS:
-            raise Exception(f"Error: gaff_version must be one of {self.SUPPORTED_GAFF_VERSIONS}")
+        if not gaff_version in self.SUPPORTED_GAFF_VERSIONS:
+            raise Exception(f'Error: gaff_version must be one of {self.SUPPORTED_GAFF_VERSIONS}')
         self._gaff_version = gaff_version
         self._gaff_major_version, self._gaff_minor_version = gaff_version.split('.')
 
@@ -129,7 +129,7 @@ class GAFFTemplateGenerator(object):
             The full path to the corresponding GAFF ffxml file
         """
         from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename(f'gaff-{self._gaff_version}.dat')
+        filename = get_data_filename(f'gaff/dat/gaff-{self._gaff_version}.dat')
         return filename
 
     @property
@@ -143,7 +143,7 @@ class GAFFTemplateGenerator(object):
         """
         # TODO: Should we return a StringIO instead?
         from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename(f'gaff-{self._gaff_version}.xml')
+        filename = get_data_filename(f'gaff/ffxml/gaff-{self._gaff_version}.xml')
         return filename
 
     def _open_db():
@@ -396,8 +396,8 @@ class GAFFTemplateGenerator(object):
         return ffxml_contents
 
     def _run_antechamber(molecule_filename, input_format='sdf',
-        gaff_mol2_filename=None, frcmod_filename=None,
-        input_format='mol2', resname=False, log_debug_output=False, verbosity=0):
+                         gaff_mol2_filename=None, frcmod_filename=None,
+                         log_debug_output=False, verbosity=0):
         """Run AmberTools antechamber and parmchk2 to create GAFF mol2 and frcmod files.
 
         Parameters
@@ -414,12 +414,8 @@ class GAFFTemplateGenerator(object):
             and molecule_name
         input_format : str, optional, default='mol2'
             Format specifier for input file to pass to antechamber.
-        resname : bool, optional, default=False
-            Set the residue name used within output files to molecule_name
         log_debug_output : bool, optional, default=False
             If true, will send output of tleap to_logger.
-        gaff_version : str, default = '2.11'
-            GAFF version to use. One of ('1.4', '1.8', '1.81', '2.1', '2.11')
         verbosity : int, default=0
             Verbosity for antechamber
 
@@ -525,7 +521,7 @@ class GAFFTemplateGenerator(object):
                 line = infile.readline()
                 atom.gaff_type = line[50:58].strip()
 
-    def _check_for_errors(outputtext, other_errors=None, ignore_errors=None ):
+    def _check_for_errors(outputtext, other_errors=None, ignore_errors=None):
         """Check AMBER package output for the string 'ERROR' (upper or lowercase) and (optionally) specified other strings and raise an exception if it is found (to avoid silent failures which might be noted to log but otherwise ignored).
 
         Parameters
