@@ -7,7 +7,7 @@ Support for small molecule parameterization and additional AMBER and CHARMM forc
 
 ## Supported force fields
 
-**AMBER:** All major AMBER force fields distributed with AmberTools 18.0, as well as the GAFF small molecule force fields through 1.81 and 2.11
+**AMBER:** All major AMBER force fields distributed with AmberTools 19.9 (except ff19SB, which requres CMAP), as well as all released GAFF small molecule force fields through 1.81 and 2.11
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml)
 

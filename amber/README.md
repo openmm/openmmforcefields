@@ -51,7 +51,7 @@ With the defaults as set, all you need to do is have the script and the `files/`
 
 Output:
 * `ffxml/` with all output XMLs
-* `log.csv` - CSV log for biopolymer energy discrepancy tests
+* `biopolymer-log.csv` - CSV log for biopolymer energy discrepancy tests
 * `gaff-tests.csv` - CSV log for GAFF energy discrepancy tests
 * (LeAP is called extensively by the script, and outputs its own `leap.log` too)
 
@@ -60,7 +60,13 @@ Output:
 ** Converting the force fields **
 
 * Install the appropriate `AmberTools`
+```bash
+conda install --yes ambertools==19.9
+```
 * Convert biopolymer force fields
+```bash
+python convert_amber.py --input biopolymer.yaml --log biopolymer-tests.csv
+```
 * Convert GAFF:
 ```bash
 python convert_amber.py --input gaff.yaml --log gaff-tests.csv

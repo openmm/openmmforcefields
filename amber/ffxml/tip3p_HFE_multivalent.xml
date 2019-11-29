@@ -1,8 +1,8 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-10-26</DateGenerated>
-    <Source Source="parm/frcmod.ions234lm_hfe_tip3p" md5hash="4db3ea62100b95fa9d992ac0875db7f5" sourcePackage="AmberTools" sourcePackageVersion="18.0">parm/frcmod.ions234lm_hfe_tip3p</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="18.0">lib/atomic_ions.lib</Source>
+    <DateGenerated>2019-11-29</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_hfe_tip3p" md5hash="4db3ea62100b95fa9d992ac0875db7f5" sourcePackage="AmberTools" sourcePackageVersion="19.9">parm/frcmod.ions234lm_hfe_tip3p</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="19.9">lib/atomic_ions.lib</Source>
     <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
     <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
   </Info>

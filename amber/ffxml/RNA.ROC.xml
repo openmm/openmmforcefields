@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-10-26</DateGenerated>
-    <Source Source="leaprc.RNA.ROC" md5hash="497c59d5829093ad821d705afa74be90" sourcePackage="AmberTools" sourcePackageVersion="18.0">leaprc.RNA.ROC</Source>
+    <DateGenerated>2019-11-29</DateGenerated>
+    <Source Source="leaprc.RNA.ROC" md5hash="497c59d5829093ad821d705afa74be90" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.RNA.ROC</Source>
     <Reference>Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P. Refinement of the Cornell et al. Nucleic Acids Force Field Based on Reference Quantum Chemical Calculations of Glycosidic Torsion Profiles. J. Chem. Theory Comput., 2011, 7, 2886-2902.</Reference>
   </Info>
   <AtomTypes>
@@ -2267,6 +2267,11 @@
     <Bond type1="RNA-H" type2="RNA-NA" length="0.101" k="363171.19999999995"/>
     <Bond type1="RNA-HO" type2="RNA-OH" length="0.096" k="462750.3999999999"/>
     <Bond type1="RNA-HO" type2="RNA-OS" length="0.096" k="462750.3999999999"/>
+    <Bond type1="EP" type2="RNA-O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
     <Bond type1="RNA-CI" type2="RNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
     <Bond type1="RNA-CI" type2="RNA-CT" length="0.1526" k="259407.99999999994"/>
     <Bond type1="RNA-OS" type2="RNA-CI" length="0.141" k="267775.99999999994"/>
@@ -2468,6 +2473,25 @@
     <Angle type1="RNA-O2" type2="RNA-P" type3="RNA-OS" angle="1.888969849433463" k="836.8000000000001"/>
     <Angle type1="RNA-OH" type2="RNA-P" type3="RNA-OS" angle="1.790707812546182" k="376.56"/>
     <Angle type1="RNA-OS" type2="RNA-P" type3="RNA-OS" angle="1.790707812546182" k="376.56"/>
+    <Angle type1="RNA-CB" type2="RNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="RNA-CK" type2="RNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="RNA-CP" type2="RNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CA" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CB" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CQ" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-OH" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CT" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-HO" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-CM" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-CS" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-CT" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-P" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
     <Angle type1="RNA-H1" type2="RNA-CI" type3="RNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
     <Angle type1="RNA-H1" type2="RNA-CI" type3="RNA-H1" angle="1.911135530933791" k="292.88"/>
     <Angle type1="RNA-CI" type2="RNA-CT" type3="RNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
@@ -2621,6 +2645,17 @@
     <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-CT" type4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="RNA-HC" type2="RNA-CT" type3="RNA-CT" type4="RNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="RNA-HC" type2="RNA-CT" type3="RNA-CT" type4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CT" type2="RNA-CT" type3="RNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-H2" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CT" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CM" type2="RNA-CM" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-HA" type2="RNA-CM" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-H4" type2="RNA-CM" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-CS" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-HA" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-H4" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Proper type1="" type2="RNA-CF" type3="RNA-OS" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
     <Proper type1="" type2="RNA-CF" type3="RNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
     <Proper type1="" type2="RNA-CF" type3="RNA-CI" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>

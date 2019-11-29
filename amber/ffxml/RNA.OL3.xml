@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-10-26</DateGenerated>
-    <Source Source="leaprc.RNA.OL3" md5hash="14201dcae910ce5af3ef4fcb1c67405a" sourcePackage="AmberTools" sourcePackageVersion="18.0">leaprc.RNA.OL3</Source>
+    <DateGenerated>2019-11-29</DateGenerated>
+    <Source Source="leaprc.RNA.OL3" md5hash="bc9413240ffd1d21c4ee342b5923295c" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.RNA.OL3</Source>
     <Reference>Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P. Refinement of the Cornell et al. Nucleic Acids Force Field Based on Reference Quantum Chemical Calculations of Glycosidic Torsion Profiles. J. Chem. Theory Comput., 2011, 7, 2886-2902.</Reference>
   </Info>
   <AtomTypes>
@@ -863,10 +863,10 @@
       <Bond atomName1="O3'" atomName2="HO3'"/>
     </Residue>
     <Residue name="OHE">
-      <Atom name="H" type="RNA-HO" charge="0.226"/>
-      <Atom name="O" type="RNA-OH" charge="-0.621"/>
-      <Bond atomName1="H" atomName2="O"/>
-      <ExternalBond atomName="O"/>
+      <Atom name="HOP3" type="RNA-HO" charge="0.3129"/>
+      <Atom name="OP3" type="RNA-OH" charge="-0.621"/>
+      <Bond atomName1="HOP3" atomName2="OP3"/>
+      <ExternalBond atomName="OP3"/>
     </Residue>
     <Residue name="U">
       <Atom name="P" type="RNA-P" charge="1.1662"/>
@@ -1120,6 +1120,296 @@
       <Bond atomName1="O2'" atomName2="HO2'"/>
       <Bond atomName1="O3'" atomName2="HO3'"/>
     </Residue>
+    <Residue name="AMP">
+      <Atom name="P" type="RNA-P" charge="1.1662"/>
+      <Atom name="OP1" type="RNA-O2" charge="-0.776"/>
+      <Atom name="OP2" type="RNA-O2" charge="-0.776"/>
+      <Atom name="O5'" type="RNA-OS" charge="-0.4989"/>
+      <Atom name="C5'" type="RNA-CI" charge="0.0558"/>
+      <Atom name="H5'" type="RNA-H1" charge="0.0679"/>
+      <Atom name="H5''" type="RNA-H1" charge="0.0679"/>
+      <Atom name="C4'" type="RNA-CT" charge="0.1065"/>
+      <Atom name="H4'" type="RNA-H1" charge="0.1174"/>
+      <Atom name="O4'" type="RNA-OS" charge="-0.3548"/>
+      <Atom name="C1'" type="RNA-CT" charge="0.0394"/>
+      <Atom name="H1'" type="RNA-H2" charge="0.2007"/>
+      <Atom name="N9" type="RNA-N*" charge="-0.0251"/>
+      <Atom name="C8" type="RNA-C5" charge="0.2006"/>
+      <Atom name="H8" type="RNA-H5" charge="0.1553"/>
+      <Atom name="N7" type="RNA-NB" charge="-0.6073"/>
+      <Atom name="C5" type="RNA-CB" charge="0.0515"/>
+      <Atom name="C6" type="RNA-CA" charge="0.7009"/>
+      <Atom name="N6" type="RNA-N2" charge="-0.9019"/>
+      <Atom name="H61" type="RNA-H" charge="0.4115"/>
+      <Atom name="H62" type="RNA-H" charge="0.4115"/>
+      <Atom name="N1" type="RNA-NC" charge="-0.7615"/>
+      <Atom name="C2" type="RNA-CQ" charge="0.5875"/>
+      <Atom name="H2" type="RNA-H5" charge="0.0473"/>
+      <Atom name="N3" type="RNA-NC" charge="-0.6997"/>
+      <Atom name="C4" type="RNA-CB" charge="0.3053"/>
+      <Atom name="C3'" type="RNA-CT" charge="0.2022"/>
+      <Atom name="H3'" type="RNA-H1" charge="0.0615"/>
+      <Atom name="C2'" type="RNA-CT" charge="0.067"/>
+      <Atom name="H2'" type="RNA-H1" charge="0.0972"/>
+      <Atom name="O2'" type="RNA-OH" charge="-0.6139"/>
+      <Atom name="HO2'" type="RNA-HO" charge="0.4186"/>
+      <Atom name="O3'" type="RNA-OS" charge="-0.5246"/>
+      <Atom name="OP3" type="RNA-OH" charge="-0.621"/>
+      <Atom name="HP3" type="RNA-HO" charge="0.3129"/>
+      <Bond atomName1="P" atomName2="OP1"/>
+      <Bond atomName1="P" atomName2="OP2"/>
+      <Bond atomName1="P" atomName2="O5'"/>
+      <Bond atomName1="P" atomName2="OP3"/>
+      <Bond atomName1="O5'" atomName2="C5'"/>
+      <Bond atomName1="C5'" atomName2="H5'"/>
+      <Bond atomName1="C5'" atomName2="H5''"/>
+      <Bond atomName1="C5'" atomName2="C4'"/>
+      <Bond atomName1="C4'" atomName2="H4'"/>
+      <Bond atomName1="C4'" atomName2="O4'"/>
+      <Bond atomName1="C4'" atomName2="C3'"/>
+      <Bond atomName1="O4'" atomName2="C1'"/>
+      <Bond atomName1="C1'" atomName2="H1'"/>
+      <Bond atomName1="C1'" atomName2="N9"/>
+      <Bond atomName1="C1'" atomName2="C2'"/>
+      <Bond atomName1="N9" atomName2="C8"/>
+      <Bond atomName1="N9" atomName2="C4"/>
+      <Bond atomName1="C8" atomName2="H8"/>
+      <Bond atomName1="C8" atomName2="N7"/>
+      <Bond atomName1="N7" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="N6"/>
+      <Bond atomName1="C6" atomName2="N1"/>
+      <Bond atomName1="N6" atomName2="H61"/>
+      <Bond atomName1="N6" atomName2="H62"/>
+      <Bond atomName1="N1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="N3"/>
+      <Bond atomName1="N3" atomName2="C4"/>
+      <Bond atomName1="C3'" atomName2="H3'"/>
+      <Bond atomName1="C3'" atomName2="C2'"/>
+      <Bond atomName1="C3'" atomName2="O3'"/>
+      <Bond atomName1="C2'" atomName2="H2'"/>
+      <Bond atomName1="C2'" atomName2="O2'"/>
+      <Bond atomName1="O2'" atomName2="HO2'"/>
+      <Bond atomName1="OP3" atomName2="HP3"/>
+      <ExternalBond atomName="O3'"/>
+    </Residue>
+    <Residue name="CMP">
+      <Atom name="P" type="RNA-P" charge="1.1662"/>
+      <Atom name="OP1" type="RNA-O2" charge="-0.776"/>
+      <Atom name="OP2" type="RNA-O2" charge="-0.776"/>
+      <Atom name="O5'" type="RNA-OS" charge="-0.4989"/>
+      <Atom name="C5'" type="RNA-CI" charge="0.0558"/>
+      <Atom name="H5'" type="RNA-H1" charge="0.0679"/>
+      <Atom name="H5''" type="RNA-H1" charge="0.0679"/>
+      <Atom name="C4'" type="RNA-CT" charge="0.1065"/>
+      <Atom name="H4'" type="RNA-H1" charge="0.1174"/>
+      <Atom name="O4'" type="RNA-OS" charge="-0.3548"/>
+      <Atom name="C1'" type="RNA-CT" charge="0.0066"/>
+      <Atom name="H1'" type="RNA-H2" charge="0.2029"/>
+      <Atom name="N1" type="RNA-N*" charge="-0.0484"/>
+      <Atom name="C6" type="RNA-C4" charge="0.0053"/>
+      <Atom name="H6" type="RNA-H4" charge="0.1958"/>
+      <Atom name="C5" type="RNA-C4" charge="-0.5215"/>
+      <Atom name="H5" type="RNA-HA" charge="0.1928"/>
+      <Atom name="C4" type="RNA-CA" charge="0.8185"/>
+      <Atom name="N4" type="RNA-N2" charge="-0.953"/>
+      <Atom name="H41" type="RNA-H" charge="0.4234"/>
+      <Atom name="H42" type="RNA-H" charge="0.4234"/>
+      <Atom name="N3" type="RNA-NC" charge="-0.7584"/>
+      <Atom name="C2" type="RNA-C" charge="0.7538"/>
+      <Atom name="O2" type="RNA-O" charge="-0.6252"/>
+      <Atom name="C3'" type="RNA-CT" charge="0.2022"/>
+      <Atom name="H3'" type="RNA-H1" charge="0.0615"/>
+      <Atom name="C2'" type="RNA-CT" charge="0.067"/>
+      <Atom name="H2'" type="RNA-H1" charge="0.0972"/>
+      <Atom name="O2'" type="RNA-OH" charge="-0.6139"/>
+      <Atom name="HO2'" type="RNA-HO" charge="0.4186"/>
+      <Atom name="O3'" type="RNA-OS" charge="-0.5246"/>
+      <Atom name="OP3" type="RNA-OH" charge="-0.621"/>
+      <Atom name="HP3" type="RNA-HO" charge="0.3129"/>
+      <Bond atomName1="P" atomName2="OP1"/>
+      <Bond atomName1="P" atomName2="OP2"/>
+      <Bond atomName1="P" atomName2="O5'"/>
+      <Bond atomName1="P" atomName2="OP3"/>
+      <Bond atomName1="O5'" atomName2="C5'"/>
+      <Bond atomName1="C5'" atomName2="H5'"/>
+      <Bond atomName1="C5'" atomName2="H5''"/>
+      <Bond atomName1="C5'" atomName2="C4'"/>
+      <Bond atomName1="C4'" atomName2="H4'"/>
+      <Bond atomName1="C4'" atomName2="O4'"/>
+      <Bond atomName1="C4'" atomName2="C3'"/>
+      <Bond atomName1="O4'" atomName2="C1'"/>
+      <Bond atomName1="C1'" atomName2="H1'"/>
+      <Bond atomName1="C1'" atomName2="N1"/>
+      <Bond atomName1="C1'" atomName2="C2'"/>
+      <Bond atomName1="N1" atomName2="C6"/>
+      <Bond atomName1="N1" atomName2="C2"/>
+      <Bond atomName1="C6" atomName2="H6"/>
+      <Bond atomName1="C6" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="N4"/>
+      <Bond atomName1="C4" atomName2="N3"/>
+      <Bond atomName1="N4" atomName2="H41"/>
+      <Bond atomName1="N4" atomName2="H42"/>
+      <Bond atomName1="N3" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="C3'" atomName2="H3'"/>
+      <Bond atomName1="C3'" atomName2="C2'"/>
+      <Bond atomName1="C3'" atomName2="O3'"/>
+      <Bond atomName1="C2'" atomName2="H2'"/>
+      <Bond atomName1="C2'" atomName2="O2'"/>
+      <Bond atomName1="O2'" atomName2="HO2'"/>
+      <Bond atomName1="OP3" atomName2="HP3"/>
+      <ExternalBond atomName="O3'"/>
+    </Residue>
+    <Residue name="GMP">
+      <Atom name="P" type="RNA-P" charge="1.1662"/>
+      <Atom name="OP1" type="RNA-O2" charge="-0.776"/>
+      <Atom name="OP2" type="RNA-O2" charge="-0.776"/>
+      <Atom name="O5'" type="RNA-OS" charge="-0.4989"/>
+      <Atom name="C5'" type="RNA-CI" charge="0.0558"/>
+      <Atom name="H5'" type="RNA-H1" charge="0.0679"/>
+      <Atom name="H5''" type="RNA-H1" charge="0.0679"/>
+      <Atom name="C4'" type="RNA-CT" charge="0.1065"/>
+      <Atom name="H4'" type="RNA-H1" charge="0.1174"/>
+      <Atom name="O4'" type="RNA-OS" charge="-0.3548"/>
+      <Atom name="C1'" type="RNA-CT" charge="0.0191"/>
+      <Atom name="H1'" type="RNA-H2" charge="0.2006"/>
+      <Atom name="N9" type="RNA-N*" charge="0.0492"/>
+      <Atom name="C8" type="RNA-CP" charge="0.1374"/>
+      <Atom name="H8" type="RNA-H5" charge="0.164"/>
+      <Atom name="N7" type="RNA-NB" charge="-0.5709"/>
+      <Atom name="C5" type="RNA-CB" charge="0.1744"/>
+      <Atom name="C6" type="RNA-C" charge="0.477"/>
+      <Atom name="O6" type="RNA-O" charge="-0.5597"/>
+      <Atom name="N1" type="RNA-NA" charge="-0.4787"/>
+      <Atom name="H1" type="RNA-H" charge="0.3424"/>
+      <Atom name="C2" type="RNA-CA" charge="0.7657"/>
+      <Atom name="N2" type="RNA-N2" charge="-0.9672"/>
+      <Atom name="H21" type="RNA-H" charge="0.4364"/>
+      <Atom name="H22" type="RNA-H" charge="0.4364"/>
+      <Atom name="N3" type="RNA-NC" charge="-0.6323"/>
+      <Atom name="C4" type="RNA-CB" charge="0.1222"/>
+      <Atom name="C3'" type="RNA-CT" charge="0.2022"/>
+      <Atom name="H3'" type="RNA-H1" charge="0.0615"/>
+      <Atom name="C2'" type="RNA-CT" charge="0.067"/>
+      <Atom name="H2'" type="RNA-H1" charge="0.0972"/>
+      <Atom name="O2'" type="RNA-OH" charge="-0.6139"/>
+      <Atom name="HO2'" type="RNA-HO" charge="0.4186"/>
+      <Atom name="O3'" type="RNA-OS" charge="-0.5246"/>
+      <Atom name="OP3" type="RNA-OH" charge="-0.621"/>
+      <Atom name="HP3" type="RNA-HO" charge="0.3129"/>
+      <Bond atomName1="P" atomName2="OP1"/>
+      <Bond atomName1="P" atomName2="OP2"/>
+      <Bond atomName1="P" atomName2="O5'"/>
+      <Bond atomName1="P" atomName2="OP3"/>
+      <Bond atomName1="O5'" atomName2="C5'"/>
+      <Bond atomName1="C5'" atomName2="H5'"/>
+      <Bond atomName1="C5'" atomName2="H5''"/>
+      <Bond atomName1="C5'" atomName2="C4'"/>
+      <Bond atomName1="C4'" atomName2="H4'"/>
+      <Bond atomName1="C4'" atomName2="O4'"/>
+      <Bond atomName1="C4'" atomName2="C3'"/>
+      <Bond atomName1="O4'" atomName2="C1'"/>
+      <Bond atomName1="C1'" atomName2="H1'"/>
+      <Bond atomName1="C1'" atomName2="N9"/>
+      <Bond atomName1="C1'" atomName2="C2'"/>
+      <Bond atomName1="N9" atomName2="C8"/>
+      <Bond atomName1="N9" atomName2="C4"/>
+      <Bond atomName1="C8" atomName2="H8"/>
+      <Bond atomName1="C8" atomName2="N7"/>
+      <Bond atomName1="N7" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="C6" atomName2="N1"/>
+      <Bond atomName1="N1" atomName2="H1"/>
+      <Bond atomName1="N1" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="N2"/>
+      <Bond atomName1="C2" atomName2="N3"/>
+      <Bond atomName1="N2" atomName2="H21"/>
+      <Bond atomName1="N2" atomName2="H22"/>
+      <Bond atomName1="N3" atomName2="C4"/>
+      <Bond atomName1="C3'" atomName2="H3'"/>
+      <Bond atomName1="C3'" atomName2="C2'"/>
+      <Bond atomName1="C3'" atomName2="O3'"/>
+      <Bond atomName1="C2'" atomName2="H2'"/>
+      <Bond atomName1="C2'" atomName2="O2'"/>
+      <Bond atomName1="O2'" atomName2="HO2'"/>
+      <Bond atomName1="OP3" atomName2="HP3"/>
+      <ExternalBond atomName="O3'"/>
+    </Residue>
+    <Residue name="UMP">
+      <Atom name="P" type="RNA-P" charge="1.1662"/>
+      <Atom name="OP1" type="RNA-O2" charge="-0.776"/>
+      <Atom name="OP2" type="RNA-O2" charge="-0.776"/>
+      <Atom name="O5'" type="RNA-OS" charge="-0.4989"/>
+      <Atom name="C5'" type="RNA-CI" charge="0.0558"/>
+      <Atom name="H5'" type="RNA-H1" charge="0.0679"/>
+      <Atom name="H5''" type="RNA-H1" charge="0.0679"/>
+      <Atom name="C4'" type="RNA-CT" charge="0.1065"/>
+      <Atom name="H4'" type="RNA-H1" charge="0.1174"/>
+      <Atom name="O4'" type="RNA-OS" charge="-0.3548"/>
+      <Atom name="C1'" type="RNA-CT" charge="0.0674"/>
+      <Atom name="H1'" type="RNA-H2" charge="0.1824"/>
+      <Atom name="N1" type="RNA-N*" charge="0.0418"/>
+      <Atom name="C6" type="RNA-CS" charge="-0.1126"/>
+      <Atom name="H6" type="RNA-H4" charge="0.2188"/>
+      <Atom name="C5" type="RNA-CS" charge="-0.3635"/>
+      <Atom name="H5" type="RNA-HA" charge="0.1811"/>
+      <Atom name="C4" type="RNA-C" charge="0.5952"/>
+      <Atom name="O4" type="RNA-O" charge="-0.5761"/>
+      <Atom name="N3" type="RNA-NA" charge="-0.3549"/>
+      <Atom name="H3" type="RNA-H" charge="0.3154"/>
+      <Atom name="C2" type="RNA-C" charge="0.4687"/>
+      <Atom name="O2" type="RNA-O" charge="-0.5477"/>
+      <Atom name="C3'" type="RNA-CT" charge="0.2022"/>
+      <Atom name="H3'" type="RNA-H1" charge="0.0615"/>
+      <Atom name="C2'" type="RNA-CT" charge="0.067"/>
+      <Atom name="H2'" type="RNA-H1" charge="0.0972"/>
+      <Atom name="O2'" type="RNA-OH" charge="-0.6139"/>
+      <Atom name="HO2'" type="RNA-HO" charge="0.4186"/>
+      <Atom name="O3'" type="RNA-OS" charge="-0.5246"/>
+      <Atom name="OP3" type="RNA-OH" charge="-0.621"/>
+      <Atom name="HP3" type="RNA-HO" charge="0.3129"/>
+      <Bond atomName1="P" atomName2="OP1"/>
+      <Bond atomName1="P" atomName2="OP2"/>
+      <Bond atomName1="P" atomName2="O5'"/>
+      <Bond atomName1="P" atomName2="OP3"/>
+      <Bond atomName1="O5'" atomName2="C5'"/>
+      <Bond atomName1="C5'" atomName2="H5'"/>
+      <Bond atomName1="C5'" atomName2="H5''"/>
+      <Bond atomName1="C5'" atomName2="C4'"/>
+      <Bond atomName1="C4'" atomName2="H4'"/>
+      <Bond atomName1="C4'" atomName2="O4'"/>
+      <Bond atomName1="C4'" atomName2="C3'"/>
+      <Bond atomName1="O4'" atomName2="C1'"/>
+      <Bond atomName1="C1'" atomName2="H1'"/>
+      <Bond atomName1="C1'" atomName2="N1"/>
+      <Bond atomName1="C1'" atomName2="C2'"/>
+      <Bond atomName1="N1" atomName2="C6"/>
+      <Bond atomName1="N1" atomName2="C2"/>
+      <Bond atomName1="C6" atomName2="H6"/>
+      <Bond atomName1="C6" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C4" atomName2="N3"/>
+      <Bond atomName1="N3" atomName2="H3"/>
+      <Bond atomName1="N3" atomName2="C2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="C3'" atomName2="H3'"/>
+      <Bond atomName1="C3'" atomName2="C2'"/>
+      <Bond atomName1="C3'" atomName2="O3'"/>
+      <Bond atomName1="C2'" atomName2="H2'"/>
+      <Bond atomName1="C2'" atomName2="O2'"/>
+      <Bond atomName1="O2'" atomName2="HO2'"/>
+      <Bond atomName1="OP3" atomName2="HP3"/>
+      <ExternalBond atomName="O3'"/>
+    </Residue>
   </Residues>
   <HarmonicBondForce>
     <Bond type1="RNA-C" type2="RNA-C" length="0.1525" k="259407.99999999994"/>
@@ -1178,6 +1468,11 @@
     <Bond type1="RNA-H" type2="RNA-NA" length="0.101" k="363171.19999999995"/>
     <Bond type1="RNA-HO" type2="RNA-OH" length="0.096" k="462750.3999999999"/>
     <Bond type1="RNA-HO" type2="RNA-OS" length="0.096" k="462750.3999999999"/>
+    <Bond type1="EP" type2="RNA-O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="RNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
     <Bond type1="RNA-CI" type2="RNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
     <Bond type1="RNA-CI" type2="RNA-CT" length="0.1526" k="259407.99999999994"/>
     <Bond type1="RNA-OS" type2="RNA-CI" length="0.141" k="267775.99999999994"/>
@@ -1333,6 +1628,23 @@
     <Angle type1="RNA-O2" type2="RNA-P" type3="RNA-OS" angle="1.888969849433463" k="836.8000000000001"/>
     <Angle type1="RNA-OH" type2="RNA-P" type3="RNA-OS" angle="1.790707812546182" k="376.56"/>
     <Angle type1="RNA-OS" type2="RNA-P" type3="RNA-OS" angle="1.790707812546182" k="376.56"/>
+    <Angle type1="RNA-CB" type2="RNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="RNA-CP" type2="RNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CA" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CB" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CQ" type2="RNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-OH" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="RNA-CT" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-HO" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-C" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-CS" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-CT" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="RNA-P" type2="RNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
     <Angle type1="RNA-H1" type2="RNA-CI" type3="RNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
     <Angle type1="RNA-H1" type2="RNA-CI" type3="RNA-H1" angle="1.911135530933791" k="292.88"/>
     <Angle type1="RNA-CI" type2="RNA-CT" type3="RNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
@@ -1451,6 +1763,14 @@
     <Proper type1="RNA-OH" type2="RNA-CT" type3="RNA-CT" type4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
     <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-CT" type4="RNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-CT" type4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CT" type2="RNA-CT" type3="RNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-H1" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-H2" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CT" type2="RNA-CT" type3="RNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="RNA-CS" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-HA" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="RNA-H4" type2="RNA-CS" type3="RNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper type1="RNA-C" type2="" type3="" type4="RNA-O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="RNA-C" type2="" type3="RNA-O2" type4="RNA-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="RNA-N2" type2="" type3="" type4="RNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>

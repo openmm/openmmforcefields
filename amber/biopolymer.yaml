@@ -4,7 +4,7 @@
 
 - MODE: LEAPRC
 - sourcePackage: AmberTools
-  sourcePackageVersion: 18.0
+  sourcePackageVersion: 19.9
 - Source: leaprc.protein.ff15ipq
   Prefix: protein
   Reference:
@@ -55,7 +55,7 @@
     ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.
   Test:
   - protein
-- Source: leaprc.ff14SB.redq
+- Source: oldff/leaprc.ff14SB.redq
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).

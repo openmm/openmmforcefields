@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-10-26</DateGenerated>
-    <Source Source="leaprc.ff14SB.redq" md5hash="9b958c38ef60d0d0fb3c027980be07c5" sourcePackage="AmberTools" sourcePackageVersion="18.0">leaprc.ff14SB.redq</Source>
+    <DateGenerated>2019-11-29</DateGenerated>
+    <Source Source="oldff/leaprc.ff14SB.redq" md5hash="9b958c38ef60d0d0fb3c027980be07c5" sourcePackage="AmberTools" sourcePackageVersion="19.9">oldff/leaprc.ff14SB.redq</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
   <AtomTypes>
@@ -5095,6 +5095,14 @@
     <Bond type1="HO" type2="OS" length="0.096" k="462750.3999999999"/>
     <Bond type1="HS" type2="SH" length="0.13360000000000002" k="229283.19999999995"/>
     <Bond type1="S" type2="S" length="0.20379999999999998" k="138908.79999999996"/>
+    <Bond type1="EP" type2="O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="OS" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="N3" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="NC" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond type1="EP" type2="S" length="0.06999999999999999" k="502079.9999999999"/>
+    <Bond type1="EP" type2="SH" length="0.06999999999999999" k="502079.9999999999"/>
     <Bond type1="CI" type2="H1" length="0.10900000000000001" k="284511.99999999994"/>
     <Bond type1="CI" type2="CT" length="0.1526" k="259407.99999999994"/>
     <Bond type1="OS" type2="CI" length="0.141" k="267775.99999999994"/>
@@ -5424,6 +5432,35 @@
     <Angle type1="CT" type2="S" type3="S" angle="1.8099064343181197" k="569.024"/>
     <Angle type1="CT" type2="SH" type3="HS" angle="1.6755160819145565" k="359.824"/>
     <Angle type1="HS" type2="SH" type3="HS" angle="1.6069246423111792" k="292.88"/>
+    <Angle type1="CB" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="CC" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="CK" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="CP" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="CR" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="CV" type2="NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle type1="C" type2="NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="CA" type2="NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="CB" type2="NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="CQ" type2="NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="CT" type2="N3" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="H" type2="N3" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="C" type2="O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="EP" type2="O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="C" type2="OH" type3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle type1="CT" type2="OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="HO" type2="OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="C" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="CM" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="CS" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="CT" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="CT" type2="S" type3="EP" angle="1.5707963267948966" k="1255.2"/>
+    <Angle type1="CT" type2="SH" type3="EP" angle="1.5707963267948966" k="1255.2"/>
+    <Angle type1="P" type2="OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle type1="EP" type2="S" type3="EP" angle="3.141592653589793" k="1255.2"/>
+    <Angle type1="EP" type2="SH" type3="EP" angle="3.141592653589793" k="1255.2"/>
+    <Angle type1="HS" type2="SH" type3="EP" angle="1.5707963267948966" k="1255.2"/>
     <Angle type1="H1" type2="CI" type3="CT" angle="1.911135530933791" k="418.40000000000003"/>
     <Angle type1="H1" type2="CI" type3="H1" angle="1.911135530933791" k="292.88"/>
     <Angle type1="CI" type2="CT" type3="H1" angle="1.911135530933791" k="418.40000000000003"/>
@@ -5461,6 +5498,7 @@
     <Angle type1="HC" type2="CT" type3="C4" angle="1.911135530933791" k="418.40000000000003"/>
     <Angle type1="C" type2="N*" type3="C4" angle="2.1223203704251046" k="585.76"/>
     <Angle type1="C4" type2="N*" type3="CT" angle="2.1153390534171272" k="585.76"/>
+    <Angle type1="EP" type2="S" type3="S" angle="1.6877333866785167" k="1255.2"/>
     <Angle type1="N" type2="C" type3="2C" angle="2.035053907825388" k="585.76"/>
     <Angle type1="O" type2="C" type3="2C" angle="2.101376419401173" k="669.44"/>
     <Angle type1="OH" type2="C" type3="2C" angle="1.9198621771937625" k="669.44"/>
@@ -5693,7 +5731,22 @@
     <Proper type1="H1" type2="CX" type3="CT" type4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="HC" type2="CT" type3="CT" type4="OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="HC" type2="CT" type3="CT" type4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper type1="CT" type2="C" type3="N" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="O" type2="C" type3="N" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="H1" type2="CT" type3="OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="CT" type2="CT" type3="OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="H1" type2="CT" type3="OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="H2" type2="CT" type3="OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="CT" type2="CT" type3="OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="CM" type2="CM" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="HA" type2="CM" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="H4" type2="CM" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="CS" type2="CS" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="HA" type2="CS" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper type1="H4" type2="CS" type3="OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Proper type1="N" type2="CT" type3="CT" type4="OH" periodicity1="1" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="6.23416" periodicity3="3" phase3="0.0" k3="0.6527040000000001" periodicity4="4" phase4="0.0" k4="0.0"/>
+    <Proper type1="EP" type2="S" type3="S" type4="CT" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper type1="EP" type2="S" type3="S" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
     <Proper type1="C8" type2="CX" type3="N" type4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="3.3472000000000004" periodicity3="2" phase3="0.0" k3="7.5312" periodicity4="1" phase4="0.0" k4="8.368"/>
     <Proper type1="2C" type2="CX" type3="N" type4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="3.3472000000000004" periodicity3="2" phase3="0.0" k3="7.5312" periodicity4="1" phase4="0.0" k4="8.368"/>
     <Proper type1="3C" type2="CX" type3="N" type4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="3.3472000000000004" periodicity3="2" phase3="0.0" k3="7.5312" periodicity4="1" phase4="0.0" k4="8.368"/>
@@ -5740,6 +5793,7 @@
     <Proper type1="H1" type2="CX" type3="3C" type4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper type1="HO" type2="OH" type3="2C" type4="H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
     <Proper type1="HO" type2="OH" type3="3C" type4="H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper type1="EP" type2="S" type3="S" type4="2C" periodicity1="3" phase1="0.0" k1="0.0"/>
     <Proper type1="" type2="S" type3="2C" type4="" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
     <Proper type1="" type2="SH" type3="2C" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
     <Proper type1="" type2="2C" type3="2C" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
