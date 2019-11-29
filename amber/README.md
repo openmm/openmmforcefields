@@ -35,7 +35,7 @@ optional arguments:
                         format of the input file: "yaml" or "leaprc". Default:
                         "yaml"
   --verbose, -v         turns verbosity on
-  --no-log              turns logging of energies to log.csv off
+  --log TESTFILE        log tests to specified CSV file
   --protein-test        validate resulting XML through protein tests
   --nucleic-test        validate resulting XML through nucleic acid tests
   --protein-ua-test     validate resulting XML through united-atom protein
@@ -51,10 +51,20 @@ With the defaults as set, all you need to do is have the script and the `files/`
 
 Output:
 * `ffxml/` with all output XMLs
-* `log.csv` - csv, machine readable log, containing AMBER, OpenMM, and relative (abs(AMBER-OpenMM) / AMBER) energies  - you can see what this looks like here: https://github.com/choderalab/openmm/blob/forcefield_conversion_bonanza/devtools/forcefield-scripts/amber/log.csv . This is overwritten if already present on a new run, use `--no-log` to disable.
+* `log.csv` - CSV log for biopolymer energy discrepancy tests
+* `gaff-tests.csv` - CSV log for GAFF energy discrepancy tests
 * (LeAP is called extensively by the script, and outputs its own `leap.log` too)
 
 `-v` will turn on printing of the progress-tracking comments from the script. Warnings issued by ParmEd (warnings are by default filtered to error, but in some cases this had to be relaxed to 'always' because of the nature of the files converted) are printed always. The output of LeAP is always redirected to `dev/null`.
+
+** Converting the force fields **
+
+* Install the appropriate `AmberTools`
+* Convert biopolymer force fields
+* Convert GAFF:
+```bash
+python convert_amber.py --input gaff.yaml --log gaff-tests.csv
+```
 
 **YAML input**
 

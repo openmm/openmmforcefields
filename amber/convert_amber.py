@@ -78,8 +78,8 @@ def main():
                         'Default: "ffxml/" for yaml, "./" for leaprc')
     parser.add_argument('--verbose', '-v', action='store_true',
                         help='turns verbosity on')
-    parser.add_argument('--no-log', action='store_true',
-                        help='turns logging of energies to log.csv off')
+    parser.add_argument('--log', action='store', dest='log_filename', default=None,
+                        help='log energies for tests to specified CSV file')
     parser.add_argument('--protein-test', action='store_true',
                         help='validate resulting XML through protein tests')
     parser.add_argument('--nucleic-test', action='store_true',
@@ -94,9 +94,11 @@ def main():
                         help='validate resulting XML through lipids tests')
     args = parser.parse_args()
     verbose = args.verbose
-    no_log = args.no_log
 
-    if not no_log: logger = Logger('log.csv')
+    if args.log_filename:
+        logger = Logger(args.log_filename) # log to file
+    else:
+        logger = Logger() # be silent
 
     # input is either a YAML or a leaprc - default is leaprc
     # output directory hardcoded here for ffxml/
@@ -126,7 +128,7 @@ def main():
     else:
         sys.exit('Wrong input_format chosen.')
 
-    if not no_log: logger.close()
+    logger.close()
 
 def read_lines(filename):
     """
@@ -1239,22 +1241,37 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
 
 class Logger():
+    """
+    Log energy discrepancies to a file.
+
+    Parameters
+    ----------
+    log_filename : str
+        Name of CSV file to write to
+
+    """
     # logs testing energies into csv
-    def __init__(self, log_file):
-        csvfile = open(log_file, 'w')
-        fieldnames = ['ffxml_name', 'data_type', 'test_system', 'units', 'HarmonicBondForce',
+    def __init__(self, log_filename=None):
+        if log_filename:
+            csvfile = open(log_filename, 'w')
+            fieldnames = ['ffxml_name', 'data_type', 'test_system', 'units', 'HarmonicBondForce',
                       'HarmonicAngleForce', 'PeriodicTorsionForce_dihedrals',
                       'PeriodicTorsionForce_impropers', 'NonbondedForce']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        self.csvfile = csvfile
-        self.writer = writer
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            self.csvfile = csvfile
+            self.writer = writer
+        else:
+            self.csvfile = None
+            self.writer = None
 
     def close(self):
-        self.csvfile.close()
+        if self.csvfile:
+            self.csvfile.close()
 
     def log(self, energies):
-        self.writer.writerow(energies)
+        if self.writer:
+            self.writer.writerow(energies)
 
 if __name__ == '__main__':
     main()
