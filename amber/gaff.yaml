@@ -1,9 +1,9 @@
 - sourcePackage: AmberTools
-  sourcePackageVersion: 18.0
+  sourcePackageVersion: 19.9
 - MODE: GAFF
 - Source: gaff-1.4.dat
   Name: gaff-1.4
-  leaprc: learc.gaff
+  leaprc: leaprc.gaff
   Options:
     write_unused: True
   Test:
@@ -18,7 +18,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.7.dat
   Name: gaff-1.7
-  leaprc: learc.gaff
+  leaprc: leaprc.gaff
   Options:
     write_unused: True
   Test:
@@ -33,7 +33,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.8.dat
   Name: gaff-1.8
-  leaprc: learc.gaff
+  leaprc: leaprc.gaff
   Options:
     write_unused: True
   Test:
@@ -48,7 +48,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.81.dat
   Name: gaff-1.81
-  leaprc: learc.gaff
+  leaprc: leaprc.gaff
   Options:
     write_unused: True
   Test:
@@ -63,7 +63,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.81.dat
   Name: gaff
-  leaprc: learc.gaff
+  leaprc: leaprc.gaff
   Options:
     write_unused: True
   Test:
@@ -78,7 +78,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-2.1.dat
   Name: gaff-2.1
-  leaprc: learc.gaff2
+  leaprc: leaprc.gaff2
   Options:
     write_unused: True
   Test:
@@ -93,7 +93,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-2.11.dat
   Name: gaff-2.11
-  leaprc: learc.gaff2
+  leaprc: leaprc.gaff2
   Options:
     write_unused: True
   Test:
