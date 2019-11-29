@@ -6,7 +6,7 @@
 * `master.yaml` - YAML file directing the conversion of non-GAFF force fields
 * `gaff.yaml` - YAML file directing conversion of GAFF versions
 * `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
-* `files/` - Amber input forcefield files and YAML conversion driver
+* `files/` - Amber input forcefield files
 * `ffxml/` - converted OpenMM `ffxml` forcefields
 * `gaff/` - historical versions of GAFF `.dat` force field parameter files
 * `test/` - input files for testing conversion produces correct energies
@@ -209,3 +209,8 @@ Run `test/test.py` with `nosetests`.
 ```bash
 python merge_lipids.py
 ```
+
+**Acknowledgments**
+
+* Rafal Wiewiora (MSKCC) for creating these tools
+* Junmei Wang (University of Pittsburgh) for assistance in compiling historical GAFF releases

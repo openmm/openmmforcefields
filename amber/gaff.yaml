@@ -16,6 +16,21 @@
     Wang, J., Wang, W., Kollman P. A.; Case, D. A.
     Automatic atom type and bond type perception in molecular mechanical calculations.
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
+- Source: gaff-1.7.dat
+  Name: gaff-1.7
+  leaprc: learc.gaff
+  Options:
+    write_unused: True
+  Test:
+  - gaff
+  Reference:
+  - >-
+    Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004).
+    Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.
+  - >-
+    Wang, J., Wang, W., Kollman P. A.; Case, D. A.
+    Automatic atom type and bond type perception in molecular mechanical calculations.
+    Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.8.dat
   Name: gaff-1.8
   leaprc: learc.gaff
@@ -78,21 +93,6 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-2.11.dat
   Name: gaff-2.11
-  leaprc: learc.gaff2
-  Options:
-    write_unused: True
-  Test:
-  - gaff
-  Reference:
-  - >-
-    Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004).
-    Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.
-  - >-
-    Wang, J., Wang, W., Kollman P. A.; Case, D. A.
-    Automatic atom type and bond type perception in molecular mechanical calculations.
-    Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
-- Source: gaff-2.11.dat
-  Name: gaff2
   leaprc: learc.gaff2
   Options:
     write_unused: True
