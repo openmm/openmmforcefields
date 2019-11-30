@@ -20,14 +20,12 @@ dependencies:
 
     # Requirements for conversion tools
   - pyyaml
-  - ambertools >=18.0
+  - ambertools >=19.0 # contains sufficiently recent ParmEd
   - lxml
   - networkx
-  - parmed
 
     # GAFF template generator
-  - mdtraj
   - tinydb
 
     # openforcefield toolkit
-  - openforcefield
+  - openforcefield >=0.6.0

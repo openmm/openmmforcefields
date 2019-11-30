@@ -82,18 +82,23 @@ If not, [`antechamber -c bcc`](http://ambermd.org/antechamber/) from the [AmberT
 
 ### Examples using `GAFFTemplateGenerator` to generate small molecule GAFF parameters
 
-Create a template generator for GAFF for a single molecule (benzene, created from SMILES) and register it with ForceField:
+Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 ```python
 from openforcefield.topology import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
 from openmoltools.forcefield_generators import GAFFTemplateGenerator
-gaff = GAFFTemplateGenerator(molecules=molecule, gaff_version='1.81')
+gaff = GAFFTemplateGenerator(molecules=molecule)
 from simtk.openmm.app import ForceField
 forcefield = ForceField(gaff.gaff_xml_filename, 'amber14-all.xml', 'tip3p.xml')
 forcefield.registerTemplateGenerator(gaff)
 ```
-
-Create a template generator for GAFF2 for multiple molecules read from a file:
+The latest GAFF version is used if none is specified.
+You can check which GAFF version is in use with
+```python
+>>> gaff.gaff_version
+'2.11'
+````
+Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 ```python
 molecules = Molecule.from_file('molecules.sdf')
 gaff = OEGAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')

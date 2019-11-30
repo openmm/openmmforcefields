@@ -1,5 +1,6 @@
-from pkg_resources import resource_filename
-import contextlib, time
+import logging
+import contextlib
+_logger = logging.getLogger("openmmforcefields.generators.gaff")
 
 def get_ffxml_path():
     """
@@ -10,6 +11,7 @@ def get_ffxml_path():
     path : str
         The absolute path where OpenMM ffxml forcefield files are stored in this package
     """
+    from pkg_resources import resource_filename
     filename = resource_filename('openmmforcefields', 'ffxml')
     return filename
 
@@ -101,6 +103,13 @@ class Timer(object):
     def __init__(self):
         self.reset_timing_statistics()
 
+    def __enter__(self):
+        self.start()
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.stop()
+
     def reset_timing_statistics(self, benchmark_id=None):
         """Reset the timing statistics.
 
@@ -120,27 +129,32 @@ class Timer(object):
             self._t1.pop(benchmark_id, None)
             self._completed.pop(benchmark_id, None)
 
-    def start(self, benchmark_id):
+    def start(self, benchmark_id='default'):
         """Start a timer with given benchmark_id."""
+        import time
         self._t0[benchmark_id] = time.time()
 
-    def stop(self, benchmark_id):
+    def stop(self, benchmark_id='default'):
         try:
             t0 = self._t0[benchmark_id]
         except KeyError:
-            logger.warning("Can't stop timing for {}".format(benchmark_id))
+            _logger.warning("Can't stop timing for {}".format(benchmark_id))
         else:
+            import time
             self._t1[benchmark_id] = time.time()
             elapsed_time = self._t1[benchmark_id] - t0
             self._completed[benchmark_id] = elapsed_time
             return elapsed_time
 
-    def partial(self, benchmark_id):
+    def interval(self, benchmark_id='default'):
+        return self._completed[benchmark_id]
+
+    def partial(self, benchmark_id='default'):
         """Return the elapsed time of the given benchmark so far."""
         try:
             t0 = self._t0[benchmark_id]
         except KeyError:
-            logger.warning("Couldn't return partial timing for {}".format(benchmark_id))
+            _logger.warning("Couldn't return partial timing for {}".format(benchmark_id))
         else:
             return time.time() - t0
 
@@ -159,7 +173,7 @@ class Timer(object):
 
         """
         for benchmark_id, elapsed_time in self._completed.items():
-            logger.debug('{} took {:8.3f}s'.format(benchmark_id, elapsed_time))
+            _logger.debug('{} took {:8.3f}s'.format(benchmark_id, elapsed_time))
 
         if clear is True:
             self.reset_timing_statistics()

@@ -11,7 +11,9 @@ Residue template generator for the AMBER GAFF1/2 small molecule force fields.
 # LOGGER
 ################################################################################
 
+import os
 import logging
+import contextlib
 _logger = logging.getLogger("openmmforcefields.generators.gaff")
 
 ################################################################################
@@ -58,7 +60,7 @@ class GAFFTemplateGenerator(object):
     """
     SUPPORTED_GAFF_VERSIONS = ['1.4', '1.8', '1.81', '2.1', '2.11']
 
-    def __init__(self, molecules=None, cache=None, gaff_version='2.11'):
+    def __init__(self, molecules=None, gaff_version=None, cache=None, allow_cache_overwrite=False):
         """
         Create a GAFFTemplateGenerator with some openforcefield toolkit molecules
 
@@ -71,88 +73,106 @@ class GAFFTemplateGenerator(object):
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
+        gaff_version : str, optional, default=None
+            GAFF version to use. One of ('1.4', '1.8', '1.81', '2.1', '2.11')
+            If not specified, the latest GAFF supported version is used.
         cache : str, optional, default=None
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance.
             Note that no checking is done to determine this cache was created with the same GAFF version.
-        gaff_version : str, default = '2.11'
-            GAFF version to use. One of ('1.4', '1.8', '1.81', '2.1', '2.11')
+        allow_cache_overwrite : bool, optional, default=False
+            If True, will not complain about overwriting cache if an incompatible cache file is found.
 
         Examples
         --------
 
-        Create a template generator for GAFF for a single OEMol and register it with ForceField:
+        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
+        >>> from openforcefield.topology import Molecule
+        >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
-        >>> template_generator = GAFFTemplateGenerator(molecules=mol)
+        >>> gaff = GAFFTemplateGenerator(molecules=molecule)
+        >>> from simtk.openmm.app import ForceField
+        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber14-all.xml', 'tip3p.xml')
+        >>> forcefield.registerTemplateGenerator(gaff)
 
-        Create a template generator for GAFF 1.81 for multiple molecules:
+        The latest GAFF version is used if none is specified.
+        You can check which GAFF version is in use with
 
-        >>> template_generator = GAFFTemplateGenerator(molecules=[mol1, mol2], gaff_version='1.81')
+        >>> gaff.gaff_version
+        '2.11'
+
+        Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
+
+        >>> molecules = Molecule.from_file('molecules.sdf')
+        >>> gaff = OEGAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
+
+        You can also add molecules later on after the generator has been registered:
+
+        >>> gaff.add_molecules(molecule)
+        >>> gaff.add_molecules([molecule1, molecule2])
+
+        To check which GAFF versions are supported, check the `SUPPORTED_GAFF_VERSIONS` attribute:
+
+        >>> print(GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS)
+        ['1.4', '1.8', '1.81', '2.1', '2.11']
 
         You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-        >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
+        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', gaff_version='1.80')
 
+        Newly parameterized molecules will be written to the cache, saving time next time!
         """
+        # Use latest supported GAFF version if none is specified
+        if gaff_version is None:
+            gaff_version = self.SUPPORTED_GAFF_VERSIONS[-1]
+
+        # Ensure a valid GAFF version is specified
         if not gaff_version in self.SUPPORTED_GAFF_VERSIONS:
             raise Exception(f'Error: gaff_version must be one of {self.SUPPORTED_GAFF_VERSIONS}')
+
+        # Store user-specified GAFF version
         self._gaff_version = gaff_version
         self._gaff_major_version, self._gaff_minor_version = gaff_version.split('.')
 
-        # Add oemols to the dictionary
+        # Store specified molecules
         self._molecules = dict()
         self.add_molecules(molecules)
 
+        # Set up cache
         self._cache = cache
         self._smiles_added_to_db = set() # set of SMILES added to the database this session
 
-        # Check GAFF version compatibility with cache
-        # TODO: Add overwrite_cache optional argument to overwrite in this case?
-        if self._cache is not None:
-            db = self._open_db()
-            if 'gaff_version' in db:
-                if db['gaff_version'] != gaff_version:
-                    raise IncompatibleGAFFVersion(f"Specified cache uses GAFF {db['gaff_version']} but this generator constructed for GAFF {gaff_version}")
-            else:
-                # Record which GAFF version we're using
-                db['gaff_version'] = gaff_version
-            db.close()
+    @property
+    def gaff_version(self):
+        """The current GAFF version"""
+        return self._gaff_version
 
     @property
     def gaff_dat_filename(self):
-        """Return the path to the GAFF dat file corresponding to the requested GAFF version.
-
-        Returns
-        -------
-        filename : str
-            The full path to the corresponding GAFF ffxml file
-        """
-        from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename(f'gaff/dat/gaff-{self._gaff_version}.dat')
+        """File path to the GAFF .dat AMBER force field file"""
+        from pkg_resources import resource_filename
+        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'dat', f'gaff-{self.gaff_version}.dat'))
         return filename
 
     @property
     def gaff_xml_filename(self):
-        """Return the path to the GAFF ffxml file corresponding to the requested GAFF version.
-
-        Returns
-        -------
-        filename : str
-            The full path to the corresponding GAFF ffxml file
-        """
-        # TODO: Should we return a StringIO instead?
-        from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename(f'gaff/ffxml/gaff-{self._gaff_version}.xml')
+        """File path to the GAFF .ffxml OpenMM force field file"""
+        from pkg_resources import resource_filename
+        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'ffxml', f'gaff-{self.gaff_version}.xml'))
         return filename
 
-    def _open_db():
-        """
+    @contextlib.contextmanager
+    def _open_db(self):
+        """Open the cache database.
         """
         from tinydb import TinyDB
         tinydb_kwargs = { 'sort_keys' : True, 'indent' : 4, 'separators' : (',', ': ') } # for pretty-printing
         db = TinyDB(self._cache, **tinydb_kwargs)
-        return db
+        try:
+            yield db
+        finally:
+            db.close()
 
     def add_molecules(self, molecules=None):
         """
@@ -243,7 +263,7 @@ class GAFFTemplateGenerator(object):
         template_graph = nx.Graph()
         for atom_index, atom in enumerate(molecule_template.atoms):
             template_graph.add_node(atom_index, element=atom.atomic_number, number_of_external_bonds=0)
-        for (atom1, atom2) in molecule_template.bonds:
+        for bond in molecule_template.bonds:
             template_graph.add_edge(bond.atom1_index, bond.atom2_index)
 
         # DEBUG
@@ -267,20 +287,23 @@ class GAFFTemplateGenerator(object):
 
         return matches
 
-    def _getoutput(cmd):
-        """Compatibility function to substitute deprecated commands.getoutput in Python2.7"""
-        import subprocess
-        try:
-            out = subprocess.getoutput(cmd)
-        except AttributeError:
-            out = subprocess.Popen(cmd, shell=True, stderr=subprocess.STDOUT,
-                                   stdout=subprocess.PIPE).communicate()[0]
-        try:
-            return str(out.decode())
-        except:
-            return str(out)
+    def _generate_unique_atom_names(self, molecule):
+        """
+        Generate unique atom names
 
-    def generate_residue_template(molecule, residue_atoms=None):
+        Parameters
+        ----------
+        molecule : openforcefield.topology.Molecule
+            The molecule whose atom names are to be modified in-place
+        """
+        from collections import defaultdict
+        element_counts = defaultdict(int)
+        for atom in molecule.atoms:
+            symbol = atom.element.symbol
+            element_counts[symbol] += 1
+            atom.name = symbol + str(element_counts[symbol])
+
+    def generate_residue_template(self, molecule, residue_atoms=None):
         """
         Generate a residue template and additional parameters for the specified Molecule.
 
@@ -307,17 +330,23 @@ class GAFFTemplateGenerator(object):
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
 
         """
+        # Use the canonical isomeric SMILES to uniquely name the template
+        smiles = molecule.to_smiles()
         _logger.info(f'Generating a residue template for {smiles}')
 
-        # TODO: Generates unique atom names if they do not exist (or have Molecule do this)
+        # Generate unique atom names
+        self._generate_unique_atom_names(molecule)
 
         # Compute net formal charge
         net_charge = molecule.total_charge
+        _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charge
+        _logger.debug(f'Computing AM1-BCC charges...')
         molecule.compute_partial_charges_am1bcc()
 
         # Geneate a single conformation
+        _logger.debug(f'Generating a conformer...')
         molecule.generate_conformers(n_conformers=1)
 
         # Create temporary directory for running antechamber
@@ -330,13 +359,15 @@ class GAFFTemplateGenerator(object):
         frcmod_filename = os.path.join(tmpdir, prefix + '.frcmod')
 
         # Write MDL SDF file for input into antechamber
-        molecule.to_file(input_sdf_filename)
+        molecule.to_file(input_sdf_filename, file_format='sdf')
 
         # Parameterize the molecule with antechamber (without charging)
-        self._run_antechamber(molecule_sdf_filename=input_sdf_filename, input_format='mdl',
+        _logger.debug(f'Running antechamber...')
+        self._run_antechamber(molecule_filename=input_sdf_filename, input_format='mdl',
                 gaff_mol2_filename=gaff_mol2_filename, frcmod_filename=frcmod_filename)
 
         # Read the resulting GAFF mol2 file atom types
+        _logger.debug(f'Reading GAFF atom types...')
         self._read_gaff_atom_types_from_mol2(gaff_mol2_filename, molecule)
 
         # If residue_atoms = None, add all atoms to the residues
@@ -344,22 +375,22 @@ class GAFFTemplateGenerator(object):
             residue_atoms = [ atom for atom in molecule.atoms ]
 
         # Modify partial charges so that charge on residue atoms is integral
-        residue_charge = 0.0
-        sum_of_absolute_charge = 0.0
-        for atom in residue_atoms:
-            charge = atom.partial_charge
-            residue_charge += charge
-            sum_of_absolute_charge += abs(charge)
-        excess_charge = residue_charge - molecule.net_charge
-        # Redistribute excess charge proportionally to absolute charge
-        if sum_of_absolute_charge == 0.0:
-            sum_of_absolute_charge = 1.0
-        for atom in residue_atoms:
-            charge = atom.partial_charge
-            atom.partial_charge = charge + excess_charge * (abs(charge) / sum_of_absolute_charge)
+        # TODO: This may require some modification to correctly handle API changes
+        # when openforcefield makes charge quantities consistently unit-bearing or
+        # pure numbers.
+        _logger.debug(f'Fixing partial charges...')
+        from simtk import unit
+        residue_charge = 0.0 * unit.elementary_charge
+        total_charge = unit.sum(molecule.partial_charges)
+        sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
+        charge_deficit = net_charge * unit.elementary_charge - total_charge
+        if sum_of_absolute_charge / unit.elementary_charge > 0.0:
+            # Redistribute excess charge proportionally to absolute charge
+            molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
 
         # Generate additional parameters if needed
         # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
+        _logger.debug(f'Creating ffxml contents for additional parameters...')
         from inspect import signature # use introspection to support multiple parmed versions
         from io import StringIO
         leaprc = StringIO('parm = loadamberparams %s' % frcmod_filename)
@@ -376,28 +407,35 @@ class GAFFTemplateGenerator(object):
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
+        # Remove last </ForceField> line
+        ffxml_contents = ffxml_contents[:ffxml_contents.rfind('</ForceField>')]
+        ffxml_contents += '\n'
+
         # Create the residue template
+        _logger.debug(f'Creating residue template...')
         from simtk.openmm.app import ForceField, Element
-        ffxml_contents += '<Residues>\n'
-        ffxml_contents += f'  <Residue name="{molecule.to_smiles()}">'
+        ffxml_contents += '  <Residues>\n'
+        ffxml_contents += f'   <Residue name="{smiles}">\n'
         for (index, atom) in enumerate(molecule.atoms):
             element = Element.getByAtomicNumber(atom.atomic_number)
-            ffxml_contents += f'    <Atom name="{atom.name}" type="{atom.gaff_type}" charge="{atom.partial_charge}"/>\n'
+            ffxml_contents += f'      <Atom name="{atom.name}" type="{atom.gaff_type}" charge="{atom.partial_charge / unit.elementary_charge}"/>\n'
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
-                ffxml_contents += f'    <Bond atomName1="{bond.atom1.name}" atomName1="{bond.atom2.name}"/>\n'
+                ffxml_contents += f'      <Bond atomName1="{bond.atom1.name}" atomName2="{bond.atom2.name}"/>\n'
             elif (bond.atom1 in residue_atoms) and (bond.atom2 not in residue_atoms):
-                ffxml_contents += f'    <ExternalBond atomName="{bond.atom1.name}"/>\n'
+                ffxml_contents += f'      <ExternalBond atomName="{bond.atom1.name}"/>\n'
             elif (bond.atom1 not in residue_atoms) and (bond.atom2 in residue_atoms):
-                ffxml_contents += f'    <ExternalBond atomName="{bond.atom2.name}"/>\n'
-        ffxml_contents += f'  </Residue>'
-        ffxml_contents += "</Residues>\n"
+                ffxml_contents += f'      <ExternalBond atomName="{bond.atom2.name}"/>\n'
+        ffxml_contents += f'    </Residue>\n'
+        ffxml_contents += "  </Residues>\n"
+        ffxml_contents += "</ForceField>\n"
+
+        _logger.debug(f'ffxml creation complete.')
 
         return ffxml_contents
 
-    def _run_antechamber(molecule_filename, input_format='sdf',
-                         gaff_mol2_filename=None, frcmod_filename=None,
-                         log_debug_output=False, verbosity=0):
+    def _run_antechamber(self, molecule_filename, input_format='sdf',
+                         gaff_mol2_filename=None, frcmod_filename=None, verbosity=0):
         """Run AmberTools antechamber and parmchk2 to create GAFF mol2 and frcmod files.
 
         Parameters
@@ -414,8 +452,6 @@ class GAFFTemplateGenerator(object):
             and molecule_name
         input_format : str, optional, default='mol2'
             Format specifier for input file to pass to antechamber.
-        log_debug_output : bool, optional, default=False
-            If true, will send output of tleap to_logger.
         verbosity : int, default=0
             Verbosity for antechamber
 
@@ -433,9 +469,9 @@ class GAFFTemplateGenerator(object):
 
         # Build absolute paths for input and output files
         import os
+        molecule_filename = os.path.abspath( molecule_filename )
         gaff_mol2_filename = os.path.abspath( gaff_mol2_filename )
         frcmod_filename = os.path.abspath( frcmod_filename )
-        input_filename = os.path.abspath( input_filename )
 
         def read_file_contents(filename):
             infile = open(filename, 'r')
@@ -444,16 +480,20 @@ class GAFFTemplateGenerator(object):
             return contents
 
         # Use temporary directory context to do this to avoid issues with spaces in filenames, etc.
-        with enter_temp_directory():
+        import tempfile, subprocess
+        with tempfile.TemporaryDirectory() as tmpdir:
+            cwd = os.getcwd()
+            os.chdir(tmpdir)
+
             local_input_filename = 'in.' + input_format
             import shutil
             shutil.copy(molecule_filename, local_input_filename)
 
             # Run antechamber without charging (which is done separately)
-            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o {gaff_mol2_filename} -fo mol2 -s {verbosity} -at {self._gaff_major_version}'
+            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {self._gaff_major_version}'
 
-            if log_debug_output: _logger.debug(cmd)
-            output = self._getoutput(cmd)
+            _logger.debug(cmd)
+            output = subprocess.getoutput(cmd)
             import os
             if not os.path.exists('out.mol2'):
                 msg  = "antechamber failed to produce output mol2 file\n"
@@ -462,17 +502,17 @@ class GAFFTemplateGenerator(object):
                 msg += 8 * "----------" + '\n'
                 msg += output
                 msg += 8 * "----------" + '\n'
-                msg += "input mol2:\n"
+                msg += "input:\n"
                 msg += 8 * "----------" + '\n'
                 msg += read_file_contents(local_input_filename)
                 msg += 8 * "----------" + '\n'
                 raise Exception(msg)
-            if log_debug_output: _logger.debug(output)
+            _logger.debug(output)
 
             # Run parmchk.
             cmd = f"parmchk2 -i out.mol2 -f mol2 -p {self.gaff_dat_filename} -o out.frcmod -s %{self._gaff_major_version}"
-            if log_debug_output: _logger.debug(cmd)
-            output = self._getoutput(cmd)
+            _logger.debug(cmd)
+            output = subprocess.getoutput(cmd)
             if not os.path.exists('out.frcmod'):
                 msg  = "parmchk2 failed to produce output frcmod file\n"
                 msg += "command: %s\n" % cmd
@@ -485,12 +525,14 @@ class GAFFTemplateGenerator(object):
                 msg += read_file_contents('out.mol2')
                 msg += 8 * "----------" + '\n'
                 raise Exception(msg)
-            if log_debug_output: _logger.debug(output)
+            _logger.debug(output)
             self._check_for_errors(output)
 
             # Copy back
             shutil.copy( 'out.mol2', gaff_mol2_filename )
             shutil.copy( 'out.frcmod', frcmod_filename )
+
+            os.chdir(cwd)
 
         return gaff_mol2_filename, frcmod_filename
 
@@ -516,12 +558,15 @@ class GAFFTemplateGenerator(object):
             while line:
                 if line.strip() == '@<TRIPOS>ATOM':
                     break
+                line = infile.readline()
             # Read GAFF atom types
-            for index, atom in enumerate(molecule.n_atoms):
+            for index, atom in enumerate(molecule.atoms):
                 line = infile.readline()
                 atom.gaff_type = line[50:58].strip()
 
-    def _check_for_errors(outputtext, other_errors=None, ignore_errors=None):
+        return
+
+    def _check_for_errors(self, outputtext, other_errors=None, ignore_errors=None):
         """Check AMBER package output for the string 'ERROR' (upper or lowercase) and (optionally) specified other strings and raise an exception if it is found (to avoid silent failures which might be noted to log but otherwise ignored).
 
         Parameters
@@ -589,21 +634,22 @@ class GAFFTemplateGenerator(object):
 
         # If a database is specified, check against molecules in the database
         if self._cache is not None:
-            db = self._open_db()
-            for entry in db:
-                # Skip any molecules we've added to the database this session
-                if entry['smiles'] in self._smiles_added_to_db:
-                    continue
+            with self._open_db() as db:
+                table = db.table(self.gaff_version)
+                for entry in table:
+                    # Skip any molecules we've added to the database this session
+                    if entry['smiles'] in self._smiles_added_to_db:
+                        continue
 
-                # See if the template matches
-                from openforcefield.topology import Molecule
-                molecule_template = Molecule.from_smiles(entry['smiles'])
-                if self._match_residue(residue, molecule_template):
-                    # Add parameters and residue template for this residue
-                    # TODO: What can we do to avoid parameter or template collisions?
-                    forcefield.loadFile(StringIO(entry['ffxml']))
-                    # Signal success
-                    return True
+                    # See if the template matches
+                    from openforcefield.topology import Molecule
+                    molecule_template = Molecule.from_smiles(entry['smiles'])
+                    if self._match_residue(residue, molecule_template):
+                        # Add parameters and residue template for this residue
+                        # TODO: What can we do to avoid parameter or template collisions?
+                        forcefield.loadFile(StringIO(entry['ffxml']))
+                        # Signal success
+                        return True
 
         # Check against the molecules we know about
         for smiles, molecule in self._molecules.items():
@@ -611,31 +657,31 @@ class GAFFTemplateGenerator(object):
             if self._match_residue(residue, molecule):
                 # Generate template and parameters.
                 ffxml_contents = self.generate_residue_template(molecule)
+                _logger.debug(f'ffxml_contents:\n')
+                for index, line in enumerate(ffxml_contents.split('\n')):
+                    _logger.debug(f'{index:10}: {line}')
                 # Add the parameters and residue definition
                 # TODO: Do we have to worry about parameter collisions?
                 #       What happens if two residues contain the same additional parameter?
                 forcefield.loadFile(StringIO(ffxml_contents))
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
-                    print('Writing {} to cache'.format(smiles))
-                    record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
-                    # Add the IUPAC name for convenience if we can
-                    try:
-                        record['iupac'] = molecule.to_iupac()
-                    except Exception as e:
-                        pass
-                    # Store the record
-                    db.insert(record)
-                    self._smiles_added_to_db.add(smiles)
-                    db.close()
+                    with self._open_db() as db:
+                        table = db.table(self.gaff_version)
+                        _logger.info(f'Writing {smiles} to cache')
+                        record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
+                        # Add the IUPAC name for convenience if we can
+                        try:
+                            record['iupac'] = molecule.to_iupac()
+                        except Exception as e:
+                            pass
+                        # Store the record
+                        table.insert(record)
+                        self._smiles_added_to_db.add(smiles)
 
                 # Signal success
                 return True
 
-        # Make sure to close database
-        if self._cache is not None:
-            db.close()
-
         # Report that we have failed to parameterize the residue
-        logger.warn("Didn't know how to parameterize residue {}".format(residue.name))
+        _logger.warning("Didn't know how to parameterize residue {}".format(residue.name))
         return False

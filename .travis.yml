@@ -45,14 +45,15 @@ install:
 
 script:
     # Test installed package
-  - pytest -v --cov=openmmforcefields openmmforcefields/tests
+  #- pytest -v --cov=openmmforcefields openmmforcefields/tests
+  - pytest -v -x -s --log-cli-level DEBUG --cov=openmmforcefields openmmforcefields/tests
 
-    # STore current working directory
+    # Store current working directory
   - export WORK=`pwd`
 
     # Test AMBER conversion
   - echo "Testing AMBER conversion..."
-  - cd $WORK/amber && python convert_amber.py --input gaff.yaml --verbose
+  - cd $WORK/amber && python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
 
     # Test CHARMM conversion
   - echo "Testing CHARMM conversion..."
