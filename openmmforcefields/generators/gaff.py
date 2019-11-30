@@ -489,8 +489,16 @@ class GAFFTemplateGenerator(object):
             import shutil
             shutil.copy(molecule_filename, local_input_filename)
 
+            # Determine whether antechamber supports -dr [yes/no] option
+            cmd = f'antechamber -h | grep dr'
+            supports_acdoctor = False
+            if ('acdoctor' in subprocess.getoutput(cmd)):
+                supports_acdoctor = True
+
             # Run antechamber without charging (which is done separately)
             cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {self._gaff_major_version}'
+            if supports_acdoctor:
+                cmd += ' -dr ' + ('yes' if verbosity else 'no')
 
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
