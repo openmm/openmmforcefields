@@ -913,7 +913,7 @@ def validate_gaff(ffxml_name, leaprc_name, gaff_dat_name):
     if verbose: print('Preparing LeaP scripts...')
     leap_script_imatinib_string = """\
 source %s
-loadamberparams gaff/%s
+loadamberparams gaff/dat/%s
 loadamberparams files/frcmod.imatinib
 x = loadMol2 files/imatinib.mol2
 saveAmberParm x %s %s
