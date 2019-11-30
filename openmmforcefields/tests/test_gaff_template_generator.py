@@ -144,7 +144,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 db_entries = table.all()
                 db.close()
                 n_entries = len(db_entries)
-                assert (n_entries, n_expected), \
+                assert (n_entries == n_expected), \
                     "Expected {} entries but database has {}\n db contents: {}".format(n_expected, n_entries, db_entries)
 
             check_cache(generator, len(self.molecules))
@@ -170,3 +170,45 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             generator = GAFFTemplateGenerator(cache=cache, gaff_version='1.81')
             # Check database contains no molecules
             check_cache(generator, 0)
+
+    def test_jacs_ligands(self):
+        """Test GAFFTemplateGenerator parameterization of Schrodinger JACS set of ligands"""
+        from simtk.openmm.app import ForceField, NoCutoff
+        gaff_version = '2.11'
+
+        jacs_systems = {
+            'bace'     : { 'ligand_sdf_filename' : 'Bace_ligands.sdf' },
+            'cdk2'     : { 'ligand_sdf_filename' : 'CDK2_ligands.sdf' },
+            'jnk1'     : { 'ligand_sdf_filename' : 'Jnk1_ligands.sdf' },
+            'mcl1'     : { 'ligand_sdf_filename' : 'MCL1_ligands.sdf' },
+            'p38'      : { 'ligand_sdf_filename' : 'p38_ligands.sdf' },
+            'ptp1b'    : { 'ligand_sdf_filename' : 'PTP1B_ligands.sdf' },
+            'thrombin' : { 'ligand_sdf_filename' : 'Thrombin_ligands.sdf' },
+            'tyk2'     : { 'ligand_sdf_filename' : 'Tyk2_protein.pdb' },
+        }
+        for system_name in jacs_systems:
+            # Load molecules
+            from openforcefield.topology import Molecule
+            from openmmforcefields.utils import get_data_filename
+            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, jacs_systems[system_name]['ligand_sdf_filename']))
+            molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
+            print(f'Read {len(molecules)} molecules from {sdf_filename}')
+
+            # Create GAFF template generator with local cache
+            cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
+            from openmmforcefields.generators import GAFFTemplateGenerator
+            generator = GAFFTemplateGenerator(molecules=molecules, gaff_version=gaff_version, cache=cache_filename)
+
+            # Create a ForceField
+            forcefield = ForceField(generator.gaff_xml_filename)
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+
+            # Parameterize all molecules
+            print(f'Caching all molecules for {system_name} at {cache_filename} ...')
+            for molecule in molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                try:
+                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                except Exception as e:
+                    print(e)

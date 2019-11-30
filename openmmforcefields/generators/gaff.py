@@ -683,5 +683,5 @@ class GAFFTemplateGenerator(object):
                 return True
 
         # Report that we have failed to parameterize the residue
-        _logger.warning("Didn't know how to parameterize residue {}".format(residue.name))
+        _logger.warning(f'GAFFTemplateGenerator does not recognize residue {residue.name}; did you forget to call GAFFTemplateGenerator.add_molecules() to add it?')
         return False

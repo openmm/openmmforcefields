@@ -93,7 +93,7 @@ class GAFFSystemGenerator(SystemGenerator):
 
     >>> # Initialize a SystemGenerator
     >>> from openmmforcefields.generators import GAFFSystemGenerator
-    >>> system_generator = GAFFSystemGenerator(forcefields=['amber/protein.ff14SB.xml', 'amber/tip3p.xml'], gaff_version='2.11', cache='gaf-2.11.json')
+    >>> system_generator = GAFFSystemGenerator(forcefields=['amber/protein.ff14SB.xml', 'amber/tip3p.xml'], gaff_version='2.11', cache='gaff-2.11.json')
     >>> # Create an OpenMM System from an Open Force Field toolkit Topology object
     >>> system = system_generator.create_system(topology)
 
@@ -213,19 +213,34 @@ class GAFFSystemGenerator(SystemGenerator):
 class SMIRNOFFSystemGenerator(SystemGenerator):
     """
     This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
-    biopolymer force fields and SMIRNOF small molecule force fields.
+    biopolymer force fields and SMIRNOFF small molecule force fields.
 
     .. warning :: This API is experimental and subject to change.
 
+    >>> # Load some molecules
+    >>> from openforcefield.topology import Molecule
+    >>> molecules = Molecule.from_file('molecules.sdf')
     >>> # Initialize a SystemGenerator
-    >>> from openmmforcefields.generators import GAFFSystemGenerator
-    >>> system_generator = GAFFSystemGenerator(forcefields=['amber/protein.ff14SB.xml', 'amber/tip3p.xml'], gaff_version='2.11', cache='gaf-2.11.json')
-    >>> # Create an OpenMM System from an Open Force Field toolkit Topology object
+    >>> from openmmforcefields.generators import SMIRNOFFSystemGenerator
+    >>> forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml']
+    >>> system_generator = SMIRNOFFSystemGenerator(forcefields=forcefields,
+    ...                      smirnoff_forcefield='openforcefield-1.0.0.offxml',
+    ...                      molecules=molecules, gaff_version='2.11', cache='gaff-2.11.json')
+    >>> # Create an OpenMM System from an OpenMM Topology object
     >>> system = system_generator.create_system(topology)
 
-    """
+    You can add more molecules after the SystemGenerator has been created:
 
-    def __init__(self, forcefields=None, smirnoff_forcefield=None, metadata=None, cache=None, **kwargs):
+    >>> new_molecules = Molecule.from_file('new_molecules.sdf')
+    >>> system_generator.add_molecules(new_molecules)
+
+    You can also modify the arguments to OpenMM's ForceField.createSystem():
+
+    >>> from simtk umport unit
+    >>> system_generator.forcefield_kwargs = { 'hydrogenMass' : 4.0*unit.amu }
+
+    """
+    def __init__(self, forcefields=None, smirnoff_forcefield=None, cache=None, **forcefield_kwargs):
         """
         Create a new SystemGenerator for AMBER systems that contain SMIRNOFF-parameterized small molecules.
 
@@ -239,6 +254,8 @@ class SMIRNOFFSystemGenerator(SystemGenerator):
             SMIRNOFF force field filename
         cache : filename or TinyDB instance
             JSON filename or TinyDB instance that can be used to cache parameterized small molecules
+        system_kwargs : dict, optional
+            Additional keyword arguments to pass to ForceField.createSystem()
         """
         # Call base class
         super(SMIRNOFFSystemGenerator).__init__(**kwargs)
@@ -289,8 +306,27 @@ class SMIRNOFFSystemGenerator(SystemGenerator):
         system : simtk.openmm.System
             A system object generated from the topology
         """
-        # Create the receptor system
-        receptor_system = self._openmm_forcefield.createSystem(new_topology, **self._forcefield_kwargs)
+
+        # Split topology into residues that can be parameterized by OpenMM ForceField
+        # and those that cannot (which will be parameterized by SMIRNOFF)
+        from simtk.openmm.app import Modeller
+        modeller = Modeller(topology)
+        unmatched_residues = self._openmm_forcefield.getUnmatchedResidues(modeller.topology)
+
+        n_atoms = topology.getNumAtoms()
+        atom_indices['all'] = set(range(n_atoms))
+        atom_indices['smirnoff'] = set([ index for index in residue.atoms for residue in unmatched_residues ])
+        atom_indices['openmm_forcefield'] = atom_indices['all'] - atom_indices['smirnoff']
+
+        
+        modeller.delete(unmatched_residues)
+        receptor_system = self._openmm_forcefield.createSystem(modeller.topology, **self._forcefield_kwargs)
+
+        # Parameterize everything else with SMIRNOFF
+        modeller = Modeller(topology)
+        unmatched_residues = self._openmm_forcefield.getUnmatchedResidues(modeller.topology)
+        modeller.delete(unmatched_residues)
+        receptor_system = self._openmm_forcefield.createSystem(modeller.topology, **self._forcefield_kwargs)
 
         # Parameterize any small molecules
         smirnoff_system = self._smirnoff_forcefield.create_system(small_molecule)
