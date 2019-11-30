@@ -9,7 +9,7 @@ Support for small molecule parameterization and additional AMBER and CHARMM forc
 
 **AMBER:** All major AMBER force fields distributed with AmberTools 19.9 (except ff19SB, which requres CMAP), as well as all released GAFF small molecule force fields through 1.81 and 2.11
 
-**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml)
+**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
 **Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and `openforcefield-1.0.0` ("Parsley").
 Newer parameter sets can be obtained by simply updating the [`openforcefields` package](https://github.com/openforcefield/openforcefields) with
