@@ -20,7 +20,7 @@ dependencies:
 
     # Requirements for conversion tools
   - pyyaml
-  - ambertools >=19.0 # contains sufficiently recent ParmEd
+  - ambertools >=18.0 # contains sufficiently recent ParmEd
   - lxml
   - networkx
 
