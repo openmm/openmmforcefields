@@ -370,7 +370,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             elif MODE == 'RECIPE':
                 _filename = os.path.join(AMBERHOME, 'dat/leap/', source_file)
             elif MODE == 'GAFF':
-                _filename = os.path.join('gaff/', source_file)
+                _filename = os.path.join('gaff', 'dat', source_file)
             files.append(_filename)
             source.append(OrderedDict())
             source[-1]['Source'] = source_file

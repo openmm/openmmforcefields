@@ -6,6 +6,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -21,6 +22,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -36,6 +38,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -51,6 +54,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -66,6 +70,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -81,6 +86,7 @@
   leaprc: leaprc.gaff2
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -96,6 +102,7 @@
   leaprc: leaprc.gaff2
   Options:
     write_unused: True
+    ffxml_dir: gaff/ffxml
   Test:
   - gaff
   Reference:
