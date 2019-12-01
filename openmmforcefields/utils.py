@@ -33,10 +33,9 @@ def get_data_filename(relative_path):
 
     """
     from pkg_resources import resource_filename
-    import os
-
     fn = resource_filename('openmmforcefields', 'data/' + relative_path)
 
+    import os
     if not os.path.exists(fn):
         raise ValueError("sorry! %s does not exist. if you just added it, you'll have to re-install" % fn)
 

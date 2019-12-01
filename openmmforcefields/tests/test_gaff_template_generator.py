@@ -102,7 +102,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         generator.add_molecules(self.molecules)
 
         # Ensure all molecules can be parameterized
-        print('5')
         for molecule in self.molecules:
             openmm_topology = molecule.to_topology().to_openmm()
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
@@ -171,8 +170,37 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             # Check database contains no molecules
             check_cache(generator, 0)
 
+    def test_add_solvent(self):
+        """Test using simtk.opnmm.app.Modeller to add solvent to a small molecule parameterized by GAFFTemplateGenerator"""
+        from openmmforcefields.generators import GAFFTemplateGenerator
+        gaff_version = '2.11'
+        # Select a molecule to add solvent around
+        from simtk.openmm.app import NoCutoff, Modeller
+        from simtk import unit
+        molecule = self.molecules[0]
+        openmm_topology = molecule.to_topology().to_openmm()
+        openmm_positions = molecule.conformers[0]
+        # Try adding solvent without residue template generator; this will fail
+        from simtk.openmm.app import ForceField
+        forcefield = ForceField('tip3p.xml')
+        # Add solvent to a system containing a small molecule
+        modeller = Modeller(openmm_topology, openmm_positions)
+        try:
+            modeller.addSolvent(forcefield, model='tip3p', padding=6.0*unit.angstroms)
+        except ValueError as e:
+            pass
+
+        # Create a generator that knows about a few molecules
+        generator = GAFFTemplateGenerator(molecules=self.molecules, gaff_version=gaff_version)
+        # Add to the forcefield object
+        forcefield.loadFile(generator.gaff_xml_filename)
+        forcefield.registerTemplateGenerator(generator.generator)
+        # Add solvent to a system containing a small molecule
+        # This should succeed
+        modeller.addSolvent(forcefield, model='tip3p', padding=6.0*unit.angstroms)
+
     def test_jacs_ligands(self):
-        """Test GAFFTemplateGenerator parameterization of Schrodinger JACS set of ligands"""
+        """Use GAFFTemplateGenerator to parameterize the Schrodinger JACS set of ligands"""
         from simtk.openmm.app import ForceField, NoCutoff
         gaff_version = '2.11'
 
@@ -188,6 +216,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         }
         for system_name in jacs_systems:
             # Load molecules
+            print(f'Reading molecules from {sdf_filename} ...')
             from openforcefield.topology import Molecule
             from openmmforcefields.utils import get_data_filename
             sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, jacs_systems[system_name]['ligand_sdf_filename']))
@@ -206,9 +235,14 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Parameterize all molecules
             print(f'Caching all molecules for {system_name} at {cache_filename} ...')
+            n_success = 0
+            n_failure = 0
             for molecule in molecules:
                 openmm_topology = molecule.to_topology().to_openmm()
                 try:
                     forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                    n_success += 1
                 except Exception as e:
+                    n_failure += 1
                     print(e)
+            print(f'{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}')

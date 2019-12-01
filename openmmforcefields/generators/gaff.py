@@ -514,6 +514,7 @@ class GAFFTemplateGenerator(object):
                 msg += 8 * "----------" + '\n'
                 msg += read_file_contents(local_input_filename)
                 msg += 8 * "----------" + '\n'
+                # TODO: Run antechamber again with acdoctor mode on (-dr yes) to get more debug info, if supported
                 raise Exception(msg)
             _logger.debug(output)
 
@@ -676,7 +677,7 @@ class GAFFTemplateGenerator(object):
                 if self._cache is not None:
                     with self._open_db() as db:
                         table = db.table(self.gaff_version)
-                        _logger.info(f'Writing {smiles} to cache')
+                        _logger.info(f'Writing residue template for {smiles} to cache')
                         record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
                         # Add the IUPAC name for convenience if we can
                         try:

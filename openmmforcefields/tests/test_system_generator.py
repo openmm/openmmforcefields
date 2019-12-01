@@ -10,18 +10,45 @@ from openmmforcefields.utils import get_data_filename, Timer
 
 class TestSystemGenerator(unittest.TestCase):
     def setUp(self):
-        # Create test topologies
-        self.topologies = list()
+        self.testsystems = dict()
+        for (system_name, prefix) in [
+            ('bace', 'Bace'),
+            ('cdk1', 'CDK2'),
+            ('jnk1', 'Jnk1'),
+            ('mcl1', 'MCL1'),
+            ('p38', 'p38'),
+            ('ptp1b', 'PTP1B'),
+            ('thrombin', 'Thrombin'),
+            ('tyk2', 'Tyk2'),
+        ]:
+            # Load protein
+            from simtk.openmm.app import PDBFile
+            pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            pdbfile = PDBFile(pdb_filename)
 
-        # Create protein-ligand system
-        from openforcefield.topology import Molecule
-        ligand_off_molecule = Molecule(get_data_filename("BRD4/sdf/ligand-1.sdf"))
+            # Load molecules
+            from openforcefield.topology import Molecule
+            from openmmforcefields.utils import get_data_filename
+            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands.sdf'))
+            molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
+            n_molecules = len(molecules)
+            print(f'Read {n_molecules} molecules from {sdf_filename}')
 
-        # Read in the coordinates of the ligand from the PDB file
-        from simtk.openmm.app import PDBFile
-        ligand_pdbfile = PDBFile('ligand.pdb')
+            # Create ParmEd Structure objects
+            print('Creating protein:ligand complexes')
+            import parmed
+            protein_structure = parmed.load_file(pdb_filename)
+            molecules_structure = parmed.load_file(sdf_filename)
+            complex_structures = [ (protein_structure + molecules_structure[index]) for index in range(n_molecules) ]
 
-        # Com
+            # Store
+            testsystem = {
+                'name' : system_name,
+                'protein_pdbfile' : pdbfile,
+                'molecules' : molecules,
+                'complex_structures' : complex_structures
+                }
+            self.testsystems[system_name] = testsystem
 
         # TODO: Create other test topologies
         # TODO: Protein-only
@@ -29,13 +56,8 @@ class TestSystemGenerator(unittest.TestCase):
         # TODO: Solvated protein-ligand topology
         # TODO: Host-guest topology
 
-        from openforcefield.topology import Molecule
-        filename = get_data_filename("minidrugbank/MiniDrugBank.sdf")
-        molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
-        # Only use first file molecules for testing
-        molecules = molecules[:5]
-        # Store molecules
-        self.molecules = molecules
+        # Select AMBER force fields
+        self.amber_forcefields = ['amber/protein.ff14SB', 'amber/tip3p_standard.xml']
 
         # Suppress DEBUG logging from various packages
         import logging
@@ -50,7 +72,7 @@ class TestGAFFSystemGenerator(TestSystemGenerator):
         # Create an empty system generator
         generator = GAFFSystemGenerator()
         # Create a generator that defines a protein force field and GAFF version
-        generator = GAFFSystemGenerator(forcefields=['amber/protein.ff14SB', 'amber/tip3p.xml'], gaff_version='2.11')
+        generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, gaff_version='2.11')
         # Create a generator that also has a database cache
         with tempfile.TemporaryDirectory() as tmpdirname:
             cache = os.path.join(tmpdirname, 'db.json')
@@ -61,108 +83,78 @@ class TestGAFFSystemGenerator(TestSystemGenerator):
             generator = GAFFSystemGenerator(cache=cache)
             del generator
 
-    def test_parameterize(self):
-        """Test parameterizing molecules with GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFTemplateGenerator, GAFFSystemGenerator
+    def test_parameterize_molecules(self):
+        """Test parameterizing molecules in vacuum with GAFFTemplateGenerator"""
+        from openmmforcefields.generators import GAFFSystemGenerator
         for gaff_version in GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS:
             # Create a generator that knows about a few molecules
-            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            forcefields = ['amber/protein.ff14SB', 'tip3p.xml']
-            generator = GAFFSystemGenerator(forcefields=forcefields, gaff_version=gaff_version)
-            # Parameterize some systems
-            for topology in self.topologies:
+            testsystem = self.testsystems['mcl1']
+            molecules = testsystem['molecules']
+            from simtk.openmm.app import NoCutoff
+            forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
+            generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
+                molecules=molecules, gaff_version=gaff_version)
+            # Parameterize some molecules
+            from openmmforcefields.utils import Timer
+            for molecule in molecules[:3]:
+                openmm_topology = molecule.to_topology().to_openmm()
                 with Timer() as t1:
-                    system = generator.create_system(topology)
-                assert system.getNumParticles() == topology.n_atoms
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
                 # Molecule should now be cached
                 with Timer() as t2:
                     system = generator.create_system(topology)
-                assert system.getNumParticles() == topology.n_atoms
+                assert system.getNumParticles() == molecule.n_atoms
                 assert (t2.interval < t1.interval)
 
     def test_add_molecules(self):
-        """Test that OEMols can be added to GAFFTemplateGenerator later"""
+        """Test that Molecules can be added to GAFFSystemGenerator later"""
         from openmmforcefields.generators import GAFFTemplateGenerator
         # Create a generator that does not know about any molecules
-        generator = GAFFTemplateGenerator(gaff_version='2.11')
-        # Create a ForceField
-        from simtk.openmm.app import ForceField
-        forcefield = ForceField(generator.gaff_xml_filename)
-        # Register the template generator
-        forcefield.registerTemplateGenerator(generator.generator)
+        testsystem = self.testsystems['mcl1']
+        molecules = testsystem['molecules']
+        from simtk.openmm.app import NoCutoff
+        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
+        generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
+            gaff_version='2.11')
 
         # Check that parameterizing a molecule fails
-        molecule = self.molecules[0]
-        from simtk.openmm.app import NoCutoff
+        molecule = molecules[0]
+        openmm_topology = molecule.to_topology().to_openmm()
         try:
             # This should fail with an exception
-            system = forcefield.createSystem(molecule.to_openmm_topology(), nonbondedMethod=NoCutoff)
+            system = forcefield.create_system(openmm_topology)
         except ValueError as e:
             # Exception 'No template found...' is expected
             assert str(e).startswith('No template found')
 
         # Now add the molecule to the generator and ensure parameterization passes
         generator.add_molecules(molecule)
-        system = forcefield.createSystem(molecule.to_openmm_topology(), nonbondedMethod=NoCutoff)
+        system = forcefield.createSystem(openmm_topology)
         assert system.getNumParticles() == molecule.n_atoms
 
         # Add multiple molecules, including repeats
-        generator.add_molecules(self.molecules)
+        generator.add_molecules(molecules)
 
         # Ensure all molecules can be parameterized
-        for molecule in self.molecules:
-            system = forcefield.createSystem(molecule.to_openmm_topology(), nonbondedMethod=NoCutoff)
+        for molecule in molecules[:3]:
+            system = forcefield.createSystem(openmm_topology)
             assert system.getNumParticles() == molecule.n_atoms
 
-    def test_cache(self):
-        """Test cache capability of GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
-        from simtk.openmm.app import ForceField, NoCutoff
-        gaff_version = '2.11'
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            # Create a generator that also has a database cache
-            cache = os.path.join(tmpdirname, 'db.json')
-            generator = GAFFTemplateGenerator(molecules=self.molecules, cache=cache, gaff_version=gaff_version)
-            # Create a ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize the molecules
-            for oemol in self.oemols:
-                forcefield.createSystem(generateTopologyFromOEMol(oemol), nonbondedMethod=NoCutoff)
+    def test_complex(self):
+        """Test parameterizing a protein:ligand complex in vacuum"""
+        for testsystem in self.testsystems:
+            print(f'Testing parameterization of {testsystem.name}')
+            molecules = testsystem['molecules']
+            from simtk.openmm.app import NoCutoff
+            forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
+            generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
+                molecules=molecules, gaff_version=gaff_version)
+            # Parameterize a complex from the set
+            complex_structure = testsystem['complex_structures'][0]
+            openmm_topology = complex_structure.topology
+            system = generator.create_system(openmm_topology)
+            assert system.getNumParticles() == len(complex_structure.atoms)
 
-            # Check database contents
-            def check_database(generator):
-                from tinydb import TinyDB
-                db = TinyDB(generator._cache)
-                db_entries = db.all()
-                db.close()
-                nentries = len(db_entries)
-                nmolecules = len(self.oemols)
-                assert (nmolecules == nentries), \
-                    "Expected {} entries but database only has {}\n db contents: {}".format(nmolecules, nentries, db_entries)
 
-            check_database(generator)
-            # Clean up, forcing closure of database
-            del forcefield, generator
-
-            # Create a generator that also uses the database cache but has no molecules
-            print('Creating new generator with just cache...')
-            generator = GAFFTemplateGenerator(cache=cache, gaff_version=gaff_version)
-            # Check database contents
-            check_database(generator)
-            # Create a ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize the molecules; this should succeed
-            for oemol in self.oemols:
-                from openeye import oechem
-                forcefield.createSystem(generateTopologyFromOEMol(oemol), nonbondedMethod=NoCutoff)
-
-            # Check that using an incompatible cache will fail
-            from openmmforcefields.generators import IncompatibleGAFFVersion
-            try:
-                generator = GAFFTemplateGenerator(cache=cache, gaff_version='1.81')
-            except IncompatibleGAFFVersion as e:
-                pass
+    # TODO: Test parameterization of a protein:ligand complex in solvent
