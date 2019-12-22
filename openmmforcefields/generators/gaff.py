@@ -17,46 +17,19 @@ import contextlib
 _logger = logging.getLogger("openmmforcefields.generators.gaff")
 
 ################################################################################
-# GAFF-specific force field generation utilities
+# Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
-class GAFFTemplateGenerator(object):
+class SmallMoleculeTemplateGenerator(object):
     """
-    OpenMM ForceField residue template generator for GAFF/AM1-BCC using pre-cached openforcefield toolkit molecules.
+    Abstract base class for small molecule template generation for OpenMM ForceField.
 
-    Examples
-    --------
-
-    Create a template generator for GAFF for a single Molecule and register it with ForceField:
-
-    >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
-    >>> template_generator = GAFFTemplateGenerator(molecules=mol)
-    >>> from simtk.openmm.app import ForceField
-    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
-    >>> forcefield.registerTemplateGenerator(template_generator.generator)
-    >>> forcefield.loadFile(template_generator.gaff_xml_filename)
-
-    Create a template generator for a specific GAFF version and register multiple molecules:
-
-    >>> template_generator = GAFFTemplateGenerator(molecules=[mol1, mol2], gaff_version='2.11')
-
-    You can also add some Molecules later on after the generator has been registered:
-
-    >>> forcefield.add_molecule(mol)
-    >>> forcefield.add_molecules([mol1, mol2])
-
-    You can optionally create or use a tiny database cache of pre-parameterized molecules:
-
-    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
-
-    Newly parameterized molecules will be written to the cache, saving time next time!
-
+    This class should not be used directly, but provides utility routines for
+    subclasses that generate small molecule residue templates via external tools.
     """
-    SUPPORTED_GAFF_VERSIONS = ['1.4', '1.8', '1.81', '2.1', '2.11']
-
-    def __init__(self, molecules=None, gaff_version=None, cache=None):
+    def __init__(self, molecules=None, cache=None):
         """
-        Create a GAFFTemplateGenerator with some openforcefield toolkit molecules
+        Create a tempalte generator with some openforcefield toolkit molecules
 
         Requies the openforcefield toolkit: http://openforcefield.org
 
@@ -67,65 +40,10 @@ class GAFFTemplateGenerator(object):
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
-        gaff_version : str, optional, default=None
-            GAFF version to use. One of ('1.4', '1.8', '1.81', '2.1', '2.11')
-            If not specified, the latest GAFF supported version is used.
         cache : str, optional, default=None
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
-
-        Examples
-        --------
-
-        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
-
-        >>> from openforcefield.topology import Molecule
-        >>> molecule = Molecule.from_smiles('c1ccccc1')
-        >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
-        >>> gaff = GAFFTemplateGenerator(molecules=molecule)
-        >>> from simtk.openmm.app import ForceField
-        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber/ff14SB.xml', 'amber/tip3p.xml')
-        >>> forcefield.registerTemplateGenerator(gaff)
-
-        The latest GAFF version is used if none is specified.
-        You can check which GAFF version is in use with
-
-        >>> gaff.gaff_version
-        '2.11'
-
-        Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
-
-        >>> molecules = Molecule.from_file('molecules.sdf')
-        >>> gaff = GAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
-
-        You can also add molecules later on after the generator has been registered:
-
-        >>> gaff.add_molecules(molecule)
-        >>> gaff.add_molecules([molecule1, molecule2])
-
-        To check which GAFF versions are supported, check the `SUPPORTED_GAFF_VERSIONS` attribute:
-
-        >>> print(GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS)
-        ['1.4', '1.8', '1.81', '2.1', '2.11']
-
-        You can optionally create or use a tiny database cache of pre-parameterized molecules:
-
-        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', gaff_version='1.80')
-
-        Newly parameterized molecules will be written to the cache, saving time next time!
         """
-        # Use latest supported GAFF version if none is specified
-        if gaff_version is None:
-            gaff_version = self.SUPPORTED_GAFF_VERSIONS[-1]
-
-        # Ensure a valid GAFF version is specified
-        if not gaff_version in self.SUPPORTED_GAFF_VERSIONS:
-            raise Exception(f'Error: gaff_version must be one of {self.SUPPORTED_GAFF_VERSIONS}')
-
-        # Store user-specified GAFF version
-        self._gaff_version = gaff_version
-        self._gaff_major_version, self._gaff_minor_version = gaff_version.split('.')
-
         # Store specified molecules
         self._molecules = dict()
         self.add_molecules(molecules)
@@ -133,25 +51,6 @@ class GAFFTemplateGenerator(object):
         # Set up cache
         self._cache = cache
         self._smiles_added_to_db = set() # set of SMILES added to the database this session
-
-    @property
-    def gaff_version(self):
-        """The current GAFF version"""
-        return self._gaff_version
-
-    @property
-    def gaff_dat_filename(self):
-        """File path to the GAFF .dat AMBER force field file"""
-        from pkg_resources import resource_filename
-        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'dat', f'gaff-{self.gaff_version}.dat'))
-        return filename
-
-    @property
-    def gaff_xml_filename(self):
-        """File path to the GAFF .ffxml OpenMM force field file"""
-        from pkg_resources import resource_filename
-        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'ffxml', f'gaff-{self.gaff_version}.xml'))
-        return filename
 
     @contextlib.contextmanager
     def _open_db(self):
@@ -184,8 +83,8 @@ class GAFFTemplateGenerator(object):
 
         >>> from openforcefield.topology import Molecule
         >>> mol1, mol2, mol3 = [ Molecule.from_smiles(smiles) for smiles in ('c1ccccc1', 'O=Cc1ccc(O)c(OC)c1', 'CN1CCC[C@H]1c2cccnc2') ]
-        >>> forcefield.add_oemols(mol1)
-        >>> forcefield.add_oemols([mol2, mol3])
+        >>> generator.add_oemols(mol1)
+        >>> generator.add_oemols([mol2, mol3])
 
         """
         # Return if empty
@@ -293,6 +192,220 @@ class GAFFTemplateGenerator(object):
             symbol = atom.element.symbol
             element_counts[symbol] += 1
             atom.name = symbol + str(element_counts[symbol])
+
+    def generator(self, forcefield, residue, structure=None):
+        """
+        Residue template generator method to register with simtk.openmm.app.ForceField
+
+        Parameters
+        ----------
+        forcefield : simtk.openmm.app.ForceField
+            The ForceField object to which residue templates and/or parameters are to be added.
+        residue : simtk.openmm.app.Topology.Residue
+            The residue topology for which a template is to be generated.
+
+        Returns
+        -------
+        success : bool
+            If the generator is able to successfully parameterize the residue, `True` is returned.
+            If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
+
+        """
+        from io import StringIO
+
+        # If a database is specified, check against molecules in the database
+        if self._cache is not None:
+            with self._open_db() as db:
+                table = db.table(self.gaff_version)
+                for entry in table:
+                    # Skip any molecules we've added to the database this session
+                    if entry['smiles'] in self._smiles_added_to_db:
+                        continue
+
+                    # See if the template matches
+                    from openforcefield.topology import Molecule
+                    molecule_template = Molecule.from_smiles(entry['smiles'])
+                    if self._match_residue(residue, molecule_template):
+                        # Add parameters and residue template for this residue
+                        # TODO: What can we do to avoid parameter or template collisions?
+                        forcefield.loadFile(StringIO(entry['ffxml']))
+                        # Signal success
+                        return True
+
+        # Check against the molecules we know about
+        for smiles, molecule in self._molecules.items():
+            # See if the template matches
+            if self._match_residue(residue, molecule):
+                # Generate template and parameters.
+                ffxml_contents = self.generate_residue_template(molecule)
+                _logger.debug(f'ffxml_contents:\n')
+                for index, line in enumerate(ffxml_contents.split('\n')):
+                    _logger.debug(f'{index:10}: {line}')
+                # Add the parameters and residue definition
+                # TODO: Do we have to worry about parameter collisions?
+                #       What happens if two residues contain the same additional parameter?
+                forcefield.loadFile(StringIO(ffxml_contents))
+                # If a cache is specified, add this molecule
+                if self._cache is not None:
+                    with self._open_db() as db:
+                        table = db.table(self.gaff_version)
+                        _logger.info(f'Writing residue template for {smiles} to cache')
+                        record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
+                        # Add the IUPAC name for convenience if we can
+                        try:
+                            record['iupac'] = molecule.to_iupac()
+                        except Exception as e:
+                            pass
+                        # Store the record
+                        table.insert(record)
+                        self._smiles_added_to_db.add(smiles)
+
+                # Signal success
+                return True
+
+        # Report that we have failed to parameterize the residue
+        _logger.warning(f'Did not recognize residue {residue.name}; did you forget to call .add_molecules() to add it?')
+        return False
+
+################################################################################
+# GAFF-specific OpenMM ForceField template generation utilities
+################################################################################
+
+class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
+    """
+    OpenMM ForceField residue template generator for GAFF/AM1-BCC using pre-cached openforcefield toolkit molecules.
+
+    Examples
+    --------
+
+    Create a template generator for GAFF for a single Molecule and register it with ForceField:
+
+    >>> # Define a Molecule using the openforcefield Molecule object
+    >>> from openforcefield.topology import Molecule
+    >>> molecule = Molecule.from_smiles('c1ccccc1')
+    >>> # Create the GAFF template generator
+    >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
+    >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
+    >>> # Create an OpenMM ForceField
+    >>> from simtk.openmm.app import ForceField
+    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+    >>> # Register the template generator
+    >>> forcefield.registerTemplateGenerator(template_generator.generator)
+    >>> forcefield.loadFile(template_generator.gaff_xml_filename)
+
+    Create a template generator for a specific GAFF version and register multiple molecules:
+
+    >>> molecule1 = Molecule.from_smiles('c1ccccc1')
+    >>> molecule2 = Molecule.from_smiles('CCO')
+    >>> template_generator = GAFFTemplateGenerator(molecules=[molecule1, molecuel2], gaff_version='2.11')
+
+    You can also add some Molecules later on after the generator has been registered:
+
+    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules([molecule1, molecule2])
+
+    You can optionally create or use a tiny database cache of pre-parameterized molecules:
+
+    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
+
+    Newly parameterized molecules will be written to the cache, saving time next time!
+
+    """
+    SUPPORTED_GAFF_VERSIONS = ['1.4', '1.8', '1.81', '2.1', '2.11']
+
+    def __init__(self, molecules=None, gaff_version=None, cache=None):
+        """
+        Create a GAFFTemplateGenerator with some openforcefield toolkit molecules
+
+        Requies the openforcefield toolkit: http://openforcefield.org
+
+        Parameters
+        ----------
+        molecules : openforcefield.topology.Molecule or list, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            The parameters will be cached in case they are encountered again the future.
+        cache : str, optional, default=None
+            Filename for global caching of parameters.
+            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
+        gaff_version : str, optional, default=None
+            GAFF version to use. One of ('1.4', '1.8', '1.81', '2.1', '2.11')
+            If not specified, the latest GAFF supported version is used.
+
+        Examples
+        --------
+
+        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+
+        >>> from openforcefield.topology import Molecule
+        >>> molecule = Molecule.from_smiles('c1ccccc1')
+        >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
+        >>> gaff = GAFFTemplateGenerator(molecules=molecule)
+        >>> from simtk.openmm.app import ForceField
+        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber/ff14SB.xml', 'amber/tip3p.xml')
+        >>> forcefield.registerTemplateGenerator(gaff)
+
+        The latest GAFF version is used if none is specified.
+        You can check which GAFF version is in use with
+
+        >>> gaff.gaff_version
+        '2.11'
+
+        Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
+
+        >>> molecules = Molecule.from_file('molecules.sdf')
+        >>> gaff = GAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
+
+        You can also add molecules later on after the generator has been registered:
+
+        >>> gaff.add_molecules(molecule)
+        >>> gaff.add_molecules([molecule1, molecule2])
+
+        To check which GAFF versions are supported, check the `SUPPORTED_GAFF_VERSIONS` attribute:
+
+        >>> print(GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS)
+        ['1.4', '1.8', '1.81', '2.1', '2.11']
+
+        You can optionally create or use a tiny database cache of pre-parameterized molecules:
+
+        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', gaff_version='1.80')
+
+        Newly parameterized molecules will be written to the cache, saving time next time!
+        """
+        # Initialize molecules and cache
+        super().__init__(molecules=molecules, cache=cache)
+
+        # Use latest supported GAFF version if none is specified
+        if gaff_version is None:
+            gaff_version = self.SUPPORTED_GAFF_VERSIONS[-1]
+
+        # Ensure a valid GAFF version is specified
+        if not gaff_version in self.SUPPORTED_GAFF_VERSIONS:
+            raise Exception(f'Error: gaff_version must be one of {self.SUPPORTED_GAFF_VERSIONS}')
+
+        # Store user-specified GAFF version
+        self._gaff_version = gaff_version
+        self._gaff_major_version, self._gaff_minor_version = gaff_version.split('.')
+
+    @property
+    def gaff_version(self):
+        """The current GAFF version"""
+        return self._gaff_version
+
+    @property
+    def gaff_dat_filename(self):
+        """File path to the GAFF .dat AMBER force field file"""
+        from pkg_resources import resource_filename
+        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'dat', f'gaff-{self.gaff_version}.dat'))
+        return filename
+
+    @property
+    def gaff_xml_filename(self):
+        """File path to the GAFF .ffxml OpenMM force field file"""
+        from pkg_resources import resource_filename
+        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'ffxml', f'gaff-{self.gaff_version}.xml'))
+        return filename
 
     def generate_residue_template(self, molecule, residue_atoms=None):
         """
@@ -612,76 +725,333 @@ class GAFFTemplateGenerator(object):
 
         return
 
-    def generator(self, forcefield, residue, structure=None):
+################################################################################
+# Open Force Field Initiative SMIRNOFF specific OpenMM ForceField template generation utilities
+################################################################################
+
+class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
+    """
+    OpenMM ForceField residue template generator for Open Force Field Initiative SMIRNOFF
+    force fields using pre-cached openforcefield toolkit molecules.
+
+    Open Force Field Initiative: http://openforcefield.org
+    SMIRNOFF force field specification: https://open-forcefield-toolkit.readthedocs.io/en/latest/smirnoff.html
+
+    Examples
+    --------
+
+    Create a template generator for a single Molecule using the latest Open Force Field Initiative
+    small molecule force field and register it with ForceField:
+
+    >>> # Define a Molecule using the openforcefield Molecule object
+    >>> from openforcefield.topology import Molecule
+    >>> molecule = Molecule.from_smiles('c1ccccc1')
+    >>> # Create the SMIRNOFF template generator
+    >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
+    >>> # Create an OpenMM ForceField
+    >>> from simtk.openmm.app import ForceField
+    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+    >>> # Register the template generator
+    >>> forcefield.registerTemplateGenerator(template_generator.generator)
+
+    Create a template generator for a specific pre-installed SMIRNOFF version
+    ('openforcefield-1.0.0') and register multiple molecules:
+
+    >>> molecule1 = Molecule.from_smiles('c1ccccc1')
+    >>> molecule2 = Molecule.from_smiles('CCO')
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecuel2], smirnoff='openforcefield-1.0.0')
+
+    You can also add some Molecules later on after the generator has been registered:
+
+    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules([molecule1, molecule2])
+
+    You can optionally create or use a tiny database cache of pre-parameterized molecules:
+
+    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
+
+    Newly parameterized molecules will be written to the cache, saving time next time!
+
+    """
+    # TODO: Automatically populate this by examining plugin directories
+    # in order of semantic version
+    INSTALLED_SMIRNOFF_FORCEFIELDS = ['openforcefield-1.0.0', 'smirnoff99Frosst']
+
+    def __init__(self, molecules=None, gaff_version=None, cache=None):
         """
-        Residue template generator method to register with simtk.openmm.app.ForceField
+        Create a SMIRNOFFTemplateGenerator with some openforcefield toolkit molecules
+
+        Requies the openforcefield toolkit: http://openforcefield.org
 
         Parameters
         ----------
-        forcefield : simtk.openmm.app.ForceField
-            The ForceField object to which residue templates and/or parameters are to be added.
-        residue : simtk.openmm.app.Topology.Residue
-            The residue topology for which a template is to be generated.
+        molecules : openforcefield.topology.Molecule or list, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            The parameters will be cached in case they are encountered again the future.
+        cache : str, optional, default=None
+            Filename for global caching of parameters.
+            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
+        smirnoff : str, optional, default=None
+            Filename for SMIRNOFF .offxml file or prefix (without .offxml) of pre-installed SMIRNOFF force field.
+            If not specified, the latest Open Force Field Initiative release is used.
+
+        Examples
+        --------
+
+        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+
+        >>> from openforcefield.topology import Molecule
+        >>> molecule = Molecule.from_smiles('c1ccccc1')
+        >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
+        >>> from simtk.openmm.app import ForceField
+        >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+
+        The latest Open Force Field Initiative release is used if none is specified.
+        You can check which SMIRNOFF force field filename is in use with
+
+        >>> smirnoff.smirnoff_filename
+        '/full/path/to/openforcefield-1.0.0.offxml'
+
+        Create a template generator for a specific SMIRNOFF force field for multiple
+        molecules read from an SDF file:
+
+        >>> molecules = Molecule.from_file('molecules.sdf')
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, smirnoff='smirnoff99Frosst')
+
+        You can also add molecules later on after the generator has been registered:
+
+        >>> smirnoff.add_molecules(molecules)
+
+        To check which SMIRNOFF versions are supported, check the `INSTALLED_SMIRNOFF_FORCEFIELDS` attribute:
+
+        >>> print(SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS)
+        ['openforcefield-1.0.0', 'smirnoff99Frosst']
+
+        You can optionally create or use a cache of pre-parameterized molecules:
+
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', smirnoff='openforcefield-1.0.0')
+
+        Newly parameterized molecules will be written to the cache, saving time next time!
+        """
+        # Initialize molecules and cache
+        super().__init__(molecules=molecules, cache=cache)
+
+        if smirnoff is None:
+            # Use latest supported Open Force Field Initiative release if none is specified
+            smirnoff = self.INSTALLED_SMIRNOFF_FORCEFIELDS[0]
+
+        # Find SMIRNOFF filename
+        smirnoff_filename = self._search_paths(smirnoff)
+        if smirnoff_filename is None:
+            # Try adding .offxml extension
+            self._search_paths(smirnoff + '.offxml')
+        if smirnoff_filename is None:
+            # Can't find the specified SMIRNOFF file
+            raise ValueError(f"Can't find specified SMIRNOFF force field ({smirnoff}) in install paths")
+        self._smirnoff_filename = smirnoff_filename
+
+        # Create ForceField object
+        from openforcefield.typing.engines import smirnoff
+        self._smirnoff_forcefield = smirnoff.ForceField(smirnoff_filename)
+
+    def _search_paths(self, filename):
+        """Search registered openforcefield plugin directories
+
+        Parameters
+        ----------
+        filename : str
+            The filename to find the full path for
 
         Returns
         -------
-        success : bool
-            If the generator is able to successfully parameterize the residue, `True` is returned.
-            If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
+        fullpath : str
+            Full path to identified file, or None if no file found
+        """
+        # TODO: Replace this method once there is a public API for doing this
+
+        from openforcefield.utils import get_data_file_path
+        from openforcefield.typing.engines.smirnoff import _get_installed_offxml_dir_paths
+
+        # Check whether this could be a file path
+        if isinstance(filename, str):
+            # Try first the simple path.
+            searched_dirs_paths = ['']
+            # Then try a relative file path w.r.t. an installed directory.
+            searched_dirs_paths.extend( _get_installed_offxml_dir_paths())
+
+            # Determine the actual path of the file.
+            # TODO: What is desired toolkit behavior if two files with the desired name are available?
+            for dir_path in searched_dirs_paths:
+                file_path = os.path.join(dir_path, filename)
+                if os.path.isfile(file_path):
+                    return file_path
+        # No file found
+        return None
+
+    @property
+    def smirnoff_filename(self):
+        """Full path to the SMIRNOFF force field file"""
+        return self._smirnoff_filename
+
+    def generate_residue_template(self, molecule, residue_atoms=None):
+        """
+        Generate a residue template and additional parameters for the specified Molecule.
+
+        Parameters
+        ----------
+        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            The parameters will be cached in case they are encountered again the future.
+        residue_atoms : list of openforcefield.topology.Atom, optional, default=None
+            If specified, the subset of atoms to use in constructing a residue template
+
+        Returns
+        -------
+        ffxml_contents : str
+            Contents of ForceField `ffxml` file containing additional parameters and residue template.
+
+        Notes
+        -----
+
+        * The residue template will be named after the SMILES of the molecule.
+        * This method preserves stereochemistry during AM1-BCC charge parameterization.
+        * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
 
         """
-        from io import StringIO
+        # Use the canonical isomeric SMILES to uniquely name the template
+        smiles = molecule.to_smiles()
+        _logger.info(f'Generating a residue template for {smiles}')
 
-        # If a database is specified, check against molecules in the database
-        if self._cache is not None:
-            with self._open_db() as db:
-                table = db.table(self.gaff_version)
-                for entry in table:
-                    # Skip any molecules we've added to the database this session
-                    if entry['smiles'] in self._smiles_added_to_db:
-                        continue
+        # Generate unique atom names
+        self._generate_unique_atom_names(molecule)
 
-                    # See if the template matches
-                    from openforcefield.topology import Molecule
-                    molecule_template = Molecule.from_smiles(entry['smiles'])
-                    if self._match_residue(residue, molecule_template):
-                        # Add parameters and residue template for this residue
-                        # TODO: What can we do to avoid parameter or template collisions?
-                        forcefield.loadFile(StringIO(entry['ffxml']))
-                        # Signal success
-                        return True
+        # Parameterize molecule
+        _logger.debug(f'Generating parameters...')
+        openmm_system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
 
-        # Check against the molecules we know about
-        for smiles, molecule in self._molecules.items():
-            # See if the template matches
-            if self._match_residue(residue, molecule):
-                # Generate template and parameters.
-                ffxml_contents = self.generate_residue_template(molecule)
-                _logger.debug(f'ffxml_contents:\n')
-                for index, line in enumerate(ffxml_contents.split('\n')):
-                    _logger.debug(f'{index:10}: {line}')
-                # Add the parameters and residue definition
-                # TODO: Do we have to worry about parameter collisions?
-                #       What happens if two residues contain the same additional parameter?
-                forcefield.loadFile(StringIO(ffxml_contents))
-                # If a cache is specified, add this molecule
-                if self._cache is not None:
-                    with self._open_db() as db:
-                        table = db.table(self.gaff_version)
-                        _logger.info(f'Writing residue template for {smiles} to cache')
-                        record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
-                        # Add the IUPAC name for convenience if we can
-                        try:
-                            record['iupac'] = molecule.to_iupac()
-                        except Exception as e:
-                            pass
-                        # Store the record
-                        table.insert(record)
-                        self._smiles_added_to_db.add(smiles)
+        # Generate OpenMM ffxml definition for this molecule
+        from lxml import etree
+        root = etree.Element("ForceField")
 
-                # Signal success
-                return True
+        def as_attrib(quantity):
+            """Format simtk.unit.Quantity as XML attribute."""
+            if isinstance(quantity, str):
+                return quantity
+            elif isinstance(quantity, float) or isinstance(quantity, int):
+                return str(quantity)
+            else:
+                from simtk import unit
+                return str(quantity.value_in_unit_system(unit.md_unit_system))
 
-        # Report that we have failed to parameterize the residue
-        _logger.warning(f'GAFFTemplateGenerator does not recognize residue {residue.name}; did you forget to call GAFFTemplateGenerator.add_molecules() to add it?')
-        return False
+        # Append unique type names to atoms
+        for particle in molecule.particles:
+            setattr(particle, 'typename', f'{smiles}-{particle.name}')
+
+        # Generate atom types
+        atom_types = etree.SubElement(root, "AtomTypes")
+        for particle in molecule.particles:
+            # Create a new atom type for each atom in the molecule
+            atom_type = etree.SubElement(atom_types, "Type", name=particle.typename, class=particle.typename,
+                element=particle.element.name, mass=as_attrib(particle.element.mass))
+
+        # Compile forces into a dict
+        forces = dict()
+        for force in system.getForces():
+            force_name = force.__class__.__name__
+            if force_name in forces:
+                raise Exception("Two instances of force {force_name} appear in System")
+            forces[force_name] = force
+
+        def classes(particle_indices):
+            """Build a dict of 'class#=typename' for use in creating XML tags for forces.
+
+            Parameters
+            ----------
+            particle_indices : list of int
+                Particle indices for molecule.particles
+
+            Returns
+            -------
+            classmap : dict of str : str
+                Dict of format { 'class1' : typename1, ... }
+            """
+            return { f'class{particle_index+1}' : molecule.particles[particle_index] for particle_index in particle_indices }
+
+        # Lennard-Jones
+        # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
+        # though this must match the original AMBER values
+        nonbonded_types = etree.SubElement(root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5")
+        for particle_index in range(forces['NonbondedForce'].getNumParticles()):
+            charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
+            nonbonded_type = etree.SubElement(nonbonded_types, "Atom",
+                class=molecules.particles[particle_index].typename,
+                sigma=as_attrib(sigma), epsilon=as_attrib(epsilon))
+
+        # Bonds
+        bond_types = etree.SubElement(root, "HarmonicBondForce")
+        particle_indices = [-1]*2
+        for bond_index in range(forces['HarmonicBondForce'].getNumBonds()):
+            particle_indices[0], particle_indices[1], length, k = forces['HarmonicBondForce'].getBondParameters(bond_index)
+            bond_type = etree.SubElement(bond_types, "Bond", **classes(particle_indices),
+                length=as_attrib(length), k=as_attrib(k))
+
+        # Angles
+        angle_types = etree.SubElement(root, "HarmonicAngleForce")
+        particle_indices = [-1]*3
+        for angle_index in range(forces['HarmonicAngleForce'].getNumBonds()):
+            particle_indices[0], particle_indices[1], particle_indices[2], angle, k = forces['HarmonicAngleForce'].getAngleParameters(angle_index)
+            angle_type = etree.SubElement(bond_types, "Angle", **classes(particle_indices),
+                angle=as_attrib(angle), k=as_attrib(k))
+
+        # Torsions
+        def torsion_tag(particle_indices):
+            """Return 'Proper' or 'Improper' depending on torsion type"""
+            atoms = [ molecule.particles[particle_index] for particle_index in particle_indices ]
+            # TODO: Check to make sure all particles are in fact atoms and not virtual sites
+            if atoms[0].is_bonded_to(atoms[1]) and atoms[1].is_bonded_to(atoms[2]) and atoms[2].is_bonded_to(atoms[3]):
+                return "Proper"
+            else:
+                return "Improper"
+
+        # Collect torsions
+        torsions = dict()
+        particle_indices = [-1]*4
+        for torsion_index in range(forces['PeriodicTorsionForce'].getNumTorsions()):
+            particle_indices[0], particle_indices[1], particle_indices[2], particle_indices[3], periodicity, phase, k = forces['PeriodicTorsionForce'].getTorsionParameters(torsion_index)
+            if particle_indices in torsions:
+                torsions[particle_indices].append( (periodicity, phase, k) )
+            else:
+                torsions[particle_indices] = [ (periodicity, phase, k) ]
+
+        # Create torsion definitions
+        # TODO: Note that OpenMM's ForceField may need to be extended to assign SMIRNOFF trefoil impropers correctly
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce")
+        for particle_indices in torsions.keys():
+            params = dict() # build parameter dictionary
+            nterms = len(torsions[particle_indices])
+            for term in range(nterms):
+                params[f'periodicity{term+1}'] = as_attrib(periodicity)
+                params[f'phase{term+1}'] = as_attrib(phase)
+                params[f'k{term+1}'] = as_attrib(k)
+            torsion_type = etree.SubElement(bond_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
+
+        # Create residue definitions
+        residues = etree.SubElement(root, "Residues")
+        residue = etree.SubElement(residues, "Residue", name=smiles)
+        for atom in molecule.atoms:
+            # Create a new atom type for each atom in the molecule
+            typename = f'{smiles}-{atom.name}'
+            atom = etree.SubElement(residue, "Atom", name=atom.name, type=typename, charge=atom.partial_charge)
+        for bond in molecule.bonds:
+            bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+
+        # Render XML into string
+        ffxml_contents = etree.tostring(root, pretty_print=True)
+
+        return ffxml_contents

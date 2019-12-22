@@ -177,8 +177,8 @@ smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, smirnoff='local-file.o
 ```
 You can also add molecules to the generator later, even after the generator has been registered:
 ```python
-gaff.add_molecules(molecule)
-gaff.add_molecules([molecule1, molecule2])
+smirnoff.add_molecules(molecule)
+smirnoff.add_molecules([molecule1, molecule2])
 ```
 To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_SMIRNOFF_FORCEFIELDS` attribute:
 ```python
