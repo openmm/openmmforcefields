@@ -114,6 +114,8 @@ class CommonSystemGeneratorTests(object):
 
     def test_add_molecules(self):
         """Test that Molecules can be added to GAFFSystemGenerator later"""
+        MAX_MOLECULES_PER_SYSTEM = 3 # maximum number of molecules per system to test
+
         from openmmforcefields.generators import SystemGenerator
         # Create a generator that does not know about any molecules
         testsystem = self.testsystems['mcl1']
@@ -141,8 +143,8 @@ class CommonSystemGeneratorTests(object):
         # Add multiple molecules, including repeats
         generator.add_molecules(molecules)
 
-        # Ensure all molecules can be parameterized
-        for molecule in molecules[:3]:
+        # Ensure molecules can be parameterized
+        for molecule in molecules[:MAX_MOLECULES_PER_SYSTEM]:
             system = forcefield.createSystem(openmm_topology)
             assert system.getNumParticles() == molecule.n_atoms
 
@@ -150,7 +152,7 @@ class CommonSystemGeneratorTests(object):
         """Test parameterizing a protein:ligand complex in vacuum"""
         from openmmforcefields.generators import SystemGenerator
         for testsystem in self.testsystems:
-            print(f'Testing parameterization of {testsystem.name}')
+            print(f'Testing parameterization of {testsystem.name} in vacuum')
             molecules = testsystem['molecules']
             from simtk.openmm.app import NoCutoff
             forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }

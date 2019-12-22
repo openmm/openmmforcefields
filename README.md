@@ -7,7 +7,7 @@ This repository provides support for AMBER and CHARMM force fields and small mol
 
 ## Supported force fields
 
-**AMBER:** All major AMBER force fields distributed with AmberTools 19.9 (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
+**AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 19.9 (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
@@ -33,11 +33,11 @@ If you're not familiar with this approach to applying parameters to biomolecular
 
 Once installed, the AMBER force fields will be registered in the `amber/` relative path searched by [`simtk.openmm.app.ForceField`](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField).
 
-For example, to specify the newer recommended `ff14SB` force field and accompanying recommended ions and solvent models (corresponding to force fields loaded in LEaP with `leaprc.protein.ff14SB`), prepend the `amber` prefix and the `.xml` suffix:
+For example, to specify the newer recommended [`ff14SB`](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.5b00255) force field and accompanying recommended ions and solvent models (corresponding to force fields loaded in LEaP with `leaprc.protein.ff14SB`), prepend the `amber` prefix and the `.xml` suffix:
 ```python
 forcefield = ForceField('amber/protein.ff14SB.xml')
 ```
-To access just the `ff14SB` force field converted from `oldff/leaprc.ff14SB`:
+To access just the [`ff14SB`](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.5b00255) force field converted from `oldff/leaprc.ff14SB`:
 ```python
 forcefield = ForceField('amber/ff14SB.xml')
 ```
@@ -45,7 +45,7 @@ or to specifically access the older (now outdated) `ff99SBildn` force field conv
 ```python
 forcefield = ForceField('amber/ff99SBildn.xml')
 ```
-The TIP3P conversion also includes the Joung and Cheatham recommended salt models (`parm/frcmod.ionsjc_tip3p`) and recommended divalent counterion parameters (`parm/frcmod.ions234lm_126_tip3p`):
+The TIP3P conversion also includes the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended divalent counterion parameters (`parm/frcmod.ions234lm_126_tip3p`):
 ```python
 forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
 ```
@@ -80,9 +80,9 @@ There are many ways to create an [openforcefield `Molecule` object](https://open
 
 The `openforcefield` toolkit charging method [`Molecule.compute_partial_charges_am1bcc`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openforcefield.topology.Molecule.html#openforcefield.topology.Molecule.compute_partial_charges_am1bcc) is used to assign partial charges.
 The [canonical AM1-BCC charging method](https://docs.eyesopen.com/toolkits/cookbook/python/modeling/am1-bcc.html) is used to assign ELF10 charges if the OpenEye Toolkit is available.
-If not, [`antechamber -c bcc`](http://ambermd.org/antechamber/) from the [AmberTools]](http://ambermd.org/AmberTools.php) distribution (which uses the `sqm` semiempirical quantum chemical package) is used to assign AM1-BCC charges.
+If not, [Antechamber](http://ambermd.org/antechamber/) from the [AmberTools](http://ambermd.org/AmberTools.php) distribution (which uses the `sqm` semiempirical quantum chemical package) is used to assign AM1-BCC charges (`antechamber -c bcc`).
 
-*Note:* The molecule you specify must have the all protons and stereochemistry explicitly specified, and must match the exact protonation and tautomeric state of the molecule that will be found in your OpenMM `Topology` object.
+*Note:* The `Molecule` object must have the all protons and stereochemistry explicitly specified, and must match the exact protonation and tautomeric state of the molecule that will be found in your OpenMM `Topology` object.
 The atom ordering need not be the same.
 
 ### Caching
@@ -242,6 +242,10 @@ Parameterized molecules are cached in `openforcefield.json`.
 **Q:** Do you support the new [Amber ff19SB protein force field](https://chemrxiv.org/articles/ff19SB_Amino-Acid_Specific_Protein_Backbone_Parameters_Trained_Against_Quantum_Mechanics_Energy_Surfaces_in_Solution/8279681/1)?
 <br>
 **A:** [ParmEd](http://github.com/parmed/parmed), which is used to convert these force fields to OpenMM format, [does not currently support the conversion of AMBER CMAP forces to OpenMM](https://github.com/ParmEd/ParmEd/issues/1066), so we do not yet support this force field, but hope to add support soon.
+
+**Q:** Do you plan to support other small molecule force fields?
+<br>
+**A:** If there are other free and open source conda-installable tools for generating parameters for other AMBER- or CHARMM-compatible force fields, we are happy to add support for them!
 
 # Converting AMBER and CHARMM to OpenMM ffxml files
 
