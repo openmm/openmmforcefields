@@ -252,7 +252,7 @@ class SmallMoleculeTemplateGenerator(object):
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
                     with self._open_db() as db:
-                        table = db.table(self._table_name)
+                        table = db.table(self._database_table_name)
                         _logger.info(f'Writing residue template for {smiles} to cache')
                         record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
                         # Add the IUPAC name for convenience if we can
@@ -441,7 +441,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             # Note that we've loaded the GAFF parameters
             self._gaff_parameters_loaded[forcefield] = True
 
-        super().generator(forcefield, residue)
+        return super().generator(forcefield, residue)
 
     def generate_residue_template(self, molecule, residue_atoms=None):
         """
@@ -547,30 +547,30 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
-        # Remove last </ForceField> line
-        ffxml_contents = ffxml_contents[:ffxml_contents.rfind('</ForceField>')]
-        ffxml_contents += '\n'
-
         # Create the residue template
         _logger.debug(f'Creating residue template...')
-        from simtk.openmm.app import ForceField, Element
-        ffxml_contents += '  <Residues>\n'
-        ffxml_contents += f'   <Residue name="{smiles}">\n'
-        for (index, atom) in enumerate(molecule.atoms):
-            element = Element.getByAtomicNumber(atom.atomic_number)
-            ffxml_contents += f'      <Atom name="{atom.name}" type="{atom.gaff_type}" charge="{atom.partial_charge / unit.elementary_charge}"/>\n'
+        from lxml import etree
+        root = etree.fromstring(ffxml_contents)
+        # Create residue definitions
+        residues = etree.SubElement(root, "Residues")
+        residue = etree.SubElement(residues, "Residue", name=smiles)
+        for atom in molecule.atoms:
+            # Create a new atom type for each atom in the molecule
+            typename = f'{smiles}-{atom.name}'
+            atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.gaff_type, charge=str(atom.partial_charge / unit.elementary_charge))
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
-                ffxml_contents += f'      <Bond atomName1="{bond.atom1.name}" atomName2="{bond.atom2.name}"/>\n'
+                bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
             elif (bond.atom1 in residue_atoms) and (bond.atom2 not in residue_atoms):
-                ffxml_contents += f'      <ExternalBond atomName="{bond.atom1.name}"/>\n'
+                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom1.name)
             elif (bond.atom1 not in residue_atoms) and (bond.atom2 in residue_atoms):
-                ffxml_contents += f'      <ExternalBond atomName="{bond.atom2.name}"/>\n'
-        ffxml_contents += f'    </Residue>\n'
-        ffxml_contents += "  </Residues>\n"
-        ffxml_contents += "</ForceField>\n"
-
+                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom2.name)
+        # Render XML into string and append to parameters
+        ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
         _logger.debug(f'ffxml creation complete.')
+
+        with open('ffxml', 'w') as outfile:
+            outfile.write(ffxml_contents)
 
         return ffxml_contents
 
@@ -755,8 +755,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             error_lines = new_error_lines
 
         if len(error_lines) > 0:
-            print("Unexpected errors encountered running AMBER tool. Offending output:")
-            for line in error_lines: print(line)
+            _logger.info("Unexpected errors encountered running AMBER tool. Offending output:")
+            for line in error_lines:
+                _logger.info(line)
             raise(RuntimeError("Error encountered running AMBER tool. Exiting."))
 
         return
@@ -811,9 +812,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     """
     # TODO: Automatically populate this at import by examining plugin directories in order of semantic version
-    INSTALLED_SMIRNOFF_FORCEFIELDS = ['openforcefield-1.0.0', 'smirnoff99Frosst']
+    INSTALLED_SMIRNOFF_FORCEFIELDS = ['openforcefield-1.0.0', 'smirnoff99Frosst-1.1.0']
 
-    def __init__(self, molecules=None, gaff_version=None, cache=None):
+    def __init__(self, molecules=None, cache=None, smirnoff=None):
         """
         Create a SMIRNOFFTemplateGenerator with some openforcefield toolkit molecules
 
@@ -913,7 +914,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # TODO: Replace this method once there is a public API in the openforcefield toolkit for doing this
 
         from openforcefield.utils import get_data_file_path
-        from openforcefield.typing.engines.smirnoff import _get_installed_offxml_dir_paths
+        from openforcefield.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
 
         # Check whether this could be a file path
         if isinstance(filename, str):
@@ -1093,6 +1094,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
 
         # Render XML into string
-        ffxml_contents = etree.tostring(root, pretty_print=True)
+        ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
 
         return ffxml_contents

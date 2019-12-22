@@ -71,7 +71,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Now add the molecule to the generator and ensure parameterization passes
         generator.add_molecules(molecule)
         openmm_topology = molecule.to_topology().to_openmm()
-        system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+        try:
+            system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+        except Exception as e:
+            print(forcefield._atomTypes.keys())
+            from simtk.openmm.app import PDBFile
+            PDBFile.writeFile(openmm_topology, molecule.conformers[0])
+            raise e
         assert system.getNumParticles() == molecule.n_atoms
 
         # Add multiple molecules, including repeats
@@ -190,7 +196,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Create GAFF template generator with local cache
             cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
-            generator = self.TEMPLATE_GENERATOR(molecules=molecules, gaff_version=gaff_version, cache=cache_filename)
+            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
 
             # Create a ForceField
             forcefield = ForceField()
