@@ -8,7 +8,8 @@ from openmmforcefields.utils import get_data_filename, Timer
 # Tests
 ################################################################################
 
-class TestSystemGenerator(unittest.TestCase):
+class CommonSystemGeneratorTests(object):
+    """Base class for SystemGenerator tests."""
     def setUp(self):
         self.testsystems = dict()
         for (system_name, prefix) in [
@@ -65,10 +66,14 @@ class TestSystemGenerator(unittest.TestCase):
             logging.getLogger(name).setLevel(logging.WARNING)
 
     def test_create(self):
-        """Test GAFFSystemGenerator creation"""
+        """Test SystemGenerator creation"""
+        from openmmforcefields.generators import SystemGenerator
         # Create an empty system generator
         generator = self.SystemGenerator()
         # Create a generator that defines a protein force field and GAFF version
+        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                        **self.extra_generator_arguments)
+        # Create a generator that defines a protein force field and SMIRNOFF force field
         generator = self.SystemGenerator(forcefields=self.amber_forcefields,
                                         **self.extra_generator_arguments)
         # Create a generator that also has a database cache
@@ -84,33 +89,32 @@ class TestSystemGenerator(unittest.TestCase):
             del generator
 
     def test_parameterize_molecules(self):
-        """Test parameterizing molecules in vacuum with GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFSystemGenerator
-        for gaff_version in GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS:
-            # Create a generator that knows about a few molecules
-            testsystem = self.testsystems['mcl1']
-            molecules = testsystem['molecules']
-            from simtk.openmm.app import NoCutoff
-            forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
-            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                             forcefield_kwargs=forcefield_kwargs,
-                                             molecules=molecules, **self.extra_generator_arguments)
-            # Parameterize some molecules
-            from openmmforcefields.utils import Timer
-            for molecule in molecules[:3]:
-                openmm_topology = molecule.to_topology().to_openmm()
-                with Timer() as t1:
-                    system = generator.create_system(openmm_topology)
-                assert system.getNumParticles() == molecule.n_atoms
-                # Molecule should now be cached
-                with Timer() as t2:
-                    system = generator.create_system(topology)
-                assert system.getNumParticles() == molecule.n_atoms
-                assert (t2.interval < t1.interval)
+        """Test parameterizing molecules in vacuum"""
+        from openmmforcefields.generators import SystemGenerator
+        # Create a generator that knows about a few molecules
+        testsystem = self.testsystems['mcl1']
+        molecules = testsystem['molecules']
+        from simtk.openmm.app import NoCutoff
+        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
+        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                         forcefield_kwargs=forcefield_kwargs,
+                                         molecules=molecules, **self.extra_generator_arguments)
+        # Parameterize some molecules
+        from openmmforcefields.utils import Timer
+        for molecule in molecules[:3]:
+            openmm_topology = molecule.to_topology().to_openmm()
+            with Timer() as t1:
+                system = generator.create_system(openmm_topology)
+            assert system.getNumParticles() == molecule.n_atoms
+            # Molecule should now be cached
+            with Timer() as t2:
+                system = generator.create_system(topology)
+            assert system.getNumParticles() == molecule.n_atoms
+            assert (t2.interval < t1.interval)
 
     def test_add_molecules(self):
         """Test that Molecules can be added to GAFFSystemGenerator later"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
+        from openmmforcefields.generators import SystemGenerator
         # Create a generator that does not know about any molecules
         testsystem = self.testsystems['mcl1']
         molecules = testsystem['molecules']
@@ -144,6 +148,7 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_complex(self):
         """Test parameterizing a protein:ligand complex in vacuum"""
+        from openmmforcefields.generators import SystemGenerator
         for testsystem in self.testsystems:
             print(f'Testing parameterization of {testsystem.name}')
             molecules = testsystem['molecules']
@@ -160,14 +165,10 @@ class TestSystemGenerator(unittest.TestCase):
 
     # TODO: Test parameterization of a protein:ligand complex in solvent
 
-class TestGAFFSystemGenerator(TestSystemGenerator):
-    """Test the GAFFSystemGenerator"""
-    from openmmforcefields.generators import GAFFSystemGenerator
-    SystemGenerator = GAFFSystemGenerator
+class TestGAFFSystemGenerator(unittest.TestCase, CommonSystemGeneratorTests):
+    """Test the SystemGenerator with GAFF"""
     extra_generator_arguments = { 'gaff_version' : '2.11' }
 
-class TestSMIRNOFFSystemGenerator(TestSystemGenerator):
-    """Test the SMIRNOFFSystemGenerator"""
-    from openmmforcefields.generators import GAFFSystemGenerator
-    SystemGenerator = GAFFSystemGenerator
-    extra_generator_arguments = { 'smirnoff_filename' : 'openforcefield-1.0.0' }
+class TestSMIRNOFFSystemGenerator(unittest.TestCase, CommonSystemGeneratorTests):
+    """Test the SystemGenerator with SMIRNOFF"""
+    extra_generator_arguments = { 'smirnoff' : 'openforcefield-1.0.0' }
