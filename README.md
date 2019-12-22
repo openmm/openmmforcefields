@@ -3,15 +3,15 @@
 
 # AMBER and CHARMM force fields for OpenMM
 
-This repository provides support for small molecule parameterization and additional AMBER and CHARMM force fields for OpenMM.
+This repository provides support for AMBER and CHARMM force fields and small molecule parameterization with GAFF and the Open Force Field Toolkit for OpenMM.
 
 ## Supported force fields
 
-**AMBER:** All major AMBER force fields distributed with AmberTools 19.9 (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 and 2.11
+**AMBER:** All major AMBER force fields distributed with AmberTools 19.9 (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
-**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and []`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/).
+**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/).
 
 # Using the force fields
 
