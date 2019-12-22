@@ -24,8 +24,9 @@ dependencies:
   - lxml
   - networkx
 
-    # GAFF template generator
+    # JSON caching of residue templates
   - tinydb
 
-    # openforcefield toolkit
+    # openforcefield toolkit and force fields
   - openforcefield >=0.6.0
+  - openforcefields >=1.0.0

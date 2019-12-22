@@ -64,23 +64,23 @@ class TestSystemGenerator(unittest.TestCase):
         for name in ['parmed', 'matplotlib']:
             logging.getLogger(name).setLevel(logging.WARNING)
 
-class TestGAFFSystemGenerator(TestSystemGenerator):
-
     def test_create(self):
         """Test GAFFSystemGenerator creation"""
-        from openmmforcefields.generators import GAFFSystemGenerator
         # Create an empty system generator
-        generator = GAFFSystemGenerator()
+        generator = self.SystemGenerator()
         # Create a generator that defines a protein force field and GAFF version
-        generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, gaff_version='2.11')
+        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                        **self.extra_generator_arguments)
         # Create a generator that also has a database cache
         with tempfile.TemporaryDirectory() as tmpdirname:
             cache = os.path.join(tmpdirname, 'db.json')
             # Create a new database file
-            generator = GAFFSystemGenerator(cache=cache)
+            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                            cache=cache, **self.extra_generator_arguments)
             del generator
             # Reopen it (with cache still empty)
-            generator = GAFFSystemGenerator(cache=cache)
+            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                            cache=cache, **self.extra_generator_arguments)
             del generator
 
     def test_parameterize_molecules(self):
@@ -92,8 +92,9 @@ class TestGAFFSystemGenerator(TestSystemGenerator):
             molecules = testsystem['molecules']
             from simtk.openmm.app import NoCutoff
             forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
-            generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
-                molecules=molecules, gaff_version=gaff_version)
+            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                             forcefield_kwargs=forcefield_kwargs,
+                                             molecules=molecules, **self.extra_generator_arguments)
             # Parameterize some molecules
             from openmmforcefields.utils import Timer
             for molecule in molecules[:3]:
@@ -115,8 +116,8 @@ class TestGAFFSystemGenerator(TestSystemGenerator):
         molecules = testsystem['molecules']
         from simtk.openmm.app import NoCutoff
         forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
-        generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
-            gaff_version='2.11')
+        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+            forcefield_kwargs=forcefield_kwargs, **self.extra_generator_arguments)
 
         # Check that parameterizing a molecule fails
         molecule = molecules[0]
@@ -148,13 +149,25 @@ class TestGAFFSystemGenerator(TestSystemGenerator):
             molecules = testsystem['molecules']
             from simtk.openmm.app import NoCutoff
             forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
-            generator = GAFFSystemGenerator(forcefields=self.amber_forcefields, forcefield_kwargs=forcefield_kwargs,
-                molecules=molecules, gaff_version=gaff_version)
+            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                forcefield_kwargs=forcefield_kwargs,
+                molecules=molecules, **self.extra_generator_arguments)
             # Parameterize a complex from the set
             complex_structure = testsystem['complex_structures'][0]
             openmm_topology = complex_structure.topology
             system = generator.create_system(openmm_topology)
             assert system.getNumParticles() == len(complex_structure.atoms)
 
-
     # TODO: Test parameterization of a protein:ligand complex in solvent
+
+class TestGAFFSystemGenerator(TestSystemGenerator):
+    """Test the GAFFSystemGenerator"""
+    from openmmforcefields.generators import GAFFSystemGenerator
+    SystemGenerator = GAFFSystemGenerator
+    extra_generator_arguments = { 'gaff_version' : '2.11' }
+
+class TestSMIRNOFFSystemGenerator(TestSystemGenerator):
+    """Test the SMIRNOFFSystemGenerator"""
+    from openmmforcefields.generators import GAFFSystemGenerator
+    SystemGenerator = GAFFSystemGenerator
+    extra_generator_arguments = { 'smirnoff_filename' : 'openforcefield-1.0.0' }

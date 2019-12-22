@@ -216,10 +216,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         }
         for system_name in jacs_systems:
             # Load molecules
-            print(f'Reading molecules from {sdf_filename} ...')
+            ligand_sdf_filename = jacs_systems[system_name]['ligand_sdf_filename']
+            print(f'Reading molecules from {ligand_sdf_filename} ...')
             from openforcefield.topology import Molecule
             from openmmforcefields.utils import get_data_filename
-            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, jacs_systems[system_name]['ligand_sdf_filename']))
+            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, ligand_sdf_filename))
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
             print(f'Read {len(molecules)} molecules from {sdf_filename}')
 

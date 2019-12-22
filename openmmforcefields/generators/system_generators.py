@@ -27,20 +27,10 @@ class SystemGenerator(object):
         self._exception_epsilons = exception_epsilons
         self._torsions = torsions
 
-    def postprocess_system(self):
-
-        # Add barostat if requested.
-        if self._barostat is not None:
-            import numpy as np
-            from simtk import openmm
-            MAXINT = np.iinfo(np.int32).max
-            barostat = openmm.MonteCarloBarostat(*self._barostat)
-            seed = np.random.randint(MAXINT)
-            barostat.setRandomNumberSeed(seed)
-            system.addForce(barostat)
-
-        # TODO: Remove CM Motion?
-
+    def _modify_forces(self):
+        """
+        Modify forces if requested.
+        """
         for force in system.getForces():
             if force.__class__.__name__ == 'NonbondedForce':
                 for index in range(force.getNumParticles()):
@@ -63,6 +53,22 @@ class SystemGenerator(object):
                     if not self._torsions:
                         K *= 0
                     force.setTorsionParameters(index, p1, p2, p3, p4, periodicity, phase, K)
+
+    def postprocess_system(self):
+
+        # Add barostat if requested.
+        if self._barostat is not None:
+            import numpy as np
+            from simtk import openmm
+            MAXINT = np.iinfo(np.int32).max
+            barostat = openmm.MonteCarloBarostat(*self._barostat)
+            seed = np.random.randint(MAXINT)
+            barostat.setRandomNumberSeed(seed)
+            system.addForce(barostat)
+
+        # TODO: Remove CM Motion?
+        self._modify_forces()
+
 
     def create_system(self, topology):
         """
@@ -318,7 +324,7 @@ class SMIRNOFFSystemGenerator(SystemGenerator):
         atom_indices['smirnoff'] = set([ index for index in residue.atoms for residue in unmatched_residues ])
         atom_indices['openmm_forcefield'] = atom_indices['all'] - atom_indices['smirnoff']
 
-        
+
         modeller.delete(unmatched_residues)
         receptor_system = self._openmm_forcefield.createSystem(modeller.topology, **self._forcefield_kwargs)
 

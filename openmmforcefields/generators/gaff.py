@@ -20,12 +20,6 @@ _logger = logging.getLogger("openmmforcefields.generators.gaff")
 # GAFF-specific force field generation utilities
 ################################################################################
 
-class IncompatibleGAFFVersion(RuntimeError):
-    """
-    A cache file has been opened with an incompatible GAFF version.
-    """
-    pass
-
 class GAFFTemplateGenerator(object):
     """
     OpenMM ForceField residue template generator for GAFF/AM1-BCC using pre-cached openforcefield toolkit molecules.
@@ -38,7 +32,7 @@ class GAFFTemplateGenerator(object):
     >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
     >>> template_generator = GAFFTemplateGenerator(molecules=mol)
     >>> from simtk.openmm.app import ForceField
-    >>> forcefield = ForceField('amber14-all.xml', 'tip3p.xml')
+    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
     >>> forcefield.loadFile(template_generator.gaff_xml_filename)
 
@@ -60,7 +54,7 @@ class GAFFTemplateGenerator(object):
     """
     SUPPORTED_GAFF_VERSIONS = ['1.4', '1.8', '1.81', '2.1', '2.11']
 
-    def __init__(self, molecules=None, gaff_version=None, cache=None, allow_cache_overwrite=False):
+    def __init__(self, molecules=None, gaff_version=None, cache=None):
         """
         Create a GAFFTemplateGenerator with some openforcefield toolkit molecules
 
@@ -78,10 +72,7 @@ class GAFFTemplateGenerator(object):
             If not specified, the latest GAFF supported version is used.
         cache : str, optional, default=None
             Filename for global caching of parameters.
-            If specified, parameterized molecules will be stored in a TinyDB instance.
-            Note that no checking is done to determine this cache was created with the same GAFF version.
-        allow_cache_overwrite : bool, optional, default=False
-            If True, will not complain about overwriting cache if an incompatible cache file is found.
+            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
 
         Examples
         --------
@@ -93,7 +84,7 @@ class GAFFTemplateGenerator(object):
         >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
         >>> from simtk.openmm.app import ForceField
-        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber14-all.xml', 'tip3p.xml')
+        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber/ff14SB.xml', 'amber/tip3p.xml')
         >>> forcefield.registerTemplateGenerator(gaff)
 
         The latest GAFF version is used if none is specified.
@@ -105,7 +96,7 @@ class GAFFTemplateGenerator(object):
         Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')
-        >>> gaff = OEGAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
+        >>> gaff = GAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
 
         You can also add molecules later on after the generator has been registered:
 
