@@ -101,11 +101,17 @@ from openmoltools.forcefield_generators import GAFFTemplateGenerator
 gaff = GAFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from simtk.openmm.app import ForceField
-forcefield = ForceField(gaff.gaff_xml_filename, 'amber/protein.ff14SB.xml', 'amber/tip3p.xml')
+forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
 # Register the GAFF template generator
 forcefield.registerTemplateGenerator(gaff)
+# You can now parameterize an OpenMM Topology object that contains the specified molecule.
+# forcefield will load the appropriate GAFF parameters when needed, and antechamber
+# will be used to generate small molecule parameters on the fly.
+from simtk.openmm.app import PDBFile
+pdbfile = PDBFile('t4-lysozyme-L99A-with-benzene.pdb')
+system = forcefield.createSystem(pdbfile.topology)
 ```
-The latest GAFF version is used if none is specified.
+The latest available GAFF version is used if none is specified.
 You can check which GAFF version is in use with
 ```python
 >>> gaff.gaff_version

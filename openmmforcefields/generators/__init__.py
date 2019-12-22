@@ -1,2 +1,2 @@
-from .gaff import GAFFTemplateGenerator
-#from .system_generators import DummySystemGenerator, GAFFSystemGenerator, SMIRNOFFSystemGenerator
+from .template_generators import GAFFTemplateGenerator, SMIRNOFFTemplateGenerator
+#from .system_generators import SystemGenerator, DummySystemGenerator

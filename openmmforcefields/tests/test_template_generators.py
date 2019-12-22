@@ -2,16 +2,21 @@ import os, sys
 import unittest
 import tempfile
 
+from openmmforcefields.generators import GAFFTemplateGenerator
+from openmmforcefields.generators import SMIRNOFFTemplateGenerator
+
 ################################################################################
 # Tests
 ################################################################################
 
 class TestGAFFTemplateGenerator(unittest.TestCase):
+    TEMPLATE_GENERATOR = GAFFTemplateGenerator
+
     def setUp(self):
         # Read test molecules
         from openforcefield.topology import Molecule
         from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename("minidrugbank/MiniDrugBank.sdf")
+        filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecifie-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
         # Select some small molecules for fast testing
         MAX_ATOMS = 24
@@ -27,57 +32,28 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             logging.getLogger(name).setLevel(logging.WARNING)
 
     def test_create(self):
-        """Test creation of an GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
+        """Test template generator creation"""
         # Create an empty generator
-        generator = GAFFTemplateGenerator()
+        generator = self.TEMPLATE_GENERATOR()
         # Create a generator that knows about a few molecules
-        generator = GAFFTemplateGenerator(molecules=self.molecules)
+        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
         # Create a generator that also has a database cache
         with tempfile.TemporaryDirectory() as tmpdirname:
             cache = os.path.join(tmpdirname, 'db.json')
             # Create a new database file
-            generator = GAFFTemplateGenerator(molecules=self.molecules, cache=cache)
+            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
             del generator
             # Reopen it (with cache still empty)
-            generator = GAFFTemplateGenerator(molecules=self.molecules, cache=cache)
+            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
             del generator
 
-    def test_parameterize(self):
-        """Test parameterizing molecules with GAFFTemplateGenerator for all supported GAFF versions"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
-        # Test all supported GAFF versions
-        for gaff_version in GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS:
-            # Create a generator that knows about a few molecules
-            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = GAFFTemplateGenerator(molecules=self.molecules, gaff_version=gaff_version)
-            # Create a ForceField with the appropriate GAFF version
-            from simtk.openmm.app import ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize some molecules
-            from simtk.openmm.app import NoCutoff
-            from openmmforcefields.utils import Timer
-            for molecule in self.molecules:
-                openmm_topology = molecule.to_topology().to_openmm()
-                with Timer() as t1:
-                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-                assert system.getNumParticles() == molecule.n_atoms
-                # Molecule should now be cached
-                with Timer() as t2:
-                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-                assert system.getNumParticles() == molecule.n_atoms
-                assert (t2.interval() < t1.interval())
-
     def test_add_molecules(self):
-        """Test that molecules can be added to GAFFTemplateGenerator after its creation"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
+        """Test that molecules can be added to template generator after its creation"""
         # Create a generator that does not know about any molecules
-        generator = GAFFTemplateGenerator()
+        generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
         from simtk.openmm.app import ForceField
-        forcefield = ForceField(generator.gaff_xml_filename)
+        forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
 
@@ -108,16 +84,14 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             assert system.getNumParticles() == molecule.n_atoms
 
     def test_cache(self):
-        """Test cache capability of GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
+        """Test template generator cache capability"""
         from simtk.openmm.app import ForceField, NoCutoff
-        gaff_version = '2.11'
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a generator that also has a database cache
             cache = os.path.join(tmpdirname, 'db.json')
-            generator = GAFFTemplateGenerator(molecules=self.molecules, cache=cache, gaff_version=gaff_version)
+            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
             # Create a ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
+            forcefield = ForceField()
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize the molecules
@@ -132,7 +106,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
                 Parameters
                 ----------
-                generator : GAFFTemplateGenerator
+                generator : SmallMoleculeTemplateGenerator
                     The generator whose cache should be examined
                 n_expected : int
                     Number of expected records
@@ -153,11 +127,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Create a generator that also uses the database cache but has no molecules
             print('Creating new generator with just cache...')
-            generator = GAFFTemplateGenerator(cache=cache, gaff_version=gaff_version)
+            generator = self.TEMPLATE_GENERATOR(cache=cache)
             # Check database still contains the molecules we expect
             check_cache(generator, len(self.molecules))
             # Create a ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
+            forcefield = ForceField()
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize the molecules; this should succeed
@@ -165,15 +139,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 openmm_topology = molecule.to_topology().to_openmm()
                 forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
 
-            # Changing the GAFF version should use a different table with no molecule entries
-            generator = GAFFTemplateGenerator(cache=cache, gaff_version='1.81')
-            # Check database contains no molecules
-            check_cache(generator, 0)
-
     def test_add_solvent(self):
-        """Test using simtk.opnmm.app.Modeller to add solvent to a small molecule parameterized by GAFFTemplateGenerator"""
-        from openmmforcefields.generators import GAFFTemplateGenerator
-        gaff_version = '2.11'
+        """Test using simtk.opnmm.app.Modeller to add solvent to a small molecule parameterized by template generator"""
         # Select a molecule to add solvent around
         from simtk.openmm.app import NoCutoff, Modeller
         from simtk import unit
@@ -191,19 +158,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             pass
 
         # Create a generator that knows about a few molecules
-        generator = GAFFTemplateGenerator(molecules=self.molecules, gaff_version=gaff_version)
+        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
         # Add to the forcefield object
-        forcefield.loadFile(generator.gaff_xml_filename)
         forcefield.registerTemplateGenerator(generator.generator)
         # Add solvent to a system containing a small molecule
         # This should succeed
         modeller.addSolvent(forcefield, model='tip3p', padding=6.0*unit.angstroms)
 
     def test_jacs_ligands(self):
-        """Use GAFFTemplateGenerator to parameterize the Schrodinger JACS set of ligands"""
+        """Use template generator to parameterize the Schrodinger JACS set of ligands"""
         from simtk.openmm.app import ForceField, NoCutoff
-        gaff_version = '2.11'
-
         jacs_systems = {
             'bace'     : { 'ligand_sdf_filename' : 'Bace_ligands.sdf' },
             'cdk2'     : { 'ligand_sdf_filename' : 'CDK2_ligands.sdf' },
@@ -226,11 +190,10 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Create GAFF template generator with local cache
             cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
-            from openmmforcefields.generators import GAFFTemplateGenerator
-            generator = GAFFTemplateGenerator(molecules=molecules, gaff_version=gaff_version, cache=cache_filename)
+            generator = self.TEMPLATE_GENERATOR(molecules=molecules, gaff_version=gaff_version, cache=cache_filename)
 
             # Create a ForceField
-            forcefield = ForceField(generator.gaff_xml_filename)
+            forcefield = ForceField()
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
 
@@ -247,3 +210,60 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                     n_failure += 1
                     print(e)
             print(f'{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}')
+
+    # TODO: Test JACS protein-ligand systems
+
+    def test_parameterize(self):
+        """Test parameterizing molecules with GAFFTemplateGenerator for all supported GAFF versions"""
+        # Test all supported GAFF versions
+        for gaff_version in GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS:
+            # Create a generator that knows about a few molecules
+            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
+            generator = GAFFTemplateGenerator(molecules=self.molecules, gaff_version=gaff_version)
+            # Create a ForceField with the appropriate GAFF version
+            from simtk.openmm.app import ForceField
+            forcefield = ForceField()
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+            # Parameterize some molecules
+            from simtk.openmm.app import NoCutoff
+            from openmmforcefields.utils import Timer
+            for molecule in self.molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as t1:
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                assert system.getNumParticles() == molecule.n_atoms
+                # Molecule should now be cached
+                with Timer() as t2:
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                assert system.getNumParticles() == molecule.n_atoms
+                assert (t2.interval() < t1.interval())
+
+class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
+    TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
+
+    def test_parameterize(self):
+        """Test parameterizing molecules with SMIRNOFFTemplateGenerator for all installed SMIRNOFF force fields"""
+        # Test all supported GAFF versions
+        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS:
+            # Create a generator that knows about a few molecules
+            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
+            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, smirnoff=smirnoff)
+            # Create a ForceField
+            from simtk.openmm.app import ForceField
+            forcefield = ForceField()
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+            # Parameterize some molecules
+            from simtk.openmm.app import NoCutoff
+            from openmmforcefields.utils import Timer
+            for molecule in self.molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as t1:
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                assert system.getNumParticles() == molecule.n_atoms
+                # Molecule should now be cached
+                with Timer() as t2:
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                assert system.getNumParticles() == molecule.n_atoms
+                assert (t2.interval() < t1.interval())
