@@ -192,7 +192,10 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             from openmmforcefields.utils import get_data_filename
             sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, ligand_sdf_filename))
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
-            print(f'Read {len(molecules)} molecules from {sdf_filename}')
+            try:
+                print(f'Read {len(molecules)} molecules from {sdf_filename}')
+            except TypeError:
+                print(f'Read one molecule from {sdf_filename}')                
 
             # Create GAFF template generator with local cache
             cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
