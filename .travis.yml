@@ -46,7 +46,8 @@ install:
 script:
     # Test installed package
   #- pytest -v --cov=openmmforcefields openmmforcefields/tests
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests
+  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
 
     # Store current working directory
   - export WORK=`pwd`
