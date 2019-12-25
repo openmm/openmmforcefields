@@ -16,11 +16,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Read test molecules
         from openforcefield.topology import Molecule
         from openmmforcefields.utils import get_data_filename
-        filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecifie-stereochemistry.sdf")
+        filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
         # Select some small molecules for fast testing
         MAX_ATOMS = 24
-        MAX_MOLECULES = 5
+        MAX_MOLECULES = 20
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         molecules = molecules[:MAX_MOLECULES]
         # Store molecules
@@ -119,7 +119,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 """
                 from tinydb import TinyDB
                 db = TinyDB(generator._cache)
-                table = db.table(generator.gaff_version)
+                table = db.table(generator._database_table_name)
                 db_entries = table.all()
                 db.close()
                 n_entries = len(db_entries)
@@ -250,7 +250,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_parameterize(self):
         """Test parameterizing molecules with SMIRNOFFTemplateGenerator for all installed SMIRNOFF force fields"""
-        # Test all supported GAFF versions
+        # Test all supported SMIRNOFF force fields
         for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS:
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -273,3 +273,89 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
                     system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
                 assert system.getNumParticles() == molecule.n_atoms
                 assert (t2.interval() < t1.interval())
+
+    @staticmethod
+    def compute_energy(system, positions):
+        """Compute potential energy and Force components for an OpenMM system.
+
+        Parameters
+        ----------
+        system : simtk.openmm.System
+            The System object
+        positions : simtk.unit.Quantity of shape (nparticles,3) with units compatible with nanometers
+            The positions for which energy is to be computed
+
+        Returns
+        -------
+        openmm_energy : dict of str : simtk.unit.Quantity
+            openmm_energy['total'] is the total potential energy
+            openmm_energy['components'][forcename] is the potential energy for the specified component force
+        """
+        import copy
+        system = copy.deepcopy(system)
+        for index, force in enumerate(system.getForces()):
+            force.setForceGroup(index)
+        from simtk import openmm
+        platform = openmm.Platform.getPlatformByName('Reference')
+        integrator = openmm.VerletIntegrator(0.001)
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(positions)
+        openmm_energy = {
+            'total' : context.getState(getEnergy=True).getPotentialEnergy(),
+            'components' : { system.getForce(index).__class__.__name__ : context.getState(getEnergy=True, groups=(1 << index)).getPotentialEnergy() for index in range(system.getNumForces()) },
+            }
+        del context, integrator
+        return openmm_energy
+
+    @classmethod
+    def compare_energies(cls, molecule, off_forcefield, openmm_forcefield):
+        """Compare energies between Open Force Field Initiative and OpenMM ForceField objects"""
+        from simtk import openmm
+
+        # Create OpenMM System using openfocefield
+        smirnoff_system = off_forcefield.create_openmm_system(molecule.to_topology())
+        smirnoff_energy = cls.compute_energy(smirnoff_system, molecule.conformers[0])
+        with open('system-smirnoff.xml', 'w') as outfile:
+            outfile.write(openmm.XmlSerializer.serialize(smirnoff_system))
+
+        # Create OpenMM System using OpenMM app
+        from simtk.openmm import app
+        openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, onbondedMethod=app.NoCutoff)
+        openmm_energy = cls.compute_energy(openmm_system, molecule.conformers[0])
+        with open('system-openmm.xml', 'w') as outfile:
+            outfile.write(openmm.XmlSerializer.serialize(openmm_system))
+
+        # TODO: Compare energies
+        from simtk import unit
+        ENERGY_DEVIATION_TOLERANCE = 1.0e-2 * unit.kilocalories_per_mole
+        delta = (openmm_energy['total'] - smirnoff_energy['total'])
+        if abs(delta) > ENERGY_DEVIATION_TOLERANCE:
+            # Show breakdown by components
+            print('Energy components:')
+            print(f"{'component':24} {'OpenMM (kcal/mol)':20} {'SMIRNOFF (kcal/mol)':20}")
+            for key in openmm_energy['components'].keys():
+                openmm_component_energy = openmm_energy['components'][key]
+                smirnoff_component_energy = smirnoff_energy['components'][key]
+                print(f'{key:24} {(openmm_component_energy/unit.kilocalories_per_mole):20.3f} {(smirnoff_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol')
+            print(f'{"TOTAL":24} {(openmm_energy["total"]/unit.kilocalories_per_mole):20.3f} {(smirnoff_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol')
+            raise Exception(f'Energy deviation ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})')
+
+    def test_energies(self):
+        """Test potential energies match between openforcefield and OpenMM ForceField"""
+        # Test all supported SMIRNOFF force fields
+        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS:
+            # Create a generator that knows about a few molecules
+            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
+            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, smirnoff=smirnoff)
+            # Create a ForceField
+            import simtk
+            openmm_forcefield = simtk.openmm.app.ForceField()
+            # Register the template generator
+            openmm_forcefield.registerTemplateGenerator(generator.generator)
+            # Create openforcefield ForceField object
+            import openforcefield
+            off_forcefield = openforcefield.typing.engines.smirnoff.ForceField(smirnoff)
+            # Parameterize some molecules
+            from simtk.openmm.app import NoCutoff
+            for molecule in self.molecules:
+                self.compare_energies(molecule, off_forcefield, openmm_forcefield)

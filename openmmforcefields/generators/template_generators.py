@@ -555,8 +555,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
-            # Create a new atom type for each atom in the molecule
-            typename = f'{smiles}-{atom.name}'
             atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.gaff_type, charge=str(atom.partial_charge / unit.elementary_charge))
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
@@ -793,11 +791,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
     Create a template generator for a specific pre-installed SMIRNOFF version
-    ('openforcefield-1.0.0') and register multiple molecules:
+    ('openff-1.0.0.offxml') and register multiple molecules:
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecuel2], smirnoff='openforcefield-1.0.0')
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecuel2], smirnoff='openff-1.0.0.offxml')
 
     You can also add some Molecules later on after the generator has been registered:
 
@@ -812,7 +810,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     """
     # TODO: Automatically populate this at import by examining plugin directories in order of semantic version
-    INSTALLED_SMIRNOFF_FORCEFIELDS = ['openforcefield-1.0.0', 'smirnoff99Frosst-1.1.0']
+    INSTALLED_SMIRNOFF_FORCEFIELDS = ['openff-1.0.0.offxml', 'smirnoff99Frosst-1.1.0.offxml']
 
     def __init__(self, molecules=None, cache=None, smirnoff=None):
         """
@@ -850,7 +848,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename
-        '/full/path/to/openforcefield-1.0.0.offxml'
+        '/full/path/to/openff-1.0.0.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
@@ -865,11 +863,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         To check which SMIRNOFF versions are supported, check the `INSTALLED_SMIRNOFF_FORCEFIELDS` attribute:
 
         >>> print(SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS)
-        ['openforcefield-1.0.0', 'smirnoff99Frosst']
+        ['openff-1.0.0.offxml', 'smirnoff99Frosst.offxml']
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', smirnoff='openforcefield-1.0.0')
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', smirnoff='openff-1.0.0.offxml')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -884,19 +882,17 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # TODO: Can we instead use the force field hash, or some other unique identifier?
         self._database_table_name = smirnoff
 
+        # Create ForceField object
+        import openforcefield.typing.engines.smirnoff
+        try:
+            self._smirnoff_forcefield = openforcefield.typing.engines.smirnoff.ForceField(smirnoff)
+        except Exception as e:
+            print(e)
+            raise ValueError(f"Can't find specified SMIRNOFF force field ({smirnoff}) in install paths")
+
         # Find SMIRNOFF filename
         smirnoff_filename = self._search_paths(smirnoff)
-        if smirnoff_filename is None:
-            # Try adding .offxml extension
-            self._search_paths(smirnoff + '.offxml')
-        if smirnoff_filename is None:
-            # Can't find the specified SMIRNOFF file
-            raise ValueError(f"Can't find specified SMIRNOFF force field ({smirnoff}) in install paths")
         self._smirnoff_filename = smirnoff_filename
-
-        # Create ForceField object
-        from openforcefield.typing.engines import smirnoff
-        self._smirnoff_forcefield = smirnoff.ForceField(smirnoff_filename)
 
     def _search_paths(self, filename):
         """Search registered openforcefield plugin directories
@@ -921,7 +917,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             # Try first the simple path.
             searched_dirs_paths = ['']
             # Then try a relative file path w.r.t. an installed directory.
-            searched_dirs_paths.extend( _get_installed_offxml_dir_paths())
+            searched_dirs_paths.extend(_get_installed_offxml_dir_paths())
 
             # Determine the actual path of the file.
             # TODO: What is desired toolkit behavior if two files with the desired name are available?
@@ -973,7 +969,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Parameterize molecule
         _logger.debug(f'Generating parameters...')
-        openmm_system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
+        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
 
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
@@ -991,7 +987,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Append unique type names to atoms
         for particle in molecule.particles:
-            setattr(particle, 'typename', f'{smiles}-{particle.name}')
+            setattr(particle, 'typename', f'{smiles}${particle.name}')
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
@@ -999,7 +995,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             # Create a new atom type for each atom in the molecule
             paricle_indices = [particle_index]
             atom_type = etree.SubElement(atom_types, "Type", name=particle.typename,
-                element=particle.element.name, mass=as_attrib(particle.element.mass))
+                element=particle.element.symbol, mass=as_attrib(particle.element.mass))
             atom_type.set('class', particle.typename) # 'class' is a reserved Python keyword, so use alternative API
 
         # Compile forces into a dict
@@ -1023,17 +1019,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             classmap : dict of str : str
                 Dict of format { 'class1' : typename1, ... }
             """
-            return { f'class{particle_index+1}' : molecule.particles[particle_index] for particle_index in particle_indices }
+            return { f'class{class_index+1}' : molecule.particles[particle_index].typename for class_index,particle_index in enumerate(particle_indices) }
 
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
         # though this must match the original AMBER values
         nonbonded_types = etree.SubElement(root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5")
+        etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
         for particle_index in range(forces['NonbondedForce'].getNumParticles()):
             charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
             nonbonded_type = etree.SubElement(nonbonded_types, "Atom",
                 sigma=as_attrib(sigma), epsilon=as_attrib(epsilon))
-            nonbonded_type.set('class', molecules.particles[particle_index].typename) # 'class' is a reserved Python keyword, so use alternative API
+            nonbonded_type.set('class', molecule.particles[particle_index].typename) # 'class' is a reserved Python keyword, so use alternative API
 
         # Bonds
         bond_types = etree.SubElement(root, "HarmonicBondForce")
@@ -1046,9 +1043,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Angles
         angle_types = etree.SubElement(root, "HarmonicAngleForce")
         particle_indices = [-1]*3
-        for angle_index in range(forces['HarmonicAngleForce'].getNumBonds()):
+        for angle_index in range(forces['HarmonicAngleForce'].getNumAngles()):
             particle_indices[0], particle_indices[1], particle_indices[2], angle, k = forces['HarmonicAngleForce'].getAngleParameters(angle_index)
-            angle_type = etree.SubElement(bond_types, "Angle", **classes(particle_indices),
+            angle_type = etree.SubElement(angle_types, "Angle", **classes(particle_indices),
                 angle=as_attrib(angle), k=as_attrib(k))
 
         # Torsions
@@ -1063,10 +1060,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Collect torsions
         torsions = dict()
-        particle_indices = [-1]*4
         for torsion_index in range(forces['PeriodicTorsionForce'].getNumTorsions()):
+            particle_indices = [-1]*4
             particle_indices[0], particle_indices[1], particle_indices[2], particle_indices[3], periodicity, phase, k = forces['PeriodicTorsionForce'].getTorsionParameters(torsion_index)
-            if particle_indices in torsions:
+            particle_indices = tuple(particle_indices)
+            if particle_indices in torsions.keys():
                 torsions[particle_indices].append( (periodicity, phase, k) )
             else:
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
@@ -1078,22 +1076,26 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
             for term in range(nterms):
+                periodicity, phase, k = torsions[particle_indices][term]
                 params[f'periodicity{term+1}'] = as_attrib(periodicity)
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
-            torsion_type = etree.SubElement(bond_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
+            torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
 
         # Create residue definitions
+        # TODO: Handle non-Atom particles too (virtual sites)
+        from simtk import unit
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
-        for atom in molecule.atoms:
-            # Create a new atom type for each atom in the molecule
-            typename = f'{smiles}-{atom.name}'
-            atom = etree.SubElement(residue, "Atom", name=atom.name, type=typename, charge=atom.partial_charge)
+        for particle_index, particle in enumerate(molecule.particles):
+            charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
+            atom = etree.SubElement(residue, "Atom", name=particle.name, type=particle.typename, charge=as_attrib(charge))
         for bond in molecule.bonds:
             bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
+        with open('smirnoff.offxml', 'w') as outfile:
+            outfile.write(ffxml_contents)
 
         return ffxml_contents
