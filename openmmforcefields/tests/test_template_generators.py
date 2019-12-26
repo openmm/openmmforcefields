@@ -20,9 +20,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
         # Select some small molecules for fast testing
         MAX_ATOMS = 24
-        MAX_MOLECULES = 5
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
-        molecules = molecules[:MAX_MOLECULES]
+        # Cut down number of tests for travis
+        import os
+        if 'TRAVIS' in os.environ:
+            MAX_MOLECULES = 3
+            molecules = molecules[:MAX_MOLECULES]
         # Store molecules
         self.molecules = molecules
 
