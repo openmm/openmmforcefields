@@ -19,12 +19,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
         # Select some small molecules for fast testing
-        MAX_ATOMS = 24
+        MAX_ATOMS = 20
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
         import os
         if 'TRAVIS' in os.environ:
-            MAX_MOLECULES = 3
+            MAX_MOLECULES = 2
             molecules = molecules[:MAX_MOLECULES]
         # Store molecules
         self.molecules = molecules

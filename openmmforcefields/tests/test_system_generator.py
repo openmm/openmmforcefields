@@ -8,7 +8,10 @@ from openmmforcefields.utils import get_data_filename, Timer
 # Tests
 ################################################################################
 
-class CommonSystemGeneratorTests(object):
+class TestSystemGenerator(object):
+
+    SMALL_MOLECULE_FORCEFIELDS = ['gaff-1.81', 'gaff-2.11', 'smirnoff99Frosst-1.1.0', 'openforcefield-1.0.0']
+
     """Base class for SystemGenerator tests."""
     def setUp(self):
         self.testsystems = dict()
@@ -31,7 +34,12 @@ class CommonSystemGeneratorTests(object):
             from openforcefield.topology import Molecule
             from openmmforcefields.utils import get_data_filename
             sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands.sdf'))
+
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
+            # TODO: Filter out molecules with undefined stereochemistry
+            # TODO: Filter out big molecules
+            # TODO: Retain only a few molecules for travis
+
             n_molecules = len(molecules)
             print(f'Read {n_molecules} molecules from {sdf_filename}')
 
@@ -68,25 +76,30 @@ class CommonSystemGeneratorTests(object):
     def test_create(self):
         """Test SystemGenerator creation"""
         from openmmforcefields.generators import SystemGenerator
+
         # Create an empty system generator
         generator = self.SystemGenerator()
-        # Create a generator that defines a protein force field and GAFF version
-        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                        **self.extra_generator_arguments)
-        # Create a generator that defines a protein force field and SMIRNOFF force field
-        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                        **self.extra_generator_arguments)
-        # Create a generator that also has a database cache
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            cache = os.path.join(tmpdirname, 'db.json')
-            # Create a new database file
+
+    def test_create_small_molecule(self):
+        """Test SystemGenerator creation"""
+        from openmmforcefields.generators import SystemGenerator
+
+        for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
+            # Create a generator that defines AMBER and small molecule force fields
             generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                            cache=cache, **self.extra_generator_arguments)
-            del generator
-            # Reopen it (with cache still empty)
-            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                            cache=cache, **self.extra_generator_arguments)
-            del generator
+                small_molecule_forcefield=small_molecule_forcefield)
+
+            # Create a generator that also has a database cache
+            with tempfile.TemporaryDirectory() as tmpdirname:
+                cache = os.path.join(tmpdirname, 'db.json')
+                # Create a new database file
+                generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                    cache=cache, small_molecule_forcefield=small_molecule_forcefield)
+                del generator
+                # Reopen it (with cache still empty)
+                generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                    cache=cache, small_molecule_forcefield=small_molecule_forcefield)
+                del generator
 
     def test_parameterize_molecules(self):
         """Test parameterizing molecules in vacuum"""
@@ -96,9 +109,12 @@ class CommonSystemGeneratorTests(object):
         molecules = testsystem['molecules']
         from simtk.openmm.app import NoCutoff
         forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
-        generator = self.SystemGenerator(forcefields=self.amber_forcefields,
-                                         forcefield_kwargs=forcefield_kwargs,
-                                         molecules=molecules, **self.extra_generator_arguments)
+
+        for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
+            generator = self.SystemGenerator(forcefields=self.amber_forcefields,
+                                             small_molecule_forcefield=small_molecule_forcefield,
+                                             forcefield_kwargs=forcefield_kwargs,
+                                             molecules=molecules)
         # Parameterize some molecules
         from openmmforcefields.utils import Timer
         for molecule in molecules[:3]:
