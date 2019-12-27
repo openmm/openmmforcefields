@@ -370,10 +370,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""
         # Test all supported SMIRNOFF force fields
-        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+        for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, smirnoff=smirnoff)
+            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Create a ForceField
             import simtk
             openmm_forcefield = simtk.openmm.app.ForceField()
@@ -381,7 +382,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             openmm_forcefield.registerTemplateGenerator(generator.generator)
             # Create openforcefield ForceField object
             import openforcefield
-            off_forcefield = openforcefield.typing.engines.smirnoff.ForceField(smirnoff)
+            off_forcefield = openforcefield.typing.engines.smirnoff.ForceField(small_molecule_forcefield + '.offxml')
             # Parameterize some molecules
             from simtk.openmm.app import NoCutoff
             for molecule in self.molecules:
