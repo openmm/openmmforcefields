@@ -12,22 +12,42 @@ from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 class TestGAFFTemplateGenerator(unittest.TestCase):
     TEMPLATE_GENERATOR = GAFFTemplateGenerator
 
+    def filter_molecules(self, molecules):
+        """
+        Filter molecules to speed up tests, especially on travis.
+
+        Parameters
+        ----------
+        molecules : list of openforcefield.topology.Molecule
+            The input list of molecules to be filtered
+
+        Returns
+        -------
+        molecules : list of openforcefield.topology.Molecule
+            The filtered list of molecules to be filtered
+
+        """
+        # TODO: Eliminate molecules without fully-specified stereochemistry
+        # Select some small molecules for fast testing
+        MAX_ATOMS = 24
+        molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
+        # Cut down number of tests for travis
+        import os
+        MAX_MOLECULES = 20
+        if 'TRAVIS' in os.environ:
+            MAX_MOLECULES = 3
+        molecules = molecules[:MAX_MOLECULES]
+
+        return molecules
+
     def setUp(self):
         # Read test molecules
         from openforcefield.topology import Molecule
         from openmmforcefields.utils import get_data_filename
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
-        # Select some small molecules for fast testing
-        MAX_ATOMS = 20
-        molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
-        # Cut down number of tests for travis
-        import os
-        if 'TRAVIS' in os.environ:
-            MAX_MOLECULES = 2
-            molecules = molecules[:MAX_MOLECULES]
-        # Store molecules
-        self.molecules = molecules
+        # Filter molecules as appropriate
+        self.molecules = self.filter_molecules(molecules)
 
         # Suppress DEBUG logging from various packages
         import logging
@@ -202,6 +222,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 molecules = [molecules]
 
             print(f'Read {len(molecules)} molecules from {sdf_filename}')
+            molecules = self.filter_molecules(molecules)
+            print(f'{len(molecules)} molecules remain after filtering')
 
             # Create GAFF template generator with local cache
             cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
