@@ -205,7 +205,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             'p38'      : { 'ligand_sdf_filename' : 'p38_ligands.sdf' },
             'ptp1b'    : { 'ligand_sdf_filename' : 'PTP1B_ligands.sdf' },
             'thrombin' : { 'ligand_sdf_filename' : 'Thrombin_ligands.sdf' },
-            'tyk2'     : { 'ligand_sdf_filename' : 'Tyk2_protein.pdb' },
+            'tyk2'     : { 'ligand_sdf_filename' : 'Tyk2_ligands.sdf' },
         }
         for system_name in jacs_systems:
             # Load molecules
@@ -253,10 +253,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def test_parameterize(self):
         """Test parameterizing molecules with GAFFTemplateGenerator for all supported GAFF versions"""
         # Test all supported GAFF versions
-        for gaff_version in GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS:
+        for small_molecule_forcefield in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            print(f'Testing {small_molecule_forcefield}')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = GAFFTemplateGenerator(molecules=self.molecules, gaff_version=gaff_version)
+            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, forcefield=small_molecule_forcefield)
+            # Check that we have loaded the right force field
+            assert generator.forcefield == small_molecule_forcefield
             # Create a ForceField with the appropriate GAFF version
             from simtk.openmm.app import ForceField
             forcefield = ForceField()
@@ -276,34 +279,27 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 assert system.getNumParticles() == molecule.n_atoms
                 assert (t2.interval() < t1.interval())
 
+    def test_multiple_registration(self):
+        """Test registering the template generator with multiple force fields"""
+        generator = GAFFTemplateGenerator(molecules=self.molecules)
+        from simtk.openmm.app import ForceField
+        NUM_FORCEFIELDS = 2 # number of force fields to test
+        forcefields = list()
+        for index in range(NUM_FORCEFIELDS):
+            forcefield = ForceField()
+            forcefield.registerTemplateGenerator(generator.generator)
+            forcefields.append(forcefield)
+
+        # Parameterize a molecule in each force field instance
+        molecule = self.molecules[0]
+        openmm_topology = molecule.to_topology().to_openmm()
+        from simtk.openmm.app import NoCutoff
+        for forcefield in forcefields:
+            system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+            assert system.getNumParticles() == molecule.n_atoms
+
 class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
     TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
-
-    def test_parameterize(self):
-        """Test parameterizing molecules with SMIRNOFFTemplateGenerator for all installed SMIRNOFF force fields"""
-        # Test all supported SMIRNOFF force fields
-        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS:
-            # Create a generator that knows about a few molecules
-            # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, smirnoff=smirnoff)
-            # Create a ForceField
-            from simtk.openmm.app import ForceField
-            forcefield = ForceField()
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize some molecules
-            from simtk.openmm.app import NoCutoff
-            from openmmforcefields.utils import Timer
-            for molecule in self.molecules:
-                openmm_topology = molecule.to_topology().to_openmm()
-                with Timer() as t1:
-                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-                assert system.getNumParticles() == molecule.n_atoms
-                # Molecule should now be cached
-                with Timer() as t2:
-                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-                assert system.getNumParticles() == molecule.n_atoms
-                assert (t2.interval() < t1.interval())
 
     @staticmethod
     def compute_energy(system, positions):
@@ -374,7 +370,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""
         # Test all supported SMIRNOFF force fields
-        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS:
+        for smirnoff in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, smirnoff=smirnoff)
