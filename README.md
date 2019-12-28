@@ -120,21 +120,21 @@ You can check which GAFF version is in use with
 Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 ```python
 molecules = Molecule.from_file('molecules.sdf')
-gaff = GAFFTemplateGenerator(molecules=molecules, gaff_version='2.11')
+generator = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.11')
 ```
 You can also add molecules to the generator later, even after the generator has been registered:
 ```python
-gaff.add_molecules(molecule)
-gaff.add_molecules([molecule1, molecule2])
+generator.add_molecules(molecule)
+generator.add_molecules([molecule1, molecule2])
 ```
-To check which GAFF versions are supported, examine the `SUPPORTED_GAFF_VERSIONS` attribute:
+To check which GAFF versions are supported, examine the `INSTALLED_FORCEFIELDS` attribute:
 ```python
->>> print(GAFFTemplateGenerator.SUPPORTED_GAFF_VERSIONS)
-['1.4', '1.8', '1.81', '2.1', '2.11']
+>>> print(GAFFTemplateGenerator.INSTALLED_FORCEFIELDS)
+['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
-gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', gaff_version='1.80')
+generator = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-1.80')
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
@@ -154,46 +154,44 @@ from openforcefield.topology import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
 # Create the SMIRNOFF template generator with the default installed force field (openforcefield-1.0.0)
 from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
+generator = SMIRNOFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from simtk.openmm.app import ForceField
 forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
 # Register the SMIRNOFF template generator
-forcefield.registerTemplateGenerator(smirnoff)
+forcefield.registerTemplateGenerator(generator)
 ```
 The latest official Open Force Field Initiative release ([`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
 You can check which SMIRNOFF force field is in use with
 ```python
 >>> smirnoff.smirnoff_filename
 '/path/to/installed/openforcefield-1.0.0.offxml'
->>> smirnoff.smirnoff_contents
-...contents of SMIRNOFF force field...
-````
+```
 Create a template generator for a specific SMIRNOFF force field for multiple molecules read from an SDF file:
 ```python
 molecules = Molecule.from_file('molecules.sdf')
 # Create a SMIRNOFF residue template generator from the official openforcefield-1.0.0 release,
 # which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, smirnoff='openforcefield-1.0.0')
+generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openforcefield-1.0.0')
 # Create a SMIRNOFF residue template generator from the official smirnoff99Frosst-1.1.0 release,
 # which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, smirnoff='smirnoff99Frosst-1.1.0')
+generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='smirnoff99Frosst-1.1.0')
 # Use a local .offxml file instead
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, smirnoff='local-file.offxml')
+generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='local-file.offxml')
 ```
 You can also add molecules to the generator later, even after the generator has been registered:
 ```python
-smirnoff.add_molecules(molecule)
-smirnoff.add_molecules([molecule1, molecule2])
+generator.add_molecules(molecule)
+generator.add_molecules([molecule1, molecule2])
 ```
-To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_SMIRNOFF_FORCEFIELDS` attribute:
+To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_FORCEFIELDS` attribute:
 ```python
->>> print(SMIRNOFFTemplateGenerator.INSTALLED_SMIRNOFF_FORCEFIELDS)
-['openforcefield-1.0.0', 'smirnoff99Frosst-1.1.0']
+>>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
+['smirnoff99Frosst-1.1.0', 'openforcefield-1.0.0']
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
-smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', smirnoff='openforcefield-1.0.0')
+generator = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', forcefield='openforcefield-1.0.0')
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
@@ -212,13 +210,14 @@ forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCM
                       'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
-system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], gaff_version='2.11', forcefield_kwargs=forcefield_kwargs, cache='gaff.json')
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
 # Create an OpenMM System from an Open Force Field toolkit Topology object
 system = system_generator.create_system(openforcefield_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of openforcefield Molecule objects
 system = system_generator.create_system(openmm_topology, molecules=molecules)
 ```
-Parameterized molecules are cached in `gaff.json`.
+Parameterized molecules are cached in `db.json`.
+Parameters for multiple force fields can be held in the same cache file.
 
 ### Examples using `SMIRNOFFSystemGenerator` to automate the use of AMBER force fields with SMIRNOFF for small molecule parameterization
 
@@ -231,7 +230,7 @@ forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCM
                       'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
-system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], smirnoff='openforcefield-1.0.0', forcefield_kwargs=forcefield_kwargs, cache='openforcefield.json')
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], small_molecule_forcefield='openforcefield-1.0.0', forcefield_kwargs=forcefield_kwargs, cache='openforcefield.json')
 # Create an OpenMM System from an Open Force Field toolkit Topology object
 system = system_generator.create_system(openforcefield_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of openforcefield Molecule objects
