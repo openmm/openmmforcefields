@@ -920,6 +920,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
             forcefield = self.INSTALLED_FORCEFIELDS[-1]
+        self._forcefield = forcefield
 
         # Track parameters by provided SMIRNOFF name
         # TODO: Can we instead use the force field hash, or some other unique identifier?

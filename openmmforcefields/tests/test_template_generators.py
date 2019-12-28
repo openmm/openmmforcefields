@@ -225,7 +225,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             molecules = self.filter_molecules(molecules)
             print(f'{len(molecules)} molecules remain after filtering')
 
-            # Create GAFF template generator with local cache
+            # Create template generator with local cache
             cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
             generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
 
@@ -251,16 +251,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     # TODO: Test JACS protein-ligand systems
 
     def test_parameterize(self):
-        """Test parameterizing molecules with GAFFTemplateGenerator for all supported GAFF versions"""
-        # Test all supported GAFF versions
-        for small_molecule_forcefield in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+        """Test parameterizing molecules with template generator for all supported force fields"""
+        # Test all supported small molecule force fields
+        for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
             print(f'Testing {small_molecule_forcefield}')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Check that we have loaded the right force field
             assert generator.forcefield == small_molecule_forcefield
-            # Create a ForceField with the appropriate GAFF version
+            # Create a ForceField with the appropriate small molecule force field
             from simtk.openmm.app import ForceField
             forcefield = ForceField()
             # Register the template generator
@@ -281,7 +281,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_multiple_registration(self):
         """Test registering the template generator with multiple force fields"""
-        generator = GAFFTemplateGenerator(molecules=self.molecules)
+        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
         from simtk.openmm.app import ForceField
         NUM_FORCEFIELDS = 2 # number of force fields to test
         forcefields = list()
