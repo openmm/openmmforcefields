@@ -937,9 +937,16 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             print(e)
             raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths")
 
+        # Delete constraints, if present
+        if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
+            del self._smirnoff_forcefield._parameter_handlers['Constraints']
+
         # Find SMIRNOFF filename
         smirnoff_filename = self._search_paths(filename)
         self._smirnoff_filename = smirnoff_filename
+
+        # Cache a copy of the OpenMM System generated for each molecule for testing purposes
+        self._system_cache = dict()
 
     def _search_paths(self, filename):
         """Search registered openforcefield plugin directories
@@ -980,6 +987,26 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """Full path to the SMIRNOFF force field file"""
         return self._smirnoff_filename
 
+    def get_openmm_system(self, molecule):
+        """Retrieve the OpenMM System object generated for a particular molecule for testing/validation.
+
+        Parameters
+        ----------
+        molecule : openforcefield.topology.Molecule
+            The Molecule object
+
+        Returns
+        -------
+        system : simtk.openmm.System or None
+            If the Molecule object has already been parameterized by this instance, this molecule is returned.
+            Otherwise, None is returned.
+        """
+        smiles = molecule.to_smiles()
+        if smiles in self._system_cache:
+            return self._system_cache[smiles]
+        else:
+            return None
+
     def generate_residue_template(self, molecule, residue_atoms=None):
         """
         Generate a residue template and additional parameters for the specified Molecule.
@@ -1017,6 +1044,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Parameterize molecule
         _logger.debug(f'Generating parameters...')
         system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
+
+        # Transiently cache a copy of the OpenMM System object generated for testing/verification purposes
+        self._system_cache[smiles] = system
 
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
@@ -1128,6 +1158,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
             torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
+
+        # TODO: Handle virtual sites
+        virtual_sites = [ particle_index for particle_index in range(system.getNumParticles()) if system.isVirtualSite(particle_index) ]
+        if len(virtual_sites) > 0:
+            raise Exception('Virtual sites are not yet supported')
 
         # Create residue definitions
         # TODO: Handle non-Atom particles too (virtual sites)
