@@ -317,6 +317,9 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         openmm_energy : dict of str : simtk.unit.Quantity
             openmm_energy['total'] is the total potential energy
             openmm_energy['components'][forcename] is the potential energy for the specified component force
+        openmm_forces : dict of str : simtk.unit.Quantity
+            openmm_forces['total'] is the total force
+            openmm_forces['components'][forcename] is the force for the specified component force
         """
         import copy
         system = copy.deepcopy(system)
@@ -331,8 +334,14 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             'total' : context.getState(getEnergy=True).getPotentialEnergy(),
             'components' : { system.getForce(index).__class__.__name__ : context.getState(getEnergy=True, groups=(1 << index)).getPotentialEnergy() for index in range(system.getNumForces()) },
             }
+
+        openmm_forces = {
+            'total' : context.getState(getForces=True).getForces(asNumpy=True),
+            'components' : { system.getForce(index).__class__.__name__ : context.getState(getForces=True, groups=(1 << index)).getForces(asNumpy=True) for index in range(system.getNumForces()) },
+            }
+
         del context, integrator
-        return openmm_energy
+        return openmm_energy, openmm_forces
 
     @classmethod
     def compare_energies(cls, molecule, openmm_system, smirnoff_system):
@@ -353,11 +362,18 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         """
 
         # Compute energies
-        openmm_energy = cls.compute_energy(openmm_system, molecule.conformers[0])
-        smirnoff_energy = cls.compute_energy(smirnoff_system, molecule.conformers[0])
+        openmm_energy, openmm_forces = cls.compute_energy(openmm_system, molecule.conformers[0])
+        smirnoff_energy, smirnoff_forces = cls.compute_energy(smirnoff_system, molecule.conformers[0])
 
-        # TODO: Compare energies
         from simtk import unit
+
+        def write_xml(filename, system):
+            from simtk import openmm
+            with open(filename, 'w') as outfile:
+                print(f'Writing {filename}...')
+                outfile.write(openmm.XmlSerializer.serialize(system))
+
+        # Compare energies
         ENERGY_DEVIATION_TOLERANCE = 1.0e-2 * unit.kilocalories_per_mole
         delta = (openmm_energy['total'] - smirnoff_energy['total'])
         if abs(delta) > ENERGY_DEVIATION_TOLERANCE:
@@ -369,13 +385,30 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
                 smirnoff_component_energy = smirnoff_energy['components'][key]
                 print(f'{key:24} {(openmm_component_energy/unit.kilocalories_per_mole):20.3f} {(smirnoff_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol')
             print(f'{"TOTAL":24} {(openmm_energy["total"]/unit.kilocalories_per_mole):20.3f} {(smirnoff_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol')
-            def write_xml(filename, system):
-                with open(filename, 'w') as outfile:
-                    print(f'Writing {filename}...')
-                    outfile.write(openmm.XmlSerializer.serialize(system))
             write_xml('system-smirnoff.xml', smirnoff_system)
             write_xml('openmm-smirnoff.xml', openmm_system)
             raise Exception(f'Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})')
+
+        # Compare forces
+        import numpy as np
+        def norm(x):
+            N = x.shape[0]
+            return np.sqrt((1.0/N) * (x**2).sum())
+        def relative_deviation(x, y):
+            return norm(x-y) / norm(y)
+
+        RELATIVE_FORCE_DEVIATION_TOLERANCE = 1.0e-5
+        relative_force_deviation = relative_deviation(openmm_forces['total'], smirnoff_forces['total'])
+        if relative_force_deviation > RELATIVE_FORCE_DEVIATION_TOLERANCE:
+            # Show breakdown by components
+            print('Force components:')
+            print(f"{'component':24} {'relative deviation':24}")
+            for key in openmm_energy['components'].keys():
+                print(f"{key:24} {relative_deviation(openmm_forces['components'][key], smirnoff_forces['components'][key]):24.10f}")
+            print(f'{"TOTAL":24} {relative_force_deviation:24.10f}')
+            write_xml('system-smirnoff.xml', smirnoff_system)
+            write_xml('openmm-smirnoff.xml', openmm_system)
+            raise Exception(f'Relative force deviation for {molecule.to_smiles()} ({relative_force_deviation}) exceeds threshold ({RELATIVE_FORCE_DEVIATION_TOLERANCE})')
 
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""

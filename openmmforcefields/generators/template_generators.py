@@ -1148,7 +1148,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Create torsion definitions
         # TODO: Note that OpenMM's ForceField may need to be extended to assign SMIRNOFF trefoil impropers correctly
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce")
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='amber')
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
