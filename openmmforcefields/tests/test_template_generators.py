@@ -257,7 +257,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
         from simtk.openmm.app import ForceField, NoCutoff
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' },
+            'bace'     : { 'prefix' : 'Bace' }, # TODO: Uncomment when input files are fixed
             'cdk2'     : { 'prefix' : 'CDK2' },
             'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },
@@ -282,11 +282,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Read ParmEd Structures
             import parmed
-            #protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            from simtk import unit
             protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
-            print(f'Reading protein from {protein_pdb_filename} ...')
             from simtk.openmm.app import PDBFile
-            protein_structure = parmed.load_file(protein_pdb_filename)
+            print(f'Reading protein from {protein_pdb_filename} ...')
+            #protein_structure = parmed.load_file(protein_pdb_filename) # NOTE: This mis-interprets distorted geometry and sequentially-numbered residues that span chain breaks
+            pdbfile = PDBFile(protein_pdb_filename)
+            protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions.value_in_unit(unit.angstroms))
             ligand_structures = parmed.load_file(ligand_sdf_filename)
             try:
                 nmolecules = len(ligand_structures)
@@ -331,22 +333,32 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 # TODO: Fix the input files so we don't need to do this
                 from simtk.openmm import app
                 modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
-                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
                 residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
-                termini = [residues[0], residues[-1]]
-                print(f'Termini: {termini}')
+                termini_ids = [residues[0].id, residues[-1].id]
+                for residue in modeller.topology.residues():
+                    if residue.id in termini_ids:
+                        print(residue)
+                        for bond in residue.bonds():
+                            print(f'  {bond}')
+                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
+                print(f'Termini: {termini_ids}')
                 #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
-                hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue in termini]
+                hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
                 print(f'Deleting atoms: {hs}')
                 modeller.delete(hs)
                 from simtk.openmm.app import PDBFile
-                with open('bace-1.pdb', 'w') as outfile:
+                with open('modeller-1.pdb', 'w') as outfile:
                     PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
                 print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
                 print('Adding hydrogens...')
                 modeller.addHydrogens()
-                with open('bace-2.pdb', 'w') as outfile:
+                with open('modeller-2.pdb', 'w') as outfile:
                     PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
+                for residue in modeller.topology.residues():
+                    if residue.id in termini_ids:
+                        print(residue)
+                        for bond in residue.bonds():
+                            print(f'  {bond}')
                 print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
                 try:
                     forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
@@ -354,7 +366,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 except Exception as e:
                     n_failure += 1
                     print(e)
-                stop
             print(f'{n_failure}/{n_success+n_failure} complexes failed to parameterize for {system_name}')
 
     def test_parameterize(self):
