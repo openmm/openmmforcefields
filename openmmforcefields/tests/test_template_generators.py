@@ -282,6 +282,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Read ParmEd Structures
             import parmed
+            #protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
             protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
             print(f'Reading protein from {protein_pdb_filename} ...')
             from simtk.openmm.app import PDBFile
@@ -326,19 +327,34 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             for complex_structure in complex_structures:
                 openmm_topology = complex_structure.topology
 
-                # Fix hydrogens
-                # TODO: Fix the input files so ewe don't need to do this
+                # Delete hydrogens from terminal protein residues
+                # TODO: Fix the input files so we don't need to do this
+                from simtk.openmm import app
                 modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
-                hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL' ]
+                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
+                residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
+                termini = [residues[0], residues[-1]]
+                print(f'Termini: {termini}')
+                #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
+                hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue in termini]
+                print(f'Deleting atoms: {hs}')
                 modeller.delete(hs)
-                modeller.addHydrogens(forcefield=self._system_generator._forcefield)
-
+                from simtk.openmm.app import PDBFile
+                with open('bace-1.pdb', 'w') as outfile:
+                    PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
+                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
+                print('Adding hydrogens...')
+                modeller.addHydrogens()
+                with open('bace-2.pdb', 'w') as outfile:
+                    PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
+                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
                 try:
-                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                    forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
                     n_success += 1
                 except Exception as e:
                     n_failure += 1
                     print(e)
+                stop
             print(f'{n_failure}/{n_success+n_failure} complexes failed to parameterize for {system_name}')
 
     def test_parameterize(self):
