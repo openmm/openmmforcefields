@@ -38,7 +38,7 @@ class SmallMoleculeTemplateGenerator(object):
         molecules : openforcefield.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : str, optional, default=None
             Filename for global caching of parameters.
@@ -100,7 +100,7 @@ class SmallMoleculeTemplateGenerator(object):
         if not molecules:
             return
 
-        # Ensure oemols is iterable
+        # Ensure molecules is an iterable
         try:
             iterator = iter(molecules)
         except TypeError as te:
@@ -1063,8 +1063,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 return str(quantity.value_in_unit_system(unit.md_unit_system))
 
         # Append unique type names to atoms
-        for particle in molecule.particles:
-            setattr(particle, 'typename', f'{smiles}${particle.name}')
+        for index, particle in enumerate(molecule.particles):
+            setattr(particle, 'typename', f'{smiles}${particle.name}#{index}')
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
@@ -1097,6 +1097,21 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 Dict of format { 'class1' : typename1, ... }
             """
             return { f'class{class_index+1}' : molecule.particles[particle_index].typename for class_index,particle_index in enumerate(particle_indices) }
+
+        # Round parameters using strings for ease of comparison
+        # DEBUG
+        #from simtk import unit
+        #def round_quantity(quantity):
+        #    NDECIMALS = 3
+        #    value = quantity.value_in_unit_system(unit.md_unit_system)
+        #    value = round(value, NDECIMALS)
+        #    return value
+        #for particle_index in range(forces['NonbondedForce'].getNumParticles()):
+        #    charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
+        #    forces['NonbondedForce'].setParticleParameters(particle_index, round_quantity(charge), round_quantity(sigma), round_quantity(epsilon))
+        #for exception_index in range(forces['NonbondedForce'].getNumExceptions()):
+        #    i, j, chargeProd, sigma, epsilon = forces['NonbondedForce'].getExceptionParameters(exception_index)
+        #    forces['NonbondedForce'].setExceptionParameters(exception_index, i, j, round_quantity(chargeProd), round_quantity(sigma), round_quantity(epsilon))
 
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
@@ -1147,8 +1162,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
 
         # Create torsion definitions
-        # TODO: Note that OpenMM's ForceField may need to be extended to assign SMIRNOFF trefoil impropers correctly
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='amber')
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
@@ -1176,8 +1190,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
 
         # Render XML into string
+        # DEBUG
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-        with open('smirnoff.offxml', 'w') as outfile:
+        with open('smirnoff.ffxml', 'w') as outfile:
             outfile.write(ffxml_contents)
 
         return ffxml_contents

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/choderalab/openmm-forcefields.svg?branch=master)](https://travis-ci.org/choderalab/openmm-forcefields?branch=master)
+tip3p_standard.xml[![Build Status](https://travis-ci.org/choderalab/openmm-forcefields.svg?branch=master)](https://travis-ci.org/choderalab/openmm-forcefields?branch=master)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
 # AMBER and CHARMM force fields for OpenMM
@@ -47,7 +47,7 @@ forcefield = ForceField('amber/ff99SBildn.xml')
 ```
 The TIP3P conversion also includes the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended divalent counterion parameters (`parm/frcmod.ions234lm_126_tip3p`):
 ```python
-forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
+forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
 ```
 
 ### Using the CHARMM force fields
@@ -101,7 +101,7 @@ from openmoltools.forcefield_generators import GAFFTemplateGenerator
 gaff = GAFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from simtk.openmm.app import ForceField
-forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
+forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
 # Register the GAFF template generator
 forcefield.registerTemplateGenerator(gaff)
 # You can now parameterize an OpenMM Topology object that contains the specified molecule.
@@ -157,7 +157,7 @@ from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
 generator = SMIRNOFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from simtk.openmm.app import ForceField
-forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p.xml')
+forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(generator)
 ```
@@ -210,7 +210,7 @@ forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCM
                       'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
-system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
 # Create an OpenMM System from an Open Force Field toolkit Topology object
 system = system_generator.create_system(openforcefield_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of openforcefield Molecule objects
@@ -219,24 +219,7 @@ system = system_generator.create_system(openmm_topology, molecules=molecules)
 Parameterized molecules are cached in `db.json`.
 Parameters for multiple force fields can be held in the same cache file.
 
-### Examples using `SMIRNOFFSystemGenerator` to automate the use of AMBER force fields with SMIRNOFF for small molecule parameterization
-
-Here's an example that uses the [Open Force Field `openforcefield-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) along with the new `ff14SB` generation of AMBER force fields (and compatible solvent models) to generate an OpenMM [`System`](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.openmm.System.html#simtk.openmm.openmm.System) object from an [Open Force Field `Topology`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openforcefield.topology.Topology.html#openforcefield.topology.Topology) object:
-```python
-# Define the keyword arguments to feed to ForceField
-from simtk import unit
-from simtk.openmm import app
-forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False,
-                      'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
-# Initialize a SystemGenerator using GAFF
-from openmmforcefields.generators import SystemGenerator
-system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p.xml'], small_molecule_forcefield='openforcefield-1.0.0', forcefield_kwargs=forcefield_kwargs, cache='openforcefield.json')
-# Create an OpenMM System from an Open Force Field toolkit Topology object
-system = system_generator.create_system(openforcefield_topology)
-# Alternatively, create an OpenMM System from an OpenMM Topology object and a list of openforcefield Molecule objects
-system = system_generator.create_system(openmm_topology, molecules=molecules)
-```
-Parameterized molecules are cached in `openforcefield.json`.
+To use the [Open Force Field `openforcefield-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openforcefield-1.0.0'`.
 
 # Frequently Asked Questions (FAQ)
 

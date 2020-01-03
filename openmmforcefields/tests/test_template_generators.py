@@ -222,7 +222,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 molecules = [molecules]
 
             print(f'Read {len(molecules)} molecules from {sdf_filename}')
-            molecules = self.filter_molecules(molecules)
+            #molecules = self.filter_molecules(molecules)
+            MAX_MOLECULES = len(molecules)
+            if 'TRAVIS' in os.environ:
+                MAX_MOLECULES = 3
+            molecules = molecules[:MAX_MOLECULES]
+            ligand_structures = ligand_structures[:MAX_MOLECULES]
             print(f'{len(molecules)} molecules remain after filtering')
 
             # Create template generator with local cache
@@ -248,7 +253,93 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                     print(e)
             print(f'{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}')
 
-    # TODO: Test JACS protein-ligand systems
+    def test_jacs_complexes(self):
+        """Use template generator to parameterize the Schrodinger JACS set of complexes"""
+        from simtk.openmm.app import ForceField, NoCutoff
+        jacs_systems = {
+            'bace'     : { 'prefix' : 'Bace' },
+            'cdk2'     : { 'prefix' : 'CDK2' },
+            'jnk1'     : { 'prefix' : 'Jnk1' },
+            'mcl1'     : { 'prefix' : 'MCL1' },
+            'p38'      : { 'prefix' : 'p38' },
+            'ptp1b'    : { 'prefix' : 'PTP1B' },
+            'thrombin' : { 'prefix' : 'Thrombin' },
+            'tyk2'     : { 'prefix' : 'Tyk2' },
+        }
+        for system_name in jacs_systems:
+            from openmmforcefields.utils import get_data_filename
+            prefix = jacs_systems[system_name]['prefix']
+            # Read molecules
+            ligand_sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands.sdf'))
+            print(f'Reading molecules from {ligand_sdf_filename} ...')
+            from openforcefield.topology import Molecule
+            molecules = Molecule.from_file(ligand_sdf_filename, allow_undefined_stereo=True)
+            try:
+                nmolecules = len(molecules)
+            except TypeError:
+                molecules = [molecules]
+            print(f'Read {len(molecules)} molecules from {ligand_sdf_filename}')
+
+            # Read ParmEd Structures
+            import parmed
+            protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            print(f'Reading protein from {protein_pdb_filename} ...')
+            from simtk.openmm.app import PDBFile
+            protein_structure = parmed.load_file(protein_pdb_filename)
+            ligand_structures = parmed.load_file(ligand_sdf_filename)
+            try:
+                nmolecules = len(ligand_structures)
+            except TypeError:
+                ligand_structures = [ligand_structures]
+            assert len(ligand_structures) == len(molecules)
+
+            # Filter molecules
+            MAX_MOLECULES = len(molecules)
+            if 'TRAVIS' in os.environ:
+                MAX_MOLECULES = 3
+            molecules = molecules[:MAX_MOLECULES]
+            ligand_structures = ligand_structures[:MAX_MOLECULES]
+            #for ligand_structure, molecule in zip(ligand_structures, molecules):
+            #    ligand_structure.title = molecule.to_smiles()
+            #molecules = self.filter_molecules(molecules)
+            #smiles_to_keep = { molecule.to_smiles() for molecule in molecules }
+            #ligand_structures = [ ligand_structure for ligand_structure in ligand_structures if ligand_structure.title in smiles_to_keep ]
+            #assert len(ligand_structures) == len(molecules)
+            print(f'{len(molecules)} molecules remain after filtering')
+
+            # Create complexes
+            complex_structures = [ (protein_structure + ligand_structure) for ligand_structure in ligand_structures ]
+
+            # Create template generator with local cache
+            cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
+            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
+
+            # Create a ForceField
+            forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+
+            # Parameterize all complexes
+            print(f'Caching all molecules for {system_name} at {cache_filename} ...')
+            n_success = 0
+            n_failure = 0
+            for complex_structure in complex_structures:
+                openmm_topology = complex_structure.topology
+
+                # Fix hydrogens
+                # TODO: Fix the input files so ewe don't need to do this
+                modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
+                hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL' ]
+                modeller.delete(hs)
+                modeller.addHydrogens(forcefield=self._system_generator._forcefield)
+
+                try:
+                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                    n_success += 1
+                except Exception as e:
+                    n_failure += 1
+                    print(e)
+            print(f'{n_failure}/{n_success+n_failure} complexes failed to parameterize for {system_name}')
 
     def test_parameterize(self):
         """Test parameterizing molecules with template generator for all supported force fields"""
@@ -379,7 +470,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         if abs(delta) > ENERGY_DEVIATION_TOLERANCE:
             # Show breakdown by components
             print('Energy components:')
-            print(f"{'component':24} {'OpenMM (kcal/mol)':20} {'SMIRNOFF (kcal/mol)':20}")
+            print(f"{'component':24} {'OpenMM (kcal/mol)':>20} {'SMIRNOFF (kcal/mol)':>20}")
             for key in openmm_energy['components'].keys():
                 openmm_component_energy = openmm_energy['components'][key]
                 smirnoff_component_energy = smirnoff_energy['components'][key]
@@ -395,14 +486,17 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             N = x.shape[0]
             return np.sqrt((1.0/N) * (x**2).sum())
         def relative_deviation(x, y):
-            return norm(x-y) / norm(y)
+            if norm(y) > 0:
+                return norm(x-y) / norm(y)
+            else:
+                return 0
 
         RELATIVE_FORCE_DEVIATION_TOLERANCE = 1.0e-5
         relative_force_deviation = relative_deviation(openmm_forces['total'], smirnoff_forces['total'])
         if relative_force_deviation > RELATIVE_FORCE_DEVIATION_TOLERANCE:
             # Show breakdown by components
             print('Force components:')
-            print(f"{'component':24} {'relative deviation':24}")
+            print(f"{'component':24} {'relative deviation':>24}")
             for key in openmm_energy['components'].keys():
                 print(f"{key:24} {relative_deviation(openmm_forces['components'][key], smirnoff_forces['components'][key]):24.10f}")
             print(f'{"TOTAL":24} {relative_force_deviation:24.10f}')
@@ -410,8 +504,51 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             write_xml('openmm-smirnoff.xml', openmm_system)
             raise Exception(f'Relative force deviation for {molecule.to_smiles()} ({relative_force_deviation}) exceeds threshold ({RELATIVE_FORCE_DEVIATION_TOLERANCE})')
 
+    def propagate_dynamics(self, molecule, system):
+        """Run a few steps of dynamics to generate a perturbed configuration.
+
+        Parameters
+        ----------
+        molecule : openforcefield.topology.Molecule
+            molecule.conformers[0] is used as initial positions
+        system : simtk.openmm.System
+            System object for dynamics
+
+        Returns
+        -------
+        new_molecule : openforcefield.topology.Molecule
+            new_molecule.conformers[0] has updated positions
+
+        """
+        # Run some dynamics
+        from simtk import openmm, unit
+        temperature = 300 * unit.kelvin
+        collision_rate = 1.0 / unit.picoseconds
+        timestep = 1.0 * unit.femtoseconds
+        nsteps = 100
+        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        platform = openmm.Platform.getPlatformByName('Reference')
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(molecule.conformers[0])
+        integrator.step(nsteps)
+        # Copy the molecule, storing new conformer
+        import copy
+        new_molecule = copy.deepcopy(molecule)
+        new_molecule.conformers[0] = context.getState(getPositions=True).getPositions(asNumpy=True)
+        # Clean up
+        del context, integrator
+
+        return new_molecule
+
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""
+        # DEBUG
+        from openforcefield.topology import Molecule
+        molecule = Molecule.from_smiles('C=O')
+        molecule.generate_conformers(n_conformers=1)
+        from simtk import unit
+        molecule.conformers[0][0,0] += 0.1*unit.angstroms
+        self.molecules.insert(0, molecule)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')
@@ -432,7 +569,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
                 # Retrieve System generated by the SMIRNOFF typing engine
                 smirnoff_system = generator.get_openmm_system(molecule)
 
-                # Compare energies
+                # Compare energies and forces
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
 
-                # TODO: Compare forces
+                # Run some dynamics
+                molecule = self.propagate_dynamics(molecule, smirnoff_system)
+
+                # Compare energies again
+                self.compare_energies(molecule, openmm_system, smirnoff_system)
