@@ -12,6 +12,8 @@ class TestSystemGenerator(object):
 
     SMALL_MOLECULE_FORCEFIELDS = ['gaff-1.81', 'gaff-2.11', 'smirnoff99Frosst-1.1.0', 'openforcefield-1.0.0']
 
+    # AMBER force field combination to test
+    amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
 
     def filter_molecules(self, molecules):
         """
@@ -91,11 +93,8 @@ class TestSystemGenerator(object):
         # TODO: Protein-ligand topology
         # TODO: Solvated protein-ligand topology
         # TODO: Host-guest topology
-
-        # Select AMBER force fields
-        self.amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml.xml']
-
         # Suppress DEBUG logging from various packages
+
         import logging
         for name in ['parmed', 'matplotlib']:
             logging.getLogger(name).setLevel(logging.WARNING)

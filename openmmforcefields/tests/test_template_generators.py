@@ -12,6 +12,8 @@ from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 class TestGAFFTemplateGenerator(unittest.TestCase):
     TEMPLATE_GENERATOR = GAFFTemplateGenerator
 
+    amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+
     def filter_molecules(self, molecules):
         """
         Filter molecules to speed up tests, especially on travis.
@@ -314,7 +316,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Create a ForceField
             from simtk.openmm.app import ForceField
-            forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
+            forcefield = ForceField(*self.amber_forcefields)
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
 
