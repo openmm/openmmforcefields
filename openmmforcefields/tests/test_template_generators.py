@@ -337,7 +337,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 modeller.addHydrogens(forcefield)
 
                 # Parameterize protein:ligand complex in vacuum
-                print(f' Parameterizing {system_name} : {molecule.to_smiles()} in vacuuum...')
+                print(f' Parameterizing {system_name} : {molecule.to_smiles()} in vacuum...')
                 from simtk.openmm.app import NoCutoff
                 forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
