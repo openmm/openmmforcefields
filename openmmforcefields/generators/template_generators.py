@@ -261,7 +261,7 @@ class SmallMoleculeTemplateGenerator(object):
                 if self._cache is not None:
                     with self._open_db() as db:
                         table = db.table(self._database_table_name)
-                        _logger.info(f'Writing residue template for {smiles} to cache')
+                        _logger.info(f'Writing residue template for {smiles} to cache {self._cache}')
                         record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
                         # Add the IUPAC name for convenience if we can
                         try:

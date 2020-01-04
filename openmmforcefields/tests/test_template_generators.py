@@ -256,15 +256,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def test_jacs_complexes(self):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
         from simtk.openmm.app import ForceField, NoCutoff
+        # TODO: Uncomment working systems when we have cleaned up the input files
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' }, # TODO: Uncomment when input files are fixed
-            'cdk2'     : { 'prefix' : 'CDK2' },
-            'jnk1'     : { 'prefix' : 'Jnk1' },
+            'bace'     : { 'prefix' : 'Bace' },
+            #'cdk2'     : { 'prefix' : 'CDK2' },
+            #'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },
-            'p38'      : { 'prefix' : 'p38' },
-            'ptp1b'    : { 'prefix' : 'PTP1B' },
-            'thrombin' : { 'prefix' : 'Thrombin' },
-            'tyk2'     : { 'prefix' : 'Tyk2' },
+            #'p38'      : { 'prefix' : 'p38' },
+            #'ptp1b'    : { 'prefix' : 'PTP1B' },
+            #'thrombin' : { 'prefix' : 'Thrombin' },
+            #'tyk2'     : { 'prefix' : 'Tyk2' },
         }
         for system_name in jacs_systems:
             from openmmforcefields.utils import get_data_filename
@@ -297,17 +298,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             assert len(ligand_structures) == len(molecules)
 
             # Filter molecules
-            MAX_MOLECULES = len(molecules)
             if 'TRAVIS' in os.environ:
                 MAX_MOLECULES = 3
+            else:
+                MAX_MOLECULES = 6
             molecules = molecules[:MAX_MOLECULES]
             ligand_structures = ligand_structures[:MAX_MOLECULES]
-            #for ligand_structure, molecule in zip(ligand_structures, molecules):
-            #    ligand_structure.title = molecule.to_smiles()
-            #molecules = self.filter_molecules(molecules)
-            #smiles_to_keep = { molecule.to_smiles() for molecule in molecules }
-            #ligand_structures = [ ligand_structure for ligand_structure in ligand_structures if ligand_structure.title in smiles_to_keep ]
-            #assert len(ligand_structures) == len(molecules)
             print(f'{len(molecules)} molecules remain after filtering')
 
             # Create complexes
@@ -335,31 +331,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
                 residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
                 termini_ids = [residues[0].id, residues[-1].id]
-                for residue in modeller.topology.residues():
-                    if residue.id in termini_ids:
-                        print(residue)
-                        for bond in residue.bonds():
-                            print(f'  {bond}')
-                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
-                print(f'Termini: {termini_ids}')
                 #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
                 hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
-                print(f'Deleting atoms: {hs}')
                 modeller.delete(hs)
                 from simtk.openmm.app import PDBFile
-                with open('modeller-1.pdb', 'w') as outfile:
-                    PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
-                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
-                print('Adding hydrogens...')
                 modeller.addHydrogens()
-                with open('modeller-2.pdb', 'w') as outfile:
-                    PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
-                for residue in modeller.topology.residues():
-                    if residue.id in termini_ids:
-                        print(residue)
-                        for bond in residue.bonds():
-                            print(f'  {bond}')
-                print(f'{sum([1 for atom in modeller.topology.atoms()])} atoms')
                 try:
                     forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
                     n_success += 1
