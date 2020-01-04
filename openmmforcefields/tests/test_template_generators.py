@@ -255,7 +255,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_jacs_complexes(self):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
-        from simtk.openmm.app import ForceField, NoCutoff
         # TODO: Uncomment working systems when we have cleaned up the input files
         jacs_systems = {
             'bace'     : { 'prefix' : 'Bace' },
@@ -314,16 +313,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
 
             # Create a ForceField
+            from simtk.openmm.app import ForceField
             forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
 
             # Parameterize all complexes
             print(f'Caching all molecules for {system_name} at {cache_filename} ...')
-            n_success = 0
-            n_failure = 0
-            for complex_structure in complex_structures:
+            for ligand_index, complex_structure in enumerate(complex_structures):
                 openmm_topology = complex_structure.topology
+                molecule = molecules[ligand_index]
 
                 # Delete hydrogens from terminal protein residues
                 # TODO: Fix the input files so we don't need to do this
@@ -335,14 +334,18 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
                 modeller.delete(hs)
                 from simtk.openmm.app import PDBFile
-                modeller.addHydrogens()
-                try:
-                    forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
-                    n_success += 1
-                except Exception as e:
-                    n_failure += 1
-                    print(e)
-            print(f'{n_failure}/{n_success+n_failure} complexes failed to parameterize for {system_name}')
+                modeller.addHydrogens(forcefield)
+
+                # Parameterize protein:ligand complex in vacuum
+                print(f' Parameterizing {system_name} : {molecule.to_smiles()} in vacuuum...')
+                from simtk.openmm.app import NoCutoff
+                forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
+
+                # Parameterize protein:ligand complex in solvent
+                print(f' Parameterizing {system_name} : {molecule.to_smiles()} in explicit solvent...')
+                from simtk.openmm.app import PME
+                modeller.addSolvent(forcefield, padding=0*unit.angstroms, ionicStrength=300*unit.millimolar)
+                forcefield.createSystem(modeller.topology, nonbondedMethod=PME)
 
     def test_parameterize(self):
         """Test parameterizing molecules with template generator for all supported force fields"""
