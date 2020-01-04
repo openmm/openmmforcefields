@@ -56,6 +56,9 @@ class SmallMoleculeTemplateGenerator(object):
         # Name of the force field
         self._forcefield = None # this must be set by subclasses
 
+        # File to write ffxml to if requested
+        self.debug_ffxml_filename = None
+
     @property
     def forcefield(self):
         """The current force field name in use"""
@@ -225,6 +228,8 @@ class SmallMoleculeTemplateGenerator(object):
 
         from io import StringIO
 
+        # TODO: Refactor to reduce code duplication
+
         # If a database is specified, check against molecules in the database
         if self._cache is not None:
             with self._open_db() as db:
@@ -238,9 +243,16 @@ class SmallMoleculeTemplateGenerator(object):
                     from openforcefield.topology import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'])
                     if self._match_residue(residue, molecule_template):
+                        ffxml_contents = entry['ffxml']
+
+                        # Write to debug file if requested
+                        if self.debug_ffxml_filename is not None:
+                            with open(self.debug_ffxml_filename, 'w') as outfile:
+                                _logger.info(f'writing ffxml to {self.debug_ffxml_filename}')
+                                outfile.write(ffxml_contents)
+
                         # Add parameters and residue template for this residue
-                        # TODO: What can we do to avoid parameter or template collisions?
-                        forcefield.loadFile(StringIO(entry['ffxml']))
+                        forcefield.loadFile(StringIO(ffxml_contents))
                         # Signal success
                         return True
 
@@ -250,12 +262,14 @@ class SmallMoleculeTemplateGenerator(object):
             if self._match_residue(residue, molecule):
                 # Generate template and parameters.
                 ffxml_contents = self.generate_residue_template(molecule)
-                _logger.debug(f'ffxml_contents:\n')
-                for index, line in enumerate(ffxml_contents.split('\n')):
-                    _logger.debug(f'{index:10}: {line}')
+
+                # Write to debug file if requested
+                if self.debug_ffxml_filename is not None:
+                    with open(self.debug_ffxml_filename, 'w') as outfile:
+                        _logger.info(f'writing ffxml to {self.debug_ffxml_filename}')
+                        outfile.write(ffxml_contents)
+
                 # Add the parameters and residue definition
-                # TODO: Do we have to worry about parameter collisions?
-                #       What happens if two residues contain the same additional parameter?
                 forcefield.loadFile(StringIO(ffxml_contents))
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
@@ -601,9 +615,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Render XML into string and append to parameters
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
         _logger.debug(f'ffxml creation complete.')
-
-        with open('ffxml', 'w') as outfile:
-            outfile.write(ffxml_contents)
 
         return ffxml_contents
 
@@ -1190,9 +1201,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
 
         # Render XML into string
-        # DEBUG
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-        with open('smirnoff.ffxml', 'w') as outfile:
-            outfile.write(ffxml_contents)
 
         return ffxml_contents

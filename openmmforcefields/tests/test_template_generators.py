@@ -2,6 +2,8 @@ import os, sys
 import unittest
 import tempfile
 
+from openmmforcefields.utils import get_data_filename
+
 from openmmforcefields.generators import GAFFTemplateGenerator
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 
@@ -45,7 +47,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def setUp(self):
         # Read test molecules
         from openforcefield.topology import Molecule
-        from openmmforcefields.utils import get_data_filename
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
         # Filter molecules as appropriate
@@ -113,6 +114,37 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             openmm_topology = molecule.to_topology().to_openmm()
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
+
+    def test_debug_ffxml(self):
+        """Test that debug ffxml file is created when requested"""
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            debug_ffxml_filename = os.path.join(tmpdirname, 'molecule.ffxml')
+            cache = os.path.join(tmpdirname, 'db.json')
+            # Create a generator that only knows about one molecule
+            molecule = self.molecules[0]
+            generator = self.TEMPLATE_GENERATOR(molecules=molecule, cache=cache)
+            # Create a ForceField
+            from simtk.openmm.app import ForceField
+            forcefield = ForceField()
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+            # Ensure no file is created
+            from simtk.openmm.app import NoCutoff
+            openmm_topology = molecule.to_topology().to_openmm()
+            system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+            assert not os.path.exists(debug_ffxml_filename)
+            # Enable debug file output creation
+            forcefield = ForceField()
+            forcefield.registerTemplateGenerator(generator.generator)
+            generator.debug_ffxml_filename = debug_ffxml_filename
+            # Ensure that an ffxml file is created
+            system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+            assert os.path.exists(debug_ffxml_filename)
+            # Ensure we can use that file to create a new force field
+            forcefield_from_ffxml = ForceField(debug_ffxml_filename)
+            system2 = forcefield_from_ffxml.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+            # TODO: Test that systems are equivalent
+            assert system.getNumParticles() == system2.getNumParticles()
 
     def test_cache(self):
         """Test template generator cache capability"""
@@ -200,36 +232,34 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of ligands"""
         from simtk.openmm.app import ForceField, NoCutoff
         jacs_systems = {
-            'bace'     : { 'ligand_sdf_filename' : 'Bace_ligands.sdf' },
-            'cdk2'     : { 'ligand_sdf_filename' : 'CDK2_ligands.sdf' },
-            'jnk1'     : { 'ligand_sdf_filename' : 'Jnk1_ligands.sdf' },
-            'mcl1'     : { 'ligand_sdf_filename' : 'MCL1_ligands.sdf' },
-            'p38'      : { 'ligand_sdf_filename' : 'p38_ligands.sdf' },
-            'ptp1b'    : { 'ligand_sdf_filename' : 'PTP1B_ligands.sdf' },
-            'thrombin' : { 'ligand_sdf_filename' : 'Thrombin_ligands.sdf' },
-            'tyk2'     : { 'ligand_sdf_filename' : 'Tyk2_ligands.sdf' },
+            'bace'     : { 'prefix' : 'Bace' },
+            #'cdk2'     : { 'prefix' : 'CDK2' },
+            #'jnk1'     : { 'prefix' : 'Jnk1' },
+            'mcl1'     : { 'prefix' : 'MCL1' },
+            #'p38'      : { 'prefix' : 'p38' },
+            #'ptp1b'    : { 'prefix' : 'PTP1B' },
+            #'thrombin' : { 'prefix' : 'Thrombin' },
+            #'tyk2'     : { 'prefix' : 'Tyk2' },
         }
         for system_name in jacs_systems:
+            prefix = jacs_systems[system_name]['prefix']
             # Load molecules
-            ligand_sdf_filename = jacs_systems[system_name]['ligand_sdf_filename']
+            ligand_sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands.sdf'))
             print(f'Reading molecules from {ligand_sdf_filename} ...')
             from openforcefield.topology import Molecule
-            from openmmforcefields.utils import get_data_filename
-            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, ligand_sdf_filename))
-            molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
+            molecules = Molecule.from_file(ligand_sdf_filename, allow_undefined_stereo=True)
             # Ensure this is a list
             try:
                 nmolecules = len(molecules)
             except TypeError:
                 molecules = [molecules]
 
-            print(f'Read {len(molecules)} molecules from {sdf_filename}')
+            print(f'Read {len(molecules)} molecules from {ligand_sdf_filename}')
             #molecules = self.filter_molecules(molecules)
             MAX_MOLECULES = len(molecules)
             if 'TRAVIS' in os.environ:
                 MAX_MOLECULES = 3
             molecules = molecules[:MAX_MOLECULES]
-            ligand_structures = ligand_structures[:MAX_MOLECULES]
             print(f'{len(molecules)} molecules remain after filtering')
 
             # Create template generator with local cache
@@ -269,7 +299,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             #'tyk2'     : { 'prefix' : 'Tyk2' },
         }
         for system_name in jacs_systems:
-            from openmmforcefields.utils import get_data_filename
             prefix = jacs_systems[system_name]['prefix']
             # Read molecules
             ligand_sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands.sdf'))
