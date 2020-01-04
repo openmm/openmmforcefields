@@ -141,7 +141,10 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert os.path.exists(debug_ffxml_filename)
             # Ensure we can use that file to create a new force field
-            forcefield_from_ffxml = ForceField(debug_ffxml_filename)
+            forcefield_from_ffxml = ForceField()
+            if hasattr(generator, 'gaff_xml_filename'):
+                forcefield_from_ffxml.loadFile(generator.gaff_xml_filename)
+            forcefield_from_ffxml.loadFile(debug_ffxml_filename)
             system2 = forcefield_from_ffxml.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             # TODO: Test that systems are equivalent
             assert system.getNumParticles() == system2.getNumParticles()
