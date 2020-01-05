@@ -94,11 +94,11 @@ class SystemGenerator(object):
         to the OpenMM ``simtk.openmm.app.ForceField.createSystem()`` method:
 
         >>> from openmmforcefields.generators import SystemGenerator
-        >>> forcefields = ['amber/ff14SB.xml', 'amber/tip3p_standard.xml']
+        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> small_molecule_forcefield = 'gaff-2.11'
         >>> forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False,
         ... 'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
-        >>> system_generator = SystemGenerator(forcefields=forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
+        >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
 
         If the ``cache`` argument is specified, parameterized molecules are cached in the corresponding file.
 
@@ -175,8 +175,25 @@ class SystemGenerator(object):
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
 
         # Inform the template generator about any specified molecules
-        if self.template_generator is not None:
-            self.template_generator.add_molecules(molecules)
+        self.add_molecules(molecules)
+
+    def add_molecules(self, molecules):
+        """
+        Add molecules to registered template generator
+
+        Parameters
+        ----------
+        molecules : openforcefield.topology.Molecule or list, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized as needed.
+            The parameters will be cached in case they are encountered again the future.
+
+        """
+        if self.template_generator is None:
+            raise ValueError("You must have a small molecule residue template generator registered to add small molecules")
+
+        self.template_generator.add_molecules(molecules)
 
     def _modify_forces(self, system):
         """

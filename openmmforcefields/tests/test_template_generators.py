@@ -268,8 +268,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             print(f'{len(molecules)} molecules remain after filtering')
 
             # Create template generator with local cache
-            cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
-            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
+            cache = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
+            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache)
 
             # Create a ForceField
             forcefield = ForceField()

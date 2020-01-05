@@ -11,7 +11,7 @@ Welcome to openmmforcefields's documentation!
    :caption: Contents:
 
    getting_started
-   api
+   generators
 
 
 

@@ -239,7 +239,7 @@ class TestSystemGenerator(unittest.TestCase):
             for name, testsystem in self.testsystems.items():
                 molecules = testsystem['molecules']
                 # Add molecules
-                generator.template_generator.add_molecules(molecules)
+                generator.add_molecules(molecules)
 
                 # Parameterize molecules
                 from openmmforcefields.utils import Timer
