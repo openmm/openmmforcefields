@@ -33,7 +33,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """
         # TODO: Eliminate molecules without fully-specified stereochemistry
         # Select some small molecules for fast testing
-        MAX_ATOMS = 45
+        MAX_ATOMS = 40
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
         import os
@@ -277,7 +277,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             forcefield.registerTemplateGenerator(generator.generator)
 
             # Parameterize all molecules
-            print(f'Caching all molecules for {system_name} at {cache_filename} ...')
+            print(f'Caching all molecules for {system_name} at {cache} ...')
             n_success = 0
             n_failure = 0
             for molecule in molecules:
@@ -345,8 +345,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             complex_structures = [ (protein_structure + ligand_structure) for ligand_structure in ligand_structures ]
 
             # Create template generator with local cache
-            cache_filename = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
-            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache_filename)
+            cache = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', system_name)), 'cache.json')
+            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache)
 
             # Create a ForceField
             from simtk.openmm.app import ForceField
@@ -355,7 +355,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             forcefield.registerTemplateGenerator(generator.generator)
 
             # Parameterize all complexes
-            print(f'Caching all molecules for {system_name} at {cache_filename} ...')
+            print(f'Caching all molecules for {system_name} at {cache} ...')
             for ligand_index, complex_structure in enumerate(complex_structures):
                 openmm_topology = complex_structure.topology
                 molecule = molecules[ligand_index]

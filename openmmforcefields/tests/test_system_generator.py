@@ -34,7 +34,7 @@ class TestSystemGenerator(unittest.TestCase):
         """
         # TODO: Eliminate molecules without fully-specified stereochemistry
         # Select some small molecules for fast testing
-        MAX_ATOMS = 45
+        MAX_ATOMS = 40
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
         import os
