@@ -26,6 +26,12 @@ class SmallMoleculeTemplateGenerator(object):
 
     This class should not be used directly, but provides utility routines for
     subclasses that generate small molecule residue templates via external tools.
+
+    Parameters
+    ----------
+    debug_ffxml_filename : str
+        If not None, the generated ffxml file will be written to this filename.
+        Default is None.
     """
     def __init__(self, molecules=None, cache=None):
         """
@@ -316,7 +322,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
     >>> from simtk.openmm.app import ForceField
-    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+    >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+    >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
@@ -376,7 +383,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
         >>> from simtk.openmm.app import ForceField
-        >>> forcefield = ForceField(gaff.gaff_xml_filename, 'amber/ff14SB.xml', 'amber/tip3p.xml')
+        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+        >>> forcefield = ForceField(*amber_forcefields)
         >>> forcefield.registerTemplateGenerator(gaff)
 
         The latest GAFF version is used if none is specified.
@@ -415,7 +423,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Ensure a valid GAFF version is specified
         if not forcefield in self.INSTALLED_FORCEFIELDS:
-            raise Exception(f"'forcefield' must be one of {self.INSTALLED_FORCEFIELDS}")
+            raise ValueError(f"Specified 'forcefield' ({forcefield}) must be one of {self.INSTALLED_FORCEFIELDS}")
 
         # Store user-specified GAFF version
         self._forcefield = forcefield
@@ -832,7 +840,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
     >>> from simtk.openmm.app import ForceField
-    >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+    >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+    >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
@@ -892,7 +901,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
         >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
         >>> from simtk.openmm.app import ForceField
-        >>> forcefield = ForceField('amber/ff14SB.xml', 'amber/tip3p.xml')
+        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+        >>> forcefield = ForceField(*amber_forcefields)
 
         The latest Open Force Field Initiative release is used if none is specified.
 

@@ -33,11 +33,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """
         # TODO: Eliminate molecules without fully-specified stereochemistry
         # Select some small molecules for fast testing
-        MAX_ATOMS = 24
+        MAX_ATOMS = 45
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
         import os
-        MAX_MOLECULES = 20
+        MAX_MOLECULES = 10
         if 'TRAVIS' in os.environ:
             MAX_MOLECULES = 3
         molecules = molecules[:MAX_MOLECULES]
@@ -45,6 +45,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         return molecules
 
     def setUp(self):
+        # TODO: Harmonize with test_system_generator.py infrastructure
+
         # Read test molecules
         from openforcefield.topology import Molecule
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")

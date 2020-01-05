@@ -2,6 +2,7 @@ name: test
 
 channels:
   - conda-forge
+  - omnia-dev
   - omnia
   - defaults
 

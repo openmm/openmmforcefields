@@ -45,7 +45,7 @@ class SystemGenerator(object):
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openforcefield-1.0.0', forcefield_kwargs=None, barostat=None, molecules=None, cache=None):
+    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -56,12 +56,12 @@ class SystemGenerator(object):
         ----------
         forcefields : list of str, optional, default=None
             List of the names of ffxml files that will be used in System creation for the biopolymer.
-        small_molecule_forcefield : str, optional, default='openforcefield-1.0.0'
+        small_molecule_forcefield : str, optional, default='openff-1.0.0'
             Small molecule force field to use.
             Must be supported by one of the registered template generators: [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
             Supported GAFF force fields include: ['gaff-2.11', 'gaff-2.1', 'gaff-1.81', 'gaff-1.8', 'gaff-1.4']
             (See ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
-            Supported SMIRNOFF force fields include: [`openforcefield-1.0.0`, `smirnoff99Frosst-1.1.0`]
+            Supported SMIRNOFF force fields include: [`openff-1.0.0`, `smirnoff99Frosst-1.1.0`]
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``simtk.openmm.app.ForceField.createSystem()`` during ``System`` object creation.
@@ -75,6 +75,8 @@ class SystemGenerator(object):
             The parameters will be cached in case they are encountered again the future.
         cache : filename, optional, default=None
             If not None, filename for caching small molecule residue templates.
+        postprocess_system : method, optiona, default=None
+            If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
 
         Examples
         --------
@@ -116,10 +118,10 @@ class SystemGenerator(object):
 
         Parameters for multiple force fields can be held in the same cache file.
 
-        To use the `Open Force Field 'openforcefield-1.0.0' ("Parsley") force field <https://openforcefield.org/news/introducing-openforcefield-1.0/>`_ instead,
+        To use the `Open Force Field 'openff-1.0.0' ("Parsley") force field <https://openforcefield.org/news/introducing-openforcefield-1.0/>`_ instead,
         simply change the ``small_molecule_forcefield`` parameter to one of the supported ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS``:
 
-        >>> small_molecule_forcefield = 'openforcefield-1.0.0'
+        >>> small_molecule_forcefield = 'openff-1.0.0'
         >>> system_generator = SystemGenerator(forcefields=forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
 
         For debugging convenience, you can also turn _off_ specific interactions during system creation, such as particle charges:
@@ -142,10 +144,13 @@ class SystemGenerator(object):
         self.exception_epsilons = True # include LJ nonzero exceptions
         self.torsions = True # include torsions
 
+        # Method to use for postprocessing system
+        self.postprocess_system = postprocess_system
+
         # Create OpenMM ForceField object
-        forcefields if (forcefields is not None) else list()
+        forcefields = forcefields if (forcefields is not None) else list()
         from simtk.openmm import app
-        self.forcefield = app.ForceField(forcefields)
+        self.forcefield = app.ForceField(*forcefields)
 
         # Cache force fields and settings to use
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
@@ -162,20 +167,20 @@ class SystemGenerator(object):
                     _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
                     _logger.debug(e)
             if self.template_generator is None:
-                msg = f'No registered small molecule template generators could load force field {small_molecule_forcefield}\n'
-                msg += f'Available installed force fields are:\n'
+                msg = f"No registered small molecule template generators could load force field '{small_molecule_forcefield}'\n"
+                msg += f"Available installed force fields are:\n"
                 for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                     msg += f'  {template_generator_cls.__name__}: {template_generator_cls.INSTALLED_FORCEFIELDS}\n'
-                raise ValueError()
+                raise ValueError(msg)
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
 
-        # Add any specified molecules
+        # Inform the template generator about any specified molecules
         if self.template_generator is not None:
             self.template_generator.add_molecules(molecules)
 
     def _modify_forces(self, system):
         """
-        Modify forces if requested.
+        Add barostat and modify forces if requested.
         """
         # Add barostat if requested.
         if self.barostat is not None:
@@ -183,6 +188,7 @@ class SystemGenerator(object):
             from simtk import openmm
             MAXINT = np.iinfo(np.int32).max
 
+            # Determine pressure, temperature, and frequency
             pressure = self.barostat.getDefaultPressure()
             if hasattr(self.barostat, 'getDefaultTemperature'):
                 temperature = self.barostat.getDefaultTemperature()
@@ -190,12 +196,14 @@ class SystemGenerator(object):
                 temperature = self.barostat.getTemperature()
             frequency = self.barostat.getFrequency()
 
+            # Create the barostat
             # TODO: Make sure we can support other kinds of barostats?
             barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)
             seed = np.random.randint(MAXINT)
             barostat.setRandomNumberSeed(seed)
             system.addForce(barostat)
 
+        # Modify forces if requested
         for force in system.getForces():
             if force.__class__.__name__ == 'NonbondedForce':
                 for index in range(force.getNumParticles()):
@@ -219,7 +227,7 @@ class SystemGenerator(object):
                         K *= 0
                     force.setTorsionParameters(index, p1, p2, p3, p4, periodicity, phase, K)
 
-    def create_system(self, topology, molecules=molecules):
+    def create_system(self, topology, molecules=None):
         """
         Create a system from the specified topology.
 
@@ -242,7 +250,7 @@ class SystemGenerator(object):
 
         """
         # Inform the template generator about any specified molecules
-        if self.template_generator is not None:
+        if (self.template_generator is not None) and (molecules is not None):
             self.template_generator.add_molecules(molecules)
 
         # Build the System
