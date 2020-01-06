@@ -2,7 +2,6 @@ name: test
 
 channels:
   - conda-forge
-  - omnia-dev
   - omnia
   - defaults
 
@@ -17,7 +16,7 @@ dependencies:
   - codecov
 
     # Requirements for converted force field installer
-  - openmm >=7.5.0
+  - openmm >=7.4.1
 
     # Requirements for conversion tools
   - pyyaml
