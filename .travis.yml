@@ -2,6 +2,10 @@ language: python
 
 # Run jobs on container-based infrastructure, can be overridden per job
 
+env:
+  global:
+    - OE_LICENSE="$HOME/devtools/travis-ci/oe_license.txt"
+
 matrix:
   include:
     # Extra includes for OSX since python language is not available by default on OSX
@@ -31,14 +35,17 @@ before_install:
   - source devtools/travis-ci/before_install.sh
   - python -V
 
+    # Decrypt OpenEye license
+  - openssl aes-256-cbc -K $encrypted_c0daf35c25ce_key -iv $encrypted_c0daf35c25ce_iv -in devtools/travis-ci/oe_license.txt.enc -out devtools/travis-ci/oe_license.txt -d
+
 install:
 
     # Create test environment for package
   - python devtools/scripts/create_conda_env.py -n=test -p=$PYTHON_VER devtools/conda-envs/test_env.yaml
     # Activate the test environment
   - conda activate test
-    # Workaround for
-    # TODO: Remove this when builds are released
+    # Workaround for https://github.com/openmm/openmm/pull/2511
+    # TODO: Remove this when builds including https://github.com/openmm/openmm/pull/2511 are released
   - echo "Overwriting forcefield.py with fix from https://github.com/openmm/openmm/pull/2511"
   - wget -q https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"`
     # Build and install package
