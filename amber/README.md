@@ -3,23 +3,21 @@
 ## Manifest
 
 * `convert_amber.py` - Amber forcefield conversion drive
+* `biopolymer.yaml` - YAML file directing the conversion of AMBER biopolymer force fields
+* `gaff.yaml` - YAML file directing conversion of GAFF small molecule force fields
 * `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
-* `files/` - Amber input forcefield files and YAML conversion driver
-* `ffxml/` - converted OpenMM `ffxml` forcefields
+* `files/` - miscellaneous files used for testing and validation
+* `ffxml/` - converted AMBER biopolymer force fields as OpenMM `ffxml`
+* `gaff/dat` - historical versions of GAFF `.dat` force field parameter files
+* `gaff/ffxml` - converted GAFF small molecule force fields as OpenMM `ffxml`
 * `test/` - input files for testing conversion produces correct energies
 
 ## Amber forcefield conversion: `convert_amber.py`
 
-**Summary**: call `python amber2omm.py -v`. Requires the `files/` dir. Outputs `ffxml/` containing all converted XMLs and `log.csv` - log of the validation energies.
-
-**Dependencies**: `ParmEd`, `OpenMM`, `Amber` or `AmberTools` or `ambermini`.
-
-**General**
-
-Script supports command line arguments, and so `python convert_amber.py -h`:
+Run `python convert_amber.py -h` to see all help options:
 ```
 usage: convert_amber.py [-h] [--input INPUT] [--input-format INPUT_FORMAT]
-                        [--verbose] [--no-log] [--protein-test] [--nucleic-test]
+                        [--verbose] [--log LOGFILE] [--protein-test] [--nucleic-test]
                         [--protein-ua-test] [--phospho-protein-test] [--gaff-test]
 
 AMBER --> OpenMM forcefield conversion script
@@ -32,7 +30,7 @@ optional arguments:
                         format of the input file: "yaml" or "leaprc". Default:
                         "yaml"
   --verbose, -v         turns verbosity on
-  --no-log              turns logging of energies to log.csv off
+  --log LOGFILE         log tests to specified CSV file
   --protein-test        validate resulting XML through protein tests
   --nucleic-test        validate resulting XML through nucleic acid tests
   --protein-ua-test     validate resulting XML through united-atom protein
@@ -44,35 +42,52 @@ optional arguments:
                         test
 ```
 
+### Converting the AMBER force fields
+
+* Install the appropriate `AmberTools`
+```bash
+conda install --yes ambertools==19.9
+```
+* Convert biopolymer force fields
+```bash
+python convert_amber.py --input biopolymer.yaml --log biopolymer-tests.csv
+```
+* Convert GAFF small molecule force fields:
+```bash
+python convert_amber.py --input gaff.yaml --log gaff-tests.csv
+```
+
 With the defaults as set, all you need to do is have the script and the `files/` directory and call `python convert_amber.py`. `-v` or `--no-log` as wanted.
 
 Output:
-* `ffxml/` with all output XMLs
-* `log.csv` - csv, machine readable log, containing AMBER, OpenMM, and relative (abs(AMBER-OpenMM) / AMBER) energies  - you can see what this looks like here: https://github.com/choderalab/openmm/blob/forcefield_conversion_bonanza/devtools/forcefield-scripts/amber/log.csv . This is overwritten if already present on a new run, use `--no-log` to disable.
+* `ffxml/` - converted AMBER biopolymer force fields as OpenMM `ffxml`
+* `gaff/ffxml` - converted GAFF small molecule force fields as OpenMM `ffxml`
+* `biopolymer-log.csv` - CSV log for biopolymer energy discrepancy tests
+* `gaff-tests.csv` - CSV log for GAFF energy discrepancy tests
 * (LeAP is called extensively by the script, and outputs its own `leap.log` too)
 
 `-v` will turn on printing of the progress-tracking comments from the script. Warnings issued by ParmEd (warnings are by default filtered to error, but in some cases this had to be relaxed to 'always' because of the nature of the files converted) are printed always. The output of LeAP is always redirected to `dev/null`.
 
-**YAML input**
+### YAML input format
 
 By default the script takes a YAML file input, `files/master.yaml` has everything that is going on here.
 There's only a few rules to the required structure of the YAML and it will be very easily extendable to future forcefields.
 
 First entry in the YAML must be:
-``` yaml
+```yaml
 - sourcePackage: AmberTools
   sourcePackageVersion: 15
 ```
-
 a MODE declaration follows:
-``` yaml
+```yaml
 - MODE: LEAPRC
 ```
+There are two `MODE`s: `LEAPRC` and `RECIPE`.
+* `LEAPRC`: Convert the contents of a `leaprc` file.
+* `RECIPE`: Use a mix of `.dat`, `frcmod` and `.lib`, rather than `leaprc`; used for water-ion conversions
 
-There are two modes: LEAPRC and RECIPE. LEAPRC - self-explanatory, RECIPE - this is for water-ion conversions, RECIPE because your input files are a mix of `.dat`, `frcmod` and `.lib`, rather than leaprc.
-
-We're in LEAPRC mode - this is used for all protein/nucleic acids forcefield. So all the FFs follow, example:
-``` yaml
+`LEAPRC` mode is used for all protein/nucleic acids force fields, e.g.:
+```yaml
 - Source: leaprc.ff14SB
   Reference:
   - >-
@@ -82,11 +97,8 @@ We're in LEAPRC mode - this is used for all protein/nucleic acids forcefield. So
   - protein
   - nucleic
 ```
-
-I think that's self-explanatory, all fields required.
-
-There's an optional `Options` field, which allows changes to parameters if the default is no good for this case:
-``` yaml
+There's an optional `Options` field which allows changes to parameters if the default must be overridden:
+```yaml
 - Source: leaprc.phosaa10
   Reference:
   - >-
@@ -98,24 +110,22 @@ There's an optional `Options` field, which allows changes to parameters if the d
   Test:
   - protein_phospho
 ```
-
-And so we do all protein / nucleic acid FFs.
-
-Then we reach water & ions. MODE is changed to RECIPE:
-``` yaml
+For converting water and ion force fields, the `MODE` is changed to `RECIPE`:
+```yaml
 - MODE: RECIPE
 ```
-
-and extra source package is declared (water models are converted manually - we just supply them as an ffxml in `files/` - I have `tip3p.xml`, `tip4pew.xml`, `spce.xml` from the current distribution of OpenMM with some changes to make them the 'newest' format (e.g. no classes used, only types). These ffxmls are integrated together with the converted ion parameters to make all the output. So we have OpenMM 7.0 listed as the source of these files - hence the extra input).
-
-``` yaml
+and an extra source package is declared.
+Water models are converted manually---we supply them as an ffxml in `files/`.
+`tip3p.xml`, `tip4pew.xml`, and `spce.xml` are provided from the OpenMM 7.0, with some changes to make them the 'newest' format (e.g. no classes used, only types).
+These `ffxml`s are integrated together with the converted ion parameters to make all the output.
+OpenMM 7.0 is therefore listed as the source of these files - hence the extra input.
+```yaml
 - sourcePackage2: OpenMM
   sourcePackageVersion2: 7.0
 ```
-
-Then again, we're going ffXML by ffXML - but we need a few extra fields. Two examples:
-A 'standard' file - water model + JC monovalent ions + compromise set +2 ions
-``` yaml
+Here are two examples:
+1. A 'standard' file - water model + JC monovalent ions + compromise set +2 ions
+```yaml
 - Source:
   - parm/frcmod.ionsjc_tip3p
   - parm/frcmod.ionslrcm_cm_tip3p
@@ -139,9 +149,8 @@ A 'standard' file - water model + JC monovalent ions + compromise set +2 ions
   Test:
   - water_ion
 ```
-An 'overloading' set: HFE +2, +3 and +4 ions for tip3p water.
-
-``` yaml
+2. An 'overloading' set: HFE +2, +3 and +4 ions for tip3p water.
+```yaml
 - Source:
   - parm/frcmod.ionslrcm_hfe_tip3p
   - parm/frcmod.ions34lsm_hfe_tip3p
@@ -160,41 +169,34 @@ An 'overloading' set: HFE +2, +3 and +4 ions for tip3p water.
   - water_ion
 ```
 
-* Source - AMBER input files
+* `Source`: AMBER input files
 
-* Solvent_source - the water file in `files/` for the standard (i.e. water model containing) XMLs **or** Standard - this is the same as the `Name` field for the appropriate standard (water model containing) XML - we need to know that, because for the 'overloading' sets both that XML and the standard XML need to be loaded for energy testing
+* `Solvent_source`: the water file in `files/` for the standard (i.e. water model containing) XMLs **or** Standard - this is the same as the `Name` field for the appropriate standard (water model containing) XML - we need to know that, because for the 'overloading' sets both that XML and the standard XML need to be loaded for energy testing
 
-* Solvent - this is the name of the solvent, this is necessary to avoid hardcoding of recognition of what solvent you're using from the names of the files etc. - and knowing which solvent you're using is necessary for energy validations.
+* `Solvent`: this is the name of the solvent, this is necessary to avoid hardcoding of recognition of what solvent you're using from the names of the files etc. - and knowing which solvent you're using is necessary for energy validations.
 
-* Name - the desired name of the ffxml. (For proteins and nucleic this is done by the script, which a product of `leaprc.ff14SB` will call `ff14SB.xml` etc.)
+* `Name`: the desired name of the ffxml. (For proteins and nucleic this is done by the script, which a product of `leaprc.ff14SB` will call `ff14SB.xml` etc.)
 
 Should you want to provide a different YAML (shorter version, different completely, whatever you want), script will take it with:
 ```bash
 python convert_amber.py --input name_of_your_yaml.yaml
 ```
-
 The outputs of any YAML will be written to `ffxml/`.
 
-You can also provide a leaprc of your choosing via:
+You can also provide a `leaprc` of your choosing via:
 ```bash
 python convert_amber.py --input name_of_your_leaprc --input-format leaprc
 ```
-
 The output of any leaprc will be written to the `./`.
 
 **A few remarks on the water models and ions**
 
-As I've said before already, the system is:
-* water models converted manually, i.e. taken existing files, put them in `files/`, script will merge them with appropriate ions
-
-* we have *standard* sets: `tip3p_standard.xml`, `tip4pew_standard.xml`, `spce_standard.xml`: water model + JC monovalent ions + compromise set +2 ions
-
-* for each water model we then have an HFE and IOD sets - +2/+3/+4 ions, all have templates set to `overload = "1"`. (`tip3p_HFE_multivalent.xml`, `tip3p_IOD_multivalent.xml` etc.)
-
+For this conversion:
+* water models converted manually using `ffxml` files placed in `files/`, and merged with the appropriate converted ions
+* we create *standard* recommended combinations of water and ion models: `tip3p_standard.xml`, `tip4pew_standard.xml`, `spce_standard.xml`: water model + JC monovalent ions + compromise set +2 ions
+* for each water model, we have an HFE and IOD set for multivalent ions; all have templates set to `overload = "1"`. (`tip3p_HFE_multivalent.xml`, `tip3p_IOD_multivalent.xml` etc.)
 * usage is to always load in a standard, and then you can overload +2's and add +3 and +4 with the HFE or IOD files
-
-* naming of the water atom types has stayed as was (`tip3p-O`)
-
+* naming of the water atom types remains as before (`tip3p-O`)
 * naming of the ion atom types is `name_of_set (dash) amber_atom_type_name`, e.g. `tip3p_standard-Na+`, `tip3p_HFE_multivalent-Zn2+`.
 
 **Tests**
@@ -206,3 +208,8 @@ Run `test/test.py` with `nosetests`.
 ```bash
 python merge_lipids.py
 ```
+
+**Acknowledgments**
+
+* Rafal Wiewiora (MSKCC) for creating these tools
+* Junmei Wang (University of Pittsburgh) for assistance in compiling historical GAFF releases

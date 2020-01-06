@@ -70,16 +70,16 @@ def main():
     # argparse
     parser = argparse.ArgumentParser(description='AMBER --> OpenMM forcefield '
                                                  'conversion script')
-    parser.add_argument('--input', '-i', default='files/master.yaml',
-                        help='path of the input file. Default: "files/master.yaml"')
+    parser.add_argument('--input', '-i', default='master.yaml',
+                        help='path of the input file. Default: "master.yaml"')
     parser.add_argument('--input-format', '-if', default='yaml',
                         help='format of the input file: "yaml" or "leaprc". Default: "yaml"')
     parser.add_argument('--output-dir', '-od', help='path of the output directory. '
                         'Default: "ffxml/" for yaml, "./" for leaprc')
     parser.add_argument('--verbose', '-v', action='store_true',
                         help='turns verbosity on')
-    parser.add_argument('--no-log', action='store_true',
-                        help='turns logging of energies to log.csv off')
+    parser.add_argument('--log', action='store', dest='log_filename', default=None,
+                        help='log energies for tests to specified CSV file')
     parser.add_argument('--protein-test', action='store_true',
                         help='validate resulting XML through protein tests')
     parser.add_argument('--nucleic-test', action='store_true',
@@ -94,9 +94,11 @@ def main():
                         help='validate resulting XML through lipids tests')
     args = parser.parse_args()
     verbose = args.verbose
-    no_log = args.no_log
 
-    if not no_log: logger = Logger('log.csv')
+    if args.log_filename:
+        logger = Logger(args.log_filename) # log to file
+    else:
+        logger = Logger() # be silent
 
     # input is either a YAML or a leaprc - default is leaprc
     # output directory hardcoded here for ffxml/
@@ -126,7 +128,7 @@ def main():
     else:
         sys.exit('Wrong input_format chosen.')
 
-    if not no_log: logger.close()
+    logger.close()
 
 def read_lines(filename):
     """
@@ -213,12 +215,35 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
+def convert_gaff(files, ffxml_basename='', split_filename=False, ffxml_dir='./', ignore=ignore,
+    provenance=None, write_unused=False, filter_warnings='error'):
+    if verbose: print('\nConverting %s to ffxml...' % files)
+    # allow for multiple source files - further code assuming list is passed
+    if not isinstance(files, list):
+        files = [files]
+    # Create ffxml
+    ffxml_name = os.path.join(ffxml_dir, (ffxml_basename + '.xml'))
+    if not os.path.exists(ffxml_dir):
+        os.mkdir(ffxml_dir)
+    # Process parameter file
+    params = parmed.amber.AmberParameterSet(files)
+    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    if filter_warnings != 'error':
+        with warnings.catch_warnings():
+            warnings.filterwarnings(filter_warnings, category=ParameterWarning)
+            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
+    else:
+        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
+    if verbose: print('%s successfully written!' % ffxml_name)
+    return ffxml_name
+
 def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ffxml_basename=None,
                    filter_warnings='always'):
     if verbose: print('\nConverting %s to ffxml...' % files)
     ffxml_name = os.path.join(ffxml_dir, (ffxml_basename + '.xml'))
     ffxml_temp_stringio = StringIO()
     params = parmed.amber.AmberParameterSet(files)
+    print(params.atom_types.keys())
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params)
     # Change atom type naming
     # atom_types
@@ -287,22 +312,40 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
     return ffxml_name
 
 def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
-    data = yaml.load(open(yaml_name))
-    source_pack = data[0]['sourcePackage']
-    source_pack_ver = data[0]['sourcePackageVersion']
+    data = yaml.load(open(yaml_name), Loader=yaml.FullLoader)
+    # TODO: Verify that the version that is installed via conda matches sourcePackageVersion
+
     # Default yaml reading mode is leaprc
-    MODE = 'LEAPRC'
-    for entry in data[1:]:
+    ALLOWED_MODES = ('LEAPRC', 'RECIPE', 'GAFF')
+    for entry in data:
+        # Handle MODE switching
         if 'MODE' in entry:
             MODE = entry['MODE']
+            if not MODE in ALLOWED_MODES:
+                raise Exception(f'MODE definition must be one of {ALLOWED_MODES}')
             continue
-        if MODE == 'RECIPE' and 'sourcePackage2' in entry:
+
+        # Handle definition of source packages
+        if 'sourcePackage' in entry:
+            source_pack = entry['sourcePackage']
+            source_pack_ver = entry['sourcePackageVersion']
+            continue
+        if 'sourcePackage2' in entry:
+            # Switch mode to RECIPE processing
             source_pack2 = entry['sourcePackage2']
             source_pack_ver2 = entry['sourcePackageVersion2']
             continue
-        leaprc_name = entry['Source']
-        leaprc_reference = entry['Reference']
-        leaprc_test = entry['Test']
+
+        # Extract source files, reference, and test files
+        source_files = entry['Source']
+        reference = entry['Reference']
+        test_filename = entry['Test']
+
+        # Make sure source_files is a list
+        if isinstance(source_files, str):
+            source_files = [source_files]
+
+        # Recipes require extra definitions
         if MODE == 'RECIPE':
             recipe_name = entry['Name']
             solvent_name = entry['Solvent']
@@ -314,37 +357,32 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 standard_ffxml = os.path.join(ffxml_dir, (entry['Standard'] + '.xml'))
             else:
                 standard_ffxml = None
+        elif MODE == 'GAFF':
+            recipe_name = entry['Name']
+
+        # Create provenance object
         provenance = OrderedDict()
-        if isinstance(leaprc_name, list):
-            files = []
-            source = provenance['Source'] = []
-            for leaprc in leaprc_name:
-                if MODE == 'LEAPRC':
-                    _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', leaprc)
-                elif MODE == 'RECIPE':
-                    _filename = os.path.join(AMBERHOME, 'dat/leap/', leaprc)
-                files.append(_filename)
-                source.append(OrderedDict())
-                source[-1]['Source'] = leaprc
-                md5 = hashlib.md5()
-                with open(_filename, 'rb') as f:
-                    md5.update(f.read())
-                md5 = md5.hexdigest()
-                source[-1]['md5hash'] = md5
-                source[-1]['sourcePackage'] = source_pack
-                source[-1]['sourcePackageVersion'] = source_pack_ver
-        else:
-            files = os.path.join(AMBERHOME, 'dat/leap/cmd', leaprc_name)
-            source = provenance['Source'] = OrderedDict()
-            source['Source'] = leaprc_name
+        files = []
+        source = provenance['Source'] = []
+        for source_file in source_files:
+            if MODE == 'LEAPRC':
+                _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
+            elif MODE == 'RECIPE':
+                _filename = os.path.join(AMBERHOME, 'dat/leap/', source_file)
+            elif MODE == 'GAFF':
+                _filename = os.path.join('gaff', 'dat', source_file)
+            files.append(_filename)
+            source.append(OrderedDict())
+            source[-1]['Source'] = source_file
             md5 = hashlib.md5()
-            with open(files, 'rb') as f:
+            with open(_filename, 'rb') as f:
                 md5.update(f.read())
             md5 = md5.hexdigest()
-            source['md5hash'] = md5
-            source['sourcePackage'] = source_pack
-            source['sourcePackageVersion'] = source_pack_ver
-        # add water file and source info for it
+            source[-1]['md5hash'] = md5
+            source[-1]['sourcePackage'] = source_pack
+            source[-1]['sourcePackageVersion'] = source_pack_ver
+
+        # For recipes, add water file and source info for it
         if MODE == 'RECIPE' and recipe_source2 is not None:
             _filename = os.path.join('files', recipe_source2)
             solvent_file = _filename
@@ -359,7 +397,8 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             source[-1]['sourcePackageVersion'] = source_pack_ver2
         elif MODE == 'RECIPE' and recipe_source2 is None:
             solvent_file = None
-        provenance['Reference'] = leaprc_reference
+        provenance['Reference'] = reference
+
         # set default conversion options
         write_unused = False
         filter_warnings = 'error'
@@ -374,7 +413,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     ffxml_dir = entry['Options'][option]
                 else:
                     raise Exception("Wrong option used in Options for %s"
-                                       % leaprc_name)
+                                       % source_files)
+
+        # Convert files
         if MODE == 'LEAPRC':
             ffxml_name = convert_leaprc(files, ffxml_dir=ffxml_dir, ignore=ignore,
                          provenance=provenance, write_unused=write_unused,
@@ -383,6 +424,11 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
                          ffxml_dir=ffxml_dir, provenance=provenance,
                          ffxml_basename=recipe_name)
+        elif MODE == 'GAFF':
+            ffxml_name = convert_gaff(files, ffxml_basename=recipe_name, ffxml_dir=ffxml_dir, ignore=ignore,
+                         provenance=provenance, write_unused=write_unused,
+                         filter_warnings=filter_warnings, split_filename=True)
+
         if 'CharmmFFXMLFilename' in entry:
             charmm_ffxml_filename = entry['CharmmFFXMLFilename']
             charmm_lipid2amber_filename = entry['CharmmLipid2AmberFilename']
@@ -394,40 +440,40 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             add_prefix_to_ffxml(ffxml_name, prefix)
         if verbose: print('Validating the conversion...')
         tested = False
-        for test in leaprc_test:
+        for test in test_filename:
             if test == 'protein':
-                validate_protein(ffxml_name, leaprc_name)
+                validate_protein(ffxml_name, entry['Source'])
                 tested = True
             elif test == 'nucleic':
-                validate_dna(ffxml_name, leaprc_name)
-                validate_rna(ffxml_name, leaprc_name)
+                validate_dna(ffxml_name, entry['Source'])
+                validate_rna(ffxml_name, entry['Source'])
                 tested = True
             elif test == 'protein_ua':
-                validate_protein(ffxml_name, leaprc_name, united_atom=True)
+                validate_protein(ffxml_name, entry['Source'], united_atom=True)
                 tested = True
             elif test == 'protein_phospho':
-                validate_phospho_protein(ffxml_name, leaprc_name)
+                validate_phospho_protein(ffxml_name, entry['Source'])
                 tested = True
             elif test == 'gaff':
-                validate_gaff(ffxml_name, leaprc_name)
+                validate_gaff(ffxml_name, entry['leaprc'], entry['Source'])
                 tested = True
             elif test == 'water_ion':
                 validate_water_ion(ffxml_name, files, solvent_name, recipe_name,
                 standard_ffxml=standard_ffxml)
                 tested = True
             elif test == 'dna':
-                validate_dna(ffxml_name, leaprc_name)
+                validate_dna(ffxml_name, entry['Source'])
                 tested = True
             elif test == 'rna':
-                validate_rna(ffxml_name, leaprc_name)
+                validate_rna(ffxml_name, entry['Source'])
                 tested = True
             elif test == 'lipids':
-                #validate_lipids(ffxml_name, leaprc_name)
-                validate_merged_lipids(ffxml_name, leaprc_name)
+                #validate_lipids(ffxml_name, source_files)
+                validate_merged_lipids(ffxml_name, entry['Source'])
                 tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
-                                leaprc_name)
+                                source_files)
 
 def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename):
     """
@@ -547,7 +593,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     with open(ffxml_filename, 'w') as outfile:
         outfile.write(modified_contents)
 
-def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.0e-5,
+def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
                     improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
@@ -857,7 +903,7 @@ quit""" % (leaprc_name, rna_top[1], rna_crd[1])
             os.unlink(f[1])
     if verbose: print('RNA energy validation for %s done!' % ffxml_name)
 
-def validate_gaff(ffxml_name, leaprc_name):
+def validate_gaff(ffxml_name, leaprc_name, gaff_dat_name):
     if verbose: print('GAFF energy validation for %s' % ffxml_name)
     if verbose: print('Preparing temporary files for validation...')
     imatinib_top = tempfile.mkstemp()
@@ -865,11 +911,13 @@ def validate_gaff(ffxml_name, leaprc_name):
     leap_script_imatinib_file = tempfile.mkstemp()
 
     if verbose: print('Preparing LeaP scripts...')
-    leap_script_imatinib_string = """source %s
+    leap_script_imatinib_string = """\
+source %s
+loadamberparams gaff/dat/%s
 loadamberparams files/frcmod.imatinib
 x = loadMol2 files/imatinib.mol2
 saveAmberParm x %s %s
-quit""" % (leaprc_name, imatinib_top[1], imatinib_crd[1])
+quit""" % (leaprc_name, gaff_dat_name, imatinib_top[1], imatinib_crd[1])
     write_file(leap_script_imatinib_file[0], leap_script_imatinib_string)
 
     if verbose: print('Running LEaP...')
@@ -1193,22 +1241,37 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
 
 class Logger():
+    """
+    Log energy discrepancies to a file.
+
+    Parameters
+    ----------
+    log_filename : str
+        Name of CSV file to write to
+
+    """
     # logs testing energies into csv
-    def __init__(self, log_file):
-        csvfile = open(log_file, 'w')
-        fieldnames = ['ffxml_name', 'data_type', 'test_system', 'units', 'HarmonicBondForce',
+    def __init__(self, log_filename=None):
+        if log_filename:
+            csvfile = open(log_filename, 'w')
+            fieldnames = ['ffxml_name', 'data_type', 'test_system', 'units', 'HarmonicBondForce',
                       'HarmonicAngleForce', 'PeriodicTorsionForce_dihedrals',
                       'PeriodicTorsionForce_impropers', 'NonbondedForce']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        self.csvfile = csvfile
-        self.writer = writer
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            self.csvfile = csvfile
+            self.writer = writer
+        else:
+            self.csvfile = None
+            self.writer = None
 
     def close(self):
-        self.csvfile.close()
+        if self.csvfile:
+            self.csvfile.close()
 
     def log(self, energies):
-        self.writer.writerow(energies)
+        if self.writer:
+            self.writer.writerow(energies)
 
 if __name__ == '__main__':
     main()

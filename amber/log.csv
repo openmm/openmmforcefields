@@ -1,4 +1,0 @@
-ffxml_name,data_type,test_system,units,HarmonicBondForce,HarmonicAngleForce,PeriodicTorsionForce_dihedrals,PeriodicTorsionForce_impropers,NonbondedForce
-ffxml/protein.ff15ipq.xml,AMBER,protein-ala_ala_ala,kilojoule/mole,18.08820152282715,71.0853500366211,-49.16811752319336,0.5143800377845764,251.260498046875
-ffxml/protein.ff15ipq.xml,OpenMM,protein-ala_ala_ala,kilojoule/mole,18.08819564431724,71.0852006103372,-49.16807009347328,0.5143808543208929,251.26048379328736
-ffxml/protein.ff15ipq.xml,abs((AMBER-OpenMM)/AMBER),protein-ala_ala_ala,,3.2499139853919014e-07,2.1020686234292873e-06,9.64643807125428e-07,1.5874183608817585e-06,5.6728326765254075e-08

@@ -2,9 +2,9 @@
 # Author: Rafal P. Wiewiora, Chodera Lab
 # Structure: list - first entry - source package info, further entries - 1/resulting ffxml file
 
-- sourcePackage: AmberTools
-  sourcePackageVersion: 19.0
 - MODE: LEAPRC
+- sourcePackage: AmberTools
+  sourcePackageVersion: 19.9
 - Source: leaprc.protein.ff15ipq
   Prefix: protein
   Reference:
@@ -55,7 +55,7 @@
     ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.
   Test:
   - protein
-- Source: leaprc.ff14SB.redq
+- Source: oldff/leaprc.ff14SB.redq
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -102,24 +102,6 @@
   Test:
   - protein
   - nucleic
-- Source: leaprc.gaff
-  Reference:
-  - >-
-    Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004).
-    Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.
-  Options:
-    write_unused: True
-  Test:
-  - gaff
-- Source: leaprc.gaff2
-  Reference:
-  - >-
-    Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004).
-    Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.
-  Options:
-    write_unused: True
-  Test:
-  - gaff
 - Source: leaprc.DNA.OL15
   Prefix: DNA
   Reference:
@@ -320,7 +302,7 @@
 # IONS & SOLVENTS
 - MODE: RECIPE
 - sourcePackage2: OpenMM
-  sourcePackageVersion2: 7.2
+  sourcePackageVersion2: 7.4.1
 - Source:
   - parm/frcmod.ionsjc_tip3p
   - parm/frcmod.ions234lm_126_tip3p

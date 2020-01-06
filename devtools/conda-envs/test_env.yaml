@@ -3,6 +3,7 @@ name: test
 channels:
   - conda-forge
   - omnia
+  - openeye
   - defaults
 
 dependencies:
@@ -15,10 +16,21 @@ dependencies:
   - pytest-cov
   - codecov
 
-    # Requirements
-  - openmm >=7.3.0
+    # Requirements for converted force field installer
+  - openmm >=7.4.1
+
+    # Requirements for conversion tools
   - pyyaml
-  - ambertools >=18.0
+  - ambertools >=18.0 # contains sufficiently recent ParmEd
   - lxml
   - networkx
-  - parmed
+
+    # JSON caching of residue templates
+  - tinydb
+
+    # openforcefield toolkit and force fields
+  - openforcefield >=0.6.0
+  - openforcefields >=1.0.0
+
+    # OpenEye toolkits are only used to speed up testing; they are not required for use
+  - openeye-toolkits

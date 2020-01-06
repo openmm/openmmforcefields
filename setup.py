@@ -23,11 +23,12 @@ try:
     os.makedirs('openmmforcefields/ffxml')
     os.symlink('../../amber/ffxml/', 'openmmforcefields/ffxml/amber')
     os.symlink('../../charmm/ffxml/', 'openmmforcefields/ffxml/charmm')
+    os.symlink('../../amber/gaff', 'openmmforcefields/ffxml/amber/gaff')
 
     setup(
         # Self-descriptive entries which should always be present
         name='openmmforcefields',
-        author='Chodera lab @ MSKCC',
+        author='Chodera lab // MSKCC',
         author_email='john.chodera@choderalab.org',
         description=short_description[0],
         long_description=long_description,
@@ -68,12 +69,14 @@ try:
             },
 
         package_data={
-            'openmmforcefields': ['ffxml/amber/*.xml', 'ffxml/charmm/*.xml']
+            'openmmforcefields': ['ffxml/amber/*.xml', 'ffxml/amber/gaff/*.{xml,dat}', 'ffxml/charmm/*.xml']
             },
     )
 
 finally:
+    # TODO: Don't clean these up if `python setup.py develop`
     # Clean up temporary symlinks
+    os.unlink('openmmforcefields/ffxml/amber/gaff')
     os.unlink('openmmforcefields/ffxml/amber')
     os.unlink('openmmforcefields/ffxml/charmm')
     os.removedirs('openmmforcefields/ffxml')

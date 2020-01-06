@@ -1,0 +1,7 @@
+HETATM    1  N   NMA A   1A     44.091  41.216   3.943  1.00  0.00           N  
+HETATM    2  CA  NMA A   1A     44.204  41.689   5.318  1.00  0.00           C  
+HETATM    3  H   NMA A   1A     44.858  40.668   3.582  1.00  0.00           H  
+HETATM    4  1HA NMA A   1A     43.796  42.693   5.441  1.00  0.00           H  
+HETATM    5  2HA NMA A   1A     43.674  41.021   5.998  1.00  0.00           H  
+HETATM    6  3HA NMA A   1A     45.251  41.715   5.618  1.00  0.00           H  
+END                                                                             
