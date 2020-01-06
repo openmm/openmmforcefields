@@ -40,7 +40,7 @@ install:
     # Workaround for
     # TODO: Remove this when builds are released
   - echo "Overwriting forcefield.py with fix from https://github.com/openmm/openmm/pull/2511"
-  - wget https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"``
+  - wget -q https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"`
     # Build and install package
     # Can't use 'develop' mode because we remove symlinks after install is complete
     #- python setup.py develop --no-deps
