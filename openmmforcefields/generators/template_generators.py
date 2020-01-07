@@ -347,7 +347,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     You can see which force fields are supported with
 
     >>> template_generator.INSTALLED_FORCEFIELDS
-    ... ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+    ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 
     """
     INSTALLED_FORCEFIELDS = ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
@@ -406,7 +406,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         To check which GAFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
         >>> print(GAFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-        ... ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+        ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 
         You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
@@ -457,7 +457,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_version(self):
         """The current GAFF minor version in use"""
-        return self._gaff_minor_version
+        return self._gaff_version
 
     @property
     def gaff_dat_filename(self):
@@ -869,7 +869,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     """
     # TODO: Automatically populate this at import by examining plugin directories in order of semantic version
-    INSTALLED_FORCEFIELDS = ['openff-1.0.0', 'smirnoff99Frosst-1.1.0']
+    INSTALLED_FORCEFIELDS = ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
 
     def __init__(self, molecules=None, cache=None, forcefield=None):
         """
@@ -907,12 +907,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         The latest Open Force Field Initiative release is used if none is specified.
 
         >>> smirnof.forcefield
-        ... 'openff-1.0.0'
+        'openff-1.0.0'
 
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename
-        ... '/full/path/to/openff-1.0.0.offxml'
+        '/full/path/to/openff-1.0.0.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
@@ -927,7 +927,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
         >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-        ... ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
+        ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
 
         You can optionally create or use a cache of pre-parameterized molecules:
 

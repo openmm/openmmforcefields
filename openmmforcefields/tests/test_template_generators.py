@@ -59,6 +59,20 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         for name in ['parmed', 'matplotlib']:
             logging.getLogger(name).setLevel(logging.WARNING)
 
+    def test_version(self):
+        """Test version"""
+        for gaff_version in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator = GAFFTemplateGenerator(gaff_version=gaff_version)
+            import re
+            result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', gaff_version)
+            assert generator.gaff_version == gaff_version
+            assert generator.gaff_major_version == result['major_version']
+            assert generator.gaff_minor_version == result['minor_version']
+            assert generator.gaff_dat_filename.endswith(gaff_version + '.dat')
+            assert os.path.exists(generator.gaff_dat_filename)
+            assert generator.gaff_xml_filename.endswith(gaff_version + '.xml')
+            assert os.path.exists(generator.gaff_xml_filename)
+
     def test_create(self):
         """Test template generator creation"""
         # Create an empty generator
@@ -619,3 +633,12 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
                 # Compare energies again
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
+
+    def test_version(self):
+        """Test version"""
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            assert generator.forcefield == forcefield
+            assert generator.smirnoff_filename.endswith(forcefield + '.offxml')
+            assert os.path.exists(generator.smirnoff_filename)
+            
