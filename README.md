@@ -257,6 +257,12 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
+## 0.6.1 Updated README and minor bugfixes
+
+* Fix examples in the README
+* Fix `GAFFTemplateGenerator.gaff_major_version`
+* Fix incorrect default SMIRNOFF force field, which is now `openff-1.0.0` (was previously `smirnoff99Frosst-1.1.0`)
+
 ## 0.6.0 Updated AMBER force fields (AmberTools 19.9) and small molecule support via GAFF
 
 This release provides updated support for AMBER biopolymer force fields (from AmberTools 19.9) and small molecule support with GAFF 1.x and 2.x, along with experimental support for the new Open Force Field Initiative SMIRNOFF force fields.
