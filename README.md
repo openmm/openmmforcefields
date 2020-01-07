@@ -19,6 +19,19 @@ This repository provides support for AMBER and CHARMM force fields and small mol
 
 The `openmm-forcefields` package provides additional AMBER and CHARMM biopolymer force fields, small molecule support through GAFF and the [Open Force Field toolkit](http://openforcefield.org), and force field conversion tools.
 
+### Hacky temporary installation workaround
+
+# Install dependencies (assuming you have conda-forge, omnia, and optionally openeye channels already added)
+conda install --yes pyyaml "ambertools>=18.0" lxml networkx tinydb "openforcefield>=0.6.0" "openforcefields>=1.0.0"
+# Install openmm-forcefields
+pip install git+https://github.com/choderalab/openmm-forcefields.git
+# Patch your OpenMM installation to be able to use SMIRNOFF (assumes OpenMM 7.4.1)
+wget -q https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"`
+
+### NOTE: The method below does not work yet---we are working on building this conda package
+
+To install this package, you will need to
+
 The easiest way to install this package and its requisite dependencies is via [`conda`](https://conda.io):
 ```bash
 conda install --yes -c conda-forge -c omnia openmm-forcefields
