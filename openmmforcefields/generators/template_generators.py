@@ -450,7 +450,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_version(self):
         """The current GAFF version in use"""
-        return {self._gaff_major_version} + '.' + {self._gaff_minor_version}
+        return self._gaff_major_version + '.' + self._gaff_minor_version
 
     @property
     def gaff_major_version(self):
