@@ -62,7 +62,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def test_version(self):
         """Test version"""
         for gaff_version in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            generator = GAFFTemplateGenerator(gaff_version=gaff_version)
+            generator = GAFFTemplateGenerator(forcefield=gaff_version)
             import re
             result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', gaff_version)
             assert generator.gaff_version == gaff_version
@@ -641,4 +641,3 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             assert generator.forcefield == forcefield
             assert generator.smirnoff_filename.endswith(forcefield + '.offxml')
             assert os.path.exists(generator.smirnoff_filename)
-            
