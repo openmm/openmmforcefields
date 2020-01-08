@@ -163,6 +163,7 @@ class SystemGenerator(object):
                 try:
                     _logger.debug(f'Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}')
                     self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache)
+                    break
                 except ValueError as e:
                     _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
                     _logger.debug(e)
