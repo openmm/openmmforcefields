@@ -11,7 +11,7 @@ This repository provides support for AMBER and CHARMM force fields and small mol
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
-**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/). *This support is experimental since it requires a development version of OpenMM 7.5.0.*
+**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/). *This support is experimental since it requires a development version of OpenMM 7.5.0.*
 
 # Using the force fields
 
@@ -156,7 +156,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 ## Using the Open Force Field Initiative SMIRNOFF small molecule force fields
 
 The `openmm-forcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://open-forcefield-toolkit.readthedocs.io/en/0.6.0/smirnoff.html) small molecule force fields.
-This includes the [`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) small molecule force field.
+This includes the [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) small molecule force field.
 
 The `SMIRNOFFTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
@@ -167,7 +167,7 @@ Create a SMIRNOFF template generator for a single molecule (benzene, created fro
 # Create an openforcefield Molecule object for benzene from SMILES
 from openforcefield.topology import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
-# Create the SMIRNOFF template generator with the default installed force field (openforcefield-1.0.0)
+# Create the SMIRNOFF template generator with the default installed force field (openff-1.0.0)
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
@@ -176,7 +176,7 @@ forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(smirnoff.generator)
 ```
-The latest official Open Force Field Initiative release ([`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
+The latest official Open Force Field Initiative release ([`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
 You can check which SMIRNOFF force field is in use with
 ```python
 >>> smirnoff.smirnoff_filename
@@ -185,9 +185,9 @@ You can check which SMIRNOFF force field is in use with
 Create a template generator for a specific SMIRNOFF force field for multiple molecules read from an SDF file:
 ```python
 molecules = Molecule.from_file('molecules.sdf')
-# Create a SMIRNOFF residue template generator from the official openforcefield-1.0.0 release,
+# Create a SMIRNOFF residue template generator from the official openff-1.0.0 release,
 # which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openforcefield-1.0.0')
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-1.0.0')
 # Create a SMIRNOFF residue template generator from the official smirnoff99Frosst-1.1.0 release,
 # which is installed automatically
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='smirnoff99Frosst-1.1.0')
@@ -202,11 +202,11 @@ smirnoff.add_molecules([molecule1, molecule2])
 To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_FORCEFIELDS` attribute:
 ```python
 >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['smirnoff99Frosst-1.1.0', 'openforcefield-1.0.0']
+['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
-smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', forcefield='openforcefield-1.0.0')
+smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', forcefield='openff-1.0.0')
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
@@ -234,7 +234,7 @@ system = system_generator.create_system(openmm_topology, molecules=molecules)
 Parameterized molecules are cached in `db.json`.
 Parameters for multiple force fields can be held in the same cache file.
 
-To use the [Open Force Field `openforcefield-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openforcefield-1.0.0'`.
+To use the [Open Force Field `openff-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.0.0'`.
 
 # Frequently Asked Questions (FAQ)
 
@@ -273,7 +273,7 @@ This release provides updated support for AMBER biopolymer force fields (from Am
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
-**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openforcefield-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/). *This support is experimental since it requires a development version of OpenMM 7.5.0.*
+**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/). *This support is experimental since it requires a development version of OpenMM 7.5.0.*
 
 Residue template generators are provided for both GAFF (`GAFFTemplateGenerator`) and SMIRNOFF (`SMIRNOFFTemplateGenerator`).
 

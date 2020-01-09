@@ -236,6 +236,8 @@ class SmallMoleculeTemplateGenerator(object):
 
         # TODO: Refactor to reduce code duplication
 
+        print(f'Requested to generate parameters for residue {residue}')
+
         # If a database is specified, check against molecules in the database
         if self._cache is not None:
             with self._open_db() as db:
@@ -248,6 +250,7 @@ class SmallMoleculeTemplateGenerator(object):
                     # See if the template matches
                     from openforcefield.topology import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'])
+                    print(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
                         ffxml_contents = entry['ffxml']
 
@@ -447,7 +450,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_version(self):
         """The current GAFF version in use"""
-        return self._gaff_version
+        return self._gaff_major_version + '.' + self._gaff_minor_version
 
     @property
     def gaff_major_version(self):
@@ -455,9 +458,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         return self._gaff_major_version
 
     @property
-    def gaff_version(self):
+    def gaff_minor_version(self):
         """The current GAFF minor version in use"""
-        return self._gaff_version
+        return self._gaff_minor_version
 
     @property
     def gaff_dat_filename(self):
