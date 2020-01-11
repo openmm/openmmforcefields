@@ -11,9 +11,6 @@ from openmmforcefields.generators import SystemGenerator
 ################################################################################
 
 class TestSystemGenerator(unittest.TestCase):
-
-    SMALL_MOLECULE_FORCEFIELDS = ['gaff-1.81', 'gaff-2.11', 'smirnoff99Frosst-1.1.0', 'openff-1.0.0']
-
     # AMBER force field combination to test
     amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
 
@@ -154,7 +151,7 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_create_with_template_generator(self):
         """Test SystemGenerator creation with small molecule residue template generators"""
-        for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+        for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
             # Create a generator that defines AMBER and small molecule force fields
             generator = SystemGenerator(forcefields=self.amber_forcefields,
                 small_molecule_forcefield=small_molecule_forcefield)
@@ -181,7 +178,7 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
@@ -210,7 +207,7 @@ class TestSystemGenerator(unittest.TestCase):
         for name, testsystem in self.testsystems.items():
             molecules = testsystem['molecules']
 
-            for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
@@ -229,7 +226,7 @@ class TestSystemGenerator(unittest.TestCase):
         from simtk.openmm.app import NoCutoff
         forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
 
-        for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+        for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
             # Create a SystemGenerator for this force field
             generator = SystemGenerator(forcefields=self.amber_forcefields,
                                             small_molecule_forcefield=small_molecule_forcefield,
@@ -266,7 +263,7 @@ class TestSystemGenerator(unittest.TestCase):
             # Create a single shared cache for all force fields
             cache = os.path.join(tmpdirname, 'db.json')
             # Test that we can parameterize all molecules for all test systems
-            for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
@@ -290,7 +287,7 @@ class TestSystemGenerator(unittest.TestCase):
 
             # Molecules should now be cached; test timing is faster the second time
             # Test that we can parameterize all molecules for all test systems
-            for small_molecule_forcefield in self.SMALL_MOLECULE_FORCEFIELDS:
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
