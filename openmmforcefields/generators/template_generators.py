@@ -236,7 +236,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         # TODO: Refactor to reduce code duplication
 
-        print(f'Requested to generate parameters for residue {residue}')
+        _logger.info(f'Requested to generate parameters for residue {residue}')
 
         # If a database is specified, check against molecules in the database
         if self._cache is not None:

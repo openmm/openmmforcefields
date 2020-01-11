@@ -14,6 +14,14 @@ _logger = logging.getLogger("perses.forcefields.system_generators")
 # System generator base class
 ################################################################################
 
+class classproperty(property):
+    def __get__(self, obj, objtype=None):
+        return super(classproperty, self).__get__(objtype)
+    def __set__(self, obj, value):
+        super(classproperty, self).__set__(type(obj), value)
+    def __delete__(self, obj):
+        super(classproperty, self).__delete__(type(obj))
+
 class SystemGenerator(object):
     """
     Common interface for generating OpenMM Systems from OpenMM Topology objects
@@ -177,6 +185,15 @@ class SystemGenerator(object):
 
         # Inform the template generator about any specified molecules
         self.add_molecules(molecules)
+
+    @classproperty
+    def SMALL_MOLECULE_FORCEFIELDS(cls):
+        """Return a listof available small molecule force fields"""
+        forcefields = list()
+        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
+            forcefields += template_generator_cls.INSTALLED_FORCEFIELDS
+        return forcefields
 
     def add_molecules(self, molecules):
         """
