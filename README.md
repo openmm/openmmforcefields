@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/choderalab/openmm-forcefields.svg?branch=master)](https://travis-ci.org/choderalab/openmm-forcefields?branch=master)
+[![Build Status](https://travis-ci.org/openmm/openmm-forcefields.svg?branch=master)](https://travis-ci.org/openmm/openmm-forcefields?branch=master)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
 # AMBER and CHARMM force fields for OpenMM
@@ -25,7 +25,7 @@ The `openmm-forcefields` package provides additional AMBER and CHARMM biopolymer
 # Install dependencies (assuming you have conda-forge, omnia, and optionally openeye channels already added)
 conda install --yes pyyaml "ambertools>=18.0" lxml networkx tinydb "openforcefield>=0.6.0" "openforcefields>=1.0.0"
 # Install openmm-forcefields
-pip install git+https://github.com/choderalab/openmm-forcefields.git
+pip install git+https://github.com/openmm/openmm-forcefields.git
 # Patch your OpenMM installation to be able to use SMIRNOFF (assumes OpenMM 7.4.1)
 wget -q https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"`
 ```
