@@ -55,7 +55,7 @@ class SystemGenerator(object):
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, periodic_nonbonded_method=app.PME, nonperiodic_nonbonded_method=app.NoCutoff, barostat=None, molecules=None, cache=None, postprocess_system=None):
+    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -75,10 +75,10 @@ class SystemGenerator(object):
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``simtk.openmm.app.ForceField.createSystem()`` during ``System`` object creation.
-        periodic_nonbonded_method : NonbondedMethod, optional, default=PME
-            The nonbonded method from ``simtk.openmm.app`` to use for periodic Topology objects; one of [``PME``, ``LJPME``, ``CustoffPeriodic``]
-        nonperiodic_nonbonded_method : NonbondedMethod, optional, default=NoCutoff
-            The nonbonded method from ``simtk.openmm.app`` to use for non-periodic Topology objects; one of [``NoCutoff``, ``CutoffNonPerodic``]
+        nonperiodic_forcefield_kwargs : dict, optional, default={'nonbondedMethod' : NoCutoff}
+            Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.
+        periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
+            Keyword arguments added to forcefield_kwargs when the Topology is periodic.
         barostat : simtk.openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
@@ -167,8 +167,8 @@ class SystemGenerator(object):
 
         # Cache force fields and settings to use
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
-        self.periodic_nonbonded_method = periodic_nonbonded_method
-        self.nonperiodic_nonbonded_method = nonperiodic_nonbonded_method
+        self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.NoCutoff}
+        self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.PME}
 
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
@@ -299,10 +299,10 @@ class SystemGenerator(object):
         import copy
         forcefield_kwargs = copy.deepcopy(self.forcefield_kwargs)
         if topology.getPeriodicBoxVectors() is None:
-            forcefield_kwargs['nonbondedMethod'] = self.nonperiodic_nonbonded_method
+            forcefield_kwargs.update(self.nonperiodic_forcefield_kwargs)
         else:
-            forcefield_kwargs['nonbondedMethod'] = self.periodic_nonbonded_method
-                        
+            forcefield_kwargs.update(self.periodic_forcefield_kwargs)
+
         # Build the System
         system = self.forcefield.createSystem(topology, **forcefield_kwargs)
 

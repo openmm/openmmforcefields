@@ -185,8 +185,8 @@ class TestSystemGenerator(unittest.TestCase):
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
-                                                periodic_nonbonded_method=app.LJPME,
-                                                nonperiodic_nonbonded_method=app.CutoffNonPeriodic,
+                                                periodic_forcefield_kwargs={'nonbondedMethod':app.LJPME},
+                                                nonperiodic_forcefield_kwargs={'nonbondedMethod':app.CutoffNonPeriodic},
                                                 molecules=molecules)
 
                 # Parameterize molecules

@@ -234,10 +234,12 @@ Parameterized molecules are cached in `db.json`.
 Parameters for multiple force fields can be held in the same cache file.
 
 By default, `SystemGenerator` will use `PME` for periodic systems and `NoCutoff` for non-periodic systems.
-You can modify this behavior with the optional `periodic_nonbonded_method` and `nonperiodic_nonbonded_method` arguments:
+You can modify this behavior with the optional `periodic_forcefield_kwargs` and `nonperiodic_forcefield_kwargs` arguments, which are used to update `forcefield_kwargs` depending on whether the system is periodic or non-periodic:
 ```python
 from simtk.openmm import app
-system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], periodic_nonbonded_method=app.LJPME, nonperiodic_nonbonded_method=app.CutoffNonPeriodic)
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'],
+    periodic_forcefield_kwargs={'nonbondedMethod' : app.LJPME},
+    nonperiodic_forcefield_kwargs={'nonbondedMethod' : app.CutoffNonPeriodic})
 ```
 
 To use the [Open Force Field `openff-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.0.0'`.
