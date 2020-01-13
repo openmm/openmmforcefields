@@ -1099,7 +1099,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._generate_unique_atom_names(molecule)
 
         # Determine which molecules (if any) contain user-specified partial charges that should be used
-        charge_from_molecules = None
+        charge_from_molecules = list()
         if self._molecule_has_user_charges(molecule):
             charge_from_molecules = [molecule]
             _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
