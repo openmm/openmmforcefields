@@ -180,19 +180,32 @@ class TestSystemGenerator(unittest.TestCase):
 
             for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
-                from simtk.openmm.app import LJPME, CutoffNonPeriodic
+                from simtk import openmm
+                from simtk.openmm import app
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
-                                                periodic_nonbonded_method=LJPME,
-                                                nonperiodic_nonbonded_method=CutoffNonPeriodic,
+                                                periodic_nonbonded_method=app.LJPME,
+                                                nonperiodic_nonbonded_method=app.CutoffNonPeriodic,
                                                 molecules=molecules)
 
                 # Parameterize molecules
-                from openmmforcefields.utils import Timer
                 for molecule in molecules:
-                    openmm_topology = molecule.to_topology().to_openmm()
-                    system = generator.create_system(openmm_topology)
+                    # Create non-periodic Topology
+                    nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
+                    system = generator.create_system(nonperiodic_openmm_topology)
+                    forces = { force.__class__.__name__ : force for force in system.getForces() }
+                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+
+                    # Create periodic Topology
+                    import numpy as np
+                    import copy
+                    box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
+                    periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
+                    periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
+                    system = generator.create_system(periodic_openmm_topology)
+                    forces = { force.__class__.__name__ : force for force in system.getForces() }
+                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.LJPME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
     def test_parameterize_molecules_from_creation(self):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""

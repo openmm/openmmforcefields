@@ -246,7 +246,7 @@ To use the [Open Force Field `openff-1.0.0` ("Parsley") force field](https://ope
 
 **Q:** What is the minimum version of OpenMM required to use this package?
 <br>
-**A:** You need at least OpenMM 7.4.1 to use the `openmm-forcefields` package.
+**A:** You need at least OpenMM 7.5.0 to use the `openmm-forcefields` package.
 
 **Q:** Do you support the new [Amber ff19SB protein force field](https://chemrxiv.org/articles/ff19SB_Amino-Acid_Specific_Protein_Backbone_Parameters_Trained_Against_Quantum_Mechanics_Energy_Surfaces_in_Solution/8279681/1)?
 <br>
