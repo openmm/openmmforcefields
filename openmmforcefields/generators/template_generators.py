@@ -541,9 +541,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         net_charge = molecule.total_charge
         _logger.debug(f'Total charge is {net_charge}')
 
-        # Compute partial charge
-        _logger.debug(f'Computing AM1-BCC charges...')
-        molecule.compute_partial_charges_am1bcc()
+        # Compute partial charges if required
+        # TODO: Replace this with a call to Molecule API once we have a way to check for user-specified charges
+        import numpy as np
+        from simtk import unit
+        if np.all(molecule.partial_charges / unit.elementary_charge == 0):
+            _logger.debug(f'Computing AM1-BCC charges...')
+            molecule.compute_partial_charges_am1bcc()
+        else:
+            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
 
         # Geneate a single conformation
         _logger.debug(f'Generating a conformer...')
@@ -1065,9 +1071,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
 
+        # Determine which molecules (if any) contain user-specified partial charges that should be used
+        # TODO: Replace this with a call to Molecule API once we have a way to check for user-specified charges
+        import numpy as np
+        from simtk import unit
+        charge_from_molecules = None
+        if np.all(molecule.partial_charges / unit.elementary_charge == 0):
+            charge_from_molecules = [molecule]
+            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+
         # Parameterize molecule
         _logger.debug(f'Generating parameters...')
-        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
+        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology(), charge_from_molecules=charge_from_molecules)
 
         # Transiently cache a copy of the OpenMM System object generated for testing/verification purposes
         self._system_cache[smiles] = system
