@@ -7,6 +7,9 @@ from openmmforcefields.utils import get_data_filename
 from openmmforcefields.generators import GAFFTemplateGenerator
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 
+import logging
+_logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
+
 ################################################################################
 # Tests
 ################################################################################
@@ -174,12 +177,19 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """
         assert system.getNumParticles() == molecule.n_particles
 
-        system_charges = charges_from_system(system)
+        system_charges = self.charges_from_system(system)
 
         from simtk import unit
         molecule_charges = molecule.partial_charges / unit.elementary_charge
 
-        return np.allclose(system_charges, molecule_charges)
+        import numpy as np
+        result = np.allclose(system_charges, molecule_charges)
+        if not result:
+            _logger.debug('Charges are not equal')
+            _logger.debug(f'system charges  : {system_charges}')
+            _logger.debug(f'molecule charges: {molecule_charges}')
+
+        return result
 
     def test_charge(self):
         """Test that charges are nonzero after charging if the molecule does not contain user charges"""
@@ -197,6 +207,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = self.molecules[0]
         # Ensure partial charges are initially zero
         assert np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        # Add the molecule
+        generator.add_molecules(molecule)
+        # Create the System
         from simtk.openmm.app import NoCutoff
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
@@ -217,7 +230,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         import numpy as np
         from simtk import unit
         molecule = self.molecules[0]
-        molecule.partial_charges = unit.Quantity(np.random.random([molecule.n_particles], np.float32), unit.elementary_charge)
+        charges = np.random.random([molecule.n_particles])
+        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles 
+        molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
+        assert not np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        # Add the molecule
+        generator.add_molecules(molecule)
+        # Create the System
         from simtk.openmm.app import NoCutoff
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)

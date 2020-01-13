@@ -585,6 +585,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # when openforcefield makes charge quantities consistently unit-bearing or
         # pure numbers.
         _logger.debug(f'Fixing partial charges...')
+        _logger.debug(f'{molecule.partial_charges}')
         from simtk import unit
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
@@ -593,6 +594,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         if sum_of_absolute_charge / unit.elementary_charge > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
+        _logger.debug(f'{molecule.partial_charges}')
 
         # Generate additional parameters if needed
         # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
