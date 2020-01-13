@@ -195,6 +195,34 @@ class SmallMoleculeTemplateGenerator(object):
 
         return matches
 
+    def _molecule_has_user_charges(self, molecule):
+        """
+        Return True if molecule has user charges, False if otherwise.
+
+        This method checks to see if all charges are approximately zero.
+
+        Parameters
+        ----------
+        molecule : openforcefield.topology.Molecule
+            The Molecule object to check for user charges
+
+        Returns
+        -------
+        result : bool
+            True if molecule charges are all (close to) zero, False otherwise
+
+        .. todo ::
+
+           Replace this with an API call to Molecule once added:
+           https://github.com/openforcefield/openforcefield/issues/488
+
+        """
+        import numpy as np
+        from simtk import unit
+        zeros = np.zeros([molecule.n_particles])
+        charges_are_zero = np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)
+        return not charges_are_zero
+
     def _generate_unique_atom_names(self, molecule):
         """
         Generate unique atom names
@@ -542,14 +570,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charges if required
-        # TODO: Replace this with a call to Molecule API once we have a way to check for user-specified charges
-        import numpy as np
-        from simtk import unit
-        if np.all(molecule.partial_charges / unit.elementary_charge == 0):
+        if self._molecule_has_user_charges(molecule):
+            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+        else:
             _logger.debug(f'Computing AM1-BCC charges...')
             molecule.compute_partial_charges_am1bcc()
-        else:
-            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
 
         # Geneate a single conformation
         _logger.debug(f'Generating a conformer...')
@@ -1074,11 +1099,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._generate_unique_atom_names(molecule)
 
         # Determine which molecules (if any) contain user-specified partial charges that should be used
-        # TODO: Replace this with a call to Molecule API once we have a way to check for user-specified charges
-        import numpy as np
-        from simtk import unit
         charge_from_molecules = None
-        if np.all(molecule.partial_charges / unit.elementary_charge == 0):
+        if self._molecule_has_user_charges(molecule):
             charge_from_molecules = [molecule]
             _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
 

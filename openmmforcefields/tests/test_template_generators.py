@@ -214,7 +214,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         # Ensure charges are no longer zero
-        assert not np.all(self.charges_from_system(system) == 0)
+        assert not np.all(self.charges_from_system(system) == 0), "System has zero charges despite molecule not being charged"
 
     def test_charge_from_molecules(self):
         """Test that user-specified partial charges are used if requested"""
@@ -231,7 +231,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         from simtk import unit
         molecule = self.molecules[0]
         charges = np.random.random([molecule.n_particles])
-        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles 
+        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles
         molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
         assert not np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
