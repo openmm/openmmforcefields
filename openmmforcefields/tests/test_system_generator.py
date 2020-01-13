@@ -168,11 +168,35 @@ class TestSystemGenerator(unittest.TestCase):
                     cache=cache, small_molecule_forcefield=small_molecule_forcefield)
                 del generator
 
+    def test_forcefield_kwargs(self):
+        """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
+        from simtk import unit
+        forcefield_kwargs = { 'hydrogenMass' : 4*unit.amu }
+        from openmmforcefields.generators import SystemGenerator
+
+        for name, testsystem in self.testsystems.items():
+            print(testsystem)
+            molecules = testsystem['molecules']
+
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
+                # Create a SystemGenerator for this force field
+                from simtk.openmm.app import LJPME, CutoffNonPeriodic
+                generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                                small_molecule_forcefield=small_molecule_forcefield,
+                                                forcefield_kwargs=forcefield_kwargs,
+                                                periodic_nonbonded_method=LJPME,
+                                                nonperiodic_nonbonded_method=CutoffNonPeriodic,
+                                                molecules=molecules)
+
+                # Parameterize molecules
+                from openmmforcefields.utils import Timer
+                for molecule in molecules:
+                    openmm_topology = molecule.to_topology().to_openmm()
+                    system = generator.create_system(openmm_topology)
+
     def test_parameterize_molecules_from_creation(self):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
         from openmmforcefields.generators import SystemGenerator
-        from simtk.openmm.app import NoCutoff
-        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
 
         for name, testsystem in self.testsystems.items():
             print(testsystem)
@@ -182,7 +206,6 @@ class TestSystemGenerator(unittest.TestCase):
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs,
                                                 molecules=molecules)
 
                 # Parameterize molecules
@@ -201,8 +224,6 @@ class TestSystemGenerator(unittest.TestCase):
     def test_parameterize_molecules_specified_during_create_system(self):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
         from openmmforcefields.generators import SystemGenerator
-        from simtk.openmm.app import NoCutoff
-        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
 
         for name, testsystem in self.testsystems.items():
             molecules = testsystem['molecules']
@@ -210,8 +231,7 @@ class TestSystemGenerator(unittest.TestCase):
             for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs)
+                                                small_molecule_forcefield=small_molecule_forcefield)
 
                 # Parameterize molecules
                 from openmmforcefields.utils import Timer
@@ -223,14 +243,11 @@ class TestSystemGenerator(unittest.TestCase):
     def test_add_molecules(self):
         """Test that Molecules can be added to SystemGenerator later"""
         from openmmforcefields.generators import SystemGenerator
-        from simtk.openmm.app import NoCutoff
-        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
 
         for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
             # Create a SystemGenerator for this force field
             generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                            small_molecule_forcefield=small_molecule_forcefield,
-                                            forcefield_kwargs=forcefield_kwargs)
+                                            small_molecule_forcefield=small_molecule_forcefield)
 
             # Add molecules for each test system separately
             for name, testsystem in self.testsystems.items():
@@ -254,9 +271,7 @@ class TestSystemGenerator(unittest.TestCase):
     def test_cache(self):
         """Test that SystemGenerator correctly manages a cache"""
         from openmmforcefields.generators import SystemGenerator
-        from simtk.openmm.app import NoCutoff
         from openmmforcefields.utils import Timer
-        forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
 
         timing = dict() # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
         with tempfile.TemporaryDirectory() as tmpdirname:
@@ -267,8 +282,6 @@ class TestSystemGenerator(unittest.TestCase):
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs,
-                                                molecules=molecules,
                                                 cache=cache)
                 # Add molecules for each test system separately
                 for name, testsystem in self.testsystems.items():
@@ -291,7 +304,6 @@ class TestSystemGenerator(unittest.TestCase):
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs,
                                                 molecules=molecules,
                                                 cache=cache)
                 # Add molecules for each test system separately
@@ -323,17 +335,10 @@ class TestSystemGenerator(unittest.TestCase):
             cache = os.path.join(get_data_filename(os.path.join('perses_jacs_systems', name)), 'cache.json')
 
             # Create a system in vacuum
-            from simtk.openmm.app import NoCutoff
-            forcefield_kwargs = { 'nonbondedMethod' : NoCutoff }
             generator = SystemGenerator(forcefields=self.amber_forcefields,
-                forcefield_kwargs=forcefield_kwargs,
                 molecules=molecules, cache=cache)
             system = generator.create_system(openmm_topology)
             assert system.getNumParticles() == len(complex_structure.atoms)
-
-            # Update SystemGenerator to build periodic systems
-            from simtk.openmm.app import PME
-            generator.forcefield_kwargs = { 'nonbondedMethod' : PME }
 
             # Create solvated structure
             from simtk.openmm import app

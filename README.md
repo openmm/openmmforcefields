@@ -261,10 +261,11 @@ See the corresponding directories for information on how to use the provided con
 
 ## 0.6.1 Updated README and minor bugfixes
 
-* Fix examples in the README
+* Fix examples in the `README.md`
 * Fix `GAFFTemplateGenerator.gaff_major_version`
 * Fix incorrect default SMIRNOFF force field, which is now `openff-1.0.0` (was previously `smirnoff99Frosst-1.1.0`)
 * Add `SystemGenerator.SMALL_MOLECULE_FORCEFIELDS` convenience property to list available small molecule force fields
+* `SystemGenerator` API changed to support both periodic and non-periodic `Topology` objects for the same generator
 
 ## 0.6.0 Updated AMBER force fields (AmberTools 19.9) and small molecule support via GAFF
 
