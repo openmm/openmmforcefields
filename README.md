@@ -221,8 +221,7 @@ Here's an example that uses GAFF 2.11 along with the new `ff14SB` generation of 
 # Define the keyword arguments to feed to ForceField
 from simtk import unit
 from simtk.openmm import app
-forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False,
-                      'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
+forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False, 'hydrogenMass' : 4*unit.amu }
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
 system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
@@ -233,6 +232,13 @@ system = system_generator.create_system(openmm_topology, molecules=molecules)
 ```
 Parameterized molecules are cached in `db.json`.
 Parameters for multiple force fields can be held in the same cache file.
+
+By default, `SystemGenerator` will use `PME` for periodic systems and `NoCutoff` for non-periodic systems.
+You can modify this behavior with the optional `periodic_nonbonded_method` and `nonperiodic_nonbonded_method` arguments:
+```python
+from simtk.openmm import app
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], periodic_nonbonded_method=app.LJPME, nonperiodic_nonbonded_method=app.CutoffNonPeriodic)
+```
 
 To use the [Open Force Field `openff-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.0.0'`.
 
