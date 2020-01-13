@@ -221,8 +221,7 @@ Here's an example that uses GAFF 2.11 along with the new `ff14SB` generation of 
 # Define the keyword arguments to feed to ForceField
 from simtk import unit
 from simtk.openmm import app
-forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False,
-                      'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
+forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False, 'hydrogenMass' : 4*unit.amu }
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
 system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
@@ -234,13 +233,22 @@ system = system_generator.create_system(openmm_topology, molecules=molecules)
 Parameterized molecules are cached in `db.json`.
 Parameters for multiple force fields can be held in the same cache file.
 
+By default, `SystemGenerator` will use `PME` for periodic systems and `NoCutoff` for non-periodic systems.
+You can modify this behavior with the optional `periodic_forcefield_kwargs` and `nonperiodic_forcefield_kwargs` arguments, which are used to update `forcefield_kwargs` depending on whether the system is periodic or non-periodic:
+```python
+from simtk.openmm import app
+system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'],
+    periodic_forcefield_kwargs={'nonbondedMethod' : app.LJPME},
+    nonperiodic_forcefield_kwargs={'nonbondedMethod' : app.CutoffNonPeriodic})
+```
+
 To use the [Open Force Field `openff-1.0.0` ("Parsley") force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.0.0'`.
 
 # Frequently Asked Questions (FAQ)
 
 **Q:** What is the minimum version of OpenMM required to use this package?
 <br>
-**A:** You need at least OpenMM 7.4.1 to use the `openmm-forcefields` package.
+**A:** You need at least OpenMM 7.5.0 to use the `openmm-forcefields` package.
 
 **Q:** Do you support the new [Amber ff19SB protein force field](https://chemrxiv.org/articles/ff19SB_Amino-Acid_Specific_Protein_Backbone_Parameters_Trained_Against_Quantum_Mechanics_Energy_Surfaces_in_Solution/8279681/1)?
 <br>
@@ -261,10 +269,11 @@ See the corresponding directories for information on how to use the provided con
 
 ## 0.6.1 Updated README and minor bugfixes
 
-* Fix examples in the README
+* Fix examples in the `README.md`
 * Fix `GAFFTemplateGenerator.gaff_major_version`
 * Fix incorrect default SMIRNOFF force field, which is now `openff-1.0.0` (was previously `smirnoff99Frosst-1.1.0`)
 * Add `SystemGenerator.SMALL_MOLECULE_FORCEFIELDS` convenience property to list available small molecule force fields
+* `SystemGenerator` API changed to support both periodic and non-periodic `Topology` objects for the same generator
 
 ## 0.6.0 Updated AMBER force fields (AmberTools 19.9) and small molecule support via GAFF
 

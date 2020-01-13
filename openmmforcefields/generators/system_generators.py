@@ -10,6 +10,8 @@ System generators that build an OpenMM System object from a Topology object.
 import logging
 _logger = logging.getLogger("perses.forcefields.system_generators")
 
+from simtk.openmm import app
+
 ################################################################################
 # System generator base class
 ################################################################################
@@ -53,7 +55,7 @@ class SystemGenerator(object):
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
+    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -73,6 +75,10 @@ class SystemGenerator(object):
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``simtk.openmm.app.ForceField.createSystem()`` during ``System`` object creation.
+        nonperiodic_forcefield_kwargs : dict, optional, default={'nonbondedMethod' : NoCutoff}
+            Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.
+        periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
+            Keyword arguments added to forcefield_kwargs when the Topology is periodic.
         barostat : simtk.openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
@@ -104,8 +110,7 @@ class SystemGenerator(object):
         >>> from openmmforcefields.generators import SystemGenerator
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> small_molecule_forcefield = 'gaff-2.11'
-        >>> forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False,
-        ... 'nonbondedMethod' : app.PME, 'hydrogenMass' : 4*unit.amu }
+        >>> forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCMMotion' : False, 'hydrogenMass' : 4*unit.amu }
         >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
 
         If the ``cache`` argument is specified, parameterized molecules are cached in the corresponding file.
@@ -162,6 +167,8 @@ class SystemGenerator(object):
 
         # Cache force fields and settings to use
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
+        self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.NoCutoff}
+        self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.PME}
 
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
@@ -288,8 +295,16 @@ class SystemGenerator(object):
         if (self.template_generator is not None) and (molecules is not None):
             self.template_generator.add_molecules(molecules)
 
+        # Build the kwargs to use
+        import copy
+        forcefield_kwargs = copy.deepcopy(self.forcefield_kwargs)
+        if topology.getPeriodicBoxVectors() is None:
+            forcefield_kwargs.update(self.nonperiodic_forcefield_kwargs)
+        else:
+            forcefield_kwargs.update(self.periodic_forcefield_kwargs)
+
         # Build the System
-        system = self.forcefield.createSystem(topology, **self.forcefield_kwargs)
+        system = self.forcefield.createSystem(topology, **forcefield_kwargs)
 
         # Modify other forces as requested
         self._modify_forces(system)
