@@ -275,6 +275,7 @@ See the corresponding directories for information on how to use the provided con
 ## 0.7.0 User-specified partial charges, SystemGenerator support for periodic and non-periodic topologies, and minor bugfixes
 
 * If `Molecule` objects contain nonzero partial charges, these are used instead of generating new partial charges
+* Fix bug in default `periodic_forcefield_kwargs` and `nonperiodic_forcefield_kwargs`
 
 ## 0.6.1 Updated README and minor bugfixes
 

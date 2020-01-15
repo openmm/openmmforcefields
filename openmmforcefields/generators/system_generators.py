@@ -167,8 +167,8 @@ class SystemGenerator(object):
 
         # Cache force fields and settings to use
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
-        self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.NoCutoff}
-        self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedCutoff' : app.PME}
+        self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.NoCutoff}
+        self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
 
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
