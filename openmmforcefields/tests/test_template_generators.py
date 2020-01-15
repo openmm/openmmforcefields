@@ -7,6 +7,9 @@ from openmmforcefields.utils import get_data_filename
 from openmmforcefields.generators import GAFFTemplateGenerator
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 
+import logging
+_logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
+
 ################################################################################
 # Tests
 ################################################################################
@@ -131,6 +134,113 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             openmm_topology = molecule.to_topology().to_openmm()
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
+
+    def charges_from_system(self, system):
+        """Extract dimensionless partial charges from a System
+
+        Parameters
+        ----------
+        system : simtk.openmm.System
+            The System from which partial charges are to be extracted
+
+        Returns
+        -------
+        charges : np.array of shape [n_particles]
+            The dimensionless partial charges (implicitly in units of elementary_charge)
+
+        """
+        import numpy as np
+        from simtk import unit
+        system_charges = list()
+        forces = { force.__class__.__name__ : force for force in system.getForces() }
+        for particle_index in range(system.getNumParticles()):
+            charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
+            system_charges.append(charge / unit.elementary_charge)
+        system_charges = np.array(system_charges)
+
+        return system_charges
+
+    def charges_are_equal(self, system, molecule):
+        """Return True if partial charges are equal
+
+        Parameters
+        ----------
+        system : simtk.openmm.System
+            The System from which partial charges are to be extracted
+        molecule : openmmforcefield.topology.Molecule
+            The Molecule from which partial charges are to be extracted
+
+        Returns
+        -------
+        result : bool
+            True if the partial charges are equal, False if not
+        """
+        assert system.getNumParticles() == molecule.n_particles
+
+        system_charges = self.charges_from_system(system)
+
+        from simtk import unit
+        molecule_charges = molecule.partial_charges / unit.elementary_charge
+
+        import numpy as np
+        result = np.allclose(system_charges, molecule_charges)
+        if not result:
+            _logger.debug('Charges are not equal')
+            _logger.debug(f'system charges  : {system_charges}')
+            _logger.debug(f'molecule charges: {molecule_charges}')
+
+        return result
+
+    def test_charge(self):
+        """Test that charges are nonzero after charging if the molecule does not contain user charges"""
+        # Create a generator that does not know about any molecules
+        generator = self.TEMPLATE_GENERATOR()
+        # Create a ForceField
+        from simtk.openmm.app import ForceField
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+
+        # Check that parameterizing a molecule using user-provided charges produces expected charges
+        import numpy as np
+        from simtk import unit
+        molecule = self.molecules[0]
+        # Ensure partial charges are initially zero
+        assert np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        # Add the molecule
+        generator.add_molecules(molecule)
+        # Create the System
+        from simtk.openmm.app import NoCutoff
+        openmm_topology = molecule.to_topology().to_openmm()
+        system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+        # Ensure charges are no longer zero
+        assert not np.all(self.charges_from_system(system) == 0), "System has zero charges despite molecule not being charged"
+
+    def test_charge_from_molecules(self):
+        """Test that user-specified partial charges are used if requested"""
+        # Create a generator that does not know about any molecules
+        generator = self.TEMPLATE_GENERATOR()
+        # Create a ForceField
+        from simtk.openmm.app import ForceField
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+
+        # Check that parameterizing a molecule using user-provided charges produces expected charges
+        import numpy as np
+        from simtk import unit
+        molecule = self.molecules[0]
+        charges = np.random.random([molecule.n_particles])
+        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles
+        molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
+        assert not np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        # Add the molecule
+        generator.add_molecules(molecule)
+        # Create the System
+        from simtk.openmm.app import NoCutoff
+        openmm_topology = molecule.to_topology().to_openmm()
+        system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+        assert self.charges_are_equal(system, molecule)
 
     def test_debug_ffxml(self):
         """Test that debug ffxml file is created when requested"""

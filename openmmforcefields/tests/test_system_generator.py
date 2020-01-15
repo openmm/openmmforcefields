@@ -168,6 +168,43 @@ class TestSystemGenerator(unittest.TestCase):
                     cache=cache, small_molecule_forcefield=small_molecule_forcefield)
                 del generator
 
+    def test_forcefield_default_kwargs(self):
+        """Test that default forcefield kwargs work correctly"""
+        from simtk import unit
+        forcefield_kwargs = dict()
+        from openmmforcefields.generators import SystemGenerator
+
+        for name, testsystem in self.testsystems.items():
+            print(testsystem)
+            molecules = testsystem['molecules']
+
+            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
+                # Create a SystemGenerator for this force field
+                from simtk import openmm
+                from simtk.openmm import app
+                generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                                small_molecule_forcefield=small_molecule_forcefield,
+                                                forcefield_kwargs=forcefield_kwargs,
+                                                molecules=molecules)
+
+                # Parameterize molecules
+                for molecule in molecules:
+                    # Create non-periodic Topology
+                    nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
+                    system = generator.create_system(nonperiodic_openmm_topology)
+                    forces = { force.__class__.__name__ : force for force in system.getForces() }
+                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+
+                    # Create periodic Topology
+                    import numpy as np
+                    import copy
+                    box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
+                    periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
+                    periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
+                    system = generator.create_system(periodic_openmm_topology)
+                    forces = { force.__class__.__name__ : force for force in system.getForces() }
+                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.PME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+
     def test_forcefield_kwargs(self):
         """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
         from simtk import unit

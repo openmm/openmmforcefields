@@ -195,6 +195,34 @@ class SmallMoleculeTemplateGenerator(object):
 
         return matches
 
+    def _molecule_has_user_charges(self, molecule):
+        """
+        Return True if molecule has user charges, False if otherwise.
+
+        This method checks to see if all charges are approximately zero.
+
+        Parameters
+        ----------
+        molecule : openforcefield.topology.Molecule
+            The Molecule object to check for user charges
+
+        Returns
+        -------
+        result : bool
+            True if molecule charges are all (close to) zero, False otherwise
+
+        .. todo ::
+
+           Replace this with an API call to Molecule once added:
+           https://github.com/openforcefield/openforcefield/issues/488
+
+        """
+        import numpy as np
+        from simtk import unit
+        zeros = np.zeros([molecule.n_particles])
+        charges_are_zero = np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)
+        return not charges_are_zero
+
     def _generate_unique_atom_names(self, molecule):
         """
         Generate unique atom names
@@ -541,9 +569,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         net_charge = molecule.total_charge
         _logger.debug(f'Total charge is {net_charge}')
 
-        # Compute partial charge
-        _logger.debug(f'Computing AM1-BCC charges...')
-        molecule.compute_partial_charges_am1bcc()
+        # Compute partial charges if required
+        if self._molecule_has_user_charges(molecule):
+            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+        else:
+            _logger.debug(f'Computing AM1-BCC charges...')
+            molecule.compute_partial_charges_am1bcc()
 
         # Geneate a single conformation
         _logger.debug(f'Generating a conformer...')
@@ -579,6 +610,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # when openforcefield makes charge quantities consistently unit-bearing or
         # pure numbers.
         _logger.debug(f'Fixing partial charges...')
+        _logger.debug(f'{molecule.partial_charges}')
         from simtk import unit
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
@@ -587,6 +619,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         if sum_of_absolute_charge / unit.elementary_charge > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
+        _logger.debug(f'{molecule.partial_charges}')
 
         # Generate additional parameters if needed
         # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
@@ -1065,9 +1098,15 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
 
+        # Determine which molecules (if any) contain user-specified partial charges that should be used
+        charge_from_molecules = list()
+        if self._molecule_has_user_charges(molecule):
+            charge_from_molecules = [molecule]
+            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+
         # Parameterize molecule
         _logger.debug(f'Generating parameters...')
-        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology())
+        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology(), charge_from_molecules=charge_from_molecules)
 
         # Transiently cache a copy of the OpenMM System object generated for testing/verification purposes
         self._system_cache[smiles] = system
