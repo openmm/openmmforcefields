@@ -275,6 +275,7 @@ See the corresponding directories for information on how to use the provided con
 ## 0.7.1 Bugfix release: Fix GAFF AM1-BCC charging bug for some molecules
 
 * When using the OpenEye toolkit, some molecules failed to charge with GAFF. See https://github.com/openforcefield/openforcefield/issues/492
+* Updating perses_jacs_systems with inputs used in AMBER-TI publication, https://pubs.acs.org/doi/10.1021/acs.jcim.9b00105
 
 ## 0.7.0 User-specified partial charges, SystemGenerator support for periodic and non-periodic topologies, and minor bugfixes
 

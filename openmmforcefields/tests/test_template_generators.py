@@ -362,13 +362,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of ligands"""
         from simtk.openmm.app import ForceField, NoCutoff
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' },
+            #'bace'     : { 'prefix' : 'Bace' },
             #'cdk2'     : { 'prefix' : 'CDK2' },
-            #'jnk1'     : { 'prefix' : 'Jnk1' },
+            'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },
             #'p38'      : { 'prefix' : 'p38' },
-            #'ptp1b'    : { 'prefix' : 'PTP1B' },
-            #'thrombin' : { 'prefix' : 'Thrombin' },
+            'ptp1b'    : { 'prefix' : 'PTP1B' },
+            'thrombin' : { 'prefix' : 'Thrombin' },
             #'tyk2'     : { 'prefix' : 'Tyk2' },
         }
         for system_name in jacs_systems:
