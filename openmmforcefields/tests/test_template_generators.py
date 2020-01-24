@@ -419,7 +419,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
         # TODO: Uncomment working systems when we have cleaned up the input files
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' },
+            #'bace'     : { 'prefix' : 'Bace' },
             #'cdk2'     : { 'prefix' : 'CDK2' },
             #'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },

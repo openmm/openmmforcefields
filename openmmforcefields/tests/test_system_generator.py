@@ -49,8 +49,8 @@ class TestSystemGenerator(unittest.TestCase):
             # TODO: Uncomment these after we fix input files
             #('bace', 'Bace'),
             #('cdk1', 'CDK2'),
-            ('jnk1', 'Jnk1'),
-            #('mcl1', 'MCL1'),
+            #('jnk1', 'Jnk1'),
+            ('mcl1', 'MCL1'),
             #('p38', 'p38'),
             #('ptp1b', 'PTP1B'),
             #('thrombin', 'Thrombin'),
