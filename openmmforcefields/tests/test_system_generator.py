@@ -354,7 +354,6 @@ class TestSystemGenerator(unittest.TestCase):
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
-                                                molecules=molecules,
                                                 cache=cache)
                 # Add molecules for each test system separately
                 for name, testsystem in self.testsystems.items():
