@@ -444,7 +444,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             # Read ParmEd Structures
             import parmed
             from simtk import unit
-            protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
             from simtk.openmm.app import PDBFile
             print(f'Reading protein from {protein_pdb_filename} ...')
             #protein_structure = parmed.load_file(protein_pdb_filename) # NOTE: This mis-interprets distorted geometry and sequentially-numbered residues that span chain breaks

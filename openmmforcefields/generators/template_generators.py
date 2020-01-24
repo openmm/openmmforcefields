@@ -277,7 +277,7 @@ class SmallMoleculeTemplateGenerator(object):
 
                     # See if the template matches
                     from openforcefield.topology import Molecule
-                    molecule_template = Molecule.from_smiles(entry['smiles'])
+                    molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
                     print(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
                         ffxml_contents = entry['ffxml']
