@@ -362,13 +362,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of ligands"""
         from simtk.openmm.app import ForceField, NoCutoff
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' },
+            #'bace'     : { 'prefix' : 'Bace' },
             #'cdk2'     : { 'prefix' : 'CDK2' },
-            #'jnk1'     : { 'prefix' : 'Jnk1' },
+            'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },
             #'p38'      : { 'prefix' : 'p38' },
-            #'ptp1b'    : { 'prefix' : 'PTP1B' },
-            #'thrombin' : { 'prefix' : 'Thrombin' },
+            'ptp1b'    : { 'prefix' : 'PTP1B' },
+            'thrombin' : { 'prefix' : 'Thrombin' },
             #'tyk2'     : { 'prefix' : 'Tyk2' },
         }
         for system_name in jacs_systems:
@@ -419,7 +419,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
         # TODO: Uncomment working systems when we have cleaned up the input files
         jacs_systems = {
-            'bace'     : { 'prefix' : 'Bace' },
+            #'bace'     : { 'prefix' : 'Bace' },
             #'cdk2'     : { 'prefix' : 'CDK2' },
             #'jnk1'     : { 'prefix' : 'Jnk1' },
             'mcl1'     : { 'prefix' : 'MCL1' },
@@ -444,7 +444,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             # Read ParmEd Structures
             import parmed
             from simtk import unit
-            protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
             from simtk.openmm.app import PDBFile
             print(f'Reading protein from {protein_pdb_filename} ...')
             #protein_structure = parmed.load_file(protein_pdb_filename) # NOTE: This mis-interprets distorted geometry and sequentially-numbered residues that span chain breaks

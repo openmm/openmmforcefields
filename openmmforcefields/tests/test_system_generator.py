@@ -49,8 +49,8 @@ class TestSystemGenerator(unittest.TestCase):
             # TODO: Uncomment these after we fix input files
             #('bace', 'Bace'),
             #('cdk1', 'CDK2'),
-            ('jnk1', 'Jnk1'),
-            #('mcl1', 'MCL1'),
+            #('jnk1', 'Jnk1'),
+            ('mcl1', 'MCL1'),
             #('p38', 'p38'),
             #('ptp1b', 'PTP1B'),
             #('thrombin', 'Thrombin'),
@@ -58,7 +58,7 @@ class TestSystemGenerator(unittest.TestCase):
         ]:
             # Load protein
             from simtk.openmm.app import PDBFile
-            pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein_fixed.pdb'))
+            pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
             pdbfile = PDBFile(pdb_filename)
 
             # Load molecules
@@ -76,7 +76,10 @@ class TestSystemGenerator(unittest.TestCase):
 
             # Create structures
             import parmed
-            protein_structure = parmed.load_file(pdb_filename)
+            # NOTE: This does not work because parmed does not correctly assign bonds for HID
+            # protein_structure = parmed.load_file(pdb_filename)
+            # NOTE: This is the workaround
+            protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
             molecules_structure = parmed.load_file(sdf_filename)
             complex_structures = [ (protein_structure + molecules_structure[index]) for index in range(n_molecules) ]
 
@@ -121,7 +124,7 @@ class TestSystemGenerator(unittest.TestCase):
         # Load a PDB file
         import os
         from simtk.openmm.app import PDBFile
-        pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', 'bace', 'Bace_protein_fixed.pdb'))
+        pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', 'mcl1', 'MCL1_protein.pdb'))
         pdbfile = PDBFile(pdb_filename)
 
         # Delete hydrogens from terminal protein residues
@@ -354,7 +357,6 @@ class TestSystemGenerator(unittest.TestCase):
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
-                                                molecules=molecules,
                                                 cache=cache)
                 # Add molecules for each test system separately
                 for name, testsystem in self.testsystems.items():
