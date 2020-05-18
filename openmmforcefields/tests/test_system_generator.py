@@ -71,7 +71,7 @@ class TestSystemGenerator(unittest.TestCase):
             n_molecules = len(molecules)
 
             # Limit number of molecules for testing
-            MAX_MOLECULES = 8
+            MAX_MOLECULES = 3
             if (n_molecules > MAX_MOLECULES):
                 print(f'Limiting to {MAX_MOLECULES} for testing...')
                 n_molecules = MAX_MOLECULES
@@ -326,6 +326,7 @@ class TestSystemGenerator(unittest.TestCase):
             # Add molecules for each test system separately
             for name, testsystem in self.testsystems.items():
                 molecules = testsystem['molecules']
+
                 # Add molecules
                 generator.add_molecules(molecules)
 
