@@ -278,7 +278,7 @@ class SmallMoleculeTemplateGenerator(object):
                     # See if the template matches
                     from openforcefield.topology import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
-                    print(f"Checking against {entry['smiles']}")
+                    _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
                         ffxml_contents = entry['ffxml']
 
@@ -994,7 +994,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 filename += '.offxml'
             self._smirnoff_forcefield = openforcefield.typing.engines.smirnoff.ForceField(filename)
         except Exception as e:
-            print(e)
+            _logger.error(e)
             raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths")
 
         # Delete constraints, if present

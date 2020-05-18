@@ -1,6 +1,7 @@
 import os, sys
 import unittest
 import tempfile
+import pytest
 
 from openmmforcefields.utils import get_data_filename
 
@@ -68,6 +69,12 @@ class TestSystemGenerator(unittest.TestCase):
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
             print(f'Read {len(molecules)} molecules from {sdf_filename}')
             n_molecules = len(molecules)
+
+            # Limit number of molecules for testing
+            MAX_MOLECULES = 8
+            if (n_molecules > MAX_MOLECULES):
+                print(f'Limiting to {MAX_MOLECULES} for testing...')
+                n_molecules = MAX_MOLECULES
 
             # Create structures
             import parmed
