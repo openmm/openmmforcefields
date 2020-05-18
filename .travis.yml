@@ -56,9 +56,10 @@ install:
 script:
     # Test installed package
   #- pytest -v --cov=openmmforcefields openmmforcefields/tests
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+  - export LOGLEVEL="WARNING"
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
 
     # Store current working directory
   - export WORK=`pwd`

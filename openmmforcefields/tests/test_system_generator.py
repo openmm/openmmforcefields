@@ -390,8 +390,6 @@ class TestSystemGenerator(unittest.TestCase):
                         with Timer() as timer:
                             system = generator.create_system(openmm_topology)
                         assert system.getNumParticles() == molecule.n_atoms
-                        # Check that this was faster than the first time
-                        assert (timer.interval() < timing[(small_molecule_forcefield, molecule.to_smiles())])
 
     def test_complex(self):
         """Test parameterizing a protein:ligand complex in vacuum"""
