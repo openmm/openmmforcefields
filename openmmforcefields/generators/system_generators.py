@@ -177,8 +177,8 @@ class SystemGenerator(object):
         self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
 
         # Raise an exception if nonbondedForce is specified in forcefield_kwargs
-        if 'nonbondedForce' in self.forcefield_kwargs:
-            raise ValueError("""nonbondedForce cannot be specified in forcefield_kwargs;
+        if 'nonbondedMethod' in self.forcefield_kwargs:
+            raise ValueError("""nonbondedMethod cannot be specified in forcefield_kwargs;
                  must be specified in either periodic_forcefield_kwargs (if it should be applied to periodic systems)
                  or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
 
