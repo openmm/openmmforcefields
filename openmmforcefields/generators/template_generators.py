@@ -560,7 +560,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles}')
+        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
@@ -1096,7 +1096,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles}')
+        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
