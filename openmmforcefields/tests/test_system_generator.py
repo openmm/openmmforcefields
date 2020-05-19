@@ -38,7 +38,7 @@ class TestSystemGenerator(unittest.TestCase):
         import os
         MAX_MOLECULES = 10
         if 'TRAVIS' in os.environ:
-            MAX_MOLECULES = 3
+            MAX_MOLECULES = 2
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
@@ -71,7 +71,9 @@ class TestSystemGenerator(unittest.TestCase):
             n_molecules = len(molecules)
 
             # Limit number of molecules for testing
-            MAX_MOLECULES = 8
+            MAX_MOLECULES = 10
+            if 'TRAVIS' in os.environ:
+                MAX_MOLECULES = 2
             if (n_molecules > MAX_MOLECULES):
                 print(f'Limiting to {MAX_MOLECULES} for testing...')
                 n_molecules = MAX_MOLECULES
