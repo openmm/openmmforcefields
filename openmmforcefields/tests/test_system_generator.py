@@ -232,6 +232,7 @@ class TestSystemGenerator(unittest.TestCase):
         # Test exception is raised
         with pytest.raises(ValueError) as excinfo:
             # Not allowed to specify nonbondedMethod in forcefield_kwargs
+            from simtk.openmm import app
             generator = SystemGenerator(forcefield_kwargs={'nonbondedMethod':app.PME})
         assert "nonbondedForce cannot be specified in forcefield_kwargs" in str(excinfo.value)
 
