@@ -48,6 +48,12 @@ class SystemGenerator(object):
     forcefield_kwargs : dict
         Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation.
         These keyword arguments can be modified at any time.
+    periodic_forcefield_kwargs : dict
+        Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation for periodic systems.
+        These keyword arguments can be modified at any time.
+    nonperiodic_forcefield_kwargs : dict
+        Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation for non-periodic systems.
+        These keyword arguments can be modified at any time.
     template_generator : openmmforcefields.generators.SmallMoleculeTemplateGenerator
         The small molecule residue template generator subclass used for small molecules.
     barostat : simtk.openmm.MonteCarloBarostat
@@ -169,6 +175,12 @@ class SystemGenerator(object):
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
         self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.NoCutoff}
         self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
+
+        # Raise an exception if nonbondedForce is specified in forcefield_kwargs
+        if 'nonbondedMethod' in self.forcefield_kwargs:
+            raise ValueError("""nonbondedMethod cannot be specified in forcefield_kwargs;
+                 must be specified in either periodic_forcefield_kwargs (if it should be applied to periodic systems)
+                 or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
 
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator

@@ -229,6 +229,7 @@ system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p
 # Create an OpenMM System from an Open Force Field toolkit Topology object
 system = system_generator.create_system(openforcefield_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of openforcefield Molecule objects
+molecules = Molecule.from_file('molecules.sdf', file_format='sdf')
 system = system_generator.create_system(openmm_topology, molecules=molecules)
 ```
 Parameterized molecules are cached in `db.json`.
@@ -267,6 +268,12 @@ See the corresponding directories for information on how to use the provided con
 * `charmm/` - CHARMM force fields and conversion tools
 
 # Changelog
+
+##
+
+## 0.7.2 Bugfix release: More error checking; OpenMM 7.4.2 minimum version requirement
+
+* Raise a `ValueError` if `SystemGenerator` receives a `nonbondedMethod` key in `forcefield_kwargs`; these should go into `periodic_forcefield_kwargs` or `nonperiodic_forcefield_kwargs`.
 
 ## 0.7.1 Bugfix release: Fix GAFF AM1-BCC charging bug for some molecules
 

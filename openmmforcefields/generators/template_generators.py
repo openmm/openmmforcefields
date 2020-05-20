@@ -278,14 +278,14 @@ class SmallMoleculeTemplateGenerator(object):
                     # See if the template matches
                     from openforcefield.topology import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
-                    print(f"Checking against {entry['smiles']}")
+                    _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
                         ffxml_contents = entry['ffxml']
 
                         # Write to debug file if requested
                         if self.debug_ffxml_filename is not None:
                             with open(self.debug_ffxml_filename, 'w') as outfile:
-                                _logger.info(f'writing ffxml to {self.debug_ffxml_filename}')
+                                _logger.debug(f'writing ffxml to {self.debug_ffxml_filename}')
                                 outfile.write(ffxml_contents)
 
                         # Add parameters and residue template for this residue
@@ -303,7 +303,7 @@ class SmallMoleculeTemplateGenerator(object):
                 # Write to debug file if requested
                 if self.debug_ffxml_filename is not None:
                     with open(self.debug_ffxml_filename, 'w') as outfile:
-                        _logger.info(f'writing ffxml to {self.debug_ffxml_filename}')
+                        _logger.debug(f'writing ffxml to {self.debug_ffxml_filename}')
                         outfile.write(ffxml_contents)
 
                 # Add the parameters and residue definition
@@ -312,7 +312,7 @@ class SmallMoleculeTemplateGenerator(object):
                 if self._cache is not None:
                     with self._open_db() as db:
                         table = db.table(self._database_table_name)
-                        _logger.info(f'Writing residue template for {smiles} to cache {self._cache}')
+                        _logger.debug(f'Writing residue template for {smiles} to cache {self._cache}')
                         record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
                         # Add the IUPAC name for convenience if we can
                         try:
@@ -560,7 +560,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles}')
+        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
@@ -846,9 +846,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             error_lines = new_error_lines
 
         if len(error_lines) > 0:
-            _logger.info("Unexpected errors encountered running AMBER tool. Offending output:")
+            _logger.warning("Unexpected errors encountered running AMBER tool. Offending output:")
             for line in error_lines:
-                _logger.info(line)
+                _logger.warning(line)
             raise(RuntimeError("Error encountered running AMBER tool. Exiting."))
 
         return
@@ -994,7 +994,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 filename += '.offxml'
             self._smirnoff_forcefield = openforcefield.typing.engines.smirnoff.ForceField(filename)
         except Exception as e:
-            print(e)
+            _logger.error(e)
             raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths")
 
         # Delete constraints, if present
@@ -1096,7 +1096,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles}')
+        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)

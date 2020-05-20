@@ -47,10 +47,6 @@ install:
     # DEBUG
   - echo "OE_LICENSE path:"
   - echo $OE_LICENSE
-    # Workaround for https://github.com/openmm/openmm/pull/2511
-    # TODO: Remove this when OpenMM builds including https://github.com/openmm/openmm/pull/2511 are released
-  - echo "Overwriting OpenMM forcefield.py with fix from https://github.com/openmm/openmm/pull/2511"
-  - wget -q https://raw.githubusercontent.com/openmm/openmm/4f48402f1be3e0f049ae0e8595db638d297b0d75/wrappers/python/simtk/openmm/app/forcefield.py -O `python -c "from simtk.openmm.app import forcefield; print(forcefield.__file__)"`
     # Build and install package
     # Can't use 'develop' mode because we remove symlinks after install is complete
     #- python setup.py develop --no-deps
@@ -60,8 +56,10 @@ install:
 script:
     # Test installed package
   #- pytest -v --cov=openmmforcefields openmmforcefields/tests
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
-  - pytest -v -x -s --log-cli-level INFO --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+  - export LOGLEVEL="INFO"
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+  - pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
 
     # Store current working directory
   - export WORK=`pwd`
