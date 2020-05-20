@@ -74,6 +74,7 @@ class TestSystemGenerator(unittest.TestCase):
             if (n_molecules > MAX_MOLECULES):
                 print(f'Limiting to {MAX_MOLECULES} for testing...')
                 n_molecules = MAX_MOLECULES
+            molecules = [ molecules[index] for index in range(n_molecules) ]
 
             # Create structures
             import parmed
@@ -81,7 +82,10 @@ class TestSystemGenerator(unittest.TestCase):
             #protein_structure = parmed.load_file(pdb_filename)
             # NOTE: This is the workaround
             protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
+
             molecules_structure = parmed.load_file(sdf_filename)
+            molecules_structure = [ molecules_structure[index] for index in range(n_molecules) ]
+
             complex_structures = [ (molecules_structure[index] + protein_structure) for index in range(n_molecules) ]
             complex_structures = [ molecules_structure[index] for index in range(n_molecules) ] # DEBUG
 
