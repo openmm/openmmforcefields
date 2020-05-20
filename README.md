@@ -271,9 +271,8 @@ See the corresponding directories for information on how to use the provided con
 
 ##
 
-## 0.7.2 Bugfix release: Fix prefixes for AMBER force fields to ensure mix-and-match compatibility
+## 0.7.2 Bugfix release: More error checking; OpenMM 7.4.2 minimum version requirement
 
-* Previously, some of the AMBER biopolymer force fields were converted with prefixes appended to atom types (e.g. `protein.ff14SB.xml`) but others were not (e.g. `phosaa10.xml`), resulting in these files not being able to be used together. Prefixes have now been appended to all relevant force fields.
 * Raise a `ValueError` if `SystemGenerator` receives a `nonbondedMethod` key in `forcefield_kwargs`; these should go into `periodic_forcefield_kwargs` or `nonperiodic_forcefield_kwargs`.
 
 ## 0.7.1 Bugfix release: Fix GAFF AM1-BCC charging bug for some molecules
