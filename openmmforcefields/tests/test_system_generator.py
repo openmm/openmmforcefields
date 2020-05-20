@@ -7,6 +7,8 @@ from openmmforcefields.utils import get_data_filename
 
 from openmmforcefields.generators import SystemGenerator
 
+CI = ('TRAVIS' in os.environ)
+
 ################################################################################
 # Tests
 ################################################################################
@@ -35,10 +37,7 @@ class TestSystemGenerator(unittest.TestCase):
         MAX_ATOMS = 45
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
-        import os
-        MAX_MOLECULES = 10
-        if 'TRAVIS' in os.environ:
-            MAX_MOLECULES = 2
+        MAX_MOLECULES = 10 if not CI else 2
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
@@ -71,9 +70,7 @@ class TestSystemGenerator(unittest.TestCase):
             n_molecules = len(molecules)
 
             # Limit number of molecules for testing
-            MAX_MOLECULES = 10
-            if 'TRAVIS' in os.environ:
-                MAX_MOLECULES = 2
+            MAX_MOLECULES = 10 if not CI else 2
             if (n_molecules > MAX_MOLECULES):
                 print(f'Limiting to {MAX_MOLECULES} for testing...')
                 n_molecules = MAX_MOLECULES
@@ -171,7 +168,8 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_create_with_template_generator(self):
         """Test SystemGenerator creation with small molecule residue template generators"""
-        for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
+        forcefields = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-1.1.0']
+        for small_molecule_forcefield in forcefields:
             # Create a generator that defines AMBER and small molecule force fields
             generator = SystemGenerator(forcefields=self.amber_forcefields,
                 small_molecule_forcefield=small_molecule_forcefield)
@@ -198,7 +196,8 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
+            forcefields = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-1.1.0']
+            for small_molecule_forcefield in forcefields:
                 # Create a SystemGenerator for this force field
                 from simtk import openmm
                 from simtk.openmm import app
@@ -242,7 +241,8 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            for small_molecule_forcefield in SystemGenerator.SMALL_MOLECULE_FORCEFIELDS:
+            forcefields = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-1.1.0']
+            for small_molecule_forcefield in forcefields:
                 # Create a SystemGenerator for this force field
                 from simtk import openmm
                 from simtk.openmm import app

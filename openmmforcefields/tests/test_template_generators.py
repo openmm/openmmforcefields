@@ -10,6 +10,8 @@ from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 import logging
 _logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
 
+CI = ('TRAVIS' in os.environ)
+
 ################################################################################
 # Tests
 ################################################################################
@@ -40,9 +42,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for travis
         import os
-        MAX_MOLECULES = 10
-        if 'TRAVIS' in os.environ:
-            MAX_MOLECULES = 3
+        MAX_MOLECULES = 10 if not CI else 3
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
@@ -386,9 +386,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             print(f'Read {len(molecules)} molecules from {ligand_sdf_filename}')
             #molecules = self.filter_molecules(molecules)
-            MAX_MOLECULES = len(molecules)
-            if 'TRAVIS' in os.environ:
-                MAX_MOLECULES = 3
+            MAX_MOLECULES = len(molecules) if not CI else 3
             molecules = molecules[:MAX_MOLECULES]
             print(f'{len(molecules)} molecules remain after filtering')
 
@@ -458,10 +456,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             assert len(ligand_structures) == len(molecules)
 
             # Filter molecules
-            if 'TRAVIS' in os.environ:
-                MAX_MOLECULES = 3
-            else:
-                MAX_MOLECULES = 6
+            MAX_MOLECULES = 6 if not CI else 3
             molecules = molecules[:MAX_MOLECULES]
             ligand_structures = ligand_structures[:MAX_MOLECULES]
             print(f'{len(molecules)} molecules remain after filtering')
