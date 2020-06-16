@@ -220,7 +220,10 @@ class SmallMoleculeTemplateGenerator(object):
         import numpy as np
         from simtk import unit
         zeros = np.zeros([molecule.n_particles])
-        charges_are_zero = np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)
+        if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)):
+            charges_are_zero = True
+        else:
+            charges_are_zero = False
         return not charges_are_zero
 
     def _generate_unique_atom_names(self, molecule):
