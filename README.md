@@ -157,7 +157,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 ## Using the Open Force Field Initiative SMIRNOFF small molecule force fields
 
 The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://open-forcefield-toolkit.readthedocs.io/en/0.6.0/smirnoff.html) small molecule force fields.
-This includes the [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) small molecule force field.
+This includes the [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) small molecule force field, as well as newer versions of this force field.
 
 The `SMIRNOFFTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
@@ -269,7 +269,9 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
-##
+## 0.7.3 Bugfix release: Compatibility with openforcefield toolkit 0.7.0 and auto-detection of installed openforcefield force fields
+* [(PR #119)](https://github.com/openmm/openmmforcefields/pull/119) Handle `None` partial charges in openforcefield `Molecule` objects (needed in `openforcefield` toolkit 0.7.0)
+* [(PR #120)](https://github.com/openmm/openmmforcefields/pull/120) Auto-detect installed SMIRNOFF force fields
 
 ## 0.7.2 Bugfix release: More error checking; OpenMM 7.4.2 minimum version requirement
 

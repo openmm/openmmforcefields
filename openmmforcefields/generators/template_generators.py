@@ -860,6 +860,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 # Open Force Field Initiative SMIRNOFF specific OpenMM ForceField template generation utilities
 ################################################################################
 
+class ClassProperty(property):
+    def __get__(self, cls, owner):
+        return self.fget.__get__(None, owner)()
+
 class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     OpenMM ForceField residue template generator for Open Force Field Initiative SMIRNOFF
@@ -910,9 +914,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    # TODO: Automatically populate this at import by examining plugin directories in order of semantic version
-    INSTALLED_FORCEFIELDS = ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
-
     def __init__(self, molecules=None, cache=None, forcefield=None):
         """
         Create a SMIRNOFFTemplateGenerator with some openforcefield toolkit molecules
@@ -1011,6 +1012,41 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self._system_cache = dict()
 
+    @ClassProperty
+    @classmethod
+    def INSTALLED_FORCEFIELDS(cls):
+        """Return a list of the offxml files shipped with the openforcefield package.
+
+        Returns
+        -------
+        file_names : str
+           The file names of available force fields
+
+        .. todo ::
+
+           Replace this with an API call once this issue is addressed:
+           https://github.com/openforcefield/openforcefield/issues/477
+
+        """
+        # TODO: Replace this method once there is a public API in the openforcefield toolkit for doing this
+        # TODO: Impose some sort of ordering by preference?
+
+        from openforcefield.utils import get_data_file_path
+        from openforcefield.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
+        from glob import glob
+
+        file_names = list()
+        for dir_path in _get_installed_offxml_dir_paths():
+            file_pattern = os.path.join(dir_path, '*.offxml')
+            file_paths = [file_path for file_path in glob(file_pattern)]
+            for file_path in file_paths:
+                basename = os.path.basename(file_path)
+                root, ext = os.path.splitext(basename)
+                # Only add variants without '_unconstrained'
+                if '_unconstrained' not in root:
+                    file_names.append(root)
+        return file_names
+
     def _search_paths(self, filename):
         """Search registered openforcefield plugin directories
 
@@ -1023,6 +1059,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         -------
         fullpath : str
             Full path to identified file, or None if no file found
+
+        .. todo ::
+
+           Replace this with an API call once this issue is addressed:
+           https://github.com/openforcefield/openforcefield/issues/477
+
         """
         # TODO: Replace this method once there is a public API in the openforcefield toolkit for doing this
 
