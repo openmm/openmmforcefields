@@ -702,6 +702,12 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         return new_molecule
 
+    def test_INSTALLED_FORCEFIELDS(self):
+        """Test INSTALLED_FORCEFIELDS contains expected force fields"""
+        assert 'openff-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+        assert 'smirnoff99Frosst-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+        assert 'openff_unconstrained-1.1.0' not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+        
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""
         # DEBUG
@@ -742,7 +748,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
 
     def test_partial_charges_are_none(self):
-        """Test parameterizing a small molecule with `partial_charges=None` instead 
+        """Test parameterizing a small molecule with `partial_charges=None` instead
         of zeros (happens frequently in OFFTK>=0.7.0)"""
         from openforcefield.topology import Molecule
         molecule = Molecule.from_smiles('C=O')
@@ -763,7 +769,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             from simtk.openmm.app import NoCutoff
             openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, onbondedMethod=NoCutoff)
             smirnoff_system = generator.get_openmm_system(molecule)
-                
+
     def test_version(self):
         """Test version"""
         for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
