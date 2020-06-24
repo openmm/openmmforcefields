@@ -235,7 +235,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         if type(total_charge) is unit.Quantity:
             # Handle openforcefield >= 0.7.0
             total_charge /= unit.elementary_charge
-        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles
+        charges += (total_charge - charges.sum()) / molecule.n_particles
         molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
         assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
