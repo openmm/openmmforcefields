@@ -269,7 +269,7 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
-## 0.7.3 Bugfix release: Compatibility with openforcefield toolkit 0.7.0 and auto-detection of installed openforcefield force fields
+## 0.7.4 Bugfix release to ensure compatibility with openforcefield toolkit 0.7.0
 * [(PR #121)](https://github.com/openmm/openmmforcefields/pull/121) Add compatibility with [`openforcefield 0.7.0`](https://github.com/openforcefield/openforcefield/releases/tag/0.7.0)
 
 ## 0.7.3 Bugfix release: Compatibility with openforcefield toolkit 0.7.0 and auto-detection of installed openforcefield force fields
