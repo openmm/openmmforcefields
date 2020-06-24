@@ -27,6 +27,8 @@ conda install --yes -c conda-forge -c omnia openmmforcefields
 If you optionally have the [OpenEye Toolkits](https://www.eyesopen.com/toolkit-development) installed, `openmmforcefields` will use these to accelerate small molecule parameterization.
 Free academic licenses are available for [bona fide academic research](https://www.eyesopen.com/academic-licensing), while licenses for IP generation are available [for a fee](https://www.eyesopen.com/pricing).
 
+**Note**: You can also `pip install .` this package from source for development work. However, doing `pip install -e .` will *not* work, as the package data (forcefield files) will not be in the expected place, and won't be found.
+
 ### Patching OpenMM for SMIRNOFF torsions
 
 Until OpenMM 7.5.0 is released, if you want to use the new SMIRNOFF force fields (such as `openff-1.0.0`), you will need to patch your OpenMM installation.
