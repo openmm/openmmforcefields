@@ -206,7 +206,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         from simtk import unit
         molecule = self.molecules[0]
         # Ensure partial charges are initially zero
-        assert np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
         generator.add_molecules(molecule)
         # Create the System
@@ -233,7 +233,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         charges = np.random.random([molecule.n_particles])
         charges += (molecule.total_charge - charges.sum()) / molecule.n_particles
         molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
-        assert not np.all(molecule.partial_charges / unit.elementary_charge == 0)
+        assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
         generator.add_molecules(molecule)
         # Create the System
@@ -707,7 +707,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         assert 'openff-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
         assert 'smirnoff99Frosst-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
         assert 'openff_unconstrained-1.1.0' not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
-        
+
     def test_energies(self):
         """Test potential energies match between openforcefield and OpenMM ForceField"""
         # DEBUG
@@ -753,7 +753,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         from openforcefield.topology import Molecule
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
-        molecule._partial_charges = None
+        #molecule._partial_charges = None
+        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')
