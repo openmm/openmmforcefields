@@ -570,9 +570,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
-        if type(net_charge) == float:
+        from simtk import unit
+        if type(net_charge) != unit.Quantity:
             # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
-            net_charge *= unit.elementary_charge
+            net_charge = float(net_charge) * unit.elementary_charge
         _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charges if required
