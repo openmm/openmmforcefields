@@ -570,6 +570,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
+        if type(net_charge) == float:
+            # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
+            net_charge *= unit.elementary_charge
         _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charges if required
@@ -621,7 +624,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
         sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
-        charge_deficit = net_charge * unit.elementary_charge - total_charge
+        charge_deficit = net_charge - total_charge
         if sum_of_absolute_charge / unit.elementary_charge > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
