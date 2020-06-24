@@ -231,7 +231,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         from simtk import unit
         molecule = self.molecules[0]
         charges = np.random.random([molecule.n_particles])
-        charges += (molecule.total_charge/unit.elementary_charge - charges.sum()) / molecule.n_particles
+        total_charge = molecule.total_charge
+        if type(total_charge) is unit.Quantity:
+            # Handle openforcefield >= 0.7.0
+            total_charge /= unit.elementary_charge
+        charges += (molecule.total_charge - charges.sum()) / molecule.n_particles
         molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
         assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
