@@ -269,6 +269,9 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
+## 0.7.5 Bugfix release
+* [(PR #127)](https://github.com/openmm/openmmforcefields/pull/127) Fixes a bug where the wrong path was imported for logging; improves docstrings.
+
 ## 0.7.4 Bugfix release to ensure compatibility with openforcefield toolkit 0.7.0
 * [(PR #121)](https://github.com/openmm/openmmforcefields/pull/121) Add compatibility with [`openforcefield 0.7.0`](https://github.com/openforcefield/openforcefield/releases/tag/0.7.0)
 
