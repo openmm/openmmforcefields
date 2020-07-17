@@ -8,7 +8,7 @@ System generators that build an OpenMM System object from a Topology object.
 ################################################################################
 
 import logging
-_logger = logging.getLogger("perses.forcefields.system_generators")
+_logger = logging.getLogger("openmmforcefields.system_generators")
 
 from simtk.openmm import app
 
@@ -54,10 +54,15 @@ class SystemGenerator(object):
     nonperiodic_forcefield_kwargs : dict
         Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation for non-periodic systems.
         These keyword arguments can be modified at any time.
-    template_generator : openmmforcefields.generators.SmallMoleculeTemplateGenerator
-        The small molecule residue template generator subclass used for small molecules.
     barostat : simtk.openmm.MonteCarloBarostat
         If not None, this container holds the barostat parameters to use for newly created System objects.
+    molecules : openforcefield.topology.Molecule or list, optional, default=None
+        Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+        Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+        If specified, these molecules will be recognized and parameterized as needed.
+        The parameters will be cached in case they are encountered again the future.
+    cache : filename, optional, default=None
+        If not None, filename for caching small molecule residue templates.
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
