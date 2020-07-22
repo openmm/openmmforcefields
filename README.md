@@ -269,6 +269,9 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
+## 0.8.0 Updates for openforcefield 0.7.1 toolkit
+* [(PR #128)](https://github.com/openmm/openmmforcefields/pull/128) Update README for openff-1.2.0 and use openforcefield 0.7.1 toolkit API for identifying installed force fields
+
 ## 0.7.5 Bugfix release
 * [(PR #127)](https://github.com/openmm/openmmforcefields/pull/127) Fixes a bug where the wrong path was imported for logging; improves docstrings.
 
@@ -279,9 +282,8 @@ See the corresponding directories for information on how to use the provided con
 * [(PR #119)](https://github.com/openmm/openmmforcefields/pull/119) Handle `None` partial charges in openforcefield `Molecule` objects (needed in `openforcefield` toolkit 0.7.0)
 * [(PR #120)](https://github.com/openmm/openmmforcefields/pull/120) Auto-detect installed SMIRNOFF force fields
 
-## 0.8.0 Auto-discover installed Open Force Field Initiative force fields; OpenMM 7.4.2 minimum version requirement
+## 0.7.2 Bugfix release: More error checking; OpenMM 7.4.2 minimum version requirement
 
-* Auto-discover available installed `openforcefield` force fields.
 * Raise a `ValueError` if `SystemGenerator` receives a `nonbondedMethod` key in `forcefield_kwargs`; these should go into `periodic_forcefield_kwargs` or `nonperiodic_forcefield_kwargs`.
 
 ## 0.7.1 Bugfix release: Fix GAFF AM1-BCC charging bug for some molecules
