@@ -30,8 +30,8 @@ dependencies:
   - tinydb
 
     # openforcefield toolkit and force fields
-  - openforcefield >=0.6.0
-  - openforcefields >=1.0.0
+  - openforcefield >=0.7.1
+  - openforcefields >=1.2.0
 
     # OpenEye toolkits are only used to speed up testing; they are not required for use
   - openeye-toolkits
