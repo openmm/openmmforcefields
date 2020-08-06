@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<Forcefield name="cvff" class="2">
+  <ParticleTypes>
+    <Type tag="oz" name="oz" eq_vwd="oz" eq_bond="oz" eq_angle="oz" eq_dihedral="oz" eq_improper="oz" ref="[1]"/>
+    <Type tag="sz" name="sz" eq_vwd="sz" eq_bond="sz" eq_angle="sz" eq_dihedral="sz" eq_improper="sz" ref="[1]"/>
+    <Type tag="az" name="az" eq_vwd="az" eq_bond="az" eq_angle="az" eq_dihedral="az" eq_improper="az" ref="[1]"/>
+    <Type tag="pz" name="pz" eq_vwd="pz" eq_bond="pz" eq_angle="pz" eq_dihedral="pz" eq_improper="pz" ref="[1]"/>
+    <Type tag="ga" name="ga" eq_vwd="ga" eq_bond="ga" eq_angle="ga" eq_dihedral="ga" eq_improper="ga" ref="[1]"/>
+    <Type tag="ge" name="ge" eq_vwd="ge" eq_bond="ge" eq_angle="ge" eq_dihedral="ge" eq_improper="ge" ref="[1]"/>
+    <Type tag="tioc" name="tioc" eq_vwd="tioc" eq_bond="tioc" eq_angle="tioc" eq_dihedral="tioc" eq_improper="tioc" ref="[1]"/>
+    <Type tag="titd" name="titd" eq_vwd="titd" eq_bond="titd" eq_angle="titd" eq_dihedral="titd" eq_improper="titd" ref="[1]"/>
+    <Type tag="li+" name="li+" eq_vwd="li+" eq_bond="li+" eq_angle="li+" eq_dihedral="li+" eq_improper="li+" ref="[1]"/>
+    <Type tag="na+" name="na+" eq_vwd="na+" eq_bond="na+" eq_angle="na+" eq_dihedral="na+" eq_improper="na+" ref="[1]"/>
+    <Type tag="k+" name="k+" eq_vwd="k+" eq_bond="k+" eq_angle="k+" eq_dihedral="k+" eq_improper="k+" ref="[1]"/>
+    <Type tag="rb+" name="rb+" eq_vwd="rb+" eq_bond="rb+" eq_angle="rb+" eq_dihedral="rb+" eq_improper="rb+" ref="[1]"/>
+    <Type tag="cs+" name="cs+" eq_vwd="cs+" eq_bond="cs+" eq_angle="cs+" eq_dihedral="cs+" eq_improper="cs+" ref="[1]"/>
+    <Type tag="mg2+" name="mg2+" eq_vwd="mg2+" eq_bond="mg2+" eq_angle="mg2+" eq_dihedral="mg2+" eq_improper="mg2+" ref="[1]"/>
+    <Type tag="ca2+" name="ca2+" eq_vwd="ca2+" eq_bond="ca2+" eq_angle="ca2+" eq_dihedral="ca2+" eq_improper="ca2+" ref="[1]"/>
+    <Type tag="ba2+" name="ba2+" eq_vwd="ba2+" eq_bond="ba2+" eq_angle="ba2+" eq_dihedral="ba2+" eq_improper="ba2+" ref="[1]"/>
+    <Type tag="cu2+" name="cu2+" eq_vwd="cu2+" eq_bond="cu2+" eq_angle="cu2+" eq_dihedral="cu2+" eq_improper="cu2+" ref="[1]"/>
+    <Type tag="cl-" name="cl-" eq_vwd="cl-" eq_bond="cl-" eq_angle="cl-" eq_dihedral="cl-" eq_improper="cl-" ref="[1]"/>
+    <Type tag="br-" name="br-" eq_vwd="br-" eq_bond="br-" eq_angle="br-" eq_dihedral="br-" eq_improper="br-" ref="[1]"/>
+    <Type tag="i-" name="i-" eq_vwd="i-" eq_bond="i-" eq_angle="i-" eq_dihedral="i-" eq_improper="i-" ref="[1]"/>
+    <Type tag="so4" name="so4" eq_vwd="so4" eq_bond="so4" eq_angle="so4" eq_dihedral="so4" eq_improper="so4" ref="[1]"/>
+  </ParticleTypes>
+  <BondTypes>
+    <Type tag="oz,oz" name="oz,oz" q1="0.0000" q2="0.0000" ref="[1]" rname="oz,oz"/>
+    <Type tag="oz,sz" name="oz,sz" q1="-0.6000" q2="0.6000" ref="[1]" rname="sz,oz"/>
+    <Type tag="oz,az" name="oz,az" q1="-0.3500" q2="0.3500" ref="[1]" rname="az,oz"/>
+    <Type tag="oz,pz" name="oz,pz" q1="-0.8500" q2="0.8500" ref="[1]" rname="pz,oz"/>
+    <Type tag="oz,ga" name="oz,ga" q1="-0.3500" q2="0.3500" ref="[1]" rname="ga,oz"/>
+    <Type tag="oz,ge" name="oz,ge" q1="-0.6000" q2="0.6000" ref="[1]" rname="ge,oz"/>
+    <Type tag="oz,tioc" name="oz,tioc" q1="-0.2667" q2="0.2667" ref="[1]" rname="tioc,oz"/>
+    <Type tag="oz,titd" name="oz,titd" q1="-0.6000" q2="0.6000" ref="[1]" rname="titd,oz"/>
+    <Type tag="oz,li+" name="oz,li+" q1="0.0000" q2="1.0000" ref="[1]" rname="li+,oz"/>
+    <Type tag="oz,na+" name="oz,na+" q1="0.0000" q2="1.0000" ref="[1]" rname="na+,oz"/>
+    <Type tag="oz,k+" name="oz,k+" q1="0.0000" q2="1.0000" ref="[1]" rname="k+,oz"/>
+    <Type tag="oz,rb+" name="oz,rb+" q1="0.0000" q2="1.0000" ref="[1]" rname="rb+,oz"/>
+    <Type tag="oz,cs+" name="oz,cs+" q1="0.0000" q2="1.0000" ref="[1]" rname="cs+,oz"/>
+    <Type tag="oz,mg2+" name="oz,mg2+" q1="0.0000" q2="2.0000" ref="[1]" rname="mg2+,oz"/>
+    <Type tag="oz,ca2+" name="oz,ca2+" q1="0.0000" q2="2.0000" ref="[1]" rname="ca2+,oz"/>
+    <Type tag="oz,ba2+" name="oz,ba2+" q1="0.0000" q2="2.0000" ref="[1]" rname="ba2+,oz"/>
+    <Type tag="oz,cu2+" name="oz,cu2+" q1="0.0000" q2="2.0000" ref="[1]" rname="cu2+,oz"/>
+    <Type tag="oz,cl-" name="oz,cl-" q1="0.0000" q2="-1.0000" ref="[1]" rname="cl-,oz"/>
+    <Type tag="oz,br-" name="oz,br-" q1="0.0000" q2="-1.0000" ref="[1]" rname="br-,oz"/>
+    <Type tag="oz,i-" name="oz,i-" q1="0.0000" q2="-1.0000" ref="[1]" rname="i-,oz"/>
+    <Type tag="oz,so4" name="oz,so4" q1="-0.7000" q2="0.7000" ref="[1]" rname="so4,oz"/>
+    <Type tag="oz,h" name="oz,h" q1="0.0000" q2="1.0000" ref="[1]" rname="h,oz"/>
+  </BondTypes>
+  <AngleTypes/>
+  <DihedralTypes/>
+  <ImproperTypes/>
+</Forcefield>

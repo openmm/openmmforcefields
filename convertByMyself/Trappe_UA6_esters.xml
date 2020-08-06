@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<Forcefield name="cvff" class="2">
+  <ParticleTypes>
+    <Type mass="15.9994" elem="O" name="Oac" tag="Oac" desc="Acid Oxygen" ref="['6', 6]" eq_vwd="Oac" eq_bond="Oac" eq_angle="Oac" eq_dihedral="Oac" eq_improper="Oac"/>
+    <Type mass="15.9994" elem="O" name="Oca" tag="Oca" desc="Ester Carbonyl Oxygen" ref="['5', 5]" eq_vwd="Oca" eq_bond="Oca" eq_angle="Oca" eq_dihedral="Oca" eq_improper="Oca"/>
+    <Type mass="15.9994" elem="O" name="Os" tag="Os" desc="Ester sp3 Oxygen" ref="['5', 5]" eq_vwd="Os" eq_bond="Os" eq_angle="Os" eq_dihedral="Os" eq_improper="Os"/>
+    <Type mass="15.9994" elem="O" name="Ok" tag="Ok" desc="Ketone Oxygen" ref="['3', 3]" eq_vwd="Ok" eq_bond="Ok" eq_angle="Ok" eq_dihedral="Ok" eq_improper="Ok"/>
+    <Type mass="12.0107" elem="C" name="Ck" tag="Ck" desc="Ketone sp2 Carbon" ref="['3', 3]" eq_vwd="Ck" eq_bond="Ck" eq_angle="Ck" eq_dihedral="Ck" eq_improper="Ck"/>
+    <Type mass="15.9994" elem="O" name="Oa" tag="Oa" desc="Aldehyde Oxygen" ref="['3', 3]" eq_vwd="Oa" eq_bond="Oa" eq_angle="Ok" eq_dihedral="Ok" eq_improper="Ok"/>
+    <Type mass="13.01864" elem="C" name="CHa" tag="CHa" desc="Aldehyde sp2 Carbon" ref="['3', 3]" eq_vwd="CHa" eq_bond="CHa" eq_angle="Ck" eq_dihedral="Ck" eq_improper="Ck"/>
+    <Type mass="1.00794" elem="H" name="H" tag="H" desc="Alcohol Hydrogen" ref="['2', 2]" eq_vwd="H" eq_bond="H" eq_angle="H" eq_dihedral="H" eq_improper="H"/>
+    <Type mass="1.00794" elem="H" name="Hac" tag="Hac" desc="Acid Hydrogen" ref="['6', 6]" eq_vwd="Hac" eq_bond="Hac" eq_angle="Hac" eq_dihedral="Hac" eq_improper="Hac"/>
+    <Type mass="15.03452" elem="C" name="CH3OH" tag="CH3OH" desc="alcohol CH3 connected to OH, also for ethers, aldehydes(adjacent to sp2 carbon)" ref="['2', 2]" eq_vwd="CH3OH" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="CH3OH"/>
+    <Type mass="16.0426" elem="C" name="CH4" tag="CH4" desc="methane" ref="['1', 1]" eq_vwd="CH4" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="C_"/>
+    <Type mass="15.03452" elem="C" name="CH3" tag="CH3" desc="alkane CH3" ref="['2', 2]" eq_vwd="CH3" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="C_"/>
+    <Type mass="14.02658" elem="C" name="CH2OH" tag="CH2OH" desc="alcohol CH2 connected to OH, also for ethers, aldehydes(adjacent to sp2 carbon)" ref="['2', 2]" eq_vwd="CH2OH" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="CH2OH"/>
+    <Type mass="12.0107" elem="C" name="Cac" tag="Cac" desc="Ester C connected to OH" ref="['5', 5]" eq_vwd="Cac" eq_bond="Cac" eq_angle="Cac" eq_dihedral="Cac" eq_improper="Cac"/>
+    <Type mass="14.02658" elem="C" name="CH2" tag="CH2" desc="alkane CH2" ref="['2', 2]" eq_vwd="CH2" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="C_"/>
+    <Type mass="13.01864" elem="C" name="CHOH" tag="CHOH" desc="alcohol CH connected to OH, also for ethers" ref="['2', 2]" eq_vwd="CHOH" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="CHOH"/>
+    <Type mass="13.01864" elem="C" name="CH" tag="CH" desc="alkane CH" ref="['2', 2]" eq_vwd="CH" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="C_"/>
+    <Type mass="12.0107" elem="C" name="COH" tag="COH" desc="alcohol C connected to OH, also for ethers" ref="['2', 2]" eq_vwd="COH" eq_bond="C_" eq_angle="C_" eq_dihedral="C_" eq_improper="COH"/>
+    <Type mass="12.0107" elem="C" name="C" tag="C" desc="alkane C" ref="['2', 2]" eq_vwd="C" eq_bond="C_" eq_angle="C_" eq_dihedral="C" eq_improper="C"/>
+    <Type mass="28.086" elem="Si" name="Siz" tag="Siz" desc="Zeolite Silicon, only nonbonds" ref="['7', 7]" eq_vwd="Siz" eq_bond="Siz" eq_angle="Siz" eq_dihedral="Siz" eq_improper="Siz"/>
+    <Type mass="15.9994" elem="O" name="Oz" tag="Oz" desc="Zeolite Oxygen, only nonbonds" ref="['7', 7]" eq_vwd="Oz" eq_bond="Oz" eq_angle="Oz" eq_dihedral="Oz" eq_improper="Oz"/>
+    <Type mass="15.9994" elem="O" name="OW" tag="OW" desc="Oxygen in Water" ref="['7', 7]" eq_vwd="OW" eq_bond="OW" eq_angle="OW" eq_dihedral="OW" eq_improper="OW"/>
+    <Type mass="1.00794" elem="H" name="HW" tag="HW" desc="Hydrogen in water" ref="['7', 7]" eq_vwd="HW" eq_bond="HW" eq_angle="HW" eq_dihedral="HW" eq_improper="HW"/>
+    <Type mass="0.0" elem="He" name="HD" tag="HD" desc="Hydrogen dummy in tip4p water" ref="['7', 7]" eq_vwd="HD" eq_bond="HD" eq_angle="HD" eq_dihedral="HD" eq_improper="HD"/>
+    <Type mass="12.011" elem="C" name="C_ar" tag="C_ar" desc="C_aromatic" ref="['4', 6]" eq_vwd="C_ar" eq_bond="C_ar" eq_angle="C_ar" eq_dihedral="C_ar" eq_improper="C_ar"/>
+    <Type mass="13.011" elem="C" name="CH_ar" tag="CH_ar" desc="CH_aromatic" ref="['4', 6]" eq_vwd="CH_ar" eq_bond="CH_ar" eq_angle="CH_ar" eq_dihedral="CH_ar" eq_improper="CH_ar"/>
+    <Type mass="12.0107" elem="C" name="CCO" tag="CCO" desc="Carbon in CO2" ref="['7', 7]" eq_vwd="CCO" eq_bond="CCO" eq_angle="CCO" eq_dihedral="CCO" eq_improper="CCO"/>
+    <Type mass="15.9994" elem="O" name="OCO" tag="OCO" desc="Oxygen in CO2" ref="['7', 7]" eq_vwd="OCO" eq_bond="OCO" eq_angle="OCO" eq_dihedral="OCO" eq_improper="OCO"/>
+    <Type tag="O" name="O" eq_vwd="O" eq_bond="O" eq_angle="O" eq_dihedral="O" eq_improper="O" ref="[2]"/>
+  </ParticleTypes>
+  <BondTypes>
+    <Type tag="O,H" name="O,H" q1="-0.435" q2="0.435" ref="[2]" rname="H,O"/>
+    <Type tag="O,CH3OH" name="O,CH3OH" q1="-0.265" q2="0.265" ref="[2]" rname="CH3OH,O"/>
+    <Type tag="O,CH2OH" name="O,CH2OH" q1="-0.265" q2="0.265" ref="[2]" rname="CH2OH,O"/>
+    <Type tag="CH2OH,CH2OH" name="CH2OH,CH2OH" q1="0.000" q2="0.000" ref="[2]" rname="CH2OH,CH2OH"/>
+    <Type tag="O,CHOH" name="O,CHOH" q1="-0.265" q2="0.265" ref="[2]" rname="CHOH,O"/>
+    <Type tag="O,COH" name="O,COH" q1="-0.265" q2="0.265" ref="[2]" rname="COH,O"/>
+    <Type tag="Ok,Ck" name="Ok,Ck" q1="-0.424" q2="0.424" ref="[3]" rname="Ck,Ok"/>
+    <Type tag="C_,C_" name="C_,C_" q1="0.000" q2="0.000" ref="[2]" rname="C_,C_"/>
+    <Type tag="C_,CO" name="C_,CO" q1="0.000" q2="0.000" ref="[2]" rname="CO,C_"/>
+    <Type tag="Oac,Hac" name="Oac,Hac" q1="-0.370" q2="0.370" ref="[5]" rname="Hac,Oac"/>
+    <Type tag="Oac,Cac" name="Oac,Cac" q1="-0.090" q2="0.090" ref="[5]" rname="Cac,Oac"/>
+    <Type tag="Oca,Cac" name="Oca,Cac" q1="-0.450" q2="0.450" ref="[4]" rname="Cac,Oca"/>
+    <Type tag="CH2,Cac" name="CH2,Cac" q1="0.050" q2="-0.050" ref="[4]" rname="Cac,CH2"/>
+    <Type tag="CH3,Cac" name="CH3,Cac" q1="0.050" q2="-0.050" ref="[4]" rname="Cac,CH3"/>
+    <Type tag="CH,Cac" name="CH,Cac" q1="0.050" q2="-0.050" ref="[4]" rname="Cac,CH"/>
+    <Type tag="C,Cac" name="C,Cac" q1="0.050" q2="-0.050" ref="[4]" rname="Cac,C"/>
+    <Type tag="Siz,Oz" name="Siz,Oz" q1="0.375" q2="-0.375" ref="[7]" rname="Oz,Siz"/>
+    <Type tag="OW,HW" name="OW,HW" q1="-0.417" q2="0.417" ref="[7]" rname="HW,OW"/>
+    <Type tag="CH_ar,CH_ar" name="CH_ar,CH_ar" q1="0.000" q2="0.000" ref="[6]" rname="CH_ar,CH_ar"/>
+    <Type tag="CH_ar,COH" name="CH_ar,COH" q1="0.000" q2="0.000" ref="[6]" rname="COH,CH_ar"/>
+    <Type tag="CH_ar,C_ar" name="CH_ar,C_ar" q1="0.000" q2="0.000" ref="[6]" rname="C_ar,CH_ar"/>
+    <Type tag="C_ar,C_" name="C_ar,C_" q1="0.000" q2="0.000" ref="[6]" rname="C_,C_ar"/>
+    <Type tag="CH2OH,Os" name="CH2OH,Os" q1="0.250" q2="-0.250" ref="[4]" rname="Os,CH2OH"/>
+    <Type tag="CH3OH,Os" name="CH3OH,Os" q1="0.250" q2="-0.250" ref="[4]" rname="Os,CH3OH"/>
+    <Type tag="Os,Cac" name="Os,Cac" q1="-0.150" q2="0.150" ref="[4]" rname="Cac,Os"/>
+    <Type tag="CH3,Ck" name="CH3,Ck" q1="0.000" q2="0.000" ref="[3]" rname="Ck,CH3"/>
+    <Type tag="CH2,Ck" name="CH2,Ck" q1="0.000" q2="0.000" ref="[3]" rname="Ck,CH2"/>
+    <Type tag="CH2OH,CHa" name="CH2OH,CHa" q1="-0.043" q2="0.043" ref="[3]" rname="CHa,CH2OH"/>
+    <Type tag="CH3OH,CHa" name="CH3OH,CHa" q1="-0.043" q2="0.043" ref="[3]" rname="CHa,CH3OH"/>
+    <Type tag="Oa,CHa" name="Oa,CHa" q1="-0.482" q2="0.482" ref="[3]" rname="CHa,Oa"/>
+    <Type tag="CCO,OCO" name="CCO,OCO" q1="0.3256" q2="-0.3256" ref="[8]" rname="OCO,CCO"/>
+  </BondTypes>
+  <AngleTypes/>
+  <DihedralTypes/>
+  <ImproperTypes>
+    <Type tag="Cac,Oca,Oac,CH2" name="Cac,Oca,Oac,CH2" k="7.1794" x0="0.0" ref="[1]" rname="CH2,Oac,Oca,Cac"/>
+    <Type tag="Cac,Oca,Oac,CH3" name="Cac,Oca,Oac,CH3" k="7.1794" x0="0.0" ref="[1]" rname="CH3,Oac,Oca,Cac"/>
+    <Type tag="C_ar,CH_ar,CH_ar,CH2" name="C_ar,CH_ar,CH_ar,CH2" k="7.1794" x0="0.0" ref="[1]" rname="CH2,CH_ar,CH_ar,C_ar"/>
+    <Type tag="C_ar,CH2,CH_ar,CH_ar" name="C_ar,CH2,CH_ar,CH_ar" k="7.1794" x0="0.0" ref="[1]" rname="CH_ar,CH_ar,CH2,C_ar"/>
+  </ImproperTypes>
+</Forcefield>

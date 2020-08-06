@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Forcefield class="1" name="tip3p">
+    <ParticleTypes>
+        <Type desc="tip3p water oxygen atom" elem="O" epsilon="0.1521" mass="15.99491" name="ow" sigma="3.1507" tag="ow"/>
+        <Type desc="tip3p water hydrogen atom" elem="H" epsilon="0.0" mass="1.00797" name="hw" sigma="1.098" tag="hw"/>
+    </ParticleTypes>
+    <BondTypes>
+        <Type name="ow,hw" k="553.0" r0="0.9572" q1="-0.4170" q2="0.4170" rname="hw,ow" tag="ow,hw"/>
+    </BondTypes>
+    <AngleTypes>
+        <Type k="100.0" name="hw,ow,hw" rname="hw,ow,hw" tag="hw,ow,hw" theta0="104.52"/>
+    </AngleTypes>
+    <DihedralTypes></DihedralTypes>
+    <ImproperTypes></ImproperTypes>
+</Forcefield>

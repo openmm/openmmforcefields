@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<Forcefield name="pcff" class="2">
+  <ParticleTypes>
+    <Type mass="1.00797" elem="H" name="h*" tag="h*" desc="hydrogen bonded to nitrogen, Oxygen*" ref="['1', 1, 1]" eq_vwd="h*" eq_bond="h*" eq_angle="h*" eq_dihedral="h*" eq_improper="h*" sigma="1.098" epsilon="0.013"/>
+    <Type mass="22.9898" elem="Na+" name="na+" tag="na+" desc="sodium ion" ref="['1', 1, 1]" eq_vwd="na+" eq_bond="na+" eq_angle="na+" eq_dihedral="na+" eq_improper="na+" sigma="3.03" epsilon="0.0518"/>
+    <Type mass="15.9994" elem="O" name="o*" tag="o*" desc="oxygen in water*" ref="['1', 1, 1]" eq_vwd="o*" eq_bond="o*" eq_angle="o*" eq_dihedral="o*" eq_improper="o*" sigma="3.608" epsilon="0.274"/>
+    <Type mass="39.098" elem="K" name="K" tag="K" desc="Potassium" ref="['1', 1, 1]" eq_vwd="K" eq_bond="K" eq_angle="K" eq_dihedral="K" eq_improper="K" sigma="3.6" epsilon="0.173"/>
+    <Type mass="6.941" elem="Li" name="Li" tag="Li" desc="Lithium" ref="['1', 1, 1]" eq_vwd="Li" eq_bond="Li" eq_angle="Li" eq_dihedral="Li" eq_improper="Li" sigma="2.4" epsilon="0.0165"/>
+    <Type mass="85.468" elem="Rb" name="Rb" tag="Rb" desc="Rubidium" ref="['1', 1, 1]" eq_vwd="Rb" eq_bond="Rb" eq_angle="Rb" eq_dihedral="Rb" eq_improper="Rb" sigma="3.9" epsilon="0.2255"/>
+    <Type mass="26.98" elem="Al" name="al" tag="al" desc="" ref="['1', 1, 1]" eq_vwd="al" eq_bond="al" eq_angle="al" eq_dihedral="al" eq_improper="al" sigma="0.0001" epsilon="0.0"/>
+    <Type mass="28.086" elem="Si" name="si" tag="si" desc="" ref="['1', 1, 1]" eq_vwd="si" eq_bond="si" eq_angle="si" eq_dihedral="si" eq_improper="si" sigma="0.0001" epsilon="0.0"/>
+    <Type mass="15.99491" elem="O" name="ob" tag="ob" desc="" ref="['1', 1, 1]" eq_vwd="ob" eq_bond="ob" eq_angle="ob" eq_dihedral="ob" eq_improper="ob" sigma="2.4443" epsilon="0.0448"/>
+    <Type mass="15.99491" elem="O" name="oas" tag="oas" desc="" ref="['1', 1, 1]" eq_vwd="oas" eq_bond="oas" eq_angle="oas" eq_dihedral="oas" eq_improper="oas" sigma="2.4536" epsilon="0.0438"/>
+    <Type mass="15.99491" elem="O" name="oss" tag="oss" desc="" ref="['1', 1, 1]" eq_vwd="oss" eq_bond="oss" eq_angle="oss" eq_dihedral="oss" eq_improper="oss" sigma="2.3234" epsilon="0.0607"/>
+    <Type mass="15.99491" elem="O" name="osh" tag="osh" desc="" ref="['1', 1, 1]" eq_vwd="osh" eq_bond="osh" eq_angle="osh" eq_dihedral="osh" eq_improper="osh" sigma="1.9907" epsilon="0.1535"/>
+    <Type mass="15.99491" elem="O" name="oah" tag="oah" desc="" ref="['1', 1, 1]" eq_vwd="oah" eq_bond="oah" eq_angle="oah" eq_dihedral="oah" eq_improper="oah" sigma="2.0648" epsilon="0.1233"/>
+    <Type mass="1.007825" elem="H" name="hb" tag="hb" desc="" ref="['1', 1, 1]" eq_vwd="hb" eq_bond="hb" eq_angle="hb" eq_dihedral="hb" eq_improper="hb" sigma="1.1793" epsilon="0.8802"/>
+    <Type mass="1.007825" elem="H" name="hos" tag="hos" desc="" ref="['1', 1, 1]" eq_vwd="hos" eq_bond="hos" eq_angle="hos" eq_dihedral="hos" eq_improper="hos" sigma="1.6416" epsilon="0.121"/>
+    <Type mass="1.007825" elem="H" name="hoa" tag="hoa" desc="" ref="['1', 1, 1]" eq_vwd="hoa" eq_bond="hoa" eq_angle="hoa" eq_dihedral="hoa" eq_improper="hoa" sigma="1.2142" epsilon="0.739"/>
+  </ParticleTypes>
+  <BondTypes>
+    <Type tag="si,ob" name="si,ob" r0="1.6581" k2="370.5744" k3="-569.4988" k4="3102.2503" ref="[1]" rname="ob,si"/>
+    <Type tag="si,osh" name="si,osh" r0="1.6238" k2="431.7825" k3="-799.2202" k4="4446.0953" ref="[1]" rname="osh,si"/>
+    <Type tag="al,ob" name="al,ob" r0="1.9698" k2="86.8129" k3="26.3933" k4="758.4299" ref="[1]" rname="ob,al"/>
+    <Type tag="al,oas" name="al,oas" r0="1.7193" k2="328.685" k3="-341.0143" k4="2189.0349" ref="[1]" rname="oas,al"/>
+    <Type tag="al,oah" name="al,oah" r0="1.7096" k2="311.6053" k3="-734.839" k4="6022.397" ref="[1]" rname="oah,al"/>
+    <Type tag="ob,hb" name="ob,hb" r0="0.954" k2="656.8465" k3="-1627.4874" k4="3684.1928" ref="[1]" rname="hb,ob"/>
+    <Type tag="osh,hos" name="osh,hos" r0="0.9458" k2="707.2556" k3="-1531.5564" k4="1603.1004" ref="[1]" rname="hos,osh"/>
+    <Type tag="oas,si" name="oas,si" r0="1.6157" k2="494.1042" k3="-36.7016" k4="2150.6837" ref="[1]" rname="si,oas"/>
+    <Type tag="oah,hoa" name="oah,hoa" r0="0.9408" k2="730.0168" k3="-1566.4841" k4="1703.5916" ref="[1]" rname="hoa,oah"/>
+    <Type tag="si,oss" name="si,oss" r0="1.6104" k2="459.0786" k3="-672.4445" k4="443.3651" ref="[1]" rname="oss,si"/>
+    <Type tag="o*,h*" name="o*,h*" r0="0.97" k2="563.28" k3="-1428.22" k4="1902.12" ref="[1]" rname="h*,o*"/>
+  </BondTypes>
+  <AngleTypes>
+    <Type tag="ob,si,osh" name="ob,si,osh" theta0="103.9653" k2="103.5467" k3="-19.2943" k4="331.9679" ref="[1, 1, 1]" rname="osh,si,ob" m="131.7627" n1="-0.9347" n2="96.7623" r1="1.6581" r2="1.6238"/>
+    <Type tag="osh,si,osh" name="osh,si,osh" theta0="111.3627" k2="58.2199" k3="96.8353" k4="527.5761" ref="[1, 1, 1]" rname="osh,si,osh" m="28.5745" n1="43.7331" n2="43.7331" r1="1.6238" r2="1.6238"/>
+    <Type tag="ob,al,oas" name="ob,al,oas" theta0="81.4988" k2="43.2829" k3="-113.779" k4="202.1476" ref="[1, 1, 1]" rname="oas,al,ob" m="84.3372" n1="12.9574" n2="20.0579" r1="1.9698" r2="1.7193"/>
+    <Type tag="ob,al,oah" name="ob,al,oah" theta0="97.9051" k2="27.692" k3="-41.0318" k4="35.4654" ref="[1, 1, 1]" rname="oah,al,ob" m="37.6888" n1="25.6722" n2="20.7253" r1="1.9698" r2="1.7096"/>
+    <Type tag="oas,al,oah" name="oas,al,oah" theta0="118.337" k2="48.9048" k3="180.6775" k4="1557.508" ref="[1, 1, 1]" rname="oah,al,oas" m="49.9526" n1="87.4126" n2="15.6056" r1="1.7193" r2="1.7096"/>
+    <Type tag="oah,al,oah" name="oah,al,oah" theta0="107.0368" k2="76.4087" k3="-274.149" k4="293.2546" ref="[1, 1, 1]" rname="oah,al,oah" m="19.3587" n1="-6.2892" n2="-6.2892" r1="1.7096" r2="1.7096"/>
+    <Type tag="si,ob,al" name="si,ob,al" theta0="136.6645" k2="195.295" k3="48.8575" k4="185.3481" ref="[1, 1, 1]" rname="al,ob,si" m="130.8388" n1="23.045" n2="3.6805" r1="1.6581" r2="1.9698"/>
+    <Type tag="si,ob,hb" name="si,ob,hb" theta0="119.2823" k2="43.0215" k3="-15.2099" k4="13.1396" ref="[1, 1, 1]" rname="hb,ob,si" m="18.0332" n1="36.5384" n2="53.8615" r1="1.6581" r2="0.954"/>
+    <Type tag="al,ob,hb" name="al,ob,hb" theta0="107.12" k2="43.9725" k3="-53.4364" k4="103.3838" ref="[1, 1, 1]" rname="hb,ob,al" m="-18.4463" n1="-12.7238" n2="33.9457" r1="1.9698" r2="0.954"/>
+    <Type tag="si,osh,hos" name="si,osh,hos" theta0="118.9384" k2="20.0134" k3="-33.2675" k4="42.4295" ref="[1, 1, 1]" rname="hos,osh,si" m="9.6155" n1="46.1485" n2="25.1227" r1="1.6238" r2="0.9458"/>
+    <Type tag="al,oas,si" name="al,oas,si" theta0="162.4" k2="10.3454" k3="12.6366" k4="9.0038" ref="[1, 1, 1]" rname="si,oas,al" m="83.1658" n1="9.1662" n2="13.7478" r1="1.7193" r2="1.6157"/>
+    <Type tag="al,oah,hoa" name="al,oah,hoa" theta0="131.3984" k2="7.8119" k3="-1.6786" k4="53.6329" ref="[1, 1, 1]" rname="hoa,oah,al" m="-2.6112" n1="38.1658" n2="31.2114" r1="1.7096" r2="0.9408"/>
+    <Type tag="oas,si,osh" name="oas,si,osh" theta0="118.5582" k2="87.1068" k3="167.1975" k4="278.6751" ref="[1, 1, 1]" rname="osh,si,oas" m="72.4616" n1="-54.0838" n2="63.333" r1="1.6157" r2="1.6238"/>
+    <Type tag="oas,si,oss" name="oas,si,oss" theta0="112.4279" k2="88.0709" k3="-57.043" k4="92.4803" ref="[1, 1, 1]" rname="oss,si,oas" m="45.752" n1="20.1222" n2="77.9618" r1="1.6157" r2="1.6104"/>
+    <Type tag="oss,si,osh" name="oss,si,osh" theta0="109.9424" k2="91.8675" k3="17.2882" k4="252.8231" ref="[1, 1, 1]" rname="osh,si,oss" m="70.6866" n1="41.1242" n2="75.6" r1="1.6104" r2="1.6238"/>
+    <Type tag="oss,si,oss" name="oss,si,oss" theta0="112.02" k2="81.9691" k3="-36.5814" k4="116.9558" ref="[1, 1]" rname="oss,si,oss" n1="78.1239" n2="78.1239" r1="1.6104" r2="1.6104"/>
+    <Type tag="oss,si,ob" name="oss,si,ob" theta0="107.6066" k2="99.6715" k3="-33.1512" k4="10.7204" ref="[1, 1, 1]" rname="ob,si,oss" m="63.3273" n1="52.7776" n2="12.2769" r1="1.6104" r2="1.6581"/>
+    <Type tag="si,oss,si" name="si,oss,si" theta0="173.7651" k2="20.7015" k3="27.5506" k4="10.993" ref="[1, 1, 1]" rname="si,oss,si" m="151.8742" n1="9.239" n2="9.239" r1="1.6104" r2="1.6104"/>
+    <Type tag="oas,al,oas" name="oas,al,oas" theta0="113.4" k2="300.052" k3="-32.5659" k4="67.2591" ref="[1, 1, 1]" rname="oas,al,oas" m="-56.505" n1="110.1523" n2="110.1523" r1="1.7193" r2="1.7193"/>
+    <Type tag="oas,si,ob" name="oas,si,ob" theta0="102.9438" k2="103.827" k3="10.899" k4="0.6674" ref="[1, 1, 1]" rname="ob,si,oas" m="63.3273" n1="13.36" n2="-8.3197" r1="1.6157" r2="1.6581"/>
+    <Type tag="oas,si,oas" name="oas,si,oas" theta0="110.612" k2="154.186" k3="-68.6595" k4="23.6292" ref="[1, 1, 1]" rname="oas,si,oas" m="151.8742" n1="234.0716" n2="234.0716" r1="1.6157" r2="1.6157"/>
+    <Type tag="h*,o*,h*" name="h*,o*,h*" theta0="103.7" k2="49.84" k3="-11.6" k4="-8.0" ref="[1, 1, 1]" rname="h*,o*,h*" m="-9.5" n1="22.35" n2="22.35" r1="0.97" r2="0.97"/>
+    <Type tag="ob,si,ob" name="ob,si,ob" theta0="102.9438" k2="103.827" k3="10.899" k4="0.6674" ref="[1]" rname="ob,si,ob" r1="1.6581" r2="1.6581"/>
+  </AngleTypes>
+  <DihedralTypes>
+    <Type tag="osh,si,ob,hb" name="osh,si,ob,hb" m="-21.4028" ref="[1, 1, 1]" rname="hb,ob,si,osh" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6238" r2="1.6581" r3="0.954" theta1="103.9653" theta2="119.2823"/>
+    <Type tag="ob,si,osh,hos" name="ob,si,osh,hos" m="-9.3392" ref="[1, 1, 1]" rname="hos,osh,si,ob" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6581" r2="1.6238" r3="0.9458" theta1="103.9653" theta2="118.9384"/>
+    <Type tag="osh,si,osh,hos" name="osh,si,osh,hos" m="-2.9461" ref="[1, 1, 1]" rname="hos,osh,si,osh" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6238" r2="1.6238" r3="0.9458" theta1="111.3627" theta2="118.9384"/>
+    <Type tag="oas,al,ob,si" name="oas,al,ob,si" m="32.3177" ref="[1, 1, 1]" rname="si,ob,al,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7193" r2="1.9698" r3="1.6581" theta1="81.4988" theta2="136.6645"/>
+    <Type tag="oas,al,ob,hb" name="oas,al,ob,hb" m="8.8676" ref="[1, 1, 1]" rname="hb,ob,al,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7193" r2="1.9698" r3="0.954" theta1="81.4988" theta2="107.12"/>
+    <Type tag="oah,al,ob,si" name="oah,al,ob,si" m="-5.9667" ref="[1, 1, 1]" rname="si,ob,al,oah" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7096" r2="1.9698" r3="1.6581" theta1="97.9051" theta2="136.6645"/>
+    <Type tag="oah,al,ob,hb" name="oah,al,ob,hb" m="-22.3131" ref="[1, 1, 1]" rname="hb,ob,al,oah" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7096" r2="1.9698" r3="0.954" theta1="97.9051" theta2="107.12"/>
+    <Type tag="ob,al,oas,si" name="ob,al,oas,si" m="16.7797" ref="[1, 1, 1]" rname="si,oas,al,ob" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.9698" r2="1.7193" r3="1.6157" theta1="81.4988" theta2="162.4"/>
+    <Type tag="oah,al,oas,si" name="oah,al,oas,si" m="7.8776" ref="[1, 1, 1]" rname="si,oas,al,oah" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7096" r2="1.7193" r3="1.6157" theta1="118.337" theta2="162.4"/>
+    <Type tag="ob,al,oah,hoa" name="ob,al,oah,hoa" m="-6.368" ref="[1, 1, 1]" rname="hoa,oah,al,ob" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.9698" r2="1.7096" r3="0.9408" theta1="97.9051" theta2="131.3984"/>
+    <Type tag="oas,al,oah,hoa" name="oas,al,oah,hoa" m="-52.1956" ref="[1, 1, 1]" rname="hoa,oah,al,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7193" r2="1.7096" r3="0.9408" theta1="118.337" theta2="131.3984"/>
+    <Type tag="oah,al,oah,hoa" name="oah,al,oah,hoa" m="6.5018" ref="[1, 1, 1]" rname="hoa,oah,al,oah" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7096" r2="1.7096" r3="0.9408" theta1="107.0368" theta2="131.3984"/>
+    <Type tag="al,oas,si,osh" name="al,oas,si,osh" m="-14.1105" ref="[1, 1, 1]" rname="osh,si,oas,al" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7193" r2="1.6157" r3="1.6238" theta1="162.4" theta2="118.5582"/>
+    <Type tag="oas,si,osh,hos" name="oas,si,osh,hos" m="-4.6863" ref="[1, 1, 1]" rname="hos,osh,si,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6157" r2="1.6238" r3="0.9458" theta1="118.5582" theta2="118.9384"/>
+    <Type tag="oss,si,oas,al" name="oss,si,oas,al" m="8.4655" ref="[1, 1, 1]" rname="al,oas,si,oss" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6104" r2="1.6157" r3="1.7193" theta1="112.4279" theta2="162.4"/>
+    <Type tag="oas,si,oss,si" name="oas,si,oss,si" m="-10.4191" ref="[1, 1, 1]" rname="si,oss,si,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6157" r2="1.6104" r3="1.6104" theta1="112.4279" theta2="173.7651"/>
+    <Type tag="osh,si,oss,si" name="osh,si,oss,si" m="2.3216" ref="[1, 1, 1]" rname="si,oss,si,osh" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6238" r2="1.6104" r3="1.6104" theta1="109.9424" theta2="173.7651"/>
+    <Type tag="oss,si,osh,hos" name="oss,si,osh,hos" m="6.4184" ref="[1, 1, 1]" rname="hos,osh,si,oss" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6104" r2="1.6238" r3="0.9458" theta1="109.9424" theta2="118.9384"/>
+    <Type tag="oss,si,oss,si" name="oss,si,oss,si" m="-4.515" ref="[1, 1, 1]" rname="si,oss,si,oss" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6104" r2="1.6104" r3="1.6104" theta1="112.02" theta2="173.7651"/>
+    <Type tag="ob,si,oss,si" name="ob,si,oss,si" m="11.8037" ref="[1, 1, 1]" rname="si,oss,si,ob" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6581" r2="1.6104" r3="1.6104" theta1="107.6066" theta2="173.7651"/>
+    <Type tag="oss,si,ob,al" name="oss,si,ob,al" m="-71.4139" ref="[1, 1, 1]" rname="al,ob,si,oss" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6104" r2="1.6581" r3="1.9698" theta1="107.6066" theta2="136.6645"/>
+    <Type tag="oss,si,ob,hb" name="oss,si,ob,hb" m="15.116" ref="[1, 1, 1]" rname="hb,ob,si,oss" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6104" r2="1.6581" r3="0.954" theta1="107.6066" theta2="119.2823"/>
+    <Type tag="oas,al,oas,si" name="oas,al,oas,si" m="-18.0184" ref="[1, 1, 1]" rname="si,oas,al,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.7193" r2="1.7193" r3="1.6157" theta1="113.4" theta2="162.4"/>
+    <Type tag="ob,si,oas,al" name="ob,si,oas,al" m="17.2526" ref="[1, 1, 1]" rname="al,oas,si,ob" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6581" r2="1.6157" r3="1.7193" theta1="102.9438" theta2="162.4"/>
+    <Type tag="oas,si,ob,al" name="oas,si,ob,al" m="91.5202" ref="[1, 1, 1]" rname="al,ob,si,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6157" r2="1.6581" r3="1.9698" theta1="102.9438" theta2="136.6645"/>
+    <Type tag="oas,si,ob,hb" name="oas,si,ob,hb" m="17.5674" ref="[1, 1, 1]" rname="hb,ob,si,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6157" r2="1.6581" r3="0.954" theta1="102.9438" theta2="119.2823"/>
+    <Type tag="oas,si,oas,al" name="oas,si,oas,al" m="-10.9279" ref="[1, 1, 1]" rname="al,oas,si,oas" a1="0.0" a2="0.0" a3="0.0" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6157" r2="1.6157" r3="1.7193" theta1="110.612" theta2="162.4"/>
+    <Type tag="osh,si,ob,al" name="osh,si,ob,al" a1="0.0" a2="0.0" a3="0.0" ref="[1, 1]" rname="al,ob,si,osh" d1="0.0" d2="0.0" d3="0.0" e1="0.0" e2="0.0" e3="0.0" r1="1.6238" r2="1.6581" r3="1.9698" theta1="103.9653" theta2="136.6645"/>
+  </DihedralTypes>
+  <ImproperTypes>
+    <Type name="osh,si,oss,osh" tag="osh,si,oss,osh" m1="52.6194" ref="[1, 1]" rname="osh,oss,si,osh" m2="60.1802"/>
+    <Type tag="oss,si,osh,osh" name="oss,si,osh,osh" m2="52.6194" ref="[1, 1, 1]" rname="osh,osh,si,oss" m1="60.1802" m3="60.1802"/>
+    <Type tag="osh,si,osh,oss" name="osh,si,osh,oss" m3="52.6194" ref="[1]" rname="oss,osh,si,osh"/>
+    <Type name="osh,si,osh,osh" tag="osh,si,osh,osh" m1="38.4444" ref="[1, 1, 1]" rname="osh,osh,si,osh" m2="38.4444" m3="38.4444"/>
+    <Type name="oss,si,oss,osh" tag="oss,si,oss,osh" m1="52.3408" ref="[1, 1, 1]" rname="osh,oss,si,oss" m2="52.3408" m3="86.3954"/>
+    <Type tag="oss,si,osh,oss" name="oss,si,osh,oss" m3="52.3408" ref="[1, 1]" rname="oss,osh,si,oss" m1="86.3954"/>
+    <Type tag="osh,si,oss,oss" name="osh,si,oss,oss" m2="86.3954" ref="[1]" rname="oss,oss,si,osh"/>
+    <Type name="oss,si,oss,oss" tag="oss,si,oss,oss" m1="-6.303" ref="[1, 1, 1]" rname="oss,oss,si,oss" m2="-6.303" m3="-6.303"/>
+    <Type name="osh,si,ob,osh" tag="osh,si,ob,osh" m1="-13.6331" ref="[1, 1]" rname="osh,ob,si,osh" m2="17.4074"/>
+    <Type tag="ob,si,osh,osh" name="ob,si,osh,osh" m2="-13.6331" ref="[1, 1, 1]" rname="osh,osh,si,ob" m1="17.4074" m3="17.4074"/>
+    <Type tag="osh,si,osh,ob" name="osh,si,osh,ob" m3="-13.6331" ref="[1]" rname="ob,osh,si,osh"/>
+    <Type name="oah,al,ob,oah" tag="oah,al,ob,oah" m1="0.0" ref="[1, 1]" rname="oah,ob,al,oah" m2="-20.0594"/>
+    <Type tag="ob,al,oah,oah" name="ob,al,oah,oah" m2="0.0" ref="[1, 1, 1]" rname="oah,oah,al,ob" m1="-20.0594" m3="-20.0594"/>
+    <Type tag="oah,al,oah,ob" name="oah,al,oah,ob" m3="0.0" ref="[1]" rname="ob,oah,al,oah"/>
+    <Type name="oah,al,oah,oah" tag="oah,al,oah,oah" m1="-51.8916" ref="[1, 1, 1]" rname="oah,oah,al,oah" m2="-51.8916" m3="-51.8916"/>
+    <Type name="al,ob,si,hb" tag="al,ob,si,hb" m1="36.0652" ref="[1, 1]" rname="hb,si,ob,al" m2="58.8895"/>
+    <Type tag="si,ob,al,hb" name="si,ob,al,hb" m2="36.0652" ref="[1, 1, 1]" rname="hb,al,ob,si" m1="58.8895" m3="44.4559"/>
+    <Type tag="al,ob,hb,si" name="al,ob,hb,si" m3="36.0652" ref="[1]" rname="si,hb,ob,al"/>
+    <Type tag="si,ob,hb,al" name="si,ob,hb,al" m3="58.8895" ref="[1, 1]" rname="al,hb,ob,si" m1="44.4559"/>
+    <Type tag="hb,ob,si,al" name="hb,ob,si,al" m2="44.4559" ref="[1]" rname="al,si,ob,hb"/>
+    <Type name="oss,si,ob,osh" tag="oss,si,ob,osh" m1="61.4849" ref="[1, 1]" rname="osh,ob,si,oss" m2="75.8868"/>
+    <Type tag="ob,si,oss,osh" name="ob,si,oss,osh" m2="61.4849" ref="[1, 1, 1]" rname="osh,oss,si,ob" m1="75.8868" m3="50.5839"/>
+    <Type tag="oss,si,osh,ob" name="oss,si,osh,ob" m3="61.4849" ref="[1]" rname="ob,osh,si,oss"/>
+    <Type tag="ob,si,osh,oss" name="ob,si,osh,oss" m3="75.8868" ref="[1, 1]" rname="oss,osh,si,ob" m1="50.5839"/>
+    <Type tag="osh,si,ob,oss" name="osh,si,ob,oss" m2="50.5839" ref="[1]" rname="oss,ob,si,osh"/>
+    <Type name="oas,al,ob,oah" tag="oas,al,ob,oah" m1="13.676" ref="[1, 1]" rname="oah,ob,al,oas" m2="28.2428"/>
+    <Type tag="ob,al,oas,oah" name="ob,al,oas,oah" m2="13.676" ref="[1, 1, 1]" rname="oah,oas,al,ob" m1="28.2428" m3="-34.0834"/>
+    <Type tag="oas,al,oah,ob" name="oas,al,oah,ob" m3="13.676" ref="[1]" rname="ob,oah,al,oas"/>
+    <Type tag="ob,al,oah,oas" name="ob,al,oah,oas" m3="28.2428" ref="[1, 1]" rname="oas,oah,al,ob" m1="-34.0834"/>
+    <Type tag="oah,al,ob,oas" name="oah,al,ob,oas" m2="-34.0834" ref="[1]" rname="oas,ob,al,oah"/>
+    <Type name="oah,al,oas,oah" tag="oah,al,oas,oah" m1="-62.0442" ref="[1, 1]" rname="oah,oas,al,oah" m2="-19.2127"/>
+    <Type tag="oas,al,oah,oah" name="oas,al,oah,oah" m2="-62.0442" ref="[1, 1, 1]" rname="oah,oah,al,oas" m1="-19.2127" m3="-19.2127"/>
+    <Type tag="oah,al,oah,oas" name="oah,al,oah,oas" m3="-62.0442" ref="[1]" rname="oas,oah,al,oah"/>
+    <Type name="osh,si,oas,osh" tag="osh,si,oas,osh" m1="13.9083" ref="[1, 1]" rname="osh,oas,si,osh" m2="46.1582"/>
+    <Type tag="oas,si,osh,osh" name="oas,si,osh,osh" m2="13.9083" ref="[1, 1, 1]" rname="osh,osh,si,oas" m1="46.1582" m3="46.1582"/>
+    <Type tag="osh,si,osh,oas" name="osh,si,osh,oas" m3="13.9083" ref="[1]" rname="oas,osh,si,osh"/>
+    <Type name="oas,si,oss,osh" tag="oas,si,oss,osh" m1="51.3039" ref="[1, 1]" rname="osh,oss,si,oas" m2="40.7833"/>
+    <Type tag="oss,si,oas,osh" name="oss,si,oas,osh" m2="51.3039" ref="[1, 1, 1]" rname="osh,oas,si,oss" m1="40.7833" m3="52.5469"/>
+    <Type tag="oas,si,osh,oss" name="oas,si,osh,oss" m3="51.3039" ref="[1]" rname="oss,osh,si,oas"/>
+    <Type tag="oss,si,osh,oas" name="oss,si,osh,oas" m3="40.7833" ref="[1, 1]" rname="oas,osh,si,oss" m1="52.5469"/>
+    <Type tag="osh,si,oss,oas" name="osh,si,oss,oas" m2="52.5469" ref="[1]" rname="oas,oss,si,osh"/>
+    <Type name="oas,al,ob,oas" tag="oas,al,ob,oas" m1="-6.112" ref="[1, 1]" rname="oas,ob,al,oas" m2="39.4951"/>
+    <Type tag="ob,al,oas,oas" name="ob,al,oas,oas" m2="-6.112" ref="[1, 1, 1]" rname="oas,oas,al,ob" m1="39.4951" m3="39.4951"/>
+    <Type tag="oas,al,oas,ob" name="oas,al,oas,ob" m3="-6.112" ref="[1]" rname="ob,oas,al,oas"/>
+    <Type name="oas,al,oas,oah" tag="oas,al,oas,oah" m1="0.0" ref="[1, 1, 1]" rname="oah,oas,al,oas" m2="0.0" m3="98.5159"/>
+    <Type tag="oas,al,oah,oas" name="oas,al,oah,oas" m3="0.0" ref="[1, 1]" rname="oas,oah,al,oas" m1="98.5159"/>
+    <Type tag="oah,al,oas,oas" name="oah,al,oas,oas" m2="98.5159" ref="[1]" rname="oas,oas,al,oah"/>
+    <Type name="ob,si,oas,osh" tag="ob,si,oas,osh" m1="25.6772" ref="[1, 1]" rname="osh,oas,si,ob" m2="-35.6378"/>
+    <Type tag="oas,si,ob,osh" name="oas,si,ob,osh" m2="25.6772" ref="[1, 1, 1]" rname="osh,ob,si,oas" m1="-35.6378" m3="31.8901"/>
+    <Type tag="ob,si,osh,oas" name="ob,si,osh,oas" m3="25.6772" ref="[1]" rname="oas,osh,si,ob"/>
+    <Type tag="oas,si,osh,ob" name="oas,si,osh,ob" m3="-35.6378" ref="[1, 1]" rname="ob,osh,si,oas" m1="31.8901"/>
+    <Type tag="osh,si,oas,ob" name="osh,si,oas,ob" m2="31.8901" ref="[1]" rname="ob,oas,si,osh"/>
+    <Type name="oas,si,oss,oss" tag="oas,si,oss,oss" m1="19.2372" ref="[1, 1, 1]" rname="oss,oss,si,oas" m3="19.2372" m2="0.0"/>
+    <Type tag="oss,si,oas,oss" name="oss,si,oas,oss" m2="19.2372" ref="[1, 1]" rname="oss,oas,si,oss" m1="0.0"/>
+    <Type tag="oss,si,oss,oas" name="oss,si,oss,oas" m3="0.0" ref="[1]" rname="oas,oss,si,oss"/>
+    <Type name="oss,si,ob,oss" tag="oss,si,ob,oss" m1="79.7785" ref="[1, 1]" rname="oss,ob,si,oss" m2="0.0"/>
+    <Type tag="ob,si,oss,oss" name="ob,si,oss,oss" m2="79.7785" ref="[1, 1, 1]" rname="oss,oss,si,ob" m1="0.0" m3="0.0"/>
+    <Type tag="oss,si,oss,ob" name="oss,si,oss,ob" m3="79.7785" ref="[1]" rname="ob,oss,si,oss"/>
+    <Type name="oas,si,osh,oas" tag="oas,si,osh,oas" m1="0.0" ref="[1, 1]" rname="oas,osh,si,oas" m2="-23.1336"/>
+    <Type tag="osh,si,oas,oas" name="osh,si,oas,oas" m2="0.0" ref="[1, 1, 1]" rname="oas,oas,si,osh" m1="-23.1336" m3="-23.1336"/>
+    <Type tag="oas,si,oas,osh" name="oas,si,oas,osh" m3="0.0" ref="[1]" rname="osh,oas,si,oas"/>
+    <Type name="oas,si,ob,oas" tag="oas,si,ob,oas" m1="0.0" ref="[1, 1]" rname="oas,ob,si,oas" m2="0.0"/>
+    <Type tag="ob,si,oas,oas" name="ob,si,oas,oas" m2="0.0" ref="[1, 1, 1]" rname="oas,oas,si,ob" m1="0.0" m3="0.0"/>
+    <Type tag="oas,si,oas,ob" name="oas,si,oas,ob" m3="0.0" ref="[1]" rname="ob,oas,si,oas"/>
+  </ImproperTypes>
+</Forcefield>

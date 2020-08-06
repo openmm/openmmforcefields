@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<Forcefield class="ua" name="trappe">
+  <ParticleTypes>
+      <Type desc="aliphatic carbon with 3 H" sigma="3.75" epsilon="0.194746" elem="C" mass="15" tag="ch3_trappe"
+            name="ch3_trappe"/>
+      <Type desc="aliphatic carbon with 2 H" sigma="3.95" epsilon="0.091411" elem="C" mass="14" tag="ch2_trappe" name="ch2_trappe"/>
+      <Type desc="aliphatic carbon with 1 H" sigma="3.95" epsilon="0.091411" elem="C" mass="13" tag="ch1_trappe" name="ch1_trappe"/>
+      <Type desc="aliphatic carbon with 0 H" sigma="4.68" epsilon="0.019872" elem="C" mass="12" tag="ch0_trappe" name="ch0_trappe"/>
+      <Type desc="carbonyl carbon" sigma="3.82" epsilon="0.079488" elem="C" mass="12" tag="c_trappe" name="c_trappe"/>
+      <Type desc="O with one connected atom" sigma="3.05" epsilon="0.156989" elem="O" mass="16" tag="o_trappe" name="o_trappe"/>
+      <Type desc="ester and ether sp3 O" sigma="2.80" epsilon="0.109296" elem="O" mass="16" tag="os_trappe" name="os_trappe"/>
+  </ParticleTypes>
+  <BondTypes></BondTypes>
+  <AngleTypes></AngleTypes>
+  <DihedralTypes></DihedralTypes>
+  <ImproperTypes></ImproperTypes>
+</Forcefield>
