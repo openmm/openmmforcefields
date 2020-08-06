@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="Martini_2007" class="1" systemType="CoarseGrained" version="1.0">
+ <AtomTypes>
+  <Type name="?" mass="0.0">
+  <Template pattern="(>*)" comment="anything" />
+  </Type>
+  <Type name="Q" mass="72.0">
+  <Template pattern="(>*)" comment="Charged-Hydrogen bonding capabilities:donor/acceptor" />
+  </Type>  
+  <Type name="SQ" mass="72.0">
+  <Template pattern="(>*)" comment="Charged for ring structures-Hydrogen bonding capabilities: donor/acceptor" />
+  </Type>  
+  <Type name="Qd" mass="72.0">
+  <Template pattern="(>*)" comment="Charged-Hydrogen bonding capabilities:donor" />
+  </Type>  
+  <Type name="SQd" mass="72.0">
+  <Template pattern="(>*)" comment="Charged for ring structures-Hydrogen bonding capabilities:donor" />
+  </Type>  
+  <Type name="Qa" mass="72.0">
+  <Template pattern="(>*)" comment="Charged-Hydrogen bonding capabilities:acceptor" />
+  </Type>  
+  <Type name="SQa" mass="72.0">
+  <Template pattern="(>*)" comment="Charged for ring structures-Hydrogen bonding capabilities:acceptor" />
+  </Type>  
+  <Type name="Q0" mass="72.0">
+  <Template pattern="(>*)" comment="Charged-Hydrogen bonding capabilities:none" />
+  </Type>  
+  <Type name="SQ0" mass="72.0">
+  <Template pattern="(>*)" comment="Charged for ring structures-Hydrogen bonding capabilities:none" />
+  </Type>  
+  <Type name="P5" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar-Degree of polarity:5 (high)" />
+  </Type>
+  <Type name="SP5" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar for ring structures-Degree of polarity:5 (high)" />
+  </Type>
+  <Type name="P4" mass="72.0"> 
+  <Template pattern="(>*)" comment="Polar-Degree of polarity:4" />
+  </Type>
+  <Type name="SP4" mass="72.0"> 
+  <Template pattern="(>*)" comment="Polar for ring structures-Degree of polarity:4" />
+  </Type>
+  <Type name="P3" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar-Degree of polarity:3" />
+  </Type>
+  <Type name="SP3" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar for ring structures-Degree of polarity:3" />
+  </Type>
+  <Type name="P2" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar-Degree of polarity:2" />
+  </Type>
+  <Type name="SP2" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar for ring structures-Degree of polarity:2" />
+  </Type>
+  <Type name="P1" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar-Degree of polarity:1 (low)" />
+  </Type>
+  <Type name="SP1" mass="72.0">  
+  <Template pattern="(>*)" comment="Polar for ring structures-Degree of polarity:1 (low)" />
+  </Type>
+  <Type name="N" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar-Hydrogen bonding capabilities:donor/acceptor" />
+  </Type>  
+  <Type name="SN" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar for ring structures-Hydrogen bonding capabilities:donor/acceptor" />
+  </Type>  
+  <Type name="Nd" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar-Hydrogen bonding capabilities:donor" />
+  </Type>
+  <Type name="SNd" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar for ring structures-Hydrogen bonding capabilities:donor" />
+  </Type>
+  <Type name="Na" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar-Hydrogen bonding capabilities:acceptor" />
+  </Type>
+  <Type name="SNa" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar for ring structures-Hydrogen bonding capabilities:acceptor" />
+  </Type>
+  <Type name="N0" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar-Hydrogen bonding capabilities:none" />
+  </Type>
+  <Type name="SN0" mass="72.0">
+  <Template pattern="(>*)" comment="Nonpolar for ring structures-Hydrogen bonding capabilities:none" />
+  </Type>
+  <Type name="C5" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar-Degree of polarity:5 (high)" />
+  </Type>
+  <Type name="SC5" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar for ring structures-Degree of polarity:5 (high)" />
+  </Type>
+  <Type name="C4" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar-Degree of polarity:4" />
+  </Type>
+  <Type name="SC4" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar for ring structures-Degree of polarity:4" />
+  </Type>
+  <Type name="C3" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar-Degree of polarity:3" />
+  </Type>
+  <Type name="SC3" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar for ring structures-Degree of polarity:3" />
+  </Type>
+  <Type name="C2" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar-Degree of polarity:2" />
+  </Type>
+  <Type name="SC2" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar for ring structures-Degree of polarity:2" />
+  </Type>
+  <Type name="C1" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar-Degree of polarity:1 (low)" />
+  </Type>  
+  <Type name="SC1" mass="72.0">
+  <Template pattern="(>*)" comment="Apolar for ring structures-Degree of polarity:1 (low)" />
+  </Type>  
+  <Precedence>(? (Q) (SQ) (Qd) (SQd) (Qa) (SQa) (Q0) (SQ0) (P5) (SP5) (P4) (SP4) (P3) (SP3) (P2) (SP2) (P1) (SP1) (N) (SN) (Nd) (SNd) (Na) (SNa) (N0) (SN0) (C5) (SC5) (C4) (SC4) (C3) (SC3) (C2) (SC2) (C1) (SC1))
+  </Precedence>
+ </AtomTypes>
+ <Equivalences order="nonbond bond angle">
+  <Equivalence ver="1.0" name="Q"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SQ"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Qd"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SQd"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Qa"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SQa"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Q0"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SQ0"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="P5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SP5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="P4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SP4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="P3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SP3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="P2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SP2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="P1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SP1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="N"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SN"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Nd"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SNd"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Na"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SNa"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="N0"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SN0"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SC5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SC4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SC3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SC2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SC1"> * * * </Equivalence>
+ </Equivalences>
+  <Bonds type="harmonic" formula="k*(r-r0)^2" parameters="k r0">
+  <Bond ver="2.0" ref="r1" type1="*" type2="*">1.4931434 4.7</Bond>
+ </Bonds>
+ <Angles type="cosine_squared" formula="k*(cos(th)-cos(th0))^2" parameters="k th0"> 
+  <Angle ver="2.0" ref="r1" type1="*" type2="*" type3="*">2.9862868 179.900000</Angle> 
+ </Angles>
+ <OutOfPlanes convention="improper" use="three" type="harmonic" formula="k*(chi-chi0)^2" parameters="k chi0">
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SQ" type3="*" type4="*">5.9751434  0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SQd" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SQa" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SQ0" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SP5" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SP4" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SP3" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SP2" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SP1" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SN" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SNd" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SNa" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SN0" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SC5" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SC4" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SC3" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SC2" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+  <OutOfPlane ver="1.0" ref="r1" type1="*" type2="SC1" type3="*" type4="*">5.9751434 0.000000</OutOfPlane>  
+ </OutOfPlanes>
+ <NonBonds combination="arithmetic" scale12="0.000000" scale13="1.000000" scale14="1.000000" type="lennard_jones_12_6" formula="4*eps*[(sigma/r)^12-(sigma/r)^6]" parameters="eps sigma">
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Q" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SQ" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SQ" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Qd" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SQd" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="Qd" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SQd" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Qa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SQa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="Qa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SQa" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SQ0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SQ0" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SP5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SP5" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SP4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SP3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SP3" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SP2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SP2" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SP1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SP1" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SN" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SN" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SNd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SNd" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SNa" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SNa" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SC5" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SC3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SC3" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SC2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SC2" >0.359 5.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q" type2="SC1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ" type2="SC1" >0.359 5.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="Qd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SQd" >1.195 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SQd" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="Qa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SQa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="Qa" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SQa" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SQ0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SQ0" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SP5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SP5" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SP4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SP3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SP3" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SP2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SP2" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SP1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SP1" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SN" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SN" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SNd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SNd" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SNa" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SNa" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SC5" >0.556 4.3</Pair>     
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SC3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SC3" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SC2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SC2" >0.359 5.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qd" type2="SC1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQd" type2="SC1" >0.359 5.7</Pair>      
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="Qa" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SQa" >1.195 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SQa" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SQ0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="Q0" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SQ0" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SP5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SP5" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SP4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SP3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SP3" >1.004 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SP2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="P2" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SP2" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SP1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="P1" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SP1" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SN" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SN" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SNd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SNd" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SNa" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SNa" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SC5" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SC3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SC3" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SC2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SC2" >0.359 5.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Qa" type2="SC1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQa" type2="SC1" >0.359 5.7</Pair>         
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="Q0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SQ0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SQ0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="P5" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SP5" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="P5" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SP5" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SP4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="P3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SP3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="P3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SP3" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SP2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SP2" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="P1" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SP1" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="P1" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SP1" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="N" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SN" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="N" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SN" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SNd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SNd" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SNa" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SNa" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SC5" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SC3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="C3" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SC3" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SC2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="C2" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SC2" >0.359 5.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="Q0" type2="SC1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="C1" >0.478 6.2</Pair>
+   <Pair ver="1.0" ref="r1" type1="SQ0" type2="SC1" >0.359 5.7</Pair>            
+   <Pair ver="1.0" ref="r1" type1="P5" type2="P5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SP5" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SP5" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SP4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="P4" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SP3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="P3" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SP3" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="P2" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SP2" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="P2" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SP2" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="P1" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SP1" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="P1" >1.338 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SP1" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SN" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="N" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SN" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SNd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="Nd" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SNd" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SNa" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="Na" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SNa" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SC5" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SC3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SC3" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="C2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SC2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="C2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SC2" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="C1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P5" type2="SC1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="C1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP5" type2="SC1" >0.359 4.3</Pair>            
+   <Pair ver="1.0" ref="r1" type1="P4" type2="P4" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SP4" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SP4" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="P3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SP3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="P3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SP3" >1.004 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SP2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SP2" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SP1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SP1" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="N" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SN" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="N" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SN" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SNd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SNd" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SNa" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SNa" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SC5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="C5" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SC5" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SC4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="C4" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SC4" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SC3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SC3" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="C2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SC2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="C2" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SC2" >0.412 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="C1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P4" type2="SC1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="C1" >0.478 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP4" type2="SC1" >0.359 4.3</Pair>                  
+   <Pair ver="1.0" ref="r1" type1="P3" type2="P3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SP3" >1.195 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SP3" >0.896 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SP2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SP2" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SP1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SP1" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SN" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SN" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SNd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SNd" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SNa" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SNa" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SC4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SC4" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="C3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SC3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="C3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SC3" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SC2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SC2" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="C1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P3" type2="SC1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="C1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP3" type2="SC1" >0.412 4.3</Pair>                     
+   <Pair ver="1.0" ref="r1" type1="P2" type2="P2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SP2" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SP2" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SP1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SP1" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SN" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SN" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SNd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SNd" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SNa" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SNa" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="N0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SN0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="N0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SN0" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SC4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SC4" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="C3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SC3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="C3" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SC3" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SC2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SC2" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="C1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P2" type2="SC1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="C1" >0.549 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP2" type2="SC1" >0.412 4.3</Pair>                     
+   <Pair ver="1.0" ref="r1" type1="P1" type2="P1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SP1" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SP1" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SN" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SN" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SNd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SNd" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SNa" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SNa" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="N0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SN0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="N0" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SN0" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SC4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SC4" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SC3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SC3" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SC2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SC2" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="C1" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="P1" type2="SC1" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="C1" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SP1" type2="SC1" >0.484 4.3</Pair>                           
+   <Pair ver="1.0" ref="r1" type1="N" type2="N" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SN" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SN" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SNd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="Nd" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SNd" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SNa" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SNa" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SC4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SC4" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SC3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SC3" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="SC2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SC2" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="N" type2="SC1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SN" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SN" type2="SC1" >0.484 4.3</Pair>                                  
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="Nd" >0.956 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="Nd" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SNd" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SNa" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="Na" >1.075 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SNa" >0.807 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SC4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SC4" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SC3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SC3" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SC2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SC2" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="C1" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Nd" type2="SC1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="C1" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNd" type2="SC1" >0.484 4.3</Pair>                                 
+   <Pair ver="1.0" ref="r1" type1="Na" type2="Na" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SNa" >0.956 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SNa" >0.717 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SC4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="C4" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SC4" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SC3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="C3" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SC3" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SC2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="C2" >0.645 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SC2" >0.484 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="Na" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="Na" type2="SC1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SNa" type2="SC1" >0.484 4.3</Pair>                                       
+   <Pair ver="1.0" ref="r1" type1="N0" type2="N0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SN0" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SN0" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SC4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SC4" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SC3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SC3" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SC2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SC2" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="N0" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="N0" type2="SC1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="C1" >0.645 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SN0" type2="SC1" >0.484 4.3</Pair>                                          
+   <Pair ver="1.0" ref="r1" type1="C5" type2="C5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="SC5" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="SC5" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="SC4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="SC4" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="SC3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="SC3" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="SC2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="SC2" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5" type2="C1" >0.741 4.7</Pair> 
+   <Pair ver="1.0" ref="r1" type1="C5" type2="SC1" >0.741 4.7</Pair> 
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="C1" >0.741 4.7</Pair> 
+   <Pair ver="1.0" ref="r1" type1="SC5" type2="SC1" >0.556 4.3</Pair>                                           
+   <Pair ver="1.0" ref="r1" type1="C4" type2="C4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="SC4" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="SC4" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="SC3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="SC3" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="SC2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="C2" >0.741 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="SC2" >0.556 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C4" type2="C1" >0.741 4.7</Pair>  
+   <Pair ver="1.0" ref="r1" type1="C4" type2="SC1" >0.741 4.7</Pair>  
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="C1" >0.741 4.7</Pair>  
+   <Pair ver="1.0" ref="r1" type1="SC4" type2="SC1" >0.556 4.3</Pair>                                               
+   <Pair ver="1.0" ref="r1" type1="C3" type2="C3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C3" type2="SC3" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC3" type2="SC3" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C3" type2="C2" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C3" type2="SC2" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC3" type2="C2" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC3" type2="SC2" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C3" type2="C1" >0.836 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="C3" type2="SC1" >0.836 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SC3" type2="C1" >0.836 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SC3" type2="SC1" >0.627 4.3</Pair>                                                   
+   <Pair ver="1.0" ref="r1" type1="C2" type2="C2" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C2" type2="SC2" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC2" type2="SC2" >0.627 4.3</Pair>
+   <Pair ver="1.0" ref="r1" type1="C2" type2="C1" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="C2" type2="SC1" >0.836 4.7</Pair>
+   <Pair ver="1.0" ref="r1" type1="SC2" type2="C1" >0.836 4.7</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SC2" type2="SC1" >0.627 4.3</Pair>                                                   
+   <Pair ver="1.0" ref="r1" type1="C1" type2="C1" >0.836 4.7</Pair>               
+   <Pair ver="1.0" ref="r1" type1="C1" type2="SC1" >0.836 4.7</Pair>            
+   <Pair ver="1.0" ref="r1" type1="SC1" type2="SC1" >0.627 4.3</Pair>            
+ </NonBonds>
+  <Charges scale12="0.000000" scale13="1.0" scale14="1.0">
+ </Charges>
+</ForceField>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="TeamFF" version="1.0" systemType="atomistic" hasAutomaticParameters="true" hasTransferableParameters="true" hasBondIncrements="true">
+ <Handler command="dffdb2E.exe %1" database="TEAM_MS.dffdb" table="TEAM_MS"/>
+ <NonBonds scale12="0.0" scale13="0.0" scale14="1.0" combination="arithmetic" />
+ <Charges scale12="0.0" scale13="0.0" scale14="0.5" />
+</ForceField>

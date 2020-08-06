@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="Raos et al. library" version="1.0" systemType="mesoscale">
+ <AtomTypes>
+  <Type name="?" mass="0.0">
+    <Template pattern="(&gt;*)" comment="anything"/>
+  </Type>
+  <Type name="filler" mass="1.0">
+    <Template pattern="(&gt;*)" comment="filler bead"/>
+  </Type>
+  <Type name="polymer" mass="1.0">
+    <Template pattern="(&gt;*)" comment="polymer bead"/>
+  </Type>
+  <Precedence>(?(filler)(polymer))</Precedence>
+ </AtomTypes>
+ <DPDPairs type="dpd" formula="" parameters="A gamma">
+  <DPDPair ver="1.0" ref="r1" type1="polymer" type2="polymer">50.0 4.5</DPDPair>
+  <DPDPair ver="1.0" ref="r1" type1="filler" type2="filler">50.0 4.5</DPDPair>
+  <DPDPair ver="1.0" ref="r1" type1="polymer" type2="filler">72.0 4.5</DPDPair>
+ </DPDPairs>
+ <Bonds type="harmonic" formula="k*(r-r0)^2" parameters="k r0">
+  <Bond ver="1.0" ref="r1" type1="filler" type2="filler">60.0 0.7071</Bond>
+  <Bond ver="1.0" ref="r1" type1="polymer" type2="polymer">4.0 0.0</Bond>
+  <Bond ver="1.0" ref="r1" type1="polymer" type2="filler">4.0 0.0</Bond>
+ </Bonds>
+ <References>
+  <Reference id="r1" authors="G. Raos, M. Moreno and S. Elli" journal="Macromolecules" year="2006" volume="39" pages="6744-6751"/>
+ </References>
+</ForceField>

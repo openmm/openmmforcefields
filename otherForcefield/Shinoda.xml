@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="Shinoda" class="1" systemType="CoarseGrained" version="1.0">
+ <AtomTypes>
+  <Type name="?" mass="0.0">
+    <Template pattern="(>*)" comment="anything" />
+  </Type>
+  <Type name="W" mass="54.05">
+    <Template pattern="(>*)" comment="three water molecules" />
+  </Type>    
+  <Type name="SO3" mass="80.06">  
+    <Template pattern="(>*)" comment="SO3- head group" />
+  </Type>
+  <Type name="CAM" mass="38.05">
+    <Template pattern="(>*)" comment="-HC=C(-)-CH= branched ring type bead" />
+  </Type>  
+  <Type name="CMT" mass="41.07">
+    <Template pattern="(>*)" comment="-CH2-C(-)H-CH2- branched" />
+  </Type>
+  <Type name="CMY" mass="42.08">
+    <Template pattern="(>*)" comment="-CH2-C(-)H-CH3 branched tail group" />
+  </Type>
+  <Type name="CM4" mass="56.11">
+    <Template pattern="(>*)" comment="-CH2-C(-)H-CH2-CH3 branched tail group" />
+  </Type>
+  <Type name="CM3" mass="42.08">
+    <Template pattern="(>*)" comment="-CH2-CH2-CH2-" />
+  </Type>  
+  <Type name="CT2" mass="29.06">
+    <Template pattern="(>*)" comment="CH3CH2-" />
+  </Type>
+  <Type name="CTB" mass="29.06">
+    <Template pattern="(>*)" comment="same composition with CT2, but shorter bond length with CMT, CMY and CM4" />
+  </Type>
+  <Type name="CT3" mass="43.09">
+    <Template pattern="(>*)" comment="CH3CH2CH2-" />
+  </Type>  
+  <Type name="CTC" mass="42.09">
+    <Template pattern="(>*)" comment="same composition with CT3, but shorter bond length with CMT, CMY and CM4" />
+  </Type>
+  <Type name="CT4" mass="57.11">
+    <Template pattern="(>*)" comment="CH3CH2CH2CH2-" />
+  </Type>      
+  <Type name="CAT" mass="39.06">
+    <Template pattern="(>*)" comment="-HC=CH-CH= ring type bead" />
+  </Type>
+  <Type name="CAX" mass="53.08">
+    <Template pattern="(>*)" comment="=CH-C(-CH3)=CH- ring type bead" />
+  </Type>
+  <Type name="CMD2" mass="26.04">  
+    <Template pattern="(>*)" comment="-HC=CH- (cis)" />
+  </Type>
+  <Type name="EST1" mass="58.04">  
+    <Template pattern="(>*)" comment="-CH2CO2- in the sn-2 chain" />
+  </Type>
+  <Type name="EST2" mass="46.03">  
+    <Template pattern="(>*)" comment="-H2CO2- in the sn-1 chain" />
+  </Type>
+  <Type name="GL" mass="41.07">  
+    <Template pattern="(>*)" comment="-CH2CH-CH2-" />
+  </Type>
+  <Type name="PH" mass="94.97">  
+    <Template pattern="(>*)" comment="-PO4-" />
+  </Type>
+  <Type name="PHE" mass="94.97">  
+    <Template pattern="(>*)" comment="-PO4- for PE headgroup" />
+  </Type>
+  <Type name="NH" mass="45.08">  
+    <Template pattern="(>*)" comment="-CH2CH2-NH3" />
+  </Type>
+  <Type name="NC" mass="87.16">  
+    <Template pattern="(>*)" comment="-CH2CH2-N-(CH3)3" />
+  </Type>
+  <Type name="SOD" mass="77.04">  
+    <Template pattern="(>*)" comment="Na+ (H2O)3" />
+  </Type>
+  <Type name="OA" mass="31.03">  
+    <Template pattern="(>*)" comment="HOCH2-" />
+  </Type>
+  <Type name="EO" mass="44.05">  
+    <Template pattern="(>*)" comment="-CH2-O-CH2-" />
+  </Type>
+  <Type name="EOT" mass="45.06">  
+    <Template pattern="(>*)" comment="CH3-O-CH2-" />
+  </Type>
+  <Precedence>(?(W)(SO3)(CAM)(CMT)(CMY)(CM4)(CM3)(CT2)(CTB)(CT3)(CTC)(CT4)(CAT)(CAX)(CMD2)(EST1)(EST2)(GL)(PH)(PHE)(NH)(NC)(SOD)(OA)(EO)(EOT))</Precedence>
+  </AtomTypes>
+ 
+ <Bonds type="harmonic" formula="k*(r-r0)^2" parameters="k r0">
+  <Bond ver="2.0" ref="r1" type1="CT2" type2="CM3">9.60 3.13</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT2" type2="CT3">9.50 3.16</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM3" type2="CM3">6.20 3.651</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT3" type2="CM3">6.20 3.691</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT3" type2="CT3">6.955 3.71</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT4" type2="CT2">6.00 3.72</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT4" type2="CM3">5.00 4.23</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT4" type2="CT3">4.50 4.27</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT4" type2="CT4">3.40 4.785</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CMY">58.00 2.43</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CT2">9.75 3.060</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CTB">36.50 2.525</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CT3">6.50 3.650</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CTC">19.85 3.100</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CT2">8.70 3.071</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CTB">34.00 2.524</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CT3">6.02 3.637</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CTC">18.00 3.136</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CTY">59.40 2.500</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMT" type2="CT4">4.80 4.160</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM4" type2="CT2">5.00 3.552</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM4" type2="CTB">8.75 2.794</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM4" type2="CT3">3.78 4.109</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM4" type2="CTC">6.80 3.403</Bond>
+  <Bond ver="2.0" ref="r1" type1="CTY" type2="CTY">42.10 2.565</Bond>
+  <Bond ver="2.0" ref="r1" type1="CTY" type2="CT2">39.00 2.552</Bond>
+  <Bond ver="2.0" ref="r1" type1="CTY" type2="CM3">20.00 3.130</Bond>
+  <Bond ver="2.0" ref="r1" type1="CTY" type2="CT3">18.00 3.160</Bond>
+  <Bond ver="2.0" ref="r1" type1="CTY" type2="CT4">12.00 3.730</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAX" type2="CAX">81.00 3.060</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAX" type2="CAT">92.60 2.524</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAX" type2="CAM">190.0 2.485</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAT" type2="CAT">106.5 1.985</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAT" type2="CAM">190.0 1.947</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CAM">345.0 1.910</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CTY">108.0 2.445</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CT2">92.0 2.416</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CT3">8.03 3.000</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CT4">6.00 3.535</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CM3">9.40 2.960</Bond>
+  <Bond ver="2.0" ref="r1" type1="SO3" type2="CM3">11.00 3.065</Bond>
+  <Bond ver="2.0" ref="r1" type1="SO3" type2="CAM">138.5 2.522</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CMT">92.5 2.392</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM3" type2="CMT">6.00 3.550</Bond>
+  <Bond ver="2.0" ref="r1" type1="CAM" type2="CMY">92.50 2.390</Bond>
+  <Bond ver="2.0" ref="r1" type1="CMY" type2="CM3">6.00 3.580</Bond>
+  <Bond ver="2.0" ref="r1" type1="CM4" type2="CM3">6.00 3.570</Bond>
+  <Bond ver="2.0" ref="r1" type1="NC" type2="PH">4.80 4.25</Bond>
+  <Bond ver="2.0" ref="r1" type1="PH" type2="CM3">12.00 3.69</Bond>
+  <Bond ver="2.0" ref="r1" type1="PH" type2="GL">8.90 3.52</Bond>
+  <Bond ver="2.0" ref="r1" type1="GL" type2="EST1">30.00 2.88</Bond>
+  <Bond ver="2.0" ref="r1" type1="GL" type2="EST2">8.40 3.48</Bond>
+  <Bond ver="2.0" ref="r1" type1="EST1" type2="CM3">4.70 3.55</Bond>
+  <Bond ver="2.0" ref="r1" type1="EST2" type2="CM3">5.10 3.61</Bond>
+  <Bond ver="2.0" ref="r1" type1="NH" type2="PHE">9.40 3.60</Bond>
+  <Bond ver="2.0" ref="r1" type1="PHE" type2="GL">8.90 3.52</Bond>     
+  <Bond ver="2.0" ref="r1" type1="CMD2" type2="CM3">8.00 3.03</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT3" type2="CMD2">8.00 3.09</Bond>
+  <Bond ver="2.0" ref="r1" type1="OA" type2="OA">63.00 2.16</Bond>
+  <Bond ver="2.0" ref="r1" type1="EOT" type2="EOT">5.50 3.33</Bond>
+  <Bond ver="2.0" ref="r1" type1="EOT" type2="EO">5.40 3.34</Bond>
+  <Bond ver="2.0" ref="r1" type1="EO" type2="EO">4.90 3.28</Bond>
+  <Bond ver="2.0" ref="r1" type1="EO" type2="OA">15.00 2.79</Bond>
+  <Bond ver="2.0" ref="r1" type1="CT3" type2="EO">7.10 3.61</Bond>  
+  <Bond ver="2.0" ref="r1" type1="CM3" type2="EO">7.10 3.56</Bond>  
+  <Bond ver="2.0" ref="r1" type1="CT2" type2="EO">10.00 3.07</Bond>  
+  <Bond ver="2.0" ref="r1" type1="CT3" type2="OA">6.955 3.05</Bond>  
+  <Bond ver="2.0" ref="r1" type1="CM3" type2="OA">7.500 3.01</Bond>  
+  <Bond ver="2.0" ref="r1" type1="CT2" type2="OA">14.000 2.53</Bond>  
+ </Bonds>
+ <Angles type="harmonic" formula="k*(th-th0)^2" parameters="k th0"> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="CT2">1.50 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="CM3">1.44 179.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM3" type3="CT2">1.35 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM3" type3="CT3">1.20 181.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM3" type3="CM3">1.23 180.1</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="CM3" type3="CM3">1.22 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CM3" type3="CM3">1.20 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CM3" type3="CT3">1.20 182.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CM3" type3="CT4">1.00 181.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CTY" type2="CM3" type3="CT2">4.10 160.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CTY" type2="CM3" type3="CT3">3.00 162.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CTY" type2="CM3" type3="CT4">2.50 164.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMY" type3="CMY">4.00 127.1</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMY" type3="CTB">3.05 120.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMY" type3="CTC">3.10 120.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMY" type3="CTB">2.75 121.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMY" type3="CTC">2.90 121.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CT2">2.19 155.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CT3">1.95 158.5</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CT4">1.93 157.9</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMT" type3="CT3">2.00 158.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMT" type3="CT4">1.90 158.5</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CTB">2.95 129.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMT" type3="CTB">2.75 133.9</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CMT" type3="CTB">2.70 133.8</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CTC">3.15 128.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMT" type3="CTC">3.00 130.5</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CMT" type3="CTC">2.80 132.3</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CTY">4.30 136.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM4" type3="CTB">5.50 93.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM4" type3="CTC">5.45 96.00</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM4" type3="CTB">5.12 94.90</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM4" type3="CTC">4.80 97.90</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAX" type2="CAM" type3="CT2">47.0 163.8</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAX" type2="CAM" type3="CT3">19.5 160.7</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAX" type2="CAM" type3="CT4">11.0 158.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAX" type2="CAM" type3="CTY">80.0 170.3</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CTY">94.0 170.1</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CT2">48.5 163.3</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CT3">20.0 162.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAT" type2="CAM" type3="CTY">79.0 170.4</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAT" type2="CAM" type3="CT2">50.0 163.5</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAT" type2="CAM" type3="CT3">19.0 160.8</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAT" type2="CAM" type3="CT4">10.5 157.5</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAT" type2="CAM" type3="CM3">20.9 161.4</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CM3" type3="CT2">3.80 152.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CM3" type3="CM3">2.70 157.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CM3" type3="CT3">2.70 157.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CM3" type3="CT4">2.15 160.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CM3" type3="CT2">1.80 175.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CM3" type3="CM3">1.60 175.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CM3" type3="CT3">1.60 175.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CM3" type3="CT4">1.60 175.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CAM" type3="CAM">101.0 177.6</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CMT">99.5 169.9</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CMY">99.5 169.9</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CAM" type3="CM4">90.0 169.9</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CMT" type3="CT2">0.75 100.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CMT" type3="CT3">0.75 150.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CMT" type3="CM3">0.75 159.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CMT" type3="CT4">0.90 154.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CMY" type3="CM3">0.80 104.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CAM" type2="CM4" type3="CM3">0.80 111.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMT" type3="CM3">2.00 185.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMT" type3="CM3">1.70 185.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT4" type2="CMT" type3="CM3">2.00 175.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CMT" type2="CM3" type3="CT2">1.10 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CMT" type2="CM3" type3="CT3">1.13 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CMT" type2="CM3" type3="CT4">1.00 180.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CMY" type2="CM3" type3="CM3">1.10 182.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CM4" type2="CM3" type3="CM3">1.10 183.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="SO3" type2="CAM" type3="CAX">105.0 177.0</Angle>   
+  <Angle ver="2.0" ref="r1" type1="NC" type2="PH" type3="CM3">3.300 112.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="PH" type2="CM3" type3="CM3">1.100 178.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="NC" type2="PH" type3="GL">3.100 112.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="PH" type2="GL" type3="EST1">1.400 124.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="PH" type2="GL" type3="EST2">2.000 138.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="GL" type2="EST1" type3="CM3">0.800 168.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="GL" type2="EST2" type3="CM3">0.800 172.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="EST1" type2="GL" type3="EST2">1.000 95.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="EST1" type2="CM3" type3="CM3">1.000 178.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="EST2" type2="CM3" type3="CM3">1.000 178.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="NH" type2="PHE" type3="GL">4.000 102.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="PHE" type2="GL" type3="EST1">1.400 124.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="PHE" type2="GL" type3="EST2">2.000 138.0</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="CM3" type3="CM3">1.190 173.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="CM3" type3="CT3">1.190 175.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="CM3">1.600 172.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="CT3">1.600 172.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="CT2">1.700 173.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CM3" type3="CT3">1.093 175.500000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="CMD2" type3="CT3">7.700 116.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CMD2" type3="CT2">12.000 110.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CMD2" type2="CM3" type3="CM3">1.900 161.000000</Angle> 
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="CMD2" type3="CM3">6.000 110.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="EO" type2="EO" type3="EOT">3.500 135.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="EO" type2="EO" type3="EO">3.400 132.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="EOT" type2="EO" type3="EOT">3.500 134.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="OA" type2="EO" type3="OA">6.600 131.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="EO" type2="EO" type3="OA">3.000 131.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CT3" type2="EO" type3="EO">2.200 145.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="EO">1.300 178.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="EO" type3="CM">1.800 171.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="EO" type3="CT2">2.600 165.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="OA" type2="EO" type3="CT2">4.000 146.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="CM3" type3="EO">1.500 172.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CM3" type2="EO" type3="EO">3.200 146.000000</Angle>   
+  <Angle ver="2.0" ref="r1" type1="CT2" type2="CM3" type3="OA">1.800 166.000000</Angle>   
+ </Angles>
+ <NonBonds combination="arithmetic" scale12="0.000000" scale13="0.000000" scale14="1.000000" type="sdk_lj_12_4" formula="3*sqrt(3)/2*eps*[(sigma/r)^12-(sigma/r)^4]" parameters="eps sigma">
+   <Pair ver="1.0" ref="r1" type1="W" type2="W" >0.895 4.371</Pair>               
+   <Pair ver="1.0" ref="r1" type1="W" type2="CT2" >0.283 4.300</Pair>                  
+   <Pair ver="1.0" ref="r1" type1="W" type2="CTB" >0.283 4.300</Pair>                  
+   <Pair ver="1.0" ref="r1" type1="W" type2="CM3" >0.360 4.436</Pair>            
+   <Pair ver="1.0" ref="r1" type1="W" type2="CT3" >0.364 4.476</Pair>
+   <Pair ver="1.0" ref="r1" type1="W" type2="CTC" >0.364 4.476</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CTY" >0.334 4.624</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CMT" >0.286 4.576</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CMY" >0.296 4.616</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CM4" >0.370 4.746</Pair>      
+   <Pair ver="1.0" ref="r1" type1="W" type2="CT4" >0.433 4.622</Pair>      
+   <Pair ver="1.0" ref="r1" type1="W" type2="CAX" >0.445 4.553</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CAT" >0.370 4.406</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="CAM" >0.330 4.586</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="W" >1.100 4.100</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="SOD" >0.700 4.000</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CT2" >0.283 4.300</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CM3" >0.360 4.436</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CT3" >0.364 4.476</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CT4" >0.433 4.622</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CTY" >0.334 4.624</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CMT" >0.286 4.576</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CMY" >0.296 4.616</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CM4" >0.370 4.746</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CAM" >0.330 4.586</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CAX" >0.445 4.551</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="SOD" >0.350 4.371</Pair>
+   <Pair ver="1.0" ref="r1" type1="CLA" type2="CLA" >0.350 4.371</Pair>
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="CLA" >0.895 4.371</Pair>   
+   <Pair ver="1.0" ref="r1" type1="SOD" type2="W" >0.895 4.371</Pair>
+   <Pair ver="1.0" ref="r1" type1="CLA" type2="W" >0.895 4.371</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PH" type2="W" >1.000 4.0300</Pair>            
+   <Pair ver="1.0" ref="r1" type1="NC" type2="W" >0.900 4.6100</Pair>            
+   <Pair ver="1.0" ref="r1" type1="GL" type2="W" >0.640 4.4385</Pair>            
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="W" >1.000 4.0300</Pair>            
+   <Pair ver="1.0" ref="r1" type1="NH" type2="W" >0.800 3.9500</Pair>            
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="W" >0.270 4.1880</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="W" >0.820 4.2900</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="W" >0.820 4.2900</Pair>
+   <Pair ver="1.0" ref="r1" type1="W" type2="OA" >0.700 3.9500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="W" type2="EO" >0.570 4.3100</Pair>   
+ </NonBonds>
+ <NonBonds combination="arithmetic" scale12="0.000000" scale13="0.000000" scale14="1.000000" type="sdk_lj_9_6" formula="27/4*eps*[(sigma/r)^9-(sigma/r)^6]" parameters="eps sigma">
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="CT2" >0.3020 4.230</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="CTB" >0.3020 4.230</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CTB" type2="CTB" >0.3020 4.230</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="CM3" >0.3624 4.365</Pair>    
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="CT3" >0.3763 4.405</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="CTC" >0.3763 4.405</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTB" type2="CT3" >0.3763 4.405</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTB" type2="CTC" >0.3763 4.405</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM3" type2="CM3" >0.4350 4.500</Pair>        
+   <Pair ver="1.0" ref="r1" type1="CM3" type2="CT3" >0.4517 4.540</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CT3" type2="CT3" >0.4690 4.580</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT3" type2="CTC" >0.4690 4.580</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CTC" type2="CTC" >0.4690 4.580</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CT2" >0.4355 4.551</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CTB" >0.4355 4.551</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CM3" >0.5227 4.686</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CT3" >0.5427 4.726</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CTC" >0.5427 4.726</Pair>
+   <Pair ver="1.0" ref="r1" type1="CT4" type2="CT4" >0.6280 4.872</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTY" type2="CTY" >0.3580 4.878</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTY" type2="CT2" >0.3288 4.554</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTY" type2="CM3" >0.4046 4.689</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTY" type2="CT3" >0.4200 4.729</Pair>
+   <Pair ver="1.0" ref="r1" type1="CTY" type2="CT4" >0.5150 4.860</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CMT" >0.2600 4.780</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CT2" >0.2802 4.505</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CTB" >0.2802 4.505</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CT3" >0.3492 4.680</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CTC" >0.3492 4.680</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CTY" >0.3120 4.878</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CT4" >0.4200 4.800</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CMY" >0.2900 4.860</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CT2" >0.2959 4.545</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CTB" >0.2959 4.545</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CT3" >0.3688 4.720</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CTC" >0.3688 4.720</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CM4" >0.4400 5.120</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CT2" >0.3645 4.675</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CTB" >0.3645 4.675</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CT3" >0.4543 4.850</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CTC" >0.4543 4.850</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CAX" >0.5020 4.735</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CAT" >0.4251 4.588</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CAM" >0.3169 4.768</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CT2" >0.3894 4.483</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CT3" >0.5200 4.570</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CT4" >0.6400 4.730</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAX" type2="CTY" >0.4240 4.807</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CAT" >0.3600 4.440</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CAM" >0.2000 4.800</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CAM" >0.2683 4.620</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CTY" >0.2676 4.839</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CTY" >0.3590 4.659</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CT2" >0.2458 4.515</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CT2" >0.3297 4.335</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CM3" >0.2950 4.650</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CM3" >0.3957 4.470</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CT3" >0.3063 4.690</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CT3" >0.4109 4.510</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CT4" >0.3644 4.756</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAT" type2="CT4" >0.4855 4.576</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CMT" >0.2280 4.790</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CMY" >0.2408 4.830</Pair>
+   <Pair ver="1.0" ref="r1" type1="CAM" type2="CM4" >0.2966 4.960</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMT" type2="CM3" >0.3363 4.640</Pair>
+   <Pair ver="1.0" ref="r1" type1="CMY" type2="CM3" >0.3552 4.680</Pair>
+   <Pair ver="1.0" ref="r1" type1="CM4" type2="CM3" >0.4374 4.810</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="SO3" >0.5000 5.000</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CT2" >0.1554 4.615</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CM3" >0.1865 4.750</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CT3" >0.1937 4.790</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CT4" >0.2241 4.936</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CTY" >0.1692 4.939</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CAM" >0.1264 4.900</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CAX" >0.2000 4.865</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CMT" >0.1442 4.890</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CMY" >0.1523 4.930</Pair>
+   <Pair ver="1.0" ref="r1" type1="SO3" type2="CM4" >0.1876 5.060</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PH" type2="CM3" >0.300 4.9530</Pair>            
+   <Pair ver="1.0" ref="r1" type1="PH" type2="CT3" >0.320 4.9925</Pair>            
+   <Pair ver="1.0" ref="r1" type1="NC" type2="CM3" >0.400 5.1280</Pair>            
+   <Pair ver="1.0" ref="r1" type1="NC" type2="CT3" >0.420 5.1675</Pair>            
+   <Pair ver="1.0" ref="r1" type1="PH" type2="PH" >1.400 5.4000</Pair>
+   <Pair ver="1.0" ref="r1" type1="NC" type2="NC" >0.700 5.7500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NC" type2="PH" >1.150 4.2000</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="GL" >0.420 4.5060</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="EST1" >0.470 4.4030</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="EST2" >0.470 4.4030</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="CM3" >0.420 4.5060</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="CT3" >0.444 4.5455</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="CT2" >0.362 4.3635</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PH" type2="CT2" >0.280 4.8105</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NC" type2="CT2" >0.320 4.9855</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="GL" >0.312 4.2555</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="EST1" >0.440 4.0050</Pair>   
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="EST2" >0.440 4.0050</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PH" type2="CMD2" >0.300 4.7025</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NC" type2="CMD2" >0.350 4.8775</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="NC" >0.650 4.6200</Pair>   
+   <Pair ver="1.0" ref="r1" type1="GL" type2="PH" >0.300 4.7500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="NC" >0.750 4.4750</Pair>   
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="NC" >0.750 4.4750</Pair>   
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="PH" >0.500 4.5500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="PH" >0.500 4.5500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="PHE" >1.400 4.6000</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="CM3" >0.300 4.9530</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="CMD2" >0.300 4.7025</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="CT3" >0.320 4.9925</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="CT2" >0.280 4.8105</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="GL" >0.300 4.7500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="EST1" >0.500 4.5500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="PHE" type2="EST2" >0.500 4.5500</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="CM3" >0.330 4.5530</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="CMD2" >0.300 4.3025</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="CT2" >0.320 4.4105</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="CT3" >0.340 4.5925</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="NH" >1.100 4.6000</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="PHE" >1.200 3.8000</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="GL" >0.750 4.1900</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="EST1" >0.850 4.1100</Pair>   
+   <Pair ver="1.0" ref="r1" type1="NH" type2="EST2" >0.850 4.1100</Pair>    
+   <Pair ver="1.0" ref="r1" type1="PH" type2="PHE" >1.400 5.0000</Pair>    
+   <Pair ver="1.0" ref="r1" type1="NH" type2="PH" >1.200 3.8000</Pair>    
+   <Pair ver="1.0" ref="r1" type1="NC" type2="PHE" >1.150 4.2000</Pair>    
+   <Pair ver="1.0" ref="r1" type1="NC" type2="NH" >0.880 5.1750</Pair>                     
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="CMD2" >0.232 4.0050</Pair>            
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="CT3" >0.330 4.2950</Pair>            
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="CT2" >0.269 4.1130</Pair>            
+   <Pair ver="1.0" ref="r1" type1="CMD2" type2="CM3" >0.312 4.2555</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="CM3" >0.470 4.4030</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="CM3" >0.470 4.4030</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="CT3" >0.470 4.4425</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="CT3" >0.470 4.4425</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="CT2" >0.390 4.2605</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="CT2" >0.390 4.2605</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="EST1" >0.495 4.3000</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST1" type2="EST2" >0.495 4.3000</Pair>            
+   <Pair ver="1.0" ref="r1" type1="EST2" type2="EST2" >0.495 4.3000</Pair>
+   <Pair ver="1.0" ref="r1" type1="OA" type2="OA" >0.4491 3.7130</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EOT" type2="EOT" >0.4370 4.2500</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="EO" >0.4050 4.2500</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="EOT" >0.4200 4.2500</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="OA" >0.4400 3.8900</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="CT3" >0.4100 4.3400</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="CM3" >0.3770 4.2740</Pair>      
+   <Pair ver="1.0" ref="r1" type1="EO" type2="CT2" >0.3700 4.1400</Pair>      
+   <Pair ver="1.0" ref="r1" type1="CT3" type2="OA" >0.4372 4.0330</Pair>      
+   <Pair ver="1.0" ref="r1" type1="CM3" type2="OA" >0.3650 3.9870</Pair>      
+   <Pair ver="1.0" ref="r1" type1="CT2" type2="OA" >0.3800 3.8400</Pair>      
+ </NonBonds>
+ <Charges scale12="0.000000" scale13="0.0" scale14="1.0">
+ </Charges>
+</ForceField>

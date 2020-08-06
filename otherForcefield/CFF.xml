@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="CFF" class="2" version="1.0" systemType="atomistic">
+ <Handler command="dffdb2.exe %1" table="T_CFF"/>
+</ForceField>

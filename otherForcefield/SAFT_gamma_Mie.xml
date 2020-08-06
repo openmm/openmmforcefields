@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForceField name="SAFT_gamma_Mie" systemType="CoarseGrained" version="1.0">
+ <AtomTypes>
+  <Type name="?" mass="0.0">
+  <Template pattern="(>*)" comment="anything" />
+  </Type>
+  <Type name="C1" mass="16.04">
+  <Template pattern="(>*)" comment="Μethane modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="C2" mass="30.07">
+  <Template pattern="(>*)" comment="Εthane modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="C3" mass="44.1">
+  <Template pattern="(>*)" comment="Propane modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="C4" mass="29.06">
+  <Template pattern="(>*)" comment="Butane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="C5a" mass="36.075">
+  <Template pattern="(>*)" comment="Pentane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="C5b" mass="36.075">
+  <Template pattern="(>*)" comment="Pentane modeled with 2 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type> 
+  <Type name="C6a" mass="43.09">
+  <Template pattern="(>*)" comment="Hexane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type> 
+<Type name="C6b" mass="43.09">
+  <Template pattern="(>*)" comment="Hexane modeled with 2 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>  
+  <Type name="C7a" mass="50.105">
+  <Template pattern="(>*)" comment="Heptane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type> 
+<Type name="C7b" mass="50.105">
+  <Template pattern="(>*)" comment="Heptane modeled with 2 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>  
+  <Type name="C8a" mass="38.077">
+  <Template pattern="(>*)" comment="Octane modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C8b" mass="38.077">
+  <Template pattern="(>*)" comment="Octane modeled with 3 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type> 
+  <Type name="C9a" mass="42.73">  
+  <Template pattern="(>*)" comment="Nonane modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C9b" mass="42.73">  
+  <Template pattern="(>*)" comment="Nonane modeled with 3 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C10a" mass="47.43">  
+  <Template pattern="(>*)" comment="Decane modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C10b" mass="47.43">  
+  <Template pattern="(>*)" comment="Decane modeled with 3 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C11a" mass="39.078"> 
+  <Template pattern="(>*)" comment="Undecane modeled with 4 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C11b" mass="39.078"> 
+  <Template pattern="(>*)" comment="Undecane modeled with 4 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C12a" mass="42.585"> 
+  <Template pattern="(>*)" comment="Dodecane modeled with 4 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C12b" mass="42.585"> 
+  <Template pattern="(>*)" comment="Dodecane modeled with 4 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C13" mass="46.0925">  
+  <Template pattern="(>*)" comment="Tridecane modeled with 4 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C14a" mass="39.678">  
+  <Template pattern="(>*)" comment="Tetradecane modeled with 5 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C14b" mass="39.678">  
+  <Template pattern="(>*)" comment="Tetradecane modeled with 5 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C15" mass="42.484">  
+  <Template pattern="(>*)" comment="Pentadecane modeled with 5 beads - DOI: 10.1016/j.jct.2015.10.011" />
+  </Type>
+  <Type name="C16" mass="45.28">  
+  <Template pattern="(>*)" comment="Hexadecane modeled with 5 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C18" mass="42.417">  
+  <Template pattern="(>*)" comment="Octadecane modeled with 6 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="C20" mass="47.09">  
+  <Template pattern="(>*)" comment="Eicosane modeled with 6 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="Be1" mass="78.11">  
+  <Template pattern="(>*)" comment="Benzene modeled with 1 bead - DOI: 10.1080/00268976.2012.662303" />
+  </Type>
+  <Type name="Be2" mass="39.055">
+  <Template pattern="(>*)" comment="Benzene modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Be3" mass="26.037">
+  <Template pattern="(>*)" comment="Benzene modeled with 3 beads - DOI: 10.1080/00268976.2012.662303" />
+  </Type>  
+  <Type name="Tol1" mass="46.07">
+  <Template pattern="(>*)" comment="Toluene modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="Tol2" mass="30.71">
+  <Template pattern="(>*)" comment="Toluene modeled with 3 beads - DOI: 10.1016/j.fluid.2017.06.016" />
+  </Type>
+  <Type name="EtBe" mass="35.39">
+  <Template pattern="(>*)" comment="Ethylbenzene modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="Naph" mass="42.72">
+  <Template pattern="(>*)" comment="Naphtalene modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="N2" mass="28.014">
+  <Template pattern="(>*)" comment="Nitrogen gas modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="CO2a" mass="22.005">
+  <Template pattern="(>*)" comment="Carbon dioxide modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="CO2b" mass="44.01">
+  <Template pattern="(>*)" comment="Carbon dioxide modeled with 1 bead - DOI: 10.1021/jp204908d" />
+  </Type>
+  <Type name="O2" mass="32.0">
+  <Template pattern="(>*)" comment="Oxygen gas modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="CF4" mass="88.004">
+  <Template pattern="(>*)" comment="Carbon tetrafluoride modeled with 1 bead - DOI: 10.1021/jp306442b" />
+  </Type>
+  <Type name="SF6" mass="146.06">
+  <Template pattern="(>*)" comment="Sulfur hexafluoride modeled with 1 bead - DOI: 10.1021/jp306442b" />
+  </Type>
+  <Type name="HFO1234yf" mass="57.0">
+  <Template pattern="(>*)" comment="2,3,3,3-Tetrafluoropropene modeled with 2 beads - DOI: 10.1021/jp306442b" />
+  </Type>
+  <Type name="H2S" mass="34.1">
+  <Template pattern="(>*)" comment="Hydrogen sulphide modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="SO2" mass="64.07">
+  <Template pattern="(>*)" comment="Sulphur dioxide modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="CO" mass="28.01">
+  <Template pattern="(>*)" comment="Carbon monoxide modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>
+  <Type name="He" mass="4.0">
+  <Template pattern="(>*)" comment="Helium modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Ar" mass="39.95">
+  <Template pattern="(>*)" comment="Argon modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Pyr" mass="39.55">
+  <Template pattern="(>*)" comment="Pyridine modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Pyrr" mass="35.56">
+  <Template pattern="(>*)" comment="Pyrrolidine modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Py" mass="33.545">
+  <Template pattern="(>*)" comment="Pyrrole modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Thl" mass="44.085">
+  <Template pattern="(>*)" comment="Thiolane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Thp" mass="42.07">
+  <Template pattern="(>*)" comment="Thiophene modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="iC5" mass="36.075">
+  <Template pattern="(>*)" comment="Isopentane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="iC4" mass="29.06">
+  <Template pattern="(>*)" comment="Isobutane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="cC3" mass="42.08">
+  <Template pattern="(>*)" comment="Cyclopropane modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="cC5" mass="35.05">
+  <Template pattern="(>*)" comment="Cyclopentane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>   
+  <Type name="cC6" mass="42.08">
+  <Template pattern="(>*)" comment="Cyclohexane modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="dC2" mass="28.05">
+  <Template pattern="(>*)" comment="Ethylene modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type> 
+  <Type name="dC3" mass="42.08">
+  <Template pattern="(>*)" comment="Propylene modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="dC5" mass="35.065">
+  <Template pattern="(>*)" comment="1-Pentene modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="dC10" mass="46.755">
+  <Template pattern="(>*)" comment="1-Decene modeled with 3 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="PSba" mass="27.02">
+  <Template pattern="(>*)" comment="Backbone of PS monomer modeled with 1 bead - DOI: 10.1021/acs.macromol.6b02072" />
+  </Type>  
+  <Type name="PSbr" mass="78.06">
+  <Template pattern="(>*)" comment="Branch of PS monomer modeled with 1 bead - DOI: 10.1021/acs.macromol.6b02072" />
+  </Type>  
+  <Type name="W" mass="18.04">
+  <Template pattern="(>*)" comment="Water modeled with 1 bead - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="Wvle" mass="18.04">
+  <Template pattern="(>*)" comment="Water (CGW1-vle(298 K)) modeled with 1 bead - DOI: 10.1080/00268976.2015.1004804" />
+  </Type>  
+  <Type name="Wift" mass="18.04">
+  <Template pattern="(>*)" comment="Water (CGW1-ift(298 K)) modeled with 1 bead - DOI: 10.1080/00268976.2015.1004804" />
+  </Type>  
+  <Type name="Wbio" mass="36.08">
+  <Template pattern="(>*)" comment="Water (CGW2-bio) modeled with 1 bead - DOI: 10.1080/00268976.2015.1004804" />
+  </Type>  
+  <Type name="THF" mass="36.055">
+  <Template pattern="(>*)" comment="Tetrahydrofuran modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  <Type name="DS" mass="31.065">
+  <Template pattern="(>*)" comment="Dimethyl sulfide modeled with 2 beads - DOI: 10.1016/j.fluid.2015.07.014" />
+  </Type>  
+  
+  <Precedence>(? (C1) (C2) (C3) (C4) (C5a) (C5b) (C6a) (C6b) (C7a) (C7b) (C8a) (C8b) (C9a) (C9b) (C10a) (C10b) (C11a) (C11b) (C12a) (C12b) (C13) (C14a) (C14b) (C15) (C16) (C18) (C20) (Be1) (Be2) (Be3) (Tol1) (Tol2) (EtBe) (Naph) (N2) (CO2a) (CO2b) (O2) (CF4) (SF6) (HFO1234yf) (H2S) (SO2) (CO) (He) (Ar) (Pyr) (Pyrr) (Py) (Thl) (Thp) (iC5) (iC4) (cC3) (cC5) (cC6) (dC2) (dC3) (dC5) (dC10) (PSba) (PSbr) (W) (Wvle) (Wift) (Wbio) (THF) (DS))
+  </Precedence>
+ </AtomTypes>
+ <Equivalences order="nonbond bond angle">
+  <Equivalence ver="1.0" name="C1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C5a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C5b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C6a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C6b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C7a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C7b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C8a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C8b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C9a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C9b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C10a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C10b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C11a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C11b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C12a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C12b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C13"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C14a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C14b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C15"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C16"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C18"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="C20"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Be1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Be2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Be3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Tol1"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Tol2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="EtBe"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Naph"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="N2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="CO2a"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="CO2b"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="O2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="CF4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SF6"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="HFO1234yf"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="H2S"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="SO2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="CO"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="He"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Ar"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Pyr"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Pyrr"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Py"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Thl"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Thp"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="iC5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="iC4"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="cC3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="cC5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="cC6"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="dC2"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="dC3"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="dC5"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="dC10"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="PSba"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="PSbr"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="W"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Wvle"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Wift"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="Wbio"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="THF"> * * * </Equivalence>
+  <Equivalence ver="1.0" name="DS"> * * * </Equivalence>
+ </Equivalences>
+  <Bonds type="harmonic" formula="k*(r-r0)^2" parameters="k r0">
+  <Bond ver="2.0" ref="r1" type1="C4" type2="C4">42.1 3.961</Bond>
+  <Bond ver="2.0" ref="r1" type1="C5a" type2="C5a">42.1 4.248</Bond>
+  <Bond ver="2.0" ref="r1" type1="C5b" type2="C5b">0.0754 4.2449</Bond>
+  <Bond ver="2.0" ref="r1" type1="C6a" type2="C6a">42.1 4.508</Bond>
+  <Bond ver="2.0" ref="r1" type1="C6b" type2="C6b">0.0754 4.5089</Bond>
+  <Bond ver="2.0" ref="r1" type1="C7a" type2="C7a">42.1 4.766</Bond>
+  <Bond ver="2.0" ref="r1" type1="C7b" type2="C7b">0.0754 4.5736</Bond>
+  <Bond ver="2.0" ref="r1" type1="C8a" type2="C8a">42.1 4.227</Bond>
+  <Bond ver="2.0" ref="r1" type1="C8b" type2="C8b">0.0754 4.2412</Bond>
+  <Bond ver="2.0" ref="r1" type1="C9a" type2="C9a">42.1 4.406</Bond>
+  <Bond ver="2.0" ref="r1" type1="C9b" type2="C9b">0.0754 4.4212</Bond>
+  <Bond ver="2.0" ref="r1" type1="C10a" type2="C10a">42.1 4.584</Bond>
+  <Bond ver="2.0" ref="r1" type1="C10b" type2="C10b">0.0754 4.4908</Bond>
+  <Bond ver="2.0" ref="r1" type1="C11a" type2="C11a">42.1 4.216</Bond>
+  <Bond ver="2.0" ref="r1" type1="C11b" type2="C11b">0.0754 4.2212</Bond>
+  <Bond ver="2.0" ref="r1" type1="C12a" type2="C12a">42.1 4.351</Bond>
+  <Bond ver="2.0" ref="r1" type1="C12b" type2="C12b">0.0754 4.3635</Bond>
+  <Bond ver="2.0" ref="r1" type1="C13" type2="C13">0.0754 4.4680</Bond>
+  <Bond ver="2.0" ref="r1" type1="C14a" type2="C14a">42.1 4.183</Bond>
+  <Bond ver="2.0" ref="r1" type1="C14b" type2="C14b">0.0754 4.2332</Bond>
+  <Bond ver="2.0" ref="r1" type1="C15" type2="C15">0.0754 4.3286</Bond>
+  <Bond ver="2.0" ref="r1" type1="C16" type2="C16">42.1 4.432</Bond>
+  <Bond ver="2.0" ref="r1" type1="C18" type2="C18">42.1 4.262</Bond>
+  <Bond ver="2.0" ref="r1" type1="C20" type2="C20">42.1 4.487</Bond>
+  <Bond ver="2.0" ref="r1" type1="Be2" type2="Be2">42.1 3.978</Bond>
+  <Bond ver="2.0" ref="r1" type1="Be3" type2="Be3">42.1 3.490</Bond>
+  <Bond ver="2.0" ref="r1" type1="Tol1" type2="Tol1">42.1 4.266</Bond>
+  <Bond ver="2.0" ref="r1" type1="Tol2" type2="Tol2">42.1 3.679</Bond>
+  <Bond ver="2.0" ref="r1" type1="EtBe" type2="EtBe">42.1 3.837</Bond>
+  <Bond ver="2.0" ref="r1" type1="Naph" type2="Naph">42.1 3.932</Bond>
+  <Bond ver="2.0" ref="r1" type1="CO2a" type2="CO2a">42.1 2.848</Bond>
+  <Bond ver="2.0" ref="r1" type1="HFO1234yf" type2="HFO1234yf">42.1 3.90</Bond>
+  <Bond ver="2.0" ref="r1" type1="SO2" type2="SO2">42.1 3.091</Bond>
+  <Bond ver="2.0" ref="r1" type1="Pyr" type2="Pyr">42.1 3.899</Bond>
+  <Bond ver="2.0" ref="r1" type1="Pyrr" type2="Pyrr">42.1 3.914</Bond>
+  <Bond ver="2.0" ref="r1" type1="Py" type2="Py">42.1 3.771</Bond>
+  <Bond ver="2.0" ref="r1" type1="Thl" type2="Thl">42.1 4.012</Bond>
+  <Bond ver="2.0" ref="r1" type1="Thp" type2="Thp">42.1 3.832</Bond>
+  <Bond ver="2.0" ref="r1" type1="iC5" type2="iC5">0.0754 4.236</Bond>
+  <Bond ver="2.0" ref="r1" type1="iC4" type2="iC4">42.1 3.974</Bond>
+  <Bond ver="2.0" ref="r1" type1="cC5" type2="cC5">42.1 3.992</Bond>
+  <Bond ver="2.0" ref="r1" type1="cC6" type2="cC6">42.1 4.234</Bond>
+  <Bond ver="2.0" ref="r1" type1="dC5" type2="dC5">42.1 4.183</Bond>
+  <Bond ver="2.0" ref="r1" type1="PSba" type2="PSba">47.8 4.18</Bond>
+  <Bond ver="2.0" ref="r1" type1="PSbr" type2="PSbr">47.8 4.22</Bond>
+  <Bond ver="2.0" ref="r1" type1="dC10" type2="dC10">42.1 4.516</Bond>
+  <Bond ver="2.0" ref="r1" type1="THF" type2="THF">42.1 3.840</Bond>
+  <Bond ver="2.0" ref="r1" type1="DS" type2="DS">42.1 3.661</Bond>
+ </Bonds>
+ <Angles type="harmonic" formula="k*(th-th0)^2" parameters="k th0"> 
+  <Angle ver="2.0" ref="r1" type1="*" type2="*" type3="*">2.65 157.6</Angle> 
+ </Angles>
+ <NonBonds combination="saft_gamma_mie" scale12="0.000000" scale13="1.000000" scale14="1.000000" type="generalized_lj" formula="C*eps*[(sigma/r)^lambdaR-(sigma/r)^lambdaA]]" parameters="eps sigma lambdaR lambdaA">
+   <Site ver="1.0" ref="r1" type="C1">0.339315 3.752 16.39 6</Site>
+   <Site ver="1.0" ref="r1" type="C2">0.656274 4.349 27.30 6</Site>
+   <Site ver="1.0" ref="r1" type="C3">0.846708 4.871 34.29 6</Site>
+   <Site ver="1.0" ref="r1" type="C4">0.509440 3.961 13.29 6</Site>
+   <Site ver="1.0" ref="r1" type="C5a">0.630937 4.248 16.06 6</Site>
+   <Site ver="1.0" ref="r1" type="C5b">0.617583 4.2449 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C6a">0.747884 4.508 19.57 6</Site>
+   <Site ver="1.0" ref="r1" type="C6b">0.679624 4.5089 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C7a">0.866679 4.766 23.81 6</Site>
+   <Site ver="1.0" ref="r1" type="C7b">0.756866 4.5736 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C8a">0.657168 4.227 16.14 6</Site>
+   <Site ver="1.0" ref="r1" type="C8b">0.639184 4.2412 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C9a">0.743632 4.406 18.31 6</Site>
+   <Site ver="1.0" ref="r1" type="C9b">0.685248 4.4212 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C10a">0.825067 4.584 20.92 6</Site>
+   <Site ver="1.0" ref="r1" type="C10b">0.723322 4.4908 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C11a">0.693336 4.216 16.84 6</Site>
+   <Site ver="1.0" ref="r1" type="C11b">0.652161 4.2212 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C12a">0.752276 4.351 18.41 6</Site>
+   <Site ver="1.0" ref="r1" type="C12b">0.684433 4.3635 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C13">0.703967 4.4680 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C14a">0.721474 4.183 17.66 6</Site>
+   <Site ver="1.0" ref="r1" type="C14b">0.655400 4.2332 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C15">0.685287 4.3286 15 6</Site>
+   <Site ver="1.0" ref="r1" type="C16">0.830910 4.432 21.20 6</Site>
+   <Site ver="1.0" ref="r1" type="C18">0.782442 4.262 19.53 6</Site>
+   <Site ver="1.0" ref="r1" type="C20">0.900402 4.487 24.70 6</Site>
+   <Site ver="1.0" ref="r1" type="Be1">1.307918 5.293 32 6</Site>
+   <Site ver="1.0" ref="r1" type="Be2">0.703331 3.978 14.23 6</Site>
+   <Site ver="1.0" ref="r1" type="Be3">0.513255 3.490 11.58 6</Site>
+   <Site ver="1.0" ref="r1" type="Tol1">0.818470 4.266 16.95 6</Site>
+   <Site ver="1.0" ref="r1" type="Tol2">0.536028 3.679 11.804 6</Site>
+   <Site ver="1.0" ref="r1" type="EtBe">0.615417 3.837 12.80 6</Site>
+   <Site ver="1.0" ref="r1" type="Naph">0.748182 3.932 12.84 6</Site>
+   <Site ver="1.0" ref="r1" type="N2">0.244128 3.653 20.02 6</Site>
+   <Site ver="1.0" ref="r1" type="CO2a">0.387386 2.848 14.65 6</Site>
+   <Site ver="1.0" ref="r1" type="CO2b">0.702576 3.741 23 6.66</Site>
+   <Site ver="1.0" ref="r1" type="O2">0.286197 1.295 17.93 6</Site>
+   <Site ver="1.0" ref="r1" type="CF4">0.527742 4.35 32.53 6</Site>
+   <Site ver="1.0" ref="r1" type="SF6">0.875344 4.861 19.02 8.8</Site>
+   <Site ver="1.0" ref="r1" type="HFO1234yf">0.511486 3.90 16.54 6</Site>
+   <Site ver="1.0" ref="r1" type="H2S">0.802691 3.801 27.38 6</Site>
+   <Site ver="1.0" ref="r1" type="SO2">0.578475 3.091 16.06 6</Site>
+   <Site ver="1.0" ref="r1" type="CO">0.263960 3.687 21.49 6</Site>
+   <Site ver="1.0" ref="r1" type="He">0.008823 3.353 14.84 6</Site>
+   <Site ver="1.0" ref="r1" type="Ar">0.262390 3.414 14.85 6</Site>
+   <Site ver="1.0" ref="r1" type="Pyr">0.815668 3.899 15.52 6</Site>
+   <Site ver="1.0" ref="r1" type="Pyrr">0.846787 3.914 19.74 6</Site>
+   <Site ver="1.0" ref="r1" type="Py">1.0186 3.771 23.30 6</Site>
+   <Site ver="1.0" ref="r1" type="Thl">0.777056 4.012 13.83 6</Site>
+   <Site ver="1.0" ref="r1" type="Thp">0.704146 3.832 13.58 6</Site>
+   <Site ver="1.0" ref="r1" type="iC5">0.592942 4.236 14.92 6</Site>
+   <Site ver="1.0" ref="r1" type="iC4">0.480049 3.974 12.94 6</Site>
+   <Site ver="1.0" ref="r1" type="cC3">0.89009 4.511 31.16 6</Site>
+   <Site ver="1.0" ref="r1" type="cC5">0.620 3.992 13.52 6</Site>
+   <Site ver="1.0" ref="r1" type="cC6">0.687453 4.234 14.05 6</Site>
+   <Site ver="1.0" ref="r1" type="dC2">0.595148 4.180 25.62 6</Site>
+   <Site ver="1.0" ref="r1" type="dC3">0.829856 4.721 33.65 6</Site>
+   <Site ver="1.0" ref="r1" type="dC5">0.653512 4.183 17.50 6</Site>
+   <Site ver="1.0" ref="r1" type="dC10">0.783932 4.516 18.93 6</Site>
+   <Site ver="1.0" ref="r1" type="PSba">0.749454 4.18 16.43 6</Site>
+   <Site ver="1.0" ref="r1" type="PSbr">0.81529 4.26 16.83 6</Site>
+   <Site ver="1.0" ref="r1" type="W">0.752892 2.915 8.395 6</Site>
+   <Site ver="1.0" ref="r1" type="Wvle">0.985832 3.0089 8 6</Site>
+   <Site ver="1.0" ref="r1" type="Wift">0.606515 2.9016 8 6</Site>
+   <Site ver="1.0" ref="r1" type="Wbio">0.794882 3.7467 8 6</Site>
+   <Site ver="1.0" ref="r1" type="THF">0.693375 3.840 14.85 6</Site>
+   <Site ver="1.0" ref="r1" type="DS">0.599659 3.661 13.21 6</Site>  
+ </NonBonds>
+ <NonBonds combination="saft_gamma_mie" type="kij" formula="eps(ij)=(1-kij)*sqrt(sigma(ii)^3* sigma(jj)^3*eps(ii)*eps(jj))/sigma(ij)^3 " parameters="kij">
+   <Pair ver="1.0" ref="r1" type1="CO2b" type2="Wvle">-0.07</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C6b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C7b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C8b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C9b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C10b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C11b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C12b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C13b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C14b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C15b" type2="Wvle">0.36</Pair>
+   <Pair ver="1.0" ref="r1" type1="C12a" type2="Wift">0.3205</Pair>
+   <Pair ver="1.0" ref="r1" type1="Tol2" type2="Wift">0.241</Pair>
+   <Pair ver="1.0" ref="r1" type1="C5b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C6b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C7b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C8b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C9b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C10b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C11b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C12b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C13b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C14b" type2="CO2b">0.08</Pair>
+   <Pair ver="1.0" ref="r1" type1="C15b" type2="CO2b">0.08</Pair>
+ </NonBonds>  
+</ForceField>
