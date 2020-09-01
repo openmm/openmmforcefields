@@ -1,0 +1,374 @@
+* $Id: test_drude_model.str 28 2015-07-29 23:54:15Z alex $
+* Test case, Drude model compounds ("model") toppar file
+*
+
+!add dmpn etc
+
+set boml 0 ! set to -1 if the series contains 3-membered rings
+
+set count 1
+set nres 134
+
+!ethers
+set resi1  DEET
+set resi2  DME
+set resi3  DMEE
+set resi4  MEET
+set resi5  THF
+set resi6  TF2M
+set resi7  THP
+set resi8  MPET
+set resi9  MBET
+set resi10 EPET
+!alkanes
+set resi11 ETHA
+set resi12 PROP1
+set resi13 IBUT
+set resi14 BUTA
+set resi15 PENT
+set resi16 HEXA
+set resi17 HEPT
+set resi18 CPEN
+set resi19 CHEX
+set resi20 MEOH
+set resi21 ETOH
+set resi22 PRO1
+set resi23 BUO1
+set resi24 PRO2
+set resi25 BUO2
+!aromatics
+set resi26 BENZ
+set resi27 TOLU
+!amides, see "additional amides" below
+set resi28 ACEM
+set resi29 NMA
+set resi30 DMA
+!heterocycles
+set resi31 PYR
+set resi32 PYRM
+set resi33 PYRR
+set resi34 IMID
+set resi35 INDO
+set resi36 PUR1
+set resi37 PUR0
+set resi38 4MIM
+set resi39 MIND
+!misc
+set resi40 MAS
+set resi41 ACEH
+!charged
+set resi42 IMIM
+set resi43 GUAN
+set resi44 MGUAN
+set resi45 PHEN
+!sulfur containing
+set resi46 MESH
+set resi47 ETSH
+set resi48 PRSH
+set resi49 BUSH
+set resi50 DMDS
+set resi51 DMS
+set resi52 EMS
+!lipid model compounds
+set resi53 NC4
+set resi54 NH5
+set resi55 NC5
+set resi56 ACET
+set resi57 ETAM
+set resi58 NEOP
+set resi59 BU2M
+set resi60 BU22M
+set resi61 BU23M
+set resi62 CPNM
+set resi63 CHXM
+set resi64 DIOX
+set resi65 CRES
+set resi66 B3MO1
+set resi67 CPO1
+set resi68 BGUAN
+set resi69 CHOL
+set resi70 EAS 
+set resi71 MPRO
+set resi72 MBU       
+!misc alkanes
+set resi73 DECA
+set resi74 PEND
+set resi75 OCTD
+!alkenes
+set resi76 2BTE
+set resi77 2PTE
+set resi78 2HEX
+set resi79 3HEX
+!charged
+set resi80 NC2
+set resi81 NC3
+set resi82 dmpn
+set resi83 MP_0
+set resi84 MP_1
+set resi85 MP_2
+set resi86 PHET
+set resi87 MES
+set resi88 ETS
+!carbonyls
+set resi89 AALD
+set resi90 PALD
+set resi91 BALD
+set resi92 IBLD
+set resi93 ACO 
+set resi94 BTON
+! halogen
+set resi95  CHLB
+set resi96  12DCB
+set resi97  13DCB
+set resi98  14DCB
+set resi99  123TCB
+set resi100 124TCB
+set resi101 135TCB
+set resi102 BROB
+set resi103 12DBB
+set resi104 13DBB
+set resi105 14DBB
+set resi106 123TBB
+set resi107 124TBB
+set resi108 135TBB
+set resi109 IODB
+set resi110 12DIB
+set resi111 13DIB
+set resi112 14DIB
+set resi113 123TIB
+set resi114 124TIB
+set resi115 135TIB
+set resi116 FLUB
+set resi117 CLET 
+set resi118 DCLE
+set resi119 TCLE
+set resi120 BRET
+set resi121 DBRE
+set resi122 TBRE
+set resi123 IETH
+set resi124 DIET
+set resi125 TIET
+set resi126 FETH
+set resi127 DFET
+set resi128 TFET
+! neutral amine
+set resi129 MAM1
+set resi130 EAM1
+set resi131 PAM1
+set resi132 4MIE
+!additional amides
+set resi133 NEA
+set resi134 NPA
+
+set seed1  1 C1 1 C2 1 O3
+set seed2  1 C1 1 O2 1 C3
+set seed3  1 C1 1 O2 1 C3
+set seed4  1 C1 1 C2 1 O3
+set seed5  1 O1 1 C1 1 C2
+set seed6  1 O1 1 C1 1 C2
+set seed7  1 O1 1 C1 1 C2
+set seed8  1 C1 1 O2 1 C3
+set seed9  1 C1 1 O2 1 C3
+set seed10 1 C1 1 C2 1 O3
+set seed11 1 H11 1 C1 1 C2
+set seed12 1 C1 1 C2 1 C3
+set seed13 1 C1 1 CT 1 C2
+set seed14 1 C1 1 C2 1 C3
+set seed15 1 C1 1 C2 1 C3
+set seed16 1 C1 1 C2 1 C3
+set seed17 1 C1 1 C2 1 C3
+set seed18 1 C1 1 C2 1 C3
+set seed19 1 C1 1 C2 1 C3
+set seed20 1 HO1 1 O1 1 C1
+set seed21 1 HO1 1 O1 1 C1
+set seed22 1 HO1 1 O1 1 C1
+set seed23 1 HO1 1 O1 1 C1
+set seed24 1 HO2 1 O2 1 C2
+set seed25 1 HO2 1 O2 1 C2
+set seed26 1 CG 1 CD1 1 CE1
+set seed27 1 CG 1 CD1 1 CE1
+set seed28 1 N 1 C 1 CL
+set seed29 1 N 1 C 1 CL
+set seed30 1 N 1 C 1 CL
+set seed31 1 CG 1 CD1 1 CE1
+set seed32 1 C4 1 C5 1 C6
+set seed33 1 N5 1 C1 1 C2
+set seed34 1 ND1 1 CG 1 CD2
+set seed35 1 CG 1 CD1 1 NE1
+set seed36 1 C6 1 C5 1 C4
+set seed37 1 C6 1 C5 1 C4
+set seed38 1 ND1 1 CG 1 CB
+set seed39 1 CG 1 CD1 1 NE1
+set seed40 1 C1 1 C 1 OM
+set seed41 1 O2 1 C2 1 C1
+set seed42 1 CG 1 CD2 1 NE2
+set seed43 1 N1 1 C 1 N2
+set seed44 1 N1 1 C 1 N2
+set seed45 1 CG 1 CD1 1 CE1
+set seed46 1 HS1 1 S1 1 C1
+set seed47 1 HS1 1 S1 1 C1
+set seed48 1 HS1 1 S1 1 C1
+set seed49 1 HS1 1 S1 1 C1
+set seed50 1 H11 1 C1 1 S1
+set seed51 1 H21 1 C2 1 S1
+set seed52 1 H31 1 C3 1 C2
+set seed53 1 C1 1 N 1 C2
+set seed54 1 HN4 1 N 1 C1
+set seed55 1 C4 1 N 1 C1
+set seed56 1 O1 1 C2 1 C1
+set seed57 1 N 1 C1 1 C5
+set seed58 1 C2 1 CT 1 C1
+set seed59 1 C1 1 CT 1 C2
+set seed60 1 C4 1 CT 1 C1
+set seed61 1 C1 1 CT 1 C2
+set seed62 1 C1 1 C2 1 C3
+set seed63 1 C1 1 C2 1 C3
+set seed64 1 O1 1 C1 1 C2
+set seed65 1 CG 1 CD1 1 CE1
+set seed66 1 C1 1 C2 1 C3
+set seed67 1 C1 1 C2 1 C3
+set seed68 1 CA 1 CB 1 CG
+set seed69 1 C4 1 N 1 C1
+set seed70 1 C2 1 OM  1 C
+set seed71 1 C2 1 OM  1 C
+set seed72 1 C2 1 OM  1 C
+set seed73 1 C1 1 C2 1 C3
+set seed74 1 C1 1 C2 1 C3
+set seed75 1 C1 1 C2 1 C3
+set seed76 1 C  1 C1 1 C2
+set seed77 1 C4 1 C  1 C1
+set seed78 1 C4 1 C  1 C1
+set seed79 1 C4 1 C2 1 C
+set seed80 1 H11 1 C1 1 N
+set seed81 1 H11 1 C1 1 N
+set seed82 1 O11 1 P  1 O12
+set seed83 1 H11 1 C1 1 O1
+set seed84 1 H11 1 C1 1 O1
+set seed85 1 H11 1 C1 1 O1
+set seed86 1 CG  1 CD1 1 CE1
+set seed87 1 H11 1 C1  1 H12
+set seed88 1 H21 1 C2  1 C1
+set seed89 1 O   1 C   1 CB
+set seed90 1 O   1 C   1 CB
+set seed91 1 O   1 C   1 CB
+set seed92 1 O   1 C   1 CB
+set seed93 1 O1  1 C1  1 C2
+set seed94 1 O1  1 C1  1 C2
+
+! halogen
+set seed95  1 C1  1 C2  1 C3  
+set seed96  1 C1  1 C2  1 C3  
+set seed97  1 C1  1 C2  1 C3  
+set seed98  1 C1  1 C2  1 C3  
+set seed99  1 C1  1 C2  1 C3  
+set seed100 1 C1  1 C2  1 C3  
+set seed101 1 C1  1 C2  1 C3  
+set seed102 1 C1  1 C2  1 C3  
+set seed103 1 C1  1 C2  1 C3  
+set seed104 1 C1  1 C2  1 C3  
+set seed105 1 C1  1 C2  1 C3  
+set seed106 1 C1  1 C2  1 C3  
+set seed107 1 C1  1 C2  1 C3  
+set seed108 1 C1  1 C2  1 C3  
+set seed109 1 C1  1 C2  1 C3  
+set seed110 1 C1  1 C2  1 C3  
+set seed111 1 C1  1 C2  1 C3  
+set seed112 1 C1  1 C2  1 C3  
+set seed113 1 C1  1 C2  1 C3  
+set seed114 1 C1  1 C2  1 C3  
+set seed115 1 C1  1 C2  1 C3  
+set seed116 1 C1  1 C2  1 C3  
+set seed117 1 CL11  1 C1  1 C2  
+set seed118 1 CL11  1 C1  1 C2  
+set seed119 1 Cl11  1 C1  1 C2  
+set seed120 1 BR11  1 C1  1 C2  
+set seed121 1 BR11  1 C1  1 C2  
+set seed122 1 BR11  1 C1  1 C2  
+set seed123 1 I11  1 C1  1 C2  
+set seed124 1 I11  1 C1  1 C2  
+set seed125 1 I11  1 C1  1 C2  
+set seed126 1 F11  1 C1  1 C2  
+set seed127 1 F11  1 C1  1 C2  
+set seed128 1 F11  1 C1  1 C2  
+
+set seed129 1 H11 1 C1  1 N1 
+set seed130 1 H11 1 C1  1 N1 
+set seed131 1 H11 1 C1  1 N1 
+set seed132 1 ND1 1 CG 1 CB
+! additional amides
+set seed133 1 N 1 C 1 CL
+set seed134 1 N 1 C 1 CL
+
+label loop_model1
+
+set residue @resi@@count
+read sequence @residue 1
+
+bomlev @boml
+generate @residue first none last none setup warn drude dmass 0.4 !show
+
+!temporary
+!if @count ge 70 then
+!IC GENERATE RTF
+!endif
+
+ic param
+ic seed @seed@@count
+ic build 
+!ic print
+coor sdrude
+coor shake
+!coor print
+bomlev 0
+
+! instead of relaxing Drude, move all Drude a little bit away from their parent atom
+coor trans xdir -0.002 ydir -0.002 zdir -0.002 sele type D* end
+
+update inbfrq -1 ihbfrq 0 switch atom vatom vswitch cutnb 999.0 ctofnb 997.0 ctonnb 995.0
+
+if @mindr eq 0 then
+  energy
+ else
+  cons harm force 100000. sele .not. type D* end
+  mini ABNR nstep 200 nprint 20
+  ic fill
+  ic print
+  cons harm clear
+endif
+echo @residue starting E: ?ener
+
+if @?pdbdir eq 1 then
+  write psf card name @pdbdir/@residue.psf
+  write coor pdb name @pdbdir/@residue_start.pdb
+ endif
+
+if @mini ne 0 then
+  mini sd nstep 1000 tolgrd 0.0001 nprint 100
+  if ?grms gt 0.0001 mini abnr nstep 1000 tolgrd 0.0001
+  if ?grms gt 0.0001 then
+    echo FATAL ERROR: MINIMIZATION NOT CONVERGED
+    echu
+    echo FATAL ERROR: MINIMIZATION NOT CONVERGED
+    stop
+   endif
+  echo @residue minimized E: ?ener
+  if @?pdbdir eq 1 then ! cannot use 1-line syntax because substitution will fail
+    write coor pdb name @pdbdir/@residue_min.pdb
+   endif
+ endif
+
+coor orient
+coor dipole oxyz select all end 
+echo @residue dipole: ?rdip
+!! Check molecular polarizability
+!VIBRAN
+!diag dscf fini step 0.001
+!END
+
+shake off
+drude reset
+lone clear
+delete atom sele all end
+
+incr count
+if count le @nres goto loop_model1

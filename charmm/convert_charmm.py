@@ -113,7 +113,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 del params.residues[resname]
 
         if verbose: print('Converting parameters to OpenMM...')
-        params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
+        params_omm = openmm.OpenMMParameterSet.from_parameterset(params, unique_atom_types=True)
 
         # Set override level
         if 'Override' in entry:
