@@ -220,7 +220,10 @@ class SmallMoleculeTemplateGenerator(object):
         import numpy as np
         from simtk import unit
         zeros = np.zeros([molecule.n_particles])
-        charges_are_zero = np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)
+        if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)):
+            charges_are_zero = True
+        else:
+            charges_are_zero = False
         return not charges_are_zero
 
     def _generate_unique_atom_names(self, molecule):
@@ -567,6 +570,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
+        from simtk import unit
+        if type(net_charge) != unit.Quantity:
+            # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
+            net_charge = float(net_charge) * unit.elementary_charge
         _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charges if required
@@ -618,7 +625,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
         sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
-        charge_deficit = net_charge * unit.elementary_charge - total_charge
+        charge_deficit = net_charge - total_charge
         if sum_of_absolute_charge / unit.elementary_charge > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
@@ -857,6 +864,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 # Open Force Field Initiative SMIRNOFF specific OpenMM ForceField template generation utilities
 ################################################################################
 
+class ClassProperty(property):
+    def __get__(self, cls, owner):
+        return self.fget.__get__(None, owner)()
+
 class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     OpenMM ForceField residue template generator for Open Force Field Initiative SMIRNOFF
@@ -884,12 +895,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-1.0.0')
+    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-1.2.0')
     and register multiple molecules:
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-1.0.0')
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-1.2.0')
 
     Alternatively, you can specify a local .offxml file in the SMIRNOFF specification:
 
@@ -907,9 +918,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    # TODO: Automatically populate this at import by examining plugin directories in order of semantic version
-    INSTALLED_FORCEFIELDS = ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
-
     def __init__(self, molecules=None, cache=None, forcefield=None):
         """
         Create a SMIRNOFFTemplateGenerator with some openforcefield toolkit molecules
@@ -945,13 +953,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         The latest Open Force Field Initiative release is used if none is specified.
 
-        >>> smirnof.forcefield
-        'openff-1.0.0'
+        >>> smirnoff.forcefield
+        'openff-1.2.0'
 
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename
-        '/full/path/to/openff-1.0.0.offxml'
+        '/full/path/to/openff-1.2.0.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
@@ -966,11 +974,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
         >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-        ['smirnoff99Frosst-1.1.0', 'openff-1.0.0']
+        ['openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'openff-1.2.0', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7']
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-1.0.0')
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-1.2.0')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -979,7 +987,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = self.INSTALLED_FORCEFIELDS[-1]
+            forcefield = 'openff-1.2.0'
+            # TODO: After toolkit provides date-ranked force fields,
+            # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
 
         # Track parameters by provided SMIRNOFF name
@@ -1008,6 +1018,32 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self._system_cache = dict()
 
+    @ClassProperty
+    @classmethod
+    def INSTALLED_FORCEFIELDS(cls):
+        """Return a list of the offxml files shipped with the openforcefield package.
+
+        Returns
+        -------
+        file_names : str
+           The file names of available force fields
+
+        .. todo ::
+
+           Replace this with an API call once this issue is addressed:
+           https://github.com/openforcefield/openforcefield/issues/477
+
+        """
+        from openforcefield.typing.engines.smirnoff import get_available_force_fields
+        file_names = list()
+        for filename in get_available_force_fields(full_paths=False):
+            root, ext = os.path.splitext(filename)
+            # Only add variants without '_unconstrained'
+            if '_unconstrained' not in root:
+                file_names.append(root)
+
+        return file_names
+
     def _search_paths(self, filename):
         """Search registered openforcefield plugin directories
 
@@ -1020,6 +1056,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         -------
         fullpath : str
             Full path to identified file, or None if no file found
+
+        .. todo ::
+
+           Replace this with an API call once this issue is addressed:
+           https://github.com/openforcefield/openforcefield/issues/477
+
         """
         # TODO: Replace this method once there is a public API in the openforcefield toolkit for doing this
 
