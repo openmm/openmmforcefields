@@ -56,7 +56,7 @@ class SystemGenerator(object):
         These keyword arguments can be modified at any time.
     barostat : simtk.openmm.MonteCarloBarostat
         If not None, this container holds the barostat parameters to use for newly created System objects.
-    molecules : openforcefield.topology.Molecule or list, optional, default=None
+    molecules : openff.toolkit.topology.Molecule or list, optional, default=None
         Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
         Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
         If specified, these molecules will be recognized and parameterized as needed.
@@ -93,7 +93,7 @@ class SystemGenerator(object):
         barostat : simtk.openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -108,7 +108,7 @@ class SystemGenerator(object):
 
         Here's an example that uses GAFF 2.11 along with the new ``ff14SB`` generation of AMBER force fields
         (and compatible solvent models) to generate an OpenMM ``System`` object from an
-        `Open Force Field Topology <https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openforcefield.topology.Topology.html#openforcefield.topology.Topology>`_ object:
+        `Open Force Field Topology <https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology>`_ object:
 
         >>> # Define the keyword arguments to feed to ForceField
         >>> from simtk import unit
@@ -136,7 +136,7 @@ class SystemGenerator(object):
         >>> frequency = 25 # steps
         >>> system_generator.barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)
 
-        Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of openforcefield ``Molecule`` objects
+        Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of OpenFF ``Molecule`` objects
 
         >>> system = system_generator.create_system(openmm_topology, molecules=molecules)
 
@@ -225,7 +225,7 @@ class SystemGenerator(object):
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -290,13 +290,13 @@ class SystemGenerator(object):
         """
         Create a system from the specified topology.
 
-        .. todo :: Add support for openforcefield Topology objects once they can be converted to OpenMM Topology objects.
+        .. todo :: Add support for OpenFF Topology objects once they can be converted to OpenMM Topology objects.
 
         Parameters
         ----------
         topology : openmmtools.topology.Topology object
             The topology describing the system to be created
-        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -358,7 +358,7 @@ class DummySystemGenerator(SystemGenerator):
 
         Parameters
         ----------
-        topology : openforcefield.topology.Topology
+        topology : openff.toolkit.topology.Topology
             The Topology to be parameterized
 
         Returns

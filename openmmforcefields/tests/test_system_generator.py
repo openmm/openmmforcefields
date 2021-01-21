@@ -23,12 +23,12 @@ class TestSystemGenerator(unittest.TestCase):
 
         Parameters
         ----------
-        molecules : list of openforcefield.topology.Molecule
+        molecules : list of openff.toolkit.topology.Molecule
             The input list of molecules to be filtered
 
         Returns
         -------
-        molecules : list of openforcefield.topology.Molecule
+        molecules : list of openff.toolkit.topology.Molecule
             The filtered list of molecules to be filtered
 
         """
@@ -62,7 +62,7 @@ class TestSystemGenerator(unittest.TestCase):
             pdbfile = PDBFile(pdb_filename)
 
             # Load molecules
-            from openforcefield.topology import Molecule
+            from openff.toolkit.topology import Molecule
             sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands_shifted.sdf'))
 
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)

@@ -2,8 +2,6 @@ name: test
 
 channels:
   - conda-forge
-  - omnia
-  - omnia/label/rc
   - openeye
   - defaults
 
@@ -29,9 +27,9 @@ dependencies:
     # JSON caching of residue templates
   - tinydb
 
-    # openforcefield toolkit and force fields
-  - openforcefield >=0.7.1
-  - openforcefields >=1.2.0
+    # openff toolkit and force fields
+  - openff-toolkit >=0.7.1
+  - openff-forcefields >=1.2.0
 
     # OpenEye toolkits are only used to speed up testing; they are not required for use
   - openeye-toolkits
