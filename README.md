@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/openmm/openmmforcefields/workflows/CI/badge.svg)](https://github.com/openmm/openmmforcefields/actions?query=workflow%3ACI)
+[![CI](https://github.com/openmm/openmmforcefields/workflows/CI/badge.svg?branch=master)](https://github.com/openmm/openmmforcefields/actions?query=workflow%3ACI)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
 # AMBER and CHARMM force fields for OpenMM
