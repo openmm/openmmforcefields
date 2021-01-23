@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  test:
+
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+
+    env:
+      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        python-version: [3.6, 3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Conda Environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: ${{ matrix.cfg.python-version }}
+        environment-file: devtools/conda-envs/test_env.yaml
+
+        channels: conda-forge,openeye,defaults
+
+        activate-environment: test
+        auto-update-conda: true
+        auto-activate-base: false
+        show-channel-urls: true
+
+    - name: License OpenEye
+      shell: bash -l {0}
+      run: |
+        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
+        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
+      env:
+        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
+
+    - name: Install Package
+      shell: bash -l {0}
+      run: |
+        # Can't use 'develop' mode because we remove symlinks after install is complete
+        python setup.py install
+
+    - name: Conda Environment Information
+      shell: bash -l {0}
+      run: |
+        conda info
+        conda list
+
+    - name: Test Installed Package
+      shell: bash -l {0}
+      run: |
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+      env:
+        LOGLEVEL: "INFO"
+
+    - name: Test AMBER conversion
+      shell: bash -l {0}
+      run: |
+        python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
+      working-directory: ./amber
+
+    - name: Test CHARMM conversion
+      shell: bash -l {0}
+      run: |
+
+        # TODO: Find a way to avoid timing out on travis when running full charmm36.yaml conversion below
+        # python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+        python convert_charmm.py --verbose --in files/waters.yaml
+        # python convert_charmm.py --verbose
+
+        # TODO: Uncomment this when tests are expected to work
+        # python test_charmm.py --verbose
+
+      working-directory: ./charmm
+
+    - name: CodeCov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
