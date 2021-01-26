@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="leaprc.protein.ff14SB" md5hash="2fbe80b999846068f2a1b6f3c50fcbb9" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.protein.ff14SB</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="leaprc.protein.ff14SB" md5hash="2fbe80b999846068f2a1b6f3c50fcbb9" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.protein.ff14SB</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
   <AtomTypes>
@@ -3431,6 +3431,13 @@
     <Improper type1="protein-N" type2="protein-C" type3="protein-CT" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="protein-N" type2="protein-C" type3="protein-CX" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="protein-N" type2="protein-C" type3="protein-CT" type4="protein-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="protein-CB" type2="protein-C*" type3="protein-CA" type4="protein-CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="protein-CN" type2="protein-CA" type3="protein-CB" type4="protein-NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="protein-CB" type2="protein-C" type3="protein-CB" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="protein-CB" type2="protein-CA" type3="protein-CB" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="protein-H1" type3="protein-H1" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="protein-CT" type3="protein-H1" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="protein-CT" type3="protein-H1" type4="protein-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper type1="protein-CO" type2="" type3="protein-O2" type4="protein-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="protein-C" type2="protein-2C" type3="protein-O" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="protein-CA" type2="protein-2C" type3="protein-CA" type4="protein-CA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>

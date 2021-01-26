@@ -1,8 +1,8 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="parm/frcmod.ions234lm_iod_tip3p" md5hash="46f388bbebb3c57346f7ba20ddc2db66" sourcePackage="AmberTools" sourcePackageVersion="19.9">parm/frcmod.ions234lm_iod_tip3p</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="19.9">lib/atomic_ions.lib</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_iod_tip3p" md5hash="2e458b2ecd1a7bdbababfa42eb8f3221" sourcePackage="AmberTools" sourcePackageVersion="20.15">parm/frcmod.ions234lm_iod_tip3p</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="20.15">lib/atomic_ions.lib</Source>
     <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
     <Reference>Li, P., Song, L.F., and Merz, K.M. (2015). Parameterization of Highly Charged Metal Ions Using the 12-6-4 LJ-Type Nonbonded Model in Explicit Water. J. Phys. Chem. B 119, 883-895.</Reference>
   </Info>
@@ -188,29 +188,29 @@
     <Atom type="tip3pfb_IOD_multivalent-Sn2+" sigma="0.309676394425582" epsilon="0.6903723846400001"/>
     <Atom type="tip3pfb_IOD_multivalent-Sr2+" sigma="0.31234909058000293" epsilon="0.73715046696"/>
     <Atom type="tip3pfb_IOD_multivalent-Ba2+" sigma="0.34085784956049386" epsilon="1.2995585169600001"/>
-    <Atom type="tip3pfb_IOD_multivalent-Al3+" sigma="0.2439280690268249" epsilon="0.04721589608000001"/>
-    <Atom type="tip3pfb_IOD_multivalent-Fe3+" sigma="0.25711337005530194" epsilon="0.09989325104"/>
-    <Atom type="tip3pfb_IOD_multivalent-Cr3+" sigma="0.252124337233716" epsilon="0.07644268416000001"/>
-    <Atom type="tip3pfb_IOD_multivalent-In3+" sigma="0.2656659977494492" epsilon="0.15168878616"/>
-    <Atom type="tip3pfb_IOD_multivalent-Tl3+" sigma="0.2799203772396946" epsilon="0.27501557520000003"/>
-    <Atom type="tip3pfb_IOD_multivalent-Y3+" sigma="0.29043298211375057" epsilon="0.39786810784"/>
-    <Atom type="tip3pfb_IOD_multivalent-La3+" sigma="0.3132399892981433" epsilon="0.7530346464"/>
-    <Atom type="tip3pfb_IOD_multivalent-Ce3+" sigma="0.31751630314521695" epsilon="0.83118754056"/>
-    <Atom type="tip3pfb_IOD_multivalent-Pr3+" sigma="0.31715994365796085" epsilon="0.8245589130400001"/>
-    <Atom type="tip3pfb_IOD_multivalent-Nd3+" sigma="0.307181878014789" epsilon="0.64794725224"/>
-    <Atom type="tip3pfb_IOD_multivalent-Sm3+" sigma="0.3048655413476241" epsilon="0.60967151816"/>
-    <Atom type="tip3pfb_IOD_multivalent-Eu3+" sigma="0.3057564400657644" epsilon="0.62426246504"/>
-    <Atom type="tip3pfb_IOD_multivalent-Gd3+" sigma="0.29542201493533654" epsilon="0.46563832232"/>
-    <Atom type="tip3pfb_IOD_multivalent-Tb3+" sigma="0.2977383516025014" epsilon="0.4991058036"/>
-    <Atom type="tip3pfb_IOD_multivalent-Dy3+" sigma="0.29168024031914713" epsilon="0.41424963936000003"/>
-    <Atom type="tip3pfb_IOD_multivalent-Er3+" sigma="0.2913238808318909" epsilon="0.40953067312"/>
-    <Atom type="tip3pfb_IOD_multivalent-Tm3+" sigma="0.29346203775542773" epsilon="0.43830358088"/>
-    <Atom type="tip3pfb_IOD_multivalent-Lu3+" sigma="0.2895420833956103" epsilon="0.38639884336"/>
-    <Atom type="tip3pfb_IOD_multivalent-Hf4+" sigma="0.2850875898049086" epsilon="0.33197918711999996"/>
-    <Atom type="tip3pfb_IOD_multivalent-Zr4+" sigma="0.28669120749756116" epsilon="0.35100580160000006"/>
-    <Atom type="tip3pfb_IOD_multivalent-Ce4+" sigma="0.31466542724716784" epsilon="0.77874118424"/>
-    <Atom type="tip3pfb_IOD_multivalent-U4+" sigma="0.31929810058149766" epsilon="0.8646299178400001"/>
-    <Atom type="tip3pfb_IOD_multivalent-Pu4+" sigma="0.3121709108363749" epsilon="0.73399083568"/>
-    <Atom type="tip3pfb_IOD_multivalent-Th4+" sigma="0.31537814622168014" epsilon="0.7917259353600001"/>
+    <Atom type="tip3pfb_IOD_multivalent-Al3+" sigma="0.23109912748560402" epsilon="0.01971831336"/>
+    <Atom type="tip3pfb_IOD_multivalent-Fe3+" sigma="0.24695712466850203" epsilon="0.05678093848"/>
+    <Atom type="tip3pfb_IOD_multivalent-Cr3+" sigma="0.23947357543612321" epsilon="0.03548032"/>
+    <Atom type="tip3pfb_IOD_multivalent-In3+" sigma="0.26032060544060714" epsilon="0.11751709584"/>
+    <Atom type="tip3pfb_IOD_multivalent-Tl3+" sigma="0.26958595210926667" epsilon="0.18079185336"/>
+    <Atom type="tip3pfb_IOD_multivalent-Y3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+    <Atom type="tip3pfb_IOD_multivalent-La3+" sigma="0.3061127995530206" epsilon="0.63014479248"/>
+    <Atom type="tip3pfb_IOD_multivalent-Ce3+" sigma="0.3102109336564662" epsilon="0.69962078192"/>
+    <Atom type="tip3pfb_IOD_multivalent-Pr3+" sigma="0.3087854957074416" epsilon="0.67508049224"/>
+    <Atom type="tip3pfb_IOD_multivalent-Nd3+" sigma="0.2995201490387821" epsilon="0.52569060488"/>
+    <Atom type="tip3pfb_IOD_multivalent-Sm3+" sigma="0.2956001946789646" epsilon="0.46816830344000004"/>
+    <Atom type="tip3pfb_IOD_multivalent-Eu3+" sigma="0.29684745288436104" epsilon="0.48608615792"/>
+    <Atom type="tip3pfb_IOD_multivalent-Gd3+" sigma="0.2891857239083541" epsilon="0.38186547936"/>
+    <Atom type="tip3pfb_IOD_multivalent-Tb3+" sigma="0.29043298211375057" epsilon="0.39786810784"/>
+    <Atom type="tip3pfb_IOD_multivalent-Dy3+" sigma="0.28669120749756116" epsilon="0.35100580160000006"/>
+    <Atom type="tip3pfb_IOD_multivalent-Er3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+    <Atom type="tip3pfb_IOD_multivalent-Tm3+" sigma="0.2854439492921647" epsilon="0.33615222504000003"/>
+    <Atom type="tip3pfb_IOD_multivalent-Lu3+" sigma="0.28294943288137175" epsilon="0.30760316128000004"/>
+    <Atom type="tip3pfb_IOD_multivalent-Hf4+" sigma="0.26709143569847377" epsilon="0.16186477624"/>
+    <Atom type="tip3pfb_IOD_multivalent-Zr4+" sigma="0.27065503057103507" epsilon="0.18934696184"/>
+    <Atom type="tip3pfb_IOD_multivalent-Ce4+" sigma="0.30005468826966625" epsilon="0.53380618416"/>
+    <Atom type="tip3pfb_IOD_multivalent-U4+" sigma="0.30005468826966625" epsilon="0.53380618416"/>
+    <Atom type="tip3pfb_IOD_multivalent-Pu4+" sigma="0.29613473390984874" epsilon="0.47580293192"/>
+    <Atom type="tip3pfb_IOD_multivalent-Th4+" sigma="0.3043310021167399" epsilon="0.6009964544"/>
   </NonbondedForce>
 </ForceField>
