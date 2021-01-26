@@ -939,11 +939,18 @@ quit""" % (leaprc_name, gaff_dat_name, imatinib_top[1], imatinib_crd[1])
 
 def validate_phospho_protein(ffxml_name, leaprc_name,
                              supp_leaprc_name = 'oldff/leaprc.ff99SBildn',
-                             supp_ffxml_name='ffxml/ff99SBildn.xml'):
+                             supp_ffxml_name='ffxml/ff99SBildn.xml',
+                             phospho="phospho10"):
+    if '14' in leaprc_name:
+        # Use AMBER14SB
+        supp_leaprc_name = 'oldff/leaprc.ff14SB'
+        supp_ffxml_name='ffxml/ff14SB.xml'
+        phospho = 'phospho14'
+
     # this function assumes ffxml/ff14SB.xml already exists
     if verbose: print('Phosphorylated protein energy validation for %s' %
                       ffxml_name)
-    for pdbname in glob.iglob('files/phospho/*.pdb'):
+    for pdbname in glob.iglob(f'files/{phospho}/*.pdb'):
         if verbose: print('Now testing with pdb %s' % os.path.basename(pdbname))
         if verbose: print('Preparing temporary files for validation...')
         top = tempfile.mkstemp()
