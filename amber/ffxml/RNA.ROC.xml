@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="leaprc.RNA.ROC" md5hash="497c59d5829093ad821d705afa74be90" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.RNA.ROC</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="leaprc.RNA.ROC" md5hash="1fe3856d015119bcc053605d6c4b5b1c" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.RNA.ROC</Source>
     <Reference>Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P. Refinement of the Cornell et al. Nucleic Acids Force Field Based on Reference Quantum Chemical Calculations of Glycosidic Torsion Profiles. J. Chem. Theory Comput., 2011, 7, 2886-2902.</Reference>
   </Info>
   <AtomTypes>
@@ -2737,6 +2737,14 @@
     <Improper type1="RNA-C4" type2="RNA-C" type3="RNA-C4" type4="RNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-CA" type2="RNA-C4" type3="RNA-N2" type4="RNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-C" type2="RNA-CA" type3="RNA-CA" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="RNA-CB" type2="RNA-CB" type3="RNA-N*" type4="RNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="RNA-CB" type2="RNA-C" type3="RNA-CB" type4="RNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="RNA-CB" type2="RNA-CA" type3="RNA-CB" type4="RNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-H1" type3="RNA-H1" type4="RNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-H1" type3="RNA-H1" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>

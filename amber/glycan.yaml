@@ -1,0 +1,20 @@
+# AMBER --> OpenMM-ffxml conversion YAML
+# Author: Rafal P. Wiewiora, Chodera Lab
+# Structure: list - first entry - source package info, further entries - 1/resulting ffxml file
+
+- MODE: LEAPRC
+- sourcePackage: AmberTools
+  sourcePackageVersion: 20.15
+- Source: leaprc.GLYCAM_06j-1
+  Prefix: glycan
+  Reference:
+  - >-
+    R. Kadirvelraj; O. C. Grant; I. J. Goldstein; H. C. Winter; H. Tateno; E. Fadda; R. J. Woods. Structure and binding analysis of Polyporus squamosus lectin in complex with the Neu5Acα2-6Galβ1-4GlcNAc human- type influenza receptor. Glycobiology, 2011, 21, 973–984.
+    M. L. DeMarco; R. J. Woods. From agonist to antagonist: Structure and dynamics of innate immune glycoprotein MD-2 upon recognition of variably acylated bacterial endotoxins. Mol. Immunol., 2011, 49, 124–133.
+    B. L. Foley; M. B. Tessier; R. J. Woods. Carbohydrate force fields. WIREs Comput. Mol. Sci., 2012, 2, 652–697.
+    E. Ficko-Blean; C. P. Stuart; M. D. Suits; M. Cid; M. Tessier; R. J. Woods; A. B. Boraston. Carbohy- drate Recognition by an Architecturally Complex α-N-Acetylglucosaminidase from Clostridium perfrin- gens. PLoS ONE, 2012, 7, e33524.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein # TODO: Update test with a glycosylated protein

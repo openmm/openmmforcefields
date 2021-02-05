@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="oldff/leaprc.DNA.bsc0" md5hash="df21eaacd7bc5d43b089774a3598cdd1" sourcePackage="AmberTools" sourcePackageVersion="19.9">oldff/leaprc.DNA.bsc0</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="oldff/leaprc.DNA.bsc0" md5hash="df21eaacd7bc5d43b089774a3598cdd1" sourcePackage="AmberTools" sourcePackageVersion="20.15">oldff/leaprc.DNA.bsc0</Source>
     <Reference>Perez, A.; Marchan, I.; Svozil, D.; Sponer, J.; Cheatham, T.E.; Laughton, C.A.; Orozco, M. Refinement of the AMBER Force Field for Nucleic Acids: Improving the Description of alpha/gamma Conformers. Biophys. J., 2007, 92, 3817-3829.</Reference>
   </Info>
   <AtomTypes>
@@ -1461,6 +1461,14 @@
     <Improper type1="DNA-CM" type2="DNA-CM" type3="DNA-CT" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="DNA-C" type2="DNA-CM" type3="DNA-H4" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="DNA-C" type2="DNA-CA" type3="DNA-CA" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="DNA-CB" type2="DNA-CB" type3="DNA-N*" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CB" type2="DNA-C" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CB" type2="DNA-CA" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>

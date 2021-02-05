@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="leaprc.RNA.YIL" md5hash="86a5bbb23f9e57f4a285fee56b343bc3" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.RNA.YIL</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="leaprc.RNA.YIL" md5hash="86a5bbb23f9e57f4a285fee56b343bc3" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.RNA.YIL</Source>
     <Reference>Zgarbova, M.; Otyepka, M.; Sponer, J.; Mladek, A.; Banas, P.; Cheatham, T.E.; Jurecka, P. Refinement of the Cornell et al. Nucleic Acids Force Field Based on Reference Quantum Chemical Calculations of Glycosidic Torsion Profiles. J. Chem. Theory Comput., 2011, 7, 2886-2902.</Reference>
   </Info>
   <AtomTypes>
@@ -1505,6 +1505,14 @@
     <Improper type1="RNA-CM" type2="RNA-CM" type3="RNA-CT" type4="RNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-C" type2="RNA-CM" type3="RNA-H4" type4="RNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-C" type2="RNA-CA" type3="RNA-CA" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="RNA-CB" type2="RNA-CB" type3="RNA-N*" type4="RNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="RNA-CB" type2="RNA-C" type3="RNA-CB" type4="RNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="RNA-CB" type2="RNA-CA" type3="RNA-CB" type4="RNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-H1" type3="RNA-H1" type4="RNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-H1" type3="RNA-H1" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="RNA-CT" type3="RNA-H1" type4="RNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper type1="RNA-Q1" type2="" type3="" type4="RNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-Q2" type2="" type3="" type4="RNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="RNA-Q3" type2="" type3="" type4="RNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>

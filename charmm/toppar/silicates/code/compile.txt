@@ -1,3 +1,0 @@
-
-g77 -o patchfind.x patchfind.f crystal.f cell.f
-
