@@ -30,7 +30,7 @@ def test_ffxml_import(filename):
         ff = app.ForceField(*filenames)
     elif filename == 'amber/phosaa14SB.xml':
         # Must be used with ff14SB.xml
-        filenames = ['amber/ff14SB.xml', 'amber/phosaa14.xml']
+        filenames = ['amber/ff14SB.xml', 'amber/phosaa14SB.xml']
         ff = app.ForceField(*filenames)
     else:
         ff = app.ForceField(filename)
