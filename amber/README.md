@@ -48,10 +48,6 @@ optional arguments:
 ```bash
 conda install -c conda-forge --yes ambertools==20.15
 ```
-* Install a sufficiently recent ParmEd because there has not been a release in years:
-```bash
-pip install git+https://github.com/ParmEd/ParmEd.git@0e1a9663613a16dcfa9fca07175af179fe0c35ce
-```
 * Convert solvent force fields
 ```bash
 python convert_amber.py --input solvents.yaml --log solvents-tests.csv
