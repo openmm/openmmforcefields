@@ -222,8 +222,8 @@ forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCM
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
 system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
-# Create an OpenMM System from an Open Force Field toolkit Topology object
-system = system_generator.create_system(openff_topology)
+# Create an OpenMM System from an OpenMM Topology object
+system = system_generator.create_system(openmm_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of OpenFF Molecule objects
 molecules = Molecule.from_file('molecules.sdf', file_format='sdf')
 system = system_generator.create_system(openmm_topology, molecules=molecules)
@@ -271,7 +271,7 @@ This release utilizes the new [openforcefield 0.9.0 toolkit](https://open-forcef
 This release contains updated CHARMM and AMBER force fields for use with [OpenMM 7.5.0](https://github.com/openmm/openmm/releases/tag/7.5.0) and the new [openforcefield 0.9.0 toolkit](https://open-forcefield-toolkit.readthedocs.io/en/0.9.0/), both now distributed through [conda-forge](https://conda-forge.org/).
 
 * Amber force fields were updated to versions distributed with [AmberTools 20.15](https://anaconda.org/conda-forge/ambertools/files)
-* Added AMBER phosaa14SB parameters for phosphorylated amino acids
+* Added AMBER `phosaa14SB` parameters for phosphorylated amino acids
 * CHARMM force fields were updated to [July 2020 CHARMM additive force field release](http://mackerell.umaryland.edu/charmm_ff.shtml#charmm)
 
 ## 0.8.0 Updates for openforcefield 0.7.1 toolkit
