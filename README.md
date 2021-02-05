@@ -1,4 +1,6 @@
 [![CI](https://github.com/openmm/openmmforcefields/workflows/CI/badge.svg?branch=master)](https://github.com/openmm/openmmforcefields/actions?query=workflow%3ACI)
+[![conda-forge badge](https://anaconda.org/conda-forge/openmmforcefields/badges/installer/conda.svg)](https://anaconda.org/conda-forge/openmmforcefields)
+[![conda-forge downloads](https://anaconda.org/conda-forge/openmmforcefields/badges/downloads.svg)](https://anaconda.org/conda-forge/openmmforcefields)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
 # AMBER and CHARMM force fields for OpenMM
@@ -7,11 +9,11 @@ This repository provides support for AMBER and CHARMM force fields and small mol
 
 ## Supported force fields
 
-**AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 19.9 (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
+**AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 20.15 from [conda-forge](https://anaconda.org/conda-forge/ambertools/files) (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
 
-**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [Aug 2015 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
+**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [July 2020 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
-**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) force fields, including the `smirnoff99Frosst` series and [`openff-1.x.y` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) repository. This is now supported in OpenMM 7.4.2 and later.
+**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
 
 # Using the force fields
 
@@ -21,7 +23,7 @@ The `openmmforcefields` package provides additional AMBER and CHARMM biopolymer 
 
 The easiest way to install this package and its requisite dependencies is via [`conda`](https://conda.io):
 ```bash
-conda install --yes -c conda-forge -c omnia openmmforcefields
+conda install --yes -c conda-forge openmmforcefields
 ```
 
 If you optionally have the [OpenEye Toolkits](https://www.eyesopen.com/toolkit-development) installed, `openmmforcefields` will use these to accelerate small molecule parameterization.
@@ -220,8 +222,8 @@ forcefield_kwargs = { 'constraints' : app.HBonds, 'rigidWater' : True, 'removeCM
 # Initialize a SystemGenerator using GAFF
 from openmmforcefields.generators import SystemGenerator
 system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p_standard.xml'], small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache='db.json')
-# Create an OpenMM System from an Open Force Field toolkit Topology object
-system = system_generator.create_system(openff_topology)
+# Create an OpenMM System from an OpenMM Topology object
+system = system_generator.create_system(openmm_topology)
 # Alternatively, create an OpenMM System from an OpenMM Topology object and a list of OpenFF Molecule objects
 molecules = Molecule.from_file('molecules.sdf', file_format='sdf')
 system = system_generator.create_system(openmm_topology, molecules=molecules)
@@ -262,6 +264,15 @@ See the corresponding directories for information on how to use the provided con
 * `charmm/` - CHARMM force fields and conversion tools
 
 # Changelog
+
+## 0.9.0 Updates for openforcefield 0.9.0 toolkit
+This release utilizes the new [openforcefield 0.9.0 toolkit](https://open-forcefield-toolkit.readthedocs.io/en/0.9.0/) now distributed through [conda-forge](https://conda-forge.org/).
+
+This release contains updated CHARMM and AMBER force fields for use with [OpenMM 7.5.0](https://github.com/openmm/openmm/releases/tag/7.5.0) and the new [openforcefield 0.9.0 toolkit](https://open-forcefield-toolkit.readthedocs.io/en/0.9.0/), both now distributed through [conda-forge](https://conda-forge.org/).
+
+* Amber force fields were updated to versions distributed with [AmberTools 20.15](https://anaconda.org/conda-forge/ambertools/files)
+* Added AMBER `phosaa14SB` parameters for phosphorylated amino acids
+* CHARMM force fields were updated to [July 2020 CHARMM additive force field release](http://mackerell.umaryland.edu/charmm_ff.shtml#charmm)
 
 ## 0.8.0 Updates for openforcefield 0.7.1 toolkit
 * [(PR #128)](https://github.com/openmm/openmmforcefields/pull/128) Update README for openff-1.2.0 and use openforcefield 0.7.1 toolkit API for identifying installed force fields
