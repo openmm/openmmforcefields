@@ -14,6 +14,10 @@ This directory contains files and scripts needed to convert the CHARMM forcefiel
 ## Dependencies
 * [`ParmEd`](https://github.com/parmed/parmed) - for parameter/topology conversion
 
+## Conversion
+python convert_charmm.py --verbose --in files/waters.yaml
+python convert_charmm.py --verbose --in files/charmm36.yaml
+
 ## Notes
 
 Notes on files that were excluded from conversion:
