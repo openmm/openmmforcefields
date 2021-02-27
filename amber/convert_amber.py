@@ -1,9 +1,8 @@
 # AMBER --> OpenMM force-field conversion script
 # Author: Rafal P. Wiewiora, ChoderaLab
 from __future__ import print_function, division
+from io import StringIO
 import parmed
-from parmed.utils.six import iteritems
-from parmed.utils.six.moves import StringIO, zip
 import simtk.openmm.app as app
 import simtk.unit as u
 import simtk
@@ -159,7 +158,7 @@ def write_file(file, contents):
     outfile.close()
 
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
-    provenance=None, write_unused=False, filter_warnings='error'):
+    provenance=None, write_unused=False, override_level=None, filter_warnings='error'):
     if verbose: print('\nConverting %s to ffxml...' % files)
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
@@ -206,6 +205,9 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     if verbose: print('Converting to ffxml %s...' % ffxml_name)
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    if override_level:
+        for name, residue in params.residues.items():
+            residue.override_level = override_level
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
@@ -248,19 +250,19 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
     # Change atom type naming
     # atom_types
     new_atom_types = OrderedDict()
-    for name, atom_type in iteritems(params.atom_types):
+    for name, atom_type in params.atom_types.items():
         new_name = ffxml_basename + '-' + name
         new_atom_types[new_name] = atom_type
     params.atom_types = new_atom_types
     # atoms in residues
-    for name, residue in iteritems(params.residues):
+    for name, residue in params.residues.items():
         for atom in residue:
             new_type = ffxml_basename + '-' + atom.type
             atom.type = new_type
     if solvent_file is None:
     # this means this file does not include a water model - hard-coded assumption it is
     # then a 'multivalent' file - set overrideLevel to 1 for all residue templates
-        for name, residue in iteritems(params.residues):
+        for name, residue in params.residues.items():
             residue.override_level = 1
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
@@ -402,6 +404,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         # set default conversion options
         write_unused = False
         filter_warnings = 'error'
+        override_level = None
         # set conversion options if present
         if 'Options' in entry:
             for option in entry['Options']:
@@ -411,6 +414,8 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     filter_warnings = entry['Options'][option]
                 elif option == 'ffxml_dir':
                     ffxml_dir = entry['Options'][option]
+                elif option == 'override_level':
+                    override_level = entry['Options'][option]
                 else:
                     raise Exception("Wrong option used in Options for %s"
                                        % source_files)
@@ -418,7 +423,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         # Convert files
         if MODE == 'LEAPRC':
             ffxml_name = convert_leaprc(files, ffxml_dir=ffxml_dir, ignore=ignore,
-                         provenance=provenance, write_unused=write_unused,
+                         provenance=provenance, write_unused=write_unused, override_level=override_level,
                          filter_warnings=filter_warnings, split_filename=True)
         elif MODE == 'RECIPE':
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
@@ -470,6 +475,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             elif test == 'lipids':
                 #validate_lipids(ffxml_name, source_files)
                 validate_merged_lipids(ffxml_name, entry['Source'])
+                tested = True
+            elif test == 'protein_glycan':
+                validate_glyco_protein(ffxml_name, entry['Source'])
                 tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
@@ -1246,6 +1254,48 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
         for f in (lipids_top, lipids_crd, leap_script_lipids_file):
             os.unlink(f[1])
     if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
+
+def validate_glyco_protein(ffxml_name, leaprc_name,
+                             supp_leaprc_name = 'oldff/leaprc.ff14SB',
+                             supp_ffxml_name='ffxml/ff14SB.xml'):
+
+    # this function assumes ffxml/ff14SB.xml already exists
+    if verbose: print('Glycosylated protein energy validation for %s' %
+                      ffxml_name)
+    for pdbname in glob.iglob(f'files/glycan/*.pdb'):
+        if verbose: print('Now testing with pdb %s' % os.path.basename(pdbname))
+        if verbose: print('Preparing temporary files for validation...')
+        top = tempfile.mkstemp()
+        crd = tempfile.mkstemp()
+        leap_script_file = tempfile.mkstemp()
+
+        if verbose: print('Preparing LeaP scripts...')
+        leap_script_string = """source %s
+source %s
+x = loadPdb %s
+saveAmberParm x %s %s
+quit""" % (leaprc_name, supp_leaprc_name,  pdbname, top[1], crd[1])
+
+        write_file(leap_script_file[0], leap_script_string)
+
+        if verbose: print('Running LEaP...')
+        os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
+        if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
+            raise LeapException(leap_script_file[1])
+
+        try:
+            if verbose: print('Calculating and validating energies...')
+            assert_energies(top[1], crd[1], (supp_ffxml_name, ffxml_name),
+                            system_name='glyco_protein: %s'
+                            % os.path.basename(pdbname))
+            if verbose: print('Energy validation successful!')
+        finally:
+            if verbose: print('Deleting temp files...')
+            for f in (top, crd, leap_script_file):
+                os.unlink(f[1])
+        if verbose: print('Glycosylated protein energy validation for %s done!'
+                          % ffxml_name)
+
 
 class Logger():
     """
