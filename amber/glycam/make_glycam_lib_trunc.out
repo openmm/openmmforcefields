@@ -1,0 +1,25 @@
+-I: Adding /home/zhangi/miniconda3/envs/glycan-ff/dat/leap/prep to search path.
+-I: Adding /home/zhangi/miniconda3/envs/glycan-ff/dat/leap/lib to search path.
+-I: Adding /home/zhangi/miniconda3/envs/glycan-ff/dat/leap/parm to search path.
+-I: Adding /home/zhangi/miniconda3/envs/glycan-ff/dat/leap/cmd to search path.
+-s: Ignoring startup file: leaprc
+-f: Source make_glycam_lib_trunc.in.
+
+Welcome to LEaP!
+Sourcing: ./make_glycam_lib_trunc.in
+Loading Prep file: /home/zhangi/miniconda3/envs/glycan-ff/dat/leap/prep/GLYCAM_06j-1.prep
+ Creating GLYCAM_06j-1.lib
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.
+Building topology.
+Building atom parameters.

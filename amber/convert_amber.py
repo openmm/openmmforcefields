@@ -203,6 +203,7 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
         new_lines += fil_new_lines
     leaprc = StringIO(''.join(new_lines))
     if verbose: print('Converting to ffxml %s...' % ffxml_name)
+    print("leaprc", ''.join(new_lines))
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if override_level:
@@ -368,7 +369,8 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         source = provenance['Source'] = []
         for source_file in source_files:
             if MODE == 'LEAPRC':
-                _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
+#                _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
+                 _filename = os.path.join('./', source_file)
             elif MODE == 'RECIPE':
                 _filename = os.path.join(AMBERHOME, 'dat/leap/', source_file)
             elif MODE == 'GAFF':
@@ -620,16 +622,17 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e
 
     if openmm_topology is not None:
         system_omm = ff.createSystem(openmm_topology)
-        parm_omm = parmed.openmm.load_topology(openmm_topology, system_omm,
-                                               xyz=openmm_positions)
+        #parm_omm = parmed.openmm.load_topology(openmm_topology, system_omm,
+        #                                       xyz=openmm_positions)
     else:
         system_omm = ff.createSystem(parm_amber.topology)
-        parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
-                                               xyz=parm_amber.positions)
-    system_omm = parm_omm.createSystem(splitDihedrals=True)
-    omm_energies = parmed.openmm.energy_decomposition_system(parm_omm,
+       # parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm,
+       #                                        xyz=parm_amber.positions)
+    #system_omm = parm_omm.createSystem(splitDihedrals=True)
+    omm_energies = parmed.openmm.energy_decomposition_system(parm_amber,
                    system_omm, nrg=units, platform='Reference')
-
+    print("amber energies", amber_energies)
+    print("omm energies", omm_energies)
     # calc rel energies and assert
     energies = []
     rel_energies = []
@@ -1272,8 +1275,28 @@ def validate_glyco_protein(ffxml_name, leaprc_name,
         if verbose: print('Preparing LeaP scripts...')
         leap_script_string = """source %s
 source %s
-x = loadPdb %s
-saveAmberParm x %s %s
+mol = loadPdb %s
+#  Add disulphide bridges
+
+bond mol.336.SG mol.361.SG
+bond mol.379.SG mol.432.SG
+bond mol.391.SG mol.525.SG
+bond mol.480.SG mol.488.SG
+
+#  N343 glycans
+
+bond mol.343.ND2 mol.528.C1 #  Bond N343 to GlcNAc
+bond mol.528.O6 mol.537.C1
+bond mol.528.O4 mol.529.C1
+bond mol.529.O4 mol.530.C1
+bond mol.530.O6 mol.531.C1
+bond mol.531.O2 mol.532.C1
+bond mol.532.O4 mol.533.C1
+bond mol.530.O3 mol.534.C1
+bond mol.534.O2 mol.535.C1
+bond mol.535.O4 mol.536.C1
+
+saveAmberParm mol %s %s
 quit""" % (leaprc_name, supp_leaprc_name,  pdbname, top[1], crd[1])
 
         write_file(leap_script_file[0], leap_script_string)

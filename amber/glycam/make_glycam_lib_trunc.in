@@ -1,0 +1,2 @@
+loadamberprep GLYCAM_06j-1.prep
+saveOff {UYB 4YB VMB 2MA 0YB 0fA 0LB} GLYCAM_06j-1.lib

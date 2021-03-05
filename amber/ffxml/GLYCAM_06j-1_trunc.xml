@@ -1,0 +1,1489 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2021-03-05</DateGenerated>
+    <Source Source="glycam/leaprc.GLYCAM_06j-1_trunc" md5hash="a7359f8d717f92dba02d57d6e0c8f3f7" sourcePackage="AmberTools" sourcePackageVersion="20.15">glycam/leaprc.GLYCAM_06j-1_trunc</Source>
+    <Reference>R. Kadirvelraj; O. C. Grant; I. J. Goldstein; H. C. Winter; H. Tateno; E. Fadda; R. J. Woods. Structure and binding analysis of Polyporus squamosus lectin in complex with the Neu5Acα2-6Galβ1-4GlcNAc human- type influenza receptor. Glycobiology, 2011, 21, 973–984. M. L. DeMarco; R. J. Woods. From agonist to antagonist: Structure and dynamics of innate immune glycoprotein MD-2 upon recognition of variably acylated bacterial endotoxins. Mol. Immunol., 2011, 49, 124–133. B. L. Foley; M. B. Tessier; R. J. Woods. Carbohydrate force fields. WIREs Comput. Mol. Sci., 2012, 2, 652–697. E. Ficko-Blean; C. P. Stuart; M. D. Suits; M. Cid; M. Tessier; R. J. Woods; A. B. Boraston. Carbohy- drate Recognition by an Architecturally Complex α-N-Acetylglucosaminidase from Clostridium perfrin- gens. PLoS ONE, 2012, 7, e33524.</Reference>
+  </Info>
+  <AtomTypes>
+    <Type element="C" name="glycan-Cg" class="Cg" mass="12.01"/>
+    <Type element="C" name="glycan-CT" class="CT" mass="12.01"/>
+    <Type element="C" name="glycan-2C" class="2C" mass="12.01"/>
+    <Type element="C" name="glycan-3C" class="3C" mass="12.01"/>
+    <Type element="C" name="glycan-CX" class="CX" mass="12.01"/>
+    <Type element="C" name="glycan-Cy" class="Cy" mass="12.01"/>
+    <Type element="C" name="glycan-C" class="C" mass="12.01"/>
+    <Type element="C" name="glycan-Cp" class="Cp" mass="12.01"/>
+    <Type element="C" name="glycan-Ck" class="Ck" mass="12.01"/>
+    <Type element="C" name="glycan-Cj" class="Cj" mass="12.01"/>
+    <Type element="H" name="glycan-H" class="H" mass="1.008"/>
+    <Type element="H" name="glycan-H1" class="H1" mass="1.008"/>
+    <Type element="H" name="glycan-H2" class="H2" mass="1.008"/>
+    <Type element="H" name="glycan-Hc" class="Hc" mass="1.008"/>
+    <Type element="H" name="glycan-Ha" class="Ha" mass="1.008"/>
+    <Type element="H" name="glycan-Ho" class="Ho" mass="1.008"/>
+    <Type element="H" name="glycan-HW" class="HW" mass="1.008"/>
+    <Type element="H" name="glycan-Hp" class="Hp" mass="1.008"/>
+    <Type element="N" name="glycan-Ng" class="Ng" mass="14.01"/>
+    <Type element="N" name="glycan-NT" class="NT" mass="14.01"/>
+    <Type element="N" name="glycan-N3" class="N3" mass="14.01"/>
+    <Type element="O" name="glycan-O" class="O" mass="16.0"/>
+    <Type element="O" name="glycan-O2" class="O2" mass="16.0"/>
+    <Type element="O" name="glycan-Oh" class="Oh" mass="16.0"/>
+    <Type element="O" name="glycan-Os" class="Os" mass="16.0"/>
+    <Type element="O" name="glycan-Oy" class="Oy" mass="16.0"/>
+    <Type element="O" name="glycan-OW" class="OW" mass="16.0"/>
+    <Type element="S" name="glycan-S" class="S" mass="32.06"/>
+    <Type element="S" name="glycan-Sm" class="Sm" mass="32.06"/>
+    <Type element="P" name="glycan-P" class="P" mass="30.97"/>
+    <Type element="Li" name="glycan-Li+" class="Li+" mass="6.94"/>
+    <Type element="Na" name="glycan-Na+" class="Na+" mass="22.99"/>
+    <Type element="K" name="glycan-K+" class="K+" mass="39.1"/>
+    <Type element="Rb" name="glycan-Rb+" class="Rb+" mass="85.47"/>
+    <Type element="Cs" name="glycan-Cs+" class="Cs+" mass="132.91"/>
+    <Type element="F" name="glycan-F-" class="F-" mass="19.0"/>
+    <Type element="Cl" name="glycan-Cl-" class="Cl-" mass="35.45"/>
+    <Type element="Br" name="glycan-Br-" class="Br-" mass="79.9"/>
+    <Type element="I" name="glycan-I-" class="I-" mass="126.9"/>
+  </AtomTypes>
+  <Residues>
+    <Residue name="0LB" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.374"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.402"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.14"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.319"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Oh" charge="-0.693"/>
+      <Atom name="H6O" type="glycan-Ho" charge="0.419"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.203"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="O4" type="glycan-Oh" charge="-0.664"/>
+      <Atom name="H4O" type="glycan-Ho" charge="0.437"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.259"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.694"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.433"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.357"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="O2" type="glycan-Oh" charge="-0.726"/>
+      <Atom name="H2O" type="glycan-Ho" charge="0.432"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="O6" atomName2="H6O"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="O4" atomName2="H4O"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="O2" atomName2="H2O"/>
+      <ExternalBond atomName="C1"/>
+    </Residue>
+    <Residue name="0YB" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.287"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.433"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.208"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.289"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Oh" charge="-0.689"/>
+      <Atom name="H6O" type="glycan-Ho" charge="0.424"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.302"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="O4" type="glycan-Oh" charge="-0.716"/>
+      <Atom name="H4O" type="glycan-Ho" charge="0.436"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.18"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.681"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.423"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.48"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="N2" type="glycan-Ng" charge="-0.722"/>
+      <Atom name="H2N" type="glycan-H" charge="0.3"/>
+      <Atom name="C2N" type="glycan-C" charge="0.648"/>
+      <Atom name="O2N" type="glycan-O" charge="-0.576"/>
+      <Atom name="CME" type="glycan-Cg" charge="0.034"/>
+      <Atom name="H3M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H2M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H1M" type="glycan-Hc" charge="0.0"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="O6" atomName2="H6O"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="O4" atomName2="H4O"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="N2"/>
+      <Bond atomName1="N2" atomName2="H2N"/>
+      <Bond atomName1="N2" atomName2="C2N"/>
+      <Bond atomName1="C2N" atomName2="O2N"/>
+      <Bond atomName1="C2N" atomName2="CME"/>
+      <Bond atomName1="CME" atomName2="H3M"/>
+      <Bond atomName1="CME" atomName2="H2M"/>
+      <Bond atomName1="CME" atomName2="H1M"/>
+      <ExternalBond atomName="C1"/>
+    </Residue>
+    <Residue name="0fA" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.399"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.494"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.187"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.065"/>
+      <Atom name="H61" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H62" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H63" type="glycan-Hc" charge="0.0"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.263"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="O4" type="glycan-Oh" charge="-0.739"/>
+      <Atom name="H4O" type="glycan-Ho" charge="0.447"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.228"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.693"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.426"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.456"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="O2" type="glycan-Oh" charge="-0.804"/>
+      <Atom name="H2O" type="glycan-Ho" charge="0.453"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H63"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="O4" atomName2="H4O"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="O2" atomName2="H2O"/>
+      <ExternalBond atomName="C1"/>
+    </Residue>
+    <Residue name="2MA" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.433"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.245"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.252"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.326"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.276"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.266"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Oh" charge="-0.688"/>
+      <Atom name="H6O" type="glycan-Ho" charge="0.422"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.507"/>
+      <Atom name="O4" type="glycan-Oh" charge="-0.733"/>
+      <Atom name="H4O" type="glycan-Ho" charge="0.438"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.696"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.431"/>
+      <Atom name="O2" type="glycan-Os" charge="-0.465"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="C3"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="C4"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="C5"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="O5"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="O6" atomName2="H6O"/>
+      <Bond atomName1="O4" atomName2="H4O"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <ExternalBond atomName="C1"/>
+      <ExternalBond atomName="O2"/>
+    </Residue>
+    <Residue name="4YB" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.287"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.433"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.208"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.289"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Oh" charge="-0.689"/>
+      <Atom name="H6O" type="glycan-Ho" charge="0.424"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.302"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.18"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.681"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.423"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.48"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="N2" type="glycan-Ng" charge="-0.722"/>
+      <Atom name="H2N" type="glycan-H" charge="0.3"/>
+      <Atom name="C2N" type="glycan-C" charge="0.648"/>
+      <Atom name="O2N" type="glycan-O" charge="-0.576"/>
+      <Atom name="CME" type="glycan-Cg" charge="0.034"/>
+      <Atom name="H3M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H2M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H1M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="O4" type="glycan-Os" charge="-0.474"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="O6" atomName2="H6O"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="N2"/>
+      <Bond atomName1="N2" atomName2="H2N"/>
+      <Bond atomName1="N2" atomName2="C2N"/>
+      <Bond atomName1="C2N" atomName2="O2N"/>
+      <Bond atomName1="C2N" atomName2="CME"/>
+      <Bond atomName1="CME" atomName2="H3M"/>
+      <Bond atomName1="CME" atomName2="H2M"/>
+      <Bond atomName1="CME" atomName2="H1M"/>
+      <ExternalBond atomName="C1"/>
+      <ExternalBond atomName="O4"/>
+    </Residue>
+    <Residue name="UYB" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.287"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.433"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.208"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.289"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Os" charge="-0.459"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.302"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.18"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="O3" type="glycan-Oh" charge="-0.681"/>
+      <Atom name="H3O" type="glycan-Ho" charge="0.423"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.48"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="N2" type="glycan-Ng" charge="-0.722"/>
+      <Atom name="H2N" type="glycan-H" charge="0.3"/>
+      <Atom name="C2N" type="glycan-C" charge="0.648"/>
+      <Atom name="O2N" type="glycan-O" charge="-0.576"/>
+      <Atom name="CME" type="glycan-Cg" charge="0.034"/>
+      <Atom name="H3M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H2M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="H1M" type="glycan-Hc" charge="0.0"/>
+      <Atom name="O4" type="glycan-Os" charge="-0.474"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="O3" atomName2="H3O"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="N2"/>
+      <Bond atomName1="N2" atomName2="H2N"/>
+      <Bond atomName1="N2" atomName2="C2N"/>
+      <Bond atomName1="C2N" atomName2="O2N"/>
+      <Bond atomName1="C2N" atomName2="CME"/>
+      <Bond atomName1="CME" atomName2="H3M"/>
+      <Bond atomName1="CME" atomName2="H2M"/>
+      <Bond atomName1="CME" atomName2="H1M"/>
+      <ExternalBond atomName="C1"/>
+      <ExternalBond atomName="O4"/>
+      <ExternalBond atomName="O6"/>
+    </Residue>
+    <Residue name="VMB" override="1">
+      <Atom name="C1" type="glycan-Cg" charge="0.314"/>
+      <Atom name="H1" type="glycan-H2" charge="0.0"/>
+      <Atom name="O5" type="glycan-Os" charge="-0.393"/>
+      <Atom name="C5" type="glycan-Cg" charge="0.206"/>
+      <Atom name="H5" type="glycan-H1" charge="0.0"/>
+      <Atom name="C6" type="glycan-Cg" charge="0.273"/>
+      <Atom name="H62" type="glycan-H1" charge="0.0"/>
+      <Atom name="H61" type="glycan-H1" charge="0.0"/>
+      <Atom name="O6" type="glycan-Os" charge="-0.455"/>
+      <Atom name="C4" type="glycan-Cg" charge="0.349"/>
+      <Atom name="H4" type="glycan-H1" charge="0.0"/>
+      <Atom name="O4" type="glycan-Oh" charge="-0.746"/>
+      <Atom name="H4O" type="glycan-Ho" charge="0.443"/>
+      <Atom name="C3" type="glycan-Cg" charge="0.263"/>
+      <Atom name="H3" type="glycan-H1" charge="0.0"/>
+      <Atom name="C2" type="glycan-Cg" charge="0.241"/>
+      <Atom name="H2" type="glycan-H1" charge="0.0"/>
+      <Atom name="O2" type="glycan-Oh" charge="-0.664"/>
+      <Atom name="H2O" type="glycan-Ho" charge="0.431"/>
+      <Atom name="O3" type="glycan-Os" charge="-0.456"/>
+      <Bond atomName1="C1" atomName2="H1"/>
+      <Bond atomName1="C1" atomName2="O5"/>
+      <Bond atomName1="C1" atomName2="C2"/>
+      <Bond atomName1="O5" atomName2="C5"/>
+      <Bond atomName1="C5" atomName2="H5"/>
+      <Bond atomName1="C5" atomName2="C6"/>
+      <Bond atomName1="C5" atomName2="C4"/>
+      <Bond atomName1="C6" atomName2="H62"/>
+      <Bond atomName1="C6" atomName2="H61"/>
+      <Bond atomName1="C6" atomName2="O6"/>
+      <Bond atomName1="C4" atomName2="H4"/>
+      <Bond atomName1="C4" atomName2="O4"/>
+      <Bond atomName1="C4" atomName2="C3"/>
+      <Bond atomName1="O4" atomName2="H4O"/>
+      <Bond atomName1="C3" atomName2="H3"/>
+      <Bond atomName1="C3" atomName2="C2"/>
+      <Bond atomName1="C3" atomName2="O3"/>
+      <Bond atomName1="C2" atomName2="H2"/>
+      <Bond atomName1="C2" atomName2="O2"/>
+      <Bond atomName1="O2" atomName2="H2O"/>
+      <ExternalBond atomName="C1"/>
+      <ExternalBond atomName="O3"/>
+      <ExternalBond atomName="O6"/>
+    </Residue>
+    <Residue name="HYP" override="1">
+      <Atom name="N" type="N" charge="-0.2548"/>
+      <Atom name="CD" type="glycan-CT" charge="0.302"/>
+      <Atom name="HD2" type="glycan-H1" charge="-0.0431"/>
+      <Atom name="HD3" type="glycan-H1" charge="-0.0431"/>
+      <Atom name="CG" type="glycan-CT" charge="0.3977"/>
+      <Atom name="HG2" type="glycan-H1" charge="-0.0509"/>
+      <Atom name="OD1" type="OH" charge="-0.7296"/>
+      <Atom name="HOD" type="HO" charge="0.4358"/>
+      <Atom name="CB" type="glycan-CT" charge="-0.1467"/>
+      <Atom name="HB2" type="HC" charge="0.0409"/>
+      <Atom name="HB3" type="HC" charge="0.0409"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.0266"/>
+      <Atom name="HA" type="glycan-H1" charge="0.0627"/>
+      <Atom name="C" type="glycan-C" charge="0.5896"/>
+      <Atom name="O" type="glycan-O" charge="-0.5748"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD2"/>
+      <Bond atomName1="CD" atomName2="HD3"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG2"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="OD1" atomName2="HOD"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+      <ExternalBond atomName="OD1"/>
+      <ExternalBond atomName="HOD"/>
+    </Residue>
+    <Residue name="NLN" override="1">
+      <Atom name="N" type="N" charge="-0.4157"/>
+      <Atom name="H" type="glycan-H" charge="0.2719"/>
+      <Atom name="CA" type="glycan-CX" charge="0.0143"/>
+      <Atom name="HA" type="glycan-H1" charge="0.1048"/>
+      <Atom name="CB" type="glycan-2C" charge="-0.2041"/>
+      <Atom name="HB2" type="HC" charge="0.0797"/>
+      <Atom name="HB3" type="HC" charge="0.0797"/>
+      <Atom name="CG" type="glycan-C" charge="0.713"/>
+      <Atom name="OD1" type="glycan-O" charge="-0.5931"/>
+      <Atom name="ND2" type="N" charge="-0.6935"/>
+      <Atom name="HD21" type="glycan-H" charge="0.4196"/>
+      <Atom name="C" type="glycan-C" charge="0.5973"/>
+      <Atom name="O" type="glycan-O" charge="-0.5679"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="ND2"/>
+      <Bond atomName1="ND2" atomName2="HD21"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="ND2"/>
+    </Residue>
+    <Residue name="OLP" override="1">
+      <Atom name="N" type="N" charge="-0.2548"/>
+      <Atom name="CD" type="glycan-CT" charge="0.302"/>
+      <Atom name="HD2" type="glycan-H1" charge="-0.0431"/>
+      <Atom name="HD3" type="glycan-H1" charge="-0.0431"/>
+      <Atom name="CG" type="glycan-CT" charge="0.3977"/>
+      <Atom name="HG2" type="glycan-H1" charge="-0.0509"/>
+      <Atom name="OD1" type="glycan-Os" charge="-0.4878"/>
+      <Atom name="CB" type="glycan-CT" charge="-0.1467"/>
+      <Atom name="HB2" type="HC" charge="0.0409"/>
+      <Atom name="HB3" type="HC" charge="0.0409"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.0266"/>
+      <Atom name="HA" type="glycan-H1" charge="0.0627"/>
+      <Atom name="C" type="glycan-C" charge="0.5896"/>
+      <Atom name="O" type="glycan-O" charge="-0.5748"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD2"/>
+      <Bond atomName1="CD" atomName2="HD3"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG2"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+    </Residue>
+    <Residue name="OLS" override="1">
+      <Atom name="N" type="N" charge="-0.4157"/>
+      <Atom name="H" type="glycan-H" charge="0.2719"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.0249"/>
+      <Atom name="HA" type="glycan-H1" charge="0.0843"/>
+      <Atom name="CB" type="glycan-2C" charge="0.2117"/>
+      <Atom name="HB2" type="glycan-H1" charge="0.0352"/>
+      <Atom name="HB3" type="glycan-H1" charge="0.0352"/>
+      <Atom name="OG" type="glycan-Os" charge="-0.4211"/>
+      <Atom name="C" type="glycan-C" charge="0.5973"/>
+      <Atom name="O" type="glycan-O" charge="-0.5679"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="OG"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG"/>
+    </Residue>
+    <Residue name="OLT" override="1">
+      <Atom name="N" type="N" charge="-0.4157"/>
+      <Atom name="H" type="glycan-H" charge="0.2719"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.0389"/>
+      <Atom name="HA" type="glycan-H1" charge="0.1007"/>
+      <Atom name="CB" type="glycan-3C" charge="0.3654"/>
+      <Atom name="HB" type="glycan-H1" charge="0.0043"/>
+      <Atom name="CG2" type="glycan-CT" charge="-0.2438"/>
+      <Atom name="HG21" type="HC" charge="0.0642"/>
+      <Atom name="HG22" type="HC" charge="0.0642"/>
+      <Atom name="HG23" type="HC" charge="0.0642"/>
+      <Atom name="OG1" type="glycan-Os" charge="-0.4599"/>
+      <Atom name="C" type="glycan-C" charge="0.5973"/>
+      <Atom name="O" type="glycan-O" charge="-0.5679"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB"/>
+      <Bond atomName1="CB" atomName2="CG2"/>
+      <Bond atomName1="CB" atomName2="OG1"/>
+      <Bond atomName1="CG2" atomName2="HG21"/>
+      <Bond atomName1="CG2" atomName2="HG22"/>
+      <Bond atomName1="CG2" atomName2="HG23"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG1"/>
+    </Residue>
+    <Residue name="CHYP" override="1">
+      <Atom name="N" type="N" charge="-0.28"/>
+      <Atom name="CD" type="glycan-CT" charge="-0.2983"/>
+      <Atom name="HD22" type="glycan-H1" charge="0.1104"/>
+      <Atom name="HD23" type="glycan-H1" charge="0.1104"/>
+      <Atom name="CG" type="glycan-CT" charge="0.4255"/>
+      <Atom name="HG" type="glycan-H1" charge="-0.0073"/>
+      <Atom name="OD1" type="OH" charge="-0.738"/>
+      <Atom name="HD1" type="HO" charge="0.3929"/>
+      <Atom name="CB" type="glycan-CT" charge="0.144"/>
+      <Atom name="HB2" type="HC" charge="-0.0453"/>
+      <Atom name="HB3" type="HC" charge="-0.0453"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.1336"/>
+      <Atom name="HA" type="glycan-H1" charge="0.0465"/>
+      <Atom name="C" type="glycan-C" charge="0.9735"/>
+      <Atom name="O" type="glycan-O2" charge="-0.8277"/>
+      <Atom name="OXT" type="glycan-O2" charge="-0.8277"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD22"/>
+      <Bond atomName1="CD" atomName2="HD23"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="OD1" atomName2="HD1"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+      <ExternalBond atomName="OD1"/>
+      <ExternalBond atomName="HD1"/>
+    </Residue>
+    <Residue name="CNLN" override="1">
+      <Atom name="N" type="N" charge="-0.3821"/>
+      <Atom name="H" type="glycan-H" charge="0.2681"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.208"/>
+      <Atom name="HA" type="glycan-H1" charge="0.1358"/>
+      <Atom name="CB" type="glycan-2C" charge="-0.2299"/>
+      <Atom name="HB2" type="HC" charge="0.1023"/>
+      <Atom name="HB3" type="HC" charge="0.1023"/>
+      <Atom name="CG" type="glycan-C" charge="0.7153"/>
+      <Atom name="OD1" type="glycan-O" charge="-0.601"/>
+      <Atom name="ND2" type="N" charge="-0.6874"/>
+      <Atom name="HD21" type="glycan-H" charge="0.415"/>
+      <Atom name="C" type="glycan-C" charge="0.805"/>
+      <Atom name="O" type="glycan-O2" charge="-0.8147"/>
+      <Atom name="OXT" type="glycan-O2" charge="-0.8147"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="ND2"/>
+      <Bond atomName1="ND2" atomName2="HD21"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="ND2"/>
+    </Residue>
+    <Residue name="COLP" override="1">
+      <Atom name="N" type="N" charge="-0.28"/>
+      <Atom name="CD" type="glycan-CT" charge="-0.2983"/>
+      <Atom name="HD2" type="glycan-H1" charge="0.1104"/>
+      <Atom name="HD3" type="glycan-H1" charge="0.1104"/>
+      <Atom name="CG" type="glycan-CT" charge="0.4255"/>
+      <Atom name="HG2" type="glycan-H1" charge="-0.0073"/>
+      <Atom name="OD1" type="glycan-Os" charge="-0.5391"/>
+      <Atom name="CB" type="glycan-CT" charge="0.144"/>
+      <Atom name="HB2" type="HC" charge="-0.0453"/>
+      <Atom name="HB3" type="HC" charge="-0.0453"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.1336"/>
+      <Atom name="HA" type="glycan-H1" charge="0.0465"/>
+      <Atom name="C" type="glycan-C" charge="0.9735"/>
+      <Atom name="O" type="glycan-O2" charge="-0.8277"/>
+      <Atom name="OXT" type="glycan-O2" charge="-0.8277"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD2"/>
+      <Bond atomName1="CD" atomName2="HD3"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG2"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+    </Residue>
+    <Residue name="COLS" override="1">
+      <Atom name="N" type="N" charge="-0.3821"/>
+      <Atom name="H" type="glycan-H" charge="0.2681"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.2722"/>
+      <Atom name="HA" type="glycan-H1" charge="0.1304"/>
+      <Atom name="CB" type="glycan-2C" charge="0.1123"/>
+      <Atom name="HB2" type="glycan-H1" charge="0.0813"/>
+      <Atom name="HB3" type="glycan-H1" charge="0.0813"/>
+      <Atom name="OG" type="glycan-Os" charge="-0.398"/>
+      <Atom name="C" type="glycan-C" charge="0.8113"/>
+      <Atom name="O" type="glycan-O2" charge="-0.8132"/>
+      <Atom name="OXT" type="glycan-O2" charge="-0.8132"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="OG"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG"/>
+    </Residue>
+    <Residue name="COLT" override="1">
+      <Atom name="N" type="N" charge="-0.3821"/>
+      <Atom name="H" type="glycan-H" charge="0.2681"/>
+      <Atom name="CA" type="glycan-CX" charge="-0.242"/>
+      <Atom name="HA" type="glycan-H1" charge="0.1207"/>
+      <Atom name="CB" type="glycan-3C" charge="0.3025"/>
+      <Atom name="HB" type="glycan-H1" charge="0.0078"/>
+      <Atom name="CG2" type="glycan-CT" charge="-0.1853"/>
+      <Atom name="HG21" type="HC" charge="0.0586"/>
+      <Atom name="HG22" type="HC" charge="0.0586"/>
+      <Atom name="HG23" type="HC" charge="0.0586"/>
+      <Atom name="OG1" type="glycan-Os" charge="-0.4317"/>
+      <Atom name="C" type="glycan-C" charge="0.781"/>
+      <Atom name="O" type="glycan-O2" charge="-0.8044"/>
+      <Atom name="OXT" type="glycan-O2" charge="-0.8044"/>
+      <Bond atomName1="N" atomName2="H"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB"/>
+      <Bond atomName1="CB" atomName2="CG2"/>
+      <Bond atomName1="CB" atomName2="OG1"/>
+      <Bond atomName1="CG2" atomName2="HG21"/>
+      <Bond atomName1="CG2" atomName2="HG22"/>
+      <Bond atomName1="CG2" atomName2="HG23"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="C" atomName2="OXT"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG1"/>
+    </Residue>
+    <Residue name="NHYP" override="1">
+      <Atom name="N" type="glycan-N3" charge="-0.202"/>
+      <Atom name="H2" type="glycan-H" charge="0.2905"/>
+      <Atom name="H3" type="glycan-H" charge="0.2905"/>
+      <Atom name="CD" type="glycan-CT" charge="0.064"/>
+      <Atom name="HD22" type="HP" charge="0.0983"/>
+      <Atom name="HD23" type="HP" charge="0.0983"/>
+      <Atom name="CG" type="glycan-CT" charge="0.0059"/>
+      <Atom name="HG" type="glycan-H1" charge="0.1278"/>
+      <Atom name="OD1" type="OH" charge="-0.642"/>
+      <Atom name="HD1" type="HO" charge="0.4697"/>
+      <Atom name="CB" type="glycan-CT" charge="0.0987"/>
+      <Atom name="HB2" type="HC" charge="0.0347"/>
+      <Atom name="HB3" type="HC" charge="0.0347"/>
+      <Atom name="CA" type="glycan-CX" charge="0.1"/>
+      <Atom name="HA" type="HP" charge="0.1049"/>
+      <Atom name="C" type="glycan-C" charge="0.526"/>
+      <Atom name="O" type="glycan-O" charge="-0.5"/>
+      <Bond atomName1="N" atomName2="H2"/>
+      <Bond atomName1="N" atomName2="H3"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD22"/>
+      <Bond atomName1="CD" atomName2="HD23"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="OD1" atomName2="HD1"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+      <ExternalBond atomName="OD1"/>
+      <ExternalBond atomName="HD1"/>
+    </Residue>
+    <Residue name="NNLN" override="1">
+      <Atom name="N" type="glycan-N3" charge="0.1801"/>
+      <Atom name="H1" type="glycan-H" charge="0.1921"/>
+      <Atom name="H2" type="glycan-H" charge="0.1921"/>
+      <Atom name="H3" type="glycan-H" charge="0.1921"/>
+      <Atom name="CA" type="glycan-CX" charge="0.0368"/>
+      <Atom name="HA" type="HP" charge="0.1231"/>
+      <Atom name="CB" type="glycan-2C" charge="-0.0283"/>
+      <Atom name="HB2" type="HC" charge="0.0515"/>
+      <Atom name="HB3" type="HC" charge="0.0515"/>
+      <Atom name="CG" type="glycan-C" charge="0.5833"/>
+      <Atom name="OD1" type="glycan-O" charge="-0.5744"/>
+      <Atom name="ND2" type="N" charge="-0.6477"/>
+      <Atom name="HD21" type="glycan-H" charge="0.4097"/>
+      <Atom name="C" type="glycan-C" charge="0.6163"/>
+      <Atom name="O" type="glycan-O" charge="-0.5722"/>
+      <Bond atomName1="N" atomName2="H1"/>
+      <Bond atomName1="N" atomName2="H2"/>
+      <Bond atomName1="N" atomName2="H3"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="ND2"/>
+      <Bond atomName1="ND2" atomName2="HD21"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="ND2"/>
+    </Residue>
+    <Residue name="NOLP" override="1">
+      <Atom name="N" type="glycan-N3" charge="-0.202"/>
+      <Atom name="H2" type="glycan-H" charge="0.2905"/>
+      <Atom name="H3" type="glycan-H" charge="0.2905"/>
+      <Atom name="CD" type="glycan-CT" charge="0.064"/>
+      <Atom name="HD2" type="HP" charge="0.0983"/>
+      <Atom name="HD3" type="HP" charge="0.0983"/>
+      <Atom name="CG" type="glycan-CT" charge="0.0059"/>
+      <Atom name="HG2" type="glycan-H1" charge="0.1278"/>
+      <Atom name="OD1" type="glycan-Os" charge="-0.3663"/>
+      <Atom name="CB" type="glycan-CT" charge="0.0987"/>
+      <Atom name="HB2" type="HC" charge="0.0347"/>
+      <Atom name="HB3" type="HC" charge="0.0347"/>
+      <Atom name="CA" type="glycan-CX" charge="0.1"/>
+      <Atom name="HA" type="HP" charge="0.1049"/>
+      <Atom name="C" type="glycan-C" charge="0.526"/>
+      <Atom name="O" type="glycan-O" charge="-0.5"/>
+      <Bond atomName1="N" atomName2="H2"/>
+      <Bond atomName1="N" atomName2="H3"/>
+      <Bond atomName1="N" atomName2="CD"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CD" atomName2="HD2"/>
+      <Bond atomName1="CD" atomName2="HD3"/>
+      <Bond atomName1="CD" atomName2="CG"/>
+      <Bond atomName1="CG" atomName2="HG2"/>
+      <Bond atomName1="CG" atomName2="OD1"/>
+      <Bond atomName1="CG" atomName2="CB"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="CG"/>
+    </Residue>
+    <Residue name="NOLS" override="1">
+      <Atom name="N" type="glycan-N3" charge="0.1849"/>
+      <Atom name="H1" type="glycan-H" charge="0.1898"/>
+      <Atom name="H2" type="glycan-H" charge="0.1898"/>
+      <Atom name="H3" type="glycan-H" charge="0.1898"/>
+      <Atom name="CA" type="glycan-CX" charge="0.0567"/>
+      <Atom name="HA" type="HP" charge="0.0782"/>
+      <Atom name="CB" type="glycan-2C" charge="0.2596"/>
+      <Atom name="HB2" type="glycan-H1" charge="0.0273"/>
+      <Atom name="HB3" type="glycan-H1" charge="0.0273"/>
+      <Atom name="OG" type="glycan-Os" charge="-0.4415"/>
+      <Atom name="C" type="glycan-C" charge="0.6163"/>
+      <Atom name="O" type="glycan-O" charge="-0.5722"/>
+      <Bond atomName1="N" atomName2="H1"/>
+      <Bond atomName1="N" atomName2="H2"/>
+      <Bond atomName1="N" atomName2="H3"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="OG"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG"/>
+    </Residue>
+    <Residue name="NOLT" override="1">
+      <Atom name="N" type="glycan-N3" charge="0.1812"/>
+      <Atom name="H1" type="glycan-H" charge="0.1934"/>
+      <Atom name="H2" type="glycan-H" charge="0.1934"/>
+      <Atom name="H3" type="glycan-H" charge="0.1934"/>
+      <Atom name="CA" type="glycan-CX" charge="0.0034"/>
+      <Atom name="HA" type="HP" charge="0.1087"/>
+      <Atom name="CB" type="glycan-3C" charge="0.4514"/>
+      <Atom name="HB" type="glycan-H1" charge="-0.0323"/>
+      <Atom name="CG2" type="glycan-CT" charge="-0.2554"/>
+      <Atom name="HG21" type="HC" charge="0.0627"/>
+      <Atom name="HG22" type="HC" charge="0.0627"/>
+      <Atom name="HG23" type="HC" charge="0.0627"/>
+      <Atom name="OG1" type="glycan-Os" charge="-0.4634"/>
+      <Atom name="C" type="glycan-C" charge="0.6163"/>
+      <Atom name="O" type="glycan-O" charge="-0.5722"/>
+      <Bond atomName1="N" atomName2="H1"/>
+      <Bond atomName1="N" atomName2="H2"/>
+      <Bond atomName1="N" atomName2="H3"/>
+      <Bond atomName1="N" atomName2="CA"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="C"/>
+      <Bond atomName1="CB" atomName2="HB"/>
+      <Bond atomName1="CB" atomName2="CG2"/>
+      <Bond atomName1="CB" atomName2="OG1"/>
+      <Bond atomName1="CG2" atomName2="HG21"/>
+      <Bond atomName1="CG2" atomName2="HG22"/>
+      <Bond atomName1="CG2" atomName2="HG23"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+      <ExternalBond atomName="OG1"/>
+    </Residue>
+  </Residues>
+  <HarmonicBondForce>
+    <Bond class1="Cg" class2="N" length="0.145" k="282001.5999999999"/>
+    <Bond class1="CT" class2="Os" length="0.141" k="267775.99999999994"/>
+    <Bond class1="2C" class2="Os" length="0.141" k="267775.99999999994"/>
+    <Bond class1="3C" class2="Os" length="0.141" k="267775.99999999994"/>
+    <Bond class1="S" class2="Ng" length="0.1675" k="199158.39999999997"/>
+    <Bond class1="Cg" class2="Sm" length="0.18100000000000002" k="198321.59999999998"/>
+    <Bond class1="N3" class2="H" length="0.101" k="363171.19999999995"/>
+    <Bond class1="N3" class2="Cg" length="0.149" k="297063.99999999994"/>
+    <Bond class1="Cj" class2="Ck" length="0.14670000000000002" k="293633.11999999994"/>
+    <Bond class1="Os" class2="Cj" length="0.1359" k="380325.5999999999"/>
+    <Bond class1="Os" class2="Ck" length="0.1359" k="380325.5999999999"/>
+    <Bond class1="Cj" class2="Cj" length="0.1337" k="526347.2"/>
+    <Bond class1="Ck" class2="Ck" length="0.1337" k="526347.2"/>
+    <Bond class1="Cg" class2="Cj" length="0.1514" k="271123.19999999995"/>
+    <Bond class1="Cg" class2="Ck" length="0.1514" k="271123.19999999995"/>
+    <Bond class1="Cj" class2="Ha" length="0.1095" k="301247.99999999994"/>
+    <Bond class1="Ck" class2="Ha" length="0.1095" k="301247.99999999994"/>
+    <Bond class1="Cg" class2="Hp" length="0.1095" k="301247.99999999994"/>
+    <Bond class1="NT" class2="H" length="0.101" k="363171.19999999995"/>
+    <Bond class1="NT" class2="Cg" length="0.147" k="294553.5999999999"/>
+    <Bond class1="Cg" class2="Cp" length="0.15200000000000002" k="259407.99999999994"/>
+    <Bond class1="Cp" class2="H2" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="Cp" class2="H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="Cp" class2="Os" length="0.146" k="238487.99999999994"/>
+    <Bond class1="P" class2="Os" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="P" class2="O2" length="0.148" k="439319.99999999994"/>
+    <Bond class1="S" class2="Os" length="0.1589" k="172380.79999999996"/>
+    <Bond class1="S" class2="O2" length="0.144" k="518815.9999999999"/>
+    <Bond class1="C" class2="Os" length="0.1323" k="376559.99999999994"/>
+    <Bond class1="OW" class2="HW" length="0.09572000000000001" k="462750.3999999999"/>
+    <Bond class1="HW" class2="HW" length="0.15136000000000002" k="462750.3999999999"/>
+    <Bond class1="Cg" class2="Cg" length="0.15200000000000002" k="259407.99999999994"/>
+    <Bond class1="Cg" class2="Hc" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="Cg" class2="H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="Cg" class2="H2" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="Cg" class2="Oh" length="0.143" k="267775.99999999994"/>
+    <Bond class1="Cg" class2="C" length="0.15300000000000002" k="184095.99999999997"/>
+    <Bond class1="Cg" class2="Ng" length="0.145" k="282001.5999999999"/>
+    <Bond class1="C" class2="O" length="0.12290000000000001" k="476975.9999999999"/>
+    <Bond class1="C" class2="Ng" length="0.1335" k="410031.99999999994"/>
+    <Bond class1="C" class2="O2" length="0.125" k="548940.7999999999"/>
+    <Bond class1="C" class2="Hc" length="0.10900000000000001" k="276980.79999999993"/>
+    <Bond class1="C" class2="H1" length="0.10920000000000002" k="343087.99999999994"/>
+    <Bond class1="Oh" class2="Ho" length="0.096" k="462750.3999999999"/>
+    <Bond class1="Ng" class2="H" length="0.101" k="363171.19999999995"/>
+    <Bond class1="Cy" class2="Oh" length="0.141" k="267775.99999999994"/>
+    <Bond class1="Cg" class2="Os" length="0.146" k="238487.99999999994"/>
+    <Bond class1="Cg" class2="Oy" length="0.141" k="267775.99999999994"/>
+    <Bond class1="Cy" class2="Cg" length="0.15200000000000002" k="259407.99999999994"/>
+    <Bond class1="Cy" class2="Os" length="0.141" k="267775.99999999994"/>
+    <Bond class1="Cy" class2="Oy" length="0.141" k="267775.99999999994"/>
+    <Bond class1="Cy" class2="C" length="0.15300000000000002" k="184095.99999999997"/>
+  </HarmonicBondForce>
+  <HarmonicAngleForce>
+    <Angle class1="H" class2="N" class3="Cg" angle="2.059488517353309" k="251.04000000000002"/>
+    <Angle class1="Os" class2="Cg" class3="N" angle="1.8832102629018816" k="894.5392"/>
+    <Angle class1="Cg" class2="Cg" class3="N" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="H2" class2="Cg" class3="N" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="N" class3="Cg" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CT" class2="Os" class3="Cy" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="2C" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="3C" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="3C" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="3C" class3="Os" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="S" class2="Ng" class3="Cg" angle="1.9198621771937625" k="259.408"/>
+    <Angle class1="O2" class2="S" class3="Ng" angle="1.8849555921538759" k="702.912"/>
+    <Angle class1="S" class2="Ng" class3="H" angle="2.1153390534171272" k="313.8"/>
+    <Angle class1="H2" class2="Cg" class3="Sm" angle="1.9128808601857852" k="347.272"/>
+    <Angle class1="Os" class2="Cg" class3="Sm" angle="1.8901915799098588" k="569.024"/>
+    <Angle class1="Cg" class2="Cg" class3="Sm" angle="1.8954275676658419" k="418.40000000000003"/>
+    <Angle class1="Cg" class2="Sm" class3="Cg" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="Cg" class3="Sm" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="Hc" class2="Cg" class3="Sm" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H" class2="N3" class3="Cg" angle="1.9058995431778079" k="380.744"/>
+    <Angle class1="H" class2="N3" class3="H" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="N3" class2="Cg" class3="Hp" angle="1.9128808601857852" k="476.976"/>
+    <Angle class1="Cj" class2="Cg" class3="Ck" angle="1.9460421159736774" k="390.78560000000004"/>
+    <Angle class1="Ck" class2="Cg" class3="Ck" angle="1.9460421159736774" k="390.78560000000004"/>
+    <Angle class1="Cj" class2="Cg" class3="Cj" angle="1.9460421159736774" k="390.78560000000004"/>
+    <Angle class1="Os" class2="Cj" class3="Ha" angle="1.8762289458939043" k="544.7568"/>
+    <Angle class1="Os" class2="Ck" class3="Ha" angle="1.8762289458939043" k="544.7568"/>
+    <Angle class1="Cg" class2="Os" class3="Cj" angle="1.8675022996339325" k="317.98400000000004"/>
+    <Angle class1="Cg" class2="Os" class3="Ck" angle="1.8675022996339325" k="317.98400000000004"/>
+    <Angle class1="Os" class2="Cj" class3="Cj" angle="2.076941809873252" k="497.896"/>
+    <Angle class1="Os" class2="Ck" class3="Ck" angle="2.076941809873252" k="497.896"/>
+    <Angle class1="Cg" class2="Cj" class3="Cg" angle="2.0176006153054447" k="385.76480000000004"/>
+    <Angle class1="Cg" class2="Ck" class3="Cg" angle="2.0176006153054447" k="385.76480000000004"/>
+    <Angle class1="Ck" class2="Cj" class3="Ha" angle="2.2060961745208325" k="273.63360000000006"/>
+    <Angle class1="Cj" class2="Ck" class3="Ha" angle="2.2060961745208325" k="273.63360000000006"/>
+    <Angle class1="Ck" class2="Cj" class3="Cj" angle="2.2287854547967587" k="413.3792"/>
+    <Angle class1="Ck" class2="Ck" class3="Cj" angle="2.2287854547967587" k="413.3792"/>
+    <Angle class1="Ha" class2="Cj" class3="Ha" angle="2.049016541841343" k="261.9184"/>
+    <Angle class1="Ha" class2="Ck" class3="Ha" angle="2.049016541841343" k="261.9184"/>
+    <Angle class1="Ha" class2="Cj" class3="Cj" angle="2.117084382669122" k="319.65760000000006"/>
+    <Angle class1="Ha" class2="Ck" class3="Ck" angle="2.117084382669122" k="319.65760000000006"/>
+    <Angle class1="H1" class2="Cg" class3="Cj" angle="1.9460421159736774" k="468.608"/>
+    <Angle class1="H1" class2="Cg" class3="Ck" angle="1.9460421159736774" k="468.608"/>
+    <Angle class1="Hc" class2="Cg" class3="Cj" angle="1.9896753472735358" k="346.4352"/>
+    <Angle class1="Hc" class2="Cg" class3="Ck" angle="1.9896753472735358" k="346.4352"/>
+    <Angle class1="Ha" class2="Cj" class3="Cg" angle="1.9896753472735358" k="418.40000000000003"/>
+    <Angle class1="Ha" class2="Ck" class3="Cg" angle="1.9896753472735358" k="418.40000000000003"/>
+    <Angle class1="Cg" class2="Cj" class3="Cj" angle="2.138028333693054" k="400.8272"/>
+    <Angle class1="Cg" class2="Ck" class3="Ck" angle="2.138028333693054" k="400.8272"/>
+    <Angle class1="Cg" class2="Cg" class3="Cj" angle="1.9547687622336491" k="359.824"/>
+    <Angle class1="Cg" class2="Cg" class3="Ck" angle="1.9547687622336491" k="359.824"/>
+    <Angle class1="Oh" class2="Cg" class3="Cj" angle="1.8762289458939043" k="585.76"/>
+    <Angle class1="Oh" class2="Cg" class3="Ck" angle="1.8762289458939043" k="585.76"/>
+    <Angle class1="Hp" class2="Cg" class3="Hp" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="Hp" class2="Cg" class3="Cp" angle="1.965240737745615" k="376.56"/>
+    <Angle class1="Hp" class2="Cg" class3="Cg" angle="1.965240737745615" k="376.56"/>
+    <Angle class1="Cp" class2="Os" class3="Cg" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="Cp" class2="Cg" class3="Ng" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="Cg" class2="N3" class3="Cg" angle="1.9390607989657" k="451.872"/>
+    <Angle class1="N3" class2="Cg" class3="Cp" angle="1.9477874452256716" k="560.6560000000001"/>
+    <Angle class1="N3" class2="Cg" class3="Cg" angle="1.9477874452256716" k="560.6560000000001"/>
+    <Angle class1="H" class2="NT" class3="H" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="H" class2="NT" class3="Cg" angle="1.9058995431778079" k="410.03200000000004"/>
+    <Angle class1="NT" class2="Cg" class3="H1" angle="1.9128808601857852" k="535.552"/>
+    <Angle class1="NT" class2="Cg" class3="Cg" angle="1.9477874452256716" k="560.6560000000001"/>
+    <Angle class1="Cg" class2="NT" class3="Cg" angle="1.88670092140587" k="451.872"/>
+    <Angle class1="H1" class2="Cp" class3="H1" angle="1.911135530933791" k="376.56"/>
+    <Angle class1="Cp" class2="Cg" class3="H1" angle="1.9373154697137058" k="376.56"/>
+    <Angle class1="Cg" class2="Cp" class3="H1" angle="1.9373154697137058" k="376.56"/>
+    <Angle class1="Cg" class2="Cp" class3="Cg" angle="1.980948701013564" k="376.56"/>
+    <Angle class1="Cp" class2="Cg" class3="Cg" angle="1.980948701013564" k="376.56"/>
+    <Angle class1="Os" class2="Cp" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="Os" class2="Cg" class3="Cp" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="H2" class2="Cp" class3="Os" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H1" class2="Cp" class3="Os" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="Os" class2="P" class3="Os" angle="1.9128808601857852" k="376.56"/>
+    <Angle class1="P" class2="Os" class3="Cp" angle="2.076941809873252" k="418.40000000000003"/>
+    <Angle class1="O2" class2="P" class3="Os" angle="1.888969849433463" k="836.8000000000001"/>
+    <Angle class1="O2" class2="P" class3="O2" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="O2" class2="S" class3="O2" angle="1.9881045509467408" k="1029.2640000000001"/>
+    <Angle class1="S" class2="Os" class3="Cg" angle="2.074847414770859" k="418.40000000000003"/>
+    <Angle class1="O2" class2="S" class3="Os" angle="1.86523337160634" k="870.272"/>
+    <Angle class1="Oh" class2="Cg" class3="C" angle="1.9610519475408286" k="527.184"/>
+    <Angle class1="Cg" class2="Os" class3="C" angle="2.0420352248333655" k="502.08000000000004"/>
+    <Angle class1="Os" class2="C" class3="O" angle="2.181661564992912" k="669.44"/>
+    <Angle class1="Os" class2="C" class3="Cg" angle="1.9338248112097172" k="794.96"/>
+    <Angle class1="HW" class2="OW" class3="HW" angle="1.8242181341844732" k="836.8000000000001"/>
+    <Angle class1="HW" class2="HW" class3="OW" angle="2.2294835864975564" k="0.0"/>
+    <Angle class1="Hc" class2="Cg" class3="Hc" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="H1" class2="Cg" class3="H1" angle="1.911135530933791" k="376.56"/>
+    <Angle class1="H2" class2="Cg" class3="H2" angle="1.911135530933791" k="376.56"/>
+    <Angle class1="Cg" class2="Cg" class3="Hc" angle="1.965240737745615" k="376.56"/>
+    <Angle class1="Cg" class2="Cg" class3="H1" angle="1.9373154697137058" k="376.56"/>
+    <Angle class1="Cg" class2="Cp" class3="H2" angle="1.9373154697137058" k="376.56"/>
+    <Angle class1="Cg" class2="Cg" class3="H2" angle="1.9373154697137058" k="376.56"/>
+    <Angle class1="Cg" class2="Cg" class3="Cg" angle="1.980948701013564" k="376.56"/>
+    <Angle class1="Oh" class2="Cg" class3="Cg" angle="1.8762289458939043" k="585.76"/>
+    <Angle class1="H1" class2="Cg" class3="Oh" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H2" class2="Cg" class3="Oh" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="Cg" class2="Oh" class3="Ho" angle="1.911135530933791" k="460.24"/>
+    <Angle class1="Cy" class2="Oh" class3="Ho" angle="1.911135530933791" k="460.24"/>
+    <Angle class1="Cg" class2="Os" class3="Cg" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="CT" class2="Os" class3="Cg" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="2C" class2="Os" class3="Cg" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="3C" class2="Os" class3="Cg" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="Os" class2="Cg" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="Oy" class2="Cg" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="H1" class2="Cg" class3="Os" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H1" class2="Cg" class3="Oy" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H2" class2="Cg" class3="Os" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H1" class2="C" class3="O" angle="1.9198621771937625" k="502.08000000000004"/>
+    <Angle class1="H1" class2="C" class3="Ng" angle="1.9617500792416265" k="460.24"/>
+    <Angle class1="Os" class2="Cp" class3="Os" angle="1.9547687622336491" k="836.8000000000001"/>
+    <Angle class1="Os" class2="Cg" class3="Os" angle="1.9547687622336491" k="836.8000000000001"/>
+    <Angle class1="Oh" class2="Cg" class3="Os" angle="1.9547687622336491" k="836.8000000000001"/>
+    <Angle class1="O2" class2="C" class3="O2" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="O2" class2="C" class3="Cg" angle="2.007128639793479" k="585.76"/>
+    <Angle class1="Cg" class2="C" class3="Ng" angle="2.0176006153054447" k="585.76"/>
+    <Angle class1="Cg" class2="C" class3="O" angle="2.1240656996770992" k="669.44"/>
+    <Angle class1="Ng" class2="C" class3="O" angle="2.1450096507010312" k="669.44"/>
+    <Angle class1="Ng" class2="Cg" class3="Hc" angle="1.9216075064457567" k="418.40000000000003"/>
+    <Angle class1="Os" class2="Cg" class3="Ng" angle="1.8832102629018816" k="894.5392"/>
+    <Angle class1="Cg" class2="Cg" class3="Ng" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="H1" class2="Cg" class3="Ng" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H2" class2="Cg" class3="Ng" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="Cg" class3="Cg" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="Cg" class3="Hc" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="Cg" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="Cg" class3="H2" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="Ng" class3="Cg" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="Cg" class2="Ng" class3="Cg" angle="2.059488517353309" k="418.40000000000003"/>
+    <Angle class1="H" class2="Ng" class3="Cg" angle="2.059488517353309" k="251.04000000000002"/>
+    <Angle class1="C" class2="Ng" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H" class2="Ng" class3="H" angle="2.0943951023931953" k="292.88"/>
+    <Angle class1="H2" class2="C" class3="Ng" angle="1.9617500792416265" k="460.24"/>
+    <Angle class1="H2" class2="C" class3="O" angle="2.132792345937071" k="460.24"/>
+    <Angle class1="Os" class2="Cg" class3="C" angle="1.9610519475408286" k="527.184"/>
+    <Angle class1="O2" class2="C" class3="Oh" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="Os" class2="Cy" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="Oh" class2="Cy" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="Oy" class2="Cy" class3="Cg" angle="1.8936822384138476" k="585.76"/>
+    <Angle class1="Oh" class2="Cy" class3="C" angle="1.9610519475408286" k="527.184"/>
+    <Angle class1="Os" class2="Cy" class3="C" angle="1.9610519475408286" k="527.184"/>
+    <Angle class1="Oy" class2="Cy" class3="C" angle="1.9610519475408286" k="527.184"/>
+    <Angle class1="Oy" class2="Cy" class3="Oh" angle="1.9547687622336491" k="836.8000000000001"/>
+    <Angle class1="Oy" class2="Cy" class3="Os" angle="1.9547687622336491" k="836.8000000000001"/>
+    <Angle class1="Cg" class2="Cy" class3="C" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="Cg" class2="Os" class3="Cy" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="Cg" class2="Oy" class3="Cy" angle="1.9477874452256716" k="418.40000000000003"/>
+    <Angle class1="O2" class2="C" class3="Cy" angle="2.007128639793479" k="585.76"/>
+    <Angle class1="Hc" class2="Cg" class3="Cy" angle="1.965240737745615" k="376.56"/>
+    <Angle class1="Cg" class2="Cg" class3="Cy" angle="1.980948701013564" k="376.56"/>
+  </HarmonicAngleForce>
+  <PeriodicTorsionForce ordering="amber">
+    <Proper class1="Oy" class2="Cy" class3="Os" class4="CT" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="CT" class2="Os" class3="Cy" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="CT" class2="Os" class3="Cy" class4="C" periodicity1="1" phase1="0.0" k1="7.9496"/>
+    <Proper class1="Cy" class2="Os" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cy" class2="Os" class3="CT" class4="H1" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="O2" class2="S" class3="Ng" class4="H" periodicity1="6" phase1="0.0" k1="-0.41840000000000005"/>
+    <Proper class1="O2" class2="S" class3="Ng" class4="Cg" periodicity1="3" phase1="0.0" k1="0.46024000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="1" phase3="0.0" k3="0.0"/>
+    <Proper class1="S" class2="Ng" class3="Cg" class4="H1" periodicity1="1" phase1="0.0" k1="8.368"/>
+    <Proper class1="S" class2="Ng" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="2.092"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="Sm" periodicity1="3" phase1="0.0" k1="2.8032800000000004" periodicity2="2" phase2="0.0" k2="7.9496" periodicity3="1" phase3="0.0" k3="4.76976"/>
+    <Proper class1="Os" class2="Cg" class3="Sm" class4="Cg" periodicity1="3" phase1="0.0" k1="4.30952" periodicity2="2" phase2="0.0" k2="6.02496" periodicity3="1" phase3="0.0" k3="1.12968"/>
+    <Proper class1="H2" class2="Cg" class3="Sm" class4="Cg" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Sm" class2="Cg" class3="Cg" class4="H2" periodicity1="3" phase1="0.0" k1="1.1715200000000001" periodicity2="2" phase2="0.0" k2="0.16736" periodicity3="1" phase3="0.0" k3="-0.87864"/>
+    <Proper class1="Sm" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.12552" periodicity2="2" phase2="0.0" k2="0.75312" periodicity3="1" phase3="0.0" k3="-4.30952"/>
+    <Proper class1="Cg" class2="Sm" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="1.3807200000000002"/>
+    <Proper class1="Cg" class2="Cg" class3="Sm" class4="Cg" periodicity1="3" phase1="0.0" k1="1.33888" periodicity2="2" phase2="0.0" k2="1.4644" periodicity3="1" phase3="0.0" k3="1.4644"/>
+    <Proper class1="Sm" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.33472"/>
+    <Proper class1="Sm" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.6276" periodicity2="2" phase2="0.0" k2="-0.20920000000000002" periodicity3="1" phase3="0.0" k3="0.16736"/>
+    <Proper class1="Sm" class2="Cg" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="0.08368" periodicity2="1" phase2="0.0" k2="0.8368000000000001"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Sm" periodicity1="3" phase1="0.0" k1="0.04184" periodicity2="2" phase2="0.0" k2="0.8368000000000001" periodicity3="1" phase3="0.0" k3="2.13384"/>
+    <Proper class1="NH" class2="Cg" class3="Cg" class4="Sm" periodicity1="3" phase1="0.0" k1="1.8828" periodicity2="2" phase2="0.0" k2="1.046"/>
+    <Proper class1="H" class2="N3" class3="Cg" class4="Hp" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="H" class2="N3" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="Ck" class2="Cg" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="-0.9204800000000001"/>
+    <Proper class1="Cj" class2="Cg" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="-0.9204800000000001"/>
+    <Proper class1="C" class2="Cg" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="-1.75728" periodicity2="2" phase2="0.0" k2="1.3807200000000002" periodicity3="1" phase3="0.0" k3="1.6736000000000002"/>
+    <Proper class1="C" class2="Cg" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="-1.75728" periodicity2="2" phase2="0.0" k2="1.3807200000000002" periodicity3="1" phase3="0.0" k3="1.6736000000000002"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="-0.46024000000000004" periodicity2="2" phase2="0.0" k2="-0.66944" periodicity3="1" phase3="0.0" k3="-4.435040000000001"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="-0.46024000000000004" periodicity2="2" phase2="0.0" k2="-0.66944" periodicity3="1" phase3="0.0" k3="-4.435040000000001"/>
+    <Proper class1="Os" class2="Cj" class3="Cj" class4="Cg" periodicity1="2" phase1="0.0" k1="-54.392"/>
+    <Proper class1="Os" class2="Ck" class3="Ck" class4="Cg" periodicity1="2" phase1="0.0" k1="-54.392"/>
+    <Proper class1="Ck" class2="Cj" class3="Cj" class4="Ha" periodicity1="2" phase1="0.0" k1="-62.760000000000005"/>
+    <Proper class1="Cj" class2="Ck" class3="Ck" class4="Ha" periodicity1="2" phase1="0.0" k1="-62.760000000000005"/>
+    <Proper class1="Cg" class2="Os" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="0.33472" periodicity2="2" phase2="0.0" k2="0.9204800000000001" periodicity3="1" phase3="0.0" k3="1.6736000000000002"/>
+    <Proper class1="Cg" class2="Os" class3="Ck" class4="Ha" periodicity1="3" phase1="0.0" k1="0.33472" periodicity2="2" phase2="0.0" k2="0.9204800000000001" periodicity3="1" phase3="0.0" k3="1.6736000000000002"/>
+    <Proper class1="Os" class2="Cj" class3="Cj" class4="Ha" periodicity1="2" phase1="0.0" k1="-83.68"/>
+    <Proper class1="Os" class2="Ck" class3="Ck" class4="Ha" periodicity1="2" phase1="0.0" k1="-83.68"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="Cj" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="Ck" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="Cg" class3="Os" class4="Cj" periodicity1="3" phase1="0.0" k1="-0.04184" periodicity2="2" phase2="0.0" k2="-1.75728" periodicity3="1" phase3="0.0" k3="0.9204800000000001"/>
+    <Proper class1="Cg" class2="Cg" class3="Os" class4="Ck" periodicity1="3" phase1="0.0" k1="-0.04184" periodicity2="2" phase2="0.0" k2="-1.75728" periodicity3="1" phase3="0.0" k3="0.9204800000000001"/>
+    <Proper class1="Cg" class2="Os" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-3.64008" periodicity2="2" phase2="0.0" k2="-16.69416" periodicity3="1" phase3="0.0" k3="-1.046"/>
+    <Proper class1="Cg" class2="Os" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-3.64008" periodicity2="2" phase2="0.0" k2="-16.69416" periodicity3="1" phase3="0.0" k3="-1.046"/>
+    <Proper class1="Cj" class2="Ck" class3="Ck" class4="Cj" periodicity1="2" phase1="0.0" k1="-8.368"/>
+    <Proper class1="Ck" class2="Cj" class3="Cj" class4="Ck" periodicity1="2" phase1="0.0" k1="-8.368"/>
+    <Proper class1="Ck" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-0.16736" periodicity2="2" phase2="0.0" k2="-2.8451200000000005" periodicity3="1" phase3="0.0" k3="-0.87864"/>
+    <Proper class1="Cj" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-0.16736" periodicity2="2" phase2="0.0" k2="-2.8451200000000005" periodicity3="1" phase3="0.0" k3="-0.87864"/>
+    <Proper class1="Ck" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-0.16736" periodicity2="2" phase2="0.0" k2="-2.8451200000000005" periodicity3="1" phase3="0.0" k3="-0.87864"/>
+    <Proper class1="Cj" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-0.16736" periodicity2="2" phase2="0.0" k2="-2.8451200000000005" periodicity3="1" phase3="0.0" k3="-0.87864"/>
+    <Proper class1="Ck" class2="Cg" class3="Ck" class4="Ha" periodicity1="3" phase1="0.0" k1="1.29704" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="0.20920000000000002"/>
+    <Proper class1="Cj" class2="Cg" class3="Ck" class4="Ha" periodicity1="3" phase1="0.0" k1="1.29704" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="0.20920000000000002"/>
+    <Proper class1="Ck" class2="Cg" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="1.29704" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="0.20920000000000002"/>
+    <Proper class1="Cj" class2="Cg" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="1.29704" periodicity2="2" phase2="0.0" k2="0.12552" periodicity3="1" phase3="0.0" k3="0.20920000000000002"/>
+    <Proper class1="Cj" class2="Ck" class3="Ck" class4="Cg" periodicity1="2" phase1="0.0" k1="-14.644"/>
+    <Proper class1="Ck" class2="Cj" class3="Cj" class4="Cg" periodicity1="2" phase1="0.0" k1="-14.644"/>
+    <Proper class1="Cg" class2="Cg" class3="Cj" class4="Cg" periodicity1="3" phase1="0.0" k1="-0.04184" periodicity2="2" phase2="0.0" k2="-1.4225600000000003" periodicity3="1" phase3="0.0" k3="1.21336"/>
+    <Proper class1="Cg" class2="Cg" class3="Ck" class4="Cg" periodicity1="3" phase1="0.0" k1="-0.04184" periodicity2="2" phase2="0.0" k2="-1.4225600000000003" periodicity3="1" phase3="0.0" k3="1.21336"/>
+    <Proper class1="Hc" class2="Cg" class3="Cj" class4="Cg" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="Ck" class4="Cg" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Ha" class2="Ck" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="2.8869599999999997" periodicity2="2" phase2="0.0" k2="-7.322" periodicity3="1" phase3="0.0" k3="3.8492800000000003"/>
+    <Proper class1="Ha" class2="Cj" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="0.7112800000000001" periodicity2="2" phase2="0.0" k2="1.6736000000000002" periodicity3="1" phase3="0.0" k3="2.8869599999999997"/>
+    <Proper class1="Ha" class2="Ck" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="0.7112800000000001" periodicity2="2" phase2="0.0" k2="1.6736000000000002" periodicity3="1" phase3="0.0" k3="2.8869599999999997"/>
+    <Proper class1="Cj" class2="Cj" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="2.8869599999999997" periodicity2="2" phase2="0.0" k2="-7.322" periodicity3="1" phase3="0.0" k3="3.8492800000000003"/>
+    <Proper class1="Oh" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-2.092" periodicity2="2" phase2="0.0" k2="-4.184" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="Oh" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-2.092" periodicity2="2" phase2="0.0" k2="-4.184" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="Oh" class2="Cg" class3="Cj" class4="Ha" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Oh" class2="Cg" class3="Ck" class4="Ha" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Ho" class2="Oh" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="0.8368000000000001" periodicity2="2" phase2="0.0" k2="2.42672" periodicity3="1" phase3="0.0" k3="1.58992"/>
+    <Proper class1="Ho" class2="Oh" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="0.8368000000000001" periodicity2="2" phase2="0.0" k2="2.42672" periodicity3="1" phase3="0.0" k3="1.58992"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-2.092" periodicity2="2" phase2="0.0" k2="-1.6736000000000002"/>
+    <Proper class1="Cg" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-2.092" periodicity2="2" phase2="0.0" k2="-1.6736000000000002"/>
+    <Proper class1="Cg" class2="Cg" class3="Cj" class4="Ha" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="Ck" class4="Ha" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cj" class3="Cj" class4="Cg" periodicity1="2" phase1="0.0" k1="-62.760000000000005" periodicity2="1" phase2="0.0" k2="2.092"/>
+    <Proper class1="Cg" class2="Ck" class3="Ck" class4="Cg" periodicity1="2" phase1="0.0" k1="-62.760000000000005" periodicity2="1" phase2="0.0" k2="2.092"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Cj" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Ck" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-1.3807200000000002"/>
+    <Proper class1="H1" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-1.3807200000000002"/>
+    <Proper class1="Hc" class2="Cg" class3="Cj" class4="Cj" periodicity1="3" phase1="0.0" k1="-1.4225600000000003" periodicity2="2" phase2="0.0" k2="-0.41840000000000005" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="Hc" class2="Cg" class3="Ck" class4="Ck" periodicity1="3" phase1="0.0" k1="-1.4225600000000003" periodicity2="2" phase2="0.0" k2="-0.41840000000000005" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="Hc" class2="Cg" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="Ck" class4="Ha" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="H1" class2="Cg" class3="Cj" class4="Ha" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="H1" class2="Cg" class3="Ck" class4="Ha" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Ha" class2="Cj" class3="Cj" class4="Cg" periodicity1="2" phase1="0.0" k1="-87.864"/>
+    <Proper class1="Ha" class2="Ck" class3="Ck" class4="Cg" periodicity1="2" phase1="0.0" k1="-87.864"/>
+    <Proper class1="Ha" class2="Cj" class3="Cj" class4="Ha" periodicity1="2" phase1="0.0" k1="-35.564"/>
+    <Proper class1="Ha" class2="Ck" class3="Ck" class4="Ha" periodicity1="2" phase1="0.0" k1="-35.564"/>
+    <Proper class1="Hp" class2="Cg" class3="Cp" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Hp" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Hp" class2="Cg" class3="Cp" class4="H1" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="Hp" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="Hp" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="Hp" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="N3" class3="Cg" class4="Cp" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="-0.8368000000000001" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="Cg" class2="N3" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="-0.8368000000000001" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="Cg" class2="NT" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="-0.8368000000000001" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="N3" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="-0.41840000000000005" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="NT" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="-0.41840000000000005" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="NT" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="N3" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="NT" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="N3" class2="Cg" class3="Cp" class4="H1" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="N3" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="NT" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="6.276" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="N3" class2="Cg" class3="Cp" class4="Os" periodicity1="3" phase1="0.0" k1="6.276" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="N3" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="6.276" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="NT" class2="Cg" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="2.5104" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="-4.184"/>
+    <Proper class1="N3" class2="Cg" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="2.5104" periodicity2="2" phase2="0.0" k2="2.092" periodicity3="1" phase3="0.0" k3="-4.184"/>
+    <Proper class1="Hp" class2="Cg" class3="N3" class4="Cg" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="H1" class2="Cg" class3="NT" class4="Cg" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="Hc" class2="Cg" class3="NT" class4="Cg" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="Os" class2="C" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.8368000000000001"/>
+    <Proper class1="Cg" class2="Cg" class3="NT" class4="H" periodicity1="3" phase1="0.0" k1="0.8368000000000001"/>
+    <Proper class1="H1" class2="Cg" class3="NT" class4="H" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="Cp" class2="Cg" class3="Os" class4="C" periodicity1="3" phase1="0.0" k1="-0.16736" periodicity2="1" phase2="0.0" k2="1.96648"/>
+    <Proper class1="H1" class2="Cg" class3="Cp" class4="H1" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="H1" class2="Cg" class3="Cp" class4="Cg" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Cp" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="H1" class2="Cp" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="Os" class2="Cg" class3="Cp" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Os" class2="Cp" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Cp" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Cg" class2="Os" class3="Cp" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="Cp" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cp" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Hp" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Os" class2="Cg" class3="Cp" class4="Os" periodicity1="2" phase1="0.0" k1="1.6736000000000002"/>
+    <Proper class1="H1" class2="Cp" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="H1" class2="Cg" class3="Cp" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Ng" class2="C" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.8368000000000001" periodicity2="2" phase2="0.0" k2="-2.9288" periodicity3="1" phase3="0.0" k3="0.20920000000000002"/>
+    <Proper class1="O" class2="C" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="2.092" periodicity2="2" phase2="0.0" k2="-0.41840000000000005" periodicity3="1" phase3="0.0" k3="-0.20920000000000002"/>
+    <Proper class1="CT" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="2C" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="3C" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="C" class2="Cg" class3="Oh" class4="Ho" periodicity1="2" phase1="0.0" k1="3.7656"/>
+    <Proper class1="O" class2="C" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Ng" class2="C" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Ng" class2="C" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="0.8368000000000001" periodicity2="2" phase2="0.0" k2="-9.246640000000001" periodicity3="1" phase3="0.0" k3="9.372160000000001"/>
+    <Proper class1="O" class2="C" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="H1" class2="Cp" class3="Os" class4="P" periodicity1="3" phase1="0.0" k1="0.29288000000000003"/>
+    <Proper class1="Os" class2="P" class3="Os" class4="Cp" periodicity1="3" phase1="0.0" k1="2.092" periodicity2="2" phase2="0.0" k2="2.9288"/>
+    <Proper class1="O2" class2="P" class3="Os" class4="Cp" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="-2.092" periodicity3="1" phase3="0.0" k3="0.41840000000000005"/>
+    <Proper class1="P" class2="Os" class3="Cp" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="0.20920000000000002" periodicity3="1" phase3="0.0" k3="-5.0208"/>
+    <Proper class1="H2" class2="Cp" class3="Os" class4="P" periodicity1="3" phase1="0.0" k1="0.29288000000000003"/>
+    <Proper class1="Os" class2="Cp" class3="Os" class4="P" periodicity1="3" phase1="0.0" k1="1.6736000000000002" periodicity2="2" phase2="0.0" k2="1.6736000000000002" periodicity3="1" phase3="0.0" k3="-2.092"/>
+    <Proper class1="Cg" class2="Os" class3="S" class4="O2" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="S" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="Cg" class2="Cg" class3="Os" class4="S" periodicity1="1" phase1="0.0" k1="-5.0208"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="C" periodicity1="3" phase1="0.0" k1="-0.41840000000000005" periodicity2="2" phase2="0.0" k2="0.41840000000000005" periodicity3="1" phase3="0.0" k3="-4.184"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="C" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="0.0" k2="0.8368000000000001" periodicity3="1" phase3="0.0" k3="-10.46"/>
+    <Proper class1="Cg" class2="Cg" class3="Os" class4="C" periodicity1="3" phase1="0.0" k1="-0.04184" periodicity2="2" phase2="0.0" k2="0.16736" periodicity3="1" phase3="0.0" k3="0.50208"/>
+    <Proper class1="Cg" class2="Os" class3="C" class4="O" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="-12.1336" periodicity3="1" phase3="0.0" k3="2.5104"/>
+    <Proper class1="Cg" class2="C" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="-12.1336" periodicity3="1" phase3="0.0" k3="-2.5104"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="C" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Os" class2="C" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.5439200000000001"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="H2" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="H1" class2="Cg" class3="Cp" class4="H2" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="H2" periodicity1="3" phase1="0.0" k1="0.7112800000000001"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="H2" class2="Cp" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="H2" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="Ho" class2="Oh" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Ho" class2="Oh" class3="Cg" class4="H2" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Ho" class2="Oh" class3="Cy" class4="Oy" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Ho" class2="Oh" class3="Cy" class4="C" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Ho" class2="Oh" class3="Cy" class4="Cg" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Ho" class2="Oh" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Cg" class2="Cg" class3="Cp" class4="Cg" periodicity1="1" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Cp" periodicity1="1" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="H2" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Cp" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Cy" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Oy" class2="Cg" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="Cp" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="H1" class2="Cg" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Oh" periodicity1="1" phase1="0.0" k1="-0.41840000000000005" periodicity2="2" phase2="0.0" k2="3.9748" periodicity3="3" phase3="0.0" k3="2.3012"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Os" periodicity1="1" phase1="0.0" k1="-4.6024" periodicity2="2" phase2="0.0" k2="1.046"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Oy" periodicity1="1" phase1="0.0" k1="-4.6024" periodicity2="2" phase2="0.0" k2="1.046"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Oy" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Os" periodicity1="2" phase1="0.0" k1="1.6736000000000002"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Oy" periodicity1="2" phase1="0.0" k1="3.4308799999999997"/>
+    <Proper class1="Os" class2="Cg" class3="Oh" class4="Ho" periodicity1="3" phase1="0.0" k1="0.75312"/>
+    <Proper class1="Os" class2="Cp" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="4.01664" periodicity2="2" phase2="0.0" k2="5.7739199999999995" periodicity3="1" phase3="0.0" k3="4.51872"/>
+    <Proper class1="Os" class2="Cg" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="4.01664" periodicity2="2" phase2="0.0" k2="5.7739199999999995" periodicity3="1" phase3="0.0" k3="4.51872"/>
+    <Proper class1="Oh" class2="Cg" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="4.01664" periodicity2="2" phase2="0.0" k2="5.7739199999999995" periodicity3="1" phase3="0.0" k3="4.51872"/>
+    <Proper class1="H2" class2="Cp" class3="Os" class4="Cg" periodicity1="2" phase1="0.0" k1="2.5104" periodicity2="3" phase2="0.0" k2="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cg" class3="Os" class4="Cg" periodicity1="2" phase1="0.0" k1="2.5104" periodicity2="3" phase2="0.0" k2="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cg" class3="Os" class4="CT" periodicity1="2" phase1="0.0" k1="2.5104" periodicity2="3" phase2="0.0" k2="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cg" class3="Os" class4="2C" periodicity1="2" phase1="0.0" k1="2.5104" periodicity2="3" phase2="0.0" k2="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cg" class3="Os" class4="3C" periodicity1="2" phase1="0.0" k1="2.5104" periodicity2="3" phase2="0.0" k2="0.41840000000000005"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Hc" class2="CT" class3="3C" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="H2" class2="Cg" class3="Cg" class4="Os" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="H" class2="Ng" class3="C" class4="H1" periodicity1="2" phase1="0.0" k1="-10.46"/>
+    <Proper class1="H" class2="Ng" class3="C" class4="Cg" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="C" class4="O" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="C" class4="Ng" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="N" periodicity1="1" phase1="0.0" k1="-3.7656"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="-3.7656"/>
+    <Proper class1="Os" class2="Cp" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="-5.4392000000000005"/>
+    <Proper class1="Os" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="-5.4392000000000005"/>
+    <Proper class1="Oy" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="-5.4392000000000005"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="N" periodicity1="1" phase1="0.0" k1="-6.276"/>
+    <Proper class1="Oh" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="-6.276"/>
+    <Proper class1="Cp" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="1.6736000000000002"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="N" periodicity1="1" phase1="0.0" k1="1.6736000000000002"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="1.6736000000000002"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="N" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cp" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H2" class2="Cg" class3="Cg" class4="Ng" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Ng" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="N" class2="Cg" class3="Cg" class4="Ng" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="Cg" class4="C" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Cg" class4="C" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="Cg" class3="Cg" class4="C" periodicity1="1" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Cp" class2="Cg" class3="Ng" class4="C" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="N" class4="C" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="Ng" class4="C" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="Os" class2="Cg" class3="N" class4="C" periodicity1="2" phase1="0.0" k1="8.49352" periodicity2="1" phase2="0.0" k2="4.184"/>
+    <Proper class1="Os" class2="Cg" class3="Ng" class4="C" periodicity1="2" phase1="0.0" k1="8.49352" periodicity2="1" phase2="0.0" k2="4.184"/>
+    <Proper class1="Os" class2="Cg" class3="N" class4="H" periodicity1="2" phase1="0.0" k1="-1.79912" periodicity2="1" phase2="0.0" k2="6.35968"/>
+    <Proper class1="Os" class2="Cg" class3="Ng" class4="H" periodicity1="2" phase1="0.0" k1="-1.79912" periodicity2="1" phase2="0.0" k2="6.35968"/>
+    <Proper class1="Cp" class2="Cg" class3="Ng" class4="H" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="Cg" class3="N" class4="H" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="Cg" class3="Ng" class4="H" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H1" class2="Cg" class3="Ng" class4="Cg" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="H2" class2="Cg" class3="Ng" class4="Cg" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="H1" class2="Cg" class3="Ng" class4="H" periodicity1="1" phase1="0.0" k1="4.184"/>
+    <Proper class1="H2" class2="Cg" class3="N" class4="H" periodicity1="1" phase1="0.0" k1="4.184"/>
+    <Proper class1="H2" class2="Cg" class3="Ng" class4="H" periodicity1="1" phase1="0.0" k1="4.184"/>
+    <Proper class1="H1" class2="Cg" class3="Ng" class4="C" periodicity1="1" phase1="0.0" k1="-4.184"/>
+    <Proper class1="H2" class2="Cg" class3="N" class4="C" periodicity1="1" phase1="0.0" k1="-4.184"/>
+    <Proper class1="H2" class2="Cg" class3="Ng" class4="C" periodicity1="1" phase1="0.0" k1="-4.184"/>
+    <Proper class1="Cg" class2="Ng" class3="C" class4="O" periodicity1="2" phase1="0.0" k1="-11.7152"/>
+    <Proper class1="Cg" class2="Ng" class3="C" class4="Cg" periodicity1="2" phase1="0.0" k1="-11.296800000000001"/>
+    <Proper class1="Hc" class2="Cg" class3="C" class4="O2" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Cg" class2="Cg" class3="C" class4="O2" periodicity1="3" phase1="0.0" k1="0.04184" periodicity2="2" phase2="0.0" k2="-1.7154399999999999" periodicity3="1" phase3="0.0" k3="0.02092"/>
+    <Proper class1="H1" class2="Cg" class3="C" class4="O2" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="H2" class2="Cg" class3="C" class4="O2" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Os" class2="Cg" class3="C" class4="O2" periodicity1="3" phase1="0.0" k1="0.08368" periodicity2="2" phase2="0.0" k2="-3.0334" periodicity3="1" phase3="0.0" k3="0.08368"/>
+    <Proper class1="Cg" class2="Os" class3="Cg" class4="C" periodicity1="3" phase1="0.0" k1="1.33888" periodicity2="2" phase2="0.0" k2="1.8828" periodicity3="1" phase3="0.0" k3="-2.5104"/>
+    <Proper class1="H1" class2="CT" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="H1" class2="2C" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="H1" class2="3C" class3="Os" class4="Cg" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="Cg" class2="Os" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Os" class3="CT" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Os" class3="3C" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Os" class3="2C" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Os" class3="3C" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Os" class2="Cg" class3="Os" class4="CT" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Os" class2="Cg" class3="Os" class4="2C" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Os" class2="Cg" class3="Os" class4="3C" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Cg" class2="Ng" class3="C" class4="CT" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="Oy" class2="Cy" class3="Os" class4="Cg" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Oh" class2="Cy" class3="Oy" class4="Cg" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Os" class2="Cy" class3="Oy" class4="Cg" periodicity1="1" phase1="0.0" k1="1.2552" periodicity2="2" phase2="0.0" k2="5.313680000000001" periodicity3="3" phase3="0.0" k3="1.5480800000000001"/>
+    <Proper class1="Oh" class2="Cy" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Os" class2="Cy" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Oy" class2="Cy" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="-1.12968"/>
+    <Proper class1="Oh" class2="Cy" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Os" class2="Cy" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Oy" class2="Cy" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.20920000000000002"/>
+    <Proper class1="Cg" class2="Os" class3="Cy" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cg" class2="Oy" class3="Cy" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Oh" class2="Cy" class3="C" class4="O2" periodicity1="2" phase1="0.0" k1="-4.707"/>
+    <Proper class1="Os" class2="Cy" class3="C" class4="O2" periodicity1="2" phase1="0.0" k1="-4.707"/>
+    <Proper class1="Oy" class2="Cy" class3="C" class4="O2" periodicity1="2" phase1="0.0" k1="-4.707"/>
+    <Proper class1="Cg" class2="Cy" class3="C" class4="O2" periodicity1="2" phase1="0.0" k1="-3.138"/>
+    <Proper class1="Cg" class2="Os" class3="Cy" class4="C" periodicity1="1" phase1="0.0" k1="7.9496"/>
+    <Proper class1="Cg" class2="Oy" class3="Cy" class4="C" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="Hc" class2="Cg" class3="Cy" class4="C" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cg" class2="Cg" class3="Cy" class4="C" periodicity1="3" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Cy" class2="Os" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cy" class2="Oy" class3="Cg" class4="Cg" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="Cy" class2="Os" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="Cy" class2="Oy" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="1.12968"/>
+    <Proper class1="Cy" class2="Cg" class3="Cg" class4="Cg" periodicity1="1" phase1="0.0" k1="1.8828"/>
+    <Proper class1="Cy" class2="Cg" class3="Cg" class4="Hc" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="Cy" class2="Cg" class3="Cg" class4="H1" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="Cy" class2="Cg" class3="Cg" class4="Oh" periodicity1="3" phase1="0.0" k1="0.41840000000000005"/>
+    <Proper class1="H" class2="Ng" class3="C" class4="O" periodicity1="2" phase1="3.141592653589793" k1="10.46" periodicity2="1" phase2="0.0" k2="8.368"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="Os" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Improper class1="C" class2="Cg" class3="O" class4="Os" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cg" class3="Ng" class4="O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Ng" class3="O" class4="Os" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="H2" class3="Ng" class4="O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cg" class3="H1" class4="O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="H2" class3="O" class4="Os" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cg" class3="O2" class4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cy" class3="O2" class4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cg" class3="O2" class4="Oh" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="Cy" class3="O2" class4="Oh" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="Ng" class2="C" class3="Cg" class4="H" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
+    <Improper class1="Ng" class2="Cg" class3="H" class4="H" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
+    <Improper class1="Ng" class2="Cg" class3="H" class4="S" periodicity1="2" phase1="3.141592653589793" k1="23.012"/>
+    <Improper class1="Ng" class2="H" class3="H" class4="S" periodicity1="2" phase1="3.141592653589793" k1="23.012"/>
+  </PeriodicTorsionForce>
+  <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
+    <UseAttributeFromResidue name="charge"/>
+    <Atom class="Cg" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="CT" sigma="1.0" epsilon="0.0"/>
+    <Atom class="2C" sigma="1.0" epsilon="0.0"/>
+    <Atom class="3C" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CX" sigma="1.0" epsilon="0.0"/>
+    <Atom class="Cy" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="C" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="Cp" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="Ck" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="Cj" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="H" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
+    <Atom class="H1" sigma="0.2471353044121301" epsilon="0.06568879999999999"/>
+    <Atom class="H2" sigma="0.22931733004932334" epsilon="0.06568879999999999"/>
+    <Atom class="Hc" sigma="0.2649532787749369" epsilon="0.06568879999999999"/>
+    <Atom class="Ha" sigma="0.25996424595335105" epsilon="0.06276"/>
+    <Atom class="Ho" sigma="0.03563594872561358" epsilon="0.12552"/>
+    <Atom class="HW" sigma="1.0" epsilon="0.0"/>
+    <Atom class="Hp" sigma="0.19599771799087468" epsilon="0.06568879999999999"/>
+    <Atom class="Ng" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="NT" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="N3" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="O" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="O2" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="Oh" sigma="0.3066473387839048" epsilon="0.8803136"/>
+    <Atom class="Os" sigma="0.3000012343465779" epsilon="0.7112800000000001"/>
+    <Atom class="Oy" sigma="0.3000012343465779" epsilon="0.7112800000000001"/>
+    <Atom class="OW" sigma="0.3150752406575124" epsilon="0.635968"/>
+    <Atom class="S" sigma="0.35635948725613575" epsilon="1.046"/>
+    <Atom class="Sm" sigma="0.3066473387839048" epsilon="0.8803136"/>
+    <Atom class="P" sigma="0.37417746161894255" epsilon="0.8368000000000001"/>
+    <Atom class="Li+" sigma="0.18263423721876956" epsilon="0.1171084864"/>
+    <Atom class="Na+" sigma="0.2439280690268249" epsilon="0.3658460312"/>
+    <Atom class="K+" sigma="0.3037964628858557" epsilon="0.8103692536"/>
+    <Atom class="Rb+" sigma="0.32303987519768707" epsilon="1.3716068296000001"/>
+    <Atom class="Cs+" sigma="0.3520831734090621" epsilon="1.7009608496"/>
+    <Atom class="F-" sigma="0.4103479495754403" epsilon="0.014074976"/>
+    <Atom class="Cl-" sigma="0.4477656957373345" epsilon="0.14891274399999999"/>
+    <Atom class="Br-" sigma="0.46469277138200105" epsilon="0.24541419360000002"/>
+    <Atom class="I-" sigma="0.5095940667762741" epsilon="0.22460381440000002"/>
+  </NonbondedForce>
+  <Script>
+# Some 1-4 interactions should be unscaled.
+
+import simtk.openmm as mm
+unscaled_types = ["Cp", "H2", "H", "CX", "NT", "O2", "Ck", "Hc", "Sm", "2C", "Cy", "Ng",
+    "Oy", "C", "Ha", "S", "Oh", "Cg", "Ho", "CT", "Hp", "NH", "H1", "P",
+    "O", "3C", "N", "Os", "N3", "Cj"]
+unscaled_atoms = set(atom.index for atom in data.atoms if data.atomType[atom] in unscaled_types)
+for force in sys.getForces():
+  if isinstance(force, mm.NonbondedForce):
+    atom_charges = {}
+    for atom in unscaled_atoms:
+      charge, sigma, epsilon = force.getParticleParameters(atom)
+      atom_charges[atom] = charge
+    for i in range(force.getNumExceptions()):
+      p1, p2, chargeProd, sigma, epsilon = force.getExceptionParameters(i)
+      if p1 in unscaled_atoms and p2 in unscaled_atoms and chargeProd._value != 0:
+        force.setExceptionParameters(i, p1, p2, atom_charges[p1]*atom_charges[p2], sigma, epsilon)
+</Script>
+</ForceField>
