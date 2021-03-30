@@ -3,6 +3,7 @@
 from __future__ import print_function, division
 from io import StringIO
 import parmed
+from simtk import openmm
 import simtk.openmm.app as app
 import simtk.unit as u
 import simtk
@@ -51,6 +52,12 @@ ignore = {'solvents.lib', 'atomic_ions.lib', 'ions94.lib', 'ions91.lib',
 
 # define NEARLYZERO to replace numerical comparisons to zero
 NEARLYZERO = 1e-10
+
+# set beta
+temperature = 300.0 * u.kelvin
+kB = u.BOLTZMANN_CONSTANT_kB * u.AVOGADRO_CONSTANT_NA
+kT = kB * temperature
+beta = 1.0/kT
 
 class LeapException(Exception):
     def __init__(self, leaprc_filename):
@@ -603,6 +610,54 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     with open(ffxml_filename, 'w') as outfile:
         outfile.write(modified_contents)
 
+def assert_energies2(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
+                    improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
+
+    # Get AMBER system
+    parm_amber = parmed.load_file(prmtop, inpcrd)
+    system_amber = parm_amber.createSystem()
+
+    # Get OpenMM system
+    if isinstance(ffxml, str):
+        ff = app.ForceField(ffxml)
+    else:
+        ff = app.ForceField(*ffxml)
+
+    if openmm_positions is None:
+        openmm_positions = parm_amber.positions
+
+    if openmm_topology is not None:
+        system_omm = ff.createSystem(openmm_topology)
+    else:
+        system_omm = ff.createSystem(parm_amber.topology)
+
+    def compute_potential_components(system, positions, beta=beta):
+        # Note: this is copied from perses
+        # TODO: consider moving this outside of assert_energies2()
+        system = deepcopy(system)
+        for index in range(system.getNumForces()):
+            force = system.getForce(index)
+            force.setForceGroup(index) 
+        integrator = openmm.VerletIntegrator(1.0*u.femtosecond)
+        platform = openmm.Platform.getPlatformByName('Reference')
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(positions)
+        energy_components = list()
+        for index in range(system.getNumForces()):
+            force = system.getForce(index)
+            forcename = force.__class__.__name__
+            groups = 1<<index
+            potential = beta * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
+            energy_components.append((forcename, potential))
+        del context, integrator
+        return energy_components
+
+    amber_energies = compute_potential_components(system_amber, parm_amber.positions)
+    omm_energies = compute_potential_components(system_omm, parm_amber.positions)
+    for amber, omm in zip(amber_energies, omm_energies):
+        force_name = amber[0]
+        print(force_name, amber[1], omm[1])
+
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
                     improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
     # AMBER
@@ -843,7 +898,7 @@ def validate_rna(ffxml_name, leaprc_name):
 addPdbAtomMap {
 { "H1'" "H1*" }
 { "H2'" "H2'1" }
-{ "H2''" "H2'2" }
+{ "H2''" "H2'2" }`
 { "H3'" "H3*" }
 { "H4'" "H4*" }
 { "H5'" "H5'1" }
@@ -1259,7 +1314,7 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
     if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
 
 def validate_glyco_protein(ffxml_name, leaprc_name,
-                             supp_leaprc_name = 'oldff/leaprc.ff14SB',
+                            supp_leaprc_name = 'oldff/leaprc.ff14SB',
                              supp_ffxml_name='ffxml/ff14SB.xml'):
 
     # this function assumes ffxml/ff14SB.xml already exists
@@ -1283,7 +1338,7 @@ bond mol.379.SG mol.432.SG
 bond mol.391.SG mol.525.SG
 bond mol.480.SG mol.488.SG
 
-#  N343 glycans
+##  N343 glycans
 
 bond mol.343.ND2 mol.528.C1 #  Bond N343 to GlcNAc
 bond mol.528.O6 mol.537.C1
@@ -1308,7 +1363,7 @@ quit""" % (leaprc_name, supp_leaprc_name,  pdbname, top[1], crd[1])
 
         try:
             if verbose: print('Calculating and validating energies...')
-            assert_energies(top[1], crd[1], (supp_ffxml_name, ffxml_name),
+            assert_energies2(top[1], crd[1], (supp_ffxml_name, ffxml_name),
                             system_name='glyco_protein: %s'
                             % os.path.basename(pdbname))
             if verbose: print('Energy validation successful!')
