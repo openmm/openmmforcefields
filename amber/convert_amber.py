@@ -898,7 +898,7 @@ def validate_rna(ffxml_name, leaprc_name):
 addPdbAtomMap {
 { "H1'" "H1*" }
 { "H2'" "H2'1" }
-{ "H2''" "H2'2" }`
+{ "H2''" "H2'2" }
 { "H3'" "H3*" }
 { "H4'" "H4*" }
 { "H5'" "H5'1" }
