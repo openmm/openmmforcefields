@@ -5,7 +5,7 @@
 - MODE: LEAPRC
 - sourcePackage: AmberTools
   sourcePackageVersion: 20.15
-- Source: glycam/leaprc.GLYCAM_06j-1_modified
+- Source: glycam/leaprc.GLYCAM_06j-1
   #Prefix: glycan
   Reference:
   - >-
