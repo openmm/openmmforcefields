@@ -5,8 +5,8 @@
 - MODE: LEAPRC
 - sourcePackage: AmberTools
   sourcePackageVersion: 20.15
-- Source: glycam/leaprc.GLYCAM_06j-1_trunc
-  Prefix: glycan
+- Source: glycam/leaprc.GLYCAM_06j-1_modified
+  #Prefix: glycan
   Reference:
   - >-
     R. Kadirvelraj; O. C. Grant; I. J. Goldstein; H. C. Winter; H. Tateno; E. Fadda; R. J. Woods. Structure and binding analysis of Polyporus squamosus lectin in complex with the Neu5Acα2-6Galβ1-4GlcNAc human- type influenza receptor. Glycobiology, 2011, 21, 973–984.
