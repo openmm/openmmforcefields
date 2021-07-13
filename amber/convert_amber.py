@@ -165,7 +165,7 @@ def write_file(file, contents):
     outfile.close()
 
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
-    provenance=None, write_unused=False, override_level=None, filter_warnings='error'):
+    provenance=None, write_unused=False, override_level=None, filter_warnings='error', is_glycam=False):
     if verbose: print('\nConverting %s to ffxml...' % files)
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
@@ -215,12 +215,16 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     if override_level:
         for name, residue in params.residues.items():
             residue.override_level = override_level
+    if is_glycam:
+        skip_duplicates = False
+    else:
+        skip_duplicates = True
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber', skip_duplicates=False)
+            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber', skip_duplicates=skip_duplicates, is_glycam=is_glycam)
     else:
-        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
+        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber', skip_duplicates=skip_duplicates, is_glycam=is_glycam)
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
@@ -432,9 +436,13 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
 
         # Convert files
         if MODE == 'LEAPRC':
+            is_glycam = False
+            for source_file in source_files:
+                if 'GLYCAM' in source_file:
+                    is_glycam = True
             ffxml_name = convert_leaprc(files, ffxml_dir=ffxml_dir, ignore=ignore,
                          provenance=provenance, write_unused=write_unused, override_level=override_level,
-                         filter_warnings=filter_warnings, split_filename=True)
+                         filter_warnings=filter_warnings, split_filename=True, is_glycam=is_glycam)
         elif MODE == 'RECIPE':
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
                          ffxml_dir=ffxml_dir, provenance=provenance,
@@ -1502,7 +1510,7 @@ def validate_glyco_protein(ffxml_name, leaprc_name,
     # this function assumes ffxml/ff14SB.xml already exists
     if verbose: print('Glycosylated protein energy validation for %s' %
                       ffxml_name)
-    for pdbname in glob.iglob(f'files/glycan/*.pdb'):
+    for pdbname in glob.iglob(f'files/glycam/*.pdb'):
         if verbose: print('Now testing with pdb %s' % os.path.basename(pdbname))
         if verbose: print('Preparing temporary files for validation...')
         top = tempfile.mkstemp()
