@@ -92,7 +92,7 @@ jobs:
       working-directory: ./charmm
 
     - name: CodeCov
-      uses: codecov/codecov-action@2.0.0
+      uses: codecov/codecov-action@2.0
       with:
         file: ./coverage.xml
         flags: unittests
