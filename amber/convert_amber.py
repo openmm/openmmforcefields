@@ -619,36 +619,44 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     with open(ffxml_filename, 'w') as outfile:
         outfile.write(modified_contents)
 
-def assert_energies2(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
-                    improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
-
+def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
+    import math
+ 
     # Get AMBER system
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem()
 
-    with open('amber.xml', 'w') as f:
-        f.write(openmm.XmlSerializer.serialize(system_amber))
+    # Create topology where residue names are named from HYP to CHYP or NHYP (etc) where necessary
+    source_topology = parm_amber.topology
+    destination_topology = app.Topology()
+
+    new_atoms = {}
+    for chain in source_topology.chains():
+        new_chain = destination_topology.addChain(chain.id)
+        for residue in chain.residues():
+            new_name = residue.name
+            if residue.index in [0, 5, 13, 21, 29]:
+                new_name = 'N' + residue.name
+            elif residue.index in [4, 9, 17, 25, 33]:
+                new_name = 'C' + residue.name
+            new_residue = destination_topology.addResidue(new_name, new_chain, residue.id)
+            for atom in residue.atoms():
+                new_atom = destination_topology.addAtom(atom.name, atom.element, new_residue, atom.id)
+                new_atoms[atom] = new_atom
+    for bond in source_topology.bonds():
+        order = bond.order
+        destination_topology.addBond(new_atoms[bond[0]], new_atoms[bond[1]], order=order)
 
     # Get OpenMM system
     if isinstance(ffxml, str):
         ff = app.ForceField(ffxml)
     else:
         ff = app.ForceField(*ffxml)
-
-    if openmm_positions is None:
-        openmm_positions = parm_amber.positions
-
-    if openmm_topology is not None:
-        system_omm = ff.createSystem(openmm_topology)
-    else:
-        system_omm = ff.createSystem(parm_amber.topology)
-
-    with open('omm.xml', 'w') as f:
-        f.write(openmm.XmlSerializer.serialize(system_omm))
+    system_omm = ff.createSystem(destination_topology, ignoreExternalBonds=True)
 
     def compute_potential_components(system, positions, beta=beta):
         # Note: this is copied from perses
-        # TODO: consider moving this outside of assert_energies2()
+        # TODO: consider moving this outside of assert_energies_glyco_protein()
         system = deepcopy(system)
         for index in range(system.getNumForces()):
             force = system.getForce(index)
@@ -671,6 +679,7 @@ def assert_energies2(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5
     omm_energies = compute_potential_components(system_omm, parm_amber.positions)
     for amber, omm in zip(amber_energies, omm_energies):
         force_name = amber[0]
+        assert math.isclose(amber[1], omm[1], rel_tol=tolerance)
         print(force_name, amber[1], omm[1])
 
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
@@ -1497,8 +1506,7 @@ glycam_residues = set()
 for residue in tree.getroot().find('Residues').findall('Residue'):
   glycam_residues.add(residue.get('name'))
 self.registerTemplateMatcher(GlycamTemplateMatcher(glycam_residues))
-
-    """
+"""
 
     tree.write(input_ffxml_path)
 
@@ -1507,63 +1515,13 @@ def validate_glyco_protein(ffxml_name, leaprc_name,
                              supp_ffxml_name='ffxml/protein.ff14SB.xml'):
     modify_glycan_ffxml(ffxml_name)
 
-    # this function assumes ffxml/ff14SB.xml already exists
     if verbose: print('Glycosylated protein energy validation for %s' %
                       ffxml_name)
-    for pdbname in glob.iglob(f'files/glycam/*.pdb'):
-        if verbose: print('Now testing with pdb %s' % os.path.basename(pdbname))
-        if verbose: print('Preparing temporary files for validation...')
-        top = tempfile.mkstemp()
-        crd = tempfile.mkstemp()
-        leap_script_file = tempfile.mkstemp()
-
-        if verbose: print('Preparing LeaP scripts...')
-        leap_script_string = """source %s
-source %s
-mol = loadPdb %s
-#  Add disulphide bridges
-
-bond mol.336.SG mol.361.SG
-bond mol.379.SG mol.432.SG
-bond mol.391.SG mol.525.SG
-bond mol.480.SG mol.488.SG
-
-##  N343 glycans
-
-bond mol.343.ND2 mol.528.C1 #  Bond N343 to GlcNAc
-bond mol.528.O6 mol.537.C1
-bond mol.528.O4 mol.529.C1
-bond mol.529.O4 mol.530.C1
-bond mol.530.O6 mol.531.C1
-bond mol.531.O2 mol.532.C1
-bond mol.532.O4 mol.533.C1
-bond mol.530.O3 mol.534.C1
-bond mol.534.O2 mol.535.C1
-bond mol.535.O4 mol.536.C1
-
-saveAmberParm mol %s %s
-quit""" % (leaprc_name, supp_leaprc_name,  pdbname, top[1], crd[1])
-
-        write_file(leap_script_file[0], leap_script_string)
-
-        if verbose: print('Running LEaP...')
-        os.system('tleap -f %s > %s' % (leap_script_file[1], os.devnull))
-        if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
-            raise LeapException(leap_script_file[1])
-
-        try:
-            if verbose: print('Calculating and validating energies...')
-            assert_energies2(top[1], crd[1], (supp_ffxml_name, ffxml_name),
-                            system_name='glyco_protein: %s'
-                            % os.path.basename(pdbname))
-            if verbose: print('Energy validation successful!')
-        finally:
-            if verbose: print('Deleting temp files...')
-            for f in (top, crd, leap_script_file):
-                os.unlink(f[1])
-        if verbose: print('Glycosylated protein energy validation for %s done!'
+    top = 'files/glycam/Glycoprotein_shortened.parm7'
+    crd = 'files/glycam/Glycoprotein_shortened.rst7'
+    assert_energies_glyco_protein(top, crd, (supp_ffxml_name, ffxml_name))
+    if verbose: print('Glycosylated protein energy validation for %s was successful!'
                           % ffxml_name)
-
 
 class Logger():
     """
