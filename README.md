@@ -265,6 +265,12 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
+## 0.10.0 Updates for OpenMM 7.6 and AMBER GLYCAM addition
+This release adds support for the AMBER GLYCAM force field supporting glycans and updates imports for OpenMM 7.6.
+
+* [(PR #156)](https://github.com/openmm/openmmforcefields/pull/156) Add support for GLYCAM
+* [(PR #173)](https://github.com/openmm/openmmforcefields/pull/173) Update to OpenMM 7.6 imports
+
 ## 0.9.0 Updates for openforcefield 0.9.0 toolkit
 This release utilizes the new [openforcefield 0.9.0 toolkit](https://open-forcefield-toolkit.readthedocs.io/en/0.9.0/) now distributed through [conda-forge](https://conda-forge.org/).
 
