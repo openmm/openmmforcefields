@@ -462,7 +462,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Store user-specified GAFF version
         self._forcefield = forcefield
         import re
-        result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
+        result = re.match(r'^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
         if result is None:
             msg = "'forcefield' must be of form 'gaff-X.Y', where X and Y denote major and minor version\n"
             msg += f"Provided 'forcefield' argument was '{forcefield}'\n"
