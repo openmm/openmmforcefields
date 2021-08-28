@@ -4,9 +4,8 @@ from __future__ import print_function, division
 import parmed
 from parmed.utils.six import iteritems
 from parmed.utils.six.moves import StringIO, zip
-import simtk.openmm.app as app
-import simtk.unit as u
-import simtk
+import openmm.app as app
+import openmm.unit as u
 import os
 import sys
 import re

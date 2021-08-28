@@ -16,7 +16,7 @@ dependencies:
   - codecov
 
     # Requirements for converted force field installer
-  - openmm >=7.4.2
+  - openmm >=7.6.0
 
     # Requirements for conversion tools
   - pyyaml

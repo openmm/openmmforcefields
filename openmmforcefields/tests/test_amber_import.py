@@ -21,7 +21,7 @@ def test_ffxml_import(filename):
         The AMBER forcefield filename.
 
     """
-    from simtk.openmm import app
+    from openmm import app
 
     # Handle special cases
     if filename == 'amber/phosaa10.xml':
@@ -47,7 +47,7 @@ def check_ffxml_parameterize(pdb_filename, ffxml_filename):
         The ffxml forcefield filename.
 
     """
-    from simtk.openmm import app
+    from openmm import app
     pdbfile = app.PDBFile(pdb_filename)
     ff = app.ForceField(ffxml_filename)
 
@@ -56,7 +56,7 @@ def test_amber_import_ff94():
     Test import of ff94
 
     """
-    from simtk.openmm import app
+    from openmm import app
     ff = app.ForceField('amber/ff94.xml')
 
 def test_amber_parameterize_ff94():
@@ -65,5 +65,5 @@ def test_amber_parameterize_ff94():
 
     """
     from pkg_resources import resource_filename
-    pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
+    pdb_filename = resource_filename('openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')

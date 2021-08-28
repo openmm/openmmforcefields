@@ -57,7 +57,7 @@ class TestSystemGenerator(unittest.TestCase):
             #('tyk2', 'Tyk2'),
         ]:
             # Load protein
-            from simtk.openmm.app import PDBFile
+            from openmm.app import PDBFile
             pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
             pdbfile = PDBFile(pdb_filename)
 
@@ -100,7 +100,7 @@ class TestSystemGenerator(unittest.TestCase):
 
             # DEBUG
             for name, testsystem in self.testsystems.items():
-                from simtk.openmm import app
+                from openmm import app
                 filename = f'testsystem-{name}.pdb'
                 print(filename)
                 structure = testsystem['complex_structures'][0]
@@ -132,8 +132,8 @@ class TestSystemGenerator(unittest.TestCase):
         generator = SystemGenerator(forcefields=self.amber_forcefields)
 
         # Create a template barostat
-        from simtk.openmm import MonteCarloBarostat
-        from simtk import unit
+        from openmm import MonteCarloBarostat
+        from openmm import unit
         pressure = 0.95 * unit.atmospheres
         temperature = 301.0 * unit.kelvin
         frequency = 23
@@ -141,20 +141,20 @@ class TestSystemGenerator(unittest.TestCase):
 
         # Load a PDB file
         import os
-        from simtk.openmm.app import PDBFile
+        from openmm.app import PDBFile
         pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', 'mcl1', 'MCL1_protein.pdb'))
         pdbfile = PDBFile(pdb_filename)
 
         # Delete hydrogens from terminal protein residues
         # TODO: Fix the input files so we don't need to do this
-        from simtk.openmm import app
+        from openmm import app
         modeller = app.Modeller(pdbfile.topology, pdbfile.positions)
         residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
         termini_ids = [residues[0].id, residues[-1].id]
         #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
         hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
         modeller.delete(hs)
-        from simtk.openmm.app import PDBFile
+        from openmm.app import PDBFile
         modeller.addHydrogens()
 
         # Create a System
@@ -192,7 +192,7 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_forcefield_default_kwargs(self):
         """Test that default forcefield kwargs work correctly"""
-        from simtk import unit
+        from openmm import unit
         forcefield_kwargs = dict()
         from openmmforcefields.generators import SystemGenerator
 
@@ -204,7 +204,7 @@ class TestSystemGenerator(unittest.TestCase):
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 from simtk import openmm
-                from simtk.openmm import app
+                from openmm import app
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
@@ -230,14 +230,14 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_forcefield_kwargs(self):
         """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
-        from simtk import unit
+        from openmm import unit
         forcefield_kwargs = { 'hydrogenMass' : 4*unit.amu }
         from openmmforcefields.generators import SystemGenerator
 
         # Test exception is raised
         with pytest.raises(ValueError) as excinfo:
             # Not allowed to specify nonbondedMethod in forcefield_kwargs
-            from simtk.openmm import app
+            from openmm import app
             generator = SystemGenerator(forcefield_kwargs={'nonbondedMethod':app.PME})
         assert "nonbondedMethod cannot be specified in forcefield_kwargs" in str(excinfo.value)
 
@@ -249,7 +249,7 @@ class TestSystemGenerator(unittest.TestCase):
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 from simtk import openmm
-                from simtk.openmm import app
+                from openmm import app
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
@@ -424,8 +424,8 @@ class TestSystemGenerator(unittest.TestCase):
             assert system.getNumParticles() == len(complex_structure.atoms)
 
             # Create solvated structure
-            from simtk.openmm import app
-            from simtk import unit
+            from openmm import app
+            from openmm import unit
             modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
             modeller.addSolvent(generator.forcefield, padding=0*unit.angstroms, ionicStrength=300*unit.millimolar)
 
