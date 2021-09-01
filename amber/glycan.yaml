@@ -16,5 +16,6 @@
   Options:
     filter_warnings: always
     write_unused: True
+    override_level: 1
   Test:
-  - protein # TODO: Update test with a glycosylated protein
+  - protein_glycan

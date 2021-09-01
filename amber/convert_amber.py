@@ -1,9 +1,9 @@
 # AMBER --> OpenMM force-field conversion script
 # Author: Rafal P. Wiewiora, ChoderaLab
 from __future__ import print_function, division
+from io import StringIO
 import parmed
-from parmed.utils.six import iteritems
-from parmed.utils.six.moves import StringIO, zip
+from simtk import openmm
 import simtk.openmm.app as app
 import simtk.unit as u
 import simtk
@@ -52,6 +52,12 @@ ignore = {'solvents.lib', 'atomic_ions.lib', 'ions94.lib', 'ions91.lib',
 
 # define NEARLYZERO to replace numerical comparisons to zero
 NEARLYZERO = 1e-10
+
+# set beta
+temperature = 300.0 * u.kelvin
+kB = u.BOLTZMANN_CONSTANT_kB * u.AVOGADRO_CONSTANT_NA
+kT = kB * temperature
+beta = 1.0/kT
 
 class LeapException(Exception):
     def __init__(self, leaprc_filename):
@@ -159,7 +165,7 @@ def write_file(file, contents):
     outfile.close()
 
 def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
-    provenance=None, write_unused=False, filter_warnings='error'):
+    provenance=None, write_unused=False, override_level=None, filter_warnings='error', is_glycam=False):
     if verbose: print('\nConverting %s to ffxml...' % files)
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
@@ -206,12 +212,19 @@ def convert_leaprc(files, split_filename=False, ffxml_dir='./', ignore=ignore,
     if verbose: print('Converting to ffxml %s...' % ffxml_name)
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    if override_level:
+        for name, residue in params.residues.items():
+            residue.override_level = override_level
+    if is_glycam:
+        skip_duplicates = False
+    else:
+        skip_duplicates = True
     if filter_warnings != 'error':
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
-            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
+            params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber', skip_duplicates=skip_duplicates, is_glycam=is_glycam)
     else:
-        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber')
+        params.write(ffxml_name, provenance=provenance, write_unused=write_unused, improper_dihedrals_ordering='amber', skip_duplicates=skip_duplicates, is_glycam=is_glycam)
     if verbose: print('%s successfully written!' % ffxml_name)
     return ffxml_name
 
@@ -248,19 +261,19 @@ def convert_recipe(files, solvent_file=None, ffxml_dir='./', provenance=None, ff
     # Change atom type naming
     # atom_types
     new_atom_types = OrderedDict()
-    for name, atom_type in iteritems(params.atom_types):
+    for name, atom_type in params.atom_types.items():
         new_name = ffxml_basename + '-' + name
         new_atom_types[new_name] = atom_type
     params.atom_types = new_atom_types
     # atoms in residues
-    for name, residue in iteritems(params.residues):
+    for name, residue in params.residues.items():
         for atom in residue:
             new_type = ffxml_basename + '-' + atom.type
             atom.type = new_type
     if solvent_file is None:
     # this means this file does not include a water model - hard-coded assumption it is
     # then a 'multivalent' file - set overrideLevel to 1 for all residue templates
-        for name, residue in iteritems(params.residues):
+        for name, residue in params.residues.items():
             residue.override_level = 1
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
@@ -366,7 +379,10 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         source = provenance['Source'] = []
         for source_file in source_files:
             if MODE == 'LEAPRC':
-                _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
+                 if os.path.exists(source_file):
+                     _filename = os.path.join('./', source_file)    
+                 else:
+                     _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
             elif MODE == 'RECIPE':
                 _filename = os.path.join(AMBERHOME, 'dat/leap/', source_file)
             elif MODE == 'GAFF':
@@ -402,6 +418,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         # set default conversion options
         write_unused = False
         filter_warnings = 'error'
+        override_level = None
         # set conversion options if present
         if 'Options' in entry:
             for option in entry['Options']:
@@ -411,15 +428,21 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     filter_warnings = entry['Options'][option]
                 elif option == 'ffxml_dir':
                     ffxml_dir = entry['Options'][option]
+                elif option == 'override_level':
+                    override_level = entry['Options'][option]
                 else:
                     raise Exception("Wrong option used in Options for %s"
                                        % source_files)
 
         # Convert files
         if MODE == 'LEAPRC':
+            is_glycam = False
+            for source_file in source_files:
+                if 'GLYCAM' in source_file:
+                    is_glycam = True
             ffxml_name = convert_leaprc(files, ffxml_dir=ffxml_dir, ignore=ignore,
-                         provenance=provenance, write_unused=write_unused,
-                         filter_warnings=filter_warnings, split_filename=True)
+                         provenance=provenance, write_unused=write_unused, override_level=override_level,
+                         filter_warnings=filter_warnings, split_filename=True, is_glycam=is_glycam)
         elif MODE == 'RECIPE':
             ffxml_name = convert_recipe(files, solvent_file=solvent_file,
                          ffxml_dir=ffxml_dir, provenance=provenance,
@@ -470,6 +493,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             elif test == 'lipids':
                 #validate_lipids(ffxml_name, source_files)
                 validate_merged_lipids(ffxml_name, entry['Source'])
+                tested = True
+            elif test == 'protein_glycan':
+                validate_glyco_protein(ffxml_name, entry['Source'])
                 tested = True
         if not tested:
             raise Exception('No validation tests have been run for %s' %
@@ -593,6 +619,69 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     with open(ffxml_filename, 'w') as outfile:
         outfile.write(modified_contents)
 
+def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
+    import math
+ 
+    # Get AMBER system
+    parm_amber = parmed.load_file(prmtop, inpcrd)
+    system_amber = parm_amber.createSystem()
+
+    # Create topology where residue names are named from HYP to CHYP or NHYP (etc) where necessary
+    source_topology = parm_amber.topology
+    destination_topology = app.Topology()
+
+    new_atoms = {}
+    for chain in source_topology.chains():
+        new_chain = destination_topology.addChain(chain.id)
+        for residue in chain.residues():
+            new_name = residue.name
+            if residue.index in [0, 5, 13, 21, 29]:
+                new_name = 'N' + residue.name
+            elif residue.index in [4, 9, 17, 25, 33]:
+                new_name = 'C' + residue.name
+            new_residue = destination_topology.addResidue(new_name, new_chain, residue.id)
+            for atom in residue.atoms():
+                new_atom = destination_topology.addAtom(atom.name, atom.element, new_residue, atom.id)
+                new_atoms[atom] = new_atom
+    for bond in source_topology.bonds():
+        order = bond.order
+        destination_topology.addBond(new_atoms[bond[0]], new_atoms[bond[1]], order=order)
+
+    # Get OpenMM system
+    if isinstance(ffxml, str):
+        ff = app.ForceField(ffxml)
+    else:
+        ff = app.ForceField(*ffxml)
+    system_omm = ff.createSystem(destination_topology, ignoreExternalBonds=True)
+
+    def compute_potential_components(system, positions, beta=beta):
+        # Note: this is copied from perses
+        # TODO: consider moving this outside of assert_energies_glyco_protein()
+        system = deepcopy(system)
+        for index in range(system.getNumForces()):
+            force = system.getForce(index)
+            force.setForceGroup(index) 
+        integrator = openmm.VerletIntegrator(1.0*u.femtosecond)
+        platform = openmm.Platform.getPlatformByName('Reference')
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(positions)
+        energy_components = list()
+        for index in range(system.getNumForces()):
+            force = system.getForce(index)
+            forcename = force.__class__.__name__
+            groups = 1<<index
+            potential = beta * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
+            energy_components.append((forcename, potential))
+        del context, integrator
+        return energy_components
+
+    amber_energies = compute_potential_components(system_amber, parm_amber.positions)
+    omm_energies = compute_potential_components(system_omm, parm_amber.positions)
+    for amber, omm in zip(amber_energies, omm_energies):
+        force_name = amber[0]
+        assert math.isclose(amber[1], omm[1], rel_tol=tolerance)
+        print(force_name, amber[1], omm[1])
+
 def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e-5,
                     improper_tolerance=1e-2, units=u.kilojoules_per_mole, openmm_topology=None, openmm_positions=None):
     # AMBER
@@ -621,7 +710,7 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e
     system_omm = parm_omm.createSystem(splitDihedrals=True)
     omm_energies = parmed.openmm.energy_decomposition_system(parm_omm,
                    system_omm, nrg=units, platform='Reference')
-
+    
     # calc rel energies and assert
     energies = []
     rel_energies = []
@@ -1246,6 +1335,193 @@ quit""" % (leaprc_name, lipids_top[1], lipids_crd[1])
         for f in (lipids_top, lipids_crd, leap_script_lipids_file):
             os.unlink(f[1])
     if verbose: print('Lipids energy validation for %s done!' % ffxml_name)
+
+def modify_glycan_ffxml(input_ffxml_path):
+
+    """
+    Creates a modified XML file with the following changes:
+    - All parameters are specified by type, not class.
+    - All atom type definitions that are not GLYCAM-specific are removed.
+    - All parameter definitions that do not involve at least one GLYCAM-specific type are removed.
+    - For standard (not GLYCAM-specific) atom types, it adds the protein- prefix.
+    - Updates unscaled types in the script
+    - The bad torsion (NH-Cg-Cg-Sm, bad because NH atom type is not defined) is removed.
+    - GlycamTemplateMatcher (used for creating the system) initialization script is added.
+
+    Makes the following assumptions about the input ffxml file:
+    - No prefixes have been added.
+
+    Parameters
+    ----------
+    input_ffxml_path : str
+        path to ffxml for which to modify (in place)
+
+    """
+
+    import xml.etree.ElementTree as etree
+    import re
+
+    # Define atom types
+
+    protein_types = set(["C", "CA", "CB", "CC", "CN", "CR", "CT", "CV", "CW", "C*", "CX", "H", "HC", "H1", "HA", "H4", "H5", "HO", "HS", "HP", "N", "NA", "NB", "N2", "N3", "O", "O2", "OH", "S", "SH", "CO", "2C", "3C", "C8"])
+    solvent_types = set(["HW", "OW", "Li+", "Na+", "K+", "Rb+", "Cs+", "F-", "Cl-", "Br-", "I-"])
+    glycam_types = set()
+    replacements = {}
+    for type in protein_types:
+        replacements[type] = 'protein-'+type
+
+    # Process <AtomTypes>
+
+    tree = etree.parse(input_ffxml_path)
+    root = tree.getroot()
+    types = root.find('AtomTypes')
+    for type in types.findall('Type'):
+        name = type.get('name')
+        if name in protein_types or name in solvent_types:
+            types.remove(type)
+        else:
+            glycam_types.add(name)
+            replacements[name] = 'glycam-'+name
+            type.set('name', replacements[name])
+
+    # Process <Residues>
+
+    residues = root.find('Residues')
+    for residue in residues.findall('Residue'):
+        for atom in residue.findall('Atom'):
+            atom.set('type', replacements[atom.get('type')])
+
+    # Process <HarmonicBondForce>
+
+    force = root.find('HarmonicBondForce')
+    for bond in force.findall('Bond'):
+        # Change attributes from class to type
+        bond.attrib['type1'] = bond.attrib['class1']
+        bond.attrib['type2'] = bond.attrib['class2']
+        del bond.attrib['class1']
+        del bond.attrib['class2']        
+
+        # Fix prefixes 
+        types = [bond.get('type1'), bond.get('type2')]
+        if any(t in glycam_types for t in types):
+            bond.set('type1', replacements[types[0]])
+            bond.set('type2', replacements[types[1]])
+        else:
+            force.remove(bond)
+
+    # Process <HarmonicAngleForce>
+
+    force = root.find('HarmonicAngleForce')
+    for angle in force.findall('Angle'):
+        # Change attributes from class to type
+        angle.attrib['type1'] = angle.attrib['class1']
+        angle.attrib['type2'] = angle.attrib['class2']
+        angle.attrib['type3'] = angle.attrib['class3']
+        del angle.attrib['class1']
+        del angle.attrib['class2']
+        del angle.attrib['class3']
+
+        # Fix prefixes
+        types = [angle.get('type1'), angle.get('type2'), angle.get('type3')]
+        if any(t in glycam_types for t in types):
+            angle.set('type1', replacements[types[0]])
+            angle.set('type2', replacements[types[1]])
+            angle.set('type3', replacements[types[2]])
+        else:
+            force.remove(angle)
+
+    # Process <PeriodicTorsionForce>
+
+    force = root.find('PeriodicTorsionForce')
+    for tag in ['Proper', 'Improper']:
+        for torsion in force.findall(tag):
+            # Change attributes from class to type and remove bad torsion
+            torsion.attrib['type1'] = torsion.attrib['class1']
+            torsion.attrib['type2'] = torsion.attrib['class2']
+            torsion.attrib['type3'] = torsion.attrib['class3']
+            torsion.attrib['type4'] = torsion.attrib['class4']
+            del torsion.attrib['class1']
+            del torsion.attrib['class2']
+            del torsion.attrib['class3']
+            del torsion.attrib['class4']
+            if torsion.attrib['type1'] == 'NH' and torsion.attrib['type2'] == 'Cg' and torsion.attrib['type3'] == 'Cg' and torsion.attrib['type4'] == 'Sm':
+                force.remove(torsion)
+                continue      
+
+            # Fix prefixes
+            types = [torsion.get('type1'), torsion.get('type2'), torsion.get('type3'), torsion.get('type4')]
+            if any(t in glycam_types for t in types):
+                torsion.set('type1', replacements[types[0]])
+                torsion.set('type2', replacements[types[1]])
+                torsion.set('type3', replacements[types[2]])
+                torsion.set('type4', replacements[types[3]])
+            else:
+                force.remove(torsion)
+
+    # Process <NonbondedForce>
+
+    force = root.find('NonbondedForce')
+    for atom in force.findall('Atom'):
+        # Change attributes from class to type
+        atom.attrib['type'] = atom.attrib['class']
+        del atom.attrib['class']
+        
+        # Fix prefixes
+        type = atom.get('type')
+        if type in glycam_types:
+            atom.set('type', replacements[type])
+        else:
+            force.remove(atom)
+
+    # Remove bad NH torsion and update the unscaled types in the script
+
+    script = root.find('Script')
+    text = script.text
+
+    # Bad NH torsion
+    text_split = text.split('\n')
+    text_NH_removed = [line for line in text_split if not 'NH' in line]
+    text = '\n'.join(text_NH_removed)
+
+    # Unscaled types
+    pattern = re.compile('unscaled_types = set\((\[(.*\n)*?.*?\])\)')
+    match = pattern.search(text)
+    types = eval(match.group(1))
+    types = [(replacements[t[0]], replacements[t[1]], replacements[t[2]], replacements[t[3]]) for t in types]
+    types = ',\n    '.join(str(t) for t in types)
+    script.text = pattern.sub('unscaled_types = set([%s])' % types, text)
+
+    # Add initialization script for setting up GlycamTemplateMatcher
+    initialization_script = etree.SubElement(root, 'InitializationScript')
+    initialization_script.text = """ 
+class GlycamTemplateMatcher(object):
+  def __init__(self, glycam_residues):
+    self.glycam_residues = glycam_residues
+  def __call__(self, ff, residue):
+    if residue.name in self.glycam_residues:
+      return ff._templates[residue.name]
+    return None
+
+glycam_residues = set()
+for residue in tree.getroot().find('Residues').findall('Residue'):
+  glycam_residues.add(residue.get('name'))
+self.registerTemplateMatcher(GlycamTemplateMatcher(glycam_residues))
+"""
+
+    tree.write(input_ffxml_path)
+
+def validate_glyco_protein(ffxml_name, leaprc_name,
+                            supp_leaprc_name = 'oldff/leaprc.ff14SB',
+                             supp_ffxml_name='ffxml/protein.ff14SB.xml'):
+    modify_glycan_ffxml(ffxml_name)
+
+    if verbose: print('Glycosylated protein energy validation for %s' %
+                      ffxml_name)
+    top = 'files/glycam/Glycoprotein_shortened.parm7'
+    crd = 'files/glycam/Glycoprotein_shortened.rst7'
+    assert_energies_glyco_protein(top, crd, (supp_ffxml_name, ffxml_name))
+    if verbose: print('Glycosylated protein energy validation for %s was successful!'
+                          % ffxml_name)
 
 class Logger():
     """
