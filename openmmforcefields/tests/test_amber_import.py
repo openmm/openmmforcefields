@@ -69,5 +69,5 @@ def test_amber_parameterize_ff94():
 
     """
     from pkg_resources import resource_filename
-    pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
+    pdb_filename = resource_filename('openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')
