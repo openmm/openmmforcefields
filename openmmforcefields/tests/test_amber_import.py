@@ -32,6 +32,10 @@ def test_ffxml_import(filename):
         # Must be used with ff14SB.xml
         filenames = ['amber/ff14SB.xml', 'amber/phosaa14SB.xml']
         ff = app.ForceField(*filenames)
+    elif filename == 'amber/GLYCAM_06j-1.xml':
+        # Must be used with protein.ff14SB.xml
+        filenames = ['amber/protein.ff14SB.xml', 'amber/GLYCAM_06j-1.xml']
+        ff = app.ForceField(*filenames)
     else:
         ff = app.ForceField(filename)
 
@@ -65,5 +69,5 @@ def test_amber_parameterize_ff94():
 
     """
     from pkg_resources import resource_filename
-    pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
+    pdb_filename = resource_filename('openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')
