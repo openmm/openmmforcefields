@@ -32,6 +32,10 @@ def test_ffxml_import(filename):
         # Must be used with ff14SB.xml
         filenames = ['amber/ff14SB.xml', 'amber/phosaa14SB.xml']
         ff = app.ForceField(*filenames)
+    elif filename == 'amber/GLYCAM_06j-1.xml':
+        # Must be used with protein.ff14SB.xml
+        filenames = ['amber/protein.ff14SB.xml', 'amber/GLYCAM_06j-1.xml']
+        ff = app.ForceField(*filenames)
     else:
         ff = app.ForceField(filename)
 
