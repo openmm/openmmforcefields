@@ -131,7 +131,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         Parameters
         ----------
-        residue : simtk.openmm.app.topology.Residue
+        residue : openmm.app.topology.Residue
             The residue to check
         molecule_template : openff.toolkit.topology.Molecule
             The Molecule template to compare it to
@@ -218,7 +218,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         """
         import numpy as np
-        from simtk import unit
+        from openmm import unit
         zeros = np.zeros([molecule.n_particles])
         if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)):
             charges_are_zero = True
@@ -244,13 +244,13 @@ class SmallMoleculeTemplateGenerator(object):
 
     def generator(self, forcefield, residue):
         """
-        Residue template generator method to register with simtk.openmm.app.ForceField
+        Residue template generator method to register with openmm.app.ForceField
 
         Parameters
         ----------
-        forcefield : simtk.openmm.app.ForceField
+        forcefield : openmm.app.ForceField
             The ForceField object to which residue templates and/or parameters are to be added.
-        residue : simtk.openmm.app.Topology.Residue
+        residue : openmm.app.Topology.Residue
             The residue topology for which a template is to be generated.
 
         Returns
@@ -355,7 +355,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
     >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
-    >>> from simtk.openmm.app import ForceField
+    >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
     >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
@@ -416,7 +416,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
-        >>> from simtk.openmm.app import ForceField
+        >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> forcefield = ForceField(*amber_forcefields)
         >>> forcefield.registerTemplateGenerator(gaff)
@@ -462,7 +462,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Store user-specified GAFF version
         self._forcefield = forcefield
         import re
-        result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
+        result = re.match(r'^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
         if result is None:
             msg = "'forcefield' must be of form 'gaff-X.Y', where X and Y denote major and minor version\n"
             msg += f"Provided 'forcefield' argument was '{forcefield}'\n"
@@ -509,13 +509,13 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     def generator(self, forcefield, residue):
         """
-        Residue template generator method to register with simtk.openmm.app.ForceField
+        Residue template generator method to register with openmm.app.ForceField
 
         Parameters
         ----------
-        forcefield : simtk.openmm.app.ForceField
+        forcefield : openmm.app.ForceField
             The ForceField object to which residue templates and/or parameters are to be added.
-        residue : simtk.openmm.app.Topology.Residue
+        residue : openmm.app.Topology.Residue
             The residue topology for which a template is to be generated.
 
         Returns
@@ -570,7 +570,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
-        from simtk import unit
+        from openmm import unit
         if type(net_charge) != unit.Quantity:
             # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
             net_charge = float(net_charge) * unit.elementary_charge
@@ -621,7 +621,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         #       or pure numbers.
         _logger.debug(f'Fixing partial charges...')
         _logger.debug(f'{molecule.partial_charges}')
-        from simtk import unit
+        from openmm import unit
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
         sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
@@ -889,7 +889,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
     >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
-    >>> from simtk.openmm.app import ForceField
+    >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
     >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
@@ -947,7 +947,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
         >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
-        >>> from simtk.openmm.app import ForceField
+        >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> forcefield = ForceField(*amber_forcefields)
 
@@ -1099,7 +1099,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Returns
         -------
-        system : simtk.openmm.System or None
+        system : openmm.System or None
             If the Molecule object has already been parameterized by this instance, this molecule is returned.
             Otherwise, None is returned.
         """
@@ -1161,13 +1161,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         root = etree.Element("ForceField")
 
         def as_attrib(quantity):
-            """Format simtk.unit.Quantity as XML attribute."""
+            """Format openmm.unit.Quantity as XML attribute."""
             if isinstance(quantity, str):
                 return quantity
             elif isinstance(quantity, float) or isinstance(quantity, int):
                 return str(quantity)
             else:
-                from simtk import unit
+                from openmm import unit
                 return str(quantity.value_in_unit_system(unit.md_unit_system))
 
         # Append unique type names to atoms
@@ -1208,7 +1208,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Round parameters using strings for ease of comparison
         # DEBUG
-        #from simtk import unit
+        #from openmm import unit
         #def round_quantity(quantity):
         #    NDECIMALS = 3
         #    value = quantity.value_in_unit_system(unit.md_unit_system)
@@ -1288,7 +1288,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Create residue definitions
         # TODO: Handle non-Atom particles too (virtual sites)
-        from simtk import unit
+        from openmm import unit
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for particle_index, particle in enumerate(molecule.particles):

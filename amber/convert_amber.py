@@ -3,10 +3,10 @@
 from __future__ import print_function, division
 from io import StringIO
 import parmed
-from simtk import openmm
-import simtk.openmm.app as app
-import simtk.unit as u
-import simtk
+from parmed.utils.six import iteritems
+from parmed.utils.six.moves import StringIO, zip
+import openmm.app as app
+import openmm.unit as u
 import os
 import sys
 import re
@@ -380,7 +380,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         for source_file in source_files:
             if MODE == 'LEAPRC':
                  if os.path.exists(source_file):
-                     _filename = os.path.join('./', source_file)    
+                     _filename = os.path.join('./', source_file)
                  else:
                      _filename = os.path.join(AMBERHOME, 'dat/leap/cmd', source_file)
             elif MODE == 'RECIPE':
@@ -621,7 +621,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
 
 def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
     import math
- 
+
     # Get AMBER system
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem()
@@ -660,7 +660,7 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
         system = deepcopy(system)
         for index in range(system.getNumForces()):
             force = system.getForce(index)
-            force.setForceGroup(index) 
+            force.setForceGroup(index)
         integrator = openmm.VerletIntegrator(1.0*u.femtosecond)
         platform = openmm.Platform.getPlatformByName('Reference')
         context = openmm.Context(system, integrator, platform)
@@ -710,7 +710,7 @@ def assert_energies(prmtop, inpcrd, ffxml, system_name='unknown', tolerance=2.5e
     system_omm = parm_omm.createSystem(splitDihedrals=True)
     omm_energies = parmed.openmm.energy_decomposition_system(parm_omm,
                    system_omm, nrg=units, platform='Reference')
-    
+
     # calc rel energies and assert
     energies = []
     rel_energies = []
@@ -1399,9 +1399,9 @@ def modify_glycan_ffxml(input_ffxml_path):
         bond.attrib['type1'] = bond.attrib['class1']
         bond.attrib['type2'] = bond.attrib['class2']
         del bond.attrib['class1']
-        del bond.attrib['class2']        
+        del bond.attrib['class2']
 
-        # Fix prefixes 
+        # Fix prefixes
         types = [bond.get('type1'), bond.get('type2')]
         if any(t in glycam_types for t in types):
             bond.set('type1', replacements[types[0]])
@@ -1446,7 +1446,7 @@ def modify_glycan_ffxml(input_ffxml_path):
             del torsion.attrib['class4']
             if torsion.attrib['type1'] == 'NH' and torsion.attrib['type2'] == 'Cg' and torsion.attrib['type3'] == 'Cg' and torsion.attrib['type4'] == 'Sm':
                 force.remove(torsion)
-                continue      
+                continue
 
             # Fix prefixes
             types = [torsion.get('type1'), torsion.get('type2'), torsion.get('type3'), torsion.get('type4')]
@@ -1465,7 +1465,7 @@ def modify_glycan_ffxml(input_ffxml_path):
         # Change attributes from class to type
         atom.attrib['type'] = atom.attrib['class']
         del atom.attrib['class']
-        
+
         # Fix prefixes
         type = atom.get('type')
         if type in glycam_types:
@@ -1493,7 +1493,7 @@ def modify_glycan_ffxml(input_ffxml_path):
 
     # Add initialization script for setting up GlycamTemplateMatcher
     initialization_script = etree.SubElement(root, 'InitializationScript')
-    initialization_script.text = """ 
+    initialization_script.text = """
 class GlycamTemplateMatcher(object):
   def __init__(self, glycam_residues):
     self.glycam_residues = glycam_residues

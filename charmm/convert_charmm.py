@@ -5,9 +5,9 @@ import yaml
 from collections import OrderedDict
 import hashlib
 import os
-import simtk.openmm.app as app
-import simtk.openmm as mm
-import simtk.unit as u
+import openmm.app as app
+import openmm as mm
+import openmm.unit as u
 import argparse
 import csv
 import logging

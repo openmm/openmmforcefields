@@ -98,14 +98,14 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
-        from simtk.openmm.app import ForceField
+        from openmm.app import ForceField
         forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
 
         # Check that parameterizing a molecule fails
         molecule = self.molecules[0]
-        from simtk.openmm.app import NoCutoff
+        from openmm.app import NoCutoff
         try:
             # This should fail with an exception
             openmm_topology = molecule.to_topology().to_openmm()
@@ -121,7 +121,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         except Exception as e:
             print(forcefield._atomTypes.keys())
-            from simtk.openmm.app import PDBFile
+            from openmm.app import PDBFile
             PDBFile.writeFile(openmm_topology, molecule.conformers[0])
             raise e
         assert system.getNumParticles() == molecule.n_atoms
@@ -140,7 +140,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         Parameters
         ----------
-        system : simtk.openmm.System
+        system : openmm.System
             The System from which partial charges are to be extracted
 
         Returns
@@ -150,7 +150,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         """
         import numpy as np
-        from simtk import unit
+        from openmm import unit
         system_charges = list()
         forces = { force.__class__.__name__ : force for force in system.getForces() }
         for particle_index in range(system.getNumParticles()):
@@ -165,7 +165,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         Parameters
         ----------
-        system : simtk.openmm.System
+        system : openmm.System
             The System from which partial charges are to be extracted
         molecule : openmmforcefield.topology.Molecule
             The Molecule from which partial charges are to be extracted
@@ -179,7 +179,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         system_charges = self.charges_from_system(system)
 
-        from simtk import unit
+        from openmm import unit
         molecule_charges = molecule.partial_charges / unit.elementary_charge
 
         import numpy as np
@@ -196,21 +196,21 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
-        from simtk.openmm.app import ForceField
+        from openmm.app import ForceField
         forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
 
         # Check that parameterizing a molecule using user-provided charges produces expected charges
         import numpy as np
-        from simtk import unit
+        from openmm import unit
         molecule = self.molecules[0]
         # Ensure partial charges are initially zero
         assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
         generator.add_molecules(molecule)
         # Create the System
-        from simtk.openmm.app import NoCutoff
+        from openmm.app import NoCutoff
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         # Ensure charges are no longer zero
@@ -221,14 +221,14 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
-        from simtk.openmm.app import ForceField
+        from openmm.app import ForceField
         forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
 
         # Check that parameterizing a molecule using user-provided charges produces expected charges
         import numpy as np
-        from simtk import unit
+        from openmm import unit
         molecule = self.molecules[0]
         charges = np.random.random([molecule.n_particles])
         total_charge = molecule.total_charge
@@ -241,7 +241,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Add the molecule
         generator.add_molecules(molecule)
         # Create the System
-        from simtk.openmm.app import NoCutoff
+        from openmm.app import NoCutoff
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         assert self.charges_are_equal(system, molecule)
@@ -255,12 +255,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             molecule = self.molecules[0]
             generator = self.TEMPLATE_GENERATOR(molecules=molecule, cache=cache)
             # Create a ForceField
-            from simtk.openmm.app import ForceField
+            from openmm.app import ForceField
             forcefield = ForceField()
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
             # Ensure no file is created
-            from simtk.openmm.app import NoCutoff
+            from openmm.app import NoCutoff
             openmm_topology = molecule.to_topology().to_openmm()
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert not os.path.exists(debug_ffxml_filename)
@@ -282,7 +282,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_cache(self):
         """Test template generator cache capability"""
-        from simtk.openmm.app import ForceField, NoCutoff
+        from openmm.app import ForceField, NoCutoff
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a generator that also has a database cache
             cache = os.path.join(tmpdirname, 'db.json')
@@ -337,15 +337,15 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
 
     def test_add_solvent(self):
-        """Test using simtk.opnmm.app.Modeller to add solvent to a small molecule parameterized by template generator"""
+        """Test using openmm.app.Modeller to add solvent to a small molecule parameterized by template generator"""
         # Select a molecule to add solvent around
-        from simtk.openmm.app import NoCutoff, Modeller
-        from simtk import unit
+        from openmm.app import NoCutoff, Modeller
+        from openmm import unit
         molecule = self.molecules[0]
         openmm_topology = molecule.to_topology().to_openmm()
         openmm_positions = molecule.conformers[0]
         # Try adding solvent without residue template generator; this will fail
-        from simtk.openmm.app import ForceField
+        from openmm.app import ForceField
         forcefield = ForceField('tip3p.xml')
         # Add solvent to a system containing a small molecule
         modeller = Modeller(openmm_topology, openmm_positions)
@@ -364,7 +364,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_jacs_ligands(self):
         """Use template generator to parameterize the Schrodinger JACS set of ligands"""
-        from simtk.openmm.app import ForceField, NoCutoff
+        from openmm.app import ForceField, NoCutoff
         jacs_systems = {
             #'bace'     : { 'prefix' : 'Bace' },
             #'cdk2'     : { 'prefix' : 'CDK2' },
@@ -445,9 +445,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
             # Read ParmEd Structures
             import parmed
-            from simtk import unit
+            from openmm import unit
             protein_pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
-            from simtk.openmm.app import PDBFile
+            from openmm.app import PDBFile
             print(f'Reading protein from {protein_pdb_filename} ...')
             #protein_structure = parmed.load_file(protein_pdb_filename) # NOTE: This mis-interprets distorted geometry and sequentially-numbered residues that span chain breaks
             pdbfile = PDBFile(protein_pdb_filename)
@@ -473,7 +473,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache)
 
             # Create a ForceField
-            from simtk.openmm.app import ForceField
+            from openmm.app import ForceField
             forcefield = ForceField(*self.amber_forcefields)
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
@@ -486,24 +486,24 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
                 # Delete hydrogens from terminal protein residues
                 # TODO: Fix the input files so we don't need to do this
-                from simtk.openmm import app
+                from openmm import app
                 modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
                 residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
                 termini_ids = [residues[0].id, residues[-1].id]
                 #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
                 hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
                 modeller.delete(hs)
-                from simtk.openmm.app import PDBFile
+                from openmm.app import PDBFile
                 modeller.addHydrogens(forcefield)
 
                 # Parameterize protein:ligand complex in vacuum
                 print(f' Parameterizing {system_name} : {molecule.to_smiles()} in vacuum...')
-                from simtk.openmm.app import NoCutoff
+                from openmm.app import NoCutoff
                 forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
                 # Parameterize protein:ligand complex in solvent
                 print(f' Parameterizing {system_name} : {molecule.to_smiles()} in explicit solvent...')
-                from simtk.openmm.app import PME
+                from openmm.app import PME
                 modeller.addSolvent(forcefield, padding=0*unit.angstroms, ionicStrength=300*unit.millimolar)
                 forcefield.createSystem(modeller.topology, nonbondedMethod=PME)
 
@@ -518,12 +518,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             # Check that we have loaded the right force field
             assert generator.forcefield == small_molecule_forcefield
             # Create a ForceField with the appropriate small molecule force field
-            from simtk.openmm.app import ForceField
+            from openmm.app import ForceField
             forcefield = ForceField()
             # Register the template generator
             forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize some molecules
-            from simtk.openmm.app import NoCutoff
+            from openmm.app import NoCutoff
             from openmmforcefields.utils import Timer
             for molecule in self.molecules:
                 openmm_topology = molecule.to_topology().to_openmm()
@@ -539,7 +539,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def test_multiple_registration(self):
         """Test registering the template generator with multiple force fields"""
         generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
-        from simtk.openmm.app import ForceField
+        from openmm.app import ForceField
         NUM_FORCEFIELDS = 2 # number of force fields to test
         forcefields = list()
         for index in range(NUM_FORCEFIELDS):
@@ -550,7 +550,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Parameterize a molecule in each force field instance
         molecule = self.molecules[0]
         openmm_topology = molecule.to_topology().to_openmm()
-        from simtk.openmm.app import NoCutoff
+        from openmm.app import NoCutoff
         for forcefield in forcefields:
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
@@ -564,17 +564,17 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         Parameters
         ----------
-        system : simtk.openmm.System
+        system : openmm.System
             The System object
-        positions : simtk.unit.Quantity of shape (nparticles,3) with units compatible with nanometers
+        positions : openmm.unit.Quantity of shape (nparticles,3) with units compatible with nanometers
             The positions for which energy is to be computed
 
         Returns
         -------
-        openmm_energy : dict of str : simtk.unit.Quantity
+        openmm_energy : dict of str : openmm.unit.Quantity
             openmm_energy['total'] is the total potential energy
             openmm_energy['components'][forcename] is the potential energy for the specified component force
-        openmm_forces : dict of str : simtk.unit.Quantity
+        openmm_forces : dict of str : openmm.unit.Quantity
             openmm_forces['total'] is the total force
             openmm_forces['components'][forcename] is the force for the specified component force
         """
@@ -582,7 +582,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         system = copy.deepcopy(system)
         for index, force in enumerate(system.getForces()):
             force.setForceGroup(index)
-        from simtk import openmm
+        import openmm
         platform = openmm.Platform.getPlatformByName('Reference')
         integrator = openmm.VerletIntegrator(0.001)
         context = openmm.Context(system, integrator, platform)
@@ -611,9 +611,9 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         ----------
         molecule : openff.toolkit.topology.Molecule
             The Molecule object to compare energy components (including positions)
-        openmm_system : simtk.openmm.System
+        openmm_system : openmm.System
             System generated by OpenMM ForceField
-        smirnoff_system : simtk.openmm.System
+        smirnoff_system : openmm.System
             System generated by SMIRNOFF engine
 
         """
@@ -622,10 +622,10 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         openmm_energy, openmm_forces = cls.compute_energy(openmm_system, molecule.conformers[0])
         smirnoff_energy, smirnoff_forces = cls.compute_energy(smirnoff_system, molecule.conformers[0])
 
-        from simtk import unit
+        from openmm import unit
 
         def write_xml(filename, system):
-            from simtk import openmm
+            import openmm
             with open(filename, 'w') as outfile:
                 print(f'Writing {filename}...')
                 outfile.write(openmm.XmlSerializer.serialize(system))
@@ -677,7 +677,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         ----------
         molecule : openff.toolkit.topology.Molecule
             molecule.conformers[0] is used as initial positions
-        system : simtk.openmm.System
+        system : openmm.System
             System object for dynamics
 
         Returns
@@ -687,7 +687,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         """
         # Run some dynamics
-        from simtk import openmm, unit
+        import openmm
+        from openmm import unit
         temperature = 300 * unit.kelvin
         collision_rate = 1.0 / unit.picoseconds
         timestep = 1.0 * unit.femtoseconds
@@ -718,7 +719,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         from openff.toolkit.topology import Molecule
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
-        from simtk import unit
+        from openmm import unit
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
         self.molecules.insert(0, molecule)
         # Test all supported SMIRNOFF force fields
@@ -728,14 +729,14 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Create a ForceField
-            import simtk
-            openmm_forcefield = simtk.openmm.app.ForceField()
+            import openmm
+            openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
             openmm_forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize some molecules
             for molecule in self.molecules:
                 # Create OpenMM System using OpenMM app
-                from simtk.openmm.app import NoCutoff
+                from openmm.app import NoCutoff
                 openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, onbondedMethod=NoCutoff)
 
                 # Retrieve System generated by the SMIRNOFF typing engine
@@ -766,12 +767,12 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = SMIRNOFFTemplateGenerator(molecules=[molecule], forcefield=small_molecule_forcefield)
             # Create a ForceField
-            import simtk
-            openmm_forcefield = simtk.openmm.app.ForceField()
+            import openmm
+            openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
             openmm_forcefield.registerTemplateGenerator(generator.generator)
             # Create OpenMM System using OpenMM app
-            from simtk.openmm.app import NoCutoff
+            from openmm.app import NoCutoff
             openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, onbondedMethod=NoCutoff)
             smirnoff_system = generator.get_openmm_system(molecule)
 
