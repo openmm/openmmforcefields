@@ -3,8 +3,7 @@
 from __future__ import print_function, division
 from io import StringIO
 import parmed
-from parmed.utils.six import iteritems
-from parmed.utils.six.moves import StringIO, zip
+import openmm
 import openmm.app as app
 import openmm.unit as u
 import os
