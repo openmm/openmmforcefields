@@ -1493,19 +1493,37 @@ def modify_glycan_ffxml(input_ffxml_path):
 
     # Add initialization script for setting up GlycamTemplateMatcher
     initialization_script = etree.SubElement(root, 'InitializationScript')
-    initialization_script.text = """
+    initialization_script.text = """ 
+from openmm.app.internal import compiled
+
 class GlycamTemplateMatcher(object):
+
   def __init__(self, glycam_residues):
     self.glycam_residues = glycam_residues
-  def __call__(self, ff, residue):
+
+  def __call__(self, ff, residue, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles):
     if residue.name in self.glycam_residues:
-      return ff._templates[residue.name]
+      template = ff._templates[residue.name]
+      if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+        return template
+
+      # The residue doesn't actually match the template with the same name.  Try the terminal variants.
+
+      if 'N'+residue.name in self.glycam_residues:
+        template = ff._templates['N'+residue.name]
+        if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+          return template
+      if 'C'+residue.name in self.glycam_residues:
+        template = ff._templates['C'+residue.name]
+        if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+          return template
     return None
 
 glycam_residues = set()
 for residue in tree.getroot().find('Residues').findall('Residue'):
   glycam_residues.add(residue.get('name'))
 self.registerTemplateMatcher(GlycamTemplateMatcher(glycam_residues))
+
 """
 
     tree.write(input_ffxml_path)
