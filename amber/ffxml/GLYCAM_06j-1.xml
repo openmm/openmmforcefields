@@ -66413,6 +66413,7 @@
       <Bond atomName1="CA" atomName2="C" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
+      <ExternalBond atomName="OD1" />
       <ExternalBond atomName="C" />
     </Residue>
     <Residue name="CHYP" override="1">
@@ -66513,6 +66514,7 @@
       <Bond atomName1="C" atomName2="O" />
       <Bond atomName1="C" atomName2="OXT" />
       <ExternalBond atomName="N" />
+      <ExternalBond atomName="OD1" />
     </Residue>
     <Residue name="COLS" override="1">
       <Atom name="N" type="protein-N" charge="-0.3821" />
@@ -66673,6 +66675,7 @@
       <Bond atomName1="CA" atomName2="HA" />
       <Bond atomName1="CA" atomName2="C" />
       <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="OD1" />
       <ExternalBond atomName="C" />
     </Residue>
     <Residue name="NOLS" override="1">
