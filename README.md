@@ -268,7 +268,7 @@ See the corresponding directories for information on how to use the provided con
 ## 0.11.0 Support for espaloma small molecule parameters
 This release adds support for using [espaloma](https://github.com/choderalab/espaloma) to apply small molecule parameters.
 
-* [(PR #179)](https://github.com/openmm/openmmforcefields/pull/179) Add support for espaloma small molecule parameters
+* [(PR #182)](https://github.com/openmm/openmmforcefields/pull/179) Add support for espaloma small molecule parameters
 
 ## 0.10.0 Updates for OpenMM 7.6 and AMBER GLYCAM addition
 This release adds support for the AMBER GLYCAM force field supporting glycans and updates imports for OpenMM 7.6.

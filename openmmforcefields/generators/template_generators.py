@@ -872,6 +872,17 @@ class OpenMMSystemMixin(object):
         """
         self._system_cache = dict()
 
+    def cache_system(self, smiles, system):
+        """Transiently cache a copy of the OpenMM System object
+
+        Parameters
+        ----------
+        smiles : str
+            The SMILES corresponding to the System object
+        system : openmm.System
+            The OpenMM System to cache
+        """
+        self._system_cache[smiles] = system
 
     def get_openmm_system(self, molecule):
         """Retrieve the OpenMM System object generated for a particular molecule for testing/validation.
@@ -892,18 +903,6 @@ class OpenMMSystemMixin(object):
             return self._system_cache[smiles]
         else:
             return None
-
-    def cache_system(self, smiles, system):
-        """Transiently cache a copy of the OpenMM System object
-
-        Parameters
-        ----------
-        smiles : str
-            The SMILES corresponding to the System object
-        system : openmm.System
-            The OpenMM System to cache
-        """
-        self._system_cache[smiles] = system
 
     def convert_system_to_ffxml(self, molecule, system):
         """Convert OpenMM System object to molecule-specific OpenMM ffxml
@@ -1121,7 +1120,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
+    >>> template_generator = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json')
 
     Newly parameterized molecules will be written to the cache, saving time next time!
 
@@ -1137,7 +1136,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : str, optional, default=None
             Filename for global caching of parameters.
@@ -1149,7 +1148,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         Examples
         --------
 
-        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+        Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
         >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
@@ -1195,7 +1194,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'openff-1.2.0'
+            forcefield = 'openff-2.0.0'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1306,7 +1305,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
             The parameters will be cached in case they are encountered again the future.
         residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
             If specified, the subset of atoms to use in constructing a residue template
@@ -1340,6 +1339,277 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Parameterize molecule
         _logger.debug(f'Generating parameters...')
         system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology(), charge_from_molecules=charge_from_molecules)
+        self.cache_system(smiles, system)
+
+        # Convert to ffxml
+        ffxml_contents = self.convert_system_to_ffxml(molecule, system)
+        return ffxml_contents
+
+################################################################################
+# Espaloma template generation utilities
+################################################################################
+
+class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin):
+    """
+    OpenMM ForceField residue template generator for espaloma force fields using pre-cached OpenFF toolkit molecules.
+
+    Open Force Field Initiative: http://openforcefield.org
+    Espaloma: https://github.com/choderalab/espaloma
+
+    Examples
+    --------
+
+    Create a template generator for a single Molecule using the latest Open Force Field Initiative
+    small molecule force field and register it with ForceField:
+
+    >>> # Define a Molecule using the OpenFF Molecule object
+    >>> from openff.toolkit.topology import Molecule
+    >>> molecule = Molecule.from_smiles('c1ccccc1')
+    >>> # Create the Espaloma template generator
+    >>> from openmoltools.forcefield_generators import EspalomaTemplateGenerator
+    >>> template_generator = EspalomaTemplateGenerator(molecules=molecule)
+    >>> # Create an OpenMM ForceField
+    >>> from openmm.app import ForceField
+    >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+    >>> forcefield = ForceField(*amber_forcefields)
+    >>> # Register the template generator
+    >>> forcefield.registerTemplateGenerator(template_generator.generator)
+
+    Create a template generator for a specific Espaloma release ('espaloma-0.2.0')
+    and register multiple molecules:
+
+    >>> molecule1 = Molecule.from_smiles('c1ccccc1')
+    >>> molecule2 = Molecule.from_smiles('CCO')
+    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.2.0')
+
+    Alternatively, you can specify a local .pt parameter file for Espaloma:
+
+    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma_0.2.0.pt')
+
+    You can also add some Molecules later on after the generator has been registered:
+
+    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules([molecule1, molecule2])
+
+    You can optionally create or use a tiny database cache of pre-parameterized molecules:
+
+    >>> template_generator = EspalomaTemplateGenerator(cache='espaloma-molecules.json')
+
+    Newly parameterized molecules will be written to the cache, saving time next time!
+
+    """
+    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None):
+        """
+        Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
+
+        Requies the OpenFF toolkit: http://openforcefield.org
+        and espaloma: http://github.com/choderalab/espaloma
+
+        Parameters
+        ----------
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized with espaloma as needed.
+            The parameters will be cached in case they are encountered again the future.
+        cache : str, optional, default=None
+            Filename for global caching of parameters.
+            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
+        forcefield : str, optional, default=None
+            Name of installed Espaloma force field version (e.g. 0.2.0) to retrieve remotely,
+            a local Espaloma .pt parmaeters filename (with extension),
+            or a URL to an online espaloma force field.
+        model_cache_path : str, optional, default=None
+            If specified, use this directory to cache espaloma models
+            default: ~/.espaloma/
+
+        Examples
+        --------
+
+        Create an Espaloma template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+
+        >>> from openff.toolkit.topology import Molecule
+        >>> molecule = Molecule.from_smiles('c1ccccc1')
+        >>> from openmoltools.forcefield_generators import EspalomaTemplateGenerator
+        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecule)
+        >>> from openmm.app import ForceField
+        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+        >>> forcefield = ForceField(*amber_forcefields)
+
+        >>> espaloma_generator.forcefield
+        'espaloma-0.2.0'
+
+        You can check which espaloma parameter set force field filename is in use with
+
+        >>> espaloma_generator.parameters_filename
+        '/full/path/to/espaloma_0.2.0.pt'
+
+        Create a template generator for a specific SMIRNOFF force field for multiple
+        molecules read from an SDF file:
+
+        >>> molecules = Molecule.from_file('molecules.sdf')
+        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.0')
+
+        You can also add molecules later on after the generator has been registered:
+
+        >>> espaloma_generator.add_molecules(molecules)
+
+        You can optionally create or use a cache of pre-parameterized molecules:
+
+        >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.2.0')
+
+        Newly parameterized molecules will be written to the cache, saving time next time!
+        """
+        # Initialize molecules and cache
+        super().__init__(molecules=molecules, cache=cache)
+
+        # Espaloma model cache path
+        if model_cache_path is None:
+            self.ESPALOMA_MODEL_CACHE_PATH = f'{os.getenv("HOME")}/.espaloma'
+        else:
+            self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
+
+        if forcefield is None:
+            # Use latest supported Open Force Field Initiative release if none is specified
+            forcefield = 'espaloma-0.2.0'
+            # TODO: After toolkit provides date-ranked force fields,
+            # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
+        self._forcefield = forcefield
+
+        # Check that espaloma model parameters can be found or locally cached
+        self.espaloma_model_filepath = self._get_model_filepath(forcefield)
+
+        # Check to make sure dependencies are installed
+        try:
+            import espaloma
+        except ImportError as e:
+            msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
+            raise ValueError(msg)
+
+        # Check force field can be found
+
+        # Track parameters by provided force field name
+        # TODO: Can we instead use the force field hash, or some other unique identifier?
+        self._database_table_name = forcefield
+
+        # Load torch model
+        import torch
+        self.espaloma_model = torch.load(self.espaloma_model_filepath)
+
+        # Cache a copy of the OpenMM System generated for each molecule for testing purposes
+        self.clear_system_cache()
+
+    @property
+    def INSTALLED_FORCEFIELDS(self):
+        """Return list of available force field versions."""
+        # TODO: Does this belong here? Is there a better way to do this?
+        return ['0.2.0']
+
+    def _get_model_filepath(self, forcefield):
+        """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
+
+        Parameters
+        ----------
+        forcefield : str
+            Version to locate in local cache (or retrieve if needed)
+
+        Returns
+        -------
+        cached_filename : str
+            Path to local cache of espaloma .pt model parameters
+        """
+        import os
+        if os.path.exists(forcefield):
+            # A specific file path has been specified
+            _logger.info(f'Using espaloma model found at {forcefield}')
+            return forcefield
+        else:
+            import validators
+            if validators.url(forcefield):
+                # URL has been provided
+                url = forcefield
+                filename = os.path.basename(url) # local filename for caching
+            else:
+                # Identify version number
+                import re
+                m = re.match('espaloma-(\d+\.\d+\.\d+)', forcefield)
+                if m is None:
+                    raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.2.0" (found: "{forcefield}")')
+                version = m.group(1)
+                # Construct URL
+                url = f'https://github.com/choderalab/espaloma/releases/download/{version}/espaloma_{version}.pt'
+                filename = f'espaloma-{version}.pt' # local filename for caching
+
+            # Check cache
+            cached_filename = os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, filename)
+            if os.path.exists(cached_filename):
+                _logger.info(f'Using espaloma model cached at {cached_filename}')
+                return cached_filename
+            else:
+                # Create the cache directory
+                if not os.path.exists(self.ESPALOMA_MODEL_CACHE_PATH):
+                    os.makedirs(self.ESPALOMA_MODEL_CACHE_PATH)
+
+                # Attempt to retrieve from URL
+                _logger.info(f'Attempting to retrieve espaloma model from {url}')
+                import urllib, urllib.error, urllib.request
+                try:
+                    urllib.request.urlretrieve(url, filename=cached_filename)
+                except urllib.error.URLError as e:
+                    raise ValueError(f'No espaloma model found at expected URL: {url}')
+                except urllib.error.HTTPError as e:
+                    raise ValueError(f'An error occurred while retrieving espaloma model from {url} : {e}')
+                return cached_filename
+
+    @property
+    def espaloma_filename(self):
+        """Full path to the SMIRNOFF force field file"""
+        return self.espaloma_model_filepath
+
+    def generate_residue_template(self, molecule, residue_atoms=None):
+        """
+        Generate a residue template and additional parameters for the specified Molecule.
+
+        Parameters
+        ----------
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            If specified, these molecules will be recognized and parameterized with espaloma as needed.
+            The parameters will be cached in case they are encountered again the future.
+        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
+            If specified, the subset of atoms to use in constructing a residue template
+
+        Returns
+        -------
+        ffxml_contents : str
+            Contents of ForceField `ffxml` file containing additional parameters and residue template.
+
+        Notes
+        -----
+
+        * The residue template will be named after the SMILES of the molecule.
+
+        """
+        # Use the canonical isomeric SMILES to uniquely name the template
+        smiles = molecule.to_smiles()
+        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
+
+        # Generate unique atom names
+        self._generate_unique_atom_names(molecule)
+
+        # Parameterize molecule
+        _logger.debug(f'Generating espaloma parameters...')
+
+        # create an Espaloma Graph object to represent the molecule of interest
+        import espaloma as esp
+        molecule_graph = esp.Graph(molecule)
+
+        # Assign parameters
+        self.espaloma_model(molecule_graph.heterograph)
+
+        # Create an OpenMM System
+        system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph)
         self.cache_system(smiles, system)
 
         # Convert to ffxml

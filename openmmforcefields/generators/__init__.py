@@ -1,2 +1,2 @@
-from .template_generators import GAFFTemplateGenerator, SMIRNOFFTemplateGenerator
+from .template_generators import GAFFTemplateGenerator, SMIRNOFFTemplateGenerator, EspalomaTemplateGenerator
 from .system_generators import SystemGenerator

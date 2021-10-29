@@ -3,6 +3,7 @@ name: test
 channels:
   - conda-forge
   - openeye
+  - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
   - defaults
 
 dependencies:
@@ -33,3 +34,16 @@ dependencies:
 
     # OpenEye toolkits are only used to speed up testing; they are not required for use
   - openeye-toolkits
+
+    # Validating URLs
+  - validators
+
+    #
+    # Espaloma requirements below
+    # TODO: Rework this once espaloma is on conda-forge
+    #
+  - pytorch
+  - dgl
+
+  pip:
+    - git+https://github.com/choderalab/espaloma.git@0.2.1
