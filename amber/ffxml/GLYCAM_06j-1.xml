@@ -40762,8 +40762,8 @@
       <Bond atomName1="ND2" atomName2="HD21" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="ND2" />
       <ExternalBond atomName="C" />
+      <ExternalBond atomName="ND2" />
     </Residue>
     <Residue name="OLS" override="1">
       <Atom name="N" type="protein-N" charge="-0.4157" />
@@ -40786,8 +40786,8 @@
       <Bond atomName1="CB" atomName2="OG" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="OG" />
       <ExternalBond atomName="C" />
+      <ExternalBond atomName="OG" />
     </Residue>
     <Residue name="OLT" override="1">
       <Atom name="N" type="protein-N" charge="-0.4157" />
@@ -40816,8 +40816,8 @@
       <Bond atomName1="CG2" atomName2="HG23" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="OG1" />
       <ExternalBond atomName="C" />
+      <ExternalBond atomName="OG1" />
     </Residue>
     <Residue name="OME" override="1">
       <Atom name="H1" type="protein-H1" charge="0.0" />
@@ -66413,8 +66413,8 @@
       <Bond atomName1="CA" atomName2="C" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="OD1" />
       <ExternalBond atomName="C" />
+      <ExternalBond atomName="OD1" />
     </Residue>
     <Residue name="CHYP" override="1">
       <Atom name="N" type="protein-N" charge="-0.28" />
