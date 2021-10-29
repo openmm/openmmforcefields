@@ -44,6 +44,7 @@ dependencies:
     #
   - pytorch
   - dgl
+  - qcportal
 
   - pip:
       - git+https://github.com/choderalab/espaloma.git@0.2.1
