@@ -342,8 +342,8 @@
       <Bond atomName1="C2M" atomName2="H22" />
       <Bond atomName1="C2M" atomName2="H21" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O4N" />
       <ExternalBond atomName="C4N" />
+      <ExternalBond atomName="O4N" />
     </Residue>
     <Residue name="0BD" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.241" />
@@ -1139,11 +1139,11 @@
       <Bond atomName1="OHG" atomName2="HOG" />
       <Bond atomName1="O4" atomName2="H4O" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1A" />
       <ExternalBond atomName="O1B" />
       <ExternalBond atomName="C5N" />
+      <ExternalBond atomName="O5N" />
     </Residue>
     <Residue name="0HA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.394" />
@@ -1841,9 +1841,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="0OB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.301" />
@@ -1887,9 +1887,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0PA" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.417" />
@@ -2401,11 +2401,11 @@
       <Bond atomName1="CME" atomName2="H1M" />
       <Bond atomName1="O4" atomName2="H4O" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1A" />
       <ExternalBond atomName="O1B" />
       <ExternalBond atomName="C5N" />
+      <ExternalBond atomName="O5N" />
     </Residue>
     <Residue name="0SB" override="1">
       <Atom name="C2" type="glycam-Cy" charge="0.09" />
@@ -2483,11 +2483,11 @@
       <Bond atomName1="C1" atomName2="O1B" />
       <Bond atomName1="C1" atomName2="O1A" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O1A" />
       <ExternalBond atomName="C5N" />
       <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1B" />
+      <ExternalBond atomName="O1A" />
     </Residue>
     <Residue name="0TA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.456" />
@@ -2711,9 +2711,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="0UB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.278" />
@@ -2757,9 +2757,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0VA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.389" />
@@ -3313,9 +3313,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="0ZB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.251" />
@@ -3359,9 +3359,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0aA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.448" />
@@ -3681,8 +3681,8 @@
       <Bond atomName1="C2M" atomName2="H22" />
       <Bond atomName1="C2M" atomName2="H23" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O4N" />
       <ExternalBond atomName="C4N" />
+      <ExternalBond atomName="O4N" />
     </Residue>
     <Residue name="0bD" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.241" />
@@ -4478,11 +4478,11 @@
       <Bond atomName1="C1" atomName2="O1B" />
       <Bond atomName1="C1" atomName2="O1A" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O1A" />
       <ExternalBond atomName="C5N" />
       <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1B" />
+      <ExternalBond atomName="O1A" />
     </Residue>
     <Residue name="0hA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.394" />
@@ -5180,9 +5180,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0oB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.301" />
@@ -5226,9 +5226,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="0pA" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.417" />
@@ -5740,11 +5740,11 @@
       <Bond atomName1="C1" atomName2="O1B" />
       <Bond atomName1="C1" atomName2="O1A" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O1A" />
       <ExternalBond atomName="C5N" />
       <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1B" />
+      <ExternalBond atomName="O1A" />
     </Residue>
     <Residue name="0sB" override="1">
       <Atom name="C2" type="glycam-Cy" charge="0.09" />
@@ -5822,11 +5822,11 @@
       <Bond atomName1="CME" atomName2="H3M" />
       <Bond atomName1="O4" atomName2="H4O" />
       <ExternalBond atomName="C2" />
-      <ExternalBond atomName="O5N" />
       <ExternalBond atomName="C1" />
       <ExternalBond atomName="O1A" />
       <ExternalBond atomName="O1B" />
       <ExternalBond atomName="C5N" />
+      <ExternalBond atomName="O5N" />
     </Residue>
     <Residue name="0tA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.456" />
@@ -6050,9 +6050,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0uB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.278" />
@@ -6096,9 +6096,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="0vA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.389" />
@@ -6652,9 +6652,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="0zB" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.251" />
@@ -6698,9 +6698,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="C1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1AA" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -8402,9 +8402,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1OB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -8450,9 +8450,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1PA" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.417" />
@@ -9128,9 +9128,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1UB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -9176,9 +9176,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1VA" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -9754,9 +9754,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1ZB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -9802,9 +9802,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1aA" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -11506,9 +11506,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1oB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -11554,9 +11554,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1pA" override="1">
       <Atom name="C2" type="glycam-Cg" charge="0.417" />
@@ -12232,9 +12232,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1uB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -12280,9 +12280,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="1vA" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -12858,9 +12858,9 @@
       <Bond atomName1="C2" atomName2="O2" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6A" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6B" />
+      <ExternalBond atomName="O6A" />
     </Residue>
     <Residue name="1zB" override="1">
       <Atom name="O1" type="glycam-Os" charge="-0.388" />
@@ -12906,9 +12906,9 @@
       <Bond atomName1="O3" atomName2="H3O" />
       <Bond atomName1="O2" atomName2="H2O" />
       <ExternalBond atomName="O1" />
-      <ExternalBond atomName="O6B" />
       <ExternalBond atomName="C6" />
       <ExternalBond atomName="O6A" />
+      <ExternalBond atomName="O6B" />
     </Residue>
     <Residue name="2AA" override="1">
       <Atom name="C1" type="glycam-Cg" charge="0.448" />
@@ -40762,8 +40762,8 @@
       <Bond atomName1="ND2" atomName2="HD21" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="C" />
       <ExternalBond atomName="ND2" />
+      <ExternalBond atomName="C" />
     </Residue>
     <Residue name="OLS" override="1">
       <Atom name="N" type="protein-N" charge="-0.4157" />
@@ -40786,8 +40786,8 @@
       <Bond atomName1="CB" atomName2="OG" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="C" />
       <ExternalBond atomName="OG" />
+      <ExternalBond atomName="C" />
     </Residue>
     <Residue name="OLT" override="1">
       <Atom name="N" type="protein-N" charge="-0.4157" />
@@ -40816,8 +40816,8 @@
       <Bond atomName1="CG2" atomName2="HG23" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="C" />
       <ExternalBond atomName="OG1" />
+      <ExternalBond atomName="C" />
     </Residue>
     <Residue name="OME" override="1">
       <Atom name="H1" type="protein-H1" charge="0.0" />
@@ -66413,8 +66413,8 @@
       <Bond atomName1="CA" atomName2="C" />
       <Bond atomName1="C" atomName2="O" />
       <ExternalBond atomName="N" />
-      <ExternalBond atomName="C" />
       <ExternalBond atomName="OD1" />
+      <ExternalBond atomName="C" />
     </Residue>
     <Residue name="CHYP" override="1">
       <Atom name="N" type="protein-N" charge="-0.28" />
