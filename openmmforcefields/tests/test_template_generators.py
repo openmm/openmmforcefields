@@ -186,9 +186,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         import numpy as np
         result = np.allclose(system_charges, molecule_charges)
         if not result:
-            _logger.debug('Charges are not equal')
-            _logger.debug(f'system charges  : {system_charges}')
-            _logger.debug(f'molecule charges: {molecule_charges}')
+            _logger.info('Charges are not equal')
+            _logger.info(f'system charges  : {system_charges}')
+            _logger.info(f'molecule charges: {molecule_charges}')
 
         return result
 
