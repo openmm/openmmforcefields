@@ -1609,7 +1609,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self.espaloma_model(molecule_graph.heterograph)
 
         # Create an OpenMM System
-        system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph)
+        if self._molecule_has_user_charges(molecule):
+            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='from-molecule')
+        else:
+            # use espaloma charges
+            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
         self.cache_system(smiles, system)
 
         # Convert to ffxml
