@@ -1499,7 +1499,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
 
-    @property
+    @ClassProperty
+    @classmethod
     def INSTALLED_FORCEFIELDS(self):
         """Return list of available force field versions."""
         # TODO: Does this belong here? Is there a better way to do this?
