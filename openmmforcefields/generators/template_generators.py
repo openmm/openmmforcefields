@@ -1504,7 +1504,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     def INSTALLED_FORCEFIELDS(self):
         """Return list of available force field versions."""
         # TODO: Does this belong here? Is there a better way to do this?
-        return ['0.2.0']
+        return ['espaloma-0.2.0']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
