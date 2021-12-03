@@ -73,6 +73,7 @@ jobs:
     - name: Test AMBER conversion
       shell: bash -l {0}
       run: |
+        python convert_amber.py --input solvents.yaml --log solvents-tests.csv --verbose
         python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
       working-directory: ./amber
 
