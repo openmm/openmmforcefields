@@ -904,7 +904,7 @@ class OpenMMSystemMixin(object):
         else:
             return None
 
-    def convert_system_to_ffxml(self, molecule, system):
+    def convert_system_to_ffxml(self, molecule, system, improper_atom_ordering='smirnoff'):
         """Convert OpenMM System object to molecule-specific OpenMM ffxml
 
         Parameters
@@ -913,6 +913,8 @@ class OpenMMSystemMixin(object):
             The Molecule to be converted
         system : openmm.System
             The System corresponding to molecule
+        improper_atom_ordering : str, optional, default='smirnoff'
+            OpenMM openmm.app.ForceField improper atom ordering scheme to use
 
         Returns
         -------
@@ -1035,7 +1037,7 @@ class OpenMMSystemMixin(object):
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
 
         # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
@@ -1064,6 +1066,9 @@ class OpenMMSystemMixin(object):
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
+
+        _logger.warning(f'{ffxml_contents}') # DEBUG
+
 
         return ffxml_contents
 
@@ -1494,7 +1499,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Load torch model
         import torch
-        self.espaloma_model = torch.load(self.espaloma_model_filepath)
+        self.espaloma_model = torch.load(self.espaloma_model_filepath, map_location=torch.device('cpu'))
 
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
@@ -1504,7 +1509,10 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     def INSTALLED_FORCEFIELDS(self):
         """Return list of available force field versions."""
         # TODO: Does this belong here? Is there a better way to do this?
-        return ['espaloma-0.2.0']
+        # TODO: Update this
+        # TODO: Can we list force fields installed locally?
+        #return ['espaloma-0.2.0']
+        return ['espaloma_model_with_smirnoff_improper.pt']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1524,6 +1532,12 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             # A specific file path has been specified
             _logger.info(f'Using espaloma model found at {forcefield}')
             return forcefield
+        # TODO: This isn't quite right---we should be checking this in the previous branch?
+        elif os.path.exists(os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, forcefield)):
+            # A specific file path has been specified
+            filepath = os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, forcefield)
+            _logger.info(f'Using espaloma model found at {filepath}')
+            return filepath
         else:
             import validators
             if validators.url(forcefield):
@@ -1618,5 +1632,5 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self.cache_system(smiles, system)
 
         # Convert to ffxml
-        ffxml_contents = self.convert_system_to_ffxml(molecule, system)
+        ffxml_contents = self.convert_system_to_ffxml(molecule, system, improper_atom_ordering='default')
         return ffxml_contents
