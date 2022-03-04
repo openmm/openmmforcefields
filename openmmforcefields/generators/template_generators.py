@@ -1513,8 +1513,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Does this belong here? Is there a better way to do this?
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
-        #return ['espaloma-0.2.0']
-        return ['espaloma_model_with_smirnoff_improper.pt']
+        # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
+        return ['espaloma-0.2.0']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1634,8 +1634,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='from-molecule')
         else:
             # use espaloma charges
-            #system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='gasteiger') # DEBUG
+            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
         self.cache_system(smiles, system)
 
         # Convert to ffxml
