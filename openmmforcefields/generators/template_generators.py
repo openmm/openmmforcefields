@@ -1035,6 +1035,7 @@ class OpenMMSystemMixin(object):
                 torsions[particle_indices].append( (periodicity, phase, k) )
             else:
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
+        print(torsions.keys()) # DEBUG
 
         # Create torsion definitions
         torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
@@ -1047,6 +1048,7 @@ class OpenMMSystemMixin(object):
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
             torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
+            print(torsion_type) # DEBUG
 
         # TODO: Handle virtual sites
         virtual_sites = [ particle_index for particle_index in range(system.getNumParticles()) if system.isVirtualSite(particle_index) ]
@@ -1620,6 +1622,10 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         import espaloma as esp
         molecule_graph = esp.Graph(molecule)
 
+        # Regenerate SMIRNOFF impropers
+        from espaloma.graphs.utils.regenerate_impropers import regenerate_impropers
+        regenerate_impropers(molecule_graph)
+
         # Assign parameters
         self.espaloma_model(molecule_graph.heterograph)
 
@@ -1628,9 +1634,10 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='from-molecule')
         else:
             # use espaloma charges
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
+            #system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
+            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='gasteiger') # DEBUG
         self.cache_system(smiles, system)
 
         # Convert to ffxml
-        ffxml_contents = self.convert_system_to_ffxml(molecule, system, improper_atom_ordering='default')
+        ffxml_contents = self.convert_system_to_ffxml(molecule, system, improper_atom_ordering='smirnoff')
         return ffxml_contents
