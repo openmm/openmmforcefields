@@ -236,9 +236,13 @@ class SmallMoleculeTemplateGenerator(object):
             The molecule whose atom names are to be modified in-place
         """
         from collections import defaultdict
+
+        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
+        uses_old_api = hasattr(molecule.atoms[0], "element")
+
         element_counts = defaultdict(int)
         for atom in molecule.atoms:
-            symbol = atom.element.symbol
+            symbol = atom.element.symbol if uses_old_api else atom.symbol
             element_counts[symbol] += 1
             atom.name = symbol + str(element_counts[symbol])
 
