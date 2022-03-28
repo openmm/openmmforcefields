@@ -35,13 +35,13 @@ class SmallMoleculeTemplateGenerator(object):
     """
     def __init__(self, molecules=None, cache=None):
         """
-        Create a tempalte generator with some openforcefield toolkit molecules
+        Create a tempalte generator with some OpenFF toolkit molecules
 
-        Requies the openforcefield toolkit: http://openforcefield.org
+        Requies the openff-toolkit toolkit: http://openforcefield.org
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -88,7 +88,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -99,7 +99,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         Add some Molecules later on after the generator has been registered:
 
-        >>> from openforcefield.topology import Molecule
+        >>> from openff.toolkit.topology import Molecule
         >>> mol1, mol2, mol3 = [ Molecule.from_smiles(smiles) for smiles in ('c1ccccc1', 'O=Cc1ccc(O)c(OC)c1', 'CN1CCC[C@H]1c2cccnc2') ]
         >>> generator.add_oemols(mol1)
         >>> generator.add_oemols([mol2, mol3])
@@ -131,9 +131,9 @@ class SmallMoleculeTemplateGenerator(object):
 
         Parameters
         ----------
-        residue : simtk.openmm.app.topology.Residue
+        residue : openmm.app.topology.Residue
             The residue to check
-        molecule_template : openforcefield.topology.Molecule
+        molecule_template : openff.toolkit.topology.Molecule
             The Molecule template to compare it to
 
         Returns
@@ -142,13 +142,13 @@ class SmallMoleculeTemplateGenerator(object):
             matches[residue_atom_index] is the corresponding Molecule template atom index
             or None if it does not match the template
 
-        .. todo :: Can this be replaced by an isomorphism matching call to the openforcefield toolkit?
+        .. todo :: Can this be replaced by an isomorphism matching call to the OpenFF toolkit?
 
         """
         # TODO: Speed this up by rejecting molecules that do not have the same chemical formula
 
         # TODO: Can this NetworkX implementation be replaced by an isomorphism
-        # matching call to the openforcefield toolkit?
+        # matching call to the OpenFF toolkit?
 
         import networkx as nx
 
@@ -203,7 +203,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         Parameters
         ----------
-        molecule : openforcefield.topology.Molecule
+        molecule : openff.toolkit.topology.Molecule
             The Molecule object to check for user charges
 
         Returns
@@ -214,11 +214,11 @@ class SmallMoleculeTemplateGenerator(object):
         .. todo ::
 
            Replace this with an API call to Molecule once added:
-           https://github.com/openforcefield/openforcefield/issues/488
+           https://github.com/openforcefield/openff-toolkit/issues/488
 
         """
         import numpy as np
-        from simtk import unit
+        from openmm import unit
         zeros = np.zeros([molecule.n_particles])
         if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)):
             charges_are_zero = True
@@ -232,7 +232,7 @@ class SmallMoleculeTemplateGenerator(object):
 
         Parameters
         ----------
-        molecule : openforcefield.topology.Molecule
+        molecule : openff.toolkit.topology.Molecule
             The molecule whose atom names are to be modified in-place
         """
         from collections import defaultdict
@@ -248,13 +248,13 @@ class SmallMoleculeTemplateGenerator(object):
 
     def generator(self, forcefield, residue):
         """
-        Residue template generator method to register with simtk.openmm.app.ForceField
+        Residue template generator method to register with openmm.app.ForceField
 
         Parameters
         ----------
-        forcefield : simtk.openmm.app.ForceField
+        forcefield : openmm.app.ForceField
             The ForceField object to which residue templates and/or parameters are to be added.
-        residue : simtk.openmm.app.Topology.Residue
+        residue : openmm.app.Topology.Residue
             The residue topology for which a template is to be generated.
 
         Returns
@@ -283,7 +283,7 @@ class SmallMoleculeTemplateGenerator(object):
                         continue
 
                     # See if the template matches
-                    from openforcefield.topology import Molecule
+                    from openff.toolkit.topology import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
                     _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
@@ -343,7 +343,7 @@ class SmallMoleculeTemplateGenerator(object):
 
 class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
-    OpenMM ForceField residue template generator for GAFF/AM1-BCC using pre-cached openforcefield toolkit molecules.
+    OpenMM ForceField residue template generator for GAFF/AM1-BCC using pre-cached OpenFF toolkit molecules.
 
     One template generator can be registered in multiple OpenMM ForceField objects.
 
@@ -352,14 +352,14 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     Create a template generator for GAFF for a single Molecule and register it with ForceField:
 
-    >>> # Define a Molecule using the openforcefield Molecule object
-    >>> from openforcefield.topology import Molecule
+    >>> # Define a Molecule using the OpenFF Molecule object
+    >>> from openff.toolkit.topology import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the GAFF template generator
     >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
     >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
-    >>> from simtk.openmm.app import ForceField
+    >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
     >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
@@ -392,13 +392,13 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     def __init__(self, molecules=None, forcefield=None, cache=None):
         """
-        Create a GAFFTemplateGenerator with some openforcefield toolkit molecules
+        Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
-        Requies the openforcefield toolkit: http://openforcefield.org
+        Requies the OpenFF toolkit: http://openforcefield.org
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -416,11 +416,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openforcefield.topology import Molecule
+        >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
-        >>> from simtk.openmm.app import ForceField
+        >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> forcefield = ForceField(*amber_forcefields)
         >>> forcefield.registerTemplateGenerator(gaff)
@@ -466,7 +466,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Store user-specified GAFF version
         self._forcefield = forcefield
         import re
-        result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
+        result = re.match(r'^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
         if result is None:
             msg = "'forcefield' must be of form 'gaff-X.Y', where X and Y denote major and minor version\n"
             msg += f"Provided 'forcefield' argument was '{forcefield}'\n"
@@ -513,13 +513,13 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     def generator(self, forcefield, residue):
         """
-        Residue template generator method to register with simtk.openmm.app.ForceField
+        Residue template generator method to register with openmm.app.ForceField
 
         Parameters
         ----------
-        forcefield : simtk.openmm.app.ForceField
+        forcefield : openmm.app.ForceField
             The ForceField object to which residue templates and/or parameters are to be added.
-        residue : simtk.openmm.app.Topology.Residue
+        residue : openmm.app.Topology.Residue
             The residue topology for which a template is to be generated.
 
         Returns
@@ -544,12 +544,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
-        residue_atoms : list of openforcefield.topology.Atom, optional, default=None
+        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
             If specified, the subset of atoms to use in constructing a residue template
 
         Returns
@@ -574,7 +574,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
-        from simtk import unit
+        from openmm import unit
         if type(net_charge) != unit.Quantity:
             # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
             net_charge = float(net_charge) * unit.elementary_charge
@@ -586,7 +586,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         else:
             _logger.debug(f'Computing AM1-BCC charges...')
             # NOTE: generate_conformers seems to be required for some molecules
-            # https://github.com/openforcefield/openforcefield/issues/492
+            # https://github.com/openforcefield/openff-toolkit/issues/492
             molecule.generate_conformers(n_conformers=10)
             molecule.compute_partial_charges_am1bcc()
 
@@ -621,11 +621,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Modify partial charges so that charge on residue atoms is integral
         # TODO: This may require some modification to correctly handle API changes
-        # when openforcefield makes charge quantities consistently unit-bearing or
-        # pure numbers.
+        #       when OpenFF toolkit makes charge quantities consistently unit-bearing
+        #       or pure numbers.
         _logger.debug(f'Fixing partial charges...')
         _logger.debug(f'{molecule.partial_charges}')
-        from simtk import unit
+        from openmm import unit
         residue_charge = 0.0 * unit.elementary_charge
         total_charge = unit.sum(molecule.partial_charges)
         sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
@@ -875,7 +875,7 @@ class ClassProperty(property):
 class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     OpenMM ForceField residue template generator for Open Force Field Initiative SMIRNOFF
-    force fields using pre-cached openforcefield toolkit molecules.
+    force fields using pre-cached OpenFF toolkit molecules.
 
     Open Force Field Initiative: http://openforcefield.org
     SMIRNOFF force field specification: https://open-forcefield-toolkit.readthedocs.io/en/latest/smirnoff.html
@@ -886,14 +886,14 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     Create a template generator for a single Molecule using the latest Open Force Field Initiative
     small molecule force field and register it with ForceField:
 
-    >>> # Define a Molecule using the openforcefield Molecule object
-    >>> from openforcefield.topology import Molecule
+    >>> # Define a Molecule using the OpenFF Molecule object
+    >>> from openff.toolkit.topology import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the SMIRNOFF template generator
     >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
     >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
-    >>> from simtk.openmm.app import ForceField
+    >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
     >>> forcefield = ForceField(*amber_forcefields)
     >>> # Register the template generator
@@ -924,13 +924,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     def __init__(self, molecules=None, cache=None, forcefield=None):
         """
-        Create a SMIRNOFFTemplateGenerator with some openforcefield toolkit molecules
+        Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
-        Requies the openforcefield toolkit: http://openforcefield.org
+        Requies the OpenFF toolkit: http://openforcefield.org
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -947,11 +947,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openforcefield.topology import Molecule
+        >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
         >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
-        >>> from simtk.openmm.app import ForceField
+        >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> forcefield = ForceField(*amber_forcefields)
 
@@ -1001,12 +1001,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._database_table_name = forcefield
 
         # Create ForceField object
-        import openforcefield.typing.engines.smirnoff
+        import openff.toolkit.typing.engines.smirnoff
         try:
             filename = forcefield
             if not filename.endswith('.offxml'):
                 filename += '.offxml'
-            self._smirnoff_forcefield = openforcefield.typing.engines.smirnoff.ForceField(filename)
+            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
         except Exception as e:
             _logger.error(e)
             raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths")
@@ -1025,7 +1025,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @ClassProperty
     @classmethod
     def INSTALLED_FORCEFIELDS(cls):
-        """Return a list of the offxml files shipped with the openforcefield package.
+        """Return a list of the offxml files shipped with the openfff-forcefields package.
 
         Returns
         -------
@@ -1035,10 +1035,10 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         .. todo ::
 
            Replace this with an API call once this issue is addressed:
-           https://github.com/openforcefield/openforcefield/issues/477
+           https://github.com/openforcefield/openff-toolkit/issues/477
 
         """
-        from openforcefield.typing.engines.smirnoff import get_available_force_fields
+        from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
         file_names = list()
         for filename in get_available_force_fields(full_paths=False):
             root, ext = os.path.splitext(filename)
@@ -1049,7 +1049,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         return file_names
 
     def _search_paths(self, filename):
-        """Search registered openforcefield plugin directories
+        """Search registered OpenFF plugin directories
 
         Parameters
         ----------
@@ -1064,13 +1064,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         .. todo ::
 
            Replace this with an API call once this issue is addressed:
-           https://github.com/openforcefield/openforcefield/issues/477
+           https://github.com/openforcefield/openff-toolkit/issues/477
 
         """
-        # TODO: Replace this method once there is a public API in the openforcefield toolkit for doing this
+        # TODO: Replace this method once there is a public API in the OpenFF toolkit for doing this
 
-        from openforcefield.utils import get_data_file_path
-        from openforcefield.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
+        from openff.toolkit.utils import get_data_file_path
+        from openff.toolkit.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
 
         # Check whether this could be a file path
         if isinstance(filename, str):
@@ -1098,12 +1098,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecule : openforcefield.topology.Molecule
+        molecule : openff.toolkit.topology.Molecule
             The Molecule object
 
         Returns
         -------
-        system : simtk.openmm.System or None
+        system : openmm.System or None
             If the Molecule object has already been parameterized by this instance, this molecule is returned.
             Otherwise, None is returned.
         """
@@ -1119,12 +1119,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
-        residue_atoms : list of openforcefield.topology.Atom, optional, default=None
+        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
             If specified, the subset of atoms to use in constructing a residue template
 
         Returns
@@ -1165,13 +1165,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         root = etree.Element("ForceField")
 
         def as_attrib(quantity):
-            """Format simtk.unit.Quantity as XML attribute."""
+            """Format openmm.unit.Quantity as XML attribute."""
             if isinstance(quantity, str):
                 return quantity
             elif isinstance(quantity, float) or isinstance(quantity, int):
                 return str(quantity)
             else:
-                from simtk import unit
+                from openmm import unit
                 return str(quantity.value_in_unit_system(unit.md_unit_system))
 
         # Append unique type names to atoms
@@ -1212,7 +1212,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Round parameters using strings for ease of comparison
         # DEBUG
-        #from simtk import unit
+        #from openmm import unit
         #def round_quantity(quantity):
         #    NDECIMALS = 3
         #    value = quantity.value_in_unit_system(unit.md_unit_system)
@@ -1292,7 +1292,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Create residue definitions
         # TODO: Handle non-Atom particles too (virtual sites)
-        from simtk import unit
+        from openmm import unit
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for particle_index, particle in enumerate(molecule.particles):

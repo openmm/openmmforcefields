@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="oldff/leaprc.ff14SB" md5hash="7f016ac76ca64b68cb03725d6d370de8" sourcePackage="AmberTools" sourcePackageVersion="19.9">oldff/leaprc.ff14SB</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="oldff/leaprc.ff14SB" md5hash="7f016ac76ca64b68cb03725d6d370de8" sourcePackage="AmberTools" sourcePackageVersion="20.15">oldff/leaprc.ff14SB</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
   <AtomTypes>
@@ -5941,6 +5941,16 @@
     <Improper type1="CA" type2="C4" type3="N2" type4="NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="C" type2="CA" type3="CA" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="NA" type2="CC" type3="CR" type4="P" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="CB" type2="C*" type3="CA" type4="CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CN" type2="CA" type3="CB" type4="NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="CB" type3="N*" type4="NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="C" type3="CB" type4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="CA" type3="CB" type4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="H1" type3="H1" type4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="H1" type3="H1" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper type1="CO" type2="" type3="O2" type4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="C" type2="2C" type3="O" type4="OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper type1="CA" type2="2C" type3="CA" type4="CA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>

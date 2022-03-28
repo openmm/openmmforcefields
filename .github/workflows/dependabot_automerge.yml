@@ -1,0 +1,19 @@
+### .github/workflows/dependabot_automerge.yml
+### As of 2300 UTC on 11 March, this workflow has secrets and a read-write token
+### https://github.com/dependabot/dependabot-core/issues/3253#issuecomment-852541544
+name: Dependabot Workflow
+on:
+  pull_request_target
+  
+permissions:
+  # down scope as necessary via https://docs.github.com/en/actions/reference/authentication-in-a-workflow#modifying-the-permissions-for-the-github_token
+
+jobs:
+  do-stuff:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

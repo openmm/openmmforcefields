@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="oldff/leaprc.ff10" md5hash="0c7dea53297086f5fa5bcc00a1447226" sourcePackage="AmberTools" sourcePackageVersion="19.9">oldff/leaprc.ff10</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="oldff/leaprc.ff10" md5hash="0c7dea53297086f5fa5bcc00a1447226" sourcePackage="AmberTools" sourcePackageVersion="20.15">oldff/leaprc.ff10</Source>
     <Reference>Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006). Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.</Reference>
     <Reference>Perez, A., Marchan, I., Svozil, D., Sponer, J., Cheatham, T.E., Laughton, C.A., and Orozco, M. (2007). Refinement of the AMBER Force Field for Nucleic Acids: Improving the Description of alpha/gamma Conformers. Biophysical Journal 92, 3817-3829.</Reference>
     <Reference>Banas, P., Hollas, D., Zgarbova, M., Jurecka, P., Orozco, M., Cheatham, T.E., Sponer, J., and Otyepka, M. (2010). Performance of Molecular Mechanics Force Fields for RNA Simulations: Stability of UUCG and GNRA Hairpins. J. Chem. Theory Comput. 6, 3836-3849.</Reference>
@@ -5950,6 +5950,16 @@
     <Improper type1="CA" type2="C4" type3="N2" type4="NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="C" type2="CA" type3="CA" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="NA" type2="CC" type3="CR" type4="P" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="CB" type2="C*" type3="CA" type4="CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CN" type2="CA" type3="CB" type4="NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="CB" type3="N*" type4="NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="C" type3="CB" type4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CB" type2="CA" type3="CB" type4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="H1" type3="H1" type4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="H1" type3="H1" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="CJ" type2="CT" type3="H1" type4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
