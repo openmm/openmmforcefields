@@ -1449,7 +1449,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         You can check which espaloma parameter set force field filename is in use with
 
         >>> espaloma_generator.parameters_filename
-        '/full/path/to/espaloma_0.2.2.pt'
+        '/full/path/to/espaloma-0.2.2.pt'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
@@ -1554,7 +1554,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                     raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.2.2" (found: "{forcefield}")')
                 version = m.group(1)
                 # Construct URL
-                url = f'https://github.com/choderalab/espaloma/releases/download/{version}/espaloma_{version}.pt'
+                url = f'https://github.com/choderalab/espaloma/releases/download/{version}/espaloma-{version}.pt'
                 filename = f'espaloma-{version}.pt' # local filename for caching
 
             # Check cache

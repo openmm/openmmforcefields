@@ -941,10 +941,10 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     def test_retrieve_forcefields(self):
         """Test a force field can be retrieved"""
         # Test loading model by specifying version number
-        generator = EspalomaTemplateGenerator(forcefield='0.2.0')
+        generator = EspalomaTemplateGenerator(forcefield='espaloma-0.2.2')
         del generator
         # Test loading model from remote URL
-        generator = EspalomaTemplateGenerator(forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.0/espaloma_0.2.0.pt')
+        generator = EspalomaTemplateGenerator(forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma-0.2.2.pt')
         del generator
         # Test loading model from filename
         with tempfile.TemporaryDirectory() as tmpdirname:
