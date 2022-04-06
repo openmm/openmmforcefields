@@ -1382,16 +1382,16 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific Espaloma release ('espaloma-0.2.0')
+    Create a template generator for a specific Espaloma release ('espaloma-0.2.2')
     and register multiple molecules:
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.2.0')
+    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.2.2')
 
     Alternatively, you can specify a local .pt parameter file for Espaloma:
 
-    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma_0.2.0.pt')
+    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma_0.2.2.pt')
 
     You can also add some Molecules later on after the generator has been registered:
 
@@ -1423,7 +1423,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
         forcefield : str, optional, default=None
-            Name of installed Espaloma force field version (e.g. 0.2.0) to retrieve remotely,
+            Name of installed Espaloma force field version (e.g. 'espaloma-0.2.2') to retrieve remotely,
             a local Espaloma .pt parmaeters filename (with extension),
             or a URL to an online espaloma force field.
         model_cache_path : str, optional, default=None
@@ -1444,18 +1444,18 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         >>> forcefield = ForceField(*amber_forcefields)
 
         >>> espaloma_generator.forcefield
-        'espaloma-0.2.0'
+        'espaloma-0.2.2'
 
         You can check which espaloma parameter set force field filename is in use with
 
         >>> espaloma_generator.parameters_filename
-        '/full/path/to/espaloma_0.2.0.pt'
+        '/full/path/to/espaloma_0.2.2.pt'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')
-        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.0')
+        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.2')
 
         You can also add molecules later on after the generator has been registered:
 
@@ -1463,7 +1463,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.2.0')
+        >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.2.2')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -1478,7 +1478,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'espaloma-0.2.0'
+            forcefield = 'espaloma-0.2.2'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1514,7 +1514,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return ['espaloma-0.2.0']
+        return ['espaloma-0.2.2']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1551,7 +1551,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                 import re
                 m = re.match('espaloma-(\d+\.\d+\.\d+)', forcefield)
                 if m is None:
-                    raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.2.0" (found: "{forcefield}")')
+                    raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.2.2" (found: "{forcefield}")')
                 version = m.group(1)
                 # Construct URL
                 url = f'https://github.com/choderalab/espaloma/releases/download/{version}/espaloma_{version}.pt'
