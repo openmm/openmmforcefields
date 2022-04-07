@@ -944,7 +944,8 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         generator = EspalomaTemplateGenerator(forcefield='espaloma-0.2.2')
         del generator
         # Test loading model from remote URL
-        generator = EspalomaTemplateGenerator(forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma-0.2.2.pt')
+        url = 'https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma-0.2.2.pt'
+        generator = EspalomaTemplateGenerator(forcefield=url)
         del generator
         # Test loading model from filename
         with tempfile.TemporaryDirectory() as tmpdirname:
