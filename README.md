@@ -207,11 +207,58 @@ smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', forcefield
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
+
+## Using espaloma to generate small molecule force fields
+
+The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using the [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
+
+The `EspalomaTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
+
+**This feature is currently experimental and its API is subject to change.**
+
+### Examples using `EspalomaTemplateGenerator` to generate small molecule parameters with espaloma
+
+Create an espaloma template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+```python
+# Create an OpenFF Molecule object for benzene from SMILES
+from openff.toolkit.topology import Molecule
+molecule = Molecule.from_smiles('c1ccccc1')
+# Create the SMIRNOFF template generator with the released espaloma-0.2.0 force field
+from openmmforcefields.generators import EspalomaTemplateGenerator
+espaloma = EspalomaTemplateGenerator(molecules=molecule, forcefield='espaloma-0.2.0')
+# Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
+from simtk.openmm.app import ForceField
+forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
+# Register the SMIRNOFF template generator
+forcefield.registerTemplateGenerator(espaloma.generator)
+```
+Create a template generator for a specific espaloma force field for multiple molecules read from an SDF file:
+```python
+molecules = Molecule.from_file('molecules.sdf')
+# Create an espaloma residue template generator from the espaloma-0.2.0 release,
+# retrieving it automatically from GitHub release artifacts
+smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.0')
+# Create an espaloma residue template generator from an espaloma model retrieved from a URL
+smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.0/espaloma_0.2.0.pt')
+# Create an espaloma residue template generator from an espaloma model stored in a local file
+smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='/path/to/espaloma_0.2.0.pt')
+```
+You can also add molecules to the generator later, even after the generator has been registered:
+```python
+smirnoff.add_molecules(molecule)
+smirnoff.add_molecules([molecule1, molecule2])
+```
+You can optionally specify a file that contains a cache of pre-parameterized molecules:
+```python
+smirnoff = EspalomaTemplateGenerator(cache='espaloma-molecules.json', forcefield='espaloma-0.2.0')
+```
+Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
+
 ## Automating force field management with `SystemGenerator`
 
 The `openmmforcefields` package provides the `openmmforcefields.generators.SystemGenerator` class that handles management of common force fields transparently for you.
 
-### Using `SystemGenerator` to automate the use of AMBER force fields with GAFF for small molecule parameterization
+### Using `SystemGenerator` to automate the use of AMBER force fields with GAFF, OpenFF, or espaloma for small molecule parameterization
 
 Here's an example that uses GAFF 2.11 along with the new `ff14SB` generation of AMBER force fields (and compatible solvent models) to generate an OpenMM `System` object from an [Open Force Field `Topology`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology) object:
 ```python
@@ -242,6 +289,8 @@ system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p
 
 To use the [Open Force Field `openff-1.2.0`](https://github.com/openforcefield/openff-forcefields), an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.2.0'`.
 
+To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.2.0` model](https://github.com/choderalab/espaloma/releases/tag/0.2.0) released with the [espaloma preprint](https://arxiv.org/abs/2010.01196), you can specify `small_molecule_forcefield='espaloma-0.2.0'`.
+
 # Frequently Asked Questions (FAQ)
 
 **Q:** What is the minimum version of OpenMM required to use this package?
@@ -264,6 +313,11 @@ See the corresponding directories for information on how to use the provided con
 * `charmm/` - CHARMM force fields and conversion tools
 
 # Changelog
+
+## 0.11.0 Support for espaloma small molecule parameters
+This release adds support for using [espaloma](https://github.com/choderalab/espaloma) to apply small molecule parameters.
+
+* [(PR #182)](https://github.com/openmm/openmmforcefields/pull/179) Add support for espaloma small molecule parameters
 
 ## 0.10.0 Updates for OpenMM 7.6 and AMBER GLYCAM addition
 This release adds support for the AMBER GLYCAM force field supporting glycans and updates imports for OpenMM 7.6.
