@@ -11,7 +11,7 @@ from openmmforcefields.generators import EspalomaTemplateGenerator
 import logging
 _logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
 
-CI = ('TRAVIS' in os.environ)
+CI = ('CI' in os.environ)
 
 ################################################################################
 # Tests

@@ -7,7 +7,7 @@ from openmmforcefields.utils import get_data_filename
 
 from openmmforcefields.generators import SystemGenerator
 
-CI = ('TRAVIS' in os.environ)
+CI = ('CI' in os.environ)
 
 ################################################################################
 # Tests
