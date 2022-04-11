@@ -210,7 +210,8 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Using espaloma to generate small molecule force fields
 
-The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using the [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
+The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/simtk.openmm.app.forcefield.ForceField.html#simtk.openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
+`espaloma` uses a [graph convolutional model](https://arxiv.org/abs/2010.01196) to generate both valence parameters and fast partial charges.
 
 The `EspalomaTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
@@ -225,7 +226,7 @@ from openff.toolkit.topology import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
 # Create the SMIRNOFF template generator with the released espaloma-0.2.0 force field
 from openmmforcefields.generators import EspalomaTemplateGenerator
-espaloma = EspalomaTemplateGenerator(molecules=molecule, forcefield='espaloma-0.2.0')
+espaloma = EspalomaTemplateGenerator(molecules=molecule, forcefield='espaloma-0.2.2')
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from simtk.openmm.app import ForceField
 forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
@@ -237,11 +238,11 @@ Create a template generator for a specific espaloma force field for multiple mol
 molecules = Molecule.from_file('molecules.sdf')
 # Create an espaloma residue template generator from the espaloma-0.2.0 release,
 # retrieving it automatically from GitHub release artifacts
-smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.0')
+espaloma = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.2')
 # Create an espaloma residue template generator from an espaloma model retrieved from a URL
-smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.0/espaloma_0.2.0.pt')
+espaloma = EspalomaTemplateGenerator(molecules=molecules, forcefield='https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma_0.2.2.pt')
 # Create an espaloma residue template generator from an espaloma model stored in a local file
-smirnoff = EspalomaTemplateGenerator(molecules=molecules, forcefield='/path/to/espaloma_0.2.0.pt')
+espaloma = EspalomaTemplateGenerator(molecules=molecules, forcefield='/path/to/espaloma_0.2.2.pt')
 ```
 You can also add molecules to the generator later, even after the generator has been registered:
 ```python
@@ -250,7 +251,7 @@ smirnoff.add_molecules([molecule1, molecule2])
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
-smirnoff = EspalomaTemplateGenerator(cache='espaloma-molecules.json', forcefield='espaloma-0.2.0')
+espaloma = EspalomaTemplateGenerator(cache='espaloma-molecules.json', forcefield='espaloma-0.2.2')
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
