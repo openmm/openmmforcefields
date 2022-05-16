@@ -10,6 +10,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
 jobs:
   test:
 
@@ -92,6 +96,8 @@ jobs:
       working-directory: ./charmm
 
     - name: CodeCov
+      if: ${{ github.repository == 'openmm/openmmforcefields'
+              && github.event != 'schedule' }}
       uses: codecov/codecov-action@v2.1.0
       with:
         file: ./coverage.xml
