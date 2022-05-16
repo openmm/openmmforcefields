@@ -33,9 +33,9 @@ jobs:
       with:
         python-version: ${{ matrix.cfg.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
-
+        mamba-version: "*"
+        channel-priority: true
         channels: conda-forge,openeye,defaults
-
         activate-environment: test
         auto-update-conda: true
         auto-activate-base: false
