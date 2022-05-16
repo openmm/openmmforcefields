@@ -1065,9 +1065,8 @@ class OpenMMSystemMixin(object):
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-
-        _logger.warning(f'{ffxml_contents}') # DEBUG
-
+        
+        _logger.debug(f'{ffxml_contents}') # DEBUG
 
         return ffxml_contents
 
