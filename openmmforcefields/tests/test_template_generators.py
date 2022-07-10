@@ -43,7 +43,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for continuous integration
         import os
-        MAX_MOLECULES = 50 if not CI else 10
+        MAX_MOLECULES = 50 if not CI else 4
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
