@@ -654,7 +654,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             return np.sqrt((1.0/N) * (x**2).sum())
         def relative_deviation(x, y):
             if norm(y) > 0:
-                return norm(x-y) / norm(y)
+                return norm(x-y) / np.sqrt(norm(x)**2 + norm(y)**2)
             else:
                 return 0
 
@@ -716,7 +716,6 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
-        # DEBUG
         from openff.toolkit.topology import Molecule
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
@@ -884,7 +883,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
             return np.sqrt((1.0/N) * (x**2).sum())
         def relative_deviation(x, y):
             if norm(y) > 0:
-                return norm(x-y) / norm(y)
+                return norm(x-y) / np.sqrt(norm(x)**2 + norm(y)**2)
             else:
                 return 0
 
@@ -958,7 +957,6 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
-        # DEBUG
         from openff.toolkit.topology import Molecule
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
