@@ -922,11 +922,6 @@ class OpenMMSystemMixin(object):
             The OpenMM ffxml contents for the given molecule.
         """
 
-        # DEBUG
-        print(f'{molecule.name} System as XML:')
-        import openmm
-        print(openmm.XmlSerializer.serialize(system))
-
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
         root = etree.Element("ForceField")
@@ -977,21 +972,6 @@ class OpenMMSystemMixin(object):
                 Dict of format { 'class1' : typename1, ... }
             """
             return { f'class{class_index+1}' : molecule.particles[particle_index].typename for class_index,particle_index in enumerate(particle_indices) }
-
-        # Round parameters using strings for ease of comparison
-        # DEBUG
-        #from openmm import unit
-        #def round_quantity(quantity):
-        #    NDECIMALS = 3
-        #    value = quantity.value_in_unit_system(unit.md_unit_system)
-        #    value = round(value, NDECIMALS)
-        #    return value
-        #for particle_index in range(forces['NonbondedForce'].getNumParticles()):
-        #    charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
-        #    forces['NonbondedForce'].setParticleParameters(particle_index, round_quantity(charge), round_quantity(sigma), round_quantity(epsilon))
-        #for exception_index in range(forces['NonbondedForce'].getNumExceptions()):
-        #    i, j, chargeProd, sigma, epsilon = forces['NonbondedForce'].getExceptionParameters(exception_index)
-        #    forces['NonbondedForce'].setExceptionParameters(exception_index, i, j, round_quantity(chargeProd), round_quantity(sigma), round_quantity(epsilon))
 
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
@@ -1071,10 +1051,6 @@ class OpenMMSystemMixin(object):
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-
-        # DEBUG:
-        print('ffxml contents:')
-        print(ffxml_contents)
 
         #_logger.debug(f'{ffxml_contents}') # DEBUG
 
