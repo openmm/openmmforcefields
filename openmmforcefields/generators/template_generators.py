@@ -1042,6 +1042,7 @@ class OpenMMSystemMixin(object):
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
 
         # Create torsion definitions
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
@@ -1050,6 +1051,7 @@ class OpenMMSystemMixin(object):
                 params[f'periodicity{term+1}'] = as_attrib(periodicity)
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
+            torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
 
         # TODO: Handle virtual sites
         virtual_sites = [ particle_index for particle_index in range(system.getNumParticles()) if system.isVirtualSite(particle_index) ]

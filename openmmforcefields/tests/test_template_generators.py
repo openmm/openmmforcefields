@@ -682,7 +682,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 return 0
 
         RELATIVE_FORCE_DEVIATION_TOLERANCE = 1.0e-5
-        relative_force_deviation = relative_deviation(openmm_forces['total'], smirnoff_forces['total'])
+        relative_force_deviation = relative_deviation(template_forces['total'], reference_forces['total'])
         if relative_force_deviation > RELATIVE_FORCE_DEVIATION_TOLERANCE:
             # Show breakdown by components
             print('Force components:')
