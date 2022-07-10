@@ -556,9 +556,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
 
-class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
-    TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
-
     @staticmethod
     def compute_energy(system, positions):
         """Compute potential energy and Force components for an OpenMM system.
@@ -601,6 +598,9 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         del context, integrator
         return openmm_energy, openmm_forces
 
+class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
+    TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
+
     @classmethod
     def compare_energies(cls, molecule, openmm_system, smirnoff_system):
         """Compare energies between Open Force Field Initiative and OpenMM ForceField objects
@@ -630,6 +630,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             with open(filename, 'w') as outfile:
                 print(f'Writing {filename}...')
                 outfile.write(openmm.XmlSerializer.serialize(system))
+                # DEBUG
+                print(openmm.XmlSerializer.serialize(system))
 
         # Compare energies
         ENERGY_DEVIATION_TOLERANCE = 1.0e-2 * unit.kilocalories_per_mole
@@ -653,6 +655,12 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             N = x.shape[0]
             return np.sqrt((1.0/N) * (x**2).sum())
         def relative_deviation(x, y):
+            FORCE_UNIT = unit.kilocalories_per_mole / unit.angstroms
+            if hasattr(x, 'value_in_unit'):
+                x = x / FORCE_UNIT
+            if hasattr(y, 'value_in_unit'):
+                y = y / FORCE_UNIT
+
             if norm(y) > 0:
                 return norm(x-y) / np.sqrt(norm(x)**2 + norm(y)**2)
             else:
@@ -787,48 +795,6 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
 class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
-
-    @staticmethod
-    def compute_energy(system, positions):
-        """Compute potential energy and Force components for an OpenMM system.
-
-        Parameters
-        ----------
-        system : openmm.System
-            The System object
-        positions : openmm.unit.Quantity of shape (nparticles,3) with units compatible with nanometers
-            The positions for which energy is to be computed
-
-        Returns
-        -------
-        openmm_energy : dict of str : openmm.unit.Quantity
-            openmm_energy['total'] is the total potential energy
-            openmm_energy['components'][forcename] is the potential energy for the specified component force
-        openmm_forces : dict of str : openmm.unit.Quantity
-            openmm_forces['total'] is the total force
-            openmm_forces['components'][forcename] is the force for the specified component force
-        """
-        import copy
-        system = copy.deepcopy(system)
-        for index, force in enumerate(system.getForces()):
-            force.setForceGroup(index)
-        import openmm
-        platform = openmm.Platform.getPlatformByName('Reference')
-        integrator = openmm.VerletIntegrator(0.001)
-        context = openmm.Context(system, integrator, platform)
-        context.setPositions(positions)
-        openmm_energy = {
-            'total' : context.getState(getEnergy=True).getPotentialEnergy(),
-            'components' : { system.getForce(index).__class__.__name__ : context.getState(getEnergy=True, groups=(1 << index)).getPotentialEnergy() for index in range(system.getNumForces()) },
-            }
-
-        openmm_forces = {
-            'total' : context.getState(getForces=True).getForces(asNumpy=True),
-            'components' : { system.getForce(index).__class__.__name__ : context.getState(getForces=True, groups=(1 << index)).getForces(asNumpy=True) for index in range(system.getNumForces()) },
-            }
-
-        del context, integrator
-        return openmm_energy, openmm_forces
 
     @classmethod
     def compare_energies(cls, molecule, openmm_system, espaloma_system):
