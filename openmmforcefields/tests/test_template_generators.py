@@ -41,9 +41,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Select some small molecules for fast testing
         MAX_ATOMS = 40
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
-        # Cut down number of tests for travis
+        # Cut down number of tests for continuous integration
         import os
-        MAX_MOLECULES = 10 if not CI else 3
+        MAX_MOLECULES = 50 if not CI else 10
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
@@ -55,6 +55,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         from openff.toolkit.topology import Molecule
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
+
+        # DEBUG: Insert acetone as first test molecule, since it fails quickly if something is wrong
+        molecule = Molecule.from_smiles('C=O')
+        molecule.generate_conformers(n_conformers=1)
+        self.molecules.insert(0, molecule)
+        # DEBUG END
+
         # Filter molecules as appropriate
         self.molecules = self.filter_molecules(molecules)
 
@@ -645,8 +652,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
                 smirnoff_component_energy = smirnoff_energy['components'][key]
                 print(f'{key:24} {(openmm_component_energy/unit.kilocalories_per_mole):20.3f} {(smirnoff_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol')
             print(f'{"TOTAL":24} {(openmm_energy["total"]/unit.kilocalories_per_mole):20.3f} {(smirnoff_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol')
-            write_xml('system-smirnoff.xml', smirnoff_system)
-            write_xml('openmm-smirnoff.xml', openmm_system)
+            write_xml('smirnoff_system.xml', smirnoff_system)
+            write_xml('openmm_system.xml', openmm_system)
             raise Exception(f'Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})')
 
         # Compare forces
@@ -725,11 +732,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
         from openff.toolkit.topology import Molecule
-        molecule = Molecule.from_smiles('C=O')
-        molecule.generate_conformers(n_conformers=1)
         from openmm import unit
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
-        self.molecules.insert(0, molecule)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')
@@ -924,11 +928,8 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
         from openff.toolkit.topology import Molecule
-        molecule = Molecule.from_smiles('C=O')
-        molecule.generate_conformers(n_conformers=1)
         from openmm import unit
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
-        self.molecules.insert(0, molecule)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')

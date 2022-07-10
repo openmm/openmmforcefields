@@ -922,6 +922,11 @@ class OpenMMSystemMixin(object):
             The OpenMM ffxml contents for the given molecule.
         """
 
+        # DEBUG
+        print(f'{molecule.title} System as XML:')
+        import openmm
+        print(openmm.XmlSerializer.serialize(system))
+
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
         root = etree.Element("ForceField")
@@ -1064,8 +1069,12 @@ class OpenMMSystemMixin(object):
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-        
-        _logger.debug(f'{ffxml_contents}') # DEBUG
+
+        # DEBUG:
+        print('ffxml contents:')
+        print(ffxml_contents)
+
+        #_logger.debug(f'{ffxml_contents}') # DEBUG
 
         return ffxml_contents
 
