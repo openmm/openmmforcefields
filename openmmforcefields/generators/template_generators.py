@@ -923,7 +923,7 @@ class OpenMMSystemMixin(object):
         """
 
         # DEBUG
-        print(f'{molecule.title} System as XML:')
+        print(f'{molecule.name} System as XML:')
         import openmm
         print(openmm.XmlSerializer.serialize(system))
 
