@@ -59,7 +59,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # DEBUG: Insert acetone as first test molecule, since it fails quickly if something is wrong
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
-        self.molecules.insert(0, molecule)
+        molecules.insert(0, molecule)
         # DEBUG END
 
         # Filter molecules as appropriate
