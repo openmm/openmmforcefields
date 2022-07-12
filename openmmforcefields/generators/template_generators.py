@@ -733,9 +733,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             if ('acdoctor' in subprocess.getoutput(cmd)):
                 supports_acdoctor = True
 
-            if (self._gaff_major_version == 1):
+            if (self._gaff_major_version == '1'):
                 atom_type = 'gaff'
-            elif (self._gaff_major_version == 2):
+            elif (self._gaff_major_version == '2'):
                 atom_type = 'gaff2'
             else:
                 raise ValueError(f'gaff major version {self._gaff_major_version} unknown')
