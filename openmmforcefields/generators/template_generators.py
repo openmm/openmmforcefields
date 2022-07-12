@@ -473,6 +473,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._gaff_version = f'{self._gaff_major_version}.{self._gaff_minor_version}'
 
         # Track parameters by GAFF version string
+        # TODO: Use file hash instead of name?
         import os
         self._database_table_name = os.path.basename(forcefield)
 
@@ -1191,6 +1192,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided SMIRNOFF name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
+        # TODO: Use file hash instead of name?
         import os
         self._database_table_name = os.path.basename(forcefield)
 
@@ -1481,6 +1483,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided force field name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
+        # TODO: Use file hash instead of name?
         import os
         self._database_table_name = os.path.basename(forcefield)
 
