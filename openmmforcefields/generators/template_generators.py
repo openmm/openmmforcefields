@@ -973,21 +973,6 @@ class OpenMMSystemMixin(object):
             """
             return { f'class{class_index+1}' : molecule.particles[particle_index].typename for class_index,particle_index in enumerate(particle_indices) }
 
-        # Round parameters using strings for ease of comparison
-        # DEBUG
-        #from openmm import unit
-        #def round_quantity(quantity):
-        #    NDECIMALS = 3
-        #    value = quantity.value_in_unit_system(unit.md_unit_system)
-        #    value = round(value, NDECIMALS)
-        #    return value
-        #for particle_index in range(forces['NonbondedForce'].getNumParticles()):
-        #    charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
-        #    forces['NonbondedForce'].setParticleParameters(particle_index, round_quantity(charge), round_quantity(sigma), round_quantity(epsilon))
-        #for exception_index in range(forces['NonbondedForce'].getNumExceptions()):
-        #    i, j, chargeProd, sigma, epsilon = forces['NonbondedForce'].getExceptionParameters(exception_index)
-        #    forces['NonbondedForce'].setExceptionParameters(exception_index, i, j, round_quantity(chargeProd), round_quantity(sigma), round_quantity(epsilon))
-
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
         # though this must match the original AMBER values
@@ -1037,6 +1022,7 @@ class OpenMMSystemMixin(object):
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
 
         # Create torsion definitions
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
@@ -1045,6 +1031,7 @@ class OpenMMSystemMixin(object):
                 params[f'periodicity{term+1}'] = as_attrib(periodicity)
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
+            torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
 
         # TODO: Handle virtual sites
         virtual_sites = [ particle_index for particle_index in range(system.getNumParticles()) if system.isVirtualSite(particle_index) ]
@@ -1064,8 +1051,8 @@ class OpenMMSystemMixin(object):
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-        
-        _logger.debug(f'{ffxml_contents}') # DEBUG
+
+        #_logger.debug(f'{ffxml_contents}') # DEBUG
 
         return ffxml_contents
 
