@@ -473,7 +473,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._gaff_version = f'{self._gaff_major_version}.{self._gaff_minor_version}'
 
         # Track parameters by GAFF version string
-        self._database_table_name = forcefield
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
         self._gaff_parameters_loaded = dict()
@@ -1190,7 +1191,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided SMIRNOFF name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
-        self._database_table_name = forcefield
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Create ForceField object
         import openff.toolkit.typing.engines.smirnoff
@@ -1479,7 +1481,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided force field name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
-        self._database_table_name = forcefield
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Load torch model
         import torch
