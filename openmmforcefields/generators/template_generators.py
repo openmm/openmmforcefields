@@ -733,8 +733,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             if ('acdoctor' in subprocess.getoutput(cmd)):
                 supports_acdoctor = True
 
+            if (self._gaff_major_version == '1'):
+                atom_type = 'gaff'
+            elif (self._gaff_major_version == '2'):
+                atom_type = 'gaff2'
+            else:
+                raise ValueError(f'gaff major version {self._gaff_major_version} unknown')
+
             # Run antechamber without charging (which is done separately)
-            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {self._gaff_major_version}'
+            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}'
             if supports_acdoctor:
                 cmd += ' -dr ' + ('yes' if verbosity else 'no')
 
