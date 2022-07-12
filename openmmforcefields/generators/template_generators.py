@@ -1458,6 +1458,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Espaloma model cache path
         if model_cache_path is None:
+            import os
             self.ESPALOMA_MODEL_CACHE_PATH = f'{os.getenv("HOME")}/.espaloma'
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
