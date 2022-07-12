@@ -47,4 +47,5 @@ dependencies:
   - qcportal >=0.15.0
 
   - pip:
-      - git+https://github.com/choderalab/espaloma.git@0.2.2
+      # TODO: Switch back to stable espaloma release or conda package when able
+      - git+https://github.com/choderalab/espaloma.git@master
