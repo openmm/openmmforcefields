@@ -766,7 +766,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             _logger.debug(output)
 
             # Run parmchk.
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p {self.gaff_dat_filename} -o out.frcmod -s %{self._gaff_major_version}"
+            cmd = f"parmchk2 -i out.mol2 -f mol2 -p {self.gaff_dat_filename} -o out.frcmod -s {self._gaff_major_version}"
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
             if not os.path.exists('out.frcmod'):
