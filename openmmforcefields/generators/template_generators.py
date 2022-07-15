@@ -762,6 +762,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 msg += read_file_contents(local_input_filename)
                 msg += 8 * "----------" + '\n'
                 # TODO: Run antechamber again with acdoctor mode on (-dr yes) to get more debug info, if supported
+                os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
 
@@ -780,6 +781,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 msg += 8 * "----------" + '\n'
                 msg += read_file_contents('out.mol2')
                 msg += 8 * "----------" + '\n'
+                os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
             self._check_for_errors(output)
