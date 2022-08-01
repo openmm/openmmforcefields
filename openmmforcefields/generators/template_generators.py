@@ -473,7 +473,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._gaff_version = f'{self._gaff_major_version}.{self._gaff_minor_version}'
 
         # Track parameters by GAFF version string
-        self._database_table_name = forcefield
+        # TODO: Use file hash instead of name?
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
         self._gaff_parameters_loaded = dict()
@@ -733,8 +735,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             if ('acdoctor' in subprocess.getoutput(cmd)):
                 supports_acdoctor = True
 
+            if (self._gaff_major_version == '1'):
+                atom_type = 'gaff'
+            elif (self._gaff_major_version == '2'):
+                atom_type = 'gaff2'
+            else:
+                raise ValueError(f'gaff major version {self._gaff_major_version} unknown')
+
             # Run antechamber without charging (which is done separately)
-            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {self._gaff_major_version}'
+            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}'
             if supports_acdoctor:
                 cmd += ' -dr ' + ('yes' if verbosity else 'no')
 
@@ -973,21 +982,6 @@ class OpenMMSystemMixin(object):
             """
             return { f'class{class_index+1}' : molecule.particles[particle_index].typename for class_index,particle_index in enumerate(particle_indices) }
 
-        # Round parameters using strings for ease of comparison
-        # DEBUG
-        #from openmm import unit
-        #def round_quantity(quantity):
-        #    NDECIMALS = 3
-        #    value = quantity.value_in_unit_system(unit.md_unit_system)
-        #    value = round(value, NDECIMALS)
-        #    return value
-        #for particle_index in range(forces['NonbondedForce'].getNumParticles()):
-        #    charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(particle_index)
-        #    forces['NonbondedForce'].setParticleParameters(particle_index, round_quantity(charge), round_quantity(sigma), round_quantity(epsilon))
-        #for exception_index in range(forces['NonbondedForce'].getNumExceptions()):
-        #    i, j, chargeProd, sigma, epsilon = forces['NonbondedForce'].getExceptionParameters(exception_index)
-        #    forces['NonbondedForce'].setExceptionParameters(exception_index, i, j, round_quantity(chargeProd), round_quantity(sigma), round_quantity(epsilon))
-
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
         # though this must match the original AMBER values
@@ -1035,10 +1029,9 @@ class OpenMMSystemMixin(object):
                 torsions[particle_indices].append( (periodicity, phase, k) )
             else:
                 torsions[particle_indices] = [ (periodicity, phase, k) ]
-        print(torsions.keys()) # DEBUG
 
         # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
         for particle_indices in torsions.keys():
             params = dict() # build parameter dictionary
             nterms = len(torsions[particle_indices])
@@ -1048,7 +1041,6 @@ class OpenMMSystemMixin(object):
                 params[f'phase{term+1}'] = as_attrib(phase)
                 params[f'k{term+1}'] = as_attrib(k)
             torsion_type = etree.SubElement(torsion_types, torsion_tag(particle_indices), **classes(particle_indices), **params)
-            print(torsion_type) # DEBUG
 
         # TODO: Handle virtual sites
         virtual_sites = [ particle_index for particle_index in range(system.getNumParticles()) if system.isVirtualSite(particle_index) ]
@@ -1069,8 +1061,7 @@ class OpenMMSystemMixin(object):
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
 
-        _logger.warning(f'{ffxml_contents}') # DEBUG
-
+        #_logger.debug(f'{ffxml_contents}') # DEBUG
 
         return ffxml_contents
 
@@ -1208,7 +1199,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided SMIRNOFF name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
-        self._database_table_name = forcefield
+        # TODO: Use file hash instead of name?
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Create ForceField object
         import openff.toolkit.typing.engines.smirnoff
@@ -1472,6 +1465,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Espaloma model cache path
         if model_cache_path is None:
+            import os
             self.ESPALOMA_MODEL_CACHE_PATH = f'{os.getenv("HOME")}/.espaloma'
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
@@ -1497,7 +1491,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Track parameters by provided force field name
         # TODO: Can we instead use the force field hash, or some other unique identifier?
-        self._database_table_name = forcefield
+        # TODO: Use file hash instead of name?
+        import os
+        self._database_table_name = os.path.basename(forcefield)
 
         # Load torch model
         import torch

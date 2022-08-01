@@ -10,6 +10,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
 jobs:
   test:
 
@@ -33,9 +37,9 @@ jobs:
       with:
         python-version: ${{ matrix.cfg.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
-
-        channels: conda-forge,openeye,defaults
-
+        mamba-version: "*"
+        channel-priority: true
+        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,openeye,defaults
         activate-environment: test
         auto-update-conda: true
         auto-activate-base: false
@@ -92,6 +96,8 @@ jobs:
       working-directory: ./charmm
 
     - name: CodeCov
+      if: ${{ github.repository == 'openmm/openmmforcefields'
+              && github.event != 'schedule' }}
       uses: codecov/codecov-action@v2.1.0
       with:
         file: ./coverage.xml
