@@ -30,8 +30,6 @@ dependencies:
     # OpenFF toolkit and force fields
   - openff-toolkit >=0.10.3|<=0.10.0
   - openff-forcefields >=1.2.0
-  - pip:
-    - git+https://github.com/openforcefield/openff-toolkit.git@topology-biopolymer-refactor
 
     # Validating URLs
   - validators
@@ -43,7 +41,4 @@ dependencies:
   - pytorch >=1.8.0
   - dgl
   - qcportal >=0.15.0
-
-  - pip:
-      # TODO: Switch back to stable espaloma release or conda package when able
-      - git+https://github.com/choderalab/espaloma.git@master
+  - espaloma
