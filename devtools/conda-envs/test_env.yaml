@@ -2,7 +2,6 @@ name: test
 
 channels:
   - conda-forge
-  - openeye
   - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
   - defaults
 
@@ -28,12 +27,11 @@ dependencies:
     # JSON caching of residue templates
   - tinydb
 
-    # openff toolkit and force fields
-  - openff-toolkit >=0.7.1
+    # OpenFF toolkit and force fields
+  - openff-toolkit >=0.10.3|<=0.10.0
   - openff-forcefields >=1.2.0
-
-    # OpenEye toolkits are only used to speed up testing; they are not required for use
-  - openeye-toolkits
+  - pip:
+    - git+https://github.com/openforcefield/openff-toolkit.git@topology-biopolymer-refactor
 
     # Validating URLs
   - validators
