@@ -67,6 +67,7 @@ jobs:
         pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
       shell: bash -l {0}
