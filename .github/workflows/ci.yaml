@@ -44,8 +44,7 @@ jobs:
     - name: "Install latest openff-toolkit"
       if: ${{ matrix.latest-openff-toolkit }}
       run: |
-        mamba update -y -c conda-forge/label/openff-toolkit_rc openff-toolkit
-
+        mamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc "openff-toolkit >=0.11.0rc1"
 
     - name: Install Package
       shell: bash -l {0}
