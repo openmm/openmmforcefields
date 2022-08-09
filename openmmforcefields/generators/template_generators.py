@@ -218,9 +218,9 @@ class SmallMoleculeTemplateGenerator(object):
 
         """
         import numpy as np
-        from openmm import unit
+        from openff.units import unit
         zeros = np.zeros([molecule.n_particles])
-        if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges / unit.elementary_charge, zeros)):
+        if (molecule.partial_charges is None) or (np.allclose(molecule.partial_charges.m_as(unit.elementary_charge, zeros)):
             charges_are_zero = True
         else:
             charges_are_zero = False
@@ -567,6 +567,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
 
         """
+        from openff.units import unit
+        import numpy as np
+
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
@@ -576,9 +579,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Compute net formal charge
         net_charge = molecule.total_charge
-        from openmm import unit
+
         if type(net_charge) != unit.Quantity:
             # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
+            # how long should openmmforcefields support < 0.7.0?
             net_charge = float(net_charge) * unit.elementary_charge
         _logger.debug(f'Total charge is {net_charge}')
 
@@ -590,7 +594,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             # NOTE: generate_conformers seems to be required for some molecules
             # https://github.com/openforcefield/openff-toolkit/issues/492
             molecule.generate_conformers(n_conformers=10)
-            molecule.compute_partial_charges_am1bcc()
+            molecule.assign_partial_charges(partial_charge_method='am1bcc')
 
         # Geneate a single conformation
         _logger.debug(f'Generating a conformer...')
@@ -627,12 +631,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         #       or pure numbers.
         _logger.debug(f'Fixing partial charges...')
         _logger.debug(f'{molecule.partial_charges}')
-        from openmm import unit
         residue_charge = 0.0 * unit.elementary_charge
-        total_charge = unit.sum(molecule.partial_charges)
-        sum_of_absolute_charge = unit.sum(abs(molecule.partial_charges))
+        total_charge = molecule.partial_charges.sum()
+        sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
         charge_deficit = net_charge - total_charge
-        if sum_of_absolute_charge / unit.elementary_charge > 0.0:
+        if (sum_of_absolute_charge / unit.elementary_charge).m > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
         _logger.debug(f'{molecule.partial_charges}')
@@ -664,7 +667,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
-            atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.gaff_type, charge=str(atom.partial_charge / unit.elementary_charge))
+            atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.gaff_type, charge=str(atom.partial_charge.m_as(unit.elementary_charge)))
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
                 bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
@@ -1059,7 +1062,6 @@ class OpenMMSystemMixin(object):
 
         # Create residue definitions
         # TODO: Handle non-Atom particles too (virtual sites)
-        from openmm import unit
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for particle_index, particle in enumerate(molecule.particles):
