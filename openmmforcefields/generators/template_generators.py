@@ -937,6 +937,8 @@ class OpenMMSystemMixin(object):
         ffxml_contents : str
             The OpenMM ffxml contents for the given molecule.
         """
+        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
+        uses_old_api = hasattr(molecule.atoms[0], "element")
 
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
@@ -962,8 +964,9 @@ class OpenMMSystemMixin(object):
         for particle_index, particle in enumerate(molecule.particles):
             # Create a new atom type for each atom in the molecule
             paricle_indices = [particle_index]
+            element_symbol = particle.element.symbol if uses_old_api else particle.symbol
             atom_type = etree.SubElement(atom_types, "Type", name=particle.typename,
-                element=particle.element.symbol, mass=as_attrib(particle.element.mass))
+                element=element_symbol, mass=as_attrib(particle.element.mass))
             atom_type.set('class', particle.typename) # 'class' is a reserved Python keyword, so use alternative API
 
         # Compile forces into a dict
