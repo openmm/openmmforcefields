@@ -49,17 +49,19 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         return molecules
 
     def setUp(self):
+        from openff.units import unit
+        from openff.toolkit.topology import Molecule
+
         # TODO: Harmonize with test_system_generator.py infrastructure
 
         # Read test molecules
-        from openff.toolkit.topology import Molecule
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
 
         # DEBUG: Insert acetone perturbed from planarity as first test molecule, since it fails quickly if something is wrong
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
-        from simtk import unit
+
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
         molecules.insert(0, molecule)
         # DEBUG END
@@ -189,8 +191,10 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         system_charges = self.charges_from_system(system)
 
-        from openmm import unit
-        molecule_charges = molecule.partial_charges / unit.elementary_charge
+        from openmm import unit as openmm_unit
+        from openff.units import unit
+
+        molecule_charges = molecule.partial_charges.m_as(unit.elementary_charge)
 
         import numpy as np
         result = np.allclose(system_charges, molecule_charges)

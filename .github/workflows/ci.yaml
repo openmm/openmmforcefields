@@ -62,9 +62,9 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
