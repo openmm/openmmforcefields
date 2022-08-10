@@ -35,18 +35,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Conda Environment
-      uses: conda-incubator/setup-miniconda@v2
+    - name: Create conda Environment
+      uses: mamba-org/provision-with-micromamba@main
       with:
-        python-version: ${{ matrix.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
-        mamba-version: "*"
-        channel-priority: true
-        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,defaults
-        activate-environment: test
-        auto-update-conda: true
-        auto-activate-base: false
-        show-channel-urls: true
+        extra-specs: |
+          python=${{ matrix.python-version }}
+          mamba
 
     - name: "Install latest openff-toolkit"
       if: ${{ matrix.latest-openff-toolkit }}
