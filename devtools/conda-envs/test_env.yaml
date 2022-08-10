@@ -1,4 +1,4 @@
-name: test
+name: openmmforcefields-test
 
 channels:
   - conda-forge

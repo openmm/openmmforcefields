@@ -46,7 +46,7 @@ jobs:
     - name: "Install latest openff-toolkit"
       if: ${{ matrix.latest-openff-toolkit }}
       run: |
-        mamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc "openff-toolkit >=0.11.0rc1"
+        mamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc -c conda-forge "openff-toolkit >=0.11.0rc1"
 
     - name: Install Package
       run: |
@@ -57,6 +57,7 @@ jobs:
       run: |
         conda info
         conda list
+        python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
       run: |
