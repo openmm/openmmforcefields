@@ -5,9 +5,9 @@ import yaml
 from collections import OrderedDict
 import hashlib
 import os
-import simtk.openmm.app as app
-import simtk.openmm as mm
-import simtk.unit as u
+import openmm.app as app
+import openmm as mm
+import openmm.unit as u
 import argparse
 import csv
 import logging
@@ -113,7 +113,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 del params.residues[resname]
 
         if verbose: print('Converting parameters to OpenMM...')
-        params_omm = openmm.OpenMMParameterSet.from_parameterset(params)
+        params_omm = openmm.OpenMMParameterSet.from_parameterset(params, unique_atom_types=True)
 
         # Set override level
         if 'Override' in entry:

@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+  schedule:
+    - cron: "0 0 * * *"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        python-version: [3.7, 3.8, 3.9]
+        latest-openff-toolkit: ["true", "false"]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Conda Environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        environment-file: devtools/conda-envs/test_env.yaml
+        mamba-version: "*"
+        channel-priority: true
+        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,defaults
+        activate-environment: test
+        auto-update-conda: true
+        auto-activate-base: false
+        show-channel-urls: true
+
+    - name: "Install latest openff-toolkit"
+      if: ${{ matrix.latest-openff-toolkit }}
+      run: |
+        mamba update -y -c conda-forge/label/openff-toolkit_rc openff-toolkit
+
+
+    - name: Install Package
+      shell: bash -l {0}
+      run: |
+        # Can't use 'develop' mode because we remove symlinks after install is complete
+        python setup.py install
+
+    - name: Conda Environment Information
+      shell: bash -l {0}
+      run: |
+        conda info
+        conda list
+
+    - name: Test Installed Package
+      shell: bash -l {0}
+      run: |
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
+        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+      env:
+        LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
+
+    - name: Test AMBER conversion
+      shell: bash -l {0}
+      run: |
+        python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
+      working-directory: ./amber
+
+    - name: Test CHARMM conversion
+      shell: bash -l {0}
+      run: |
+
+        # TODO: Uncomment these tests when new ParmEd is released
+        # TODO: Find a way to avoid timing out when running full charmm36.yaml conversion below
+        # python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+        # python convert_charmm.py --verbose --in files/waters.yaml
+        # python convert_charmm.py --verbose
+
+        # TODO: Uncomment this when tests are expected to work
+        # python test_charmm.py --verbose
+
+      working-directory: ./charmm
+
+    - name: CodeCov
+      if: ${{ github.repository == 'openmm/openmmforcefields'
+              && github.event != 'schedule' }}
+      uses: codecov/codecov-action@v2.1.0
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}

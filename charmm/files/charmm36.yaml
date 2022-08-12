@@ -5,42 +5,43 @@
 # values. In addition, toppar_hbond.str and toppar_all36_lipid_list.str are not standard stream files.
 
 - sourcePackage: charmm36
-  sourcePackageVersion: toppar_c36_aug15.tgz
+  sourcePackageVersion: toppar_c36_jul20.tgz
 - Destination: charmm36_nowaters.xml
   Source:
     include:
      # Proteins should be listed first so patches can be tested on amino acids first
-     - toppar/top_all36_prot.rtf
-     - toppar/par_all36_prot.prm
-     - toppar/top_all36_na.rtf
-     - toppar/par_all36_na.prm
-     - toppar/top_all36_cgenff.rtf
-     - toppar/par_all36_cgenff.prm
-     - toppar/top_all36_carb.rtf
-     - toppar/par_all36_carb.prm
-     - toppar/top_all36_lipid.rtf
-     - toppar/par_all36_lipid.prm
+     - toppar_c36_jul20/top_all36_prot.rtf
+     - toppar_c36_jul20/par_all36_prot.prm
+     - toppar_c36_jul20/top_all36_na.rtf
+     - toppar_c36_jul20/par_all36_na.prm
+     - toppar_c36_jul20/top_all36_cgenff.rtf
+     - toppar_c36_jul20/par_all36_cgenff.prm
+     - toppar_c36_jul20/top_all36_carb.rtf
+     - toppar_c36_jul20/par_all36_carb.prm
+     - toppar_c36_jul20/top_all36_lipid.rtf
+     - toppar_c36_jul20/par_all36_lipid.prm
     stream:
-     - toppar/stream/carb/*.str
-     - toppar/stream/lipid/*.str
-     - toppar/stream/prot/*.str
-     - toppar/stream/na/*.str
-     - toppar/stream/misc/*.str
+     - toppar_c36_jul20/stream/carb/*.str
+     - toppar_c36_jul20/stream/lipid/*.str
+     - toppar_c36_jul20/stream/prot/*.str
+     - toppar_c36_jul20/stream/na/*.str
+     - toppar_c36_jul20/stream/misc/*.str
     exclude:
-     - toppar/stream/lipid/toppar_all36_lipid_list.str
-     - toppar/stream/lipid/toppar_all36_lipid_glycolipid.str
-     - toppar/stream/prot/toppar_all36_prot_aldehydes.str
-     - toppar/stream/na/toppar_all36_na_modifications.str
-     - toppar/stream/misc/toppar_hbond.str
-     - toppar/stream/prot/toppar_all36_prot_d_aminoacids.str
+     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_list.str
+     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_glycolipid.str
+     - toppar_c36_jul20/stream/prot/toppar_all36_prot_aldehydes.str
+     - toppar_c36_jul20/stream/na/toppar_all36_na_modifications.str
+     - toppar_c36_jul20/stream/misc/toppar_hbond.str
+     - toppar_c36_jul20/stream/prot/toppar_all36_prot_d_aminoacids.str
+     - toppar_c36_jul20/stream/na/toppar_all36_na_reactive_rna.str
      # Exclude default waters and ions, since we split these out:
-     - toppar/toppar_water_ions.str
-     - toppar/stream/misc/toppar_ions_won.str
+     - toppar_c36_jul20/toppar_water_ions.str
+     - toppar_c36_jul20/stream/misc/toppar_ions_won.str
      # Exclude model compounds
-     - toppar/stream/prot/toppar_all36_prot_model.str
-     - toppar/stream/na/toppar_all36_na_model.str
-     - toppar/stream/lipid/toppar_all36_lipid_model.str
-     - toppar/stream/carb/toppar_all36_carb_model.str
+     - toppar_c36_jul20/stream/prot/toppar_all36_prot_model.str
+     - toppar_c36_jul20/stream/na/toppar_all36_na_model.str
+     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_model.str
+     - toppar_c36_jul20/stream/carb/toppar_all36_carb_model.str
   References:
    protein:
      - >-
@@ -189,7 +190,7 @@
   Source:
     include:
     stream:
-     - toppar/stream/prot/toppar_all36_prot_model.str
+     - toppar_c36_jul20/stream/prot/toppar_all36_prot_model.str
   TestInclude:
      - ffxml/charmm36.xml
   References:
@@ -207,7 +208,7 @@
   Source:
     include:
     stream:
-      - toppar/stream/na/toppar_all36_na_model.str
+      - toppar_c36_jul20/stream/na/toppar_all36_na_model.str
   TestInclude:
      - ffxml/charmm36.xml
   References:
@@ -223,7 +224,7 @@
   Source:
     include:
     stream:
-      - toppar/stream/lipid/toppar_all36_lipid_model.str
+      - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_model.str
   TestInclude:
      - ffxml/charmm36.xml
   References:
@@ -267,7 +268,7 @@
   Source:
     include:
     stream:
-      - toppar/stream/carb/toppar_all36_carb_model.str
+      - toppar_c36_jul20/stream/carb/toppar_all36_carb_model.str
   TestInclude:
      - ffxml/charmm36.xml
   References:

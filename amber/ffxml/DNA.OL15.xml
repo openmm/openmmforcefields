@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2019-11-29</DateGenerated>
-    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="19.9">leaprc.DNA.OL15</Source>
+    <DateGenerated>2021-01-26</DateGenerated>
+    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.DNA.OL15</Source>
     <Reference>Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P. Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA. J. Chem. Theor. and Comp., 2015, 12, 5723-5736.</Reference>
   </Info>
   <AtomTypes>
@@ -1555,6 +1555,14 @@
     <Improper type1="DNA-CM" type2="DNA-CM" type3="DNA-CT" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="DNA-C" type2="DNA-CM" type3="DNA-H4" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="DNA-C" type2="DNA-CA" type3="DNA-CA" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper type1="DNA-CB" type2="DNA-CB" type3="DNA-N*" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CB" type2="DNA-C" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CB" type2="DNA-CA" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper type1="DNA-C2" type2="" type3="" type4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper type1="DNA-N*" type2="DNA-C2" type3="DNA-CB" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper type1="DNA-C1" type2="" type3="" type4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
