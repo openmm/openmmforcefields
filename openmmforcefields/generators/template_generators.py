@@ -236,9 +236,13 @@ class SmallMoleculeTemplateGenerator(object):
             The molecule whose atom names are to be modified in-place
         """
         from collections import defaultdict
+
+        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
+        uses_old_api = hasattr(molecule.atoms[0], "element")
+
         element_counts = defaultdict(int)
         for atom in molecule.atoms:
-            symbol = atom.element.symbol
+            symbol = atom.element.symbol if uses_old_api else atom.symbol
             element_counts[symbol] += 1
             atom.name = symbol + str(element_counts[symbol])
 
@@ -762,11 +766,13 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 msg += read_file_contents(local_input_filename)
                 msg += 8 * "----------" + '\n'
                 # TODO: Run antechamber again with acdoctor mode on (-dr yes) to get more debug info, if supported
+                os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
 
             # Run parmchk.
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p {self.gaff_dat_filename} -o out.frcmod -s %{self._gaff_major_version}"
+            shutil.copy(self.gaff_dat_filename, 'gaff.dat')
+            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version}"
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
             if not os.path.exists('out.frcmod'):
@@ -780,6 +786,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 msg += 8 * "----------" + '\n'
                 msg += read_file_contents('out.mol2')
                 msg += 8 * "----------" + '\n'
+                os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
             self._check_for_errors(output)
