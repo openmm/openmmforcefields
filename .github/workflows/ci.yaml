@@ -16,18 +16,14 @@ concurrency:
 
 jobs:
   test:
-
-    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
     runs-on: ${{ matrix.os }}
-
-    env:
-      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
-
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-latest]
         python-version: [3.7, 3.8, 3.9]
+        latest-openff-toolkit: ["true", "false"]
 
     steps:
     - uses: actions/checkout@v2
@@ -35,23 +31,21 @@ jobs:
     - name: Setup Conda Environment
       uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: ${{ matrix.cfg.python-version }}
+        python-version: ${{ matrix.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
         mamba-version: "*"
         channel-priority: true
-        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,openeye,defaults
+        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,defaults
         activate-environment: test
         auto-update-conda: true
         auto-activate-base: false
         show-channel-urls: true
 
-    - name: License OpenEye
-      shell: bash -l {0}
+    - name: "Install latest openff-toolkit"
+      if: ${{ matrix.latest-openff-toolkit }}
       run: |
-        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
-        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
-      env:
-        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
+        mamba update -y -c conda-forge/label/openff-toolkit_rc openff-toolkit
+
 
     - name: Install Package
       shell: bash -l {0}
@@ -73,6 +67,7 @@ jobs:
         pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
       shell: bash -l {0}
