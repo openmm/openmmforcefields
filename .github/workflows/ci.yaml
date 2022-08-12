@@ -51,6 +51,8 @@ jobs:
     - name: Install Package
       run: |
         # Can't use 'develop' mode because we remove symlinks after install is complete
+        pip list
+        conda list
         python setup.py install
 
     - name: Conda Environment Information
