@@ -53,6 +53,7 @@ jobs:
         # Can't use 'develop' mode because we remove symlinks after install is complete
         pip list
         conda list
+        conda remove --force openmmforcefields
         python setup.py install
 
     - name: Conda Environment Information
