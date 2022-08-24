@@ -41,16 +41,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         environment-file: devtools/conda-envs/test_env.yaml
-        extra-specs: |
-          python=${{ matrix.python-version }}
-          mamba
-        mamba-version: "*"
+        envrionment-name: test
+        extra-specs: python=${{ matrix.python-version }}
         channel-priority: true
         channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,openeye
-        activate-environment: test
-        auto-update-conda: true
-        auto-activate-base: false
-        show-channel-urls: true
 
     - name: License OpenEye
       shell: bash -l {0}
@@ -63,21 +57,21 @@ jobs:
     - name: "Install latest openff-toolkit"
       if: ${{ matrix.latest-openff-toolkit }}
       run: |
-        mamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc -c conda-forge "openff-toolkit >=0.11.0rc1"
+        micromamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc -c conda-forge "openff-toolkit >=0.11.0rc1"
 
 
     - name: Install Package
       run: |
         # Can't use 'develop' mode because we remove symlinks after install is complete
         pip list
-        conda list
-        conda remove --force openmmforcefields
+        micromamba list
+        micromamba remove --force openmmforcefields
         python setup.py install
 
     - name: Conda Environment Information
       run: |
-        conda info
-        conda list
+        micromamba info
+        micromamba list
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
