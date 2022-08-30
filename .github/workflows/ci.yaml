@@ -59,8 +59,7 @@ jobs:
     - name: Install Package
       shell: bash -l {0}
       run: |
-        # Can't use 'develop' mode because we remove symlinks after install is complete
-        python setup.py install
+        python -m pip install -e .
 
     - name: Conda Environment Information
       shell: bash -l {0}
