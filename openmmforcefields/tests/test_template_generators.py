@@ -59,7 +59,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # DEBUG: Insert acetone perturbed from planarity as first test molecule, since it fails quickly if something is wrong
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
-        from simtk import unit
+        from openff.toolkit.topology.molecule import unit
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
         molecules.insert(0, molecule)
         # DEBUG END
