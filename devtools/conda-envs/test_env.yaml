@@ -4,6 +4,7 @@ channels:
   - conda-forge
   - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
   - defaults
+  - openeye
 
 dependencies:
     # Base depends
@@ -26,9 +27,11 @@ dependencies:
 
     # JSON caching of residue templates
   - tinydb
+    # OpenEye toolkits are only used to speed up testing; they are not required for use
+  - openeye-toolkits
 
     # OpenFF toolkit and force fields
-  - openff-toolkit >=0.10.3|<=0.10.0
+  - openff-toolkit =0.10.6
   - openff-forcefields >=1.2.0
 
     # Validating URLs
