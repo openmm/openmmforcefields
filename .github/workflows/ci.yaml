@@ -40,9 +40,9 @@ jobs:
         environment-file: devtools/conda-envs/test_env.yaml
         extra-specs: |
           python=${{ matrix.python-version }}
-          mamba
 
     - name: License OpenEye
+      shell: bash -l {0}
       run: |
         echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
         python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
@@ -53,7 +53,7 @@ jobs:
       if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
         # Until #225 is complete, we should not assume compatibility with new API
-        mamba install "openff-toolkit =0.10.6" -c conda-forge -y
+        micromamba install "openff-toolkit =0.10.6" -c conda-forge -y
 
     - name: Install Package
       run: |
