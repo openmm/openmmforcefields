@@ -62,6 +62,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
 
+        from openff.toolkit.topology.molecule import unit
+
         molecule.conformers[0][0,0] += 0.1*unit.angstroms
         molecules.insert(0, molecule)
         # DEBUG END

@@ -10,6 +10,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+defaults:
+  run:
+    shell: bash -l {0}
+
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: true
@@ -22,6 +26,8 @@ jobs:
   test:
     name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
     runs-on: ${{ matrix.os }}
+    env:
+      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
     strategy:
       fail-fast: false
       matrix:
@@ -35,18 +41,25 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Create conda Environment
+    - name: Setup Conda Environment
       uses: mamba-org/provision-with-micromamba@main
       with:
         environment-file: devtools/conda-envs/test_env.yaml
         extra-specs: |
           python=${{ matrix.python-version }}
-          mamba
+
+    - name: License OpenEye
+      shell: bash -l {0}
+      run: |
+        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
+        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
+      env:
+        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
 
     - name: "Install latest openff-toolkit"
-      if: ${{ matrix.latest-openff-toolkit }}
+      if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
-        mamba update -y -c conda-forge/label/openff-toolkit_rc -c conda-forge/label/openff-interchange_rc -c conda-forge "openff-toolkit >=0.11.0rc1"
+        micromamba update -y -c conda-forge "openff-toolkit >=0.11.0"
 
     - name: Install Package
       run: |

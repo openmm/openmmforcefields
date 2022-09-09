@@ -1261,7 +1261,14 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             root, ext = os.path.splitext(filename)
             # Only add variants without '_unconstrained'
             if '_unconstrained' not in root:
-                file_names.append(root)
+                continue
+            # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
+            # impropers and one with Amber-style impropers. The latter requires a special handler
+            # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
+            # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
+            if root.startswith("ff14sb") and 'off_impropers' not in root:
+                continue
+            file_names.append(root)
 
         return file_names
 

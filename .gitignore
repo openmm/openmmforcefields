@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
@@ -22,6 +23,7 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -45,6 +47,11 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+*.cover
+.hypothesis/
+.pytest_cache
+
+.mypy_cache/
 
 # Translations
 *.mo
@@ -56,6 +63,17 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 docs/api/generated
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
 
 # PyBuilder
 target/
@@ -63,5 +81,45 @@ target/
 # PyCharm
 *.idea/vcs.xml
 
-# Ipython notebook checkpoints
-*.ipynb_checkpoints/
+# Jupyter
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# profraw files from LLVM? Unclear exactly what triggers this
+# There are reports this comes from LLVM profiling, but also Xcode 9.
+*profraw
+
+# In-tree generated files
+*/_version.py
+
+# macOS
+*.DS_Store
