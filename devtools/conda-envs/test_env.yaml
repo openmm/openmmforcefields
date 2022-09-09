@@ -30,10 +30,6 @@ dependencies:
     # OpenEye toolkits are only used to speed up testing; they are not required for use
   - openeye-toolkits
 
-    # OpenFF toolkit and force fields
-  - openff-toolkit >=0.10.6,<=0.11.0  # Versions 0.10.1 and 0.10.2 are bugged, but 0.11.0 breaks API
-  - openff-forcefields >=1.2.0
-
     # Validating URLs
   - validators
 
