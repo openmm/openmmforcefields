@@ -60,7 +60,7 @@ jobs:
         pip list
         micromamba list
         micromamba remove --force openmmforcefields
-        python setup.py install
+        python -m pip install .
 
     - name: Conda Environment Information
       run: |
