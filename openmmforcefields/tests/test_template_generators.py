@@ -755,6 +755,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            if "ff14sb" in small_molecule_forcefield:
+                continue
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
