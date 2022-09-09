@@ -220,14 +220,17 @@ class SmallMoleculeTemplateGenerator(object):
         """
         import numpy as np
         from openff.units import unit
-        zeros = np.zeros([molecule.n_atoms])
-        if (molecule.partial_charges is None) or(
-            np.allclose(molecule.partial_charges.m_as(unit.elementary_charge, zeros))
+
+        if molecule.partial_charges is None:
+            return False
+
+        if np.allclose(
+            molecule.partial_charges.m_as(unit.elementary_charge),
+            np.zeros([molecule.n_atoms]),
         ):
-            charges_are_zero = True
-        else:
-            charges_are_zero = False
-        return not charges_are_zero
+            return False
+
+        return True
 
     def _generate_unique_atom_names(self, molecule):
         """
@@ -640,7 +643,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         charge_deficit = net_charge - total_charge
         if (sum_of_absolute_charge / unit.elementary_charge).m > 0.0:
             # Redistribute excess charge proportionally to absolute charge
-            molecule.partial_charges += charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
+            molecule.partial_charges = molecule.partial_charges + charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
         _logger.debug(f'{molecule.partial_charges}')
 
         # Generate additional parameters if needed
@@ -1367,6 +1370,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Determine which molecules (if any) contain user-specified partial charges that should be used
         charge_from_molecules = list()
+
         if self._molecule_has_user_charges(molecule):
             charge_from_molecules = [molecule]
             _logger.debug(f'Using user-provided charges because partial charges are nonzero...')

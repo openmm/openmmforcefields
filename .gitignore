@@ -116,3 +116,9 @@ ENV/
 
 # macOS
 *.DS_Store
+
+# Caches
+openmmforcefields/data/perses_jacs_systems/*/cache.json
+
+# Test molecules
+testsystem-bace*

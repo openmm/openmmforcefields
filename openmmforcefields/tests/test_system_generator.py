@@ -1,11 +1,16 @@
+import copy
 import os
 import tempfile
 import unittest
 
+import numpy as np
+import openmm
 import pytest
+from openff.toolkit.topology import Molecule
+from openmm.app import LJPME, PME, CutoffNonPeriodic, Modeller, PDBFile
 
 from openmmforcefields.generators import SystemGenerator
-from openmmforcefields.utils import get_data_filename
+from openmmforcefields.utils import Timer, get_data_filename
 
 CI = ('CI' in os.environ)
 
@@ -57,12 +62,10 @@ class TestSystemGenerator(unittest.TestCase):
             #('tyk2', 'Tyk2'),
         ]:
             # Load protein
-            from openmm.app import PDBFile
             pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
             pdbfile = PDBFile(pdb_filename)
 
             # Load molecules
-            from openff.toolkit.topology import Molecule
             sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands_shifted.sdf'))
 
             molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
@@ -101,13 +104,12 @@ class TestSystemGenerator(unittest.TestCase):
 
             # DEBUG
             for name, testsystem in self.testsystems.items():
-                from openmm import app
                 filename = f'testsystem-{name}.pdb'
                 print(filename)
                 structure = testsystem['complex_structures'][0]
                 #structure.save(filename, overwrite=True)
                 with open(filename, 'w') as outfile:
-                    app.PDBFile.writeFile(structure.topology, structure.positions, outfile)
+                    PDBFile.writeFile(structure.topology, structure.positions, outfile)
                 testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.sdf', file_format="SDF")
                 testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.pdb', file_format="PDB")
 
@@ -140,22 +142,18 @@ class TestSystemGenerator(unittest.TestCase):
         generator.barostat = MonteCarloBarostat(pressure, temperature, frequency)
 
         # Load a PDB file
-        import os
 
-        from openmm.app import PDBFile
         pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', 'mcl1', 'MCL1_protein.pdb'))
         pdbfile = PDBFile(pdb_filename)
 
         # Delete hydrogens from terminal protein residues
         # TODO: Fix the input files so we don't need to do this
-        from openmm import app
-        modeller = app.Modeller(pdbfile.topology, pdbfile.positions)
+        modeller = Modeller(pdbfile.topology, pdbfile.positions)
         residues = [residue for residue in modeller.topology.residues() if residue.name != 'UNL']
         termini_ids = [residues[0].id, residues[-1].id]
         #hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
         hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.id in termini_ids]
         modeller.delete(hs)
-        from openmm.app import PDBFile
         modeller.addHydrogens()
 
         # Create a System
@@ -204,7 +202,6 @@ class TestSystemGenerator(unittest.TestCase):
             SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
-                from simtk import openmm
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
@@ -219,9 +216,6 @@ class TestSystemGenerator(unittest.TestCase):
                     assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
                     # Create periodic Topology
-                    import copy
-
-                    import numpy as np
                     box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
                     periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
                     periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
@@ -238,8 +232,7 @@ class TestSystemGenerator(unittest.TestCase):
         # Test exception is raised
         with pytest.raises(ValueError) as excinfo:
             # Not allowed to specify nonbondedMethod in forcefield_kwargs
-            from openmm import app
-            generator = SystemGenerator(forcefield_kwargs={'nonbondedMethod':app.PME})
+            generator = SystemGenerator(forcefield_kwargs={'nonbondedMethod':PME})
         assert "nonbondedMethod cannot be specified in forcefield_kwargs" in str(excinfo.value)
 
         for name, testsystem in self.testsystems.items():
@@ -249,13 +242,11 @@ class TestSystemGenerator(unittest.TestCase):
             SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
-                from openmm import app
-                from simtk import openmm
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 forcefield_kwargs=forcefield_kwargs,
-                                                periodic_forcefield_kwargs={'nonbondedMethod':app.LJPME},
-                                                nonperiodic_forcefield_kwargs={'nonbondedMethod':app.CutoffNonPeriodic},
+                                                periodic_forcefield_kwargs={'nonbondedMethod':LJPME},
+                                                nonperiodic_forcefield_kwargs={'nonbondedMethod':CutoffNonPeriodic},
                                                 molecules=molecules)
 
                 # Parameterize molecules
@@ -267,9 +258,6 @@ class TestSystemGenerator(unittest.TestCase):
                     assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
                     # Create periodic Topology
-                    import copy
-
-                    import numpy as np
                     box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
                     periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
                     periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
@@ -279,8 +267,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_parameterize_molecules_from_creation(self):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
-        from openmmforcefields.generators import SystemGenerator
-
         for name, testsystem in self.testsystems.items():
             print(testsystem)
             molecules = testsystem['molecules']
@@ -293,7 +279,6 @@ class TestSystemGenerator(unittest.TestCase):
                                                 molecules=molecules)
 
                 # Parameterize molecules
-                from openmmforcefields.utils import Timer
                 for molecule in molecules:
                     openmm_topology = molecule.to_topology().to_openmm()
                     with Timer() as t1:
@@ -307,8 +292,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_parameterize_molecules_specified_during_create_system(self):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
-        from openmmforcefields.generators import SystemGenerator
-
         for name, testsystem in self.testsystems.items():
             molecules = testsystem['molecules']
 
@@ -326,8 +309,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_add_molecules(self):
         """Test that Molecules can be added to SystemGenerator later"""
-        from openmmforcefields.generators import SystemGenerator
-
         SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
         for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
             # Create a SystemGenerator for this force field
@@ -342,7 +323,6 @@ class TestSystemGenerator(unittest.TestCase):
                 generator.add_molecules(molecules)
 
                 # Parameterize molecules
-                from openmmforcefields.utils import Timer
                 for molecule in molecules:
                     openmm_topology = molecule.to_topology().to_openmm()
                     with Timer() as t1:
@@ -356,9 +336,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_cache(self):
         """Test that SystemGenerator correctly manages a cache"""
-        from openmmforcefields.generators import SystemGenerator
-        from openmmforcefields.utils import Timer
-
         timing = dict() # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a single shared cache for all force fields
@@ -407,7 +384,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_complex(self):
         """Test parameterizing a protein:ligand complex in vacuum"""
-        from openmmforcefields.generators import SystemGenerator
         for name, testsystem in self.testsystems.items():
             print(f'Testing parameterization of {name} in vacuum')
             molecules = testsystem['molecules']
@@ -425,8 +401,7 @@ class TestSystemGenerator(unittest.TestCase):
             assert system.getNumParticles() == len(complex_structure.atoms)
 
             # Create solvated structure
-            from openmm import app, unit
-            modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
+            modeller = Modeller(complex_structure.topology, complex_structure.positions)
             modeller.addSolvent(generator.forcefield, padding=0*unit.angstroms, ionicStrength=300*unit.millimolar)
 
             # Create a system with solvent and ions
@@ -434,4 +409,4 @@ class TestSystemGenerator(unittest.TestCase):
             assert system.getNumParticles() == len(list(modeller.topology.atoms()))
 
             with open('test.pdb', 'w') as outfile:
-                app.PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
+                PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
