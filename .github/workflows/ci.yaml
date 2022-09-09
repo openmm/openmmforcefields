@@ -65,13 +65,14 @@ jobs:
       run: |
         # Can't use 'develop' mode because we remove symlinks after install is complete
         pip list
-        conda list
+        micromamba list
+        micromamba remove --force openmmforcefields
         python setup.py install
 
     - name: Conda Environment Information
       run: |
-        conda info
-        conda list
+        micromamba info
+        micromamba list
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
