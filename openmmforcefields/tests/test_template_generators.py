@@ -513,6 +513,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Test parameterizing molecules with template generator for all supported force fields"""
         # Test all supported small molecule force fields
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
+            if "ff14sb" in small_molecule_forcefield:
+                continue
             print(f'Testing {small_molecule_forcefield}')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -788,6 +790,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            if "ff14sb" in small_molecule_forcefield:
+                continue
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -830,6 +834,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         """
         # Run some dynamics
         from openff.units.openmm import to_openmm as to_openmm_quantity
+        from openff.units.openmm import from_openmm as from_openmm_quantity
         from openmm import unit
 
         if Version(toolkit_version) < Version("0.11.0"):
@@ -846,7 +851,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         integrator.step(nsteps)
         # Copy the molecule, storing new conformer
         new_molecule = copy.deepcopy(molecule)
-        new_molecule.conformers[0] = context.getState(getPositions=True).getPositions(asNumpy=True)
+        new_molecule.conformers[0] = from_openmm_quantity(context.getState(getPositions=True).getPositions())
         # Clean up
         del context, integrator
 
@@ -872,6 +877,9 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
+
+        if Version(toolkit_version) < Version("0.11.0"):
+            self.skipTest("Test written with new toolkit API")
 
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
