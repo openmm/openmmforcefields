@@ -3,12 +3,16 @@ name: CI
 on:
   push:
     branches:
-      - "master"
+      - "main"
   pull_request:
     branches:
-      - "master"
+      - "main"
   schedule:
     - cron: "0 0 * * *"
+
+defaults:
+  run:
+    shell: bash -l {0}
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -18,49 +22,50 @@ jobs:
   test:
     name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
     runs-on: ${{ matrix.os }}
+    env:
+      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-latest]
-        python-version: [3.7, 3.8, 3.9]
-        latest-openff-toolkit: ["true", "false"]
+        python-version: ["3.8", "3.9", "3.10"]
+        latest-openff-toolkit: [true, false]
 
     steps:
     - uses: actions/checkout@v3.0.2
 
     - name: Setup Conda Environment
-      uses: conda-incubator/setup-miniconda@v2
+      uses: mamba-org/provision-with-micromamba@main
       with:
-        python-version: ${{ matrix.python-version }}
         environment-file: devtools/conda-envs/test_env.yaml
-        mamba-version: "*"
-        channel-priority: true
-        channels: jaimergp/label/unsupported-cudatoolkit-shim,conda-forge,defaults
-        activate-environment: test
-        auto-update-conda: true
-        auto-activate-base: false
-        show-channel-urls: true
+        extra-specs: |
+          python=${{ matrix.python-version }}
+
+    - name: License OpenEye
+      shell: bash -l {0}
+      run: |
+        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
+        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
+      env:
+        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
 
     - name: "Install latest openff-toolkit"
-      if: ${{ matrix.latest-openff-toolkit }}
+      if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
-        mamba update -y -c conda-forge/label/openff-toolkit_rc openff-toolkit
-
+        # Until #225 is complete, we should not assume compatibility with new API
+        micromamba install "openff-toolkit =0.10.6" -c conda-forge -y
 
     - name: Install Package
-      shell: bash -l {0}
       run: |
         # Can't use 'develop' mode because we remove symlinks after install is complete
         python setup.py install
 
     - name: Conda Environment Information
-      shell: bash -l {0}
       run: |
         conda info
         conda list
 
     - name: Test Installed Package
-      shell: bash -l {0}
       run: |
         pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
         pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
@@ -70,13 +75,11 @@ jobs:
         KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
-      shell: bash -l {0}
       run: |
         python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
       working-directory: ./amber
 
     - name: Test CHARMM conversion
-      shell: bash -l {0}
       run: |
 
         # TODO: Uncomment these tests when new ParmEd is released
