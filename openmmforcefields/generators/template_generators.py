@@ -1251,7 +1251,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     @ClassProperty
     @classmethod
     def INSTALLED_FORCEFIELDS(cls):
-        """Return a list of the offxml files shipped with the openfff-forcefields package.
+        """Return a list of the offxml files shipped with the openff-forcefields package.
 
         Returns
         -------
@@ -1269,7 +1269,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         for filename in get_available_force_fields(full_paths=False):
             root, ext = os.path.splitext(filename)
             # Only add variants without '_unconstrained'
-            if '_unconstrained' not in root:
+            if '_unconstrained' in root:
                 continue
             # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
             # impropers and one with Amber-style impropers. The latter requires a special handler

@@ -160,7 +160,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         Returns
         -------
-        charges : np.array of shape [n_particles]
+        charges : np.array of shape [n_atoms]
             The dimensionless partial charges (implicitly in units of elementary_charge)
 
         """
@@ -190,17 +190,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         result : bool
             True if the partial charges are equal, False if not
         """
-        assert system.getNumParticles() == molecule.n_particles
-
-        system_charges = self.charges_from_system(system)
-
-        from openmm import unit as openmm_unit
+        import numpy as np
         from openff.units import unit
 
-        molecule_charges = molecule.partial_charges.m_as(unit.elementary_charge)
+        assert system.getNumParticles() == molecule.n_atoms
 
-        import numpy as np
+        system_charges: np.ndarray = self.charges_from_system(system)
+        molecule_charges: np.ndarray = molecule.partial_charges.m_as(unit.elementary_charge)
+
         result = np.allclose(system_charges, molecule_charges)
+
         if not result:
             _logger.info('Charges are not equal')
             _logger.info(f'system charges  : {system_charges}')
@@ -235,6 +234,13 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_charge_from_molecules(self):
         """Test that user-specified partial charges are used if requested"""
+        from openff.toolkit import __version__
+        from openff.units import unit
+        from packaging.version import Version
+
+        if Version(__version__) < Version("0.11.0"):
+            self.skipTest("Test written with new toolkit API")
+
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
@@ -245,22 +251,23 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
         # Check that parameterizing a molecule using user-provided charges produces expected charges
         import numpy as np
-        from openmm import unit
+
         molecule = self.molecules[0]
-        charges = np.random.random([molecule.n_particles])
-        total_charge = molecule.total_charge
-        if type(total_charge) is unit.Quantity:
-            # Handle openforcefield >= 0.7.0
-            total_charge /= unit.elementary_charge
-        charges += (total_charge - charges.sum()) / molecule.n_particles
-        molecule.partial_charges = unit.Quantity(charges, unit.elementary_charge)
-        assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges / unit.elementary_charge == 0)
-        # Add the molecule
+
+        arbitrary_charges = unit.Quantity(np.random.random([molecule.n_atoms]), unit.elementary_charge)
+
+        charge_modifications = (molecule.total_charge - arbitrary_charges.sum()) / molecule.n_atoms
+
+        molecule.partial_charges = molecule.partial_charges + charge_modifications
+
+        assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges.m_as(unit.elementary_charge) == 0)
+
         generator.add_molecules(molecule)
-        # Create the System
+
         from openmm.app import NoCutoff
-        openmm_topology = molecule.to_topology().to_openmm()
-        system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
+
         assert self.charges_are_equal(system, molecule)
 
     def test_debug_ffxml(self):
@@ -672,7 +679,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             print(f"{'component':24} {'Template (kcal/mol)':>20} {'Reference (kcal/mol)':>20}")
             for key in components:
                 reference_component_energy = reference_energy['components'][key]
-                template_component_energy = template_energy['components'][key]                
+                template_component_energy = template_energy['components'][key]
                 print(f'{key:24} {(template_component_energy/unit.kilocalories_per_mole):20.3f} {(reference_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol')
             print(f'{"TOTAL":24} {(template_energy["total"]/unit.kilocalories_per_mole):20.3f} {(reference_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol')
             write_xml('reference_system.xml', reference_system)
@@ -751,9 +758,22 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_INSTALLED_FORCEFIELDS(self):
         """Test INSTALLED_FORCEFIELDS contains expected force fields"""
-        assert 'openff-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
-        assert 'smirnoff99Frosst-1.1.0' in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
-        assert 'openff_unconstrained-1.1.0' not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+        expected_force_fields = [
+            'openff-1.1.0',
+            'openff-2.0.0',
+            'smirnoff99Frosst-1.1.0',
+            'ff14sb_off_impropers_0.0.3',
+        ]
+        forbidden_force_fields = [
+            'openff_unconstrained',
+            'ff14sb_0.0.3',
+        ]
+
+        for expected in expected_force_fields:
+            assert expected in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+
+        for forbidden in forbidden_force_fields:
+            assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
@@ -842,8 +862,16 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
         """
         # Run some dynamics
+        from openff.toolkit import __version__
+        from packaging.version import Version
+
         import openmm
         from openmm import unit
+        from openff.units.openmm import to_openmm as to_openmm_quantity
+
+        if Version(__version__) < Version("0.11.0"):
+            self.skipTest("Test written with new toolkit API")
+
         temperature = 300 * unit.kelvin
         collision_rate = 1.0 / unit.picoseconds
         timestep = 1.0 * unit.femtoseconds
@@ -851,7 +879,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
         platform = openmm.Platform.getPlatformByName('Reference')
         context = openmm.Context(system, integrator, platform)
-        context.setPositions(molecule.conformers[0])
+        context.setPositions(to_openmm_quantity(molecule.conformers[0]))
         integrator.step(nsteps)
         # Copy the molecule, storing new conformer
         import copy
