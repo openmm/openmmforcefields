@@ -31,7 +31,7 @@ dependencies:
   - openeye-toolkits
 
     # OpenFF toolkit and force fields
-  - openff-toolkit >=0.10.3|<=0.10.0
+  - openff-toolkit =0.10.6
   - openff-forcefields >=1.2.0
 
     # Validating URLs
