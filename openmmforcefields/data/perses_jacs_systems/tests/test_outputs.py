@@ -1,7 +1,7 @@
 import sys
 from argparse import ArgumentParser
-from simtk.openmm import app
 
+from simtk.openmm import app
 
 if __name__ == "__main__":
     parser = ArgumentParser(epilog='''This program reads a pdb file and tests whether the file that is compatible 

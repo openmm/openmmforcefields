@@ -8,9 +8,8 @@ System generators that build an OpenMM System object from a Topology object.
 ################################################################################
 
 import logging
-_logger = logging.getLogger("openmmforcefields.system_generators")
 
-from openmm import app
+_logger = logging.getLogger("openmmforcefields.system_generators")
 
 ################################################################################
 # System generator base class
@@ -188,7 +187,9 @@ class SystemGenerator(object):
                  or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
 
         # Create and cache a residue template generator
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         self.template_generator = None
         if small_molecule_forcefield is not None:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
@@ -214,7 +215,9 @@ class SystemGenerator(object):
     def SMALL_MOLECULE_FORCEFIELDS(cls):
         """Return a listof available small molecule force fields"""
         forcefields = list()
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
             forcefields += template_generator_cls.INSTALLED_FORCEFIELDS
         return forcefields

@@ -11,9 +11,10 @@ Residue template generator for the AMBER GAFF1/2 small molecule force fields.
 # LOGGER
 ################################################################################
 
-import os
-import logging
 import contextlib
+import logging
+import os
+
 _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 
 ################################################################################
@@ -569,8 +570,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
 
         """
-        from openff.units import unit
         import numpy as np
+        from openff.units import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
@@ -603,8 +604,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         molecule.generate_conformers(n_conformers=1)
 
         # Create temporary directory for running antechamber
-        import tempfile
         import os
+        import tempfile
         tmpdir = tempfile.mkdtemp()
         prefix = 'molecule'
         input_sdf_filename = os.path.join(tmpdir, prefix + '.sdf')
@@ -645,7 +646,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Generate additional parameters if needed
         # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
         _logger.debug(f'Creating ffxml contents for additional parameters...')
-        from inspect import signature # use introspection to support multiple parmed versions
+        from inspect import (
+            signature,  # use introspection to support multiple parmed versions
+        )
         from io import StringIO
         leaprc = StringIO('parm = loadamberparams %s' % frcmod_filename)
         import parmed
@@ -729,7 +732,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             return contents
 
         # Use temporary directory context to do this to avoid issues with spaces in filenames, etc.
-        import tempfile, subprocess
+        import subprocess
+        import tempfile
         with tempfile.TemporaryDirectory() as tmpdir:
             cwd = os.getcwd()
             os.chdir(tmpdir)
@@ -1302,8 +1306,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         """
         # TODO: Replace this method once there is a public API in the OpenFF toolkit for doing this
 
-        from openff.toolkit.utils import get_data_file_path
-        from openff.toolkit.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
+        from openff.toolkit.typing.engines.smirnoff.forcefield import (
+            _get_installed_offxml_dir_paths,
+        )
 
         # Check whether this could be a file path
         if isinstance(filename, str):
@@ -1595,7 +1600,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
                 # Attempt to retrieve from URL
                 _logger.info(f'Attempting to retrieve espaloma model from {url}')
-                import urllib, urllib.error, urllib.request
+                import urllib
+                import urllib.error
+                import urllib.request
                 try:
                     urllib.request.urlretrieve(url, filename=cached_filename)
                 except urllib.error.URLError as e:

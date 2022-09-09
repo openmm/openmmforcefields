@@ -2,10 +2,10 @@
 Test AMBER forcefield imports.
 
 """
+import pathlib
 from typing import List
 
 import pytest
-import pathlib
 
 from openmmforcefields.utils import get_ffxml_path
 

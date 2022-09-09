@@ -1,5 +1,6 @@
-import logging
 import contextlib
+import logging
+
 _logger = logging.getLogger("openmmforcefields.generators.gaff")
 
 def get_ffxml_path():

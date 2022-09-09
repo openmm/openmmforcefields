@@ -1,14 +1,18 @@
-import os, sys
-import unittest
+import logging
+import os
 import tempfile
+import unittest
 
+import numpy as np
+from packaging.version import Version
+
+from openmmforcefields.generators import (
+    EspalomaTemplateGenerator,
+    GAFFTemplateGenerator,
+    SMIRNOFFTemplateGenerator,
+)
 from openmmforcefields.utils import get_data_filename
 
-from openmmforcefields.generators import GAFFTemplateGenerator
-from openmmforcefields.generators import SMIRNOFFTemplateGenerator
-from openmmforcefields.generators import EspalomaTemplateGenerator
-
-import logging
 _logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
 
 CI = ('CI' in os.environ)
@@ -42,18 +46,16 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         MAX_ATOMS = 40
         molecules = [ molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS ]
         # Cut down number of tests for continuous integration
-        import os
         MAX_MOLECULES = 50 if not CI else 4
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
 
     def setUp(self):
-        from openff.units import unit
         from openff.toolkit.topology import Molecule
+        from openff.units import unit
 
         # TODO: Harmonize with test_system_generator.py infrastructure
-
         # Read test molecules
         filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
@@ -135,8 +137,8 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         except Exception as e:
             print(forcefield._atomTypes.keys())
-            from openmm.app import PDBFile
             from openff.units.openmm import to_openmm
+            from openmm.app import PDBFile
             PDBFile.writeFile(openmm_topology, to_openmm(molecule.conformers[0]))
             raise e
         assert system.getNumParticles() == molecule.n_atoms
@@ -164,7 +166,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             The dimensionless partial charges (implicitly in units of elementary_charge)
 
         """
-        import numpy as np
         from openmm import unit
         system_charges = list()
         forces = { force.__class__.__name__ : force for force in system.getForces() }
@@ -190,7 +191,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         result : bool
             True if the partial charges are equal, False if not
         """
-        import numpy as np
         from openff.units import unit
 
         assert system.getNumParticles() == molecule.n_atoms
@@ -218,7 +218,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         forcefield.registerTemplateGenerator(generator.generator)
 
         # Check that parameterizing a molecule using user-provided charges produces expected charges
-        import numpy as np
         from openmm import unit
         molecule = self.molecules[0]
         # Ensure partial charges are initially zero
@@ -236,7 +235,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         """Test that user-specified partial charges are used if requested"""
         from openff.toolkit import __version__
         from openff.units import unit
-        from packaging.version import Version
+        from openmm.app import ForceField
 
         if Version(__version__) < Version("0.11.0"):
             self.skipTest("Test written with new toolkit API")
@@ -244,13 +243,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
         # Create a ForceField
-        from openmm.app import ForceField
         forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
 
         # Check that parameterizing a molecule using user-provided charges produces expected charges
-        import numpy as np
 
         molecule = self.molecules[0]
 
@@ -363,9 +360,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
     def test_add_solvent(self):
         """Test using openmm.app.Modeller to add solvent to a small molecule parameterized by template generator"""
         # Select a molecule to add solvent around
-        from openmm.app import NoCutoff, Modeller
-        from openmm import unit
         from openff.units.openmm import to_openmm
+        from openmm import unit
+        from openmm.app import Modeller
         molecule = self.molecules[0]
         openmm_topology = molecule.to_topology().to_openmm()
         openmm_positions = to_openmm(molecule.conformers[0])
@@ -549,6 +546,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize some molecules
             from openmm.app import NoCutoff
+
             from openmmforcefields.utils import Timer
             for molecule in self.molecules:
                 openmm_topology = molecule.to_topology().to_openmm()
@@ -687,7 +685,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             raise Exception(f'Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})')
 
         # Compare forces
-        import numpy as np
         def norm(x):
             N = x.shape[0]
             return np.sqrt((1.0/N) * (x**2).sum())
@@ -777,8 +774,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
-        from openff.toolkit.topology import Molecule
-        from openmm import unit
+
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')
@@ -862,12 +858,10 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
         """
         # Run some dynamics
-        from openff.toolkit import __version__
-        from packaging.version import Version
-
         import openmm
-        from openmm import unit
+        from openff.toolkit import __version__
         from openff.units.openmm import to_openmm as to_openmm_quantity
+        from openmm import unit
 
         if Version(__version__) < Version("0.11.0"):
             self.skipTest("Test written with new toolkit API")
@@ -910,8 +904,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
-        from openff.toolkit.topology import Molecule
-        from openmm import unit
+
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f'Testing energies for {small_molecule_forcefield}...')
