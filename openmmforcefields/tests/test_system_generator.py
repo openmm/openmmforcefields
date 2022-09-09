@@ -385,6 +385,8 @@ class TestSystemGenerator(unittest.TestCase):
     def test_complex(self):
         """Test parameterizing a protein:ligand complex in vacuum"""
         for name, testsystem in self.testsystems.items():
+            from openmm import unit
+
             print(f'Testing parameterization of {name} in vacuum')
             molecules = testsystem['molecules']
             # Select a complex from the set
