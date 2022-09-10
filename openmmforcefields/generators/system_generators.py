@@ -17,13 +17,13 @@ _logger = logging.getLogger("openmmforcefields.system_generators")
 
 class classproperty(property):
     def __get__(self, obj, objtype=None):
-        return super(classproperty, self).__get__(objtype)
+        return super().__get__(objtype)
     def __set__(self, obj, value):
-        super(classproperty, self).__set__(type(obj), value)
+        super().__set__(type(obj), value)
     def __delete__(self, obj):
-        super(classproperty, self).__delete__(type(obj))
+        super().__delete__(type(obj))
 
-class SystemGenerator(object):
+class SystemGenerator:
     """
     Common interface for generating OpenMM Systems from OpenMM Topology objects
     that may contain both biopolymers (with parameters provided by OpenMM) and small molecules

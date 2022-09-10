@@ -21,7 +21,7 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 # Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
-class SmallMoleculeTemplateGenerator(object):
+class SmallMoleculeTemplateGenerator:
     """
     Abstract base class for small molecule template generation for OpenMM ForceField.
 
@@ -729,7 +729,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         frcmod_filename = os.path.abspath( frcmod_filename )
 
         def read_file_contents(filename):
-            infile = open(filename, 'r')
+            infile = open(filename)
             contents = infile.read()
             infile.close()
             return contents
@@ -827,7 +827,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         #       1 C1           1.8850    -1.0360    -0.1120 ca         1 MOL       0.000000
         # 012345678901234567890123456789012345678901234567890123456789012345678901234567890
         # 0         1         2         3         4         5         6         7         8
-        with open(gaff_mol2_filename, 'r') as infile:
+        with open(gaff_mol2_filename) as infile:
             line = infile.readline()
             # Seek to ATOM block
             while line:
@@ -892,7 +892,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 # MixIn for force field template generators that produce OpenMM System objects
 ################################################################################
 
-class OpenMMSystemMixin(object):
+class OpenMMSystemMixin:
     """
     """
     def clear_system_cache(self):
@@ -1584,7 +1584,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             else:
                 # Identify version number
                 import re
-                m = re.match('espaloma-(\d+\.\d+\.\d+)', forcefield)
+                m = re.match(r'espaloma-(\d+\.\d+\.\d+)', forcefield)
                 if m is None:
                     raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.2.2" (found: "{forcefield}")')
                 version = m.group(1)

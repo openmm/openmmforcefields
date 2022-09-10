@@ -85,7 +85,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         for forcefield in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             generator = GAFFTemplateGenerator(forcefield=forcefield)
             import re
-            result = re.match('^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
+            result = re.match(r'^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
             assert generator.forcefield == forcefield
             assert generator.gaff_version == result['major_version'] + '.' + result['minor_version']
             assert generator.gaff_major_version == result['major_version']
@@ -326,7 +326,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 db.close()
                 n_entries = len(db_entries)
                 assert (n_entries == n_expected), \
-                    "Expected {} entries but database has {}\n db contents: {}".format(n_expected, n_entries, db_entries)
+                    f"Expected {n_expected} entries but database has {n_entries}\n db contents: {db_entries}"
 
             check_cache(generator, len(self.molecules))
 
@@ -835,8 +835,8 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
         """
         # Run some dynamics
-        from openff.units.openmm import to_openmm as to_openmm_quantity
         from openff.units.openmm import from_openmm as from_openmm_quantity
+        from openff.units.openmm import to_openmm as to_openmm_quantity
         from openmm import unit
 
         if Version(toolkit_version) < Version("0.11.0"):
