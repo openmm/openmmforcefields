@@ -35,7 +35,7 @@ jobs:
             os: macOS-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Setup Conda Environment
       uses: mamba-org/provision-with-micromamba@main
@@ -73,7 +73,7 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto \
+        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto --cov-append --cov-report=xml \
           openmmforcefields/tests/test_amber_import.py \
           openmmforcefields/tests/test_template_generators.py \
           openmmforcefields/tests/test_system_generator.py
@@ -102,7 +102,7 @@ jobs:
 
     - name: CodeCov
       if: ${{ github.repository == 'openmm/openmmforcefields' && github.event != 'schedule' }}
-      uses: codecov/codecov-action@v2.1.0
+      uses: codecov/codecov-action@v3.1.0
       with:
         file: ./coverage.xml
         flags: unittests
