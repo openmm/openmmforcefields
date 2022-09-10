@@ -102,7 +102,7 @@ jobs:
 
     - name: CodeCov
       if: ${{ github.repository == 'openmm/openmmforcefields' && github.event != 'schedule' }}
-      uses: codecov/codecov-action@v3.1.0
+      uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
         flags: unittests
