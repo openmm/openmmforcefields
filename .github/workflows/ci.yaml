@@ -73,9 +73,10 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
-        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
-        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto \
+          openmmforcefields/tests/test_amber_import.py \
+          openmmforcefields/tests/test_template_generators.py \
+          openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
@@ -100,8 +101,7 @@ jobs:
       working-directory: ./charmm
 
     - name: CodeCov
-      if: ${{ github.repository == 'openmm/openmmforcefields'
-              && github.event != 'schedule' }}
+      if: ${{ github.repository == 'openmm/openmmforcefields' && github.event != 'schedule' }}
       uses: codecov/codecov-action@v2.1.0
       with:
         file: ./coverage.xml
