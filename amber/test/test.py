@@ -1,5 +1,6 @@
-import unittest
 import os
+import unittest
+
 os.chdir('..')
 
 class Testamber2ommmScript(unittest.TestCase):
