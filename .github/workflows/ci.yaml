@@ -73,9 +73,9 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -s --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto --cov-append --cov-report=xml \
+        pytest -v -x --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto --cov-append --cov-report=xml \
           openmmforcefields/tests/test_amber_import.py \
-          openmmforcefields/tests/test_template_generators.py \
+          # openmmforcefields/tests/test_template_generators.py \
           openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
@@ -100,10 +100,33 @@ jobs:
 
       working-directory: ./charmm
 
+<<<<<<< HEAD
     - name: CodeCov
       if: ${{ github.repository == 'openmm/openmmforcefields' && github.event != 'schedule' }}
       uses: codecov/codecov-action@v3.1.0
+=======
+    - name: Upload coverage data
+      uses: actions/upload-artifact@v3
+>>>>>>> coverage
       with:
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
+        name: coverage-data
+        path: ".coverage.*"
+        if-no-files-found: ignore
+
+    - name: Download coverage data.
+      uses: actions/download-artifact@v2
+      with:
+        name: coverage-data
+
+    - name: Combine coverage & fail if it's <100%.
+      run: |
+        python -m coverage combine
+        python -m coverage html --skip-covered --skip-empty
+        python -m coverage report --fail-under=100
+
+    - name: Upload HTML report if check failed.
+      uses: actions/upload-artifact@v2
+      with:
+        name: html-report
+        path: htmlcov
+      if: ${{ failure() }}
