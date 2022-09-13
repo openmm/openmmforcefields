@@ -100,14 +100,8 @@ jobs:
 
       working-directory: ./charmm
 
-<<<<<<< HEAD
-    - name: CodeCov
-      if: ${{ github.repository == 'openmm/openmmforcefields' && github.event != 'schedule' }}
-      uses: codecov/codecov-action@v3.1.0
-=======
     - name: Upload coverage data
       uses: actions/upload-artifact@v3
->>>>>>> coverage
       with:
         name: coverage-data
         path: ".coverage.*"
