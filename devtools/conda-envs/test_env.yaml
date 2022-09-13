@@ -14,7 +14,6 @@ dependencies:
     # Testing
   - pytest
   - pytest-cov
-  - pytest-xdist
   - coverage
 
     # Requirements for converted force field installer
