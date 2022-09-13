@@ -70,7 +70,7 @@ jobs:
         pytest -v -x --log-cli-level $LOGLEVEL --cov=openmmforcefields --durations=20 -nauto --cov-append --cov-report=xml \
           openmmforcefields/tests/test_amber_import.py \
           # openmmforcefields/tests/test_template_generators.py \
-          # openmmforcefields/tests/test_system_generator.py
+          openmmforcefields/tests/test_system_generator.py
       env:
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
