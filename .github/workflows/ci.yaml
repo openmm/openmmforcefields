@@ -95,11 +95,11 @@ jobs:
       working-directory: ./charmm
 
     - name: Upload coverage data
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-data
-          path: ".coverage.*"
-          if-no-files-found: ignore
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-data
+        path: ".coverage.*"
+        if-no-files-found: ignore
 
     - name: Download coverage data.
       uses: actions/download-artifact@v2
