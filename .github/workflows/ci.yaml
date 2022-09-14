@@ -114,9 +114,9 @@ jobs:
 
     - name: Combine coverage & fail if it's <100%.
       run: |
-        python -m coverage combine
         python -m coverage html --skip-covered --skip-empty
-        python -m coverage report --fail-under=10
+        python -m coverage report --fail-under=70
+        python -m coverage report --fail-under=100
 
     - name: Upload HTML report if check failed.
       uses: actions/upload-artifact@v2
