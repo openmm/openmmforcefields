@@ -73,7 +73,7 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS \
+        pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/test_amber_import.py \
           openmmforcefields/tests/test_template_generators.py \
           openmmforcefields/tests/test_system_generator.py
@@ -101,20 +101,9 @@ jobs:
 
       working-directory: ./charmm
 
-    - name: Generate coverage report
-      run: |
-        python -m coverage html
-        # python -m coverage report --fail-under=10
-
-    - name: Upload coverage data
-      uses: actions/upload-artifact@v3
+    - name: Upload coverage report to CodeCov
+      uses: codecov/codecov-action@v3.1.0
       with:
-        name: coverage-data
-        path: coverage.xml
-        if-no-files-found: ignore
-
-    - name: Upload HTML report
-      uses: actions/upload-artifact@v3
-      with:
-        name: html-report
-        path: htmlcov
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: true
