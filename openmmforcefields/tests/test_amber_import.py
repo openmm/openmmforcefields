@@ -2,13 +2,16 @@
 Test AMBER forcefield imports.
 
 """
+import pathlib
+from typing import List
 
-import os
-import glob
 import pytest
 
 from openmmforcefields.utils import get_ffxml_path
-amber_ffxml_filenames = [ os.path.join('amber', os.path.split(filename)[1]) for filename in glob.glob(os.path.join(get_ffxml_path(), 'amber', '*.xml')) ]
+
+amber_ffxml_filenames: List[str] = [
+    'amber/' + file.name for file in pathlib.Path(get_ffxml_path()).glob("amber/*xml")
+]
 
 @pytest.mark.parametrize("filename", amber_ffxml_filenames, ids=lambda filename : f'Importing ffxml file {filename}')
 def test_ffxml_import(filename):

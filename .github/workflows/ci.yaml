@@ -27,12 +27,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10"]
         latest-openff-toolkit: [true, false]
+        exclude:
+          - python-version: "3.10"
+            os: macos-latest
 
     steps:
-    - uses: actions/checkout@v3.0.2
+    - uses: actions/checkout@v3
 
     - name: Setup Conda Environment
       uses: mamba-org/provision-with-micromamba@main
@@ -52,25 +55,29 @@ jobs:
     - name: "Install latest openff-toolkit"
       if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
-        # Until #225 is complete, we should not assume compatibility with new API
-        micromamba install "openff-toolkit =0.10.6" -c conda-forge -y
+        micromamba update -y -c conda-forge "openff-toolkit >=0.11.0"
 
     - name: Install Package
       run: |
-        # Can't use 'develop' mode because we remove symlinks after install is complete
-        python setup.py install
+        pip list
+        micromamba list
+        micromamba remove --force openmmforcefields
+        python -m pip install .
 
     - name: Conda Environment Information
       run: |
-        conda info
-        conda list
+        micromamba info
+        micromamba list
+        python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
       run: |
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_amber_import.py
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_template_generators.py
-        pytest -v -x -s --log-cli-level $LOGLEVEL --cov=openmmforcefields openmmforcefields/tests/test_system_generator.py
+        pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+          openmmforcefields/tests/test_amber_import.py \
+          openmmforcefields/tests/test_template_generators.py \
+          openmmforcefields/tests/test_system_generator.py
       env:
+        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
 
@@ -93,11 +100,11 @@ jobs:
 
       working-directory: ./charmm
 
-    - name: CodeCov
+    - name: Upload coverage report to CodeCov
+      uses: codecov/codecov-action@v3.1.0
       if: ${{ github.repository == 'openmm/openmmforcefields'
               && github.event != 'schedule' }}
-      uses: codecov/codecov-action@v3.1.0
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
-        flags: unittests
-        name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
+        fail_ci_if_error: true

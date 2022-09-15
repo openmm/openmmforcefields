@@ -53,7 +53,10 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
+
+# Sphinx documentation
+docs/_build/
+docs/api/generated
 
 # Flask stuff:
 instance/
@@ -62,12 +65,13 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
-
 # PyBuilder
 target/
 
+# PyCharm
+*.idea/vcs.xml
+
+# Jupyter
 # Jupyter Notebook
 .ipynb_checkpoints
 
@@ -108,5 +112,11 @@ ENV/
 # In-tree generated files
 */_version.py
 
-# OS X extra files
+# macOS
 *.DS_Store
+
+# Caches
+openmmforcefields/data/perses_jacs_systems/*/cache.json
+
+# Test molecules
+testsystem-bace*

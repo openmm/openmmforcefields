@@ -6,7 +6,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -22,7 +22,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -38,7 +38,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -54,7 +54,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -70,7 +70,7 @@
   leaprc: leaprc.gaff
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -86,7 +86,7 @@
   leaprc: leaprc.gaff2
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:
@@ -102,7 +102,7 @@
   leaprc: leaprc.gaff2
   Options:
     write_unused: True
-    ffxml_dir: gaff/ffxml
+    ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
   Test:
   - gaff
   Reference:

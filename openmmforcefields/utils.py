@@ -1,5 +1,6 @@
-import logging
 import contextlib
+import logging
+
 _logger = logging.getLogger("openmmforcefields.generators.gaff")
 
 def get_ffxml_path():
@@ -80,7 +81,7 @@ def with_timer(task_name):
     return _with_timer
 
 
-class Timer(object):
+class Timer:
     """A class with stopwatch-style timing functions.
 
     Examples
@@ -137,7 +138,7 @@ class Timer(object):
         try:
             t0 = self._t0[benchmark_id]
         except KeyError:
-            _logger.warning("Can't stop timing for {}".format(benchmark_id))
+            _logger.warning(f"Can't stop timing for {benchmark_id}")
         else:
             import time
             self._t1[benchmark_id] = time.time()
@@ -153,7 +154,7 @@ class Timer(object):
         try:
             t0 = self._t0[benchmark_id]
         except KeyError:
-            _logger.warning("Couldn't return partial timing for {}".format(benchmark_id))
+            _logger.warning(f"Couldn't return partial timing for {benchmark_id}")
         else:
             return time.time() - t0
 
@@ -172,7 +173,7 @@ class Timer(object):
 
         """
         for benchmark_id, elapsed_time in self._completed.items():
-            _logger.debug('{} took {:8.3f}s'.format(benchmark_id, elapsed_time))
+            _logger.debug(f'{benchmark_id} took {elapsed_time:8.3f}s')
 
         if clear is True:
             self.reset_timing_statistics()

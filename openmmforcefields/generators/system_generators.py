@@ -8,9 +8,8 @@ System generators that build an OpenMM System object from a Topology object.
 ################################################################################
 
 import logging
-_logger = logging.getLogger("openmmforcefields.system_generators")
 
-from openmm import app
+_logger = logging.getLogger("openmmforcefields.system_generators")
 
 ################################################################################
 # System generator base class
@@ -18,13 +17,13 @@ from openmm import app
 
 class classproperty(property):
     def __get__(self, obj, objtype=None):
-        return super(classproperty, self).__get__(objtype)
+        return super().__get__(objtype)
     def __set__(self, obj, value):
-        super(classproperty, self).__set__(type(obj), value)
+        super().__set__(type(obj), value)
     def __delete__(self, obj):
-        super(classproperty, self).__delete__(type(obj))
+        super().__delete__(type(obj))
 
-class SystemGenerator(object):
+class SystemGenerator:
     """
     Common interface for generating OpenMM Systems from OpenMM Topology objects
     that may contain both biopolymers (with parameters provided by OpenMM) and small molecules
@@ -188,7 +187,9 @@ class SystemGenerator(object):
                  or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
 
         # Create and cache a residue template generator
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         self.template_generator = None
         if small_molecule_forcefield is not None:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
@@ -214,7 +215,9 @@ class SystemGenerator(object):
     def SMALL_MOLECULE_FORCEFIELDS(cls):
         """Return a listof available small molecule force fields"""
         forcefields = list()
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
             forcefields += template_generator_cls.INSTALLED_FORCEFIELDS
         return forcefields
