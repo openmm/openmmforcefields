@@ -100,6 +100,11 @@ jobs:
 
       working-directory: ./charmm
 
+    - name: Generate coverage report
+      run: |
+        python -m coverage html
+        python -m coverage report --fail-under=10
+
     - name: Upload coverage data
       uses: actions/upload-artifact@v3
       with:
@@ -107,20 +112,8 @@ jobs:
         path: coverage.xml
         if-no-files-found: ignore
 
-    - name: Download coverage data.
-      uses: actions/download-artifact@v2
-      with:
-        name: coverage-data
-
-    - name: Combine coverage & fail if it's <100%.
-      run: |
-        python -m coverage html --skip-covered --skip-empty
-        python -m coverage report --fail-under=70
-        python -m coverage report --fail-under=100
-
-    - name: Upload HTML report if check failed.
-      uses: actions/upload-artifact@v2
+    - name: Upload HTML report
+      uses: actions/upload-artifact@v3
       with:
         name: html-report
         path: htmlcov
-      if: ${{ failure() }}
