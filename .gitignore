@@ -72,9 +72,7 @@ target/
 *.idea/vcs.xml
 
 # Jupyter
-=======
 # Jupyter Notebook
->>>>>>> upstream/main
 .ipynb_checkpoints
 
 # pyenv
