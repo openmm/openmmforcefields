@@ -102,6 +102,8 @@ jobs:
 
     - name: Upload coverage report to CodeCov
       uses: codecov/codecov-action@v3.1.0
+      if: ${{ github.repository == 'openmm/openmmforcefields'
+              && github.event != 'schedule' }}
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
