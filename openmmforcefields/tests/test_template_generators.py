@@ -58,6 +58,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def setUp(self):
         from openff.units import unit
+        from openff.units.openmm import ensure_quantity
 
         # TODO: Harmonize with test_system_generator.py infrastructure
         # Read test molecules
@@ -68,7 +69,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
 
-        molecule.conformers[0][0,0] += 0.1*unit.angstroms
+        molecule.conformers[0][0,0] += ensure_quantity(
+            unit.Quantity(0.1, unit.angstroms),
+            "openmm",
+        )
+
         molecules.insert(0, molecule)
         # DEBUG END
 
