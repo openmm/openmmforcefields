@@ -57,6 +57,11 @@ jobs:
       run: |
         micromamba update -y -c conda-forge "openff-toolkit >=0.11.0"
 
+    - name: "Install latest openff-toolkit"
+      if: ${{ matrix.latest-openff-toolkit == false }}
+      run: |
+        micromamba update -y -c conda-forge "openff-toolkit <0.11.0"
+
     - name: Install Package
       run: |
         pip list
