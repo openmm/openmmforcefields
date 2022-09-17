@@ -734,7 +734,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         if uses_old_api:
             new_molecule.conformers[0] = new_positions
         else:
-            new_molecule.conformers[0] = from_openmm_quantity(new_positions)
+            new_molecule.conformers[0] = ensure_quantity(new_positions, "openff")
 
         del context, integrator
 
@@ -865,7 +865,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         if uses_old_api:
             new_molecule.conformers[0] = new_positions
         else:
-            new_molecule.conformers[0] = from_openmm_quantity(new_positions)
+            new_molecule.conformers[0] = ensure_quantity(new_positions, "openff")
 
         # Clean up
         del context, integrator
