@@ -69,9 +69,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
 
+        uses_old_api = hasattr(molecule.atoms[0], "element")
+
         molecule.conformers[0][0,0] += ensure_quantity(
             unit.Quantity(0.1, unit.angstroms),
-            "openmm",
+            "openmm" if uses_old_api else "openff",
         )
 
         molecules.insert(0, molecule)
