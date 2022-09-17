@@ -647,7 +647,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
 
         if uses_old_api:
-            redistribute = sum_of_absolute_charge._value > 0.0
+            redistribute = sum_of_absolute_charge > 0.0
         else:
             redistribute = sum_of_absolute_charge.m > 0.0
 
