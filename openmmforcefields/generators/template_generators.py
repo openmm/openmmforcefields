@@ -643,9 +643,17 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         _logger.debug(f'{molecule.partial_charges}')
         residue_charge = ensure_quantity(0.0 * unit.elementary_charge, unit_solution)
         total_charge = molecule.partial_charges.sum()
+
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
+
+        if uses_old_api:
+            redistribute = sum_of_absolute_charge._value > 0.0
+        else:
+            redistribute = sum_of_absolute_charge.m > 0.0
+
         charge_deficit = net_charge - total_charge
-        if ensure_quantity(sum_of_absolute_charge, "openff").m_as(unit.elementary_charge) > 0.0:
+
+        if sum_of_absolute_charge > 0.0:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges = molecule.partial_charges + charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
         _logger.debug(f'{molecule.partial_charges}')
