@@ -747,7 +747,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         new_molecule.conformers[0] = ensure_quantity(
             new_positions,
-            "openmm" if uses old api else "openff",
+            "openmm" if uses_old_api else "openff",
         )
 
 
