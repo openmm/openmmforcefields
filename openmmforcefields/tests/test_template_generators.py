@@ -199,11 +199,17 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             True if the partial charges are equal, False if not
         """
         from openff.units import unit
+        from openff.units.openmm import ensure_quantity
 
         assert system.getNumParticles() == molecule.n_atoms
 
+        # charges_from_system returns a NumPy array that we trust to be implicitly e
         system_charges: np.ndarray = self.charges_from_system(system)
-        molecule_charges: np.ndarray = molecule.partial_charges.m_as(unit.elementary_charge)
+
+        # type(molecule.partial_charges) depends on the toolkit version
+        molecule_charges: np.ndarray = ensure_quantity(
+            molecule.partial_charges, "openff",
+        ).m_as(unit.elementary_charge)
 
         result = np.allclose(system_charges, molecule_charges)
 
@@ -238,7 +244,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_charge_from_molecules(self):
         """Test that user-specified partial charges are used if requested"""
-        from openff.units import unit
+        from openff.units.openmm import ensure_quantity
 
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
@@ -250,6 +256,12 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Check that parameterizing a molecule using user-provided charges produces expected charges
 
         molecule = self.molecules[0]
+        uses_old_api = hasattr(molecule.atoms[0], "element")
+
+        if uses_old_api:
+            from openmm import unit
+        else:
+            from openff.units import unit
 
         # Populate the molecule with arbitrary partial charges that still sum to 0.0
         molecule.partial_charges = unit.Quantity(
@@ -257,7 +269,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             unit.elementary_charge,
         )
 
-        assert (molecule.partial_charges is not None) and not np.all(molecule.partial_charges.m_as(unit.elementary_charge) == 0)
+        assert (molecule.partial_charges is not None)
+
+        assert not np.all(ensure_quantity(molecule.partial_charges, "openff").m == 0)
 
         generator.add_molecules(molecule)
 
