@@ -647,16 +647,14 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
 
         if uses_old_api:
-            redistribute = sum_of_absolute_charge > 0.0
             from openmm import unit as openmm_unit
+
+            redistribute = sum_of_absolute_charge > 0.0
+
             sum_of_absolute_charge = openmm_unit.Quantity(
                 sum_of_absolute_charge,
                 openmm_unit.elementary_charge,
             )
-            assert (net_charge - total_charge).unit == openmm_unit.elementary_charge
-            assert abs(molecule.partial_charges).unit == openmm_unit.elementary_charge
-            assert sum_of_absolute_charge.unit == openmm_unit.elementary_charge
-            assert molecule.partial_charges.unit == openmm_unit.elementary_charge
         else:
             redistribute = sum_of_absolute_charge.m > 0.0
 

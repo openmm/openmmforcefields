@@ -745,10 +745,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         new_molecule = copy.deepcopy(molecule)
         new_positions = context.getState(getPositions=True).getPositions()
 
-        if uses_old_api:
-            new_molecule.conformers[0] = new_positions
-        else:
-            new_molecule.conformers[0] = ensure_quantity(new_positions, "openff")
+        new_molecule.conformers[0] = ensure_quantity(
+            new_positions,
+            "openmm" if uses old api else "openff",
+        )
+
 
         del context, integrator
 
@@ -876,10 +877,10 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         new_molecule = copy.deepcopy(molecule)
         new_positions = context.getState(getPositions=True).getPositions()
 
-        if uses_old_api:
-            new_molecule.conformers[0] = new_positions
-        else:
-            new_molecule.conformers[0] = ensure_quantity(new_positions, "openff")
+        new_molecule.conformers[0] = ensure_quantity(
+            new_positions,
+            "openmm" if uses_old_api else "openff",
+        )
 
         # Clean up
         del context, integrator
