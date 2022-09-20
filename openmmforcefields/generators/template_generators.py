@@ -219,13 +219,13 @@ class SmallMoleculeTemplateGenerator:
 
         """
         import numpy as np
-        from openff.units import unit
+        from openff.units.openmm import ensure_quantity
 
         if molecule.partial_charges is None:
             return False
 
         if np.allclose(
-            molecule.partial_charges.m_as(unit.elementary_charge),
+            ensure_quantity(molecule.partial_charges, "openff").m,
             np.zeros([molecule.n_atoms]),
         ):
             return False
@@ -575,6 +575,14 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         import numpy as np
         from openff.units import unit
+        from openff.units.openmm import ensure_quantity
+
+        uses_old_api = hasattr(molecule.atoms[0], "element")
+
+        if uses_old_api:
+            unit_solution = "openmm"
+        else:
+            unit_solution = "openff"
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
@@ -586,10 +594,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Compute net formal charge
         net_charge = molecule.total_charge
 
-        if type(net_charge) != unit.Quantity:
-            # openforcefield toolkit < 0.7.0 did not return unit-bearing quantity
-            # how long should openmmforcefields support < 0.7.0?
-            net_charge = float(net_charge) * unit.elementary_charge
         _logger.debug(f'Total charge is {net_charge}')
 
         # Compute partial charges if required
@@ -637,11 +641,26 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         #       or pure numbers.
         _logger.debug(f'Fixing partial charges...')
         _logger.debug(f'{molecule.partial_charges}')
-        residue_charge = 0.0 * unit.elementary_charge
+        residue_charge = ensure_quantity(0.0 * unit.elementary_charge, unit_solution)
         total_charge = molecule.partial_charges.sum()
+
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
+
+        if uses_old_api:
+            from openmm import unit as openmm_unit
+
+            redistribute = sum_of_absolute_charge > 0.0
+
+            sum_of_absolute_charge = openmm_unit.Quantity(
+                sum_of_absolute_charge,
+                openmm_unit.elementary_charge,
+            )
+        else:
+            redistribute = sum_of_absolute_charge.m > 0.0
+
         charge_deficit = net_charge - total_charge
-        if (sum_of_absolute_charge / unit.elementary_charge).m > 0.0:
+
+        if redistribute:
             # Redistribute excess charge proportionally to absolute charge
             molecule.partial_charges = molecule.partial_charges + charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
         _logger.debug(f'{molecule.partial_charges}')
@@ -675,7 +694,24 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
-            atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.gaff_type, charge=str(atom.partial_charge.m_as(unit.elementary_charge)))
+
+            if uses_old_api:
+                charge_string =str(
+                    atom.partial_charge.value_in_unit(openmm_unit.elementary_charge)
+                )
+            else:
+                charge_string = str(
+                    atom.partial_charge.m_as(unit.elementary_charge)
+                )
+
+            atom = etree.SubElement(
+                residue,
+                "Atom",
+                name=atom.name,
+                type=atom.gaff_type,
+                charge=charge_string,
+            )
+
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
                 bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)

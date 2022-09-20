@@ -19,6 +19,8 @@ dependencies:
     # Requirements for converted force field installer
   - openmm >=7.6.0
 
+  - openff-units >=0.1.8
+
     # Requirements for conversion tools
   - pyyaml
   - ambertools >=18.0 # contains sufficiently recent ParmEd
