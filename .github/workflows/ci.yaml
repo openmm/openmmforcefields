@@ -106,7 +106,7 @@ jobs:
       working-directory: ./charmm
 
     - name: Upload coverage report to CodeCov
-      uses: codecov/codecov-action@v3.1.0
+      uses: codecov/codecov-action@v3.1.1
       if: ${{ github.repository == 'openmm/openmmforcefields'
               && github.event != 'schedule' }}
       with:
