@@ -1,0 +1,4 @@
+<ForceField>
+ <Include file="opc3.xml"/>
+ <Include file="ions/ionslm_126_opc3.xml"/>
+</ForceField>
