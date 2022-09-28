@@ -143,7 +143,7 @@ def amber_frcmod_ions_to_openmm_xml(
     print(f'Converted {len(mass_data)} ions from {frcmod_file} to {xml_file}')
 
 if len(sys.argv) < 2:
-    print('processAmberIons.py script to convert all Amber/AmberTools frcmod.ions* files to equivalent openmm xml files')
+    print('convert_amber_ions.py script to convert all Amber/AmberTools frcmod.ions* files to equivalent openmm xml files')
     print('Usage: python ./amber/convert_amber_ions.py /path/to/ambertools')
     sys.exit()
 
