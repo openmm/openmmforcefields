@@ -105,6 +105,12 @@ jobs:
 
       working-directory: ./charmm
 
+    - name: Run docstrings
+      if: ${{ matrix.latest-openff-toolkit == true }}
+      continue-on-error: True
+      run: |
+        pytest --doctest-modules openmmforcefields --ignore=openmmforcefields/tests
+
     - name: Upload coverage report to CodeCov
       uses: codecov/codecov-action@v3.1.1
       if: ${{ github.repository == 'openmm/openmmforcefields'

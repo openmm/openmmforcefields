@@ -101,9 +101,10 @@ class SmallMoleculeTemplateGenerator:
         Add some Molecules later on after the generator has been registered:
 
         >>> from openff.toolkit.topology import Molecule
-        >>> mol1, mol2, mol3 = [ Molecule.from_smiles(smiles) for smiles in ('c1ccccc1', 'O=Cc1ccc(O)c(OC)c1', 'CN1CCC[C@H]1c2cccnc2') ]
-        >>> generator.add_oemols(mol1)
-        >>> generator.add_oemols([mol2, mol3])
+        >>> smiles = ('c1ccccc1', 'O=Cc1ccc(O)c(OC)c1', 'CN1CCC[C@H]1c2cccnc2')
+        >>> mol1, mol2, mol3 = [Molecule.from_smiles(s, allow_undefined_stereo=True) for s in smiles]
+        >>> generator.add_molecules(mol1)  # doctest: +SKIP
+        >>> generator.add_molecules([mol2, mol3])  # doctest: +SKIP
 
         """
         # Return if empty
@@ -362,7 +363,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> from openff.toolkit.topology import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the GAFF template generator
-    >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
+    >>> from openmmforcefields.generators import GAFFTemplateGenerator
     >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
@@ -375,11 +376,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = GAFFTemplateGenerator(molecules=[molecule1, molecuel2], forcefield='gaff-2.11')
+    >>> template_generator = GAFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='gaff-2.11')
 
     You can also add some Molecules later on after the generator has been registered:
 
-    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules(molecule)
     >>> template_generator.add_molecules([molecule1, molecule2])
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
@@ -424,7 +425,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
-        >>> from openmoltools.forcefield_generators import GAFFTemplateGenerator
+        >>> from openmmforcefields.generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
         >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -439,12 +440,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 
-        >>> molecules = Molecule.from_file('molecules.sdf')
-        >>> gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.11')
+        >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
+        >>> gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.11')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
+        >>> molecule = Molecule.from_smiles("CCO")
         >>> gaff.add_molecules(molecule)
+
+        >>> molecule1, molecule2 = [Molecule.from_smiles(smiles) for smiles in ["CC", "c1ccccc1"]]
         >>> gaff.add_molecules([molecule1, molecule2])
 
         To check which GAFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
@@ -454,7 +458,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-1.80')
+        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-2.11')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -1157,7 +1161,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     >>> from openff.toolkit.topology import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the SMIRNOFF template generator
-    >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
+    >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
     >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
@@ -1166,20 +1170,20 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-1.2.0')
+    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-2.0.0')
     and register multiple molecules:
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-1.2.0')
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-2.0.0')
 
     Alternatively, you can specify a local .offxml file in the SMIRNOFF specification:
 
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='mysmirnoff.offxml')
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='mysmirnoff.offxml')  # doctest: +SKIP
 
     You can also add some Molecules later on after the generator has been registered:
 
-    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules(molecule)
     >>> template_generator.add_molecules([molecule1, molecule2])
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
@@ -1216,7 +1220,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
-        >>> from openmoltools.forcefield_generators import SMIRNOFFTemplateGenerator
+        >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
         >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
         >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -1225,31 +1229,31 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         The latest Open Force Field Initiative release is used if none is specified.
 
         >>> smirnoff.forcefield
-        'openff-1.2.0'
+        'openff-2.0.0'
 
         You can check which SMIRNOFF force field filename is in use with
 
-        >>> smirnoff.smirnoff_filename
-        '/full/path/to/openff-1.2.0.offxml'
+        >>> smirnoff.smirnoff_filename  # doctest:+ELLIPSIS
+        '/.../openff-2.0.0.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
 
-        >>> molecules = Molecule.from_file('molecules.sdf')
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='smirnoff99Frosst-1.1.0')
+        >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.0.0')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
-        >>> smirnoff.add_molecules(molecules)
+        >>> smirnoff.add_molecules(molecules)  # doctest: +SKIP
 
         To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
-        >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
+        >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)  # doctest: +SKIP
         ['openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'openff-1.2.0', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7']
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-1.2.0')
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.0.0')  # doctest: +SKIP
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -1441,7 +1445,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     >>> from openff.toolkit.topology import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the Espaloma template generator
-    >>> from openmoltools.forcefield_generators import EspalomaTemplateGenerator
+    >>> from openmmforcefields.generators import EspalomaTemplateGenerator
     >>> template_generator = EspalomaTemplateGenerator(molecules=molecule)
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
@@ -1459,11 +1463,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
     Alternatively, you can specify a local .pt parameter file for Espaloma:
 
-    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma_0.2.2.pt')
+    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.2.2.pt')
 
     You can also add some Molecules later on after the generator has been registered:
 
-    >>> template_generator.add_molecule(molecule)
+    >>> template_generator.add_molecules(molecule)
     >>> template_generator.add_molecules([molecule1, molecule2])
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
@@ -1505,7 +1509,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         >>> from openff.toolkit.topology import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
-        >>> from openmoltools.forcefield_generators import EspalomaTemplateGenerator
+        >>> from openmmforcefields.generators import EspalomaTemplateGenerator
         >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecule)
         >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -1516,18 +1520,19 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         You can check which espaloma parameter set force field filename is in use with
 
-        >>> espaloma_generator.parameters_filename
-        '/full/path/to/espaloma-0.2.2.pt'
+        >>> espaloma_generator.espaloma_filename
+        '/.../espaloma-0.2.2.pt'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
-        molecules read from an SDF file:
+        molecules read from an SDF file or list of SMILES strings:
 
-        >>> molecules = Molecule.from_file('molecules.sdf')
+        >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
+        >>> molecules = [Molecule.from_smiles(smiles) for smiles in ["CCO", "c1ccccc1"]]
         >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecules, forcefield='espaloma-0.2.2')
 
         You can also add molecules later on after the generator has been registered:
 
-        >>> espaloma_generator.add_molecules(molecules)
+        >>> espaloma_generator.add_molecules(molecules[-1])
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
