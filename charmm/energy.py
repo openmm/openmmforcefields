@@ -2,8 +2,9 @@
 from __future__ import print_function
 import sys
 import parmed as pmd
-from simtk import openmm as mm, unit as u
-from simtk.openmm import app
+import openmm as mm
+from openmm import unit as u
+from openmm import app
 import numpy as np
 import time
 import os, re
