@@ -761,7 +761,6 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             'openff-1.1.0',
             'openff-2.0.0',
             'smirnoff99Frosst-1.1.0',
-            'ff14sb_off_impropers_0.0.3',
         ]
         forbidden_force_fields = [
             'openff_unconstrained',
