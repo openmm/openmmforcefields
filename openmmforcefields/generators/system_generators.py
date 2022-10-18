@@ -8,9 +8,8 @@ System generators that build an OpenMM System object from a Topology object.
 ################################################################################
 
 import logging
-_logger = logging.getLogger("openmmforcefields.system_generators")
 
-from simtk.openmm import app
+_logger = logging.getLogger("openmmforcefields.system_generators")
 
 ################################################################################
 # System generator base class
@@ -18,13 +17,13 @@ from simtk.openmm import app
 
 class classproperty(property):
     def __get__(self, obj, objtype=None):
-        return super(classproperty, self).__get__(objtype)
+        return super().__get__(objtype)
     def __set__(self, obj, value):
-        super(classproperty, self).__set__(type(obj), value)
+        super().__set__(type(obj), value)
     def __delete__(self, obj):
-        super(classproperty, self).__delete__(type(obj))
+        super().__delete__(type(obj))
 
-class SystemGenerator(object):
+class SystemGenerator:
     """
     Common interface for generating OpenMM Systems from OpenMM Topology objects
     that may contain both biopolymers (with parameters provided by OpenMM) and small molecules
@@ -42,21 +41,21 @@ class SystemGenerator(object):
 
     Parameters
     ----------
-    forcefield : simtk.openmm.app.ForceField
+    forcefield : openmm.app.ForceField
         The ForceField object used to create new System objects.
         New ffxml files can be read in at any time.
     forcefield_kwargs : dict
-        Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation.
+        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation.
         These keyword arguments can be modified at any time.
     periodic_forcefield_kwargs : dict
-        Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation for periodic systems.
+        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation for periodic systems.
         These keyword arguments can be modified at any time.
     nonperiodic_forcefield_kwargs : dict
-        Keyword arguments fed to ``simtk.openmm.app.ForceField.createSystem()`` during System generation for non-periodic systems.
+        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation for non-periodic systems.
         These keyword arguments can be modified at any time.
-    barostat : simtk.openmm.MonteCarloBarostat
+    barostat : openmm.MonteCarloBarostat
         If not None, this container holds the barostat parameters to use for newly created System objects.
-    molecules : openforcefield.topology.Molecule or list, optional, default=None
+    molecules : openff.toolkit.topology.Molecule or list, optional, default=None
         Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
         Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
         If specified, these molecules will be recognized and parameterized as needed.
@@ -85,15 +84,15 @@ class SystemGenerator(object):
             Supported SMIRNOFF force fields include: [`openff-1.0.0`, `smirnoff99Frosst-1.1.0`]
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
-            Keyword arguments to be passed to ``simtk.openmm.app.ForceField.createSystem()`` during ``System`` object creation.
+            Keyword arguments to be passed to ``openmm.app.ForceField.createSystem()`` during ``System`` object creation.
         nonperiodic_forcefield_kwargs : dict, optional, default={'nonbondedMethod' : NoCutoff}
             Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.
         periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
             Keyword arguments added to forcefield_kwargs when the Topology is periodic.
-        barostat : simtk.openmm.MonteCarloBarostat, optional, default=None
+        barostat : openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -108,15 +107,15 @@ class SystemGenerator(object):
 
         Here's an example that uses GAFF 2.11 along with the new ``ff14SB`` generation of AMBER force fields
         (and compatible solvent models) to generate an OpenMM ``System`` object from an
-        `Open Force Field Topology <https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openforcefield.topology.Topology.html#openforcefield.topology.Topology>`_ object:
+        `Open Force Field Topology <https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology>`_ object:
 
         >>> # Define the keyword arguments to feed to ForceField
-        >>> from simtk import unit
-        >>> from simtk.openmm import app
+        >>> from openmm import unit
+        >>> from openmm import app
         >>> # Define standard OpenMM biopolymer and solvent force fields to use
 
         To initialize the ``SystemGenerator``, we specify the OpenMM force fields, the small molecule force field, and any ``kwargs`` to be fed
-        to the OpenMM ``simtk.openmm.app.ForceField.createSystem()`` method:
+        to the OpenMM ``openmm.app.ForceField.createSystem()`` method:
 
         >>> from openmmforcefields.generators import SystemGenerator
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -136,7 +135,7 @@ class SystemGenerator(object):
         >>> frequency = 25 # steps
         >>> system_generator.barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)
 
-        Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of openforcefield ``Molecule`` objects
+        Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of OpenFF ``Molecule`` objects
 
         >>> system = system_generator.create_system(openmm_topology, molecules=molecules)
 
@@ -173,7 +172,7 @@ class SystemGenerator(object):
 
         # Create OpenMM ForceField object
         forcefields = forcefields if (forcefields is not None) else list()
-        from simtk.openmm import app
+        from openmm import app
         self.forcefield = app.ForceField(*forcefields)
 
         # Cache force fields and settings to use
@@ -188,7 +187,9 @@ class SystemGenerator(object):
                  or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
 
         # Create and cache a residue template generator
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         self.template_generator = None
         if small_molecule_forcefield is not None:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
@@ -214,7 +215,9 @@ class SystemGenerator(object):
     def SMALL_MOLECULE_FORCEFIELDS(cls):
         """Return a listof available small molecule force fields"""
         forcefields = list()
-        from openmmforcefields.generators.template_generators import SmallMoleculeTemplateGenerator
+        from openmmforcefields.generators.template_generators import (
+            SmallMoleculeTemplateGenerator,
+        )
         for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
             forcefields += template_generator_cls.INSTALLED_FORCEFIELDS
         return forcefields
@@ -225,7 +228,7 @@ class SystemGenerator(object):
 
         Parameters
         ----------
-        molecules : openforcefield.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -244,7 +247,7 @@ class SystemGenerator(object):
         # Add barostat if requested.
         if self.barostat is not None:
             import numpy as np
-            from simtk import openmm
+            import openmm
             MAXINT = np.iinfo(np.int32).max
 
             # Determine pressure, temperature, and frequency
@@ -290,13 +293,13 @@ class SystemGenerator(object):
         """
         Create a system from the specified topology.
 
-        .. todo :: Add support for openforcefield Topology objects once they can be converted to OpenMM Topology objects.
+        .. todo :: Add support for OpenFF Topology objects once they can be converted to OpenMM Topology objects.
 
         Parameters
         ----------
         topology : openmmtools.topology.Topology object
             The topology describing the system to be created
-        molecules : openforcefield.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -304,7 +307,7 @@ class SystemGenerator(object):
 
         Returns
         -------
-        system : simtk.openmm.System
+        system : openmm.System
             A system object generated from the topology
 
         """
@@ -358,12 +361,12 @@ class DummySystemGenerator(SystemGenerator):
 
         Parameters
         ----------
-        topology : openforcefield.topology.Topology
+        topology : openff.toolkit.topology.Topology
             The Topology to be parameterized
 
         Returns
         -------
-        system : simtk.openmm.System
+        system : openmm.System
             The System object
 
         """

@@ -44,9 +44,13 @@ optional arguments:
 
 ### Converting the AMBER force fields
 
-* Install the appropriate `AmberTools`
+* Install the appropriate `AmberTools` from `conda-forge`
 ```bash
-conda install --yes ambertools==19.9
+conda install -c conda-forge --yes ambertools==20.15
+```
+* Convert solvent force fields
+```bash
+python convert_amber.py --input solvents.yaml --log solvents-tests.csv
 ```
 * Convert biopolymer force fields
 ```bash

@@ -2,13 +2,16 @@
 Test AMBER forcefield imports.
 
 """
+import pathlib
+from typing import List
 
-import os
-import glob
 import pytest
 
 from openmmforcefields.utils import get_ffxml_path
-amber_ffxml_filenames = [ os.path.join('amber', os.path.split(filename)[1]) for filename in glob.glob(os.path.join(get_ffxml_path(), 'amber', '*.xml')) ]
+
+amber_ffxml_filenames: List[str] = [
+    'amber/' + file.name for file in pathlib.Path(get_ffxml_path()).glob("amber/*xml")
+]
 
 @pytest.mark.parametrize("filename", amber_ffxml_filenames, ids=lambda filename : f'Importing ffxml file {filename}')
 def test_ffxml_import(filename):
@@ -21,12 +24,20 @@ def test_ffxml_import(filename):
         The AMBER forcefield filename.
 
     """
-    from simtk.openmm import app
+    from openmm import app
 
     # Handle special cases
     if filename == 'amber/phosaa10.xml':
         # Must be used with ff99SB.xml
         filenames = ['amber/ff99SB.xml', 'amber/phosaa10.xml']
+        ff = app.ForceField(*filenames)
+    elif filename == 'amber/phosaa14SB.xml':
+        # Must be used with ff14SB.xml
+        filenames = ['amber/ff14SB.xml', 'amber/phosaa14SB.xml']
+        ff = app.ForceField(*filenames)
+    elif filename == 'amber/GLYCAM_06j-1.xml':
+        # Must be used with protein.ff14SB.xml
+        filenames = ['amber/protein.ff14SB.xml', 'amber/GLYCAM_06j-1.xml']
         ff = app.ForceField(*filenames)
     else:
         ff = app.ForceField(filename)
@@ -43,7 +54,7 @@ def check_ffxml_parameterize(pdb_filename, ffxml_filename):
         The ffxml forcefield filename.
 
     """
-    from simtk.openmm import app
+    from openmm import app
     pdbfile = app.PDBFile(pdb_filename)
     ff = app.ForceField(ffxml_filename)
 
@@ -52,7 +63,7 @@ def test_amber_import_ff94():
     Test import of ff94
 
     """
-    from simtk.openmm import app
+    from openmm import app
     ff = app.ForceField('amber/ff94.xml')
 
 def test_amber_parameterize_ff94():
@@ -61,5 +72,5 @@ def test_amber_parameterize_ff94():
 
     """
     from pkg_resources import resource_filename
-    pdb_filename = resource_filename('simtk.openmm.app', 'data/test.pdb')
+    pdb_filename = resource_filename('openmm.app', 'data/test.pdb')
     check_ffxml_parameterize(pdb_filename, 'amber/ff94.xml')

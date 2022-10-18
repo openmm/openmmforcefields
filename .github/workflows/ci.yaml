@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+  schedule:
+    - cron: "0 0 * * *"
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
+    runs-on: ${{ matrix.os }}
+    env:
+      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10"]
+        latest-openff-toolkit: [true, false]
+        exclude:
+          - python-version: "3.10"
+            os: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Conda Environment
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        environment-file: devtools/conda-envs/test_env.yaml
+        extra-specs: |
+          python=${{ matrix.python-version }}
+
+    - name: License OpenEye
+      shell: bash -l {0}
+      run: |
+        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
+        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
+      env:
+        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
+
+    - name: "Install latest openff-toolkit"
+      if: ${{ matrix.latest-openff-toolkit == true }}
+      run: |
+        micromamba update -y -c conda-forge "openff-toolkit >=0.11.0"
+
+    - name: "Install the older  openff-toolkit"
+      if: ${{ matrix.latest-openff-toolkit == false }}
+      run: |
+        micromamba install -y -c conda-forge "openff-toolkit==0.10.6" "openff-toolkit-base==0.10.6"
+
+    - name: Install Package
+      run: |
+        pip list
+        micromamba list
+        micromamba remove --force openmmforcefields
+        python -m pip install .
+
+    - name: Conda Environment Information
+      run: |
+        micromamba info
+        micromamba list
+        python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
+
+    - name: Test Installed Package
+      run: |
+        pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+          openmmforcefields/tests/test_amber_import.py \
+          openmmforcefields/tests/test_template_generators.py \
+          openmmforcefields/tests/test_system_generator.py
+      env:
+        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
+
+    - name: Test AMBER conversion
+      run: |
+        python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
+      working-directory: ./amber
+
+    - name: Test CHARMM conversion
+      run: |
+
+        # TODO: Uncomment these tests when new ParmEd is released
+        # TODO: Find a way to avoid timing out when running full charmm36.yaml conversion below
+        # python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+        # python convert_charmm.py --verbose --in files/waters.yaml
+        # python convert_charmm.py --verbose
+
+        # TODO: Uncomment this when tests are expected to work
+        # python test_charmm.py --verbose
+
+      working-directory: ./charmm
+
+    - name: Upload coverage report to CodeCov
+      uses: codecov/codecov-action@v3.1.1
+      if: ${{ github.repository == 'openmm/openmmforcefields'
+              && github.event != 'schedule' }}
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: true

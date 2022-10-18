@@ -1,11 +1,10 @@
-name: test
+name: openmmforcefields-test
 
 channels:
   - conda-forge
-  - omnia
-  - omnia/label/rc
-  - openeye
+  - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
   - defaults
+  - openeye
 
 dependencies:
     # Base depends
@@ -18,7 +17,9 @@ dependencies:
   - codecov
 
     # Requirements for converted force field installer
-  - openmm >=7.4.2
+  - openmm >=7.6.0
+
+  - openff-units >=0.1.8
 
     # Requirements for conversion tools
   - pyyaml
@@ -28,10 +29,17 @@ dependencies:
 
     # JSON caching of residue templates
   - tinydb
-
-    # openforcefield toolkit and force fields
-  - openforcefield >=0.7.1
-  - openforcefields >=1.2.0
-
     # OpenEye toolkits are only used to speed up testing; they are not required for use
   - openeye-toolkits
+
+    # Validating URLs
+  - validators
+
+    #
+    # Espaloma requirements below
+    # TODO: Rework this once espaloma is on conda-forge
+    #
+  - pytorch >=1.8.0
+  - dgl
+  - qcportal >=0.15.0
+  - espaloma
