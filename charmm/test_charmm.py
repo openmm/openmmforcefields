@@ -5,9 +5,9 @@ import yaml
 from collections import OrderedDict
 import hashlib
 import os
-import simtk.openmm.app as app
-import simtk.openmm as mm
-import simtk.unit as u
+import openmm.app as app
+import openmm as mm
+import openmm.unit as u
 import argparse
 import csv
 import logging
@@ -100,7 +100,7 @@ def write_serialized_system(filename, system):
     ----------
     filename : str
         The name of the file to be written
-    system : simtk.openmm.System
+    system : openmm.System
         The System object to be written
 
     """
@@ -129,7 +129,7 @@ def read_box_vectors(filename):
 
     Returns
     -------
-    box_vectors : simtk.unit.Quantity with shape [3,3] and units of Angstroms
+    box_vectors : openmm.unit.Quantity with shape [3,3] and units of Angstroms
         Box vectors
     """
     with open(filename, 'r') as infile:
@@ -162,14 +162,14 @@ def compute_potential(system, positions):
 
     Parameters
     ----------
-    system : simtk.openmm.System
+    system : openmm.System
         System
-    positions : simtk.unit.Quantity of shape [nparticles,3] with units compatible with angstroms
+    positions : openmm.unit.Quantity of shape [nparticles,3] with units compatible with angstroms
         Positions
 
     Returns
     -------
-    potential : simtk.unit.Quantity with units of kJ/mol
+    potential : openmm.unit.Quantity with units of kJ/mol
         The potential energy
 
     """
@@ -202,7 +202,7 @@ def compare_energies(system_name, pdb_filename, psf_filename, ffxml_filenames, t
         Keyword arguments to pass to CharmmPsfFile.createSystem() and ForceField.CreateSystem() when constructing System objects for energy comparison
     tolerance : float, optional, default=1e-5
         Relative energy discrepancy tolerance
-    units : simtk.unit.Unit
+    units : openmm.unit.Unit
         Unit to use for energy comparison
     write_serialized_xml : bool, optional, default=False
         If True, will write out serialized System XML files for OpenMM systems to aid debugging.

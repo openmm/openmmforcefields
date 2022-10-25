@@ -126,10 +126,12 @@ class SystemGenerator:
         If the ``cache`` argument is specified, parameterized molecules are cached in the corresponding file.
 
         >>> cache = 'db.json'
-        >>> system_generator = SystemGenerator(forcefields=forcefields, small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache=cache)
+        >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache=cache)  # doctest: +SKIP
 
         To use a barostat, you need to define a barostat whose parameters will be copied into each system (with a different random number seed):
 
+        >>> import openmm
+        >>> from openmm import unit
         >>> pressure = 1.0 * unit.atmospheres
         >>> temperature = 298.0 * unit.kelvin
         >>> frequency = 25 # steps
@@ -137,6 +139,9 @@ class SystemGenerator:
 
         Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of OpenFF ``Molecule`` objects
 
+        >>> from openff.toolkit import Molecule, Topology
+        >>> molecules = [Molecule.from_smiles(smiles) for smiles in ["CCO", "c1ccccc1"]]
+        >>> openmm_topology = Topology.from_molecules(molecules).to_openmm()
         >>> system = system_generator.create_system(openmm_topology, molecules=molecules)
 
         Parameters for multiple force fields can be held in the same cache file.
@@ -145,7 +150,7 @@ class SystemGenerator:
         simply change the ``small_molecule_forcefield`` parameter to one of the supported ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS``:
 
         >>> small_molecule_forcefield = 'openff-1.0.0'
-        >>> system_generator = SystemGenerator(forcefields=forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
+        >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)
 
         For debugging convenience, you can also turn _off_ specific interactions during system creation, such as particle charges:
 
