@@ -1,6 +1,7 @@
 name: openmmforcefields-test
 
 channels:
+  - conda-forge/label/openmm_rc
   - conda-forge
   - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
   - defaults
@@ -16,8 +17,7 @@ dependencies:
   - pytest-cov
   - codecov
 
-    # Requirements for converted force field installer
-  - openmm >=7.6.0
+  - openmm >=8.0.0beta
 
   - openff-units >=0.1.8
   - openff-amber-ff-ports >=0.0.3
