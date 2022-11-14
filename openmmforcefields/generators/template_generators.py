@@ -1477,7 +1477,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None):
+    def __init__(self, molecules=None, cache=None, forcefield=None, reference_forcefield=None, charge_method=None, model_cache_path=None):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1498,6 +1498,15 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             Name of installed Espaloma force field version (e.g. 'espaloma-0.2.2') to retrieve remotely,
             a local Espaloma .pt parmaeters filename (with extension),
             or a URL to an online espaloma force field.
+        reference_forcefield : str, optional, default=None
+            Name of the openf force field used to assign nonbonded parameters.
+            All valence parameters will be overwritten by espaloma_frocefield.
+        charge_method : str, optional, default=None
+            Method to use for assigning partial charges:
+            'nn' : Assign partial charges from the espaloma graph net model
+            'am1-bcc' : Allow the OpenFF toolkit to assign AM1-BCC charges using default backend
+            'gasteiger' : Assign Gasteiger partial charges (not recommended)
+            'from-molecule' : Use partial charges provided in the original `Molecule` object
         model_cache_path : str, optional, default=None
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
@@ -1559,6 +1568,24 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Check that espaloma model parameters can be found or locally cached
         self.espaloma_model_filepath = self._get_model_filepath(forcefield)
+
+        if reference_forcefield is None:
+            reference_forcefield = 'openff_unconstrained-1.2.0'
+        else:
+            try:
+                ff = ForceField("%s.offxml" % forcefield)
+            except:
+                msg = "Invalid reference forcefield"
+                ValueError(msg)
+        self._reference_forcefield = reference_forcefield
+
+        if charge_method is None:
+            charge_method = 'am1-bcc'
+        else:
+            if charge_method not in ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']:
+                msg = "Invalid charge method"
+                ValueError(msg)
+        self._charge_method = charge_method
 
         # Check to make sure dependencies are installed
         try:
@@ -1708,11 +1735,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self.espaloma_model(molecule_graph.heterograph)
 
         # Create an OpenMM System
-        if self._molecule_has_user_charges(molecule):
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='from-molecule')
-        else:
-            # use espaloma charges
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
+        system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)        
+        _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
 
         # Convert to ffxml
