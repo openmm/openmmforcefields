@@ -1054,9 +1054,12 @@ class OpenMMSystemMixin:
             return { f'class{class_index+1}' : molecule.atoms[atom_index].typename for class_index,atom_index in enumerate(atom_indices) }
 
         # Lennard-Jones
-        # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
-        # though this must match the original AMBER values
-        nonbonded_types = etree.SubElement(root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5")
+        nonbonded_types = etree.SubElement(
+            root,
+            "NonbondedForce",
+            coulomb14scale=self._smirnoff_forcefield['Electrostatics'].scale14,
+            lj14scale=self._smirnoff_forcefield['vdW'].scale14,
+        )
         etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
         for atom_index in range(forces['NonbondedForce'].getNumParticles()):
             charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(atom_index)
