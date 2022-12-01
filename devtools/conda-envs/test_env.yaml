@@ -21,6 +21,7 @@ dependencies:
 
   - openff-units >=0.1.8
   - openff-amber-ff-ports >=0.0.3
+  - openff-toolkit >=0.11.3
 
     # Requirements for conversion tools
   - pyyaml
