@@ -52,12 +52,12 @@ jobs:
       env:
         SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
 
-    - name: "Install latest openff-toolkit"
+    - name: "Install openff-toolkit >= 0.11 API changes"
       if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
-        micromamba update -y -c conda-forge "openff-toolkit >=0.11.0"
+        micromamba update -y -c conda-forge "openff-toolkit >=0.11.3"
 
-    - name: "Install the older  openff-toolkit"
+    - name: "Install openff-toolkit <  0.11 API changes"
       if: ${{ matrix.latest-openff-toolkit == false }}
       run: |
         micromamba install -y -c conda-forge "openff-toolkit==0.10.6" "openff-toolkit-base==0.10.6"
