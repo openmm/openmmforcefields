@@ -1578,6 +1578,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Load torch model
         import torch
         self.espaloma_model = torch.load(self.espaloma_model_filepath, map_location=torch.device('cpu'))
+        self.espaloma_model.eval()
 
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
