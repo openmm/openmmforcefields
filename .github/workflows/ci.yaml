@@ -44,14 +44,6 @@ jobs:
         extra-specs: |
           python=${{ matrix.python-version }}
 
-    - name: License OpenEye
-      shell: bash -l {0}
-      run: |
-        echo "${SECRET_OE_LICENSE}" > ${OE_LICENSE}
-        python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
-      env:
-        SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
-
     - name: "Install openff-toolkit >= 0.11 API changes"
       if: ${{ matrix.latest-openff-toolkit == true }}
       run: |
