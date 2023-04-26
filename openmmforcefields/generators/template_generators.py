@@ -1322,7 +1322,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             # impropers and one with Amber-style impropers. The latter requires a special handler
             # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
             # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
-            if root.startswith("ff14sb") and 'off_impropers' not in root:
+            if (
+                (root.startswith("ff14sb") and 'off_impropers' not in root)
+                or root.startswith("tip")
+                or root.startswith("opc")
+            ):
                 continue
             file_names.append(root)
 
