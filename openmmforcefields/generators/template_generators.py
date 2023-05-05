@@ -1481,8 +1481,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     """
     CHARGE_METHODS = ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']
 
-    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None,
-                 template_generator_kwargs={'reference_forcefield': 'openff_unconstrained-2.0.0', 'charge_method': 'nn'}):
+    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None, template_generator_kwargs={}):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1506,7 +1505,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         model_cache_path : str, optional, default=None
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
-        template_generator_kwargs : dict, optional, default={'reference_forcefield': 'openff_unconstrained-2.0.0', 'charge_method': 'nn'}
+        template_generator_kwargs : dict, optional, default=None
             Optional keyword arguments.
 
         Examples
@@ -1568,21 +1567,26 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self.espaloma_model_filepath = self._get_model_filepath(forcefield)
 
         # Check reference forcefield
-        reference_forcefield = template_generator_kwargs['reference_forcefield']
-        try:
-            ff = ForceField("%s.offxml" % reference_forcefield)
-        except:
-            msg = f"Invalid reference forcefield. See https://github.com/openforcefield/openff-forcefields for supported force fields."
-            ValueError(msg)
+        if 'reference_forcefield' not in template_generator_kwargs.keys():
+            reference_forcefield = 'openff_unconstrained-2.0.0'
+        else:
+            reference_forcefield = template_generator_kwargs['reference_forcefield']
+            try:
+                ff = ForceField("%s.offxml" % reference_forcefield)
+            except:
+                msg = f"Invalid reference forcefield. See https://github.com/openforcefield/openff-forcefields for supported force fields."
+                ValueError(msg)
         self._reference_forcefield = reference_forcefield
 
         # Check charge method
-        charge_method = template_generator_kwargs['charge_method']
-        if charge_method not in self.CHARGE_METHODS:
-            msg = f"Invalid charge method. Choose from [{self.CHARGE_METHODS}]."
-            ValueError(msg)
+        if 'charge_method' not in template_generator_kwargs.keys():
+            charge_method = 'nn'
         else:
-            self._charge_method = charge_method
+            charge_method = template_generator_kwargs['charge_method']
+            if charge_method not in self.CHARGE_METHODS:
+                msg = f"Invalid charge method. Choose from [{self.CHARGE_METHODS}]."
+                ValueError(msg)
+        self._charge_method = charge_method
 
         # Check to make sure dependencies are installed
         try:
