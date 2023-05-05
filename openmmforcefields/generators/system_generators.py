@@ -203,7 +203,7 @@ class SystemGenerator:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
                     _logger.debug(f'Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}')
-                    self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache, template_generator_kwargs=template_generator_kwargs)
+                    self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache, template_generator_kwargs=self.template_generator_kwargs)
                     break
                 except ValueError as e:
                     _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
