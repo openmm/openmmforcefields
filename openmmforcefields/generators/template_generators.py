@@ -1571,11 +1571,15 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             reference_forcefield = 'openff_unconstrained-2.0.0'
         else:
             reference_forcefield = template_generator_kwargs['reference_forcefield']
+            print(reference_forcefield)
             try:
+                print("try")
+                from openmm.app import ForceField
                 ff = ForceField("%s.offxml" % reference_forcefield)
             except:
+                print("except")
                 msg = f"Invalid reference forcefield. See https://github.com/openforcefield/openff-forcefields for supported force fields."
-                ValueError(msg)
+                raise ValueError(msg)
         self._reference_forcefield = reference_forcefield
 
         # Check charge method
@@ -1584,16 +1588,16 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         else:
             charge_method = template_generator_kwargs['charge_method']
             if charge_method not in self.CHARGE_METHODS:
-                msg = f"Invalid charge method. Choose from [{self.CHARGE_METHODS}]."
-                ValueError(msg)
+                msg = f"Invalid charge method. Supported charge methods are {self.CHARGE_METHODS}."
+                raise ValueError(msg)
         self._charge_method = charge_method
 
         # Check to make sure dependencies are installed
-        try:
-            import espaloma
-        except ImportError as e:
-            msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
-            raise ValueError(msg)
+        #try:
+        #    import espaloma
+        #except ImportError as e:
+        #    msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
+        #    raise ValueError(msg)
 
         # Check force field can be found
 
