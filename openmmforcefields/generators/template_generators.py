@@ -1479,7 +1479,6 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    INSTALLED_FORCEFIELDS = ['espaloma-0.2.2']
     CHARGE_METHODS = ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']
 
     def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None,
@@ -1558,11 +1557,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 
-        # Use latest supported Open Force Field Initiative release if none is specified
         if forcefield is None:
+            # Use latest supported Open Force Field Initiative release if none is specified
+            forcefield = 'espaloma-0.2.2'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
-            forcefield = self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
 
         # Check that espaloma model parameters can be found or locally cached
@@ -1616,7 +1615,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return self.INSTALLED_FORCEFIELDS
+        return ['espaloma-0.2.2']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
