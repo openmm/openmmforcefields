@@ -65,7 +65,7 @@ class SystemGenerator:
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
+    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, template_generator_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -89,6 +89,8 @@ class SystemGenerator:
             Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.
         periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
             Keyword arguments added to forcefield_kwargs when the Topology is periodic.
+        template_generator_kwargs : dict, optional, default=None
+            Keyword arguments to be passed to ``openmmforcefields.generators.template_generators``.
         barostat : openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
@@ -184,6 +186,7 @@ class SystemGenerator:
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
         self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.NoCutoff}
         self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
+        self.template_generator_kwargs = template_generator_kwargs if template_generator_kwargs is not None else dict()
 
         # Raise an exception if nonbondedForce is specified in forcefield_kwargs
         if 'nonbondedMethod' in self.forcefield_kwargs:
@@ -200,7 +203,7 @@ class SystemGenerator:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
                     _logger.debug(f'Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}')
-                    self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache)
+                    self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache, template_generator_kwargs=template_generator_kwargs)
                     break
                 except ValueError as e:
                     _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')

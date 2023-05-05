@@ -397,7 +397,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     INSTALLED_FORCEFIELDS = ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 
-    def __init__(self, molecules=None, forcefield=None, cache=None):
+    def __init__(self, molecules=None, forcefield=None, cache=None, template_generator_kwargs={}):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -417,7 +417,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             GAFF force field to use, one of ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
             If not specified, the latest GAFF supported version is used.
             GAFFTemplateGenerator.INSTALLED_FORCEFIELDS contains a complete up-to-date list of supported force fields.
-
+        template_generator_kwargs : dict, optional, default=None
+            Optional keyword arguments.
         Examples
         --------
 
@@ -1193,7 +1194,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    def __init__(self, molecules=None, cache=None, forcefield=None):
+    def __init__(self, molecules=None, cache=None, forcefield=None, template_generator_kwargs={}):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1212,7 +1213,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         forcefield : str, optional, default=None
             Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
             If not specified, the latest Open Force Field Initiative release is used.
-
+        template_generator_kwargs : dict, optional, default=None
+            Optional keyword arguments.
         Examples
         --------
 
@@ -1477,7 +1479,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None):
+    INSTALLED_FORCEFIELDS = ['espaloma-0.2.2']
+    CHARGE_METHODS = ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']
+
+    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None,
+                 template_generator_kwargs={'reference_forcefield': 'openff_unconstrained-2.0.0', 'charge_method': 'nn'}):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1501,6 +1507,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         model_cache_path : str, optional, default=None
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
+        template_generator_kwargs : dict, optional, default={'reference_forcefield': 'openff_unconstrained-2.0.0', 'charge_method': 'nn'}
+            Optional keyword arguments.
 
         Examples
         --------
@@ -1550,15 +1558,32 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 
+        # Use latest supported Open Force Field Initiative release if none is specified
         if forcefield is None:
-            # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'espaloma-0.2.2'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
+            forcefield = self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
 
         # Check that espaloma model parameters can be found or locally cached
         self.espaloma_model_filepath = self._get_model_filepath(forcefield)
+
+        # Check reference forcefield
+        installed_smirnoffs = SMIRNOFFTemplateGenerator().INSTALLED_FORCEFIELDS
+        reference_forcefield = template_generator_kwargs['reference_forcefield']
+        if reference_forcefield not in installed_smirnoffs:
+            msg = f"Invalid reference forcefield. Choose from [{installed_smirnoffs}]."
+            ValueError(msg)
+        else:
+            self.reference_forcefield = reference_forcefield
+
+        # Check charge method
+        charge_method = template_generator_kwargs['charge_method']
+        if charge_method not in self.CHARGE_METHODS:
+            msg = f"Invalid charge method. Choose from [{self.CHARGE_METHODS}]."
+            ValueError(msg)
+        else:
+            self.charge_method = charge_method
 
         # Check to make sure dependencies are installed
         try:
@@ -1591,7 +1616,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return ['espaloma-0.2.2']
+        return self.INSTALLED_FORCEFIELDS
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1709,11 +1734,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self.espaloma_model(molecule_graph.heterograph)
 
         # Create an OpenMM System
-        if self._molecule_has_user_charges(molecule):
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='from-molecule')
-        else:
-            # use espaloma charges
-            system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method='nn')
+        system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self.charge_method, forcefield=self.reference_forcefield)
+        _logger.info(f'Generating a system with charge method {self.charge_method} and {self.reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
 
         # Convert to ffxml
