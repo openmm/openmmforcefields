@@ -1571,9 +1571,10 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             reference_forcefield = 'openff_unconstrained-2.0.0'
         else:
             reference_forcefield = template_generator_kwargs['reference_forcefield']
+            # Check if the reference_forcefield could be called.
             try:
-                from openmm.app import ForceField
-                ff = ForceField("%s.offxml" % reference_forcefield)
+                from openff.toolkit.typing.engines.smirnoff import ForceField as OpenffForceField
+                ff = OpenffForceField("%s.offxml" % reference_forcefield)
             except:
                 msg = f"Invalid reference forcefield. See https://github.com/openforcefield/openff-forcefields for supported force fields."
                 raise ValueError(msg)
