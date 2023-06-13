@@ -90,7 +90,8 @@ class SystemGenerator:
         periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
             Keyword arguments added to forcefield_kwargs when the Topology is periodic.
         template_generator_kwargs : dict, optional, default=None
-            Keyword arguments to be passed to ``openmmforcefields.generators.template_generators``.
+            Keyword arguments to be passed to subclasses of ``openmmforcefields.generators.template_generators.SmallMoleculeTemplateGenerator``.
+            Currently only used for ``openmmforcefields.generators.template_generators.EspalomaTemplateGenerator``.
         barostat : openmm.MonteCarloBarostat, optional, default=None
             If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed) will be created and
             added to each newly created ``System``.
@@ -186,7 +187,7 @@ class SystemGenerator:
         self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
         self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.NoCutoff}
         self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
-        self.template_generator_kwargs = template_generator_kwargs if template_generator_kwargs is not None else dict()
+        self.template_generator_kwargs = template_generator_kwargs
 
         # Raise an exception if nonbondedForce is specified in forcefield_kwargs
         if 'nonbondedMethod' in self.forcefield_kwargs:

@@ -397,7 +397,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
     INSTALLED_FORCEFIELDS = ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 
-    def __init__(self, molecules=None, forcefield=None, cache=None, template_generator_kwargs={}):
+    def __init__(self, molecules=None, forcefield=None, cache=None, **kwargs):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -417,8 +417,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             GAFF force field to use, one of ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
             If not specified, the latest GAFF supported version is used.
             GAFFTemplateGenerator.INSTALLED_FORCEFIELDS contains a complete up-to-date list of supported force fields.
-        template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments.
         Examples
         --------
 
@@ -1194,7 +1192,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    def __init__(self, molecules=None, cache=None, forcefield=None, template_generator_kwargs={}):
+    def __init__(self, molecules=None, cache=None, forcefield=None, **kwargs):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1213,8 +1211,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         forcefield : str, optional, default=None
             Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
             If not specified, the latest Open Force Field Initiative release is used.
-        template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments.
         Examples
         --------
 
@@ -1479,9 +1475,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    CHARGE_METHODS = ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']
+    CHARGE_METHODS = ('nn', 'am1-bcc', 'gasteiger', 'from-molecule')
 
-    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None, template_generator_kwargs={}):
+    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None, template_generator_kwargs=None, **kwargs):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1506,7 +1502,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments.
+            Optional keyword arguments. Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield``.
+            Partial charge assignment using ``charge_method`` = ``from-molecule`` is not supported.
+            If partial charges are assigned to a molecule, this will be overwritten by espaloma charge.
+            {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields without .offxml extension}
+            {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']} 
 
         Examples
         --------
@@ -1545,6 +1545,12 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.2.2')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
+
+        You can also pass a template_generator_kwargs to specify the reference_forcefield and/or charge_method in EspalomaTemplateGenerator:
+
+        >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.0.0", "charge_method": "nn"}
+        >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.2.2', 
+        >>>                                                template_generator_kwargs=template_generator_kwargs)
         """
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
@@ -1566,36 +1572,20 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Check that espaloma model parameters can be found or locally cached
         self.espaloma_model_filepath = self._get_model_filepath(forcefield)
 
-        # Check reference forcefield
-        if 'reference_forcefield' not in template_generator_kwargs.keys():
-            reference_forcefield = 'openff_unconstrained-2.0.0'
+        # Check reference forcefield and charge method
+        if template_generator_kwargs is not None:
+            self._reference_forcefield = template_generator_kwargs.get('reference_forcefield', 'openff_unconstrained-2.0.0')
+            self._charge_method = template_generator_kwargs.get('charge_method', 'nn')
         else:
-            reference_forcefield = template_generator_kwargs['reference_forcefield']
-            # Check if the reference_forcefield could be called.
-            try:
-                from openff.toolkit.typing.engines.smirnoff import ForceField as OpenffForceField
-                ff = OpenffForceField("%s.offxml" % reference_forcefield)
-            except:
-                msg = f"Invalid reference forcefield. See https://github.com/openforcefield/openff-forcefields for supported force fields."
-                raise ValueError(msg)
-        self._reference_forcefield = reference_forcefield
-
-        # Check charge method
-        if 'charge_method' not in template_generator_kwargs.keys():
-            charge_method = 'nn'
-        else:
-            charge_method = template_generator_kwargs['charge_method']
-            if charge_method not in self.CHARGE_METHODS:
-                msg = f"Invalid charge method. Supported charge methods are {self.CHARGE_METHODS}."
-                raise ValueError(msg)
-        self._charge_method = charge_method
+            self._reference_forcefield = 'openff_unconstrained-2.0.0'
+            self._charge_method = 'nn'
 
         # Check to make sure dependencies are installed
-        #try:
-        #    import espaloma
-        #except ImportError as e:
-        #    msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
-        #    raise ValueError(msg)
+        try:
+            import espaloma
+        except ImportError as e:
+            msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
+            raise ValueError(msg)
 
         # Check force field can be found
 
@@ -1736,9 +1726,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         regenerate_impropers(molecule_graph)
 
         # Assign parameters
+        # NOTE: espaloma (nn) partial charges are assigned to molecules automatically if available.
+        # We need to overwrite the partial charges if we want to read them from the molecule.
         self.espaloma_model(molecule_graph.heterograph)
 
         # Create an OpenMM System
+        #if self._molecule_has_user_charges(molecule):
+        #    _logger.info(f'Found partial charges in molecule. Forcing charge method to "from-molecule"')
+        #    self._charge_method = 'from-molecule'
         system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)
         _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
