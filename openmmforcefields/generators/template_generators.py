@@ -1502,11 +1502,13 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments. Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield``.
-            Partial charge assignment using ``charge_method`` = ``from-molecule`` is not supported.
-            If partial charges are assigned to a molecule, this will be overwritten by espaloma charge.
+            Optional keyword arguments: 
             {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields without .offxml extension}
             {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']} 
+            
+            Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and  `nn` for `charge_method`.
+            User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule`` 
+            if charges are assigned to openff.toolkit.topology.Molecule.
 
         Examples
         --------
@@ -1725,15 +1727,28 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         from espaloma.graphs.utils.regenerate_impropers import regenerate_impropers
         regenerate_impropers(molecule_graph)
 
+        # Book keep partial charges if molecule has user charges
+        # NOTE: Charges will be overwritten when the Espaloma Graph object is loaded into an espaloma model
+        if self._molecule_has_user_charges(molecule):
+            _charges = molecule.partial_charges.value_in_unit(esp.units.CHARGE_UNIT)
+
         # Assign parameters
-        # NOTE: espaloma (nn) partial charges are assigned to molecules automatically if available.
-        # We need to overwrite the partial charges if we want to read them from the molecule.
         self.espaloma_model(molecule_graph.heterograph)
 
         # Create an OpenMM System
-        #if self._molecule_has_user_charges(molecule):
-        #    _logger.info(f'Found partial charges in molecule. Forcing charge method to "from-molecule"')
-        #    self._charge_method = 'from-molecule'
+        # Update partial charges if charge_method is "from_molecule"
+        if self._charge_method == 'from-molecule':
+            if self._molecule_has_user_charges(molecule):
+                import torch
+                import numpy as np
+                # Handle ValueError:
+                # "ValueError: given numpy array has byte order different from the native byte order. 
+                # Conversion between byte orders is currently not supported."
+                _charges = _charges.astype(np.float32)
+                molecule_graph.nodes['n1'].data['q'] = torch.from_numpy(_charges).unsqueeze(-1).float()
+            else:
+                # TODO: Is this the right place to raise error?
+                raise ValueError(f'Partial charges not assigned to molecule.')
         system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)
         _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
