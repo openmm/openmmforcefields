@@ -1283,6 +1283,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
            https://github.com/openforcefield/openff-toolkit/issues/477
 
         """
+        # It may be better to use an allow list instead of grabbing all and filtering things out.
+
         from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
         file_names = list()
         for filename in get_available_force_fields(full_paths=False):
@@ -1290,12 +1292,20 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             # Only add variants without '_unconstrained'
             if '_unconstrained' in root:
                 continue
+
+            # Don't load water models as small molecule force fields
+            if root.startswith("tip"):
+                continue
+            if root.startswith("opc"):
+                continue
+
             # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
             # impropers and one with Amber-style impropers. The latter requires a special handler
             # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
             # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
             if root.startswith("ff14sb") and 'off_impropers' not in root:
                 continue
+
             file_names.append(root)
 
         return file_names
