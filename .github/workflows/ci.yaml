@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     env:
       OE_LICENSE: ${{ github.workspace }}/oe_license.txt
@@ -29,7 +29,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python-version: ["3.9", "3.10"]  # Add 3.11 in with AmberTools 23
-        latest-openff-toolkit: [true, false]
         exclude:
           - python-version: "3.10"
             os: macos-latest
@@ -51,16 +50,6 @@ jobs:
         python -c "from openeye import oechem; assert oechem.OEChemIsLicensed()"
       env:
         SECRET_OE_LICENSE: ${{ secrets.OE_LICENSE }}
-
-    - name: "Install openff-toolkit >= 0.11 API changes"
-      if: ${{ matrix.latest-openff-toolkit == true }}
-      run: |
-        micromamba update -y -c conda-forge "openff-toolkit >=0.11.3"
-
-    - name: "Install openff-toolkit <  0.11 API changes"
-      if: ${{ matrix.latest-openff-toolkit == false }}
-      run: |
-        micromamba install -y -c conda-forge "openff-toolkit==0.10.6" "openff-toolkit-base==0.10.6"
 
     - name: Install Package
       run: |
@@ -108,7 +97,6 @@ jobs:
       working-directory: ./charmm
 
     - name: Run docstrings
-      if: ${{ matrix.latest-openff-toolkit == true }}
       continue-on-error: True
       run: |
         pytest --doctest-modules openmmforcefields --ignore=openmmforcefields/tests
