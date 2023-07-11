@@ -244,12 +244,9 @@ class SmallMoleculeTemplateGenerator:
         """
         from collections import defaultdict
 
-        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
         element_counts = defaultdict(int)
         for atom in molecule.atoms:
-            symbol = atom.element.symbol if uses_old_api else atom.symbol
+            symbol = atom.symbol
             element_counts[symbol] += 1
             atom.name = symbol + str(element_counts[symbol])
 
@@ -290,7 +287,7 @@ class SmallMoleculeTemplateGenerator:
                         continue
 
                     # See if the template matches
-                    from openff.toolkit.topology import Molecule
+                    from openff.toolkit import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
                     _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
@@ -360,7 +357,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     Create a template generator for GAFF for a single Molecule and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
-    >>> from openff.toolkit.topology import Molecule
+    >>> from openff.toolkit import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the GAFF template generator
     >>> from openmmforcefields.generators import GAFFTemplateGenerator
@@ -423,7 +420,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openff.toolkit.topology import Molecule
+        >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
@@ -581,13 +578,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         from openff.units import unit
         from openff.units.openmm import ensure_quantity
 
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
-        if uses_old_api:
-            unit_solution = "openmm"
-        else:
-            unit_solution = "openff"
-
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
@@ -645,22 +635,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         #       or pure numbers.
         _logger.debug(f'Fixing partial charges...')
         _logger.debug(f'{molecule.partial_charges}')
-        residue_charge = ensure_quantity(0.0 * unit.elementary_charge, unit_solution)
+
         total_charge = molecule.partial_charges.sum()
 
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
 
-        if uses_old_api:
-            from openmm import unit as openmm_unit
-
-            redistribute = sum_of_absolute_charge > 0.0
-
-            sum_of_absolute_charge = openmm_unit.Quantity(
-                sum_of_absolute_charge,
-                openmm_unit.elementary_charge,
-            )
-        else:
-            redistribute = sum_of_absolute_charge.m > 0.0
+        redistribute = sum_of_absolute_charge.m > 0.0
 
         charge_deficit = net_charge - total_charge
 
@@ -699,14 +679,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
 
-            if uses_old_api:
-                charge_string =str(
-                    atom.partial_charge.value_in_unit(openmm_unit.elementary_charge)
-                )
-            else:
-                charge_string = str(
-                    atom.partial_charge.m_as(unit.elementary_charge)
-                )
+            charge_string = str(
+                atom.partial_charge.m_as(unit.elementary_charge)
+            )
 
             atom = etree.SubElement(
                 residue,
@@ -989,8 +964,6 @@ class OpenMMSystemMixin:
         ffxml_contents : str
             The OpenMM ffxml contents for the given molecule.
         """
-        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
-        uses_old_api = hasattr(molecule.atoms[0], "element")
 
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
@@ -1024,8 +997,7 @@ class OpenMMSystemMixin:
         atom_types = etree.SubElement(root, "AtomTypes")
         for atom_index, atom in enumerate(molecule.atoms):
             # Create a new atom type for each atom in the molecule
-            paricle_indices = [atom_index]
-            element_symbol = atom.element.symbol if uses_old_api else atom.symbol
+            element_symbol = atom.symbol
             atom_type = etree.SubElement(atom_types, "Type", name=atom.typename,
                 element=element_symbol, mass=as_attrib(atom.mass))
             atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
@@ -1274,12 +1246,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         self._database_table_name = os.path.basename(forcefield)
 
         # Create ForceField object
-        import openff.toolkit.typing.engines.smirnoff
+        from openff.toolkit import ForceField as _ForceField
         try:
             filename = forcefield
             if not filename.endswith('.offxml'):
                 filename += '.offxml'
-            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
+            self._smirnoff_forcefield = _ForceField(filename)
         except Exception as e:
             _logger.error(e)
             raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths")
@@ -1314,7 +1286,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
         file_names = list()
         for filename in get_available_force_fields(full_paths=False):
-            root, ext = os.path.splitext(filename)
+            root, _ = os.path.splitext(filename)
             # Only add variants without '_unconstrained'
             if '_unconstrained' in root:
                 continue

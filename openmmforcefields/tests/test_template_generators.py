@@ -67,12 +67,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
 
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
-        molecule.conformers[0][0,0] += ensure_quantity(
-            unit.Quantity(0.1, unit.angstroms),
-            "openmm" if uses_old_api else "openff",
-        )
+        molecule.conformers[0][0,0] += unit.Quantity(0.1, unit.angstroms)
 
         molecules.insert(0, molecule)
         # DEBUG END
@@ -244,7 +239,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
 
     def test_charge_from_molecules(self):
         """Test that user-specified partial charges are used if requested"""
-        from openff.units.openmm import ensure_quantity
+        from openff.units import unit
 
         # Create a generator that does not know about any molecules
         generator = self.TEMPLATE_GENERATOR()
@@ -256,12 +251,6 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         # Check that parameterizing a molecule using user-provided charges produces expected charges
 
         molecule = self.molecules[0]
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
-        if uses_old_api:
-            from openmm import unit
-        else:
-            from openff.units import unit
 
         # Populate the molecule with arbitrary partial charges that still sum to 0.0
         molecule.partial_charges = unit.Quantity(
@@ -269,9 +258,9 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
             unit.elementary_charge,
         )
 
-        assert (molecule.partial_charges is not None)
+        assert molecule.partial_charges is not None
 
-        assert not np.all(ensure_quantity(molecule.partial_charges, "openff").m == 0)
+        assert not np.all(molecule.partial_charges.m == 0)
 
         generator.add_molecules(molecule)
 
@@ -730,8 +719,6 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         from openff.units.openmm import ensure_quantity
         from openmm import unit
 
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
         temperature = 300 * unit.kelvin
         collision_rate = 1.0 / unit.picoseconds
         timestep = 1.0 * unit.femtoseconds
@@ -747,7 +734,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
         new_molecule.conformers[0] = ensure_quantity(
             new_positions,
-            "openmm" if uses_old_api else "openff",
+            "openff",
         )
 
 
@@ -861,8 +848,6 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         from openff.units.openmm import ensure_quantity
         from openmm import unit
 
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
         temperature = 300 * unit.kelvin
         collision_rate = 1.0 / unit.picoseconds
         timestep = 1.0 * unit.femtoseconds
@@ -878,7 +863,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
 
         new_molecule.conformers[0] = ensure_quantity(
             new_positions,
-            "openmm" if uses_old_api else "openff",
+            "openff",
         )
 
         # Clean up
