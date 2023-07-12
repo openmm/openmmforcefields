@@ -782,7 +782,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
                 continue
             if "tip" in small_molecule_forcefield:
                 continue
-            if "tip" in small_molecule_forcefield:
+            if "opc" in small_molecule_forcefield:
                 continue
 
             print(f'Testing energies for {small_molecule_forcefield}...')
