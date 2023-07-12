@@ -76,6 +76,7 @@ jobs:
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
+      if: always()
       run: |
         pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/test_amber_import.py \
