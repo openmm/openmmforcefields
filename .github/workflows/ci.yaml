@@ -78,7 +78,7 @@ jobs:
     - name: Test Installed Package
       if: always()
       run: |
-        pytest -nauto -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+        pytest -v -x --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/test_amber_import.py \
           openmmforcefields/tests/test_template_generators.py \
           openmmforcefields/tests/test_system_generator.py

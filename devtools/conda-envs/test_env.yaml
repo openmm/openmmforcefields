@@ -14,8 +14,7 @@ dependencies:
     # Testing
   - pytest
   - pytest-cov
-  - pytest-xdist
-  - pytest-randomly
+  - codecov
 
     # Requirements for converted force field installer
   - openmm >=7.6.0
