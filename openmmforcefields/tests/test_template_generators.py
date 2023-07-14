@@ -534,6 +534,10 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
+            if "tip" in small_molecule_forcefield:
+                continue
+            if "opc" in small_molecule_forcefield:
+                continue
             print(f'Testing {small_molecule_forcefield}')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
