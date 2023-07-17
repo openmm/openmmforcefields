@@ -18,7 +18,90 @@ CI = ('CI' in os.environ)
 # Tests
 ################################################################################
 
-class TestSystemGenerator(unittest.TestCase):
+@pytest.fixture(scope="class", autouse=True)
+
+
+def test_systems():
+    testsystems = dict()
+    for (system_name, prefix) in [
+        # TODO: Uncomment these after we fix input files
+        ('bace', 'Bace'),
+        # ('cdk1', 'CDK2'),
+        # ('jnk1', 'Jnk1'),
+        # ('mcl1', 'MCL1'),
+        # ('p38', 'p38'),
+        # ('ptp1b', 'PTP1B'),
+        # ('thrombin', 'Thrombin'),
+        # ('tyk2', 'Tyk2'),
+    ]:
+        # Load protein
+        pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
+        pdbfile = PDBFile(pdb_filename)
+
+        # Load molecules
+        sdf_filename = get_data_filename(
+            os.path.join('perses_jacs_systems', system_name, prefix + '_ligands_shifted.sdf'))
+
+        molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
+        print(f'Read {len(molecules)} molecules from {sdf_filename}')
+        n_molecules = len(molecules)
+
+        # Limit number of molecules for testing
+        MAX_MOLECULES = 10 if not CI else 2
+        if (n_molecules > MAX_MOLECULES):
+            print(f'Limiting to {MAX_MOLECULES} for testing...')
+            n_molecules = MAX_MOLECULES
+        molecules = [molecules[index] for index in range(n_molecules)]
+
+        # Create structures
+        import parmed
+
+        # NOTE: This does not work because parmed does not correctly assign bonds for HID
+        # protein_structure = parmed.load_file(pdb_filename)
+        # NOTE: This is the workaround
+        protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
+
+        molecules_structure = parmed.load_file(sdf_filename)
+        molecules_structure = [molecules_structure[index] for index in range(n_molecules)]
+
+        complex_structures = [(molecules_structure[index] + protein_structure) for index in range(n_molecules)]
+        complex_structures = [molecules_structure[index] for index in range(n_molecules)]  # DEBUG
+
+        # Store
+        testsystem = {
+            'name': system_name,
+            'protein_pdbfile': pdbfile,
+            'molecules': molecules,
+            'complex_structures': complex_structures
+        }
+        testsystems[system_name] = testsystem
+
+        # DEBUG
+        for name, testsystem in testsystems.items():
+            filename = f'testsystem-{name}.pdb'
+            print(filename)
+            structure = testsystem['complex_structures'][0]
+            # structure.save(filename, overwrite=True)
+            with open(filename, 'w') as outfile:
+                PDBFile.writeFile(structure.topology, structure.positions, outfile)
+            testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.sdf', file_format="SDF")
+            testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.pdb', file_format="PDB")
+
+    # TODO: Create other test topologies
+    # TODO: Protein-only
+    # TODO: Protein-ligand topology
+    # TODO: Solvated protein-ligand topology
+    # TODO: Host-guest topology
+    # Suppress DEBUG logging from various packages
+
+    import logging
+    for name in ['parmed', 'matplotlib']:
+        logging.getLogger(name).setLevel(logging.WARNING)
+
+    return testsystems
+
+
+class TestSystemGenerator(object):
     # AMBER force field combination to test
     amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
 
@@ -46,83 +129,6 @@ class TestSystemGenerator(unittest.TestCase):
         molecules = molecules[:MAX_MOLECULES]
 
         return molecules
-
-    """Base class for SystemGenerator tests."""
-    def setUp(self):
-        self.testsystems = dict()
-        for (system_name, prefix) in [
-            # TODO: Uncomment these after we fix input files
-            ('bace', 'Bace'),
-            #('cdk1', 'CDK2'),
-            #('jnk1', 'Jnk1'),
-            #('mcl1', 'MCL1'),
-            #('p38', 'p38'),
-            #('ptp1b', 'PTP1B'),
-            #('thrombin', 'Thrombin'),
-            #('tyk2', 'Tyk2'),
-        ]:
-            # Load protein
-            pdb_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_protein.pdb'))
-            pdbfile = PDBFile(pdb_filename)
-
-            # Load molecules
-            sdf_filename = get_data_filename(os.path.join('perses_jacs_systems', system_name, prefix + '_ligands_shifted.sdf'))
-
-            molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
-            print(f'Read {len(molecules)} molecules from {sdf_filename}')
-            n_molecules = len(molecules)
-
-            # Limit number of molecules for testing
-            MAX_MOLECULES = 10 if not CI else 2
-            if (n_molecules > MAX_MOLECULES):
-                print(f'Limiting to {MAX_MOLECULES} for testing...')
-                n_molecules = MAX_MOLECULES
-            molecules = [ molecules[index] for index in range(n_molecules) ]
-
-            # Create structures
-            import parmed
-
-            # NOTE: This does not work because parmed does not correctly assign bonds for HID
-            #protein_structure = parmed.load_file(pdb_filename)
-            # NOTE: This is the workaround
-            protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
-
-            molecules_structure = parmed.load_file(sdf_filename)
-            molecules_structure = [ molecules_structure[index] for index in range(n_molecules) ]
-
-            complex_structures = [ (molecules_structure[index] + protein_structure) for index in range(n_molecules) ]
-            complex_structures = [ molecules_structure[index] for index in range(n_molecules) ] # DEBUG
-
-            # Store
-            testsystem = {
-                'name' : system_name,
-                'protein_pdbfile' : pdbfile,
-                'molecules' : molecules,
-                'complex_structures' : complex_structures
-                }
-            self.testsystems[system_name] = testsystem
-
-            # DEBUG
-            for name, testsystem in self.testsystems.items():
-                filename = f'testsystem-{name}.pdb'
-                print(filename)
-                structure = testsystem['complex_structures'][0]
-                #structure.save(filename, overwrite=True)
-                with open(filename, 'w') as outfile:
-                    PDBFile.writeFile(structure.topology, structure.positions, outfile)
-                testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.sdf', file_format="SDF")
-                testsystem['molecules'][0].to_file(f'testsystem-{name}-molecule.pdb', file_format="PDB")
-
-        # TODO: Create other test topologies
-        # TODO: Protein-only
-        # TODO: Protein-ligand topology
-        # TODO: Solvated protein-ligand topology
-        # TODO: Host-guest topology
-        # Suppress DEBUG logging from various packages
-
-        import logging
-        for name in ['parmed', 'matplotlib']:
-            logging.getLogger(name).setLevel(logging.WARNING)
 
     def test_create(self):
         """Test SystemGenerator creation with only OpenMM ffxml force fields"""
@@ -189,41 +195,40 @@ class TestSystemGenerator(unittest.TestCase):
                     cache=cache, small_molecule_forcefield=small_molecule_forcefield)
                 del generator
 
-    def test_forcefield_default_kwargs(self):
+    @pytest.mark.parametrize("small_molecule_forcefield", ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2'])
+    def test_forcefield_default_kwargs(self, small_molecule_forcefield, test_systems):
         """Test that default forcefield kwargs work correctly"""
         from openmm import unit
         forcefield_kwargs = dict()
         from openmmforcefields.generators import SystemGenerator
 
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-                # Create a SystemGenerator for this force field
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs,
-                                                molecules=molecules)
+            # Create a SystemGenerator for this force field
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        small_molecule_forcefield=small_molecule_forcefield,
+                                        forcefield_kwargs=forcefield_kwargs,
+                                        molecules=molecules)
 
-                # Parameterize molecules
-                for molecule in molecules:
-                    # Create non-periodic Topology
-                    nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
-                    system = generator.create_system(nonperiodic_openmm_topology)
-                    forces = { force.__class__.__name__ : force for force in system.getForces() }
-                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+            # Parameterize molecules
+            for molecule in molecules:
+                # Create non-periodic Topology
+                nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
+                system = generator.create_system(nonperiodic_openmm_topology)
+                forces = {force.__class__.__name__: force for force in system.getForces()}
+                assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-                    # Create periodic Topology
-                    box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
-                    periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
-                    periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
-                    system = generator.create_system(periodic_openmm_topology)
-                    forces = { force.__class__.__name__ : force for force in system.getForces() }
-                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.PME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                # Create periodic Topology
+                box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
+                periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
+                periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
+                system = generator.create_system(periodic_openmm_topology)
+                forces = {force.__class__.__name__: force for force in system.getForces()}
+                assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.PME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    def test_forcefield_kwargs(self):
+    def test_forcefield_kwargs(self, test_systems):
         """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
         from openmm import unit
         forcefield_kwargs = { 'hydrogenMass' : 4*unit.amu }
@@ -235,7 +240,7 @@ class TestSystemGenerator(unittest.TestCase):
             generator = SystemGenerator(forcefield_kwargs={'nonbondedMethod':PME})
         assert "nonbondedMethod cannot be specified in forcefield_kwargs" in str(excinfo.value)
 
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             print(testsystem)
             molecules = testsystem['molecules']
 
@@ -265,9 +270,9 @@ class TestSystemGenerator(unittest.TestCase):
                     forces = { force.__class__.__name__ : force for force in system.getForces() }
                     assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.LJPME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    def test_parameterize_molecules_from_creation(self):
+    def test_parameterize_molecules_from_creation(self, test_systems):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             print(testsystem)
             molecules = testsystem['molecules']
 
@@ -290,9 +295,9 @@ class TestSystemGenerator(unittest.TestCase):
                     assert system.getNumParticles() == molecule.n_atoms
                     assert (t2.interval() < t1.interval())
 
-    def test_parameterize_molecules_specified_during_create_system(self):
+    def test_parameterize_molecules_specified_during_create_system(self, test_systems):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             molecules = testsystem['molecules']
 
             SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
@@ -307,7 +312,7 @@ class TestSystemGenerator(unittest.TestCase):
                     # Specify molecules during system creation
                     system = generator.create_system(openmm_topology, molecules=molecules)
 
-    def test_add_molecules(self):
+    def test_add_molecules(self, test_systems):
         """Test that Molecules can be added to SystemGenerator later"""
         SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
         for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
@@ -316,7 +321,7 @@ class TestSystemGenerator(unittest.TestCase):
                                             small_molecule_forcefield=small_molecule_forcefield)
 
             # Add molecules for each test system separately
-            for name, testsystem in self.testsystems.items():
+            for name, testsystem in test_systems.items():
                 molecules = testsystem['molecules']
 
                 # Add molecules
@@ -334,7 +339,7 @@ class TestSystemGenerator(unittest.TestCase):
                     assert system.getNumParticles() == molecule.n_atoms
                     assert (t2.interval() < t1.interval())
 
-    def test_cache(self):
+    def test_cache(self, test_systems):
         """Test that SystemGenerator correctly manages a cache"""
         timing = dict() # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
         with tempfile.TemporaryDirectory() as tmpdirname:
@@ -348,7 +353,7 @@ class TestSystemGenerator(unittest.TestCase):
                                                 small_molecule_forcefield=small_molecule_forcefield,
                                                 cache=cache)
                 # Add molecules for each test system separately
-                for name, testsystem in self.testsystems.items():
+                for name, testsystem in test_systems.items():
                     molecules = testsystem['molecules']
                     # Add molecules
                     generator.add_molecules(molecules)
@@ -382,9 +387,9 @@ class TestSystemGenerator(unittest.TestCase):
                             system = generator.create_system(openmm_topology)
                         assert system.getNumParticles() == molecule.n_atoms
 
-    def test_complex(self):
+    def test_complex(self, test_systems):
         """Test parameterizing a protein:ligand complex in vacuum"""
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             from openmm import unit
 
             print(f'Testing parameterization of {name} in vacuum')
