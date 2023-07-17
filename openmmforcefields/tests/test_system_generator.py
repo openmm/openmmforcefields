@@ -384,23 +384,23 @@ class TestSystemGenerator(object):
                     # Record time
                     timing[(small_molecule_forcefield, molecule.to_smiles())] = timer.interval()
 
-        # Molecules should now be cached; test timing is faster the second time
-        # Test that we can parameterize all molecules for all test systems
-        # Create a SystemGenerator
-        generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                    small_molecule_forcefield=small_molecule_forcefield,
-                                    cache=cache)
-        # Add molecules for each test system separately
-        for name, testsystem in test_systems.items():
-            molecules = testsystem['molecules']
-            # We don't need to add molecules that are already defined in the cache
+            # Molecules should now be cached; test timing is faster the second time
+            # Test that we can parameterize all molecules for all test systems
+            # Create a SystemGenerator
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        small_molecule_forcefield=small_molecule_forcefield,
+                                        cache=cache)
+            # Add molecules for each test system separately
+            for name, testsystem in test_systems.items():
+                molecules = testsystem['molecules']
+                # We don't need to add molecules that are already defined in the cache
 
-            # Parameterize molecules
-            for molecule in molecules:
-                openmm_topology = molecule.to_topology().to_openmm()
-                with Timer() as timer:
-                    system = generator.create_system(openmm_topology)
-                assert system.getNumParticles() == molecule.n_atoms
+                # Parameterize molecules
+                for molecule in molecules:
+                    openmm_topology = molecule.to_topology().to_openmm()
+                    with Timer() as timer:
+                        system = generator.create_system(openmm_topology)
+                    assert system.getNumParticles() == molecule.n_atoms
 
     def test_complex(self, test_systems):
         """Test parameterizing a protein:ligand complex in vacuum"""
