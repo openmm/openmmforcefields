@@ -60,7 +60,7 @@ jobs:
       if: always()
       run: |
         pytest -v --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
-          -k "TestEspalomaTemplateGenerator" --runespaloma
+          -k "TestEspalomaTemplateGenerator" -m "espaloma"
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"

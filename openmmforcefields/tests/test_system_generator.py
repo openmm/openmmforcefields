@@ -391,7 +391,7 @@ class TestSystemGenerator(object):
                                     small_molecule_forcefield=small_molecule_forcefield,
                                     cache=cache)
         # Add molecules for each test system separately
-        for name, testsystem in self.testsystems.items():
+        for name, testsystem in test_systems.items():
             molecules = testsystem['molecules']
             # We don't need to add molecules that are already defined in the cache
 
