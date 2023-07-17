@@ -175,27 +175,32 @@ class TestSystemGenerator(object):
         assert force.getDefaultTemperature() == temperature
         assert force.getFrequency() == frequency
 
-    def test_create_with_template_generator(self):
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_create_with_template_generator(self, small_molecule_forcefield):
         """Test SystemGenerator creation with small molecule residue template generators"""
-        SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-        for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-            # Create a generator that defines AMBER and small molecule force fields
+        # Create a generator that defines AMBER and small molecule force fields
+        generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                    small_molecule_forcefield=small_molecule_forcefield)
+
+        # Create a generator that also has a database cache
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            cache = os.path.join(tmpdirname, 'db.json')
+            # Create a new database file
             generator = SystemGenerator(forcefields=self.amber_forcefields,
-                small_molecule_forcefield=small_molecule_forcefield)
+                                        cache=cache, small_molecule_forcefield=small_molecule_forcefield)
+            del generator
+            # Reopen it (with cache still empty)
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        cache=cache, small_molecule_forcefield=small_molecule_forcefield)
+            del generator
 
-            # Create a generator that also has a database cache
-            with tempfile.TemporaryDirectory() as tmpdirname:
-                cache = os.path.join(tmpdirname, 'db.json')
-                # Create a new database file
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                    cache=cache, small_molecule_forcefield=small_molecule_forcefield)
-                del generator
-                # Reopen it (with cache still empty)
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                    cache=cache, small_molecule_forcefield=small_molecule_forcefield)
-                del generator
-
-    @pytest.mark.parametrize("small_molecule_forcefield", ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2'])
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
     def test_forcefield_default_kwargs(self, small_molecule_forcefield, test_systems):
         """Test that default forcefield kwargs work correctly"""
         from openmm import unit
@@ -228,7 +233,11 @@ class TestSystemGenerator(object):
                 forces = {force.__class__.__name__: force for force in system.getForces()}
                 assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.PME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    def test_forcefield_kwargs(self, test_systems):
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_forcefield_kwargs(self, small_molecule_forcefield, test_systems):
         """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
         from openmm import unit
         forcefield_kwargs = { 'hydrogenMass' : 4*unit.amu }
@@ -244,148 +253,154 @@ class TestSystemGenerator(object):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-                # Create a SystemGenerator for this force field
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                forcefield_kwargs=forcefield_kwargs,
-                                                periodic_forcefield_kwargs={'nonbondedMethod':LJPME},
-                                                nonperiodic_forcefield_kwargs={'nonbondedMethod':CutoffNonPeriodic},
-                                                molecules=molecules)
+            # Create a SystemGenerator for this force field
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        small_molecule_forcefield=small_molecule_forcefield,
+                                        forcefield_kwargs=forcefield_kwargs,
+                                        periodic_forcefield_kwargs={'nonbondedMethod': LJPME},
+                                        nonperiodic_forcefield_kwargs={'nonbondedMethod': CutoffNonPeriodic},
+                                        molecules=molecules)
 
-                # Parameterize molecules
-                for molecule in molecules:
-                    # Create non-periodic Topology
-                    nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
-                    system = generator.create_system(nonperiodic_openmm_topology)
-                    forces = { force.__class__.__name__ : force for force in system.getForces() }
-                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+            # Parameterize molecules
+            for molecule in molecules:
+                # Create non-periodic Topology
+                nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
+                system = generator.create_system(nonperiodic_openmm_topology)
+                forces = {force.__class__.__name__: force for force in system.getForces()}
+                assert forces[
+                           'NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic, "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-                    # Create periodic Topology
-                    box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
-                    periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
-                    periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
-                    system = generator.create_system(periodic_openmm_topology)
-                    forces = { force.__class__.__name__ : force for force in system.getForces() }
-                    assert forces['NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.LJPME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                # Create periodic Topology
+                box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
+                periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
+                periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
+                system = generator.create_system(periodic_openmm_topology)
+                forces = {force.__class__.__name__: force for force in system.getForces()}
+                assert forces[
+                           'NonbondedForce'].getNonbondedMethod() == openmm.NonbondedForce.LJPME, "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    def test_parameterize_molecules_from_creation(self, test_systems):
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_parameterize_molecules_from_creation(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
         for name, testsystem in test_systems.items():
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-                # Create a SystemGenerator for this force field
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                molecules=molecules)
+            # Create a SystemGenerator for this force field
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        small_molecule_forcefield=small_molecule_forcefield,
+                                        molecules=molecules)
 
-                # Parameterize molecules
-                for molecule in molecules:
-                    openmm_topology = molecule.to_topology().to_openmm()
-                    with Timer() as t1:
-                        system = generator.create_system(openmm_topology)
-                    assert system.getNumParticles() == molecule.n_atoms
-                    # Molecule should now be cached
-                    with Timer() as t2:
-                        system = generator.create_system(openmm_topology)
-                    assert system.getNumParticles() == molecule.n_atoms
-                    assert (t2.interval() < t1.interval())
+            # Parameterize molecules
+            for molecule in molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as t1:
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
+                # Molecule should now be cached
+                with Timer() as t2:
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
+                assert (t2.interval() < t1.interval())
 
-    def test_parameterize_molecules_specified_during_create_system(self, test_systems):
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_parameterize_molecules_specified_during_create_system(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
         for name, testsystem in test_systems.items():
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-                # Create a SystemGenerator for this force field
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield)
-
-                # Parameterize molecules
-                for molecule in molecules:
-                    openmm_topology = molecule.to_topology().to_openmm()
-                    # Specify molecules during system creation
-                    system = generator.create_system(openmm_topology, molecules=molecules)
-
-    def test_add_molecules(self, test_systems):
-        """Test that Molecules can be added to SystemGenerator later"""
-        SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-        for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
             # Create a SystemGenerator for this force field
             generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                            small_molecule_forcefield=small_molecule_forcefield)
+                                        small_molecule_forcefield=small_molecule_forcefield)
 
-            # Add molecules for each test system separately
-            for name, testsystem in test_systems.items():
-                molecules = testsystem['molecules']
+            # Parameterize molecules
+            for molecule in molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                # Specify molecules during system creation
+                system = generator.create_system(openmm_topology, molecules=molecules)
 
-                # Add molecules
-                generator.add_molecules(molecules)
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_add_molecules(self, test_systems, small_molecule_forcefield):
+        """Test that Molecules can be added to SystemGenerator later"""
+            # Create a SystemGenerator for this force field
+        generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                    small_molecule_forcefield=small_molecule_forcefield)
 
-                # Parameterize molecules
-                for molecule in molecules:
-                    openmm_topology = molecule.to_topology().to_openmm()
-                    with Timer() as t1:
-                        system = generator.create_system(openmm_topology)
-                    assert system.getNumParticles() == molecule.n_atoms
-                    # Molecule should now be cached
-                    with Timer() as t2:
-                        system = generator.create_system(openmm_topology)
-                    assert system.getNumParticles() == molecule.n_atoms
-                    assert (t2.interval() < t1.interval())
+        # Add molecules for each test system separately
+        for name, testsystem in test_systems.items():
+            molecules = testsystem['molecules']
 
-    def test_cache(self, test_systems):
+            # Add molecules
+            generator.add_molecules(molecules)
+
+            # Parameterize molecules
+            for molecule in molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as t1:
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
+                # Molecule should now be cached
+                with Timer() as t2:
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
+                assert (t2.interval() < t1.interval())
+
+    @pytest.mark.parametrize("small_molecule_forcefield", [
+        'gaff-2.11',
+        'openff-2.0.0',
+        pytest.param('espaloma-0.2.2', marks=pytest.mark.espaloma)])
+    def test_cache(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator correctly manages a cache"""
         timing = dict() # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a single shared cache for all force fields
             cache = os.path.join(tmpdirname, 'db.json')
             # Test that we can parameterize all molecules for all test systems
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                cache=cache)
-                # Add molecules for each test system separately
-                for name, testsystem in test_systems.items():
-                    molecules = testsystem['molecules']
-                    # Add molecules
-                    generator.add_molecules(molecules)
+            generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                        small_molecule_forcefield=small_molecule_forcefield,
+                                        cache=cache)
+            # Add molecules for each test system separately
+            for name, testsystem in test_systems.items():
+                molecules = testsystem['molecules']
+                # Add molecules
+                generator.add_molecules(molecules)
 
-                    # Parameterize molecules
-                    for molecule in molecules:
-                        openmm_topology = molecule.to_topology().to_openmm()
-                        with Timer() as timer:
-                            system = generator.create_system(openmm_topology)
-                        assert system.getNumParticles() == molecule.n_atoms
-                        # Record time
-                        timing[(small_molecule_forcefield, molecule.to_smiles())] = timer.interval()
+                # Parameterize molecules
+                for molecule in molecules:
+                    openmm_topology = molecule.to_topology().to_openmm()
+                    with Timer() as timer:
+                        system = generator.create_system(openmm_topology)
+                    assert system.getNumParticles() == molecule.n_atoms
+                    # Record time
+                    timing[(small_molecule_forcefield, molecule.to_smiles())] = timer.interval()
 
-            # Molecules should now be cached; test timing is faster the second time
-            # Test that we can parameterize all molecules for all test systems
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
-            for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
-                # Create a SystemGenerator
-                generator = SystemGenerator(forcefields=self.amber_forcefields,
-                                                small_molecule_forcefield=small_molecule_forcefield,
-                                                cache=cache)
-                # Add molecules for each test system separately
-                for name, testsystem in self.testsystems.items():
-                    molecules = testsystem['molecules']
-                    # We don't need to add molecules that are already defined in the cache
+        # Molecules should now be cached; test timing is faster the second time
+        # Test that we can parameterize all molecules for all test systems
+        # Create a SystemGenerator
+        generator = SystemGenerator(forcefields=self.amber_forcefields,
+                                    small_molecule_forcefield=small_molecule_forcefield,
+                                    cache=cache)
+        # Add molecules for each test system separately
+        for name, testsystem in self.testsystems.items():
+            molecules = testsystem['molecules']
+            # We don't need to add molecules that are already defined in the cache
 
-                    # Parameterize molecules
-                    for molecule in molecules:
-                        openmm_topology = molecule.to_topology().to_openmm()
-                        with Timer() as timer:
-                            system = generator.create_system(openmm_topology)
-                        assert system.getNumParticles() == molecule.n_atoms
+            # Parameterize molecules
+            for molecule in molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as timer:
+                    system = generator.create_system(openmm_topology)
+                assert system.getNumParticles() == molecule.n_atoms
 
     def test_complex(self, test_systems):
         """Test parameterizing a protein:ligand complex in vacuum"""
