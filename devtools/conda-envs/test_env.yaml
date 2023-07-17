@@ -42,6 +42,6 @@ dependencies:
     # TODO: Rework this once espaloma is on conda-forge
     #
   - pytorch >=1.8.0
-  - dgl
+  - dgl <1.1
   - qcportal >=0.15.0
   - espaloma
