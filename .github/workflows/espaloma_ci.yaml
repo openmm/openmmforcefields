@@ -64,4 +64,3 @@ jobs:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
-
