@@ -1,0 +1,66 @@
+name: EspalomaCI
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+  schedule:
+    - cron: "0 0 * * *"
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, Latest openff-toolkit ${{ matrix.latest-openff-toolkit }}
+    runs-on: ${{ matrix.os }}
+    env:
+      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.9", "3.10"]  # Add 3.11 in with AmberTools 23
+        exclude:
+          - python-version: "3.10"
+            os: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Conda Environment
+      uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-file: devtools/conda-envs/test_env.yaml
+        create-args: >-
+          python=${{ matrix.python-version }}
+
+    - name: Install Package
+      run: |
+        pip list
+        micromamba list
+        micromamba remove --force openmmforcefields
+        python -m pip install .
+
+    - name: Conda Environment Information
+      run: |
+        micromamba info
+        micromamba list
+        python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
+
+    - name: Test Installed Package
+      run: |
+        pytest -v --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+          -m "espaloma" openmmforcefields/tests --runespaloma
+      env:
+        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"

@@ -4,6 +4,7 @@ import os
 import pytest
 import tempfile
 import unittest
+import pytest
 
 import numpy as np
 import openmm
@@ -537,6 +538,11 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
+            if "tip" in small_molecule_forcefield:
+                continue
+            if "opc" in small_molecule_forcefield:
+                continue
+
             print(f'Testing {small_molecule_forcefield}')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -678,7 +684,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
                 print(f'{key:24} {(template_component_energy/unit.kilocalories_per_mole):20.3f} {(reference_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol')
             print(f'{"TOTAL":24} {(template_energy["total"]/unit.kilocalories_per_mole):20.3f} {(reference_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol')
             write_xml('reference_system.xml', reference_system)
-            write_xml('template_system.xml', template_system)
+            write_xml('template_system.xml', template_system)  # What's this? This variable does not exist
             raise Exception(f'Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})')
 
         # Compare forces
@@ -783,6 +789,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
+            if "tip" in small_molecule_forcefield:
+                continue
+            if "opc" in small_molecule_forcefield:
+                continue
+
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -820,6 +831,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
+            if "tip" in small_molecule_forcefield:
+                continue
+            if "opc" in small_molecule_forcefield:
+                continue
+
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -834,6 +850,8 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
     def test_version(self):
         """Test version"""
+        # This test does not appear to test the version of anything in particular, but it fails sometimes
+        # because old versions of the toolkit can't bring in new versions of some water models
         for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
             assert generator.forcefield == forcefield
@@ -875,6 +893,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             assert pytest.approx(length.value_in_unit(openmm.unit.angstrom)) == 2
 
 
+@pytest.mark.espaloma
 class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
 
