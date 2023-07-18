@@ -3,6 +3,7 @@ import logging
 import os
 import tempfile
 import unittest
+import pytest
 
 import numpy as np
 import openmm
@@ -855,6 +856,7 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             assert os.path.exists(generator.smirnoff_filename)
 
 
+@pytest.mark.espaloma
 class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
 
