@@ -57,10 +57,9 @@ jobs:
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package
-      if: always()
       run: |
         pytest -v --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
-          -k "TestEspalomaTemplateGenerator" -m "espaloma" openmmforcefields/tests
+          -m "espaloma" openmmforcefields/tests
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
