@@ -21,6 +21,9 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 # Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
+class ForceException(Exception):
+    """Exception for forces"""
+
 class SmallMoleculeTemplateGenerator:
     """
     Abstract base class for small molecule template generation for OpenMM ForceField.
@@ -1043,9 +1046,9 @@ class OpenMMSystemMixin:
             force_name = force.__class__.__name__
 
             if force_name in forces:
-                raise Exception(f"Two instances of force {force_name} appear in System")
+                raise ForceException(f"Two instances of force {force_name} appear in System")
             if force_name not in supported_forces:
-                raise Exception(f"Custom forces not supported. Found force of type {force_name}.")
+                raise ForceException(f"Custom forces not supported. Found force of type {force_name}.")
 
             forces[force_name] = force
 
