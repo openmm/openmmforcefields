@@ -21,6 +21,9 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 # Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
+class ForceException(Exception):
+    """Exception for forces"""
+
 class SmallMoleculeTemplateGenerator:
     """
     Abstract base class for small molecule template generation for OpenMM ForceField.
@@ -1030,12 +1033,23 @@ class OpenMMSystemMixin:
                 element=element_symbol, mass=as_attrib(atom.mass))
             atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
 
+        supported_forces = {
+            "NonbondedForce",
+            "HarmonicAngleForce",
+            "HarmonicBondForce",
+            "PeriodicTorsionForce",
+        }
+
         # Compile forces into a dict
         forces = dict()
         for force in system.getForces():
             force_name = force.__class__.__name__
+
             if force_name in forces:
-                raise Exception("Two instances of force {force_name} appear in System")
+                raise ForceException(f"Two instances of force {force_name} appear in System")
+            if force_name not in supported_forces:
+                raise ForceException(f"Custom forces not supported. Found force of type {force_name}.")
+
             forces[force_name] = force
 
         def classes(atom_indices):
