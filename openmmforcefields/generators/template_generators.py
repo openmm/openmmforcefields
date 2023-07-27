@@ -1289,14 +1289,19 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Create ForceField object
         import openff.toolkit.typing.engines.smirnoff
-        try:
-            filename = forcefield
-            if not filename.endswith('.offxml'):
-                filename += '.offxml'
+
+        # check for an installed force field
+        available_force_fields = openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
+        if (filename := forcefield + ".offxml") in available_force_fields or (filename := forcefield) in available_force_fields:
             self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
-        except Exception as e:
-            _logger.error(e)
-            raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths") from e
+
+        # just try parsing the input and let openff handle the error
+        else:
+            try:
+                self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
+            except Exception as e:
+                _logger.error(e)
+                raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string.") from e
 
         # Delete constraints, if present
         if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
