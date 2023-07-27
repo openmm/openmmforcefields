@@ -1301,7 +1301,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                 self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
             except Exception as e:
                 _logger.error(e)
-                raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths") from e
+                raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string.") from e
 
         # Delete constraints, if present
         if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
