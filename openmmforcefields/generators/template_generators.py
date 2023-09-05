@@ -607,11 +607,16 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         if self._molecule_has_user_charges(molecule):
             _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
         else:
-            _logger.debug(f'Computing AM1-BCC charges...')
+            _logger.debug(f'Computing partial charges...')
             # NOTE: generate_conformers seems to be required for some molecules
             # https://github.com/openforcefield/openff-toolkit/issues/492
             molecule.generate_conformers(n_conformers=10)
-            molecule.assign_partial_charges(partial_charge_method='am1bcc')
+            if len(molecule.atoms) >= 150:
+                _logger.info(f'Molecule has >= 150 atoms ({len(molecule.atoms)}), using Gasteiger...')
+                partial_charge_method = 'gasteiger'
+            else:
+                partial_charge_method = 'am1bcc'
+            molecule.assign_partial_charges(partial_charge_method=partial_charge_method)
 
         # Geneate a single conformation
         _logger.debug(f'Generating a conformer...')
