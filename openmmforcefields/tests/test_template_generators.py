@@ -1072,6 +1072,6 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         # Make sure passing through the EspalomaGenerator changes the charges
         assert not self.charges_are_equal(system, molecule), "Expected different charges"
         # Assert the reference forcefield is "openff_unconstrained-2.1.0"
-        expected_ref_ff = "openff_unconstrained-2.0.0"
+        expected_ref_ff = "openff_unconstrained-2.1.0"
         generator_ref_ff = generator._reference_forcefield
         assert generator_ref_ff == expected_ref_ff, f"Expected {expected_ref_ff}, received {generator_ref_ff}."
