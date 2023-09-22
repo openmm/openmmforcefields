@@ -973,3 +973,68 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
             # Create OpenMM System using OpenMM app
             openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, nonbondedMethod=NoCutoff)
             smirnoff_system = generator.get_openmm_system(molecule)
+
+    # def test_template_generator_kwargs(self):
+    #     """Test """
+
+    def test_keyword_arguments_default(self):
+        """
+        Test the default behavior for the keyword arguments, which is using "openff_unconstrained-2.0.0"
+        as the reference forcefield and "from-molecule" as the charge method.
+
+        Check charges are the same as the input, after passing through the template generator.
+        """
+        molecule = Molecule.from_smiles("C=O")
+        molecule.generate_conformers(n_conformers=1)
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
+        generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield="espaloma-0.3.1")
+        # Create forcefield object
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+        # Create system
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
+        # Make sure passing through the EspalomaGenerator didn't change the charges
+        assert self.charges_are_equal(system, molecule), "Expected equal charges."
+        # Assert the reference forcefield is the default "openff_unconstrained-2.0.0"
+        default_ref_ff = "openff_unconstrained-2.0.0"
+        generator_ref_ff = generator._reference_forcefield
+        assert generator_ref_ff == default_ref_ff, f"Expected {default_ref_ff}, received {generator_ref_ff}."
+
+
+    def test_keyword_arguments(self):
+        """
+        Test passing a custom keyword arguments dictionary to the generator behaves correctly.
+
+        Specifically changing the reference forcefield to openff-2.1.0 and the charge method to nn.
+        Which are not the default values.
+
+        Check generated charges are different from the ones included in the input molecule.
+
+        Returns
+        -------
+
+        """
+        molecule = Molecule.from_smiles("C=O")
+        molecule.generate_conformers(n_conformers=1)
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
+        # Custom generator kwargs
+        espaloma_generator_kwargs = {
+            "reference_forcefield": "openff_unconstrained-2.1.0",
+            "charge_method": "nn",
+        }
+        generator = EspalomaTemplateGenerator(molecules=[molecule],
+                                              forcefield="espaloma-0.3.1",
+                                              template_generator_kwargs=espaloma_generator_kwargs)
+        # Create forcefield object
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+        # Create system
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
+        # Make sure passing through the EspalomaGenerator changes the charges
+        assert not self.charges_are_equal(system, molecule), "Expected different charges"
+        # Assert the reference forcefield is "openff_unconstrained-2.1.0"
+        expected_ref_ff = "openff_unconstrained-2.0.0"
+        generator_ref_ff = generator._reference_forcefield
+        assert generator_ref_ff == expected_ref_ff, f"Expected {default_ref_ff}, received {generator_ref_ff}."
