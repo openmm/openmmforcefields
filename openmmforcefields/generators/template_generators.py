@@ -1580,7 +1580,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             self._charge_method = template_generator_kwargs.get('charge_method', 'nn')
         else:
             self._reference_forcefield = 'openff_unconstrained-2.0.0'
-            self._charge_method = 'nn'
+            self._charge_method = 'from-molecule'
 
         # Check to make sure dependencies are installed
         try:
@@ -1709,6 +1709,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         * The residue template will be named after the SMILES of the molecule.
 
         """
+        from openmm import unit
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
@@ -1730,7 +1731,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Book keep partial charges if molecule has user charges
         # NOTE: Charges will be overwritten when the Espaloma Graph object is loaded into an espaloma model
         if self._molecule_has_user_charges(molecule):
-            _charges = molecule.partial_charges.value_in_unit(esp.units.CHARGE_UNIT)
+            # TODO: Change this to use openff.units exclusively?
+            # Make sure charges are in the right openmm units
+            _partial_charges = molecule.partial_charges
+            if all([isinstance(_charge, unit.Quantity) for _charge in _partial_charges]):
+                _charges = _partial_charges.value_in_unit(esp.units.CHARGE_UNIT)
+            else:
+                # Assuming charges are in openff units
+                _charges = _partial_charges.magnitude
 
         # Assign parameters
         self.espaloma_model(molecule_graph.heterograph)
@@ -1748,7 +1756,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                 molecule_graph.nodes['n1'].data['q'] = torch.from_numpy(_charges).unsqueeze(-1).float()
             else:
                 # TODO: Is this the right place to raise error?
-                raise ValueError(f'Partial charges not assigned to molecule.')
+                raise ValueError(f'"{self._charge_method}" charge method specified, '
+                                 f'but no partial charges assigned to molecule were found.')
         system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)
         _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
