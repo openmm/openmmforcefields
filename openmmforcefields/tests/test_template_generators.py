@@ -1,6 +1,7 @@
 import copy
 import logging
 import os
+import pytest
 import tempfile
 import unittest
 import pytest
@@ -8,6 +9,8 @@ import pytest
 import numpy as np
 import openmm
 from openff.toolkit.topology import Molecule
+from openff.toolkit.typing.engines.smirnoff import ForceField as OFFForceField
+from openff.units import unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
 
 from openmmforcefields.generators import (
@@ -854,6 +857,40 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             assert generator.forcefield == forcefield
             assert generator.smirnoff_filename.endswith(forcefield + '.offxml')
             assert os.path.exists(generator.smirnoff_filename)
+
+    def test_bespoke_force_field(self):
+        """
+        Make sure a molecule can be parameterised using a bespoke force field passed as a string to
+        the template generator.
+        """
+
+        custom_sage = OFFForceField("openff-2.0.0.offxml")
+        # Create a simple molecule with one bond type
+        ethane = Molecule.from_smiles("C")
+        # Label ethane to get the bond type (not hard coded incase this changes in future)
+        bond_parameter = custom_sage.label_molecules(ethane.to_topology())[0]["Bonds"][(0, 1)]
+        # Edit the bond parameter
+        bonds = custom_sage.get_parameter_handler("Bonds")
+        new_parameter = bonds[bond_parameter.smirks]
+        new_parameter.length = 2 * OFFUnit.angstrom
+
+        # Use the custom sage passed as string to build a template and an openmm system
+        generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
+
+        # Create a ForceField
+        openmm_forcefield = openmm.app.ForceField()
+        # Register the template generator
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+        # Use OpenMM app to generate the system
+        openmm_system = openmm_forcefield.createSystem(ethane.to_topology().to_openmm(), removeCMMotion=False,
+                                                       nonbondedMethod=NoCutoff)
+
+        # Check the bond length has been updated
+        forces = {force.__class__.__name__: force for force in openmm_system.getForces()}
+        bond_force = forces["HarmonicBondForce"]
+        for i in range(bond_force.getNumBonds()):
+            _, _, length, _ = bond_force.getBondParameters(i)
+            assert pytest.approx(length.value_in_unit(openmm.unit.angstrom)) == 2
 
 
 @pytest.mark.espaloma

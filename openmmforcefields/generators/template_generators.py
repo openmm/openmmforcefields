@@ -21,6 +21,9 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 # Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
+class ForceException(Exception):
+    """Exception for forces"""
+
 class SmallMoleculeTemplateGenerator:
     """
     Abstract base class for small molecule template generation for OpenMM ForceField.
@@ -1029,12 +1032,23 @@ class OpenMMSystemMixin:
                 element=element_symbol, mass=as_attrib(atom.mass))
             atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
 
+        supported_forces = {
+            "NonbondedForce",
+            "HarmonicAngleForce",
+            "HarmonicBondForce",
+            "PeriodicTorsionForce",
+        }
+
         # Compile forces into a dict
         forces = dict()
         for force in system.getForces():
             force_name = force.__class__.__name__
+
             if force_name in forces:
-                raise Exception("Two instances of force {force_name} appear in System")
+                raise ForceException(f"Two instances of force {force_name} appear in System")
+            if force_name not in supported_forces:
+                raise ForceException(f"Custom forces not supported. Found force of type {force_name}.")
+
             forces[force_name] = force
 
         def classes(atom_indices):
@@ -1273,14 +1287,19 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Create ForceField object
         import openff.toolkit.typing.engines.smirnoff
-        try:
-            filename = forcefield
-            if not filename.endswith('.offxml'):
-                filename += '.offxml'
+
+        # check for an installed force field
+        available_force_fields = openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
+        if (filename := forcefield + ".offxml") in available_force_fields or (filename := forcefield) in available_force_fields:
             self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
-        except Exception as e:
-            _logger.error(e)
-            raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths") from e
+
+        # just try parsing the input and let openff handle the error
+        else:
+            try:
+                self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
+            except Exception as e:
+                _logger.error(e)
+                raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string.") from e
 
         # Delete constraints, if present
         if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
