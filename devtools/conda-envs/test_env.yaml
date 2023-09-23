@@ -37,6 +37,5 @@ dependencies:
 
     #
     # Espaloma requirements below
-    # TODO: Rework this once espaloma is on conda-forge
     #
-  - espaloma
+  - espaloma >=0.3.1

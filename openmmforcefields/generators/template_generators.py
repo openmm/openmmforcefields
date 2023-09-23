@@ -1584,8 +1584,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 
         if forcefield is None:
-            # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'espaloma-0.2.2'
+            # Use latest supported Espaloma force field release if none is specified
+            forcefield = 'espaloma-0.3.2'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
