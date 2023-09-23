@@ -14,6 +14,7 @@ Residue template generator for the AMBER GAFF1/2 small molecule force fields.
 import contextlib
 import logging
 import os
+import warnings
 
 _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 
@@ -1632,7 +1633,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return ['espaloma-0.2.2']
+        return ['espaloma-0.3.1', 'espaloma-0.3.2']
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1774,9 +1775,10 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                 _charges = _charges.astype(np.float32)
                 molecule_graph.nodes['n1'].data['q'] = torch.from_numpy(_charges).unsqueeze(-1).float()
             else:
-                # TODO: Is this the right place to raise error?
-                raise ValueError(f'"{self._charge_method}" charge method specified, '
-                                 f'but no partial charges assigned to molecule were found.')
+                # No charges were found in molecule -- defaulting to nn charge method
+                warnings.warn("No charges found in molecule. Defaulting to 'nn' charge method.")
+                self._charge_method = "nn"
+
         system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)
         _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
         self.cache_system(smiles, system)
