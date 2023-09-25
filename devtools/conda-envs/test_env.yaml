@@ -2,7 +2,6 @@ name: openmmforcefields-test
 
 channels:
   - conda-forge
-  - defaults
   - openeye
 
 dependencies:
