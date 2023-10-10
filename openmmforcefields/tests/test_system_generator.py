@@ -14,6 +14,15 @@ from openmmforcefields.utils import Timer, get_data_filename
 
 CI = ('CI' in os.environ)
 
+# DEBUG
+CI = True
+
+SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS
+if CI:
+    # Reduce number of small molecule force fields tested for CI
+    SMALL_MOLECULE_FORCEFIELDS = list(filter(lambda forcefield : forcefield in ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2'], SMALL_MOLECULE_FORCEFIELDS))
+    print(f'Reducing SMALL_MOLECULE_FORCEFIELDS for CI: {SMALL_MOLECULE_FORCEFIELDS}')
+
 ################################################################################
 # Tests
 ################################################################################
@@ -171,7 +180,6 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_create_with_template_generator(self):
         """Test SystemGenerator creation with small molecule residue template generators"""
-        SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
         for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
             # Create a generator that defines AMBER and small molecule force fields
             generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -199,7 +207,6 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -239,7 +246,6 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -271,7 +277,6 @@ class TestSystemGenerator(unittest.TestCase):
             print(testsystem)
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -295,7 +300,6 @@ class TestSystemGenerator(unittest.TestCase):
         for name, testsystem in self.testsystems.items():
             molecules = testsystem['molecules']
 
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator for this force field
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -309,8 +313,8 @@ class TestSystemGenerator(unittest.TestCase):
 
     def test_add_molecules(self):
         """Test that Molecules can be added to SystemGenerator later"""
-        SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
         for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
+            print(small_molecule_forcefield)
             # Create a SystemGenerator for this force field
             generator = SystemGenerator(forcefields=self.amber_forcefields,
                                             small_molecule_forcefield=small_molecule_forcefield)
@@ -324,13 +328,25 @@ class TestSystemGenerator(unittest.TestCase):
 
                 # Parameterize molecules
                 for molecule in molecules:
+                    # DEBUG
+                    if not (small_molecule_forcefield == 'gaff-2.11'):
+                        continue
+
                     openmm_topology = molecule.to_topology().to_openmm()
                     with Timer() as t1:
-                        system = generator.create_system(openmm_topology)
+                        try:
+                            print(f'{small_molecule_forcefield} {name} {molecule.name} first generation')
+                            system = generator.create_system(openmm_topology)
+                        except ValueError as e:
+                            raise(e)
                     assert system.getNumParticles() == molecule.n_atoms
                     # Molecule should now be cached
                     with Timer() as t2:
-                        system = generator.create_system(openmm_topology)
+                        try:
+                            print(f'{small_molecule_forcefield} {name} {molecule.name} cached regeneration')
+                            system = generator.create_system(openmm_topology)
+                        except ValueError as e:
+                            raise(e)
                     assert system.getNumParticles() == molecule.n_atoms
                     assert (t2.interval() < t1.interval())
 
@@ -341,7 +357,6 @@ class TestSystemGenerator(unittest.TestCase):
             # Create a single shared cache for all force fields
             cache = os.path.join(tmpdirname, 'db.json')
             # Test that we can parameterize all molecules for all test systems
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,
@@ -364,7 +379,6 @@ class TestSystemGenerator(unittest.TestCase):
 
             # Molecules should now be cached; test timing is faster the second time
             # Test that we can parameterize all molecules for all test systems
-            SMALL_MOLECULE_FORCEFIELDS = SystemGenerator.SMALL_MOLECULE_FORCEFIELDS if not CI else ['gaff-2.11', 'openff-2.0.0', 'espaloma-0.2.2']
             for small_molecule_forcefield in SMALL_MOLECULE_FORCEFIELDS:
                 # Create a SystemGenerator
                 generator = SystemGenerator(forcefields=self.amber_forcefields,

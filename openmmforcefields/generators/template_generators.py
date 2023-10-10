@@ -300,7 +300,7 @@ class SmallMoleculeTemplateGenerator:
                         if self.debug_ffxml_filename is not None:
                             with open(self.debug_ffxml_filename, 'w') as outfile:
                                 _logger.debug(f'writing ffxml to {self.debug_ffxml_filename}')
-                                outfile.write(ffxml_contents)
+                                outfile.write(ffxml_contents)                                                                
 
                         # Add parameters and residue template for this residue
                         forcefield.loadFile(StringIO(ffxml_contents))
@@ -321,6 +321,7 @@ class SmallMoleculeTemplateGenerator:
                         outfile.write(ffxml_contents)
 
                 # Add the parameters and residue definition
+                print(ffxml_contents) # DEBUG
                 forcefield.loadFile(StringIO(ffxml_contents))
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
@@ -619,6 +620,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         import tempfile
         tmpdir = tempfile.mkdtemp()
         prefix = 'molecule'
+        print(tmpdir) # DEBUG
         input_sdf_filename = os.path.join(tmpdir, prefix + '.sdf')
         gaff_mol2_filename = os.path.join(tmpdir, prefix + '.gaff.mol2')
         frcmod_filename = os.path.join(tmpdir, prefix + '.frcmod')
@@ -824,7 +826,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
             # Run parmchk.
             shutil.copy(self.gaff_dat_filename, 'gaff.dat')
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version}"
+            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod"
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
             if not os.path.exists('out.frcmod'):
@@ -842,6 +844,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 raise Exception(msg)
             _logger.debug(output)
             self._check_for_errors(output)
+
+            # TODO: Check for parameters that need revision
+            # From the AmberTools23 manual 16.1.2:
+            # Problematic parameters, if any, are indicated in the frcmod file with the note, “ATTN, need revision”, and are typically given values of zero. 
 
             # Copy back
             shutil.copy( 'out.mol2', gaff_mol2_filename )
@@ -1018,7 +1024,8 @@ class OpenMMSystemMixin:
         # Append unique type names to atoms
         smiles = molecule.to_smiles()
         for index, atom in enumerate(molecule.atoms):
-            setattr(atom, 'typename', f'{smiles}${atom.name}#{index}')
+            typename = f'{smiles}${atom.name}#{index}'
+            setattr(atom, 'typename', typename)
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
@@ -1590,7 +1597,15 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return ['espaloma-0.2.2']
+
+        # Check to make sure dependencies are installed
+        try:
+            import espaloma
+            available_forcefields = ['espaloma-0.2.2']
+        except ImportError as e:
+            available_forcefields = [] # no espaloma force fields are available
+
+        return available_forcefields
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
