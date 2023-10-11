@@ -794,6 +794,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             if "opc" in small_molecule_forcefield:
                 continue
 
+            # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException due to an equilibrium angle > \pi
+            # See https://github.com/openmm/openmm/issues/3185
+            if "openff-2.0.0-rc.1" not in small_molecule_forcefield:
+                continue
+
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -812,13 +817,13 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
                 # Compare energies and forces
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-
+    
                 # Run some dynamics
                 molecule = self.propagate_dynamics(molecule, smirnoff_system)
 
                 # Compare energies again
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-
+    
 
     def test_partial_charges_are_none(self):
         """Test parameterizing a small molecule with `partial_charges=None` instead
@@ -945,10 +950,10 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     def test_retrieve_forcefields(self):
         """Test a force field can be retrieved"""
         # Test loading model by specifying version number
-        generator = EspalomaTemplateGenerator(forcefield='espaloma-0.2.2')
+        generator = EspalomaTemplateGenerator(forcefield='espaloma-0.3.2')
         del generator
         # Test loading model from remote URL
-        url = 'https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma-0.2.2.pt'
+        url = 'https://github.com/choderalab/espaloma/releases/download/0.3.2/espaloma-0.3.2.pt'
         generator = EspalomaTemplateGenerator(forcefield=url)
         del generator
         # Test loading model from filename
@@ -1024,7 +1029,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
         molecule = Molecule.from_smiles("C=O")
         molecule.generate_conformers(n_conformers=1)
         molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
-        generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield="espaloma-0.3.1")
+        generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield="espaloma-0.3.2")
         # Create forcefield object
         forcefield = ForceField()
         # Register the template generator
@@ -1061,7 +1066,7 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
             "charge_method": "nn",
         }
         generator = EspalomaTemplateGenerator(molecules=[molecule],
-                                              forcefield="espaloma-0.3.1",
+                                              forcefield="espaloma-0.3.2",
                                               template_generator_kwargs=espaloma_generator_kwargs)
         # Create forcefield object
         forcefield = ForceField()
