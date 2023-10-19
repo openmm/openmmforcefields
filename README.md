@@ -104,9 +104,10 @@ The atom ordering need not be the same.
 ### Examples using `GAFFTemplateGenerator` to generate small molecule GAFF parameters
 
 Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+
 ```python
 # Create an OpenFF Molecule object for benzene from SMILES
-from openff.toolkit.topology import Molecule
+from openff.toolkit import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
 # Create the GAFF template generator
 from openmmforcefields.generators import GAFFTemplateGenerator
@@ -123,13 +124,17 @@ from openmm.app import PDBFile
 pdbfile = PDBFile('t4-lysozyme-L99A-with-benzene.pdb')
 system = forcefield.createSystem(pdbfile.topology)
 ```
+
 The latest available GAFF version is used if none is specified.
 You can check which GAFF version is in use with
+
 ```python
->>> generator.gaff_version
+>>> gaff.gaff_version
 '2.11'
 ````
+
 Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
+
 ```python
 molecules = Molecule.from_file('molecules.sdf')
 gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.11')
@@ -146,25 +151,26 @@ To check which GAFF versions are supported, examine the `INSTALLED_FORCEFIELDS` 
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
-generator = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-1.80')
+generator = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-1.8')
 ```
 Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
 ## Using the Open Force Field Initiative SMIRNOFF small molecule force fields
 
-The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://open-forcefield-toolkit.readthedocs.io/en/0.6.0/smirnoff.html) small molecule force fields.
-This includes the [`openff-1.0.0` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) small molecule force field, as well as [newer versions of this force field](https://github.com/openforcefield/openff-forcefields).
+The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://openforcefield.github.io/standards/standards/smirnoff/)small molecule force fields.
+This includes the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) and [`openff-2.x.y` ("Sage")](https://pubs.acs.org/doi/10.1021/acs.jctc.3c00039) small molecule force field lines, including the [most recent force field in each lines](https://github.com/openforcefield/openff-forcefields).
 
 The `SMIRNOFFTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
 ### Examples using `SMIRNOFFTemplateGenerator` to generate small molecule SMIRNOFF parameters
 
 Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+
 ```python
 # Create an OpenFF Molecule object for benzene from SMILES
-from openff.toolkit.topology import Molecule
+from openff.toolkit import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
-# Create the SMIRNOFF template generator with the default installed force field (openff-1.0.0)
+# Create the SMIRNOFF template generator with the default installed force field (openff-2.1.0)
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
@@ -173,13 +179,17 @@ forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(smirnoff.generator)
 ```
+
 The latest official Open Force Field Initiative release ([`openff-1.2.0`](https://github.com/openforcefield/openff-forcefields) of the ["Parsley" small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
 You can check which SMIRNOFF force field is in use with
+
 ```python
 >>> smirnoff.smirnoff_filename
-'/Users/choderaj/Library/Caches/Python-Eggs/openforcefields-1.0.0-py3.7.egg-tmp/openforcefields/offxml/openff-1.0.0.offxml'
+'/Users/mattthompson/mambaforge/envs/openmmforcefields/lib/python3.11/site-packages/openforcefields/offxml/openff-2.1.0.offxml'
 ```
+
 Create a template generator for a specific SMIRNOFF force field for multiple molecules read from an SDF file:
+
 ```python
 molecules = Molecule.from_file('molecules.sdf')
 # Create a SMIRNOFF residue template generator from the official openff-1.0.0 release,
@@ -191,22 +201,28 @@ smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='smirnoff99
 # Use a local .offxml file instead
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='local-file.offxml')
 ```
+
 You can also add molecules to the generator later, even after the generator has been registered:
+
 ```python
 smirnoff.add_molecules(molecule)
 smirnoff.add_molecules([molecule1, molecule2])
 ```
+
 To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_FORCEFIELDS` attribute:
+
 ```python
 >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'openff-1.2.0', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7']
+['smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7', 'ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'opc3-1.0.1', 'opc', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'tip4p_fb-1.0.0', 'openff-2.0.0-rc.1', 'opc-1.0.1']
 ```
+
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
+
 ```python
 smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json', forcefield='openff-1.2.0')
 ```
-Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
+Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.
 
 ## Using espaloma to generate small molecule force fields
 
@@ -222,7 +238,7 @@ The `EspalomaTemplateGenerator` residue template generator operates in a manner 
 Create an espaloma template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 ```python
 # Create an OpenFF Molecule object for benzene from SMILES
-from openff.toolkit.topology import Molecule
+from openff.toolkit import Molecule
 molecule = Molecule.from_smiles('c1ccccc1')
 # Create the SMIRNOFF template generator with the released espaloma-0.2.0 force field
 from openmmforcefields.generators import EspalomaTemplateGenerator
