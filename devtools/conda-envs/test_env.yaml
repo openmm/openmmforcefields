@@ -2,8 +2,6 @@ name: openmmforcefields-test
 
 channels:
   - conda-forge
-  - dglteam # espaloma; TODO: Remove this once espaloma is fully on conda-forge
-  - defaults
   - openeye
 
 dependencies:
@@ -24,7 +22,7 @@ dependencies:
 
     # Requirements for conversion tools
   - pyyaml
-  - ambertools =22
+  - ambertools <23
   - lxml
   - networkx
 
@@ -38,9 +36,5 @@ dependencies:
 
     #
     # Espaloma requirements below
-    # TODO: Rework this once espaloma is on conda-forge
     #
-  - pytorch >=1.8.0
-  - dgl <1
-  - qcportal >=0.15.0
-  - espaloma
+  - espaloma >=0.3.1

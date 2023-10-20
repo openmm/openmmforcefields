@@ -1,6 +1,7 @@
 import copy
 import logging
 import os
+import pytest
 import tempfile
 import unittest
 import pytest
@@ -8,6 +9,8 @@ import pytest
 import numpy as np
 import openmm
 from openff.toolkit.topology import Molecule
+from openff.toolkit.typing.engines.smirnoff import ForceField as OFFForceField
+from openff.units import unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
 
 from openmmforcefields.generators import (
@@ -791,6 +794,11 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             if "opc" in small_molecule_forcefield:
                 continue
 
+            # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException due to an equilibrium angle > \pi
+            # See https://github.com/openmm/openmm/issues/3185
+            if "openff-2.0.0-rc.1" not in small_molecule_forcefield:
+                continue
+
             print(f'Testing energies for {small_molecule_forcefield}...')
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
@@ -809,13 +817,13 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
                 # Compare energies and forces
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-
+    
                 # Run some dynamics
                 molecule = self.propagate_dynamics(molecule, smirnoff_system)
 
                 # Compare energies again
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-
+    
 
     def test_partial_charges_are_none(self):
         """Test parameterizing a small molecule with `partial_charges=None` instead
@@ -854,6 +862,40 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             assert generator.forcefield == forcefield
             assert generator.smirnoff_filename.endswith(forcefield + '.offxml')
             assert os.path.exists(generator.smirnoff_filename)
+
+    def test_bespoke_force_field(self):
+        """
+        Make sure a molecule can be parameterised using a bespoke force field passed as a string to
+        the template generator.
+        """
+
+        custom_sage = OFFForceField("openff-2.0.0.offxml")
+        # Create a simple molecule with one bond type
+        ethane = Molecule.from_smiles("C")
+        # Label ethane to get the bond type (not hard coded incase this changes in future)
+        bond_parameter = custom_sage.label_molecules(ethane.to_topology())[0]["Bonds"][(0, 1)]
+        # Edit the bond parameter
+        bonds = custom_sage.get_parameter_handler("Bonds")
+        new_parameter = bonds[bond_parameter.smirks]
+        new_parameter.length = 2 * OFFUnit.angstrom
+
+        # Use the custom sage passed as string to build a template and an openmm system
+        generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
+
+        # Create a ForceField
+        openmm_forcefield = openmm.app.ForceField()
+        # Register the template generator
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+        # Use OpenMM app to generate the system
+        openmm_system = openmm_forcefield.createSystem(ethane.to_topology().to_openmm(), removeCMMotion=False,
+                                                       nonbondedMethod=NoCutoff)
+
+        # Check the bond length has been updated
+        forces = {force.__class__.__name__: force for force in openmm_system.getForces()}
+        bond_force = forces["HarmonicBondForce"]
+        for i in range(bond_force.getNumBonds()):
+            _, _, length, _ = bond_force.getBondParameters(i)
+            assert pytest.approx(length.value_in_unit(openmm.unit.angstrom)) == 2
 
 
 @pytest.mark.espaloma
@@ -908,10 +950,10 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
     def test_retrieve_forcefields(self):
         """Test a force field can be retrieved"""
         # Test loading model by specifying version number
-        generator = EspalomaTemplateGenerator(forcefield='espaloma-0.2.2')
+        generator = EspalomaTemplateGenerator(forcefield='espaloma-0.3.2')
         del generator
         # Test loading model from remote URL
-        url = 'https://github.com/choderalab/espaloma/releases/download/0.2.2/espaloma-0.2.2.pt'
+        url = 'https://github.com/choderalab/espaloma/releases/download/0.3.2/espaloma-0.3.2.pt'
         generator = EspalomaTemplateGenerator(forcefield=url)
         del generator
         # Test loading model from filename
@@ -973,3 +1015,68 @@ class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
             # Create OpenMM System using OpenMM app
             openmm_system = openmm_forcefield.createSystem(molecule.to_topology().to_openmm(), removeCMMotion=False, nonbondedMethod=NoCutoff)
             smirnoff_system = generator.get_openmm_system(molecule)
+
+    # def test_template_generator_kwargs(self):
+    #     """Test """
+
+    def test_keyword_arguments_default(self):
+        """
+        Test the default behavior for the keyword arguments, which is using "openff_unconstrained-2.0.0"
+        as the reference forcefield and "from-molecule" as the charge method.
+
+        Check charges are the same as the input, after passing through the template generator.
+        """
+        molecule = Molecule.from_smiles("C=O")
+        molecule.generate_conformers(n_conformers=1)
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
+        generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield="espaloma-0.3.2")
+        # Create forcefield object
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+        # Create system
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
+        # Make sure passing through the EspalomaGenerator didn't change the charges
+        assert self.charges_are_equal(system, molecule), "Expected equal charges."
+        # Assert the reference forcefield is the default "openff_unconstrained-2.0.0"
+        default_ref_ff = "openff_unconstrained-2.0.0"
+        generator_ref_ff = generator._reference_forcefield
+        assert generator_ref_ff == default_ref_ff, f"Expected {default_ref_ff}, received {generator_ref_ff}."
+
+
+    def test_keyword_arguments(self):
+        """
+        Test passing a custom keyword arguments dictionary to the generator behaves correctly.
+
+        Specifically changing the reference forcefield to openff-2.1.0 and the charge method to nn.
+        Which are not the default values.
+
+        Check generated charges are different from the ones included in the input molecule.
+
+        Returns
+        -------
+
+        """
+        molecule = Molecule.from_smiles("C=O")
+        molecule.generate_conformers(n_conformers=1)
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
+        # Custom generator kwargs
+        espaloma_generator_kwargs = {
+            "reference_forcefield": "openff_unconstrained-2.1.0",
+            "charge_method": "nn",
+        }
+        generator = EspalomaTemplateGenerator(molecules=[molecule],
+                                              forcefield="espaloma-0.3.2",
+                                              template_generator_kwargs=espaloma_generator_kwargs)
+        # Create forcefield object
+        forcefield = ForceField()
+        # Register the template generator
+        forcefield.registerTemplateGenerator(generator.generator)
+        # Create system
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
+        # Make sure passing through the EspalomaGenerator changes the charges
+        assert not self.charges_are_equal(system, molecule), "Expected different charges"
+        # Assert the reference forcefield is "openff_unconstrained-2.1.0"
+        expected_ref_ff = "openff_unconstrained-2.1.0"
+        generator_ref_ff = generator._reference_forcefield
+        assert generator_ref_ff == expected_ref_ff, f"Expected {expected_ref_ff}, received {generator_ref_ff}."
