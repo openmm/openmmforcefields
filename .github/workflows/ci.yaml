@@ -34,7 +34,7 @@ jobs:
             os: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup Conda Environment
       uses: mamba-org/setup-micromamba@v1
@@ -101,7 +101,7 @@ jobs:
         pytest --doctest-modules openmmforcefields --ignore=openmmforcefields/tests
 
     - name: Upload coverage report to CodeCov
-      uses: codecov/codecov-action@v3.1.1
+      uses: codecov/codecov-action@v3
       if: ${{ github.repository == 'openmm/openmmforcefields'
               && github.event != 'schedule' }}
       with:
