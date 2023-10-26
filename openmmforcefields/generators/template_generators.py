@@ -46,7 +46,7 @@ class SmallMoleculeTemplateGenerator:
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
@@ -93,7 +93,7 @@ class SmallMoleculeTemplateGenerator:
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -104,7 +104,7 @@ class SmallMoleculeTemplateGenerator:
 
         Add some Molecules later on after the generator has been registered:
 
-        >>> from openff.toolkit.topology import Molecule
+        >>> from openff.toolkit import Molecule
         >>> smiles = ('c1ccccc1', 'O=Cc1ccc(O)c(OC)c1', 'CN1CCC[C@H]1c2cccnc2')
         >>> mol1, mol2, mol3 = [Molecule.from_smiles(s, allow_undefined_stereo=True) for s in smiles]
         >>> generator.add_molecules(mol1)  # doctest: +SKIP
@@ -139,7 +139,7 @@ class SmallMoleculeTemplateGenerator:
         ----------
         residue : openmm.app.topology.Residue
             The residue to check
-        molecule_template : openff.toolkit.topology.Molecule
+        molecule_template : openff.toolkit.Molecule
             The Molecule template to compare it to
 
         Returns
@@ -209,7 +209,7 @@ class SmallMoleculeTemplateGenerator:
 
         Parameters
         ----------
-        molecule : openff.toolkit.topology.Molecule
+        molecule : openff.toolkit.Molecule
             The Molecule object to check for user charges
 
         Returns
@@ -243,7 +243,7 @@ class SmallMoleculeTemplateGenerator:
 
         Parameters
         ----------
-        molecule : openff.toolkit.topology.Molecule
+        molecule : openff.toolkit.Molecule
             The molecule whose atom names are to be modified in-place
         """
         from collections import defaultdict
@@ -294,7 +294,7 @@ class SmallMoleculeTemplateGenerator:
                         continue
 
                     # See if the template matches
-                    from openff.toolkit.topology import Molecule
+                    from openff.toolkit import Molecule
                     molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
                     _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
@@ -364,7 +364,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     Create a template generator for GAFF for a single Molecule and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
-    >>> from openff.toolkit.topology import Molecule
+    >>> from openff.toolkit import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the GAFF template generator
     >>> from openmmforcefields.generators import GAFFTemplateGenerator
@@ -409,7 +409,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -426,7 +426,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openff.toolkit.topology import Molecule
+        >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
@@ -559,7 +559,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
@@ -960,7 +960,7 @@ class OpenMMSystemMixin:
 
         Parameters
         ----------
-        molecule : openff.toolkit.topology.Molecule
+        molecule : openff.toolkit.Molecule
             The Molecule object
 
         Returns
@@ -980,7 +980,7 @@ class OpenMMSystemMixin:
 
         Parameters
         ----------
-        molecule : openff.toolkit.topology.Molecule
+        molecule : openff.toolkit.Molecule
             The Molecule to be converted
         system : openmm.System
             The System corresponding to molecule
@@ -1172,7 +1172,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     small molecule force field and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
-    >>> from openff.toolkit.topology import Molecule
+    >>> from openff.toolkit import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the SMIRNOFF template generator
     >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
@@ -1215,7 +1215,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit .Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
@@ -1231,7 +1231,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openff.toolkit.topology import Molecule
+        >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
         >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
@@ -1242,18 +1242,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         The latest Open Force Field Initiative release is used if none is specified.
 
         >>> smirnoff.forcefield
-        'openff-2.0.0'
+        'openff-2.1.0'
 
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename  # doctest:+ELLIPSIS
-        '/.../openff-2.0.0.offxml'
+        '/.../openff-2.1.0.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.0.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.1.0')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
@@ -1266,7 +1266,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.0.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.1.0')  # doctest: +SKIP
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -1275,7 +1275,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'openff-2.0.0'
+            forcefield = 'openff-2.1.0'
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1398,7 +1398,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
@@ -1465,7 +1465,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     small molecule force field and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
-    >>> from openff.toolkit.topology import Molecule
+    >>> from openff.toolkit import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the Espaloma template generator
     >>> from openmmforcefields.generators import EspalomaTemplateGenerator
@@ -1511,7 +1511,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list, optional, default=None
+        molecules : openff.toolkit.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with espaloma as needed.
@@ -1533,14 +1533,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             
             Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and  `nn` for `charge_method`.
             User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule`` 
-            if charges are assigned to openff.toolkit.topology.Molecule.
+            if charges are assigned to openff.toolkit.Molecule.
 
         Examples
         --------
 
         Create an Espaloma template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
 
-        >>> from openff.toolkit.topology import Molecule
+        >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import EspalomaTemplateGenerator
         >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecule)
@@ -1603,6 +1603,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             self._reference_forcefield = template_generator_kwargs.get('reference_forcefield', 'openff_unconstrained-2.0.0')
             self._charge_method = template_generator_kwargs.get('charge_method', 'nn')
         else:
+            # Consider upgrading to 2.1.0, the recommended small moleucle force field for general use
             self._reference_forcefield = 'openff_unconstrained-2.0.0'
             self._charge_method = 'from-molecule'
 
@@ -1714,7 +1715,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Parameters
         ----------
-        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with espaloma as needed.
