@@ -15,7 +15,7 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 **Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
 
-**Espaloma:** Currently [`espaloma-0.3.2`](https://github.com/choderalab/espaloma/releases/tag/0.3.2) is supported.
+**Espaloma:** Currently [`espaloma-0.3.2`](https://github.com/choderalab/espaloma/releases/tag/0.3.2) is supported. See our [first espaloma paper](https://arxiv.org/abs/2010.01196) and our second paper which focuses on [protein-ligand systems and beyond](https://arxiv.org/abs/2307.07085).
 
 # Using the force fields
 
@@ -231,6 +231,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
 `espaloma` uses a [graph convolutional model](https://arxiv.org/abs/2010.01196) to generate both valence parameters and fast partial charges.
 
+
 The `EspalomaTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
 **This feature is currently experimental and its API is subject to change.**
@@ -308,7 +309,7 @@ system_generator = SystemGenerator(forcefields=['amber/ff14SB.xml', 'amber/tip3p
 
 To use the [Open Force Field `openff-1.2.0`](https://github.com/openforcefield/openff-forcefields), an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.2.0'`.
 
-To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2010.01196), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
+To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
 
 # Frequently Asked Questions (FAQ)
 
