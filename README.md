@@ -333,6 +333,9 @@ See the corresponding directories for information on how to use the provided con
 
 # Changelog
 
+## 0.12.0 Updates for espaloma and support a offxml string in SystemGenerator
+See our [0.12.0 release page](https://github.com/openmm/openmmforcefields/releases/tag/0.12.0) for more details.
+
 ## 0.11.0 Support for espaloma small molecule parameters
 This release adds support for using [espaloma](https://github.com/choderalab/espaloma) to apply small molecule parameters.
 
