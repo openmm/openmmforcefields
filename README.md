@@ -1,6 +1,6 @@
-[![CI](https://github.com/openmm/openmmforcefields/workflows/CI/badge.svg?branch=master)](https://github.com/openmm/openmmforcefields/actions?query=workflow%3ACI)
-[![conda-forge badge](https://anaconda.org/conda-forge/openmmforcefields/badges/installer/conda.svg)](https://anaconda.org/conda-forge/openmmforcefields)
-[![conda-forge downloads](https://anaconda.org/conda-forge/openmmforcefields/badges/downloads.svg)](https://anaconda.org/conda-forge/openmmforcefields)
+[![CI](https://github.com/openmm/openmmforcefields/actions/workflows/ci.yaml/badge.svg)](https://github.com/openmm/openmmforcefields/actions/workflows/ci.yaml)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmmforcefields.svg)](https://anaconda.org/conda-forge/openmmforcefields)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmmforcefields.svg)](https://anaconda.org/conda-forge/openmmforcefields)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
 # AMBER and CHARMM force fields for OpenMM
