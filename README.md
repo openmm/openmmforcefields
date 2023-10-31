@@ -331,7 +331,7 @@ See the corresponding directories for information on how to use the provided con
 * `amber/` - AMBER force fields and conversion tools
 * `charmm/` - CHARMM force fields and conversion tools
 
-# Changelog
+# [Changelog](https://github.com/openmm/openmmforcefields/releases)
 
 ## 0.12.0 Updates for espaloma and support a offxml string in SystemGenerator
 See our [0.12.0 release page](https://github.com/openmm/openmmforcefields/releases/tag/0.12.0) for more details.
