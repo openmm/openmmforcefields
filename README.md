@@ -15,7 +15,7 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 **Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
 
-**Espaloma:** Currently [`espaloma-0.3.2`](https://github.com/choderalab/espaloma) is supported.
+**Espaloma:** Currently [`espaloma-0.3.2`](https://github.com/choderalab/espaloma/releases/tag/0.3.2) is supported.
 
 # Using the force fields
 
