@@ -1070,8 +1070,8 @@ class OpenMMSystemMixin:
         # Lennard-Jones
         # In case subclasses specifically set the 1-4 scaling factors, use those.
         nonbonded_types = etree.SubElement(root, "NonbondedForce",
-                                           coulomb14scale=getattr(self, "_coulomb14scale", None) or "0.833333",
-                                           lj14scale=getattr(self, "_lj14scale", None) or "0.5")
+                                           coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
+                                           lj14scale=getattr(self, "_lj14scale", "0.5"))
         etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
         for atom_index in range(forces['NonbondedForce'].getNumParticles()):
             charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(atom_index)
