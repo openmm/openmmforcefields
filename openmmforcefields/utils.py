@@ -1,7 +1,10 @@
 import contextlib
+import functools
 import logging
+import time
 
 _logger = logging.getLogger("openmmforcefields.generators.gaff")
+
 
 def get_ffxml_path():
     """
@@ -13,8 +16,10 @@ def get_ffxml_path():
         The absolute path where OpenMM ffxml forcefield files are stored in this package
     """
     from pkg_resources import resource_filename
-    filename = resource_filename('openmmforcefields', 'ffxml')
+
+    filename = resource_filename("openmmforcefields", "ffxml")
     return filename
+
 
 def get_data_filename(relative_path):
     """get the full path to one of the reference files shipped for testing
@@ -34,17 +39,24 @@ def get_data_filename(relative_path):
 
     """
     from pkg_resources import resource_filename
-    fn = resource_filename('openmmforcefields', 'data/' + relative_path)
+
+    fn = resource_filename("openmmforcefields", "data/" + relative_path)
 
     import os
+
     if not os.path.exists(fn):
-        raise ValueError("sorry! %s does not exist. if you just added it, you'll have to re-install" % fn)
+        raise ValueError(
+            "sorry! %s does not exist. if you just added it, you'll have to re-install"
+            % fn
+        )
 
     return fn
+
 
 # =============================================================================
 # BENCHMARKING UTILITIES
 # =============================================================================
+
 
 @contextlib.contextmanager
 def time_it(task_name):
@@ -72,12 +84,15 @@ def with_timer(task_name):
         The name of the task that will be reported.
 
     """
+
     def _with_timer(func):
         @functools.wraps(func)
         def _wrapper(*args, **kwargs):
             with time_it(task_name):
                 return func(*args, **kwargs)
+
         return _wrapper
+
     return _with_timer
 
 
@@ -129,27 +144,29 @@ class Timer:
             self._t1.pop(benchmark_id, None)
             self._completed.pop(benchmark_id, None)
 
-    def start(self, benchmark_id='default'):
+    def start(self, benchmark_id="default"):
         """Start a timer with given benchmark_id."""
         import time
+
         self._t0[benchmark_id] = time.time()
 
-    def stop(self, benchmark_id='default'):
+    def stop(self, benchmark_id="default"):
         try:
             t0 = self._t0[benchmark_id]
         except KeyError:
             _logger.warning(f"Can't stop timing for {benchmark_id}")
         else:
             import time
+
             self._t1[benchmark_id] = time.time()
             elapsed_time = self._t1[benchmark_id] - t0
             self._completed[benchmark_id] = elapsed_time
             return elapsed_time
 
-    def interval(self, benchmark_id='default'):
+    def interval(self, benchmark_id="default"):
         return self._completed[benchmark_id]
 
-    def partial(self, benchmark_id='default'):
+    def partial(self, benchmark_id="default"):
         """Return the elapsed time of the given benchmark so far."""
         try:
             t0 = self._t0[benchmark_id]
@@ -173,7 +190,7 @@ class Timer:
 
         """
         for benchmark_id, elapsed_time in self._completed.items():
-            _logger.debug(f'{benchmark_id} took {elapsed_time:8.3f}s')
+            _logger.debug(f"{benchmark_id} took {elapsed_time:8.3f}s")
 
         if clear is True:
             self.reset_timing_statistics()

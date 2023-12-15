@@ -15,13 +15,17 @@ _logger = logging.getLogger("openmmforcefields.system_generators")
 # System generator base class
 ################################################################################
 
+
 class classproperty(property):
     def __get__(self, obj, objtype=None):
         return super().__get__(objtype)
+
     def __set__(self, obj, value):
         super().__set__(type(obj), value)
+
     def __delete__(self, obj):
         super().__delete__(type(obj))
+
 
 class SystemGenerator:
     """
@@ -65,7 +69,20 @@ class SystemGenerator:
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, template_generator_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
+
+    def __init__(
+        self,
+        forcefields=None,
+        small_molecule_forcefield="openff-1.0.0",
+        forcefield_kwargs=None,
+        nonperiodic_forcefield_kwargs=None,
+        periodic_forcefield_kwargs=None,
+        template_generator_kwargs=None,
+        barostat=None,
+        molecules=None,
+        cache=None,
+        postprocess_system=None,
+    ):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -166,14 +183,16 @@ class SystemGenerator:
         """
 
         # Initialize
-        self.barostat = barostat # barostat to copy, or None if no barostat is to be added
+        self.barostat = (
+            barostat  # barostat to copy, or None if no barostat is to be added
+        )
 
         # Post-creation system transformations
-        self.particle_charges = True # include particle charges
-        self.exception_charges = True # include electrostatics nonzero exceptions
-        self.particle_epsilons = True # include LJ particles
-        self.exception_epsilons = True # include LJ nonzero exceptions
-        self.torsions = True # include torsions
+        self.particle_charges = True  # include particle charges
+        self.exception_charges = True  # include electrostatics nonzero exceptions
+        self.particle_epsilons = True  # include LJ particles
+        self.exception_epsilons = True  # include LJ nonzero exceptions
+        self.torsions = True  # include torsions
 
         # Method to use for postprocessing system
         self.postprocess_system = postprocess_system
@@ -181,39 +200,65 @@ class SystemGenerator:
         # Create OpenMM ForceField object
         forcefields = forcefields if (forcefields is not None) else list()
         from openmm import app
+
         self.forcefield = app.ForceField(*forcefields)
 
         # Cache force fields and settings to use
-        self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
-        self.nonperiodic_forcefield_kwargs = nonperiodic_forcefield_kwargs if nonperiodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.NoCutoff}
-        self.periodic_forcefield_kwargs = periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {'nonbondedMethod' : app.PME}
+        self.forcefield_kwargs = (
+            forcefield_kwargs if forcefield_kwargs is not None else dict()
+        )
+        self.nonperiodic_forcefield_kwargs = (
+            nonperiodic_forcefield_kwargs
+            if nonperiodic_forcefield_kwargs is not None
+            else {"nonbondedMethod": app.NoCutoff}
+        )
+        self.periodic_forcefield_kwargs = (
+            periodic_forcefield_kwargs
+            if periodic_forcefield_kwargs is not None
+            else {"nonbondedMethod": app.PME}
+        )
         self.template_generator_kwargs = template_generator_kwargs
 
         # Raise an exception if nonbondedForce is specified in forcefield_kwargs
-        if 'nonbondedMethod' in self.forcefield_kwargs:
-            raise ValueError("""nonbondedMethod cannot be specified in forcefield_kwargs;
+        if "nonbondedMethod" in self.forcefield_kwargs:
+            raise ValueError(
+                """nonbondedMethod cannot be specified in forcefield_kwargs;
                  must be specified in either periodic_forcefield_kwargs (if it should be applied to periodic systems)
-                 or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)""")
+                 or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)"""
+            )
 
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import (
             SmallMoleculeTemplateGenerator,
         )
+
         self.template_generator = None
         if small_molecule_forcefield is not None:
-            for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
+            for (
+                template_generator_cls
+            ) in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
-                    _logger.debug(f'Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}')
-                    self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache, template_generator_kwargs=self.template_generator_kwargs)
+                    _logger.debug(
+                        f"Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}"
+                    )
+                    self.template_generator = template_generator_cls(
+                        forcefield=small_molecule_forcefield,
+                        cache=cache,
+                        template_generator_kwargs=self.template_generator_kwargs,
+                    )
                     break
                 except ValueError as e:
-                    _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
+                    _logger.debug(
+                        f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}"
+                    )
                     _logger.debug(e)
             if self.template_generator is None:
                 msg = f"No registered small molecule template generators could load force field '{small_molecule_forcefield}'\n"
-                msg += f"Available installed force fields are:\n"
-                for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
-                    msg += f'  {template_generator_cls.__name__}: {template_generator_cls.INSTALLED_FORCEFIELDS}\n'
+                msg += "Available installed force fields are:\n"
+                for (
+                    template_generator_cls
+                ) in SmallMoleculeTemplateGenerator.__subclasses__():
+                    msg += f"  {template_generator_cls.__name__}: {template_generator_cls.INSTALLED_FORCEFIELDS}\n"
                 raise ValueError(msg)
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
 
@@ -227,6 +272,7 @@ class SystemGenerator:
         from openmmforcefields.generators.template_generators import (
             SmallMoleculeTemplateGenerator,
         )
+
         for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
             forcefields += template_generator_cls.INSTALLED_FORCEFIELDS
         return forcefields
@@ -245,7 +291,9 @@ class SystemGenerator:
 
         """
         if self.template_generator is None:
-            raise ValueError("You must have a small molecule residue template generator registered to add small molecules")
+            raise ValueError(
+                "You must have a small molecule residue template generator registered to add small molecules"
+            )
 
         self.template_generator.add_molecules(molecules)
 
@@ -257,11 +305,12 @@ class SystemGenerator:
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
             import openmm
+
             MAXINT = np.iinfo(np.int32).max
 
             # Determine pressure, temperature, and frequency
             pressure = self.barostat.getDefaultPressure()
-            if hasattr(self.barostat, 'getDefaultTemperature'):
+            if hasattr(self.barostat, "getDefaultTemperature"):
                 temperature = self.barostat.getDefaultTemperature()
             else:
                 temperature = self.barostat.getTemperature()
@@ -276,7 +325,7 @@ class SystemGenerator:
 
         # Modify forces if requested
         for force in system.getForces():
-            if force.__class__.__name__ == 'NonbondedForce':
+            if force.__class__.__name__ == "NonbondedForce":
                 for index in range(force.getNumParticles()):
                     charge, sigma, epsilon = force.getParticleParameters(index)
                     if not self.particle_charges:
@@ -285,18 +334,26 @@ class SystemGenerator:
                         epsilon *= 0
                     force.setParticleParameters(index, charge, sigma, epsilon)
                 for index in range(force.getNumExceptions()):
-                    p1, p2, chargeProd, sigma, epsilon = force.getExceptionParameters(index)
+                    p1, p2, chargeProd, sigma, epsilon = force.getExceptionParameters(
+                        index
+                    )
                     if not self.exception_charges:
                         chargeProd *= 0
                     if not self.exception_epsilons:
                         epsilon *= 0
-                    force.setExceptionParameters(index, p1, p2, chargeProd, sigma, epsilon)
-            elif force.__class__.__name__ == 'PeriodicTorsionForce':
+                    force.setExceptionParameters(
+                        index, p1, p2, chargeProd, sigma, epsilon
+                    )
+            elif force.__class__.__name__ == "PeriodicTorsionForce":
                 for index in range(force.getNumTorsions()):
-                    p1, p2, p3, p4, periodicity, phase, K = force.getTorsionParameters(index)
+                    p1, p2, p3, p4, periodicity, phase, K = force.getTorsionParameters(
+                        index
+                    )
                     if not self.torsions:
                         K *= 0
-                    force.setTorsionParameters(index, p1, p2, p3, p4, periodicity, phase, K)
+                    force.setTorsionParameters(
+                        index, p1, p2, p3, p4, periodicity, phase, K
+                    )
 
     def create_system(self, topology, molecules=None):
         """
@@ -326,6 +383,7 @@ class SystemGenerator:
 
         # Build the kwargs to use
         import copy
+
         forcefield_kwargs = copy.deepcopy(self.forcefield_kwargs)
         if topology.getPeriodicBoxVectors() is None:
             forcefield_kwargs.update(self.nonperiodic_forcefield_kwargs)
@@ -344,9 +402,11 @@ class SystemGenerator:
 
         return system
 
+
 ################################################################################
 # Dummy system generator
 ################################################################################
+
 
 class DummySystemGenerator(SystemGenerator):
     """
@@ -362,6 +422,7 @@ class DummySystemGenerator(SystemGenerator):
     * Torsions are added with periodicity 3, but no barrier height
 
     """
+
     def create_system(self, topology, **kwargs):
         """
         Create a System object with simple parameters from the provided Topology
@@ -381,8 +442,11 @@ class DummySystemGenerator(SystemGenerator):
         """
         # TODO: Allow periodicity to be determined from topology
 
+        import openmm
+        from openmm import unit
         from openmmtools.constants import kB
-        kT = kB * 300*unit.kelvin # hard-coded temperature for setting energy scales
+
+        kT = kB * 300 * unit.kelvin  # hard-coded temperature for setting energy scales
 
         # Create a System
         system = openmm.System()
@@ -394,9 +458,9 @@ class DummySystemGenerator(SystemGenerator):
 
         # Add simple repulsive interactions
         # TODO: Use softcore repulsive interaction; Gaussian times switch?
-        nonbonded = openmm.CustomNonbondedForce('100/(r/0.1)^4')
-        nonbonded.setNonbondedMethod(openmm.CustomNonbondedForce.CutoffNonPeriodic);
-        nonbonded.setCutoffDistance(1*unit.nanometer)
+        nonbonded = openmm.CustomNonbondedForce("100/(r/0.1)^4")
+        nonbonded.setNonbondedMethod(openmm.CustomNonbondedForce.CutoffNonPeriodic)
+        nonbonded.setCutoffDistance(1 * unit.nanometer)
         system.addForce(nonbonded)
         for atom in topology.atoms:
             nonbonded.addParticle([])
@@ -405,7 +469,7 @@ class DummySystemGenerator(SystemGenerator):
         bondedToAtom = []
         for atom in topology.atoms():
             bondedToAtom.append(set())
-        for (atom1, atom2) in topology.bonds():
+        for atom1, atom2 in topology.bonds():
             bondedToAtom[atom1.index].add(atom2.index)
             bondedToAtom[atom2.index].add(atom1.index)
         return bondedToAtom
@@ -435,11 +499,13 @@ class DummySystemGenerator(SystemGenerator):
                     else:
                         uniqueAngles.add((atom, bond.atom2, bond.atom1))
         angles = sorted(list(uniqueAngles))
-        theta0 = 109.5 * unit.degrees # TODO: Adapt based on number of bonds to each atom?
+        theta0 = (
+            109.5 * unit.degrees
+        )  # TODO: Adapt based on number of bonds to each atom?
         sigma_theta = 10 * unit.degrees
         Ktheta = kT / sigma_theta**2
         angle_force = openmm.HarmonicAngleForce()
-        for (atom1, atom2, atom3) in angles:
+        for atom1, atom2, atom3 in angles:
             angles.addAngle(atom1.index, atom2.index, atom3.index, theta0, Ktheta)
         system.addForce(angle_force)
 
@@ -463,8 +529,16 @@ class DummySystemGenerator(SystemGenerator):
         periodicity = 3
         phase = 0.0 * unit.degrees
         Kphi = 0.0 * kT
-        for (atom1, atom2, atom3, atom4) in propers:
-            torsion_force.add_torsion(atom1.index, atom2.index, atom3.index, atom4.index, periodicity, phase, Kphi)
+        for atom1, atom2, atom3, atom4 in propers:
+            torsion_force.add_torsion(
+                atom1.index,
+                atom2.index,
+                atom3.index,
+                atom4.index,
+                periodicity,
+                phase,
+                Kphi,
+            )
         system.addForce(torsion_force)
 
         return system

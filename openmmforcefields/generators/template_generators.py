@@ -22,8 +22,10 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 # Small molecule OpenMM ForceField template generation utilities
 ################################################################################
 
+
 class ForceException(Exception):
     """Exception for forces"""
+
 
 class SmallMoleculeTemplateGenerator:
     """
@@ -38,6 +40,7 @@ class SmallMoleculeTemplateGenerator:
         If not None, the generated ffxml file will be written to this filename.
         Default is None.
     """
+
     def __init__(self, molecules=None, cache=None):
         """
         Create a tempalte generator with some OpenFF toolkit molecules
@@ -61,11 +64,15 @@ class SmallMoleculeTemplateGenerator:
 
         # Set up cache
         self._cache = cache
-        self._smiles_added_to_db = set() # set of SMILES added to the database this session
-        self._database_table_name = None # this must be set by subclasses for cache to function
+        self._smiles_added_to_db = (
+            set()
+        )  # set of SMILES added to the database this session
+        self._database_table_name = (
+            None  # this must be set by subclasses for cache to function
+        )
 
         # Name of the force field
-        self._forcefield = None # this must be set by subclasses
+        self._forcefield = None  # this must be set by subclasses
 
         # File to write ffxml to if requested
         self.debug_ffxml_filename = None
@@ -77,10 +84,14 @@ class SmallMoleculeTemplateGenerator:
 
     @contextlib.contextmanager
     def _open_db(self):
-        """Open the cache database.
-        """
+        """Open the cache database."""
         from tinydb import TinyDB
-        tinydb_kwargs = { 'sort_keys' : True, 'indent' : 4, 'separators' : (',', ': ') } # for pretty-printing
+
+        tinydb_kwargs = {
+            "sort_keys": True,
+            "indent": 4,
+            "separators": (",", ": "),
+        }  # for pretty-printing
         db = TinyDB(self._cache, **tinydb_kwargs)
         try:
             yield db
@@ -117,17 +128,20 @@ class SmallMoleculeTemplateGenerator:
 
         # Ensure molecules is an iterable
         try:
-            iterator = iter(molecules)
-        except TypeError as te:
-            molecules = [ molecules ]
+            iter(molecules)
+        except TypeError:
+            molecules = [molecules]
 
         # Create copies
         # TODO: Do we need to try to construct molecules with other schemes, such as Molecule.from_smiles(), if needed?
         import copy
-        molecules = [ copy.deepcopy(molecule) for molecule in molecules ]
+
+        molecules = [copy.deepcopy(molecule) for molecule in molecules]
 
         # Cache molecules
-        self._molecules.update( { molecule.to_smiles() : molecule for molecule in molecules } )
+        self._molecules.update(
+            {molecule.to_smiles(): molecule for molecule in molecules}
+        )
 
     @staticmethod
     def _match_residue(residue, molecule_template):
@@ -159,15 +173,21 @@ class SmallMoleculeTemplateGenerator:
         import networkx as nx
 
         # Build list of external bonds for residue
-        number_of_external_bonds = { atom : 0 for atom in residue.atoms() }
+        number_of_external_bonds = {atom: 0 for atom in residue.atoms()}
         for bond in residue.external_bonds():
-            if bond[0] in number_of_external_bonds: number_of_external_bonds[bond[0]] += 1
-            if bond[1] in number_of_external_bonds: number_of_external_bonds[bond[1]] += 1
+            if bond[0] in number_of_external_bonds:
+                number_of_external_bonds[bond[0]] += 1
+            if bond[1] in number_of_external_bonds:
+                number_of_external_bonds[bond[1]] += 1
 
         # Residue graph
         residue_graph = nx.Graph()
         for atom in residue.atoms():
-            residue_graph.add_node(atom, element=atom.element.atomic_number, number_of_external_bonds=number_of_external_bonds[atom])
+            residue_graph.add_node(
+                atom,
+                element=atom.element.atomic_number,
+                number_of_external_bonds=number_of_external_bonds[atom],
+            )
         for bond in residue.internal_bonds():
             residue_graph.add_edge(bond[0], bond[1])
 
@@ -176,28 +196,45 @@ class SmallMoleculeTemplateGenerator:
         # See https://docs.eyesopen.com/toolkits/python/oechemtk/OEChemClasses/OEAtomBase.html
         template_graph = nx.Graph()
         for atom_index, atom in enumerate(molecule_template.atoms):
-            template_graph.add_node(atom_index, element=atom.atomic_number, number_of_external_bonds=0)
+            template_graph.add_node(
+                atom_index, element=atom.atomic_number, number_of_external_bonds=0
+            )
         for bond in molecule_template.bonds:
             template_graph.add_edge(bond.atom1_index, bond.atom2_index)
 
         # DEBUG
-        #print(f'residue_graph: nodes {len(list(residue_graph.nodes))} edges {len(list(residue_graph.edges))}')
-        #print(f'template_graph: nodes {len(list(template_graph.nodes))} edges {len(list(template_graph.edges))}')
+        # print(f'residue_graph: nodes {len(list(residue_graph.nodes))} edges {len(list(residue_graph.edges))}')
+        # print(f'template_graph: nodes {len(list(template_graph.nodes))} edges {len(list(template_graph.edges))}')
 
         # Determine graph isomorphism
         from networkx.algorithms import isomorphism
+
         def node_match(n1, n2):
             """Return True of nodes match, and False if not"""
-            return (n1['element']==n2['element']) and (n1['number_of_external_bonds']==n2['number_of_external_bonds'])
-        graph_matcher = isomorphism.GraphMatcher(residue_graph, template_graph, node_match=node_match)
-        if graph_matcher.is_isomorphic() == False:
+            return (n1["element"] == n2["element"]) and (
+                n1["number_of_external_bonds"] == n2["number_of_external_bonds"]
+            )
+
+        graph_matcher = isomorphism.GraphMatcher(
+            residue_graph, template_graph, node_match=node_match
+        )
+        if not graph_matcher.is_isomorphic():
             return None
 
         # Translate to local residue atom indices
         # TODO: This can be simplified because molecule_template uses atom index as key
-        atom_index_within_residue = { atom : index for (index, atom) in enumerate(residue.atoms()) }
-        atom_index_within_template = { index : index for (index, atom) in enumerate(molecule_template.atoms) }
-        matches = { atom_index_within_residue[residue_atom] : atom_index_within_template[template_atom] for (residue_atom, template_atom) in graph_matcher.mapping.items() }
+        atom_index_within_residue = {
+            atom: index for (index, atom) in enumerate(residue.atoms())
+        }
+        atom_index_within_template = {
+            index: index for (index, atom) in enumerate(molecule_template.atoms)
+        }
+        matches = {
+            atom_index_within_residue[residue_atom]: atom_index_within_template[
+                template_atom
+            ]
+            for (residue_atom, template_atom) in graph_matcher.mapping.items()
+        }
 
         return matches
 
@@ -276,13 +313,15 @@ class SmallMoleculeTemplateGenerator:
 
         """
         if self._database_table_name is None:
-            raise NotImplementedError('SmallMoleculeTemplateGenerator is an abstract base class and cannot be used directly.')
+            raise NotImplementedError(
+                "SmallMoleculeTemplateGenerator is an abstract base class and cannot be used directly."
+            )
 
         from io import StringIO
 
         # TODO: Refactor to reduce code duplication
 
-        _logger.info(f'Requested to generate parameters for residue {residue}')
+        _logger.info(f"Requested to generate parameters for residue {residue}")
 
         # If a database is specified, check against molecules in the database
         if self._cache is not None:
@@ -290,20 +329,25 @@ class SmallMoleculeTemplateGenerator:
                 table = db.table(self._database_table_name)
                 for entry in table:
                     # Skip any molecules we've added to the database this session
-                    if entry['smiles'] in self._smiles_added_to_db:
+                    if entry["smiles"] in self._smiles_added_to_db:
                         continue
 
                     # See if the template matches
                     from openff.toolkit import Molecule
-                    molecule_template = Molecule.from_smiles(entry['smiles'], allow_undefined_stereo=True)
+
+                    molecule_template = Molecule.from_smiles(
+                        entry["smiles"], allow_undefined_stereo=True
+                    )
                     _logger.debug(f"Checking against {entry['smiles']}")
                     if self._match_residue(residue, molecule_template):
-                        ffxml_contents = entry['ffxml']
+                        ffxml_contents = entry["ffxml"]
 
                         # Write to debug file if requested
                         if self.debug_ffxml_filename is not None:
-                            with open(self.debug_ffxml_filename, 'w') as outfile:
-                                _logger.debug(f'writing ffxml to {self.debug_ffxml_filename}')
+                            with open(self.debug_ffxml_filename, "w") as outfile:
+                                _logger.debug(
+                                    f"writing ffxml to {self.debug_ffxml_filename}"
+                                )
                                 outfile.write(ffxml_contents)
 
                         # Add parameters and residue template for this residue
@@ -320,8 +364,8 @@ class SmallMoleculeTemplateGenerator:
 
                 # Write to debug file if requested
                 if self.debug_ffxml_filename is not None:
-                    with open(self.debug_ffxml_filename, 'w') as outfile:
-                        _logger.debug(f'writing ffxml to {self.debug_ffxml_filename}')
+                    with open(self.debug_ffxml_filename, "w") as outfile:
+                        _logger.debug(f"writing ffxml to {self.debug_ffxml_filename}")
                         outfile.write(ffxml_contents)
 
                 # Add the parameters and residue definition
@@ -330,12 +374,14 @@ class SmallMoleculeTemplateGenerator:
                 if self._cache is not None:
                     with self._open_db() as db:
                         table = db.table(self._database_table_name)
-                        _logger.debug(f'Writing residue template for {smiles} to cache {self._cache}')
-                        record = {'smiles' : smiles, 'ffxml' : ffxml_contents}
+                        _logger.debug(
+                            f"Writing residue template for {smiles} to cache {self._cache}"
+                        )
+                        record = {"smiles": smiles, "ffxml": ffxml_contents}
                         # Add the IUPAC name for convenience if we can
                         try:
-                            record['iupac'] = molecule.to_iupac()
-                        except Exception as e:
+                            record["iupac"] = molecule.to_iupac()
+                        except Exception:
                             pass
                         # Store the record
                         table.insert(record)
@@ -345,12 +391,16 @@ class SmallMoleculeTemplateGenerator:
                 return True
 
         # Report that we have failed to parameterize the residue
-        _logger.warning(f'Did not recognize residue {residue.name}; did you forget to call .add_molecules() to add it?')
+        _logger.warning(
+            f"Did not recognize residue {residue.name}; did you forget to call .add_molecules() to add it?"
+        )
         return False
+
 
 ################################################################################
 # GAFF-specific OpenMM ForceField template generation utilities
 ################################################################################
+
 
 class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     """
@@ -399,7 +449,14 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
 
     """
-    INSTALLED_FORCEFIELDS = ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+
+    INSTALLED_FORCEFIELDS = [
+        "gaff-1.4",
+        "gaff-1.8",
+        "gaff-1.81",
+        "gaff-2.1",
+        "gaff-2.11",
+    ]
 
     def __init__(self, molecules=None, forcefield=None, cache=None, **kwargs):
         """
@@ -473,25 +530,31 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             forcefield = self.INSTALLED_FORCEFIELDS[-1]
 
         # Ensure a valid GAFF version is specified
-        if not forcefield in self.INSTALLED_FORCEFIELDS:
-            raise ValueError(f"Specified 'forcefield' ({forcefield}) must be one of {self.INSTALLED_FORCEFIELDS}")
+        if forcefield not in self.INSTALLED_FORCEFIELDS:
+            raise ValueError(
+                f"Specified 'forcefield' ({forcefield}) must be one of {self.INSTALLED_FORCEFIELDS}"
+            )
 
         # Store user-specified GAFF version
         self._forcefield = forcefield
         import re
-        result = re.match(r'^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$', forcefield)
+
+        result = re.match(
+            r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield
+        )
         if result is None:
             msg = "'forcefield' must be of form 'gaff-X.Y', where X and Y denote major and minor version\n"
             msg += f"Provided 'forcefield' argument was '{forcefield}'\n"
             msg += f"Supported values are: {self.INSTALLED_FORCEFIELDS}"
             raise ValueError(msg)
-        self._gaff_major_version = result['major_version']
-        self._gaff_minor_version = result['minor_version']
-        self._gaff_version = f'{self._gaff_major_version}.{self._gaff_minor_version}'
+        self._gaff_major_version = result["major_version"]
+        self._gaff_minor_version = result["minor_version"]
+        self._gaff_version = f"{self._gaff_major_version}.{self._gaff_minor_version}"
 
         # Track parameters by GAFF version string
         # TODO: Use file hash instead of name?
         import os
+
         self._database_table_name = os.path.basename(forcefield)
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
@@ -500,7 +563,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_version(self):
         """The current GAFF version in use"""
-        return self._gaff_major_version + '.' + self._gaff_minor_version
+        return self._gaff_major_version + "." + self._gaff_minor_version
 
     @property
     def gaff_major_version(self):
@@ -516,14 +579,22 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     def gaff_dat_filename(self):
         """File path to the GAFF .dat AMBER force field file"""
         from pkg_resources import resource_filename
-        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'dat', f'{self._forcefield}.dat'))
+
+        filename = resource_filename(
+            "openmmforcefields",
+            os.path.join("ffxml", "amber", "gaff", "dat", f"{self._forcefield}.dat"),
+        )
         return filename
 
     @property
     def gaff_xml_filename(self):
         """File path to the GAFF .ffxml OpenMM force field file"""
         from pkg_resources import resource_filename
-        filename = resource_filename('openmmforcefields', os.path.join('ffxml', 'amber', 'gaff', 'ffxml', f'{self._forcefield}.xml'))
+
+        filename = resource_filename(
+            "openmmforcefields",
+            os.path.join("ffxml", "amber", "gaff", "ffxml", f"{self._forcefield}.xml"),
+        )
         return filename
 
     def generator(self, forcefield, residue):
@@ -545,7 +616,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
         # Load the GAFF parameters if we haven't done so already for this force field
-        if not forcefield in self._gaff_parameters_loaded:
+        if forcefield not in self._gaff_parameters_loaded:
             # Instruct the ForceField to load the GAFF parameters
             forcefield.loadFile(self.gaff_xml_filename)
             # Note that we've loaded the GAFF parameters
@@ -593,7 +664,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
+        _logger.info(
+            f"Generating a residue template for {smiles} using {self._forcefield}"
+        )
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
@@ -601,54 +674,66 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Compute net formal charge
         net_charge = molecule.total_charge
 
-        _logger.debug(f'Total charge is {net_charge}')
+        _logger.debug(f"Total charge is {net_charge}")
 
         # Compute partial charges if required
         if self._molecule_has_user_charges(molecule):
-            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+            _logger.debug(
+                "Using user-provided charges because partial charges are nonzero..."
+            )
         else:
-            _logger.debug(f'Computing AM1-BCC charges...')
+            _logger.debug("Computing AM1-BCC charges...")
             # NOTE: generate_conformers seems to be required for some molecules
             # https://github.com/openforcefield/openff-toolkit/issues/492
             molecule.generate_conformers(n_conformers=10)
-            molecule.assign_partial_charges(partial_charge_method='am1bcc')
+            molecule.assign_partial_charges(partial_charge_method="am1bcc")
 
         # Geneate a single conformation
-        _logger.debug(f'Generating a conformer...')
+        _logger.debug("Generating a conformer...")
         molecule.generate_conformers(n_conformers=1)
 
         # Create temporary directory for running antechamber
         import os
         import tempfile
+
         tmpdir = tempfile.mkdtemp()
-        prefix = 'molecule'
-        input_sdf_filename = os.path.join(tmpdir, prefix + '.sdf')
-        gaff_mol2_filename = os.path.join(tmpdir, prefix + '.gaff.mol2')
-        frcmod_filename = os.path.join(tmpdir, prefix + '.frcmod')
+        prefix = "molecule"
+        input_sdf_filename = os.path.join(tmpdir, prefix + ".sdf")
+        gaff_mol2_filename = os.path.join(tmpdir, prefix + ".gaff.mol2")
+        frcmod_filename = os.path.join(tmpdir, prefix + ".frcmod")
 
         # Write MDL SDF file for input into antechamber
-        molecule.to_file(input_sdf_filename, file_format='sdf')
+        molecule.to_file(input_sdf_filename, file_format="sdf")
 
         # Parameterize the molecule with antechamber (without charging)
-        _logger.debug(f'Running antechamber...')
-        self._run_antechamber(molecule_filename=input_sdf_filename, input_format='mdl',
-                gaff_mol2_filename=gaff_mol2_filename, frcmod_filename=frcmod_filename)
+        _logger.debug("Running antechamber...")
+        self._run_antechamber(
+            molecule_filename=input_sdf_filename,
+            input_format="mdl",
+            gaff_mol2_filename=gaff_mol2_filename,
+            frcmod_filename=frcmod_filename,
+        )
 
         # Read the resulting GAFF mol2 file atom types
-        _logger.debug(f'Reading GAFF atom types...')
+        _logger.debug("Reading GAFF atom types...")
         self._read_gaff_atom_types_from_mol2(gaff_mol2_filename, molecule)
 
-        # If residue_atoms = None, add all atoms to the residues
-        if residue_atoms == None:
-            residue_atoms = [ atom for atom in molecule.atoms ]
+        # If residue_atoms == None, add all atoms to the residues
+        if not residue_atoms:
+            residue_atoms = [atom for atom in molecule.atoms]
 
         # Modify partial charges so that charge on residue atoms is integral
         # TODO: This may require some modification to correctly handle API changes
         #       when OpenFF toolkit makes charge quantities consistently unit-bearing
         #       or pure numbers.
-        _logger.debug(f'Fixing partial charges...')
-        _logger.debug(f'{molecule.partial_charges}')
-        residue_charge = ensure_quantity(0.0 * unit.elementary_charge, unit_solution)
+        _logger.debug("Fixing partial charges...")
+        _logger.debug(f"{molecule.partial_charges}")
+
+        # This variable is unsed!
+        residue_charge = ensure_quantity(  # noqaa
+            0.0 * unit.elementary_charge,
+            unit_solution,
+        )
         total_charge = molecule.partial_charges.sum()
 
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
@@ -669,47 +754,55 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         if redistribute:
             # Redistribute excess charge proportionally to absolute charge
-            molecule.partial_charges = molecule.partial_charges + charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
-        _logger.debug(f'{molecule.partial_charges}')
+            molecule.partial_charges = (
+                molecule.partial_charges
+                + charge_deficit
+                * abs(molecule.partial_charges)
+                / sum_of_absolute_charge
+            )
+        _logger.debug(f"{molecule.partial_charges}")
 
         # Generate additional parameters if needed
         # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
-        _logger.debug(f'Creating ffxml contents for additional parameters...')
-        from inspect import (
-            signature,  # use introspection to support multiple parmed versions
+        _logger.debug("Creating ffxml contents for additional parameters...")
+        from inspect import (  # use introspection to support multiple parmed versions
+            signature,
         )
         from io import StringIO
-        leaprc = StringIO('parm = loadamberparams %s' % frcmod_filename)
+
+        leaprc = StringIO("parm = loadamberparams %s" % frcmod_filename)
         import parmed
+
         params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
         kwargs = {}
-        if 'remediate_residues' in signature(parmed.openmm.OpenMMParameterSet.from_parameterset).parameters:
-            kwargs['remediate_residues'] = False
+        if (
+            "remediate_residues"
+            in signature(parmed.openmm.OpenMMParameterSet.from_parameterset).parameters
+        ):
+            kwargs["remediate_residues"] = False
         params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, **kwargs)
         ffxml = StringIO()
         kwargs = {}
-        if 'write_unused' in signature(params.write).parameters:
-            kwargs['write_unused'] = True
+        if "write_unused" in signature(params.write).parameters:
+            kwargs["write_unused"] = True
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
         # Create the residue template
-        _logger.debug(f'Creating residue template...')
+        _logger.debug("Creating residue template...")
         from lxml import etree
+
         root = etree.fromstring(ffxml_contents)
         # Create residue definitions
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
-
             if uses_old_api:
-                charge_string =str(
+                charge_string = str(
                     atom.partial_charge.value_in_unit(openmm_unit.elementary_charge)
                 )
             else:
-                charge_string = str(
-                    atom.partial_charge.m_as(unit.elementary_charge)
-                )
+                charge_string = str(atom.partial_charge.m_as(unit.elementary_charge))
 
             atom = etree.SubElement(
                 residue,
@@ -721,19 +814,34 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         for bond in molecule.bonds:
             if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
-                bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+                bond = etree.SubElement(
+                    residue,
+                    "Bond",
+                    atomName1=bond.atom1.name,
+                    atomName2=bond.atom2.name,
+                )
             elif (bond.atom1 in residue_atoms) and (bond.atom2 not in residue_atoms):
-                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom1.name)
+                bond = etree.SubElement(
+                    residue, "ExternalBond", atomName=bond.atom1.name
+                )
             elif (bond.atom1 not in residue_atoms) and (bond.atom2 in residue_atoms):
-                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom2.name)
+                bond = etree.SubElement(
+                    residue, "ExternalBond", atomName=bond.atom2.name
+                )
         # Render XML into string and append to parameters
-        ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
-        _logger.debug(f'ffxml creation complete.')
+        ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
+        _logger.debug("ffxml creation complete.")
 
         return ffxml_contents
 
-    def _run_antechamber(self, molecule_filename, input_format='sdf',
-                         gaff_mol2_filename=None, frcmod_filename=None, verbosity=0):
+    def _run_antechamber(
+        self,
+        molecule_filename,
+        input_format="sdf",
+        gaff_mol2_filename=None,
+        frcmod_filename=None,
+        verbosity=0,
+    ):
         """Run AmberTools antechamber and parmchk2 to create GAFF mol2 and frcmod files.
 
         Parameters
@@ -761,15 +869,16 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             Amber frcmod file containing additional parameters for the molecule not found in corresponding gaff.dat
         """
         if gaff_mol2_filename is None:
-            gaff_mol2_filename = 'molecule.gaff.mol2'
+            gaff_mol2_filename = "molecule.gaff.mol2"
         if frcmod_filename is None:
-            frcmod_filename = 'molecule.frcmod'
+            frcmod_filename = "molecule.frcmod"
 
         # Build absolute paths for input and output files
         import os
-        molecule_filename = os.path.abspath( molecule_filename )
-        gaff_mol2_filename = os.path.abspath( gaff_mol2_filename )
-        frcmod_filename = os.path.abspath( frcmod_filename )
+
+        molecule_filename = os.path.abspath(molecule_filename)
+        gaff_mol2_filename = os.path.abspath(gaff_mol2_filename)
+        frcmod_filename = os.path.abspath(frcmod_filename)
 
         def read_file_contents(filename):
             infile = open(filename)
@@ -780,75 +889,80 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Use temporary directory context to do this to avoid issues with spaces in filenames, etc.
         import subprocess
         import tempfile
+
         with tempfile.TemporaryDirectory() as tmpdir:
             cwd = os.getcwd()
             os.chdir(tmpdir)
 
-            local_input_filename = 'in.' + input_format
+            local_input_filename = "in." + input_format
             import shutil
+
             shutil.copy(molecule_filename, local_input_filename)
 
             # Determine whether antechamber supports -dr [yes/no] option
-            cmd = f'antechamber -h | grep dr'
+            cmd = "antechamber -h | grep dr"
             supports_acdoctor = False
-            if ('acdoctor' in subprocess.getoutput(cmd)):
+            if "acdoctor" in subprocess.getoutput(cmd):
                 supports_acdoctor = True
 
-            if (self._gaff_major_version == '1'):
-                atom_type = 'gaff'
-            elif (self._gaff_major_version == '2'):
-                atom_type = 'gaff2'
+            if self._gaff_major_version == "1":
+                atom_type = "gaff"
+            elif self._gaff_major_version == "2":
+                atom_type = "gaff2"
             else:
-                raise ValueError(f'gaff major version {self._gaff_major_version} unknown')
+                raise ValueError(
+                    f"gaff major version {self._gaff_major_version} unknown"
+                )
 
             # Run antechamber without charging (which is done separately)
-            cmd = f'antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}'
+            cmd = f"antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}"
             if supports_acdoctor:
-                cmd += ' -dr ' + ('yes' if verbosity else 'no')
+                cmd += " -dr " + ("yes" if verbosity else "no")
 
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
             import os
-            if not os.path.exists('out.mol2'):
-                msg  = "antechamber failed to produce output mol2 file\n"
+
+            if not os.path.exists("out.mol2"):
+                msg = "antechamber failed to produce output mol2 file\n"
                 msg += "command: %s\n" % cmd
                 msg += "output:\n"
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 msg += output
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 msg += "input:\n"
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 msg += read_file_contents(local_input_filename)
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 # TODO: Run antechamber again with acdoctor mode on (-dr yes) to get more debug info, if supported
                 os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
 
             # Run parmchk.
-            shutil.copy(self.gaff_dat_filename, 'gaff.dat')
+            shutil.copy(self.gaff_dat_filename, "gaff.dat")
             cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version}"
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
-            if not os.path.exists('out.frcmod'):
-                msg  = "parmchk2 failed to produce output frcmod file\n"
+            if not os.path.exists("out.frcmod"):
+                msg = "parmchk2 failed to produce output frcmod file\n"
                 msg += "command: %s\n" % cmd
                 msg += "output:\n"
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 msg += output
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
                 msg += "input mol2:\n"
-                msg += 8 * "----------" + '\n'
-                msg += read_file_contents('out.mol2')
-                msg += 8 * "----------" + '\n'
+                msg += 8 * "----------" + "\n"
+                msg += read_file_contents("out.mol2")
+                msg += 8 * "----------" + "\n"
                 os.chdir(cwd)
                 raise Exception(msg)
             _logger.debug(output)
             self._check_for_errors(output)
 
             # Copy back
-            shutil.copy( 'out.mol2', gaff_mol2_filename )
-            shutil.copy( 'out.frcmod', frcmod_filename )
+            shutil.copy("out.mol2", gaff_mol2_filename)
+            shutil.copy("out.frcmod", frcmod_filename)
 
             os.chdir(cwd)
 
@@ -874,7 +988,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             line = infile.readline()
             # Seek to ATOM block
             while line:
-                if line.strip() == '@<TRIPOS>ATOM':
+                if line.strip() == "@<TRIPOS>ATOM":
                     break
                 line = infile.readline()
             # Read GAFF atom types
@@ -902,17 +1016,17 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
 
-        lines = outputtext.split('\n')
+        lines = outputtext.split("\n")
         error_lines = []
         for line in lines:
-            if 'ERROR' in line.upper():
-                error_lines.append( line )
-            if not other_errors == None:
+            if "ERROR" in line.upper():
+                error_lines.append(line)
+            if other_errors is not None:
                 for err in other_errors:
                     if err.upper() in line.upper():
-                        error_lines.append( line )
+                        error_lines.append(line)
 
-        if not ignore_errors == None and len(error_lines)>0:
+        if ignore_errors is not None and len(error_lines) > 0:
             new_error_lines = []
             for ign in ignore_errors:
                 ignore = False
@@ -920,27 +1034,30 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                     if ign in err:
                         ignore = True
                 if not ignore:
-                    new_error_lines.append( err )
+                    new_error_lines.append(err)
             error_lines = new_error_lines
 
         if len(error_lines) > 0:
-            _logger.warning("Unexpected errors encountered running AMBER tool. Offending output:")
+            _logger.warning(
+                "Unexpected errors encountered running AMBER tool. Offending output:"
+            )
             for line in error_lines:
                 _logger.warning(line)
-            raise(RuntimeError("Error encountered running AMBER tool. Exiting."))
+            raise (RuntimeError("Error encountered running AMBER tool. Exiting."))
 
         return
+
 
 ################################################################################
 # MixIn for force field template generators that produce OpenMM System objects
 ################################################################################
 
+
 class OpenMMSystemMixin:
-    """
-    """
+    """ """
+
     def clear_system_cache(self):
-        """Initialize the OpenMM System cache
-        """
+        """Initialize the OpenMM System cache"""
         self._system_cache = dict()
 
     def cache_system(self, smiles, system):
@@ -975,7 +1092,9 @@ class OpenMMSystemMixin:
         else:
             return None
 
-    def convert_system_to_ffxml(self, molecule, system, improper_atom_ordering='smirnoff'):
+    def convert_system_to_ffxml(
+        self, molecule, system, improper_atom_ordering="smirnoff"
+    ):
         """Convert OpenMM System object to molecule-specific OpenMM ffxml
 
         Parameters
@@ -997,6 +1116,7 @@ class OpenMMSystemMixin:
 
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
+
         root = etree.Element("ForceField")
 
         def as_attrib(quantity):
@@ -1012,8 +1132,10 @@ class OpenMMSystemMixin:
                 return str(quantity.m)
             else:
                 from openmm.unit import Quantity as OpenMMQuantity
+
                 if isinstance(quantity, OpenMMQuantity):
                     from openmm import unit
+
                     return str(quantity.value_in_unit_system(unit.md_unit_system))
                 else:
                     raise ValueError(f"Found unexpected type {type(quantity)}.")
@@ -1021,17 +1143,23 @@ class OpenMMSystemMixin:
         # Append unique type names to atoms
         smiles = molecule.to_smiles()
         for index, atom in enumerate(molecule.atoms):
-            setattr(atom, 'typename', f'{smiles}${atom.name}#{index}')
+            setattr(atom, "typename", f"{smiles}${atom.name}#{index}")
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
         for atom_index, atom in enumerate(molecule.atoms):
             # Create a new atom type for each atom in the molecule
-            paricle_indices = [atom_index]
             element_symbol = atom.element.symbol if uses_old_api else atom.symbol
-            atom_type = etree.SubElement(atom_types, "Type", name=atom.typename,
-                element=element_symbol, mass=as_attrib(atom.mass))
-            atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
+            atom_type = etree.SubElement(
+                atom_types,
+                "Type",
+                name=atom.typename,
+                element=element_symbol,
+                mass=as_attrib(atom.mass),
+            )
+            atom_type.set(
+                "class", atom.typename
+            )  # 'class' is a reserved Python keyword, so use alternative API
 
         supported_forces = {
             "NonbondedForce",
@@ -1046,9 +1174,13 @@ class OpenMMSystemMixin:
             force_name = force.__class__.__name__
 
             if force_name in forces:
-                raise ForceException(f"Two instances of force {force_name} appear in System")
+                raise ForceException(
+                    f"Two instances of force {force_name} appear in System"
+                )
             if force_name not in supported_forces:
-                raise ForceException(f"Custom forces not supported. Found force of type {force_name}.")
+                raise ForceException(
+                    f"Custom forces not supported. Found force of type {force_name}."
+                )
 
             forces[force_name] = force
 
@@ -1065,99 +1197,168 @@ class OpenMMSystemMixin:
             classmap : dict of str : str
                 Dict of format { 'class1' : typename1, ... }
             """
-            return { f'class{class_index+1}' : molecule.atoms[atom_index].typename for class_index,atom_index in enumerate(atom_indices) }
+            return {
+                f"class{class_index+1}": molecule.atoms[atom_index].typename
+                for class_index, atom_index in enumerate(atom_indices)
+            }
 
         # Lennard-Jones
         # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
         # though this must match the original AMBER values
-        nonbonded_types = etree.SubElement(root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5")
+        nonbonded_types = etree.SubElement(
+            root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5"
+        )
         etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
-        for atom_index in range(forces['NonbondedForce'].getNumParticles()):
-            charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(atom_index)
-            nonbonded_type = etree.SubElement(nonbonded_types, "Atom",
-                sigma=as_attrib(sigma), epsilon=as_attrib(epsilon))
-            nonbonded_type.set('class', molecule.atoms[atom_index].typename) # 'class' is a reserved Python keyword, so use alternative API
+        for atom_index in range(forces["NonbondedForce"].getNumParticles()):
+            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(
+                atom_index
+            )
+            nonbonded_type = etree.SubElement(
+                nonbonded_types,
+                "Atom",
+                sigma=as_attrib(sigma),
+                epsilon=as_attrib(epsilon),
+            )
+            nonbonded_type.set(
+                "class", molecule.atoms[atom_index].typename
+            )  # 'class' is a reserved Python keyword, so use alternative API
 
         # Bonds
         bond_types = etree.SubElement(root, "HarmonicBondForce")
-        atom_indices = [-1]*2
-        for bond_index in range(forces['HarmonicBondForce'].getNumBonds()):
-            atom_indices[0], atom_indices[1], length, k = forces['HarmonicBondForce'].getBondParameters(bond_index)
-            bond_type = etree.SubElement(bond_types, "Bond", **classes(atom_indices),
-                length=as_attrib(length), k=as_attrib(k))
+        atom_indices = [-1] * 2
+        for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
+            atom_indices[0], atom_indices[1], length, k = forces[
+                "HarmonicBondForce"
+            ].getBondParameters(bond_index)
+
+            # This variable is not used - is it needed?
+            bond_type = etree.SubElement(  # noqa
+                bond_types,
+                "Bond",
+                **classes(atom_indices),
+                length=as_attrib(length),
+                k=as_attrib(k),
+            )
 
         # Angles
         angle_types = etree.SubElement(root, "HarmonicAngleForce")
-        atom_indices = [-1]*3
-        for angle_index in range(forces['HarmonicAngleForce'].getNumAngles()):
-            atom_indices[0], atom_indices[1], atom_indices[2], angle, k = forces['HarmonicAngleForce'].getAngleParameters(angle_index)
-            angle_type = etree.SubElement(angle_types, "Angle", **classes(atom_indices),
-                angle=as_attrib(angle), k=as_attrib(k))
+        atom_indices = [-1] * 3
+        for angle_index in range(forces["HarmonicAngleForce"].getNumAngles()):
+            atom_indices[0], atom_indices[1], atom_indices[2], angle, k = forces[
+                "HarmonicAngleForce"
+            ].getAngleParameters(angle_index)
+
+            # This variable is not used - is it needed?
+            angle_type = etree.SubElement(  # noqa
+                angle_types,
+                "Angle",
+                **classes(atom_indices),
+                angle=as_attrib(angle),
+                k=as_attrib(k),
+            )
 
         # Torsions
         def torsion_tag(atom_indices):
             """Return 'Proper' or 'Improper' depending on torsion type"""
-            atoms = [ molecule.atoms[atom_index] for atom_index in atom_indices ]
+            atoms = [molecule.atoms[atom_index] for atom_index in atom_indices]
             # TODO: Check to make sure all atoms are in fact atoms and not virtual sites
-            if atoms[0].is_bonded_to(atoms[1]) and atoms[1].is_bonded_to(atoms[2]) and atoms[2].is_bonded_to(atoms[3]):
+            if (
+                atoms[0].is_bonded_to(atoms[1])
+                and atoms[1].is_bonded_to(atoms[2])
+                and atoms[2].is_bonded_to(atoms[3])
+            ):
                 return "Proper"
             else:
                 return "Improper"
 
         # Collect torsions
         torsions = dict()
-        for torsion_index in range(forces['PeriodicTorsionForce'].getNumTorsions()):
-            atom_indices = [-1]*4
-            atom_indices[0], atom_indices[1], atom_indices[2], atom_indices[3], periodicity, phase, k = forces['PeriodicTorsionForce'].getTorsionParameters(torsion_index)
+        for torsion_index in range(forces["PeriodicTorsionForce"].getNumTorsions()):
+            atom_indices = [-1] * 4
+            (
+                atom_indices[0],
+                atom_indices[1],
+                atom_indices[2],
+                atom_indices[3],
+                periodicity,
+                phase,
+                k,
+            ) = forces["PeriodicTorsionForce"].getTorsionParameters(torsion_index)
             atom_indices = tuple(atom_indices)
             if atom_indices in torsions.keys():
-                torsions[atom_indices].append( (periodicity, phase, k) )
+                torsions[atom_indices].append((periodicity, phase, k))
             else:
-                torsions[atom_indices] = [ (periodicity, phase, k) ]
+                torsions[atom_indices] = [(periodicity, phase, k)]
 
         # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering='smirnoff')
+        torsion_types = etree.SubElement(
+            root, "PeriodicTorsionForce", ordering="smirnoff"
+        )
         for atom_indices in torsions.keys():
-            params = dict() # build parameter dictionary
+            params = dict()  # build parameter dictionary
             nterms = len(torsions[atom_indices])
             for term in range(nterms):
                 periodicity, phase, k = torsions[atom_indices][term]
-                params[f'periodicity{term+1}'] = as_attrib(periodicity)
-                params[f'phase{term+1}'] = as_attrib(phase)
-                params[f'k{term+1}'] = as_attrib(k)
-            torsion_type = etree.SubElement(torsion_types, torsion_tag(atom_indices), **classes(atom_indices), **params)
+                params[f"periodicity{term+1}"] = as_attrib(periodicity)
+                params[f"phase{term+1}"] = as_attrib(phase)
+                params[f"k{term+1}"] = as_attrib(k)
+
+            # This variable is not used - is it needed?
+            torsion_type = etree.SubElement(  # noqa
+                torsion_types,
+                torsion_tag(atom_indices),
+                **classes(atom_indices),
+                **params,
+            )
 
         # TODO: Handle virtual sites
-        virtual_sites = [ atom_index for atom_index in range(system.getNumParticles()) if system.isVirtualSite(atom_index) ]
+        virtual_sites = [
+            atom_index
+            for atom_index in range(system.getNumParticles())
+            if system.isVirtualSite(atom_index)
+        ]
         if len(virtual_sites) > 0:
-            raise Exception('Virtual sites are not yet supported')
+            raise Exception("Virtual sites are not yet supported")
 
         # Create residue definitions
         # TODO: Handle non-Atom atoms too (virtual sites)
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom_index, atom in enumerate(molecule.atoms):
-            charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(atom_index)
-            atom = etree.SubElement(residue, "Atom", name=atom.name, type=atom.typename, charge=as_attrib(charge))
+            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(
+                atom_index
+            )
+            atom = etree.SubElement(
+                residue,
+                "Atom",
+                name=atom.name,
+                type=atom.typename,
+                charge=as_attrib(charge),
+            )
         for bond in molecule.bonds:
-            bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+            bond = etree.SubElement(
+                residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name
+            )
 
         # Render XML into string
-        ffxml_contents = etree.tostring(root, pretty_print=True, encoding='unicode')
+        ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
 
-        #_logger.debug(f'{ffxml_contents}') # DEBUG
+        # _logger.debug(f'{ffxml_contents}') # DEBUG
 
         return ffxml_contents
+
 
 ################################################################################
 # Open Force Field Initiative SMIRNOFF specific OpenMM ForceField template generation utilities
 ################################################################################
 
+
 class ClassProperty(property):
     def __get__(self, cls, owner):
         return self.fget.__get__(None, owner)()
 
-class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin):
+
+class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixin):
     """
     OpenMM ForceField residue template generator for Open Force Field Initiative SMIRNOFF
     force fields using pre-cached OpenFF toolkit molecules.
@@ -1207,6 +1408,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
+
     def __init__(self, molecules=None, cache=None, forcefield=None, **kwargs):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
@@ -1275,7 +1477,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = 'openff-2.1.0'
+            forcefield = "openff-2.1.0"
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1284,27 +1486,38 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Can we instead use the force field hash, or some other unique identifier?
         # TODO: Use file hash instead of name?
         import os
+
         self._database_table_name = os.path.basename(forcefield)
 
         # Create ForceField object
         import openff.toolkit.typing.engines.smirnoff
 
         # check for an installed force field
-        available_force_fields = openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
-        if (filename := forcefield + ".offxml") in available_force_fields or (filename := forcefield) in available_force_fields:
-            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
+        available_force_fields = (
+            openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
+        )
+        if (filename := forcefield + ".offxml") in available_force_fields or (
+            filename := forcefield
+        ) in available_force_fields:
+            self._smirnoff_forcefield = (
+                openff.toolkit.typing.engines.smirnoff.ForceField(filename)
+            )
 
         # just try parsing the input and let openff handle the error
         else:
             try:
-                self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
+                self._smirnoff_forcefield = (
+                    openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
+                )
             except Exception as e:
                 _logger.error(e)
-                raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string.") from e
+                raise ValueError(
+                    f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string."
+                ) from e
 
         # Delete constraints, if present
-        if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
-            del self._smirnoff_forcefield._parameter_handlers['Constraints']
+        if "Constraints" in self._smirnoff_forcefield._parameter_handlers:
+            del self._smirnoff_forcefield._parameter_handlers["Constraints"]
 
         # Find SMIRNOFF filename
         smirnoff_filename = self._search_paths(filename)
@@ -1330,17 +1543,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         """
         from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
+
         file_names = list()
         for filename in get_available_force_fields(full_paths=False):
             root, ext = os.path.splitext(filename)
             # Only add variants without '_unconstrained'
-            if '_unconstrained' in root:
+            if "_unconstrained" in root:
                 continue
             # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
             # impropers and one with Amber-style impropers. The latter requires a special handler
             # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
             # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
-            if root.startswith("ff14sb") and 'off_impropers' not in root:
+            if root.startswith("ff14sb") and "off_impropers" not in root:
                 continue
             file_names.append(root)
 
@@ -1374,7 +1588,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Check whether this could be a file path
         if isinstance(filename, str):
             # Try first the simple path.
-            searched_dirs_paths = ['']
+            searched_dirs_paths = [""]
             # Then try a relative file path w.r.t. an installed directory.
             searched_dirs_paths.extend(_get_installed_offxml_dir_paths())
 
@@ -1421,7 +1635,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         """
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
+        _logger.info(
+            f"Generating a residue template for {smiles} using {self._forcefield}"
+        )
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
@@ -1431,26 +1647,32 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         if self._molecule_has_user_charges(molecule):
             charge_from_molecules = [molecule]
-            _logger.debug(f'Using user-provided charges because partial charges are nonzero...')
+            _logger.debug(
+                "Using user-provided charges because partial charges are nonzero..."
+            )
 
         # Parameterize molecule
-        _logger.debug(f'Generating parameters...')
-        system = self._smirnoff_forcefield.create_openmm_system(molecule.to_topology(), charge_from_molecules=charge_from_molecules)
+        _logger.debug("Generating parameters...")
+        system = self._smirnoff_forcefield.create_openmm_system(
+            molecule.to_topology(), charge_from_molecules=charge_from_molecules
+        )
         self.cache_system(smiles, system)
 
         # Convert to ffxml
         ffxml_contents = self.convert_system_to_ffxml(molecule, system)
         return ffxml_contents
 
+
 ################################################################################
 # Espaloma template generation utilities
 ################################################################################
 
-class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin):
+
+class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixin):
     """
     OpenMM ForceField residue template generator for espaloma force fields using pre-cached OpenFF toolkit molecules.
 
-    Espaloma uses a graph net approach to chemical perception to assign parameters and charges. 
+    Espaloma uses a graph net approach to chemical perception to assign parameters and charges.
 
     * Espaloma docs and papers: https://docs.espaloma.org/
     * Espaloma code and models: https://github.com/choderalab/espaloma
@@ -1500,9 +1722,18 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     Newly parameterized molecules will be written to the cache, saving time next time!
 
     """
-    CHARGE_METHODS = ('nn', 'am1-bcc', 'gasteiger', 'from-molecule')
 
-    def __init__(self, molecules=None, cache=None, forcefield=None, model_cache_path=None, template_generator_kwargs=None, **kwargs):
+    CHARGE_METHODS = ("nn", "am1-bcc", "gasteiger", "from-molecule")
+
+    def __init__(
+        self,
+        molecules=None,
+        cache=None,
+        forcefield=None,
+        model_cache_path=None,
+        template_generator_kwargs=None,
+        **kwargs,
+    ):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1527,12 +1758,12 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments: 
+            Optional keyword arguments:
             {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields without .offxml extension}
-            {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']} 
-            
+            {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
+
             Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and  `nn` for `charge_method`.
-            User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule`` 
+            User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule``
             if charges are assigned to openff.toolkit.Molecule.
 
         Examples
@@ -1584,13 +1815,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # Espaloma model cache path
         if model_cache_path is None:
             import os
+
             self.ESPALOMA_MODEL_CACHE_PATH = f'{os.getenv("HOME")}/.espaloma'
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 
         if forcefield is None:
             # Use latest supported Espaloma force field release if none is specified
-            forcefield = 'espaloma-0.3.2'
+            forcefield = "espaloma-0.3.2"
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1600,19 +1832,22 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Check reference forcefield and charge method
         if template_generator_kwargs is not None:
-            self._reference_forcefield = template_generator_kwargs.get('reference_forcefield', 'openff_unconstrained-2.0.0')
-            self._charge_method = template_generator_kwargs.get('charge_method', 'nn')
+            self._reference_forcefield = template_generator_kwargs.get(
+                "reference_forcefield", "openff_unconstrained-2.0.0"
+            )
+            self._charge_method = template_generator_kwargs.get("charge_method", "nn")
         else:
             # Consider upgrading to 2.1.0, the recommended small moleucle force field for general use
-            self._reference_forcefield = 'openff_unconstrained-2.0.0'
-            self._charge_method = 'from-molecule'
+            self._reference_forcefield = "openff_unconstrained-2.0.0"
+            self._charge_method = "from-molecule"
 
         # Check to make sure dependencies are installed
         try:
-            import espaloma
-        except ImportError as e:
-            msg = 'The EspalomaResidueTemplateGenerator requires espaloma to be installed'
-            raise ValueError(msg)
+            import espaloma  # noqa
+        except ImportError:
+            raise ValueError(
+                "The EspalomaResidueTemplateGenerator requires espaloma to be installed"
+            )
 
         # Check force field can be found
 
@@ -1620,11 +1855,15 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Can we instead use the force field hash, or some other unique identifier?
         # TODO: Use file hash instead of name?
         import os
+
         self._database_table_name = os.path.basename(forcefield)
 
         # Load torch model
         import torch
-        self.espaloma_model = torch.load(self.espaloma_model_filepath, map_location=torch.device('cpu'))
+
+        self.espaloma_model = torch.load(
+            self.espaloma_model_filepath, map_location=torch.device("cpu")
+        )
         self.espaloma_model.eval()
 
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
@@ -1638,7 +1877,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
         # TODO: Update this
         # TODO: Can we list force fields installed locally?
         # TODO: Maybe we can check ~/.espaloma and ESPALOMA_PATH?
-        return ['espaloma-0.3.2']
+        return ["espaloma-0.3.2"]
 
     def _get_model_filepath(self, forcefield):
         """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
@@ -1654,37 +1893,42 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             Path to local cache of espaloma .pt model parameters
         """
         import os
+
         if os.path.exists(forcefield):
             # A specific file path has been specified
-            _logger.info(f'Using espaloma model found at {forcefield}')
+            _logger.info(f"Using espaloma model found at {forcefield}")
             return forcefield
         # TODO: This isn't quite right---we should be checking this in the previous branch?
         elif os.path.exists(os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, forcefield)):
             # A specific file path has been specified
             filepath = os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, forcefield)
-            _logger.info(f'Using espaloma model found at {filepath}')
+            _logger.info(f"Using espaloma model found at {filepath}")
             return filepath
         else:
             import validators
+
             if validators.url(forcefield):
                 # URL has been provided
                 url = forcefield
-                filename = os.path.basename(url) # local filename for caching
+                filename = os.path.basename(url)  # local filename for caching
             else:
                 # Identify version number
                 import re
-                m = re.match(r'espaloma-(\d+\.\d+\.\d+)', forcefield)
+
+                m = re.match(r"espaloma-(\d+\.\d+\.\d+)", forcefield)
                 if m is None:
-                    raise ValueError(f'Espaloma model must be filepath or formatted like "espaloma-0.3.2" (found: "{forcefield}")')
+                    raise ValueError(
+                        f'Espaloma model must be filepath or formatted like "espaloma-0.3.2" (found: "{forcefield}")'
+                    )
                 version = m.group(1)
                 # Construct URL
-                url = f'https://github.com/choderalab/espaloma/releases/download/{version}/espaloma-{version}.pt'
-                filename = f'espaloma-{version}.pt' # local filename for caching
+                url = f"https://github.com/choderalab/espaloma/releases/download/{version}/espaloma-{version}.pt"
+                filename = f"espaloma-{version}.pt"  # local filename for caching
 
             # Check cache
             cached_filename = os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, filename)
             if os.path.exists(cached_filename):
-                _logger.info(f'Using espaloma model cached at {cached_filename}')
+                _logger.info(f"Using espaloma model cached at {cached_filename}")
                 return cached_filename
             else:
                 # Create the cache directory
@@ -1692,16 +1936,19 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                     os.makedirs(self.ESPALOMA_MODEL_CACHE_PATH)
 
                 # Attempt to retrieve from URL
-                _logger.info(f'Attempting to retrieve espaloma model from {url}')
+                _logger.info(f"Attempting to retrieve espaloma model from {url}")
                 import urllib
                 import urllib.error
                 import urllib.request
+
                 try:
                     urllib.request.urlretrieve(url, filename=cached_filename)
-                except urllib.error.URLError as e:
-                    raise ValueError(f'No espaloma model found at expected URL: {url}')
+                except urllib.error.URLError:
+                    raise ValueError(f"No espaloma model found at expected URL: {url}")
                 except urllib.error.HTTPError as e:
-                    raise ValueError(f'An error occurred while retrieving espaloma model from {url} : {e}')
+                    raise ValueError(
+                        f"An error occurred while retrieving espaloma model from {url} : {e}"
+                    )
                 return cached_filename
 
     @property
@@ -1735,22 +1982,27 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         """
         from openmm import unit
+
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
-        _logger.info(f'Generating a residue template for {smiles} using {self._forcefield}')
+        _logger.info(
+            f"Generating a residue template for {smiles} using {self._forcefield}"
+        )
 
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
 
         # Parameterize molecule
-        _logger.debug(f'Generating espaloma parameters...')
+        _logger.debug("Generating espaloma parameters...")
 
         # create an Espaloma Graph object to represent the molecule of interest
         import espaloma as esp
+
         molecule_graph = esp.Graph(molecule)
 
         # Regenerate SMIRNOFF impropers
         from espaloma.graphs.utils.regenerate_impropers import regenerate_impropers
+
         regenerate_impropers(molecule_graph)
 
         # Book keep partial charges if molecule has user charges
@@ -1759,7 +2011,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             # TODO: Change this to use openff.units exclusively?
             # Make sure charges are in the right openmm units
             _partial_charges = molecule.partial_charges
-            if all([isinstance(_charge, unit.Quantity) for _charge in _partial_charges]):
+            if all(
+                [isinstance(_charge, unit.Quantity) for _charge in _partial_charges]
+            ):
                 _charges = _partial_charges.value_in_unit(esp.units.CHARGE_UNIT)
             else:
                 # Assuming charges are in openff units
@@ -1770,24 +2024,37 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         # Create an OpenMM System
         # Update partial charges if charge_method is "from_molecule"
-        if self._charge_method == 'from-molecule':
+        if self._charge_method == "from-molecule":
             if self._molecule_has_user_charges(molecule):
-                import torch
                 import numpy as np
+                import torch
+
                 # Handle ValueError:
-                # "ValueError: given numpy array has byte order different from the native byte order. 
+                # "ValueError: given numpy array has byte order different from the native byte order.
                 # Conversion between byte orders is currently not supported."
                 _charges = _charges.astype(np.float32)
-                molecule_graph.nodes['n1'].data['q'] = torch.from_numpy(_charges).unsqueeze(-1).float()
+                molecule_graph.nodes["n1"].data["q"] = (
+                    torch.from_numpy(_charges).unsqueeze(-1).float()
+                )
             else:
                 # No charges were found in molecule -- defaulting to nn charge method
-                warnings.warn("No charges found in molecule. Defaulting to 'nn' charge method.")
+                warnings.warn(
+                    "No charges found in molecule. Defaulting to 'nn' charge method."
+                )
                 self._charge_method = "nn"
 
-        system = esp.graphs.deploy.openmm_system_from_graph(molecule_graph, charge_method=self._charge_method, forcefield=self._reference_forcefield)
-        _logger.info(f'Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters')
+        system = esp.graphs.deploy.openmm_system_from_graph(
+            molecule_graph,
+            charge_method=self._charge_method,
+            forcefield=self._reference_forcefield,
+        )
+        _logger.info(
+            f"Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters"
+        )
         self.cache_system(smiles, system)
 
         # Convert to ffxml
-        ffxml_contents = self.convert_system_to_ffxml(molecule, system, improper_atom_ordering='smirnoff')
+        ffxml_contents = self.convert_system_to_ffxml(
+            molecule, system, improper_atom_ordering="smirnoff"
+        )
         return ffxml_contents
