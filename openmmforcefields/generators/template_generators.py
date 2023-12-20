@@ -1068,9 +1068,10 @@ class OpenMMSystemMixin:
             return { f'class{class_index+1}' : molecule.atoms[atom_index].typename for class_index,atom_index in enumerate(atom_indices) }
 
         # Lennard-Jones
-        # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
-        # though this must match the original AMBER values
-        nonbonded_types = etree.SubElement(root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5")
+        # In case subclasses specifically set the 1-4 scaling factors, use those.
+        nonbonded_types = etree.SubElement(root, "NonbondedForce",
+                                           coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
+                                           lj14scale=getattr(self, "_lj14scale", "0.5"))
         etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
         for atom_index in range(forces['NonbondedForce'].getNumParticles()):
             charge, sigma, epsilon = forces['NonbondedForce'].getParticleParameters(atom_index)
@@ -1270,6 +1271,10 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
+
+        self._lj14scale = None
+        self._coulomb14scale = None
+
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
@@ -1301,6 +1306,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             except Exception as e:
                 _logger.error(e)
                 raise ValueError(f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string.") from e
+
+        self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
+        self._lj14scale = str(self._smirnoff_forcefield.get_parameter_handler("vdW").scale14)
 
         # Delete constraints, if present
         if 'Constraints' in self._smirnoff_forcefield._parameter_handlers:
@@ -1450,7 +1458,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
     """
     OpenMM ForceField residue template generator for espaloma force fields using pre-cached OpenFF toolkit molecules.
 
-    Espaloma uses a graph net approach to chemical perception to assign parameters and charges. 
+    Espaloma uses a graph net approach to chemical perception to assign parameters and charges.
 
     * Espaloma docs and papers: https://docs.espaloma.org/
     * Espaloma code and models: https://github.com/choderalab/espaloma
@@ -1527,12 +1535,12 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments: 
+            Optional keyword arguments:
             {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields without .offxml extension}
-            {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']} 
-            
+            {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
+
             Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and  `nn` for `charge_method`.
-            User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule`` 
+            User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule``
             if charges are assigned to openff.toolkit.Molecule.
 
         Examples
@@ -1775,7 +1783,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator,OpenMMSystemMixin
                 import torch
                 import numpy as np
                 # Handle ValueError:
-                # "ValueError: given numpy array has byte order different from the native byte order. 
+                # "ValueError: given numpy array has byte order different from the native byte order.
                 # Conversion between byte orders is currently not supported."
                 _charges = _charges.astype(np.float32)
                 molecule_graph.nodes['n1'].data['q'] = torch.from_numpy(_charges).unsqueeze(-1).float()
