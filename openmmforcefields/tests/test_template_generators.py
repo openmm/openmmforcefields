@@ -817,13 +817,13 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
 
                 # Compare energies and forces
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-    
+
                 # Run some dynamics
                 molecule = self.propagate_dynamics(molecule, smirnoff_system)
 
                 # Compare energies again
                 self.compare_energies(molecule, openmm_system, smirnoff_system)
-    
+
 
     def test_partial_charges_are_none(self):
         """Test parameterizing a small molecule with `partial_charges=None` instead
@@ -897,6 +897,38 @@ class TestSMIRNOFFTemplateGenerator(TestGAFFTemplateGenerator):
             _, _, length, _ = bond_force.getBondParameters(i)
             assert pytest.approx(length.value_in_unit(openmm.unit.angstrom)) == 2
 
+    def test_14_scaling_from_offxml(self):
+        """
+        Make sure we can read lj14scale and coulomb14scale from the SMIRNOFF force field
+        """
+        custom_sage = OFFForceField("openff-2.0.0.offxml")
+        custom_sage.get_parameter_handler("vdW").scale14 = 0.0
+        custom_sage.get_parameter_handler("Electrostatics").scale14 = 0.0
+        # Create a simplest 1-4 bond molecule
+        ethane = Molecule.from_smiles("CC")
+
+        # Use the custom sage passed as string to build a template and an openmm system
+        generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
+
+        # Create a ForceField
+        openmm_forcefield = openmm.app.ForceField()
+        # Register the template generator
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+        # Use OpenMM app to generate the system
+        openmm_system = openmm_forcefield.createSystem(
+            ethane.to_topology().to_openmm(),
+            removeCMMotion=False,
+            nonbondedMethod=NoCutoff
+        )
+
+        # Find Nonbondedforce
+        nb_force = [force for force in openmm_system.getForces() if force.__class__.__name__ == "NonbondedForce"][0]
+
+        # Check all exceptions have q/eps == 0.
+        exceptions = [nb_force.getExceptionParameters(i) for i in range(nb_force.getNumExceptions())]
+        for exception in exceptions:
+            assert exception[2]._value == 0.
+            assert exception[4]._value == 0.
 
 @pytest.mark.espaloma
 class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
