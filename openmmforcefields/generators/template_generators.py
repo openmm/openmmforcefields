@@ -683,9 +683,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             )
         else:
             _logger.debug("Computing AM1-BCC charges...")
-            # NOTE: generate_conformers seems to be required for some molecules
-            # https://github.com/openforcefield/openff-toolkit/issues/492
-            molecule.generate_conformers(n_conformers=10)
             molecule.assign_partial_charges(partial_charge_method="am1bcc")
 
         # Geneate a single conformation
@@ -1203,10 +1200,12 @@ class OpenMMSystemMixin:
             }
 
         # Lennard-Jones
-        # TODO: Get coulomb14scale and lj14scale from SMIRNOFF ForceField object,
-        # though this must match the original AMBER values
+        # In case subclasses specifically set the 1-4 scaling factors, use those.
         nonbonded_types = etree.SubElement(
-            root, "NonbondedForce", coulomb14scale="0.833333", lj14scale="0.5"
+            root,
+            "NonbondedForce",
+            coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
+            lj14scale=getattr(self, "_lj14scale", "0.5"),
         )
         etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
         for atom_index in range(forces["NonbondedForce"].getNumParticles()):
@@ -1472,6 +1471,10 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
+
+        self._lj14scale = None
+        self._coulomb14scale = None
+
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
@@ -1514,6 +1517,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
                 raise ValueError(
                     f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string."
                 ) from e
+
+        self._coulomb14scale = str(
+            self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14
+        )
+        self._lj14scale = str(
+            self._smirnoff_forcefield.get_parameter_handler("vdW").scale14
+        )
 
         # Delete constraints, if present
         if "Constraints" in self._smirnoff_forcefield._parameter_handlers:
