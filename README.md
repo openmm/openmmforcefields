@@ -183,6 +183,14 @@ from openmm.app import ForceField
 forcefield = ForceField('amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml')
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(smirnoff.generator)
+
+# create a System with the non-bonded settings of mainline OpenFF force fields
+# (9 Angstrom cut-off, switching distance applied at 8 Angstrom)
+system = forcefield.createSystem(
+    topology=molecule.to_topology().to_openmm(),
+    nonbondedCutoff=0.9 * openmm.unit.nanometer,
+    switchDistance=0.8 * openmm.unit.nanometer,
+)
 ```
 
 The latest official Open Force Field Initiative release ([`openff-1.2.0`](https://github.com/openforcefield/openff-forcefields) of the ["Parsley" small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
