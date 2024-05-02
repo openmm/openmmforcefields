@@ -7,6 +7,10 @@ def pytest_addoption(parser):
         "--runespaloma", action="store_true", default=False, help="run espaloma tests"
     )
 
+    parser.addoption(
+        "--rungaff", action="store_true", default=False, help="run gaff tests"
+    )
+
 
 def pytest_configure(config):
     config.addinivalue_line("markers", "espaloma: mark test as slow to run")
