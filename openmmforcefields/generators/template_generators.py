@@ -465,6 +465,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
+        raise NotImplementedError(
+            "This release (0.13.x) of openmmforcefields temporarily drops GAFF support and "
+            "thereby the GAFFTemplateGenerator class. Support will be re-introduced in "
+            "future releases (0.14.x). To use this class, install version 0.12.0 or older."
+        )
+
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
