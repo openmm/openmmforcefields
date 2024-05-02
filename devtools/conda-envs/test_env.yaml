@@ -2,7 +2,6 @@ name: openmmforcefields-test
 
 channels:
   - conda-forge
-  - openeye
 
 dependencies:
     # Base depends
@@ -28,8 +27,6 @@ dependencies:
 
     # JSON caching of residue templates
   - tinydb
-    # OpenEye toolkits are only used to speed up testing; they are not required for use
-  - openeye-toolkits
 
     # Validating URLs
   - validators
