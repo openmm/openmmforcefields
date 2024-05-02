@@ -21,7 +21,7 @@ dependencies:
 
     # Requirements for conversion tools
   - pyyaml
-  - ambertools <23
+  - ambertools >=22,<24
   - lxml
   - networkx
 

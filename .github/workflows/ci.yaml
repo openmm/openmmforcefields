@@ -28,10 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ["3.9", "3.10"]  # Add 3.11 in with AmberTools 23
-        exclude:
-          - python-version: "3.10"
-            os: macos-latest
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
     - uses: actions/checkout@v4
@@ -58,7 +55,7 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+        pytest -v -n logical --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/test_amber_import.py \
           openmmforcefields/tests/test_template_generators.py \
           openmmforcefields/tests/test_system_generator.py \
