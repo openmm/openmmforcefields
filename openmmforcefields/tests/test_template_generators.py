@@ -952,7 +952,6 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 f'{"TOTAL":24} {(template_energy["total"]/unit.kilocalories_per_mole):20.3f} {(reference_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol'
             )
             write_xml("reference_system.xml", reference_system)
-            write_xml("template_system.xml", template_system)  # What's this? This variable does not exist
             raise Exception(
                 f"Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})"
             )
