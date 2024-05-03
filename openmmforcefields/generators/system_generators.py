@@ -65,7 +65,7 @@ class SystemGenerator:
     postprocess_system : method
         If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System object for create_system(topology) before it is returned.
     """
-    def __init__(self, forcefields=None, small_molecule_forcefield='openff-1.0.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, template_generator_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
+    def __init__(self, forcefields=None, small_molecule_forcefield='openff-2.2.0', forcefield_kwargs=None, nonperiodic_forcefield_kwargs=None, periodic_forcefield_kwargs=None, template_generator_kwargs=None, barostat=None, molecules=None, cache=None, postprocess_system=None):
         """
         This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
         protein force fields and GAFF small molecule force fields.
@@ -206,7 +206,7 @@ class SystemGenerator:
                     _logger.debug(f'Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}')
                     self.template_generator = template_generator_cls(forcefield=small_molecule_forcefield, cache=cache, template_generator_kwargs=self.template_generator_kwargs)
                     break
-                except ValueError as e:
+                except (ValueError, NotImplementedError) as e:
                     _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
                     _logger.debug(e)
             if self.template_generator is None:
