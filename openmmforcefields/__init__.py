@@ -2,8 +2,6 @@
 # Handle versioneer
 from openmmforcefields.utils import get_ffxml_path
 
-from ._version import get_versions
+from . import _version
 
-versions = get_versions()
-__version__ = versions["version"]
-__git_revision__ = versions["full-revisionid"]
+__version__ = _version.get_versions()["version"]

@@ -101,7 +101,7 @@ def test_systems():
     return testsystems
 
 
-class TestSystemGenerator(object):
+class TestSystemGenerator:
     # AMBER force field combination to test
     amber_forcefields = [
         "amber/protein.ff14SB.xml",
@@ -162,7 +162,7 @@ class TestSystemGenerator(object):
         modeller = Modeller(pdbfile.topology, pdbfile.positions)
         residues = [residue for residue in modeller.topology.residues() if residue.name != "UNL"]
         termini_ids = [residues[0].id, residues[-1].id]
-        # hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
+
         hs = [
             atom
             for atom in modeller.topology.atoms()
@@ -423,7 +423,8 @@ class TestSystemGenerator(object):
     )
     def test_cache(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator correctly manages a cache"""
-        timing = dict()  # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
+        # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
+        timing = dict()
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a single shared cache for all force fields
             cache = os.path.join(tmpdirname, "db.json")

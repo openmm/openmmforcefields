@@ -50,7 +50,8 @@ class SmallMoleculeTemplateGenerator:
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
+            to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -101,7 +102,8 @@ class SmallMoleculeTemplateGenerator:
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
+            to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -441,7 +443,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
+            to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -455,14 +458,18 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         Examples
         --------
 
-        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+        Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it:
 
         >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import GAFFTemplateGenerator
         >>> gaff = GAFFTemplateGenerator(molecules=molecule)
         >>> from openmm.app import ForceField
-        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
+        >>> amber_forcefields = [
+        ...     'amber/protein.ff14SB.xml',
+        ...     'amber/tip3p_standard.xml',
+        ...     'amber/tip3p_HFE_multivalent.xml',
+        ... ]
         >>> forcefield = ForceField(*amber_forcefields)
         >>> forcefield.registerTemplateGenerator(gaff)
 
@@ -607,7 +614,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be
+            used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -714,7 +722,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         )
         from io import StringIO
 
-        leaprc = StringIO("parm = loadamberparams %s" % frcmod_filename)
+        leaprc = StringIO(f"parm = loadamberparams {frcmod_filename}")
         import parmed
 
         params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
@@ -845,7 +853,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 raise ValueError(f"gaff major version {self._gaff_major_version} unknown")
 
             # Run antechamber without charging (which is done separately)
-            cmd = f"antechamber -i {local_input_filename} -fi {input_format} -o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}"
+            cmd = (
+                f"antechamber -i {local_input_filename} -fi {input_format} "
+                f"-o out.mol2 -fo mol2 -s {verbosity} -at {atom_type}"
+            )
             if supports_acdoctor:
                 cmd += " -dr " + ("yes" if verbosity else "no")
 
@@ -855,7 +866,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
             if not os.path.exists("out.mol2"):
                 msg = "antechamber failed to produce output mol2 file\n"
-                msg += "command: %s\n" % cmd
+                msg += f"command: {cmd}\n"
                 msg += "output:\n"
                 msg += 8 * "----------" + "\n"
                 msg += output
@@ -876,7 +887,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             output = subprocess.getoutput(cmd)
             if not os.path.exists("out.frcmod"):
                 msg = "parmchk2 failed to produce output frcmod file\n"
-                msg += "command: %s\n" % cmd
+                msg += f"command: {cmd}\n"
                 msg += "output:\n"
                 msg += 8 * "----------" + "\n"
                 msg += output
@@ -900,7 +911,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     def _read_gaff_atom_types_from_mol2(self, gaff_mol2_filename, molecule):
         """
-        Read the GAFF atom types specified in an antechamber-generated mol2 file into atom.gaff_type in the specified Molecule
+        Read the GAFF atom types specified in an antechamber-generated mol2 file into atom.gaff_type in
+        the specified Molecule
 
         Parameters
         ----------
@@ -908,7 +920,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             The antechamber-generated mol2 file containing GAFF/GAFF2 atom types
         molecule : Molecule
             The Molecule to receive atom types
-            The Atom objects within the molecule will have a ``gaff_type`` field added containing the GAFF atom type as a string
+            The Atom objects within the molecule will have a ``gaff_type`` field added containing the GAFF
+            atom type as a string
         """
         # Read the resulting GAFF mol2 file atom types
         #       1 C1           1.8850    -1.0360    -0.1120 ca         1 MOL       0.000000
@@ -929,16 +942,22 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         return
 
     def _check_for_errors(self, outputtext, other_errors=None, ignore_errors=None):
-        """Check AMBER package output for the string 'ERROR' (upper or lowercase) and (optionally) specified other strings and raise an exception if it is found (to avoid silent failures which might be noted to log but otherwise ignored).
+        """
+        Check AMBER package output for the string 'ERROR' (upper or lowercase) and (optionally) specified other
+        strings and raise an exception if it is found (to avoid silent failures which might be noted to log but
+        otherwise ignored).
 
         Parameters
         ----------
         outputtext : str
             String listing output text from an (AMBER) command which should be checked for errors.
         other_errors : list(str), default None
-            If specified, provide strings for other errors which will be chcked for, such as "improper number of arguments", etc.
+            If specified, provide strings for other errors which will be chcked for, such as
+            "improper number of arguments", etc.
         ignore_errors: list(str), default None
-            If specified, AMBER output lines containing errors but also containing any of the specified strings will be ignored (because, for example, AMBER issues an "ERROR" for non-integer charges in some cases when only a warning is needed).
+            If specified, AMBER output lines containing errors but also containing any of the specified strings
+            will be ignored (because, for example, AMBER issues an "ERROR" for non-integer charges in some cases
+            when only a warning is needed).
 
         Notes
         -----
@@ -1306,7 +1325,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
     Newly parameterized molecules will be written to the cache, saving time next time!
 
-    """
+    """  # noqa
 
     def __init__(self, molecules=None, cache=None, forcefield=None, **kwargs):
         """
@@ -1370,7 +1389,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.1.0')  # doctest: +SKIP
 
         Newly parameterized molecules will be written to the cache, saving time next time!
-        """
+        """  # noqa
 
         self._lj14scale = None
         self._coulomb14scale = None
@@ -1409,7 +1428,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             except Exception as e:
                 _logger.error(e)
                 raise ValueError(
-                    f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths or parse the input as a string."
+                    f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths "
+                    "or parse the input as a string."
                 ) from e
 
         self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
@@ -1513,7 +1533,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
+            to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -1600,11 +1621,17 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.3.2')
+    >>> template_generator = EspalomaTemplateGenerator(
+    ...     molecules=[molecule1, molecule2],
+    ...     forcefield='espaloma-0.3.2',
+    ... )
 
     Alternatively, you can specify a local .pt parameter file for Espaloma:
 
-    >>> template_generator = EspalomaTemplateGenerator(molecules=[molecule1, molecule2], forcefield='espaloma-0.3.2.pt')
+    >>> template_generator = EspalomaTemplateGenerator(
+    ...     molecules=[molecule1, molecule2],
+    ...     forcefield='espaloma-0.3.2.pt',
+    ... )
 
     You can also add some Molecules later on after the generator has been registered:
 
@@ -1639,7 +1666,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can
+            be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with espaloma as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -1655,10 +1683,12 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
             Optional keyword arguments:
-            {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields without .offxml extension}
+            {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields
+            without .offxml extension}
             {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
 
-            Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and  `nn` for `charge_method`.
+            Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and
+            `nn` for `charge_method`.
             User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule``
             if charges are assigned to openff.toolkit.Molecule.
 
@@ -1704,7 +1734,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.0.0", "charge_method": "nn"}
         >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.3.2', template_generator_kwargs=template_generator_kwargs)
-        """
+        """  # noqa
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
@@ -1853,7 +1883,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
+            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
+                to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with espaloma as needed.
             The parameters will be cached in case they are encountered again the future.
@@ -1931,7 +1962,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             forcefield=self._reference_forcefield,
         )
         _logger.info(
-            f"Generating a system with charge method {self._charge_method} and {self._reference_forcefield} to assign nonbonded parameters"
+            f"Generating a system with charge method {self._charge_method} and "
+            f"{self._reference_forcefield} to assign nonbonded parameters"
         )
         self.cache_system(smiles, system)
 
