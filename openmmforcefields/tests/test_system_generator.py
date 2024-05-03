@@ -33,16 +33,12 @@ def test_systems():
         # ('tyk2', 'Tyk2'),
     ]:
         # Load protein
-        pdb_filename = get_data_filename(
-            os.path.join("perses_jacs_systems", system_name, prefix + "_protein.pdb")
-        )
+        pdb_filename = get_data_filename(os.path.join("perses_jacs_systems", system_name, prefix + "_protein.pdb"))
         pdbfile = PDBFile(pdb_filename)
 
         # Load molecules
         sdf_filename = get_data_filename(
-            os.path.join(
-                "perses_jacs_systems", system_name, prefix + "_ligands_shifted.sdf"
-            )
+            os.path.join("perses_jacs_systems", system_name, prefix + "_ligands_shifted.sdf")
         )
 
         molecules = Molecule.from_file(sdf_filename, allow_undefined_stereo=True)
@@ -62,22 +58,13 @@ def test_systems():
         # NOTE: This does not work because parmed does not correctly assign bonds for HID
         # protein_structure = parmed.load_file(pdb_filename)
         # NOTE: This is the workaround
-        protein_structure = parmed.openmm.load_topology(
-            pdbfile.topology, xyz=pdbfile.positions
-        )
+        protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
 
         molecules_structure = parmed.load_file(sdf_filename)
-        molecules_structure = [
-            molecules_structure[index] for index in range(n_molecules)
-        ]
+        molecules_structure = [molecules_structure[index] for index in range(n_molecules)]
 
-        complex_structures = [
-            (molecules_structure[index] + protein_structure)
-            for index in range(n_molecules)
-        ]
-        complex_structures = [
-            molecules_structure[index] for index in range(n_molecules)
-        ]  # DEBUG
+        complex_structures = [(molecules_structure[index] + protein_structure) for index in range(n_molecules)]
+        complex_structures = [molecules_structure[index] for index in range(n_molecules)]  # DEBUG
 
         # Store
         testsystem = {
@@ -96,12 +83,8 @@ def test_systems():
             # structure.save(filename, overwrite=True)
             with open(filename, "w") as outfile:
                 PDBFile.writeFile(structure.topology, structure.positions, outfile)
-            testsystem["molecules"][0].to_file(
-                f"testsystem-{name}-molecule.sdf", file_format="SDF"
-            )
-            testsystem["molecules"][0].to_file(
-                f"testsystem-{name}-molecule.pdb", file_format="PDB"
-            )
+            testsystem["molecules"][0].to_file(f"testsystem-{name}-molecule.sdf", file_format="SDF")
+            testsystem["molecules"][0].to_file(f"testsystem-{name}-molecule.pdb", file_format="PDB")
 
     # TODO: Create other test topologies
     # TODO: Protein-only
@@ -171,17 +154,13 @@ class TestSystemGenerator(object):
 
         # Load a PDB file
 
-        pdb_filename = get_data_filename(
-            os.path.join("perses_jacs_systems", "mcl1", "MCL1_protein.pdb")
-        )
+        pdb_filename = get_data_filename(os.path.join("perses_jacs_systems", "mcl1", "MCL1_protein.pdb"))
         pdbfile = PDBFile(pdb_filename)
 
         # Delete hydrogens from terminal protein residues
         # TODO: Fix the input files so we don't need to do this
         modeller = Modeller(pdbfile.topology, pdbfile.positions)
-        residues = [
-            residue for residue in modeller.topology.residues() if residue.name != "UNL"
-        ]
+        residues = [residue for residue in modeller.topology.residues() if residue.name != "UNL"]
         termini_ids = [residues[0].id, residues[-1].id]
         # hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
         hs = [
@@ -271,12 +250,9 @@ class TestSystemGenerator(object):
                 # Create non-periodic Topology
                 nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
                 system = generator.create_system(nonperiodic_openmm_topology)
-                forces = {
-                    force.__class__.__name__: force for force in system.getForces()
-                }
+                forces = {force.__class__.__name__: force for force in system.getForces()}
                 assert (
-                    forces["NonbondedForce"].getNonbondedMethod()
-                    == openmm.NonbondedForce.NoCutoff
+                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff
                 ), "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
                 # Create periodic Topology
@@ -284,12 +260,9 @@ class TestSystemGenerator(object):
                 periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
                 periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
                 system = generator.create_system(periodic_openmm_topology)
-                forces = {
-                    force.__class__.__name__: force for force in system.getForces()
-                }
+                forces = {force.__class__.__name__: force for force in system.getForces()}
                 assert (
-                    forces["NonbondedForce"].getNonbondedMethod()
-                    == openmm.NonbondedForce.PME
+                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.PME
                 ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
     @pytest.mark.parametrize(
@@ -311,9 +284,7 @@ class TestSystemGenerator(object):
         with pytest.raises(ValueError) as excinfo:
             # Not allowed to specify nonbondedMethod in forcefield_kwargs
             generator = SystemGenerator(forcefield_kwargs={"nonbondedMethod": PME})
-        assert "nonbondedMethod cannot be specified in forcefield_kwargs" in str(
-            excinfo.value
-        )
+        assert "nonbondedMethod cannot be specified in forcefield_kwargs" in str(excinfo.value)
 
         for name, testsystem in test_systems.items():
             print(testsystem)
@@ -334,12 +305,9 @@ class TestSystemGenerator(object):
                 # Create non-periodic Topology
                 nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
                 system = generator.create_system(nonperiodic_openmm_topology)
-                forces = {
-                    force.__class__.__name__: force for force in system.getForces()
-                }
+                forces = {force.__class__.__name__: force for force in system.getForces()}
                 assert (
-                    forces["NonbondedForce"].getNonbondedMethod()
-                    == openmm.NonbondedForce.CutoffNonPeriodic
+                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic
                 ), "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
                 # Create periodic Topology
@@ -347,12 +315,9 @@ class TestSystemGenerator(object):
                 periodic_openmm_topology = copy.deepcopy(nonperiodic_openmm_topology)
                 periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
                 system = generator.create_system(periodic_openmm_topology)
-                forces = {
-                    force.__class__.__name__: force for force in system.getForces()
-                }
+                forces = {force.__class__.__name__: force for force in system.getForces()}
                 assert (
-                    forces["NonbondedForce"].getNonbondedMethod()
-                    == openmm.NonbondedForce.LJPME
+                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.LJPME
                 ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
     @pytest.mark.parametrize(
@@ -363,9 +328,7 @@ class TestSystemGenerator(object):
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
     )
-    def test_parameterize_molecules_from_creation(
-        self, test_systems, small_molecule_forcefield
-    ):
+    def test_parameterize_molecules_from_creation(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
         for name, testsystem in test_systems.items():
             print(testsystem)
@@ -398,9 +361,7 @@ class TestSystemGenerator(object):
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
     )
-    def test_parameterize_molecules_specified_during_create_system(
-        self, test_systems, small_molecule_forcefield
-    ):
+    def test_parameterize_molecules_specified_during_create_system(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
         for name, testsystem in test_systems.items():
             molecules = testsystem["molecules"]
@@ -462,9 +423,7 @@ class TestSystemGenerator(object):
     )
     def test_cache(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator correctly manages a cache"""
-        timing = (
-            dict()
-        )  # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
+        timing = dict()  # timing[(small_molecule_forcefield, smiles)] is the time (in seconds) to parameterize molecule the first time
         with tempfile.TemporaryDirectory() as tmpdirname:
             # Create a single shared cache for all force fields
             cache = os.path.join(tmpdirname, "db.json")
@@ -488,9 +447,7 @@ class TestSystemGenerator(object):
                         system = generator.create_system(openmm_topology)
                     assert system.getNumParticles() == molecule.n_atoms
                     # Record time
-                    timing[
-                        (small_molecule_forcefield, molecule.to_smiles())
-                    ] = timer.interval()
+                    timing[(small_molecule_forcefield, molecule.to_smiles())] = timer.interval()
 
             # Molecules should now be cached; test timing is faster the second time
             # Test that we can parameterize all molecules for all test systems
@@ -530,9 +487,7 @@ class TestSystemGenerator(object):
             )
 
             # Create a system in vacuum
-            generator = SystemGenerator(
-                forcefields=self.amber_forcefields, molecules=molecules, cache=cache
-            )
+            generator = SystemGenerator(forcefields=self.amber_forcefields, molecules=molecules, cache=cache)
             system = generator.create_system(openmm_topology)
             assert system.getNumParticles() == len(complex_structure.atoms)
 

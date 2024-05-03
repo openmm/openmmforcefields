@@ -183,9 +183,7 @@ class SystemGenerator:
         """
 
         # Initialize
-        self.barostat = (
-            barostat  # barostat to copy, or None if no barostat is to be added
-        )
+        self.barostat = barostat  # barostat to copy, or None if no barostat is to be added
 
         # Post-creation system transformations
         self.particle_charges = True  # include particle charges
@@ -204,18 +202,14 @@ class SystemGenerator:
         self.forcefield = app.ForceField(*forcefields)
 
         # Cache force fields and settings to use
-        self.forcefield_kwargs = (
-            forcefield_kwargs if forcefield_kwargs is not None else dict()
-        )
+        self.forcefield_kwargs = forcefield_kwargs if forcefield_kwargs is not None else dict()
         self.nonperiodic_forcefield_kwargs = (
             nonperiodic_forcefield_kwargs
             if nonperiodic_forcefield_kwargs is not None
             else {"nonbondedMethod": app.NoCutoff}
         )
         self.periodic_forcefield_kwargs = (
-            periodic_forcefield_kwargs
-            if periodic_forcefield_kwargs is not None
-            else {"nonbondedMethod": app.PME}
+            periodic_forcefield_kwargs if periodic_forcefield_kwargs is not None else {"nonbondedMethod": app.PME}
         )
         self.template_generator_kwargs = template_generator_kwargs
 
@@ -234,13 +228,9 @@ class SystemGenerator:
 
         self.template_generator = None
         if small_molecule_forcefield is not None:
-            for (
-                template_generator_cls
-            ) in SmallMoleculeTemplateGenerator.__subclasses__():
+            for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
-                    _logger.debug(
-                        f"Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}"
-                    )
+                    _logger.debug(f"Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}")
                     self.template_generator = template_generator_cls(
                         forcefield=small_molecule_forcefield,
                         cache=cache,
@@ -248,16 +238,12 @@ class SystemGenerator:
                     )
                     break
                 except (ValueError, NotImplementedError) as e:
-                    _logger.debug(
-                        f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}"
-                    )
+                    _logger.debug(f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}")
                     _logger.debug(e)
             if self.template_generator is None:
                 msg = f"No registered small molecule template generators could load force field '{small_molecule_forcefield}'\n"
                 msg += "Available installed force fields are:\n"
-                for (
-                    template_generator_cls
-                ) in SmallMoleculeTemplateGenerator.__subclasses__():
+                for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                     msg += f"  {template_generator_cls.__name__}: {template_generator_cls.INSTALLED_FORCEFIELDS}\n"
                 raise ValueError(msg)
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
@@ -334,26 +320,18 @@ class SystemGenerator:
                         epsilon *= 0
                     force.setParticleParameters(index, charge, sigma, epsilon)
                 for index in range(force.getNumExceptions()):
-                    p1, p2, chargeProd, sigma, epsilon = force.getExceptionParameters(
-                        index
-                    )
+                    p1, p2, chargeProd, sigma, epsilon = force.getExceptionParameters(index)
                     if not self.exception_charges:
                         chargeProd *= 0
                     if not self.exception_epsilons:
                         epsilon *= 0
-                    force.setExceptionParameters(
-                        index, p1, p2, chargeProd, sigma, epsilon
-                    )
+                    force.setExceptionParameters(index, p1, p2, chargeProd, sigma, epsilon)
             elif force.__class__.__name__ == "PeriodicTorsionForce":
                 for index in range(force.getNumTorsions()):
-                    p1, p2, p3, p4, periodicity, phase, K = force.getTorsionParameters(
-                        index
-                    )
+                    p1, p2, p3, p4, periodicity, phase, K = force.getTorsionParameters(index)
                     if not self.torsions:
                         K *= 0
-                    force.setTorsionParameters(
-                        index, p1, p2, p3, p4, periodicity, phase, K
-                    )
+                    force.setTorsionParameters(index, p1, p2, p3, p4, periodicity, phase, K)
 
     def create_system(self, topology, molecules=None):
         """
@@ -499,9 +477,7 @@ class DummySystemGenerator(SystemGenerator):
                     else:
                         uniqueAngles.add((atom, bond.atom2, bond.atom1))
         angles = sorted(list(uniqueAngles))
-        theta0 = (
-            109.5 * unit.degrees
-        )  # TODO: Adapt based on number of bonds to each atom?
+        theta0 = 109.5 * unit.degrees  # TODO: Adapt based on number of bonds to each atom?
         sigma_theta = 10 * unit.degrees
         Ktheta = kT / sigma_theta**2
         angle_force = openmm.HarmonicAngleForce()

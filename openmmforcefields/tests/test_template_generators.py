@@ -60,9 +60,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         # TODO: Harmonize with test_system_generator.py infrastructure
         # Read test molecules
-        filename = get_data_filename(
-            "minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf"
-        )
+        filename = get_data_filename("minidrugbank/MiniDrugBank-without-unspecified-stereochemistry.sdf")
         molecules = Molecule.from_file(filename, allow_undefined_stereo=True)
 
         # DEBUG: Insert acetone perturbed from planarity as first test molecule, since it fails quickly if something is wrong
@@ -145,9 +143,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         if abs(delta) > ENERGY_DEVIATION_TOLERANCE:
             # Show breakdown by components
             print("Energy components:")
-            print(
-                f"{'component':24} {'Template (kcal/mol)':>20} {'Reference (kcal/mol)':>20}"
-            )
+            print(f"{'component':24} {'Template (kcal/mol)':>20} {'Reference (kcal/mol)':>20}")
             for key in components:
                 reference_component_energy = reference_energy["components"][key]
                 template_component_energy = template_energy["components"][key]
@@ -180,9 +176,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
                 return 0
 
         RELATIVE_FORCE_DEVIATION_TOLERANCE = 1.0e-5
-        relative_force_deviation = relative_deviation(
-            template_forces["total"], reference_forces["total"]
-        )
+        relative_force_deviation = relative_deviation(template_forces["total"], reference_forces["total"])
         if relative_force_deviation > RELATIVE_FORCE_DEVIATION_TOLERANCE:
             # Show breakdown by components
             print("Force components:")
@@ -228,11 +222,9 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         openmm_energy = {
             "total": context.getState(getEnergy=True).getPotentialEnergy(),
             "components": {
-                system.getForce(index)
-                .__class__.__name__: context.getState(
+                system.getForce(index).__class__.__name__: context.getState(
                     getEnergy=True, groups=(1 << index)
-                )
-                .getPotentialEnergy()
+                ).getPotentialEnergy()
                 for index in range(system.getNumForces())
             },
         }
@@ -240,11 +232,9 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         openmm_forces = {
             "total": context.getState(getForces=True).getForces(asNumpy=True),
             "components": {
-                system.getForce(index)
-                .__class__.__name__: context.getState(
+                system.getForce(index).__class__.__name__: context.getState(
                     getForces=True, groups=(1 << index)
-                )
-                .getForces(asNumpy=True)
+                ).getForces(asNumpy=True)
                 for index in range(system.getNumForces())
             },
         }
@@ -269,14 +259,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             generator = GAFFTemplateGenerator(forcefield=forcefield)
             import re
 
-            result = re.match(
-                r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield
-            )
+            result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield)
             assert generator.forcefield == forcefield
-            assert (
-                generator.gaff_version
-                == result["major_version"] + "." + result["minor_version"]
-            )
+            assert generator.gaff_version == result["major_version"] + "." + result["minor_version"]
             assert generator.gaff_major_version == result["major_version"]
             assert generator.gaff_minor_version == result["minor_version"]
             assert generator.gaff_dat_filename.endswith(forcefield + ".dat")
@@ -363,9 +348,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         system_charges = list()
         forces = {force.__class__.__name__: force for force in system.getForces()}
         for particle_index in range(system.getNumParticles()):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(
-                particle_index
-            )
+            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(particle_index)
             system_charges.append(charge / unit.elementary_charge)
         system_charges = np.array(system_charges)
 
@@ -423,9 +406,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         molecule = self.molecules[0]
         # Ensure partial charges are initially zero
-        assert (molecule.partial_charges is None) or np.all(
-            molecule.partial_charges / unit.elementary_charge == 0
-        )
+        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Add the molecule
         generator.add_molecules(molecule)
         # Create the System
@@ -469,9 +450,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         generator.add_molecules(molecule)
 
-        system = forcefield.createSystem(
-            molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff
-        )
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
 
         assert self.charges_are_equal(system, molecule)
 
@@ -503,9 +482,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             if hasattr(generator, "gaff_xml_filename"):
                 forcefield_from_ffxml.loadFile(generator.gaff_xml_filename)
             forcefield_from_ffxml.loadFile(debug_ffxml_filename)
-            system2 = forcefield_from_ffxml.createSystem(
-                openmm_topology, nonbondedMethod=NoCutoff
-            )
+            system2 = forcefield_from_ffxml.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             # TODO: Test that systems are equivalent
             assert system.getNumParticles() == system2.getNumParticles()
 
@@ -608,14 +585,10 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             prefix = jacs_systems[system_name]["prefix"]
             # Load molecules
             ligand_sdf_filename = get_data_filename(
-                os.path.join(
-                    "perses_jacs_systems", system_name, prefix + "_ligands.sdf"
-                )
+                os.path.join("perses_jacs_systems", system_name, prefix + "_ligands.sdf")
             )
             print(f"Reading molecules from {ligand_sdf_filename} ...")
-            molecules = Molecule.from_file(
-                ligand_sdf_filename, allow_undefined_stereo=True
-            )
+            molecules = Molecule.from_file(ligand_sdf_filename, allow_undefined_stereo=True)
             # Ensure this is a list
             try:
                 len(molecules)
@@ -652,9 +625,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 except Exception as e:
                     n_failure += 1
                     print(e)
-            print(
-                f"{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}"
-            )
+            print(f"{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}")
 
     def test_jacs_complexes(self):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
@@ -673,14 +644,10 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             prefix = jacs_systems[system_name]["prefix"]
             # Read molecules
             ligand_sdf_filename = get_data_filename(
-                os.path.join(
-                    "perses_jacs_systems", system_name, prefix + "_ligands.sdf"
-                )
+                os.path.join("perses_jacs_systems", system_name, prefix + "_ligands.sdf")
             )
             print(f"Reading molecules from {ligand_sdf_filename} ...")
-            molecules = Molecule.from_file(
-                ligand_sdf_filename, allow_undefined_stereo=True
-            )
+            molecules = Molecule.from_file(ligand_sdf_filename, allow_undefined_stereo=True)
             try:
                 len(molecules)
             except TypeError:
@@ -692,9 +659,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             from openmm import unit
 
             protein_pdb_filename = get_data_filename(
-                os.path.join(
-                    "perses_jacs_systems", system_name, prefix + "_protein.pdb"
-                )
+                os.path.join("perses_jacs_systems", system_name, prefix + "_protein.pdb")
             )
             print(f"Reading protein from {protein_pdb_filename} ...")
             # protein_structure = parmed.load_file(protein_pdb_filename) # NOTE: This mis-interprets distorted geometry and sequentially-numbered residues that span chain breaks
@@ -716,10 +681,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             print(f"{len(molecules)} molecules remain after filtering")
 
             # Create complexes
-            complex_structures = [
-                (protein_structure + ligand_structure)
-                for ligand_structure in ligand_structures
-            ]
+            complex_structures = [(protein_structure + ligand_structure) for ligand_structure in ligand_structures]
 
             # Create template generator with local cache
             cache = os.path.join(
@@ -742,14 +704,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 # TODO: Fix the input files so we don't need to do this
                 from openmm import app
 
-                modeller = app.Modeller(
-                    complex_structure.topology, complex_structure.positions
-                )
-                residues = [
-                    residue
-                    for residue in modeller.topology.residues()
-                    if residue.name != "UNL"
-                ]
+                modeller = app.Modeller(complex_structure.topology, complex_structure.positions)
+                residues = [residue for residue in modeller.topology.residues() if residue.name != "UNL"]
                 termini_ids = [residues[0].id, residues[-1].id]
                 # hs = [atom for atom in modeller.topology.atoms() if atom.element.symbol in ['H'] and atom.residue.name != 'UNL']
                 hs = [
@@ -761,15 +717,11 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 modeller.addHydrogens(forcefield)
 
                 # Parameterize protein:ligand complex in vacuum
-                print(
-                    f" Parameterizing {system_name} : {molecule.to_smiles()} in vacuum..."
-                )
+                print(f" Parameterizing {system_name} : {molecule.to_smiles()} in vacuum...")
                 forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
                 # Parameterize protein:ligand complex in solvent
-                print(
-                    f" Parameterizing {system_name} : {molecule.to_smiles()} in explicit solvent..."
-                )
+                print(f" Parameterizing {system_name} : {molecule.to_smiles()} in explicit solvent...")
                 modeller.addSolvent(
                     forcefield,
                     padding=0 * unit.angstroms,
@@ -791,9 +743,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             print(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = self.TEMPLATE_GENERATOR(
-                molecules=self.molecules, forcefield=small_molecule_forcefield
-            )
+            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Check that we have loaded the right force field
             assert generator.forcefield == small_molecule_forcefield
             # Create a ForceField with the appropriate small molecule force field
@@ -807,15 +757,11 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             for molecule in self.molecules:
                 openmm_topology = molecule.to_topology().to_openmm()
                 with Timer() as t1:
-                    system = forcefield.createSystem(
-                        openmm_topology, nonbondedMethod=NoCutoff
-                    )
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
                 assert system.getNumParticles() == molecule.n_atoms
                 # Molecule should now be cached
                 with Timer() as t2:
-                    system = forcefield.createSystem(
-                        openmm_topology, nonbondedMethod=NoCutoff
-                    )
+                    system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
                 assert system.getNumParticles() == molecule.n_atoms
                 assert t2.interval() < t1.interval()
 
@@ -906,9 +852,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
 
         # Test all supported SMIRNOFF force fields
-        for (
-            small_molecule_forcefield
-        ) in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+        for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
             if "tip" in small_molecule_forcefield:
@@ -924,9 +868,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             print(f"Testing energies for {small_molecule_forcefield}...")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = SMIRNOFFTemplateGenerator(
-                molecules=self.molecules, forcefield=small_molecule_forcefield
-            )
+            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Create a ForceField
             openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
@@ -960,13 +902,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         molecule = Molecule.from_smiles("C=O")
         molecule.generate_conformers(n_conformers=1)
         # molecule._partial_charges = None
-        assert (molecule.partial_charges is None) or np.all(
-            molecule.partial_charges / unit.elementary_charge == 0
-        )
+        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Test all supported SMIRNOFF force fields
-        for (
-            small_molecule_forcefield
-        ) in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+        for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if "ff14sb" in small_molecule_forcefield:
                 continue
             if "tip" in small_molecule_forcefield:
@@ -979,9 +917,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             print(f"Testing energies for {small_molecule_forcefield}...")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = SMIRNOFFTemplateGenerator(
-                molecules=[molecule], forcefield=small_molecule_forcefield
-            )
+            generator = SMIRNOFFTemplateGenerator(molecules=[molecule], forcefield=small_molecule_forcefield)
             # Create a ForceField
             openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
@@ -1014,18 +950,14 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         # Create a simple molecule with one bond type
         ethane = Molecule.from_smiles("C")
         # Label ethane to get the bond type (not hard coded incase this changes in future)
-        bond_parameter = custom_sage.label_molecules(ethane.to_topology())[0]["Bonds"][
-            (0, 1)
-        ]
+        bond_parameter = custom_sage.label_molecules(ethane.to_topology())[0]["Bonds"][(0, 1)]
         # Edit the bond parameter
         bonds = custom_sage.get_parameter_handler("Bonds")
         new_parameter = bonds[bond_parameter.smirks]
         new_parameter.length = 2 * OFFUnit.angstrom
 
         # Use the custom sage passed as string to build a template and an openmm system
-        generator = SMIRNOFFTemplateGenerator(
-            molecules=ethane, forcefield=custom_sage.to_string()
-        )
+        generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
 
         # Create a ForceField
         openmm_forcefield = openmm.app.ForceField()
@@ -1039,9 +971,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         )
 
         # Check the bond length has been updated
-        forces = {
-            force.__class__.__name__: force for force in openmm_system.getForces()
-        }
+        forces = {force.__class__.__name__: force for force in openmm_system.getForces()}
         bond_force = forces["HarmonicBondForce"]
         for i in range(bond_force.getNumBonds()):
             _, _, length, _ = bond_force.getBondParameters(i)
@@ -1058,9 +988,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         ethane = Molecule.from_smiles("CC")
 
         # Use the custom sage passed as string to build a template and an openmm system
-        generator = SMIRNOFFTemplateGenerator(
-            molecules=ethane, forcefield=custom_sage.to_string()
-        )
+        generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
 
         # Create a ForceField
         openmm_forcefield = openmm.app.ForceField()
@@ -1074,17 +1002,10 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         )
 
         # Find Nonbondedforce
-        nb_force = [
-            force
-            for force in openmm_system.getForces()
-            if force.__class__.__name__ == "NonbondedForce"
-        ][0]
+        nb_force = [force for force in openmm_system.getForces() if force.__class__.__name__ == "NonbondedForce"][0]
 
         # Check all exceptions have q/eps == 0.
-        exceptions = [
-            nb_force.getExceptionParameters(i)
-            for i in range(nb_force.getNumExceptions())
-        ]
+        exceptions = [nb_force.getExceptionParameters(i) for i in range(nb_force.getNumExceptions())]
         for exception in exceptions:
             assert exception[2]._value == 0.0
             assert exception[4]._value == 0.0
@@ -1162,15 +1083,11 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
 
         # Test all supported SMIRNOFF force fields
-        for (
-            small_molecule_forcefield
-        ) in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
+        for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f"Testing energies for {small_molecule_forcefield}...")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = EspalomaTemplateGenerator(
-                molecules=self.molecules, forcefield=small_molecule_forcefield
-            )
+            generator = EspalomaTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
             # Create a ForceField
             openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
@@ -1204,19 +1121,13 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         molecule = Molecule.from_smiles("C=O")
         molecule.generate_conformers(n_conformers=1)
         # molecule._partial_charges = None
-        assert (molecule.partial_charges is None) or np.all(
-            molecule.partial_charges / unit.elementary_charge == 0
-        )
+        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Test all supported SMIRNOFF force fields
-        for (
-            small_molecule_forcefield
-        ) in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
+        for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f"Testing energies for {small_molecule_forcefield}...")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = EspalomaTemplateGenerator(
-                molecules=[molecule], forcefield=small_molecule_forcefield
-            )
+            generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield=small_molecule_forcefield)
             # Create a ForceField
             openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
@@ -1241,28 +1152,20 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         """
         molecule = Molecule.from_smiles("C=O")
         molecule.generate_conformers(n_conformers=1)
-        molecule.assign_partial_charges(
-            "am1bcc"
-        )  # Assign partial charges with off toolkit am1bcc method
-        generator = EspalomaTemplateGenerator(
-            molecules=[molecule], forcefield="espaloma-0.3.2"
-        )
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
+        generator = EspalomaTemplateGenerator(molecules=[molecule], forcefield="espaloma-0.3.2")
         # Create forcefield object
         forcefield = ForceField()
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
         # Create system
-        system = forcefield.createSystem(
-            molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff
-        )
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
         # Make sure passing through the EspalomaGenerator didn't change the charges
         assert self.charges_are_equal(system, molecule), "Expected equal charges."
         # Assert the reference forcefield is the default "openff_unconstrained-2.0.0"
         default_ref_ff = "openff_unconstrained-2.0.0"
         generator_ref_ff = generator._reference_forcefield
-        assert (
-            generator_ref_ff == default_ref_ff
-        ), f"Expected {default_ref_ff}, received {generator_ref_ff}."
+        assert generator_ref_ff == default_ref_ff, f"Expected {default_ref_ff}, received {generator_ref_ff}."
 
     def test_keyword_arguments(self):
         """
@@ -1279,9 +1182,7 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         """
         molecule = Molecule.from_smiles("C=O")
         molecule.generate_conformers(n_conformers=1)
-        molecule.assign_partial_charges(
-            "am1bcc"
-        )  # Assign partial charges with off toolkit am1bcc method
+        molecule.assign_partial_charges("am1bcc")  # Assign partial charges with off toolkit am1bcc method
         # Custom generator kwargs
         espaloma_generator_kwargs = {
             "reference_forcefield": "openff_unconstrained-2.1.0",
@@ -1297,16 +1198,10 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         # Register the template generator
         forcefield.registerTemplateGenerator(generator.generator)
         # Create system
-        system = forcefield.createSystem(
-            molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff
-        )
+        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
         # Make sure passing through the EspalomaGenerator changes the charges
-        assert not self.charges_are_equal(
-            system, molecule
-        ), "Expected different charges"
+        assert not self.charges_are_equal(system, molecule), "Expected different charges"
         # Assert the reference forcefield is "openff_unconstrained-2.1.0"
         expected_ref_ff = "openff_unconstrained-2.1.0"
         generator_ref_ff = generator._reference_forcefield
-        assert (
-            generator_ref_ff == expected_ref_ff
-        ), f"Expected {expected_ref_ff}, received {generator_ref_ff}."
+        assert generator_ref_ff == expected_ref_ff, f"Expected {expected_ref_ff}, received {generator_ref_ff}."

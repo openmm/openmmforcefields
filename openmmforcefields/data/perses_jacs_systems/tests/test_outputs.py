@@ -28,12 +28,6 @@ if __name__ == "__main__":
         modeller.addHydrogens(forcefield=forcefield)
     except ValueError as error:
         print(error)
-        sys.exit(
-            "File %s was not properly prepared and cannot be parsed by openmm"
-            % args.protein
-        )
+        sys.exit("File %s was not properly prepared and cannot be parsed by openmm" % args.protein)
 
-    sys.exit(
-        "Test passed! Output %s was prepared properly and can be parsed by openmm"
-        % args.protein
-    )
+    sys.exit("Test passed! Output %s was prepared properly and can be parsed by openmm" % args.protein)
