@@ -70,7 +70,7 @@ class TestGAFFTemplateGenerator(unittest.TestCase):
         molecule = Molecule.from_smiles('C=O')
         molecule.generate_conformers(n_conformers=1)
 
-        molecule.conformers[0][0,0] += unit.Quantity(0.1, unit.angstroms),
+        molecule.conformers[0][0,0] += unit.Quantity(0.1, unit.angstroms)
 
         molecules.insert(0, molecule)
         # DEBUG END
