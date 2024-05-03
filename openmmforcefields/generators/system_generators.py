@@ -247,6 +247,7 @@ class SystemGenerator:
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import (
             SmallMoleculeTemplateGenerator,
+            GAFFNotSupportedError,
         )
 
         self.template_generator = None
@@ -260,10 +261,17 @@ class SystemGenerator:
                         template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
-                except (ValueError, NotImplementedError) as e:
+                except (ValueError, GAFFNotSupportedError) as e:
                     _logger.debug(f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}")
                     _logger.debug(e)
             if self.template_generator is None:
+                if small_molecule_forcefield.startswith("gaff"):
+                    raise GAFFNotSupportedError(
+                        "This release (0.13.x) of openmmforcefields temporarily drops GAFF support and "
+                        "thereby the GAFFTemplateGenerator class. Support will be re-introduced in "
+                        "future releases (0.14.x). To use this class, install version 0.12.0 or older."
+                    )
+
                 msg = (
                     "No registered small molecule template generators could load force field "
                     f"'{small_molecule_forcefield}'\n"
