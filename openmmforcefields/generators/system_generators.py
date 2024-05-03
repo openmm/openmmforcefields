@@ -73,7 +73,7 @@ class SystemGenerator:
     def __init__(
         self,
         forcefields=None,
-        small_molecule_forcefield="openff-1.0.0",
+        small_molecule_forcefield="openff-2.2.0",
         forcefield_kwargs=None,
         nonperiodic_forcefield_kwargs=None,
         periodic_forcefield_kwargs=None,
@@ -247,10 +247,8 @@ class SystemGenerator:
                         template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
-                except ValueError as e:
-                    _logger.debug(
-                        f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}"
-                    )
+                except (ValueError, NotImplementedError) as e:
+                    _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
                     _logger.debug(e)
             if self.template_generator is None:
                 msg = f"No registered small molecule template generators could load force field '{small_molecule_forcefield}'\n"

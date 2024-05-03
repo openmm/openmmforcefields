@@ -2,7 +2,6 @@ name: openmmforcefields-test
 
 channels:
   - conda-forge
-  - openeye
 
 dependencies:
     # Base depends
@@ -22,14 +21,12 @@ dependencies:
 
     # Requirements for conversion tools
   - pyyaml
-  - ambertools <23
+  - ambertools >=22,<24
   - lxml
   - networkx
 
     # JSON caching of residue templates
   - tinydb
-    # OpenEye toolkits are only used to speed up testing; they are not required for use
-  - openeye-toolkits
 
     # Validating URLs
   - validators
@@ -37,4 +34,4 @@ dependencies:
     #
     # Espaloma requirements below
     #
-  - espaloma >=0.3.1
+  # espaloma >=0.3.1
