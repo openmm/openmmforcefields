@@ -1092,11 +1092,11 @@ class OpenMMSystemMixin:
         atom_types = etree.SubElement(root, "AtomTypes")
         for atom_index, atom in enumerate(molecule.atoms):
             # Create a new atom type for each atom in the molecule
-            paricle_indices = [atom_index]
             element_symbol = atom.symbol
-            atom_type = etree.SubElement(atom_types, "Type", name=atom.typename,
-                element=element_symbol, mass=as_attrib(atom.mass))
-            atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
+            atom_type = etree.SubElement(
+                atom_types, "Type", name=atom.typename, element=element_symbol, mass=as_attrib(atom.mass)
+            )
+            atom_type.set("class", atom.typename)  # 'class' is a reserved Python keyword, so use alternative API
 
         supported_forces = {
             "NonbondedForce",
