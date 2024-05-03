@@ -2,6 +2,7 @@
 
 import pytest
 
+
 def pytest_addoption(parser):
     parser.addoption(
         "--runespaloma",
@@ -29,7 +30,6 @@ def pytest_collection_modifyitems(config, items):
         for item in items:
             if "espaloma" in item.keywords:
                 item.add_marker(skip_slow)
-
     del skip_slow
 
     skip_slow = pytest.mark.skip(reason="need --rungaff option to run")

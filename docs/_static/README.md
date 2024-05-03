@@ -7,7 +7,7 @@ so a file named "default.css" will overwrite the builtin "default.css".
 
 The path to this folder is set in the Sphinx `conf.py` file in the line: 
 ```python
-templates_path = ['_static']
+templates_path = ["_static"]
 ```
 
 ## Examples of file to add to this directory
