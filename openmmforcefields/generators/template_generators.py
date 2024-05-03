@@ -245,13 +245,12 @@ class SmallMoleculeTemplateGenerator:
 
         """
         import numpy as np
-        from openff.units.openmm import ensure_quantity
 
         if molecule.partial_charges is None:
             return False
 
         if np.allclose(
-            ensure_quantity(molecule.partial_charges, "openff").m,
+            molecule.partial_charges.m,
             np.zeros([molecule.n_atoms]),
         ):
             return False
@@ -269,12 +268,9 @@ class SmallMoleculeTemplateGenerator:
         """
         from collections import defaultdict
 
-        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
         element_counts = defaultdict(int)
         for atom in molecule.atoms:
-            symbol = atom.element.symbol if uses_old_api else atom.symbol
+            symbol = atom.symbol
             element_counts[symbol] += 1
             atom.name = symbol + str(element_counts[symbol])
 
@@ -632,15 +628,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
         import numpy as np
-        from openff.units import unit
-        from openff.units.openmm import ensure_quantity
-
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
-        if uses_old_api:
-            unit_solution = "openmm"
-        else:
-            unit_solution = "openff"
+        from openff.units import unit, Quantity
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
@@ -699,29 +687,14 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # TODO: This may require some modification to correctly handle API changes
         #       when OpenFF toolkit makes charge quantities consistently unit-bearing
         #       or pure numbers.
-        _logger.debug("Fixing partial charges...")
-        _logger.debug(f"{molecule.partial_charges}")
-
-        # This variable is unsed!
-        residue_charge = ensure_quantity(  # noqa
-            0.0 * unit.elementary_charge,
-            unit_solution,
-        )
+        _logger.debug(f'Fixing partial charges...')
+        _logger.debug(f'{molecule.partial_charges}')
+        residue_charge = Quantity(0.0, unit.elementary_charge)  # is this used?
         total_charge = molecule.partial_charges.sum()
 
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
 
-        if uses_old_api:
-            from openmm import unit as openmm_unit
-
-            redistribute = sum_of_absolute_charge > 0.0
-
-            sum_of_absolute_charge = openmm_unit.Quantity(
-                sum_of_absolute_charge,
-                openmm_unit.elementary_charge,
-            )
-        else:
-            redistribute = sum_of_absolute_charge.m > 0.0
+        redistribute = sum_of_absolute_charge.m > 0.0
 
         charge_deficit = net_charge - total_charge
 
@@ -764,10 +737,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom in molecule.atoms:
-            if uses_old_api:
-                charge_string = str(atom.partial_charge.value_in_unit(openmm_unit.elementary_charge))
-            else:
-                charge_string = str(atom.partial_charge.m_as(unit.elementary_charge))
+
+            charge_string = str(atom.partial_charge.m_as(unit.elementary_charge))
 
             atom = etree.SubElement(
                 residue,
@@ -1066,9 +1037,6 @@ class OpenMMSystemMixin:
         ffxml_contents : str
             The OpenMM ffxml contents for the given molecule.
         """
-        # OpenFF Toolkit v0.11.0 removed Atom.element and replced it with Atom.symbol, etc.
-        uses_old_api = hasattr(molecule.atoms[0], "element")
-
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
 
@@ -1104,15 +1072,11 @@ class OpenMMSystemMixin:
         atom_types = etree.SubElement(root, "AtomTypes")
         for atom_index, atom in enumerate(molecule.atoms):
             # Create a new atom type for each atom in the molecule
-            element_symbol = atom.element.symbol if uses_old_api else atom.symbol
-            atom_type = etree.SubElement(
-                atom_types,
-                "Type",
-                name=atom.typename,
-                element=element_symbol,
-                mass=as_attrib(atom.mass),
-            )
-            atom_type.set("class", atom.typename)  # 'class' is a reserved Python keyword, so use alternative API
+            paricle_indices = [atom_index]
+            element_symbol = atom.symbol
+            atom_type = etree.SubElement(atom_types, "Type", name=atom.typename,
+                element=element_symbol, mass=as_attrib(atom.mass))
+            atom_type.set('class', atom.typename) # 'class' is a reserved Python keyword, so use alternative API
 
         supported_forces = {
             "NonbondedForce",
