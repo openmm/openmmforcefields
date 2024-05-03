@@ -205,10 +205,14 @@ class TestSystemGenerator(object):
         assert force.getDefaultTemperature() == temperature
         assert force.getFrequency() == frequency
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
     def test_create_with_template_generator(self, small_molecule_forcefield):
         """Test SystemGenerator creation with small molecule residue template generators"""
         # Create a generator that defines AMBER and small molecule force fields
@@ -235,10 +239,14 @@ class TestSystemGenerator(object):
             )
             del generator
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
     def test_forcefield_default_kwargs(self, small_molecule_forcefield, test_systems):
         """Test that default forcefield kwargs work correctly"""
         from openmm import unit
@@ -284,10 +292,14 @@ class TestSystemGenerator(object):
                     == openmm.NonbondedForce.PME
                 ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
     def test_forcefield_kwargs(self, small_molecule_forcefield, test_systems):
         """Test that forcefield_kwargs and nonbonded method specifications work correctly"""
         from openmm import unit
@@ -343,11 +355,17 @@ class TestSystemGenerator(object):
                     == openmm.NonbondedForce.LJPME
                 ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
-    def test_parameterize_molecules_from_creation(self, test_systems, small_molecule_forcefield):
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
+    def test_parameterize_molecules_from_creation(
+        self, test_systems, small_molecule_forcefield
+    ):
         """Test that SystemGenerator can parameterize pre-specified molecules in vacuum"""
         for name, testsystem in test_systems.items():
             print(testsystem)
@@ -372,11 +390,17 @@ class TestSystemGenerator(object):
                 assert system.getNumParticles() == molecule.n_atoms
                 assert t2.interval() < t1.interval()
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
-    def test_parameterize_molecules_specified_during_create_system(self, test_systems, small_molecule_forcefield):
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
+    def test_parameterize_molecules_specified_during_create_system(
+        self, test_systems, small_molecule_forcefield
+    ):
         """Test that SystemGenerator can parameterize molecules specified during create_system"""
         for name, testsystem in test_systems.items():
             molecules = testsystem["molecules"]
@@ -394,11 +418,12 @@ class TestSystemGenerator(object):
                 generator.create_system(openmm_topology, molecules=molecules)
 
     @pytest.mark.parametrize(
-        "small_molecule_forcefield", [
-            pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-            'openff-2.0.0',
-            pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma),
-        ]
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
     )
     def test_add_molecules(self, test_systems, small_molecule_forcefield):
         """Test that Molecules can be added to SystemGenerator later"""
@@ -427,10 +452,14 @@ class TestSystemGenerator(object):
                 assert system.getNumParticles() == molecule.n_atoms
                 assert t2.interval() < t1.interval()
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
     def test_cache(self, test_systems, small_molecule_forcefield):
         """Test that SystemGenerator correctly manages a cache"""
         timing = (

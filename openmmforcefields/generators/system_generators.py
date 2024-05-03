@@ -248,7 +248,9 @@ class SystemGenerator:
                     )
                     break
                 except (ValueError, NotImplementedError) as e:
-                    _logger.debug(f'  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}')
+                    _logger.debug(
+                        f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}"
+                    )
                     _logger.debug(e)
             if self.template_generator is None:
                 msg = f"No registered small molecule template generators could load force field '{small_molecule_forcefield}'\n"
