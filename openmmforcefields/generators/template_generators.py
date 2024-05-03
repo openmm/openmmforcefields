@@ -26,6 +26,7 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 class ForceException(Exception):
     """Exception for forces"""
 
+
 class GAFFNotSupportedError(Exception):
     """Exception for missing GAFF support"""
 
