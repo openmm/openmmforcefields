@@ -247,6 +247,7 @@ class SystemGenerator:
         # Create and cache a residue template generator
         from openmmforcefields.generators.template_generators import (
             SmallMoleculeTemplateGenerator,
+            GAFFNotSupportedError,
         )
 
         self.template_generator = None
@@ -260,7 +261,7 @@ class SystemGenerator:
                         template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
-                except (ValueError, NotImplementedError) as e:
+                except (ValueError, NotImplementedError, GAFFNotSupportedError) as e:
                     _logger.debug(f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}")
                     _logger.debug(e)
             if self.template_generator is None:
