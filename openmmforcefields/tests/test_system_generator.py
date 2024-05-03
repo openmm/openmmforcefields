@@ -325,10 +325,13 @@ class TestSystemGenerator(object):
                 # Specify molecules during system creation
                 system = generator.create_system(openmm_topology, molecules=molecules)
 
-    @pytest.mark.parametrize("small_molecule_forcefield", [
-        pytest.param('gaff-2.11', marks=pytest.mark.gaff),
-        'openff-2.0.0',
-        pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma)])
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield", [
+            pytest.param('gaff-2.11', marks=pytest.mark.gaff),
+            'openff-2.0.0',
+            pytest.param('espaloma-0.3.2', marks=pytest.mark.espaloma),
+        ]
+    )
     def test_add_molecules(self, test_systems, small_molecule_forcefield):
         """Test that Molecules can be added to SystemGenerator later"""
             # Create a SystemGenerator for this force field

@@ -937,7 +937,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             assert exception[4]._value == 0.
 
 @pytest.mark.espaloma
-class TestEspalomaTemplateGenerator(TestGAFFTemplateGenerator):
+class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
 
     def propagate_dynamics(self, molecule, system):
