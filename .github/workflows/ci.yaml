@@ -100,4 +100,4 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
-        fail_ci_if_error: true
+        fail_ci_if_error: false  # I don't want this to cause CI failures when a developer pushes to a fork
