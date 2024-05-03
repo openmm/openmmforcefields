@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 119
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "UP",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"openmmforcefields/generators/__init__.py" = ["F401"]
+"openmmforcefields/__init__.py" = ["F401"]
+"charmm/energy.py" = ["E501"]

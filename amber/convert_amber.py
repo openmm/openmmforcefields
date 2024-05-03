@@ -10,7 +10,6 @@ import sys
 import tempfile
 import warnings
 import xml.etree.ElementTree as etree
-from collections import OrderedDict
 from copy import deepcopy
 from distutils.spawn import find_executable
 from io import StringIO
@@ -81,9 +80,7 @@ def main():
     global no_log
     global logger
     # argparse
-    parser = argparse.ArgumentParser(
-        description="AMBER --> OpenMM forcefield " "conversion script"
-    )
+    parser = argparse.ArgumentParser(description="AMBER --> OpenMM forcefield " "conversion script")
     parser.add_argument(
         "--input",
         "-i",
@@ -99,12 +96,9 @@ def main():
     parser.add_argument(
         "--output-dir",
         "-od",
-        help="path of the output directory. "
-        'Default: "ffxml/" for yaml, "./" for leaprc',
+        help="path of the output directory. " 'Default: "ffxml/" for yaml, "./" for leaprc',
     )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="turns verbosity on"
-    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="turns verbosity on")
     parser.add_argument(
         "--log",
         action="store",
@@ -187,10 +181,7 @@ def read_lines(filename):
 
     """
     with open(filename) as f:
-        lines = [
-            line if "#" not in line else line[: line.index("#")]
-            for line in f.readlines()
-        ]
+        lines = [line if "#" not in line else line[: line.index("#")] for line in f.readlines()]
     return lines
 
 
@@ -206,7 +197,7 @@ def write_file(file, contents):
        Text contents to be written to file
 
     """
-    if type(file) == str:
+    if isinstance(file, str):
         outfile = open(file, "w")
     else:
         outfile = os.fdopen(file, "w")
@@ -226,7 +217,7 @@ def convert_leaprc(
     is_glycam=False,
 ):
     if verbose:
-        print("\nConverting %s to ffxml..." % files)
+        print(f"\nConverting {files:s} to ffxml...")
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
         files = [files]
@@ -245,7 +236,7 @@ def convert_leaprc(
     if not os.path.exists(ffxml_dir):
         os.mkdir(ffxml_dir)
     if verbose:
-        print("Preprocessing the leaprc for %s..." % basename)
+        print(f"Preprocessing the leaprc for {basename:s}...")
     # do source processing
     new_files = []
     for fil in files:
@@ -253,9 +244,7 @@ def convert_leaprc(
         for line in lines:
             if _sourcere.findall(line):
                 replace_leaprc = _sourcere.findall(line)[0]
-                replace_leaprc_path = os.path.join(
-                    os.path.join(AMBERHOME, "dat/leap/cmd", replace_leaprc)
-                )
+                replace_leaprc_path = os.path.join(os.path.join(AMBERHOME, "dat/leap/cmd", replace_leaprc))
                 new_files.append(replace_leaprc_path)
         new_files.append(fil)
     # now do ignore processing and join multiple leaprc's
@@ -265,21 +254,15 @@ def convert_leaprc(
         lines = read_lines(fil)
         fil_new_lines = []
         for line in lines:
-            if (
-                ignore is not None
-                and _loadoffre.findall(line)
-                and _loadoffre.findall(line)[0] in ignore
-            ):
+            if ignore is not None and _loadoffre.findall(line) and _loadoffre.findall(line)[0] in ignore:
                 continue
             fil_new_lines += line
         new_lines += fil_new_lines
     leaprc = StringIO("".join(new_lines))
     if verbose:
-        print("Converting to ffxml %s..." % ffxml_name)
+        print(f"Converting to ffxml {ffxml_name}...")
     params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
-    params = parmed.openmm.OpenMMParameterSet.from_parameterset(
-        params, remediate_residues=(not write_unused)
-    )
+    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if override_level:
         for name, residue in params.residues.items():
             residue.override_level = override_level
@@ -308,7 +291,7 @@ def convert_leaprc(
             is_glycam=is_glycam,
         )
     if verbose:
-        print("%s successfully written!" % ffxml_name)
+        print(f"{ffxml_name} successfully written!")
     return ffxml_name
 
 
@@ -323,7 +306,7 @@ def convert_gaff(
     filter_warnings="error",
 ):
     if verbose:
-        print("\nConverting %s to ffxml..." % files)
+        print(f"\nConverting {files} to ffxml...")
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
         files = [files]
@@ -333,9 +316,7 @@ def convert_gaff(
         os.mkdir(ffxml_dir)
     # Process parameter file
     params = parmed.amber.AmberParameterSet(files)
-    params = parmed.openmm.OpenMMParameterSet.from_parameterset(
-        params, remediate_residues=(not write_unused)
-    )
+    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if filter_warnings != "error":
         with warnings.catch_warnings():
             warnings.filterwarnings(filter_warnings, category=ParameterWarning)
@@ -353,7 +334,7 @@ def convert_gaff(
             improper_dihedrals_ordering="amber",
         )
     if verbose:
-        print("%s successfully written!" % ffxml_name)
+        print(f"{ffxml_name} successfully written!")
     return ffxml_name
 
 
@@ -366,7 +347,7 @@ def convert_recipe(
     filter_warnings="always",
 ):
     if verbose:
-        print("\nConverting %s to ffxml..." % files)
+        print(f"\nConverting {files} to ffxml...")
     ffxml_name = os.path.join(ffxml_dir, (ffxml_basename + ".xml"))
     ffxml_temp_stringio = StringIO()
     params = parmed.amber.AmberParameterSet(files)
@@ -374,7 +355,7 @@ def convert_recipe(
     params = parmed.openmm.OpenMMParameterSet.from_parameterset(params)
     # Change atom type naming
     # atom_types
-    new_atom_types = OrderedDict()
+    new_atom_types = dict()
     for name, atom_type in params.atom_types.items():
         new_name = ffxml_basename + "-" + name
         new_atom_types[new_name] = atom_type
@@ -437,8 +418,7 @@ def convert_recipe(
             f.write(b"</HarmonicAngleForce>\n ")
             f.write(
                 (
-                    '<NonbondedForce coulomb14scale="%s" lj14scale="%s">\n  '
-                    % (
+                    '<NonbondedForce coulomb14scale="{}" lj14scale="{}">\n  '.format(
                         root_main.findall("NonbondedForce")[0].attrib["coulomb14scale"],
                         root_main.findall("NonbondedForce")[0].attrib["lj14scale"],
                     )
@@ -453,7 +433,7 @@ def convert_recipe(
                 f.write(et.tostring(subelement))
             f.write(b"</NonbondedForce>\n</ForceField>")
     if verbose:
-        print("%s successfully written!" % ffxml_name)
+        print(f"{ffxml_name} successfully written!")
     return ffxml_name
 
 
@@ -467,7 +447,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         # Handle MODE switching
         if "MODE" in entry:
             MODE = entry["MODE"]
-            if not MODE in ALLOWED_MODES:
+            if MODE not in ALLOWED_MODES:
                 raise Exception(f"MODE definition must be one of {ALLOWED_MODES}")
             continue
 
@@ -507,7 +487,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             recipe_name = entry["Name"]
 
         # Create provenance object
-        provenance = OrderedDict()
+        provenance = dict()
         files = []
         source = provenance["Source"] = []
         for source_file in source_files:
@@ -524,7 +504,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     source_file,
                 )
             files.append(_filename)
-            source.append(OrderedDict())
+            source.append(dict())
             source[-1]["Source"] = source_file
             md5 = hashlib.md5()
             with open(_filename, "rb") as f:
@@ -538,7 +518,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if MODE == "RECIPE" and recipe_source2 is not None:
             _filename = os.path.join("files", recipe_source2)
             solvent_file = _filename
-            source.append(OrderedDict())
+            source.append(dict())
             source[-1]["Source"] = recipe_source2
             md5 = hashlib.md5()
             with open(_filename, "rb") as f:
@@ -567,9 +547,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 elif option == "override_level":
                     override_level = entry["Options"][option]
                 else:
-                    raise Exception(
-                        "Wrong option used in Options for %s" % source_files
-                    )
+                    raise Exception(f"Wrong option used in Options for {source_files:s}")
 
         # Convert files
         if MODE == "LEAPRC":
@@ -662,7 +640,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 validate_glyco_protein(ffxml_name, entry["Source"])
                 tested = True
         if not tested:
-            raise Exception("No validation tests have been run for %s" % source_files)
+            raise Exception(f"No validation tests have been run for {source_files}")
 
 
 def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename):
@@ -714,10 +692,7 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
             if key not in translations:
                 return None  # We don't have a translation.
             amberResName, amberAtomName = translations[key]
-            if (
-                amberResName not in amberResMap
-                or amberAtomName not in amberResMap[amberResName]
-            ):
+            if amberResName not in amberResMap or amberAtomName not in amberResMap[amberResName]:
                 return None  # We don't have a translation.
             amberAtom = amberResMap[amberResName][amberAtomName]
             for attrib in amberAtom.attrib:
@@ -753,7 +728,6 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     """
 
     import re
-    import sys
 
     inTypes = False
     replacements = {}
@@ -770,12 +744,12 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
                 if match is not None:
                     name = match.group(1)
                     newName = prefix + "-" + name
-                    line = line.replace('name="%s"' % name, 'name="%s"' % newName)
-                    replacements['type="%s"' % name] = 'type="%s"' % newName
-                    replacements['type1="%s"' % name] = 'type1="%s"' % newName
-                    replacements['type2="%s"' % name] = 'type2="%s"' % newName
-                    replacements['type3="%s"' % name] = 'type3="%s"' % newName
-                    replacements['type4="%s"' % name] = 'type4="%s"' % newName
+                    line = line.replace(f'name="{name}"', f'name="{newName}"')
+                    replacements[f'type="{name:s}"'] = f'type="{newName}"'
+                    replacements[f'type1="{name:s}"'] = f'type1="{newName}"'
+                    replacements[f'type2="{name:s}"'] = f'type2="{newName}"'
+                    replacements[f'type3="{name:s}"'] = f'type3="{newName}"'
+                    replacements[f'type4="{name:s}"'] = f'type4="{newName}"'
             else:
                 for key in replacements:
                     if key in line:
@@ -808,19 +782,13 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
                 new_name = "N" + residue.name
             elif residue.index in [4, 9, 17, 25, 33]:
                 new_name = "C" + residue.name
-            new_residue = destination_topology.addResidue(
-                new_name, new_chain, residue.id
-            )
+            new_residue = destination_topology.addResidue(new_name, new_chain, residue.id)
             for atom in residue.atoms():
-                new_atom = destination_topology.addAtom(
-                    atom.name, atom.element, new_residue, atom.id
-                )
+                new_atom = destination_topology.addAtom(atom.name, atom.element, new_residue, atom.id)
                 new_atoms[atom] = new_atom
     for bond in source_topology.bonds():
         order = bond.order
-        destination_topology.addBond(
-            new_atoms[bond[0]], new_atoms[bond[1]], order=order
-        )
+        destination_topology.addBond(new_atoms[bond[0]], new_atoms[bond[1]], order=order)
 
     # Get OpenMM system
     if isinstance(ffxml, str):
@@ -845,10 +813,7 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
             force = system.getForce(index)
             forcename = force.__class__.__name__
             groups = 1 << index
-            potential = (
-                beta
-                * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
-            )
+            potential = beta * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
             energy_components.append((forcename, potential))
         del context, integrator
         return energy_components
@@ -875,9 +840,7 @@ def assert_energies(
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem(splitDihedrals=True)
-    amber_energies = parmed.openmm.energy_decomposition_system(
-        parm_amber, system_amber, nrg=units
-    )
+    amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, nrg=units)
 
     # OpenMM-ffxml
     if isinstance(ffxml, str):
@@ -890,21 +853,15 @@ def assert_energies(
 
     if openmm_topology is not None:
         system_omm = ff.createSystem(openmm_topology)
-        parm_omm = parmed.openmm.load_topology(
-            openmm_topology, system_omm, xyz=openmm_positions
-        )
+        parm_omm = parmed.openmm.load_topology(openmm_topology, system_omm, xyz=openmm_positions)
     else:
         system_omm = ff.createSystem(parm_amber.topology)
-        parm_omm = parmed.openmm.load_topology(
-            parm_amber.topology, system_omm, xyz=parm_amber.positions
-        )
+        parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm, xyz=parm_amber.positions)
     system_omm = parm_omm.createSystem(splitDihedrals=True)
-    omm_energies = parmed.openmm.energy_decomposition_system(
-        parm_omm, system_omm, nrg=units, platform="Reference"
-    )
+    omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
 
     # calc rel energies and assert
-    energies = []
+    _energies = []
     rel_energies = []
     for i, j in zip(amber_energies, omm_energies):
         if i[0] != j[0]:
@@ -914,59 +871,35 @@ def assert_energies(
         else:
             if abs(j[1]) > NEARLYZERO:
                 raise AssertionError(
-                    "One of AMBER %s energies (%s) for %s is zero, "
+                    f"One of AMBER {system_name} energies ({i[0]}) for {ffxml} is zero, "
                     "while the corresponding OpenMM energy is non-zero"
-                    % (system_name, i[0], ffxml)
                 )
             rel_energies.append((i[0], 0))
 
     dihedrals_done = False
-    for (i, amber_energy, openmm_energy) in zip(
-        rel_energies, amber_energies, omm_energies
-    ):
+    for i, amber_energy, openmm_energy in zip(rel_energies, amber_energies, omm_energies):
         if i[0] != "PeriodicTorsionForce":
             if i[1] > tolerance:
                 raise AssertionError(
-                    "%s relative energy error (%s, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s"
-                    % (
-                        system_name,
-                        i[0],
-                        i[1],
-                        tolerance,
-                        ffxml,
-                        amber_energy,
-                        openmm_energy,
-                    )
+                    f"{system_name} relative energy error ({i[0]}, {i[1]:f}) "
+                    f"outside of allowed tolerance ({tolerance:f}) for {ffxml}: "
+                    f"AMBER {amber_energy} OpenMM {openmm_energy}"
                 )
         else:
             if not dihedrals_done:
                 if i[1] > tolerance:
                     raise AssertionError(
-                        "%s relative energy error (%s, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s"
-                        % (
-                            system_name,
-                            i[0],
-                            i[1],
-                            tolerance,
-                            ffxml,
-                            amber_energy,
-                            openmm_energy,
-                        )
+                        f"{system_name} relative energy error ({i[0]}, {i[1]:f}) "
+                        f"outside of allowed tolerance ({tolerance:f}) for {ffxml}: "
+                        f"AMBER {amber_energy} OpenMM {openmm_energy}"
                     )
                 dihedrals_done = True
             else:  # impropers
                 if i[1] > improper_tolerance:
                     raise AssertionError(
-                        "%s relative energy error (%s-impropers, %f) outside of allowed tolerance (%f) for %s: AMBER %s OpenMM %s"
-                        % (
-                            system_name,
-                            i[0],
-                            i[1],
-                            improper_tolerance,
-                            ffxml,
-                            amber_energy,
-                            openmm_energy,
-                        )
+                        f"{system_name} relative energy error ({i[0]}-impropers, {i[1]:f}) "
+                        f"outside of allowed tolerance ({improper_tolerance:f}) for {ffxml}: "
+                        f"AMBER {amber_energy} OpenMM {openmm_energy}"
                     )
 
     # logging
@@ -1026,7 +959,7 @@ def assert_energies(
 
 def validate_protein(ffxml_name, leaprc_name, united_atom=False):
     if verbose:
-        print("Protein energy validation for %s" % ffxml_name)
+        print(f"Protein energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     ala3_top = tempfile.mkstemp()
@@ -1039,31 +972,23 @@ def validate_protein(ffxml_name, leaprc_name, united_atom=False):
     if verbose:
         print("Preparing LeaP scripts...")
     if not united_atom:
-        leap_script_ala3_string = """source {}
+        leap_script_ala3_string = f"""source {leaprc_name}
 x = loadPdb files/ala3.pdb
-saveAmberParm x {} {}
-quit""".format(
-            leaprc_name, ala3_top[1], ala3_crd[1]
-        )
-        leap_script_villin_string = """source {}
+saveAmberParm x {ala3_top[1]} {ala3_crd[1]}
+quit"""
+        leap_script_villin_string = f"""source {leaprc_name}
 x = loadPdb files/villin.pdb
-saveAmberParm x {} {}
-quit""".format(
-            leaprc_name, villin_top[1], villin_crd[1]
-        )
+saveAmberParm x {villin_top[1]} {villin_crd[1]}
+quit"""
     else:
-        leap_script_ala3_string = """source {}
+        leap_script_ala3_string = f"""source {leaprc_name}
 x = loadPdb files/ala3_ua.pdb
-saveAmberParm x {} {}
-quit""".format(
-            leaprc_name, ala3_top[1], ala3_crd[1]
-        )
-        leap_script_villin_string = """source {}
+saveAmberParm x {ala3_top[1]} {ala3_crd[1]}
+quit"""
+        leap_script_villin_string = f"""source {leaprc_name}
 x = loadPdb files/villin_ua.pdb
-saveAmberParm x {} {}
-quit""".format(
-            leaprc_name, villin_top[1], villin_crd[1]
-        )
+saveAmberParm x {villin_top[1]} {villin_crd[1]}
+quit"""
 
     write_file(leap_script_ala3_file[0], leap_script_ala3_string)
     write_file(leap_script_villin_file[0], leap_script_villin_string)
@@ -1080,9 +1005,7 @@ quit""".format(
     try:
         if verbose:
             print("Calculating and validating ala_ala_ala energies...")
-        assert_energies(
-            ala3_top[1], ala3_crd[1], ffxml_name, system_name="protein-ala_ala_ala"
-        )
+        assert_energies(ala3_top[1], ala3_crd[1], ffxml_name, system_name="protein-ala_ala_ala")
         if verbose:
             print("Ala_ala_ala energy validation successful!")
 
@@ -1109,12 +1032,12 @@ quit""".format(
         ):
             os.unlink(f[1])
     if verbose:
-        print("Protein energy validation for %s done!" % ffxml_name)
+        print(f"Protein energy validation for {ffxml_name} done!")
 
 
 def validate_dna(ffxml_name, leaprc_name):
     if verbose:
-        print("DNA energy validation for %s" % ffxml_name)
+        print(f"DNA energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     dna_top = tempfile.mkstemp()
@@ -1123,7 +1046,7 @@ def validate_dna(ffxml_name, leaprc_name):
 
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_dna_string = """addPdbAtomMap {{
+    leap_script_dna_string = f"""addPdbAtomMap {{
 {{ "H1'" "H1*" }}
 {{ "H2'" "H2'1" }}
 {{ "H2''" "H2'2" }}
@@ -1137,7 +1060,7 @@ def validate_dna(ffxml_name, leaprc_name):
 {{ "OP1" "O1P" }}
 {{ "OP2" "O2P" }}
 }}
-source {}
+source {leaprc_name}
 addPdbResMap {{
 {{ 0 "DG" "DG5"  }} {{ 1 "DG" "DG3"  }}
 {{ 0 "DA" "DA5"  }} {{ 1 "DA" "DA3"  }}
@@ -1145,10 +1068,8 @@ addPdbResMap {{
 {{ 0 "DT" "DT5"  }} {{ 1 "DT" "DT3"  }}
 }}
 x = loadPdb files/4rzn_dna.pdb
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, dna_top[1], dna_crd[1]
-    )
+saveAmberParm x {dna_top[1]} {dna_crd[1]}
+quit"""
 
     write_file(leap_script_dna_file[0], leap_script_dna_string)
 
@@ -1171,12 +1092,12 @@ quit""".format(
         for f in (dna_top, dna_crd, leap_script_dna_file):
             os.unlink(f[1])
     if verbose:
-        print("DNA energy validation for %s done!" % ffxml_name)
+        print(f"DNA energy validation for {ffxml_name} done!")
 
 
 def validate_rna(ffxml_name, leaprc_name):
     if verbose:
-        print("RNA energy validation for %s" % ffxml_name)
+        print(f"RNA energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     rna_top = tempfile.mkstemp()
@@ -1187,7 +1108,7 @@ def validate_rna(ffxml_name, leaprc_name):
     if verbose:
         print("Preparing LeaP scripts...")
 
-    leap_script_rna_string = """
+    leap_script_rna_string = f"""
 addPdbAtomMap {{
 {{ "H1'" "H1*" }}
 {{ "H2'" "H2'1" }}
@@ -1202,7 +1123,7 @@ addPdbAtomMap {{
 {{ "OP1" "O1P" }}
 {{ "OP2" "O2P" }}
 }}
-source {}
+source {leaprc_name}
 addPdbResMap {{
 {{ 0 "G" "G5"  }} {{ 1 "G" "G3"  }} {{ "G" "G" }}
 {{ 0 "A" "A5"  }} {{ 1 "A" "A3"  }} {{ "A" "A" }}
@@ -1210,12 +1131,10 @@ addPdbResMap {{
 {{ 0 "U" "U5"  }} {{ 1 "U" "U3"  }} {{ "U" "U" }}
 }}
 x = loadPdb files/5c5w_rna.pdb
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, rna_top[1], rna_crd[1]
-    )
+saveAmberParm x {rna_top[1]} {rna_crd[1]}
+quit"""
 
-    leap_script_rna_string_alt = """
+    leap_script_rna_string_alt = f"""
 addPdbAtomMap {{
 {{ "H1'" "H1*" }}
 {{ "H2'" "H2'1" }}
@@ -1230,7 +1149,7 @@ addPdbAtomMap {{
 {{ "OP1" "O1P" }}
 {{ "OP2" "O2P" }}
 }}
-source {}
+source {leaprc_name}
 addPdbResMap {{
 {{ 0 "G" "RG5"  }} {{ 1 "G" "RG3"  }} {{ "G" "RG" }}
 {{ 0 "A" "RA5"  }} {{ 1 "A" "RA3"  }} {{ "A" "RA" }}
@@ -1238,10 +1157,8 @@ addPdbResMap {{
 {{ 0 "U" "RU5"  }} {{ 1 "U" "RU3"  }} {{ "U" "RU" }}
 }}
 x = loadPdb files/5c5w_rna.pdb
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, rna_top[1], rna_crd[1]
-    )
+saveAmberParm x {rna_top[1]} {rna_crd[1]}
+quit"""
 
     write_file(leap_script_rna_file[0], leap_script_rna_string)
     write_file(leap_script_rna_file_alt[0], leap_script_rna_string_alt)
@@ -1268,12 +1185,12 @@ quit""".format(
         for f in (rna_top, rna_crd, leap_script_rna_file, leap_script_rna_file_alt):
             os.unlink(f[1])
     if verbose:
-        print("RNA energy validation for %s done!" % ffxml_name)
+        print(f"RNA energy validation for {ffxml_name} done!")
 
 
 def validate_gaff(ffxml_name, leaprc_name, gaff_dat_name):
     if verbose:
-        print("GAFF energy validation for %s" % ffxml_name)
+        print(f"GAFF energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     imatinib_top = tempfile.mkstemp()
@@ -1282,15 +1199,13 @@ def validate_gaff(ffxml_name, leaprc_name, gaff_dat_name):
 
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_imatinib_string = """\
-source {}
-loadamberparams ../openmmforcefields/ffxml/amber/gaff/dat/{}
+    leap_script_imatinib_string = f"""\
+source {leaprc_name}
+loadamberparams ../openmmforcefields/ffxml/amber/gaff/dat/{gaff_dat_name}
 loadamberparams files/frcmod.imatinib
 x = loadMol2 files/imatinib.mol2
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, gaff_dat_name, imatinib_top[1], imatinib_crd[1]
-    )
+saveAmberParm x {imatinib_top[1]} {imatinib_crd[1]}
+quit"""
     write_file(leap_script_imatinib_file[0], leap_script_imatinib_string)
 
     if verbose:
@@ -1316,7 +1231,7 @@ quit""".format(
         for f in (imatinib_top, imatinib_crd, leap_script_imatinib_file):
             os.unlink(f[1])
     if verbose:
-        print("GAFF energy validation for %s done!" % ffxml_name)
+        print(f"GAFF energy validation for {ffxml_name} done!")
 
 
 def validate_phospho_protein(
@@ -1334,10 +1249,10 @@ def validate_phospho_protein(
 
     # this function assumes ffxml/ff14SB.xml already exists
     if verbose:
-        print("Phosphorylated protein energy validation for %s" % ffxml_name)
+        print(f"Phosphorylated protein energy validation for {ffxml_name}")
     for pdbname in glob.iglob(f"files/{phospho}/*.pdb"):
         if verbose:
-            print("Now testing with pdb %s" % os.path.basename(pdbname))
+            print(f"Now testing with pdb {os.path.basename(pdbname)}")
         if verbose:
             print("Preparing temporary files for validation...")
         top = tempfile.mkstemp()
@@ -1346,13 +1261,11 @@ def validate_phospho_protein(
 
         if verbose:
             print("Preparing LeaP scripts...")
-        leap_script_string = """source {}
-source {}
-x = loadPdb {}
-saveAmberParm x {} {}
-quit""".format(
-            supp_leaprc_name, leaprc_name, pdbname, top[1], crd[1]
-        )
+        leap_script_string = f"""source {supp_leaprc_name}
+source {leaprc_name}
+x = loadPdb {pdbname}
+saveAmberParm x {top[1]} {crd[1]}
+quit"""
 
         write_file(leap_script_file[0], leap_script_string)
 
@@ -1369,7 +1282,7 @@ quit""".format(
                 top[1],
                 crd[1],
                 (supp_ffxml_name, ffxml_name),
-                system_name="phospho_protein: %s" % os.path.basename(pdbname),
+                system_name=f"phospho_protein: {os.path.basename(pdbname)}",
             )
             if verbose:
                 print("Energy validation successful!")
@@ -1379,14 +1292,12 @@ quit""".format(
             for f in (top, crd, leap_script_file):
                 os.unlink(f[1])
         if verbose:
-            print("Phosphorylated protein energy validation for %s done!" % ffxml_name)
+            print(f"Phosphorylated protein energy validation for {ffxml_name} done!")
 
 
-def validate_water_ion(
-    ffxml_name, source_recipe_files, solvent_name, recipe_name, standard_ffxml=None
-):
+def validate_water_ion(ffxml_name, source_recipe_files, solvent_name, recipe_name, standard_ffxml=None):
     if verbose:
-        print("Water and ions energy validation for %s" % ffxml_name)
+        print(f"Water and ions energy validation for {ffxml_name}")
     if solvent_name == "tip3p":
         HOH = "TP3"
         solvent_frcmod = None
@@ -1410,28 +1321,22 @@ def validate_water_ion(
     leap_script_file = tempfile.mkstemp()
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_string_part1 = """loadamberparams parm10.dat
-loadamberparams {}
-loadamberparams {}\n""".format(
-        source_recipe_files[0], source_recipe_files[1]
-    )
+    leap_script_string_part1 = f"""loadamberparams parm10.dat
+loadamberparams {source_recipe_files[0]}
+loadamberparams {source_recipe_files[1]}\n"""
 
-    leap_script_string_part2 = """\nloadOff atomic_ions.lib
+    leap_script_string_part2 = f"""\nloadOff atomic_ions.lib
 loadoff solvents.lib
-HOH = {}
+HOH = {HOH}
 # for TIP4PEW
 addPdbAtomMap {{{{ "M" "EPW" }}}}
-x = loadPdb {}
-saveAmberParm x {} {}
-quit""".format(
-        HOH, pdb_name, top[1], crd[1]
-    )
+x = loadPdb {pdb_name}
+saveAmberParm x {top[1]} {crd[1]}
+quit"""
 
     if solvent_frcmod:
         leap_script_string = (
-            leap_script_string_part1
-            + ("loadamberparams %s" % solvent_frcmod)
-            + leap_script_string_part2
+            leap_script_string_part1 + (f"loadamberparams {solvent_frcmod}") + leap_script_string_part2
         )
     else:
         leap_script_string = leap_script_string_part1 + leap_script_string_part2
@@ -1456,15 +1361,11 @@ quit""".format(
         parm_omm = parmed.openmm.load_topology(pdb.topology, xyz=pdb.positions)
         parm_amber = parmed.load_file(top[1], crd[1])
         system_amber = parm_amber.createSystem()
-        omm_energies = parmed.openmm.energy_decomposition_system(
-            parm_omm, system_omm, nrg=u.kilojoules_per_mole
-        )
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=u.kilojoules_per_mole)
         for entry in omm_energies:
             if entry[0] == "NonbondedForce":
                 omm_nonbonded = entry[1]
-        amber_energies = parmed.openmm.energy_decomposition_system(
-            parm_amber, system_amber, nrg=u.kilojoules_per_mole
-        )
+        amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, nrg=u.kilojoules_per_mole)
         for entry in amber_energies:
             if entry[0] == "NonbondedForce":
                 amber_nonbonded = entry[1]
@@ -1473,8 +1374,8 @@ quit""".format(
 
         if rel_nonbonded > 1e-5:
             raise AssertionError(
-                "NonbondedForce Water and ions energy (%f) outside of "
-                "allowed tolerance (%f) for %s:" % (rel_nonbonded, 1e-5, ffxml_name)
+                f"NonbondedForce Water and ions energy ({rel_nonbonded:f}) outside of "
+                f"allowed tolerance ({1e-5:f}) for {ffxml_name}:"
             )
         if verbose:
             print("Energy validation successful!")
@@ -1507,12 +1408,12 @@ quit""".format(
         logger.log(omm_energies_log)
         logger.log(rel_energies_log)
     if verbose:
-        print("Water and ions energy validation for %s done!" % ffxml_name)
+        print(f"Water and ions energy validation for {ffxml_name} done!")
 
 
 def validate_impropers(ffxml_name, leaprc_name):
     if verbose:
-        print("Impropers validation for %s" % ffxml_name)
+        print(f"Impropers validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     top_villin = tempfile.mkstemp()
@@ -1525,22 +1426,14 @@ def validate_impropers(ffxml_name, leaprc_name):
 
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_string = """source {}
+    leap_script_string = f"""source {leaprc_name}
 x = loadPdb files/villin.pdb
 y = loadPdb files/4rzn_dna.pdb
 z = loadPdb files/5c5w_rna.pdb
-saveAmberParm x {} {}
-saveAmberParm y {} {}
-saveAmberParm z {} {}
-quit""".format(
-        leaprc_name,
-        top_villin[1],
-        crd_villin[1],
-        top_dna[1],
-        crd_dna[1],
-        top_rna[1],
-        crd_rna[1],
-    )
+saveAmberParm x {top_villin[1]} {crd_villin[1]}
+saveAmberParm y {top_dna[1]} {crd_dna[1]}
+saveAmberParm z {top_rna[1]} {crd_rna[1]}
+quit"""
     write_file(leap_script_file[0], leap_script_string)
 
     if verbose:
@@ -1563,9 +1456,7 @@ quit""".format(
     sys_omm_villin = ff.createSystem(parm_amber_villin.topology)
     sys_omm_dna = ff.createSystem(parm_amber_dna.topology)
     sys_omm_rna = ff.createSystem(parm_amber_rna.topology)
-    parm_omm_villin = parmed.openmm.load_topology(
-        parm_amber_villin.topology, sys_omm_villin
-    )
+    parm_omm_villin = parmed.openmm.load_topology(parm_amber_villin.topology, sys_omm_villin)
     parm_omm_dna = parmed.openmm.load_topology(parm_amber_dna.topology, sys_omm_dna)
     parm_omm_rna = parmed.openmm.load_topology(parm_amber_rna.topology, sys_omm_rna)
 
@@ -1591,45 +1482,30 @@ quit""".format(
         if dih.improper
     }
     set_omm_dna = {
-        (dih.atom1.idx, dih.atom2.idx, dih.atom3.idx, dih.atom4.idx)
-        for dih in parm_omm_dna.dihedrals
-        if dih.improper
+        (dih.atom1.idx, dih.atom2.idx, dih.atom3.idx, dih.atom4.idx) for dih in parm_omm_dna.dihedrals if dih.improper
     }
     set_omm_rna = {
-        (dih.atom1.idx, dih.atom2.idx, dih.atom3.idx, dih.atom4.idx)
-        for dih in parm_omm_rna.dihedrals
-        if dih.improper
+        (dih.atom1.idx, dih.atom2.idx, dih.atom3.idx, dih.atom4.idx) for dih in parm_omm_rna.dihedrals if dih.improper
     }
 
     try:
-        if (
-            set_amber_villin - set_omm_villin != set()
-            or set_omm_villin - set_amber_villin != set()
-        ):
+        if set_amber_villin - set_omm_villin != set() or set_omm_villin - set_amber_villin != set():
             raise AssertionError(
-                """Impropers validation fail for {} (villin)
-                                    set_amber - set_omm: {}
-                                    set_omm - set_amber: {}""".format(
-                    ffxml_name,
-                    set_amber_villin - set_omm_villin,
-                    set_omm_villin - set_amber_villin,
-                )
+                f"""Impropers validation fail for {ffxml_name} (villin)
+                                    set_amber - set_omm: {set_amber_villin - set_omm_villin}
+                                    set_omm - set_amber: {set_omm_villin - set_amber_villin}"""
             )
         if set_amber_dna - set_omm_dna != set() or set_omm_dna - set_amber_dna != set():
             raise AssertionError(
-                """Impropers validation fail for {} (DNA)
-                                    set_amber - set_omm: {}
-                                    set_omm - set_amber: {}""".format(
-                    ffxml_name, set_amber_dna - set_omm_dna, set_omm_dna - set_amber_dna
-                )
+                f"""Impropers validation fail for {ffxml_name} (DNA)
+                                    set_amber - set_omm: {set_amber_dna - set_omm_dna}
+                                    set_omm - set_amber: {set_omm_dna - set_amber_dna}"""
             )
         if set_amber_rna - set_omm_rna != set() or set_omm_rna - set_amber_rna != set():
             raise AssertionError(
-                """Impropers validation fail for {} (RNA)
-                                    set_amber - set_omm: {}
-                                    set_omm - set_amber: {}""".format(
-                    ffxml_name, set_amber_rna - set_omm_rna, set_omm_rna - set_amber_rna
-                )
+                f"""Impropers validation fail for {ffxml_name} (RNA)
+                                    set_amber - set_omm: {set_amber_rna - set_omm_rna}
+                                    set_omm - set_amber: {set_omm_rna - set_amber_rna}"""
             )
     finally:
         if verbose:
@@ -1645,12 +1521,12 @@ quit""".format(
         ):
             os.unlink(f[1])
     if verbose:
-        print("Improper validation for %s done!" % ffxml_name)
+        print(f"Improper validation for {ffxml_name} done!")
 
 
 def validate_lipids(ffxml_name, leaprc_name):
     if verbose:
-        print("Lipids energy validation for %s" % ffxml_name)
+        print(f"Lipids energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     lipids_top = tempfile.mkstemp()
@@ -1659,12 +1535,10 @@ def validate_lipids(ffxml_name, leaprc_name):
 
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_lipids_string = """source {}
+    leap_script_lipids_string = f"""source {leaprc_name}
 x = loadPdb files/POPC-nowater-amber.pdb
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, lipids_top[1], lipids_crd[1]
-    )
+saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
+quit"""
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
 
     if verbose:
@@ -1685,12 +1559,12 @@ quit""".format(
         for f in (lipids_top, lipids_crd, leap_script_lipids_file):
             os.unlink(f[1])
     if verbose:
-        print("Lipids energy validation for %s done!" % ffxml_name)
+        print(f"Lipids energy validation for {ffxml_name} done!")
 
 
 def validate_merged_lipids(ffxml_name, leaprc_name):
     if verbose:
-        print("Lipids (merged) energy validation for %s" % ffxml_name)
+        print(f"Lipids (merged) energy validation for {ffxml_name}")
     if verbose:
         print("Preparing temporary files for validation...")
     lipids_top = tempfile.mkstemp()
@@ -1700,12 +1574,10 @@ def validate_merged_lipids(ffxml_name, leaprc_name):
 
     if verbose:
         print("Preparing LeaP scripts...")
-    leap_script_lipids_string = """source {}
+    leap_script_lipids_string = f"""source {leaprc_name}
 x = loadPdb files/POPC-nowater-amber.pdb
-saveAmberParm x {} {}
-quit""".format(
-        leaprc_name, lipids_top[1], lipids_crd[1]
-    )
+saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
+quit"""
     write_file(leap_script_lipids_file[0], leap_script_lipids_string)
 
     if verbose:
@@ -1733,11 +1605,10 @@ quit""".format(
         for f in (lipids_top, lipids_crd, leap_script_lipids_file):
             os.unlink(f[1])
     if verbose:
-        print("Lipids energy validation for %s done!" % ffxml_name)
+        print(f"Lipids energy validation for {ffxml_name} done!")
 
 
 def modify_glycan_ffxml(input_ffxml_path):
-
     """
     Creates a modified XML file with the following changes:
     - All parameters are specified by type, not class.
@@ -1937,23 +1808,20 @@ def modify_glycan_ffxml(input_ffxml_path):
 
     # Bad NH torsion
     text_split = text.split("\n")
-    text_NH_removed = [line for line in text_split if not "NH" in line]
+    text_NH_removed = [line for line in text_split if "NH" not in line]
     text = "\n".join(text_NH_removed)
 
     # Unscaled types
     pattern = re.compile("unscaled_types = set\\((\\[(.*\n)*?.*?\\])\\)")
     match = pattern.search(text)
     types = eval(match.group(1))
-    types = [
-        (replacements[t[0]], replacements[t[1]], replacements[t[2]], replacements[t[3]])
-        for t in types
-    ]
+    types = [(replacements[t[0]], replacements[t[1]], replacements[t[2]], replacements[t[3]]) for t in types]
     types = ",\n    ".join(str(t) for t in types)
-    script.text = pattern.sub("unscaled_types = set([%s])" % types, text)
+    script.text = pattern.sub(f"unscaled_types = set([{types}])", text)
 
     # Add initialization script for setting up GlycamTemplateMatcher
     initialization_script = etree.SubElement(root, "InitializationScript")
-    initialization_script.text = """ 
+    initialization_script.text = """
 from openmm.app.internal import compiled
 
 class GlycamTemplateMatcher(object):
@@ -1964,18 +1832,36 @@ class GlycamTemplateMatcher(object):
   def __call__(self, ff, residue, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles):
     if residue.name in self.glycam_residues:
       template = ff._templates[residue.name]
-      if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+      if compiled.matchResidueToTemplate(
+        residue,
+        template,
+        bondedToAtom,
+        ignoreExternalBonds,
+        ignoreExtraParticles,
+    ) is not None:
         return template
 
       # The residue doesn't actually match the template with the same name.  Try the terminal variants.
 
       if 'N'+residue.name in self.glycam_residues:
         template = ff._templates['N'+residue.name]
-        if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+        if compiled.matchResidueToTemplate(
+            residue,
+            template,
+            bondedToAtom,
+            ignoreExternalBonds,
+            ignoreExtraParticles,
+        ) is not None:
           return template
       if 'C'+residue.name in self.glycam_residues:
         template = ff._templates['C'+residue.name]
-        if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+        if compiled.matchResidueToTemplate(
+            residue,
+            template,
+            bondedToAtom,
+            ignoreExternalBonds,
+            ignoreExtraParticles,
+        ) is not None:
           return template
     return None
 
@@ -1998,14 +1884,19 @@ def validate_glyco_protein(
     modify_glycan_ffxml(ffxml_name)
 
     if verbose:
-        print("Glycosylated protein energy validation for %s" % ffxml_name)
+        print(f"Glycosylated protein energy validation for {ffxml_name}")
     top = "files/glycam/Glycoprotein_shortened.parm7"
     crd = "files/glycam/Glycoprotein_shortened.rst7"
     assert_energies_glyco_protein(top, crd, (supp_ffxml_name, ffxml_name))
     if verbose:
-        print(
-            "Glycosylated protein energy validation for %s was successful!" % ffxml_name
-        )
+        print(f"Glycosylated protein energy validation for {ffxml_name} was successful!")
+
+
+def validate_nucleic(
+    ffxml_name,
+    args,
+):
+    raise NotImplementedError()
 
 
 class Logger:
