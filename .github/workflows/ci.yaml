@@ -29,6 +29,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python-version: ["3.10", "3.11", "3.12"]
+        amber-conversion: [false]
+        charmm-conversion: [false]
 
     steps:
     - uses: actions/checkout@v4
@@ -56,28 +58,30 @@ jobs:
     - name: Test Installed Package
       run: |
         pytest -v -n logical --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
-          openmmforcefields/tests/test_amber_import.py \
-          openmmforcefields/tests/test_template_generators.py \
-          openmmforcefields/tests/test_system_generator.py \
-          -k "not TestEspalomaTemplateGenerator"
+          openmmforcefields/tests/
+
+        # add --rungaff / --runespaloma to run those tests
+
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
+      if: ${{ matrix.amber-conversion == 'true' }}
       run: |
         python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
       working-directory: ./amber
 
     - name: Test CHARMM conversion
+      if: ${{ matrix.charmm-conversion == 'true' }}
       run: |
 
-        # TODO: Uncomment these tests when new ParmEd is released
+        # TODO: Turn on these tests (in job matrix) when new ParmEd is released
         # TODO: Find a way to avoid timing out when running full charmm36.yaml conversion below
-        # python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
-        # python convert_charmm.py --verbose --in files/waters.yaml
-        # python convert_charmm.py --verbose
+        python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
+        python convert_charmm.py --verbose --in files/waters.yaml
+        python convert_charmm.py --verbose
 
         # TODO: Uncomment this when tests are expected to work
         # python test_charmm.py --verbose
