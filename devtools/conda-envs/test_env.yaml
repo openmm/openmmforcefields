@@ -34,4 +34,4 @@ dependencies:
     #
     # Espaloma requirements below
     #
-  # espaloma >=0.3.1
+  - espaloma >=0.3.1
