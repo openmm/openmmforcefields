@@ -26,6 +26,7 @@ _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 class ForceException(Exception):
     """Exception for forces"""
 
+
 class SmallMoleculeTemplateGenerator:
     """
     Abstract base class for small molecule template generation for OpenMM ForceField.
