@@ -1,37 +1,20 @@
 name: openmmforcefields-test
-
 channels:
+  - conda-forge/label/openmm_rc
   - conda-forge
-
 dependencies:
-    # Base depends
   - python
   - pip
-
-    # Testing
   - pytest
   - pytest-cov
   - pytest-xdist
   - pytest-randomly
-
-    # Requirements for converted force field installer
-  - openmm >=7.6.0
-
+  - openmm ~=8.1.2rc1
   - openff-toolkit >=0.11
-
-    # Requirements for conversion tools
   - pyyaml
   - ambertools >=22,<24
   - lxml
   - networkx
-
-    # JSON caching of residue templates
   - tinydb
-
-    # Validating URLs
   - validators
-
-    #
-    # Espaloma requirements below
-    #
   - espaloma >=0.3.1
