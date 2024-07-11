@@ -17,4 +17,3 @@ dependencies:
   - networkx
   - tinydb
   - validators
-  - espaloma >=0.3.1
