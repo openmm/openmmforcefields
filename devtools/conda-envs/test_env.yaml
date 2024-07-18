@@ -16,3 +16,4 @@ dependencies:
   - networkx
   - tinydb
   - validators
+  - rdkit !=2024.03.4
