@@ -410,6 +410,10 @@ See the corresponding directories for information on how to use the provided con
 
 # [Changelog](https://github.com/openmm/openmmforcefields/releases)
 
+## 0.14.0 Bring back GAFFTemplateGenerator
+
+This release effectively reverts the changes in 0.13.0. This release is **only** compatible with OpenMM 8.1.2. No other changes were made.
+
 ## 0.13.0 Temporarily remove GAFFTemplateGenerator
 
 This release temporarily removes GAFFTemplateGenerator because of packaging incompatibilities with
