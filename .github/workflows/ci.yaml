@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-12, macos-latest]
         python-version: ["3.10", "3.11", "3.12"]
         amber-conversion: [false]
         charmm-conversion: [false]
@@ -57,7 +57,7 @@ jobs:
 
     - name: Test Installed Package
       run: |
-        pytest -v -n logical --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+        pytest -v -n logical --rungaff --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/
 
         # add --rungaff / --runespaloma to run those tests
