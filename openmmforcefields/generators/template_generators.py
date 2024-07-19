@@ -556,23 +556,17 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_dat_filename(self):
         """File path to the GAFF .dat AMBER force field file"""
-        from pkg_resources import resource_filename
+        import importlib_resources
 
-        filename = resource_filename(
-            "openmmforcefields",
-            os.path.join("ffxml", "amber", "gaff", "dat", f"{self._forcefield}.dat"),
-        )
+        filename = str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" / "gaff" / "dat" / f"{self._forcefield}.dat")
         return filename
 
     @property
     def gaff_xml_filename(self):
         """File path to the GAFF .ffxml OpenMM force field file"""
-        from pkg_resources import resource_filename
+        import importlib_resources
 
-        filename = resource_filename(
-            "openmmforcefields",
-            os.path.join("ffxml", "amber", "gaff", "ffxml", f"{self._forcefield}.xml"),
-        )
+        filename = str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" / "gaff" / "ffxml" / f"{self._forcefield}.xml")
         return filename
 
     def generator(self, forcefield, residue):

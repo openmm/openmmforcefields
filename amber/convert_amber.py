@@ -21,7 +21,7 @@ import parmed
 import yaml
 from lxml import etree as et
 from parmed.exceptions import ParameterWarning
-from pkg_resources import resource_filename
+import importlib_resources
 
 warnings.filterwarnings("error", category=ParameterWarning)
 
@@ -500,7 +500,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 _filename = os.path.join(AMBERHOME, "dat/leap/", source_file)
             elif MODE == "GAFF":
                 _filename = os.path.join(
-                    resource_filename("openmmforcefields", "ffxml/amber/gaff/dat"),
+                    str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" /" gaff" / "dat"),
                     source_file,
                 )
             files.append(_filename)
