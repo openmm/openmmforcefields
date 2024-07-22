@@ -347,7 +347,11 @@ class SmallMoleculeTemplateGenerator:
                         outfile.write(ffxml_contents)
 
                 # Add the parameters and residue definition
-                forcefield.loadFile(StringIO(ffxml_contents))
+                try:
+                    forcefield.loadFile(StringIO(ffxml_contents))
+                except ValueError as err:
+                    print(ffxml_contents)
+                    raise err
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
                     with self._open_db() as db:
@@ -588,11 +592,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
         # Load the GAFF parameters if we haven't done so already for this force field
-        if forcefield not in self._gaff_parameters_loaded:
-            # Instruct the ForceField to load the GAFF parameters
-            forcefield.loadFile(self.gaff_xml_filename)
-            # Note that we've loaded the GAFF parameters
-            self._gaff_parameters_loaded[forcefield] = True
+        #if forcefield not in self._gaff_parameters_loaded:
+        #    # Instruct the ForceField to load the GAFF parameters
+        #    forcefield.loadFile(self.gaff_xml_filename)
+        #    # Note that we've loaded the GAFF parameters
+        #    self._gaff_parameters_loaded[forcefield] = True
 
         return super().generator(forcefield, residue)
 
@@ -872,8 +876,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
             # Run parmchk.
             shutil.copy(self.gaff_dat_filename, "gaff.dat")
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version} -p Y"
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version}"
+            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version} -a Y"
 
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
