@@ -500,7 +500,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 _filename = os.path.join(AMBERHOME, "dat/leap/", source_file)
             elif MODE == "GAFF":
                 _filename = os.path.join(
-                    str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" /" gaff" / "dat"),
+                    str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" / " gaff" / "dat"),
                     source_file,
                 )
             files.append(_filename)

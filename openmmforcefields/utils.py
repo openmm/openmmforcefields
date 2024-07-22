@@ -39,7 +39,7 @@ def get_data_filename(relative_path):
 
     """
 
-    fn = importlib_resources.files("openmmforcefields") / "data"  / relative_path
+    fn = importlib_resources.files("openmmforcefields") / "data" / relative_path
 
     import os
 
