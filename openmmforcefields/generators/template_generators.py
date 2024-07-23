@@ -607,7 +607,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
         # Load the GAFF parameters if we haven't done so already for this force field
-        #if forcefield not in self._gaff_parameters_loaded:
+        # if forcefield not in self._gaff_parameters_loaded:
         #    # Instruct the ForceField to load the GAFF parameters
         #    forcefield.loadFile(self.gaff_xml_filename)
         #    # Note that we've loaded the GAFF parameters
@@ -743,13 +743,13 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         kwargs = {}
         if "write_unused" in signature(params.write).parameters:
             kwargs["write_unused"] = True
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         # TODO MMH
         # get the types
         # check if they are in our cache
         # remove and add them as needed
         # see if this fixes it
-        #params.atom_types.keys()
+        # params.atom_types.keys()
         for atom_type in params.atom_types.copy().keys():
             if atom_type not in self._gaff_atom_type_cache:
                 self._gaff_atom_type_cache.add(atom_type)
