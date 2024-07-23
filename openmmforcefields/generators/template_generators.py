@@ -347,11 +347,8 @@ class SmallMoleculeTemplateGenerator:
                         outfile.write(ffxml_contents)
 
                 # Add the parameters and residue definition
-                try:
-                    forcefield.loadFile(StringIO(ffxml_contents))
-                except (ValueError, KeyError) as err:
-                    print(ffxml_contents)
-                    raise err
+                forcefield.loadFile(StringIO(ffxml_contents))
+
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
                     with self._open_db() as db:
@@ -541,7 +538,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
         self._gaff_parameters_loaded = dict()
-        self._gaff_atom_type_cache = set()
+        # Track which atom types we have told OpenMM about
+        self._gaff_atom_types_observed = set()
 
     @property
     def gaff_version(self):
@@ -606,12 +604,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
 
         """
-        # Load the GAFF parameters if we haven't done so already for this force field
-        #if forcefield not in self._gaff_parameters_loaded:
-        #    # Instruct the ForceField to load the GAFF parameters
-        #    forcefield.loadFile(self.gaff_xml_filename)
-        #    # Note that we've loaded the GAFF parameters
-        #    self._gaff_parameters_loaded[forcefield] = True
 
         return super().generator(forcefield, residue)
 
@@ -724,7 +716,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         _logger.debug(f"{molecule.partial_charges}")
 
         # Generate additional parameters if needed
-        # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
         _logger.debug("Creating ffxml contents for additional parameters...")
         from inspect import (  # use introspection to support multiple parmed versions
             signature,
@@ -743,20 +734,22 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         kwargs = {}
         if "write_unused" in signature(params.write).parameters:
             kwargs["write_unused"] = True
-        #import pdb; pdb.set_trace()
-        # TODO MMH
-        # get the types
-        # check if they are in our cache
-        # remove and add them as needed
-        # see if this fixes it
-        #params.atom_types.keys()
+
+        # We need to make sure we don't duplicate atom types we have already told
+        # OpenMM about. To do this we will keep track of atom types we have already
+        # seen and ensure we only record new atom types in the xml.
+
+        # iterate over a copy of the atom types
         for atom_type in params.atom_types.copy().keys():
-            if atom_type not in self._gaff_atom_type_cache:
-                self._gaff_atom_type_cache.add(atom_type)
-                print(f"added {atom_type} to cache")
+            if atom_type not in self._gaff_atom_types_observed:
+                self._gaff_atom_types_observed.add(atom_type)
+                _logger.debug(f"added {atom_type} to set of seen types")
+            # if we have seen the atom type, delete it from the OG params,
+            # not the copy!
             else:
                 del params.atom_types[atom_type]
-                print(f"del {atom_type}")
+                _logger.debug(f"{atom_type} already recorded")
+
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
