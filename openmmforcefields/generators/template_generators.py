@@ -349,7 +349,7 @@ class SmallMoleculeTemplateGenerator:
                 # Add the parameters and residue definition
                 try:
                     forcefield.loadFile(StringIO(ffxml_contents))
-                except ValueError as err:
+                except (ValueError, KeyError) as err:
                     print(ffxml_contents)
                     raise err
                 # If a cache is specified, add this molecule
@@ -541,6 +541,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
         self._gaff_parameters_loaded = dict()
+        self._gaff_atom_type_cache = set()
 
     @property
     def gaff_version(self):
@@ -606,7 +607,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         """
         # Load the GAFF parameters if we haven't done so already for this force field
-        # if forcefield not in self._gaff_parameters_loaded:
+        #if forcefield not in self._gaff_parameters_loaded:
         #    # Instruct the ForceField to load the GAFF parameters
         #    forcefield.loadFile(self.gaff_xml_filename)
         #    # Note that we've loaded the GAFF parameters
@@ -742,6 +743,20 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         kwargs = {}
         if "write_unused" in signature(params.write).parameters:
             kwargs["write_unused"] = True
+        #import pdb; pdb.set_trace()
+        # TODO MMH
+        # get the types
+        # check if they are in our cache
+        # remove and add them as needed
+        # see if this fixes it
+        #params.atom_types.keys()
+        for atom_type in params.atom_types.copy().keys():
+            if atom_type not in self._gaff_atom_type_cache:
+                self._gaff_atom_type_cache.add(atom_type)
+                print(f"added {atom_type} to cache")
+            else:
+                del params.atom_types[atom_type]
+                print(f"del {atom_type}")
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
