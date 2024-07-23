@@ -348,7 +348,6 @@ class SmallMoleculeTemplateGenerator:
 
                 # Add the parameters and residue definition
                 forcefield.loadFile(StringIO(ffxml_contents))
-
                 # If a cache is specified, add this molecule
                 if self._cache is not None:
                     with self._open_db() as db:
