@@ -415,7 +415,8 @@ See the corresponding directories for information on how to use the provided con
 This release brings back GAFF force feild support for all versions of OpenMM previously supported.
 Additionally, we now use the output of parmchk2 for all GAFF parameters.
 Previously we used gaff.dat + parmchk2 output to generate forcefield parameters.
-Functionally this doesn't change the end user experience but means we do not need to create new forcefield XML files for newer GAFF versions and now support whatever GAFF versions that parmchk2 supports for the installed AmberTools version. 
+Functionally this doesn't change the end user experience but means we do not need to create new forcefield XML files for newer GAFF versions and now support whatever GAFF versions that parmchk2 supports for the installed AmberTools version.
+The XML files in `openmmforcefields/ffxml/amber/gaff/ffxml` may be removed in a future release.
 
 ## 0.14.0 Bring back GAFFTemplateGenerator
 
