@@ -21,6 +21,7 @@ def pytest_addoption(parser):
 
 def pytest_configure(config):
     config.addinivalue_line("markers", "espaloma: mark test as slow to run")
+    config.addinivalue_line("markers", "gaff: mark test as using gaff")
 
 
 def pytest_collection_modifyitems(config, items):

@@ -537,6 +537,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
         self._gaff_parameters_loaded = dict()
+        # Track which atom types we have told OpenMM about
+        self._gaff_atom_types_observed = set()
 
     @property
     def gaff_version(self):
@@ -556,22 +558,30 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     @property
     def gaff_dat_filename(self):
         """File path to the GAFF .dat AMBER force field file"""
-        from pkg_resources import resource_filename
+        import importlib_resources
 
-        filename = resource_filename(
-            "openmmforcefields",
-            os.path.join("ffxml", "amber", "gaff", "dat", f"{self._forcefield}.dat"),
+        filename = str(
+            importlib_resources.files("openmmforcefields")
+            / "ffxml"
+            / "amber"
+            / "gaff"
+            / "dat"
+            / f"{self._forcefield}.dat"
         )
         return filename
 
     @property
     def gaff_xml_filename(self):
         """File path to the GAFF .ffxml OpenMM force field file"""
-        from pkg_resources import resource_filename
+        import importlib_resources
 
-        filename = resource_filename(
-            "openmmforcefields",
-            os.path.join("ffxml", "amber", "gaff", "ffxml", f"{self._forcefield}.xml"),
+        filename = str(
+            importlib_resources.files("openmmforcefields")
+            / "ffxml"
+            / "amber"
+            / "gaff"
+            / "ffxml"
+            / f"{self._forcefield}.xml"
         )
         return filename
 
@@ -593,12 +603,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
 
         """
-        # Load the GAFF parameters if we haven't done so already for this force field
-        if forcefield not in self._gaff_parameters_loaded:
-            # Instruct the ForceField to load the GAFF parameters
-            forcefield.loadFile(self.gaff_xml_filename)
-            # Note that we've loaded the GAFF parameters
-            self._gaff_parameters_loaded[forcefield] = True
 
         return super().generator(forcefield, residue)
 
@@ -711,7 +715,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         _logger.debug(f"{molecule.partial_charges}")
 
         # Generate additional parameters if needed
-        # TODO: Do we have to make sure that we don't duplicate existing parameters already loaded in the forcefield?
         _logger.debug("Creating ffxml contents for additional parameters...")
         from inspect import (  # use introspection to support multiple parmed versions
             signature,
@@ -730,6 +733,22 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         kwargs = {}
         if "write_unused" in signature(params.write).parameters:
             kwargs["write_unused"] = True
+
+        # We need to make sure we don't duplicate atom types we have already told
+        # OpenMM about. To do this we will keep track of atom types we have already
+        # seen and ensure we only record new atom types in the xml.
+
+        # iterate over a copy of the atom types
+        for atom_type in params.atom_types.copy().keys():
+            if atom_type not in self._gaff_atom_types_observed:
+                self._gaff_atom_types_observed.add(atom_type)
+                _logger.debug(f"added {atom_type} to set of seen types")
+            # if we have seen the atom type, delete it from the OG params,
+            # not the copy!
+            else:
+                del params.atom_types[atom_type]
+                _logger.debug(f"{atom_type} already recorded")
+
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
 
@@ -878,7 +897,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
             # Run parmchk.
             shutil.copy(self.gaff_dat_filename, "gaff.dat")
-            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version}"
+            cmd = f"parmchk2 -i out.mol2 -f mol2 -p gaff.dat -o out.frcmod -s {self._gaff_major_version} -a Y"
+
             _logger.debug(cmd)
             output = subprocess.getoutput(cmd)
             if not os.path.exists("out.frcmod"):
