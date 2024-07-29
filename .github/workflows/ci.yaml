@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, OpenMM ${{ matrix.openmm-version }}
     runs-on: ${{ matrix.os }}
     env:
       OE_LICENSE: ${{ github.workspace }}/oe_license.txt
@@ -31,6 +31,7 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
         amber-conversion: [false]
         charmm-conversion: [false]
+        openmm-version: ["8.1.1", "8.1.2"]
 
     steps:
     - uses: actions/checkout@v4
@@ -41,6 +42,7 @@ jobs:
         environment-file: devtools/conda-envs/test_env.yaml
         create-args: >-
           python=${{ matrix.python-version }}
+          openmm=${{ matrix.openmm-version }}
 
     - name: Install Package
       run: |
