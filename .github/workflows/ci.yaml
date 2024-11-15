@@ -96,10 +96,10 @@ jobs:
         pytest --doctest-modules openmmforcefields --ignore=openmmforcefields/tests
 
     - name: Upload coverage report to CodeCov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       if: ${{ github.repository == 'openmm/openmmforcefields'
               && github.event != 'schedule' }}
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
+        files: ./coverage.xml
         fail_ci_if_error: false  # I don't want this to cause CI failures when a developer pushes to a fork
