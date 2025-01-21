@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-02-04</DateGenerated>
-    <Source Source="toppar_c36_jul20/non_charmm/toppar_water_ions_tip5p.str" md5hash="c9f6f24bebcf5be97ba1856be0bc0008" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul20.tgz">toppar_c36_jul20/non_charmm/toppar_water_ions_tip5p.str</Source>
+    <DateGenerated>2025-01-21</DateGenerated>
+    <Source Source="toppar/non_charmm/toppar_water_ions_tip5p.str" md5hash="9c77ba3236c2f10e5474bcbda612a486" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip5p.str</Source>
     <Reference Reference="M.W. Mahoney and W.L. Jorgensen. A five-site model for liquid water and the reproduction of the density anomaly by rigid, nonpolarizable potential functions. J. Chem Phys. 112:8910-8922, 2000." forcefield="tip5p">M.W. Mahoney and W.L. Jorgensen. A five-site model for liquid water and the reproduction of the density anomaly by rigid, nonpolarizable potential functions. J. Chem Phys. 112:8910-8922, 2000.</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
     <Reference Reference="['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']" forcefield="ions" type="zinc">['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']</Reference>

@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-02-04</DateGenerated>
-    <Source Source="toppar_c36_jul20/toppar_water_ions.str" md5hash="789b30edc593da50bfcf7c7765cdc26b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul20.tgz">toppar_c36_jul20/toppar_water_ions.str</Source>
+    <DateGenerated>2025-01-21</DateGenerated>
+    <Source Source="toppar/toppar_water_ions.str" md5hash="1eba52cd9a244fa3df9a274a806d9128" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/toppar_water_ions.str</Source>
     <Reference Reference="W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; &quot;Comparison of simple potential functions for simulating liquid water&quot;, J. Chem. Phys. 79 926-935 (1983)." forcefield="tip3p">W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; "Comparison of simple potential functions for simulating liquid water", J. Chem. Phys. 79 926-935 (1983).</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
     <Reference Reference="['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']" forcefield="ions" type="zinc">['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']</Reference>
@@ -139,8 +139,6 @@
     <Atom class="ZN" sigma="0.194215920554594" epsilon="1.046"/>
     <Atom class="CAD" sigma="0.2417899121032881" epsilon="0.50208"/>
     <Atom class="CLA" sigma="0.4044680180357141" epsilon="0.6276"/>
-    <NBFixPair class1="CLA" class2="SOD" sigma="0.3323943117381606" epsilon="0.3510376"/>
-    <NBFixPair class1="CLA" class2="POT" sigma="0.3635757668730725" epsilon="0.4778128"/>
     <NBFixPair class1="OC" class2="SOD" sigma="0.2877602859593296" epsilon="0.31388368000000005"/>
     <NBFixPair class1="OS" class2="SOD" sigma="0.2788512987779262" epsilon="0.31388368000000005"/>
     <NBFixPair class1="LIT" class2="ON3" sigma="0.28308306768909286" epsilon="0.0698728"/>
@@ -152,6 +150,8 @@
     <NBFixPair class1="OG2D2" class2="SOD" sigma="0.2877602859593296" epsilon="0.31388368000000005"/>
     <NBFixPair class1="OG2P1" class2="SOD" sigma="0.28152399493234725" epsilon="0.31388368000000005"/>
     <NBFixPair class1="CLA" class2="LIT" sigma="0.3285189023142501" epsilon="0.07824080000000001"/>
+    <NBFixPair class1="CLA" class2="SOD" sigma="0.3323943117381606" epsilon="0.3510376"/>
+    <NBFixPair class1="CLA" class2="POT" sigma="0.3635757668730725" epsilon="0.4778128"/>
     <NBFixPair class1="OC" class2="POT" sigma="0.3139527082726556" epsilon="0.4276048"/>
     <NBFixPair class1="OCL" class2="POT" sigma="0.3139527082726556" epsilon="0.4276048"/>
     <NBFixPair class1="OC2D2" class2="POT" sigma="0.3139527082726556" epsilon="0.4276048"/>
