@@ -1,10 +1,10 @@
 # CHARMM forcefield conversion tools for OpenMM
 
-This directory contains files and scripts needed to convert the CHARMM forcefield to OpenMM `ffxml` files
-Updated to July 2020 release from http://mackerell.umaryland.edu/charmm_ff.shtml#charmm
+This directory contains files and scripts needed to convert the CHARMM forcefield to OpenMM `ffxml` files.
+
+Updated to July 2024 release from <http://mackerell.umaryland.edu/charmm_ff.shtml#charmm>.
 
 ## Manifest
-* `ffxml/` - converted OpenMM `ffxml` files for CHARMM36
 * `tests/` - test systems for CHARMM36
 * `charmm36.yaml` - yaml input file needed to drive bundling by `convert_charmm.py`
 * `convert_charmm.py` - script to convert CHARMM `top` and `par` files to `ffxml`
@@ -13,20 +13,29 @@ Updated to July 2020 release from http://mackerell.umaryland.edu/charmm_ff.shtml
 
 ## Notes
 
-Notes on files that were excluded from conversion:
+Notes on files that were excluded from conversion due to inconsistencies or
+other problems:
 
-* There are two glycolipid stream files with duplicate dihedrals with different values.
-According to discussion with Alex MacKerell, the carb glycolipid file should be used so the lipid glycolipid stream file was excluded.
-* `toppar_all36_prot_aldehydes.str` and `toppar_all36_na_modifications.str` have different values for the angle of atom types O CD CT2.
-These files should not be used in the same system so both were excluded.  A new atom type is needed to correct this.
-If needed, [CGenFF](https://cgenff.paramchem.org/) can be used for aldehydes or the user can convert these files at their own risk.
+* `toppar/stream/na/toppar_all36_na_reactive_rna.str` is excluded due to a
+  naming collision between atoms in residue DMPR (dimethylpropanamide) and patch
+  DMPR (thio-substitution of dimyristoyl-D-glycero-1-phosphatidic acid).
+* `toppar/stream/carb/toppar_all36_carb_glycolipid.str` is excluded due to
+  parameter values for CG2R61-CG301 (bond from 6-membered aromatic ring carbon
+  to aliphatic carbon with no hydrogens) that are inconsistent with the CGenFF
+  values.
+* `toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str` is
+  excluded as ParmEd is unable to understand some of the entries in the file.
+
+If you need parameters from these files, you may download the CHARMM TOPPAR
+files, manually edit the offending entries, and regenerate the OpenMM XML files
+at your own risk.
 
 ## Converting
 
 Retrieve and unpack the CHARMM files
 ```
-wget http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/toppar_c36_jul20.tgz
-tar zxf toppar_c36_jul20.tgz
+wget -O toppar.tgz http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/toppar_c36_jul24.tgz
+tar -xzf toppar.tgz
 ```
 Convert the solvent force fields
 ```
@@ -36,6 +45,21 @@ Convert non-solvent force fields
 ```
 python convert_charmm.py --verbose --in files/charmm36.yaml
 ```
+Convert Drude force fields
+```
+(cd toppar/drude; tar -xzf drude_toppar_2023.tgz)
+python convert_charmm.py --verbose --in files/drude2023.yaml
+```
+
+It is strongly advised to review the input conversion specification files (the
+.yaml files) and all warning messages produced during conversion when updating
+files to support a new version of the CHARMM force field parameters.
+Idiosyncracies of each version of the force field parameters or a lack of
+support from ParmEd may necessitate excluding certain parameter files.  If
+warning messages indicating the presence of inconsistent parameter values are
+generated, the TOPPAR files should be reviewed to locate the inconsistency.  You
+may wish to exclude one or another set of parameters at this point to ensure
+that the resulting force field is correct.
 
 CHARMM docker image
 ===================

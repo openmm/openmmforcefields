@@ -1,10 +1,12 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-01-21</DateGenerated>
+    <DateGenerated>2025-01-22</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str" md5hash="2a6cb5826fd2c30b3430fa8b04f34ec8" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str</Source>
+    <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="D.J. Price and C.L. Brooks III. A modified TIP3P water potential for simulation with Ewald summation. J. Chem. Phys. 121:10096-10103, 2004." forcefield="tip3p-pme-f">D.J. Price and C.L. Brooks III. A modified TIP3P water potential for simulation with Ewald summation. J. Chem. Phys. 121:10096-10103, 2004.</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
-    <Reference Reference="['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']" forcefield="ions" type="zinc">['Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)']</Reference>
+    <Reference Reference="Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)" forcefield="ions">Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)</Reference>
+    <Reference Reference="Won, Y., &quot;Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary Potential,&quot; Journal of Physical Chemistry A., 116: 11763-11767, 2012." forcefield="ions">Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.</Reference>
   </Info>
   <AtomTypes>
     <Type name="TP3F-OH2" class="OT" mass="15.9994" element="O"/>
@@ -23,6 +25,61 @@
     <Type name="ZN2-ZN" class="ZN" mass="65.37" element="Zn"/>
     <Type name="CD2-CD" class="CAD" mass="112.411" element="Cd"/>
     <Type name="CLA-CLA" class="CLA" mass="35.45" element="Cl"/>
+    <Type name="CU1P-CU1P" class="CU1P" mass="63.546" element="Cu"/>
+    <Type name="AG1P-AG1P" class="AG1P" mass="107.87" element="Ag"/>
+    <Type name="AU1P-AU1P" class="AU1P" mass="196.97" element="Au"/>
+    <Type name="TI1P-TI1P" class="TI1P" mass="47.867" element="Ti"/>
+    <Type name="BE2P-BE2P" class="BE2P" mass="9.0122" element="Be"/>
+    <Type name="SR2P-SR2P" class="SR2P" mass="87.62" element="Sr"/>
+    <Type name="RA2P-RA2P" class="RA2P" mass="226.03" element="Ra"/>
+    <Type name="V2P-V2P" class="V2P" mass="50.942" element="V"/>
+    <Type name="CR2P-CR2P" class="CR2P" mass="51.996" element="Cr"/>
+    <Type name="MN2P-MN2P" class="MN2P" mass="54.938" element="Mn"/>
+    <Type name="FE2P-FE2P" class="FE2P" mass="55.854" element="Fe"/>
+    <Type name="CO2P-CO2P" class="CO2P" mass="58.933" element="Co"/>
+    <Type name="NI2P-NI2P" class="NI2P" mass="58.693" element="Ni"/>
+    <Type name="CU2P-CU2P" class="CU2P" mass="63.546" element="Cu"/>
+    <Type name="PD2P-PD2P" class="PD2P" mass="106.42" element="Pd"/>
+    <Type name="AG2P-AG2P" class="AG2P" mass="107.87" element="Ag"/>
+    <Type name="SN2P-SN2P" class="SN2P" mass="118.71" element="Sn"/>
+    <Type name="PT2P-PT2P" class="PT2P" mass="195.08" element="Pt"/>
+    <Type name="HG2P-HG2P" class="HG2P" mass="200.59" element="Hg"/>
+    <Type name="PB2P-PB2P" class="PB2P" mass="207.2" element="Pb"/>
+    <Type name="SM2P-SM2P" class="SM2P" mass="150.36" element="Sm"/>
+    <Type name="EU2P-EU2P" class="EU2P" mass="151.96" element="Eu"/>
+    <Type name="YB2P-YB2P" class="YB2P" mass="173.05" element="Yb"/>
+    <Type name="AL3P-AL3P" class="AL3P" mass="26.982" element="Al"/>
+    <Type name="SC3P-SC3P" class="SC3P" mass="44.956" element="Sc"/>
+    <Type name="Y3P-Y3P" class="Y3P" mass="88.906" element="Y"/>
+    <Type name="LA3P-LA3P" class="LA3P" mass="138.91" element="La"/>
+    <Type name="CE3P-CE3P" class="CE3P" mass="140.12" element="Ce"/>
+    <Type name="PR3P-PR3P" class="PR3P" mass="140.91" element="Pr"/>
+    <Type name="ND3P-ND3P" class="ND3P" mass="144.24" element="Nd"/>
+    <Type name="PM3P-PM3P" class="PM3P" mass="144.91" element="Pm"/>
+    <Type name="SM3P-SM3P" class="SM3P" mass="150.36" element="Sm"/>
+    <Type name="EU3P-EU3P" class="EU3P" mass="151.96" element="Eu"/>
+    <Type name="GD3P-GD3P" class="GD3P" mass="157.25" element="Gd"/>
+    <Type name="TB3P-TB3P" class="TB3P" mass="158.93" element="Tb"/>
+    <Type name="DY3P-DY3P" class="DY3P" mass="162.5" element="Dy"/>
+    <Type name="HO3P-HO3P" class="HO3P" mass="164.93" element="Ho"/>
+    <Type name="ER3P-ER3P" class="ER3P" mass="167.28" element="Er"/>
+    <Type name="TM3P-TM3P" class="TM3P" mass="168.93" element="Tm"/>
+    <Type name="YB3P-YB3P" class="YB3P" mass="173.05" element="Yb"/>
+    <Type name="LU3P-LU3P" class="LU3P" mass="174.97" element="Lu"/>
+    <Type name="U3P-U3P" class="U3P" mass="238.03" element="U"/>
+    <Type name="PU3P-PU3P" class="PU3P" mass="244.06" element="Pu"/>
+    <Type name="TI3P-TI3P" class="TI3P" mass="47.867" element="Ti"/>
+    <Type name="V3P-V3P" class="V3P" mass="50.942" element="V"/>
+    <Type name="CR3P-CR3P" class="CR3P" mass="51.996" element="Cr"/>
+    <Type name="MN3P-MN3P" class="MN3P" mass="54.938" element="Mn"/>
+    <Type name="FE3P-FE3P" class="FE3P" mass="55.854" element="Fe"/>
+    <Type name="CO3P-CO3P" class="CO3P" mass="58.933" element="Co"/>
+    <Type name="GA3P-GA3P" class="GA3P" mass="69.723" element="Ga"/>
+    <Type name="RH3P-RH3P" class="RH3P" mass="102.91" element="Rh"/>
+    <Type name="IN3P-IN3P" class="IN3P" mass="114.82" element="In"/>
+    <Type name="AU3P-AU3P" class="AU3P" mass="196.97" element="Au"/>
+    <Type name="TL3P-TL3P" class="TL3P" mass="204.38" element="Tl"/>
+    <Type name="BI3P-BI3P" class="BI3P" mass="208.98" element="Bi"/>
   </AtomTypes>
   <Residues>
     <Residue name="TP3F">
@@ -70,6 +127,171 @@
     <Residue name="CLA">
       <Atom name="CLA" type="CLA-CLA" charge="-1.0"/>
     </Residue>
+    <Residue name="CU1P">
+      <Atom name="CU1P" type="CU1P-CU1P" charge="1.0"/>
+    </Residue>
+    <Residue name="AG1P">
+      <Atom name="AG1P" type="AG1P-AG1P" charge="1.0"/>
+    </Residue>
+    <Residue name="AU1P">
+      <Atom name="AU1P" type="AU1P-AU1P" charge="1.0"/>
+    </Residue>
+    <Residue name="TI1P">
+      <Atom name="TI1P" type="TI1P-TI1P" charge="1.0"/>
+    </Residue>
+    <Residue name="BE2P">
+      <Atom name="BE2P" type="BE2P-BE2P" charge="2.0"/>
+    </Residue>
+    <Residue name="SR2P">
+      <Atom name="SR2P" type="SR2P-SR2P" charge="2.0"/>
+    </Residue>
+    <Residue name="RA2P">
+      <Atom name="RA2P" type="RA2P-RA2P" charge="2.0"/>
+    </Residue>
+    <Residue name="V2P">
+      <Atom name="V2P" type="V2P-V2P" charge="2.0"/>
+    </Residue>
+    <Residue name="CR2P">
+      <Atom name="CR2P" type="CR2P-CR2P" charge="2.0"/>
+    </Residue>
+    <Residue name="MN2P">
+      <Atom name="MN2P" type="MN2P-MN2P" charge="2.0"/>
+    </Residue>
+    <Residue name="FE2P">
+      <Atom name="FE2P" type="FE2P-FE2P" charge="2.0"/>
+    </Residue>
+    <Residue name="CO2P">
+      <Atom name="CO2P" type="CO2P-CO2P" charge="2.0"/>
+    </Residue>
+    <Residue name="NI2P">
+      <Atom name="NI2P" type="NI2P-NI2P" charge="2.0"/>
+    </Residue>
+    <Residue name="CU2P">
+      <Atom name="CU2P" type="CU2P-CU2P" charge="2.0"/>
+    </Residue>
+    <Residue name="PD2P">
+      <Atom name="PD2P" type="PD2P-PD2P" charge="2.0"/>
+    </Residue>
+    <Residue name="AG2P">
+      <Atom name="AG2P" type="AG2P-AG2P" charge="2.0"/>
+    </Residue>
+    <Residue name="SN2P">
+      <Atom name="SN2P" type="SN2P-SN2P" charge="2.0"/>
+    </Residue>
+    <Residue name="PT2P">
+      <Atom name="PT2P" type="PT2P-PT2P" charge="2.0"/>
+    </Residue>
+    <Residue name="HG2P">
+      <Atom name="HG2P" type="HG2P-HG2P" charge="2.0"/>
+    </Residue>
+    <Residue name="PB2P">
+      <Atom name="PB2P" type="PB2P-PB2P" charge="2.0"/>
+    </Residue>
+    <Residue name="SM2P">
+      <Atom name="SM2P" type="SM2P-SM2P" charge="2.0"/>
+    </Residue>
+    <Residue name="EU2P">
+      <Atom name="EU2P" type="EU2P-EU2P" charge="2.0"/>
+    </Residue>
+    <Residue name="YB2P">
+      <Atom name="YB2P" type="YB2P-YB2P" charge="2.0"/>
+    </Residue>
+    <Residue name="AL3P">
+      <Atom name="AL3P" type="AL3P-AL3P" charge="3.0"/>
+    </Residue>
+    <Residue name="SC3P">
+      <Atom name="SC3P" type="SC3P-SC3P" charge="3.0"/>
+    </Residue>
+    <Residue name="Y3P">
+      <Atom name="Y3P" type="Y3P-Y3P" charge="3.0"/>
+    </Residue>
+    <Residue name="LA3P">
+      <Atom name="LA3P" type="LA3P-LA3P" charge="3.0"/>
+    </Residue>
+    <Residue name="CE3P">
+      <Atom name="CE3P" type="CE3P-CE3P" charge="3.0"/>
+    </Residue>
+    <Residue name="PR3P">
+      <Atom name="PR3P" type="PR3P-PR3P" charge="3.0"/>
+    </Residue>
+    <Residue name="ND3P">
+      <Atom name="ND3P" type="ND3P-ND3P" charge="3.0"/>
+    </Residue>
+    <Residue name="PM3P">
+      <Atom name="PM3P" type="PM3P-PM3P" charge="3.0"/>
+    </Residue>
+    <Residue name="SM3P">
+      <Atom name="SM3P" type="SM3P-SM3P" charge="3.0"/>
+    </Residue>
+    <Residue name="EU3P">
+      <Atom name="EU3P" type="EU3P-EU3P" charge="3.0"/>
+    </Residue>
+    <Residue name="GD3P">
+      <Atom name="GD3P" type="GD3P-GD3P" charge="3.0"/>
+    </Residue>
+    <Residue name="TB3P">
+      <Atom name="TB3P" type="TB3P-TB3P" charge="3.0"/>
+    </Residue>
+    <Residue name="DY3P">
+      <Atom name="DY3P" type="DY3P-DY3P" charge="3.0"/>
+    </Residue>
+    <Residue name="HO3P">
+      <Atom name="HO3P" type="HO3P-HO3P" charge="3.0"/>
+    </Residue>
+    <Residue name="ER3P">
+      <Atom name="ER3P" type="ER3P-ER3P" charge="3.0"/>
+    </Residue>
+    <Residue name="TM3P">
+      <Atom name="TM3P" type="TM3P-TM3P" charge="3.0"/>
+    </Residue>
+    <Residue name="YB3P">
+      <Atom name="YB3P" type="YB3P-YB3P" charge="3.0"/>
+    </Residue>
+    <Residue name="LU3P">
+      <Atom name="LU3P" type="LU3P-LU3P" charge="3.0"/>
+    </Residue>
+    <Residue name="U3P">
+      <Atom name="U3P" type="U3P-U3P" charge="3.0"/>
+    </Residue>
+    <Residue name="PU3P">
+      <Atom name="PU3P" type="PU3P-PU3P" charge="3.0"/>
+    </Residue>
+    <Residue name="TI3P">
+      <Atom name="TI3P" type="TI3P-TI3P" charge="3.0"/>
+    </Residue>
+    <Residue name="V3P">
+      <Atom name="V3P" type="V3P-V3P" charge="3.0"/>
+    </Residue>
+    <Residue name="CR3P">
+      <Atom name="CR3P" type="CR3P-CR3P" charge="3.0"/>
+    </Residue>
+    <Residue name="MN3P">
+      <Atom name="MN3P" type="MN3P-MN3P" charge="3.0"/>
+    </Residue>
+    <Residue name="FE3P">
+      <Atom name="FE3P" type="FE3P-FE3P" charge="3.0"/>
+    </Residue>
+    <Residue name="CO3P">
+      <Atom name="CO3P" type="CO3P-CO3P" charge="3.0"/>
+    </Residue>
+    <Residue name="GA3P">
+      <Atom name="GA3P" type="GA3P-GA3P" charge="3.0"/>
+    </Residue>
+    <Residue name="RH3P">
+      <Atom name="RH3P" type="RH3P-RH3P" charge="3.0"/>
+    </Residue>
+    <Residue name="IN3P">
+      <Atom name="IN3P" type="IN3P-IN3P" charge="3.0"/>
+    </Residue>
+    <Residue name="AU3P">
+      <Atom name="AU3P" type="AU3P-AU3P" charge="3.0"/>
+    </Residue>
+    <Residue name="TL3P">
+      <Atom name="TL3P" type="TL3P-TL3P" charge="3.0"/>
+    </Residue>
+    <Residue name="BI3P">
+      <Atom name="BI3P" type="BI3P-BI3P" charge="3.0"/>
+    </Residue>
   </Residues>
   <HarmonicBondForce>
     <Bond class1="HT" class2="HT" length="0.15139000000000002" k="0.0"/>
@@ -98,6 +320,61 @@
     <Atom class="ZN" sigma="1.0" epsilon="0.0"/>
     <Atom class="CAD" sigma="1.0" epsilon="0.0"/>
     <Atom class="CLA" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CU1P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="AG1P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="AU1P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="TI1P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="BE2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="SR2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="RA2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="V2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CR2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="MN2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="FE2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CO2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="NI2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CU2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PD2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="AG2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="SN2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PT2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="HG2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PB2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="SM2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="EU2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="YB2P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="AL3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="SC3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="Y3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="LA3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CE3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PR3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="ND3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PM3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="SM3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="EU3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="GD3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="TB3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="DY3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="HO3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="ER3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="TM3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="YB3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="LU3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="U3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="PU3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="TI3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="V3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CR3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="MN3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="FE3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="CO3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="GA3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="RH3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="IN3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="AU3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="TL3P" sigma="1.0" epsilon="0.0"/>
+    <Atom class="BI3P" sigma="1.0" epsilon="0.0"/>
   </NonbondedForce>
   <LennardJonesForce lj14scale="1.0">
     <Atom class="HT" sigma="1.0" epsilon="0.0"/>
@@ -115,6 +392,61 @@
     <Atom class="ZN" sigma="0.194215920554594" epsilon="1.046"/>
     <Atom class="CAD" sigma="0.2417899121032881" epsilon="0.50208"/>
     <Atom class="CLA" sigma="0.4044680180357141" epsilon="0.6276"/>
+    <Atom class="CU1P" sigma="0.1535909390073945" epsilon="0.7748768"/>
+    <Atom class="AG1P" sigma="0.2163636626875628" epsilon="1.2008079999999999"/>
+    <Atom class="AU1P" sigma="0.11250269012676205" epsilon="1.4907592"/>
+    <Atom class="TI1P" sigma="0.34401163102271065" epsilon="1.7016328"/>
+    <Atom class="BE2P" sigma="0.007127189745122714" epsilon="0.4250944"/>
+    <Atom class="SR2P" sigma="0.3306837861993312" epsilon="0.9572992"/>
+    <Atom class="RA2P" sigma="0.37237784620829906" epsilon="1.2631496"/>
+    <Atom class="V2P" sigma="0.1966569830422985" epsilon="0.6732056"/>
+    <Atom class="CR2P" sigma="0.18872798445084948" epsilon="0.6974728"/>
+    <Atom class="MN2P" sigma="0.2144749574051053" epsilon="0.7050040000000001"/>
+    <Atom class="FE2P" sigma="0.1924519410926761" epsilon="0.667348"/>
+    <Atom class="CO2P" sigma="0.16527953018939576" epsilon="0.6439176000000001"/>
+    <Atom class="NI2P" sigma="0.13903365395298137" epsilon="0.5999856"/>
+    <Atom class="CU2P" sigma="0.129198132104712" epsilon="0.629692"/>
+    <Atom class="PD2P" sigma="0.16519044031758173" epsilon="0.7288528"/>
+    <Atom class="AG2P" sigma="0.1869105510658432" epsilon="0.7752952"/>
+    <Atom class="SN2P" sigma="0.29542201493533654" epsilon="0.7861736"/>
+    <Atom class="PT2P" sigma="0.1420270736459329" epsilon="0.6824104"/>
+    <Atom class="HG2P" sigma="0.2105728210196506" epsilon="0.8593936"/>
+    <Atom class="PB2P" sigma="0.3132399892981433" epsilon="1.0016496000000001"/>
+    <Atom class="SM2P" sigma="0.330790694045508" epsilon="1.0242432"/>
+    <Atom class="EU2P" sigma="0.3279220001730961" epsilon="0.9907712000000001"/>
+    <Atom class="YB2P" sigma="0.28669120749756116" epsilon="0.8593936"/>
+    <Atom class="AL3P" sigma="0.039377723341803" epsilon="0.44601440000000003"/>
+    <Atom class="SC3P" sigma="0.19544536078562763" epsilon="0.5899439999999999"/>
+    <Atom class="Y3P" sigma="0.25183924964391113" epsilon="0.6928704"/>
+    <Atom class="LA3P" sigma="0.3158592315294759" epsilon="0.7932864"/>
+    <Atom class="CE3P" sigma="0.30495463121943817" epsilon="0.7702744000000001"/>
+    <Atom class="PR3P" sigma="0.2956180126533274" epsilon="0.7627432"/>
+    <Atom class="ND3P" sigma="0.2886333667031071" epsilon="0.7497728"/>
+    <Atom class="PM3P" sigma="0.29527947114043407" epsilon="0.74266"/>
+    <Atom class="SM3P" sigma="0.2791542043420939" epsilon="0.7351288"/>
+    <Atom class="EU3P" sigma="0.2713677495455473" epsilon="0.728016"/>
+    <Atom class="GD3P" sigma="0.2681605141602421" epsilon="0.7209032000000001"/>
+    <Atom class="TB3P" sigma="0.2628151218514001" epsilon="0.7083512000000001"/>
+    <Atom class="DY3P" sigma="0.2573628216963812" epsilon="0.6999832"/>
+    <Atom class="HO3P" sigma="0.247794569463554" epsilon="0.6928704"/>
+    <Atom class="ER3P" sigma="0.24362516346265717" epsilon="0.6845024"/>
+    <Atom class="TM3P" sigma="0.24029320225681233" epsilon="0.6778080000000001"/>
+    <Atom class="YB3P" sigma="0.23077840394707347" epsilon="0.6711136"/>
+    <Atom class="LU3P" sigma="0.2407564695902453" epsilon="0.6644192"/>
+    <Atom class="U3P" sigma="0.3031193798600691" epsilon="0.7932864"/>
+    <Atom class="PU3P" sigma="0.29750671793578487" epsilon="0.7702744000000001"/>
+    <Atom class="TI3P" sigma="0.14769318949330543" epsilon="0.537644"/>
+    <Atom class="V3P" sigma="0.10943799853635927" epsilon="0.5171424"/>
+    <Atom class="CR3P" sigma="0.15022334185282402" epsilon="0.5045904"/>
+    <Atom class="MN3P" sigma="0.06849229345062928" epsilon="0.5238368"/>
+    <Atom class="FE3P" sigma="0.10090318881657484" epsilon="0.5238368"/>
+    <Atom class="CO3P" sigma="0.04598819183040431" epsilon="0.4983144"/>
+    <Atom class="GA3P" sigma="0.04042898382920859" epsilon="0.5045904"/>
+    <Atom class="RH3P" sigma="0.0821943157356277" epsilon="0.537644"/>
+    <Atom class="IN3P" sigma="0.15435711190499518" epsilon="0.6163031999999999"/>
+    <Atom class="AU3P" sigma="0.065106878321696" epsilon="0.5564720000000001"/>
+    <Atom class="TL3P" sigma="0.15489165113587938" epsilon="0.6815736"/>
+    <Atom class="BI3P" sigma="0.24378552523192246" epsilon="0.7740400000000001"/>
     <NBFixPair class1="CLA" class2="SOD" sigma="0.3323943117381606" epsilon="0.35093300000000005"/>
     <NBFixPair class1="CLA" class2="POT" sigma="0.3635757668730725" epsilon="0.477963424"/>
     <NBFixPair class1="OC" class2="SOD" sigma="0.28419669108676826" epsilon="0.31388368000000005"/>
