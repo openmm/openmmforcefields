@@ -13,8 +13,8 @@ Updated to July 2024 release from <http://mackerell.umaryland.edu/charmm_ff.shtm
 
 ## Notes
 
-Notes on files that were excluded from conversion due to inconsistencies or
-other problems:
+Notes on files or residues that were excluded from conversion due to
+inconsistencies or other problems:
 
 * `toppar/stream/na/toppar_all36_na_reactive_rna.str` is excluded due to a
   naming collision between atoms in residue DMPR (dimethylpropanamide) and patch
@@ -25,10 +25,13 @@ other problems:
   values.
 * `toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str` is
   excluded as ParmEd is unable to understand some of the entries in the file.
+* Thulium(III) ion from `toppar/stream/misc/toppar_ions_won.str` (TM3P) is
+  excluded because it collides with the identically-named 4'-methyl,3'-phosphate
+  tetrahydrofuran residue.
 
-If you need parameters from these files, you may download the CHARMM TOPPAR
-files, manually edit the offending entries, and regenerate the OpenMM XML files
-at your own risk.
+If you need parameters from these files that were excluded, you may download the
+CHARMM TOPPAR files, manually edit the offending entries, and regenerate the
+OpenMM XML files at your own risk.
 
 ## Converting
 

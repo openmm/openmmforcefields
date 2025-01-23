@@ -6,6 +6,9 @@
      - toppar/toppar_water_ions.str
      - toppar/stream/misc/toppar_ions_won.str
     exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
+     # Include regular TIP3P, not "MMFF" analog
      - TP3M
   References:
    tip3p:
@@ -30,6 +33,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_spc_e.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    spc-e:
      - >-
@@ -54,6 +60,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_spc.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    spc:
      - >-
@@ -78,6 +87,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip3p-pme-b:
      - >-
@@ -102,6 +114,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip3p-pme-f:
      - >-
@@ -126,6 +141,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip4p_2005.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p-2005:
      - >-
@@ -148,6 +166,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip4p_ew.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p-ew:
      - >-
@@ -169,6 +190,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip4p.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p:
      - >-
@@ -190,6 +214,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip5p_ew.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip5p-ew:
      - >-
@@ -212,6 +239,9 @@
     stream:
      - toppar/non_charmm/toppar_water_ions_tip5p.str
      - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip5p:
      - >-

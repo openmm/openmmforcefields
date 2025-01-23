@@ -65,7 +65,6 @@
     <Type name="DY3P-DY3P" class="DY3P" mass="162.5" element="Dy"/>
     <Type name="HO3P-HO3P" class="HO3P" mass="164.93" element="Ho"/>
     <Type name="ER3P-ER3P" class="ER3P" mass="167.28" element="Er"/>
-    <Type name="TM3P-TM3P" class="TM3P" mass="168.93" element="Tm"/>
     <Type name="YB3P-YB3P" class="YB3P" mass="173.05" element="Yb"/>
     <Type name="LU3P-LU3P" class="LU3P" mass="174.97" element="Lu"/>
     <Type name="U3P-U3P" class="U3P" mass="238.03" element="U"/>
@@ -246,9 +245,6 @@
     </Residue>
     <Residue name="ER3P">
       <Atom name="ER3P" type="ER3P-ER3P" charge="3.0"/>
-    </Residue>
-    <Residue name="TM3P">
-      <Atom name="TM3P" type="TM3P-TM3P" charge="3.0"/>
     </Residue>
     <Residue name="YB3P">
       <Atom name="YB3P" type="YB3P-YB3P" charge="3.0"/>
