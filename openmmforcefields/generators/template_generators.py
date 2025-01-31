@@ -14,6 +14,7 @@ Residue template generator for the AMBER GAFF1/2 small molecule force fields.
 import contextlib
 import logging
 import os
+import shutil
 import warnings
 
 _logger = logging.getLogger("openmmforcefields.generators.template_generators")
@@ -434,6 +435,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         "gaff-2.11",
     ]
 
+    _ANTECHAMBER_AVAILABLE = None
+
     def __init__(self, molecules=None, forcefield=None, cache=None, **kwargs):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
@@ -504,6 +507,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
 
+        if not self._check_antechamber_available():
+            raise ValueError("GAFFTemplateGenerator requires AmberTools, available at <https://ambermd.org/AmberTools.php>")
+
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
@@ -539,6 +545,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._gaff_parameters_loaded = dict()
         # Track which atom types we have told OpenMM about
         self._gaff_atom_types_observed = set()
+
+    @classmethod
+    def _check_antechamber_available(cls):
+        if cls._ANTECHAMBER_AVAILABLE is None:
+            cls._ANTECHAMBER_AVAILABLE = shutil.which("antechamber") is not None
+        return cls._ANTECHAMBER_AVAILABLE
 
     @property
     def gaff_version(self):
