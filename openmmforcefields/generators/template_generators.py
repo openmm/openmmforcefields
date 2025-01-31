@@ -508,7 +508,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
 
         if not self._check_antechamber_available():
-            raise ValueError("GAFFTemplateGenerator requires AmberTools, available at <https://ambermd.org/AmberTools.php>")
+            raise ValueError(
+                "GAFFTemplateGenerator requires AmberTools, available at <https://ambermd.org/AmberTools.php>"
+            )
 
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
