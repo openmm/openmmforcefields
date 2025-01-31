@@ -78,6 +78,7 @@ The `openmmforcefields` package includes a [residue template generator](http://d
 ### Cheminformatics toolkits
 
 The [`openff-toolkit`](http://openforcefield.org) is used to provide an interface with cheminformatics toolkits to interact with [`antechamber`](http://ambermd.org/antechamber/) from the [AmberTools](http://ambermd.org/AmberTools.php) package to generate parameters for small molecules.
+Note that AmberTools is not installed automatically as a dependency when installing `openmmforcefields` through `conda` as described above.  To use this template generator, first [download and install](http://ambermd.org/GetAmber.php#ambertools) AmberTools manually, either through `conda` if supported on your platform, or by compiling from source.
 By default, the [`openff-toolkit`](http://github.com/openforcefield/openff-toolkit) will make use of the free and open source [RDKit cheminformatics toolkit](https://www.rdkit.org/) that is installed automatically, but will optionally use the [OpenEye toolkit](https://docs.eyesopen.com/toolkits/python/index.html) if it is installed and licensed.
 The OpenEye toolkit is available [for free for academics for non-IP-generating academic research](https://www.eyesopen.com/academic-licensing).
 
