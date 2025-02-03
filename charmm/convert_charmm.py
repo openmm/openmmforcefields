@@ -173,9 +173,11 @@ def convert_yaml(yaml_filename, ffxml_dir):
         for patch in params_main_omm.patches.values():
             patch.override_level = override_level
 
+        # Use charmm_imp=False: see prepare_write() below.
         if verbose:
             print("Writing main force field file...")
-        params_main_omm.write(ffxml_filename, provenance=provenance, charmm_imp=True, separate_ljforce=True)
+        prepare_write(params_main_omm)
+        params_main_omm.write(ffxml_filename, provenance=provenance, charmm_imp=False, separate_ljforce=True)
         apply_fixes(ffxml_filename, source_files.get("fixes", []))
 
         if verbose:
@@ -209,9 +211,11 @@ def convert_yaml(yaml_filename, ffxml_dir):
             for patch in params_split_omm.patches.values():
                 patch.override_level = override_level + 1
 
+            # Use charmm_imp=False: see prepare_write() below.
             if verbose:
                 print("Writing split force field file...")
-            params_split_omm.write(split_ffxml_filename, provenance=provenance, charmm_imp=True, separate_ljforce=True)
+            prepare_write(params_split_omm)
+            params_split_omm.write(split_ffxml_filename, provenance=provenance, charmm_imp=False, separate_ljforce=True)
             apply_fixes(split_ffxml_filename, split_fixes)
 
             if verbose:
@@ -254,17 +258,40 @@ class Logger:
     def log(self, energies):
         self.writer.writerow(energies)
 
+def prepare_write(params_omm):
+    # Prepares a ParmEd OpenMM parameter set for writing.  Impropers are not
+    # handled correctly by ParmEd; specifically, when wildcards are resolved by
+    # _find_explicit_impropers(), the improper objects are not copied, so
+    # _compress_impropers() ends up accumulating the same parameters multiple
+    # times leading to an exponential increase in the dihedral force constants.
+    # This is worked around by calling these routines manually beforehand, so it
+    # is not necessary to use charmm_imp=True when actually writing.
+    
+    params_omm._find_explicit_impropers()
+
+    # The values (ImproperType, DihedralType) define __copy__() appropriately.
+    # It should not be strictly necessary to handle improper_periodic_types
+    # since only improper_types is touched by _compress_impropers(), but it is
+    # done here anyway for completeness.
+    for key in params_omm.improper_types:
+        params_omm.improper_types[key] = copy.copy(params_omm.improper_types[key])
+    for key in params_omm.improper_periodic_types:
+        params_omm.improper_periodic_types[key] = copy.copy(params_omm.improper_periodic_types[key])
+
+    params_omm._compress_impropers()
+
 def apply_fixes(xml_filename, fixes):
-    # Allows things to be done to the force field XML file in an automated way.
-    # Right now the only action is "append" to add a new element.  The target
-    # can use XPath notation to specify the location in the tree where the
-    # modification should take place.
+    # Allows edits to be made to the force field XML file in an automated way.
+    # The target can use XPath notation to specify the location in the tree
+    # where the modification should take place.
     tree = etree.parse(xml_filename)
     for fix in fixes:
         action = fix["action"]
         for target_element in tree.findall(fix.get("target", ".")):
             if action == "append":
                 target_element.append(build_xml_element(fix["content"]))
+            elif action == "update_attrib":
+                target_element.attrib.update(fix["content"])
             else:
                 raise ValueError(f"Unknown action {action!r}")
 
