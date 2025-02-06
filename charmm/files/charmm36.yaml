@@ -88,14 +88,6 @@
        output: charmm36_modified.xml
 
     fixes:
-      # Here the CustomTorsionForce (used to handle impropers) is updated with a
-      # correct functional form since ParmEd writes one that doesn't account for
-      # the periodicity of theta
-      - action: update_attrib
-        target: ./CustomTorsionForce
-        content:
-          energy: k*min(dtheta, 2*pi - dtheta)^2; dtheta = abs(theta - theta0); pi = 3.1415926535897931
-
       # Here we manually add in the DISU (cysteine disulfide) patch to the force
       # field since ParmEd doesn't convert it automatically
       - action: append

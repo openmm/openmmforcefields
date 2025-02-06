@@ -13,10 +13,14 @@
      - toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str
      - toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str
      - toppar/drude/drude_toppar_2023/toppar_drude_model_2023a.str
-     #- toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str
+     # - toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str
      - toppar/drude/drude_toppar_2023/toppar_drude_lipid_2023a.str
     exclude_residues:
      - SWM6
+    split:
+      - input:
+        - toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str
+        output: charmm_polar_2023_d.xml
   References:
    protein:
      - >-
