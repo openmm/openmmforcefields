@@ -86,6 +86,13 @@
        - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
        - toppar/stream/prot/toppar_all36_prot_modify_res.str
        output: charmm36_modified.xml
+     
+     # CGenFF has some small molecule entries that cause clashes with some amino
+     # acids, so isolate these as well
+     - input:
+       - toppar/top_all36_cgenff.rtf
+       - toppar/par_all36_cgenff.prm
+       output: charmm36_cgenff.xml
 
     fixes:
       # Here we manually add in the DISU (cysteine disulfide) patch to the force
