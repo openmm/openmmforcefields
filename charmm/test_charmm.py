@@ -10,16 +10,20 @@ import yaml
 
 # The CHARMM value can be found throughout the CHARMM source code.  The OpenMM
 # value is from SimTKOpenMMRealType.h.
-CHARMM_VACUUM_PERMITTIVITY = openmm.unit.AVOGADRO_CONSTANT_NA * openmm.unit.elementary_charge ** 2 / (4 * numpy.pi * 332.0716 * openmm.unit.kilocalorie_per_mole * openmm.unit.angstrom)
+CHARMM_VACUUM_PERMITTIVITY = (
+    openmm.unit.AVOGADRO_CONSTANT_NA
+    * openmm.unit.elementary_charge**2
+    / (4 * numpy.pi * 332.0716 * openmm.unit.kilocalorie_per_mole * openmm.unit.angstrom)
+)
 OPENMM_VACUUM_PERMITTIVITY = 8.8541878128e-12 * openmm.unit.farad / openmm.unit.meter
 CHARMM_ELECTROSTATIC_SCALE = CHARMM_VACUUM_PERMITTIVITY / OPENMM_VACUUM_PERMITTIVITY
 
-DEFAULT_ABSOLUTE_ENERGY_TOLERANCE = 5e-5    # kcal/mol
+DEFAULT_ABSOLUTE_ENERGY_TOLERANCE = 5e-5  # kcal/mol
 DEFAULT_RELATIVE_ENERGY_TOLERANCE = 5e-5
-DEFAULT_ABSOLUTE_FORCE_TOLERANCE = 5e-3     # kcal/mol/Å
+DEFAULT_ABSOLUTE_FORCE_TOLERANCE = 5e-3  # kcal/mol/Å
 DEFAULT_RELATIVE_FORCE_TOLERANCE = 5e-3
 
-DEFAULT_PERTURB_DISTANCE = 0.1              # Å
+DEFAULT_PERTURB_DISTANCE = 0.1  # Å
 DEFAULT_TOPPAR_DIRECTORY = "toppar"
 DEFAULT_FFXML_DIRECTORY = "ffxml"
 
@@ -34,6 +38,7 @@ ENERGY_FORCE_TAG = "OPENMMFORCEFIELDS-TEST-CHARMM-ENERGY-FORCES"
 CHARMM_ENERGY_CHECK_PRECISION = 5e-5
 
 DO_COLOR = sys.stdout.isatty()
+
 
 class ForceGroup(enum.Enum):
     """
@@ -50,6 +55,7 @@ class ForceGroup(enum.Enum):
     CMAP = 5
     NONBONDED = 6
 
+
 # For each force group, the CHARMM skip keywords, the labels in the CHARMM
 # output, and the OpenMM force types.
 FORCE_GROUP_DATA = {
@@ -58,66 +64,123 @@ FORCE_GROUP_DATA = {
     ForceGroup.PROPERS: (("dihe",), ("DIHEdrals",), (openmm.PeriodicTorsionForce,)),
     ForceGroup.IMPROPERS: (("impr",), ("IMPRopers",), (openmm.CustomTorsionForce,)),
     ForceGroup.CMAP: (("cmap",), ("CMAPs",), (openmm.CMAPTorsionForce,)),
-    ForceGroup.NONBONDED: (("vdw", "elec"), ("VDWaals", "ELEC"), (openmm.NonbondedForce, openmm.CustomNonbondedForce, openmm.CustomBondForce)),
-
+    ForceGroup.NONBONDED: (
+        ("vdw", "elec"),
+        ("VDWaals", "ELEC"),
+        (openmm.NonbondedForce, openmm.CustomNonbondedForce, openmm.CustomBondForce),
+    ),
     # NOTE: Impropers could be under a PeriodicTorsionForce but this almost
     # never occurs in the CHARMM force field.  The decomposition between propers
     # and impropers would fail in that case even if the total energy was being
     # evaluated correctly, but this shouldn't happen for most systems.
 }
 
+
 def main():
     """
     Main entry point for test script.  Parses command-line arguments and runs.
     """
 
-    parser = argparse.ArgumentParser(description="Test script for CHARMM force field conversion to OpenMM FFXML format")
+    parser = argparse.ArgumentParser(
+        description="Test script for CHARMM force field conversion to OpenMM FFXML format"
+    )
 
-    parser.add_argument("test_directory", nargs="*",
-        help="Directory in which to find a test specification (defined by a test.yaml file)")
+    parser.add_argument(
+        "test_directory",
+        nargs="*",
+        help="Directory in which to find a test specification (defined by a test.yaml file)",
+    )
 
-    parser.add_argument("--charmm", action="store_true",
-        help="Compute energies and forces with CHARMM (requires charmm executable in PATH)")
-    parser.add_argument("--openmm-charmm", action="store_true",
-        help="Compute energies and forces with OpenMM using OpenMM CharmmParameterSet")
-    parser.add_argument("--parmed-charmm", action="store_true",
-        help="Compute energies and forces with OpenMM using ParmEd CharmmParameterSet")
-    parser.add_argument("--openmm-ffxml", action="store_true",
-        help="Compute energies and forces with OpenMM using OpenMM ForceField")
+    parser.add_argument(
+        "--charmm",
+        action="store_true",
+        help="Compute energies and forces with CHARMM (requires charmm executable in PATH)",
+    )
+    parser.add_argument(
+        "--openmm-charmm",
+        action="store_true",
+        help="Compute energies and forces with OpenMM using OpenMM CharmmParameterSet",
+    )
+    parser.add_argument(
+        "--parmed-charmm",
+        action="store_true",
+        help="Compute energies and forces with OpenMM using ParmEd CharmmParameterSet",
+    )
+    parser.add_argument(
+        "--openmm-ffxml", action="store_true", help="Compute energies and forces with OpenMM using OpenMM ForceField"
+    )
 
-    parser.add_argument("--skip-term", action="append", default=[], choices=[force_group.name for force_group in ForceGroup],
-        help="Exclude the selected force group from the energies considered")
-    parser.add_argument("--absolute-energy-tolerance", type=float, default=DEFAULT_ABSOLUTE_ENERGY_TOLERANCE, metavar="kcal/mol",
-        help=f"Absolute tolerance for matching energies (default {DEFAULT_ABSOLUTE_ENERGY_TOLERANCE} kcal/mol)")
-    parser.add_argument("--relative-energy-tolerance", type=float, default=DEFAULT_RELATIVE_ENERGY_TOLERANCE, metavar="ratio",
-        help=f"Relative tolerance for matching energies (default {DEFAULT_RELATIVE_ENERGY_TOLERANCE})")
-    parser.add_argument("--absolute-force-tolerance", type=float, default=DEFAULT_ABSOLUTE_FORCE_TOLERANCE, metavar="kcal/mol/Å",
-        help=f"Absolute tolerance for matching forces (default {DEFAULT_ABSOLUTE_FORCE_TOLERANCE} kcal/mol/Å)")
-    parser.add_argument("--relative-force-tolerance", type=float, default=DEFAULT_RELATIVE_FORCE_TOLERANCE, metavar="ratio",
-        help=f"Relative tolerance for matching forces (default {DEFAULT_RELATIVE_FORCE_TOLERANCE})")
+    parser.add_argument(
+        "--skip-term",
+        action="append",
+        default=[],
+        choices=[force_group.name for force_group in ForceGroup],
+        help="Exclude the selected force group from the energies considered",
+    )
+    parser.add_argument(
+        "--absolute-energy-tolerance",
+        type=float,
+        default=DEFAULT_ABSOLUTE_ENERGY_TOLERANCE,
+        metavar="kcal/mol",
+        help=f"Absolute tolerance for matching energies (default {DEFAULT_ABSOLUTE_ENERGY_TOLERANCE} kcal/mol)",
+    )
+    parser.add_argument(
+        "--relative-energy-tolerance",
+        type=float,
+        default=DEFAULT_RELATIVE_ENERGY_TOLERANCE,
+        metavar="ratio",
+        help=f"Relative tolerance for matching energies (default {DEFAULT_RELATIVE_ENERGY_TOLERANCE})",
+    )
+    parser.add_argument(
+        "--absolute-force-tolerance",
+        type=float,
+        default=DEFAULT_ABSOLUTE_FORCE_TOLERANCE,
+        metavar="kcal/mol/Å",
+        help=f"Absolute tolerance for matching forces (default {DEFAULT_ABSOLUTE_FORCE_TOLERANCE} kcal/mol/Å)",
+    )
+    parser.add_argument(
+        "--relative-force-tolerance",
+        type=float,
+        default=DEFAULT_RELATIVE_FORCE_TOLERANCE,
+        metavar="ratio",
+        help=f"Relative tolerance for matching forces (default {DEFAULT_RELATIVE_FORCE_TOLERANCE})",
+    )
 
-    parser.add_argument("--perturb-replicates", type=int, default=0, metavar="count",
-        help="Repeat tests with perturbed positions this many times")
-    parser.add_argument("--perturb-distance", type=float, default=DEFAULT_PERTURB_DISTANCE, metavar="Å",
-        help=f"Perturb positions by up to this distance (default {DEFAULT_PERTURB_DISTANCE} Å)")
-    parser.add_argument("--perturb-seed", type=int, metavar="seed",
-        help="Random seed for repeating tests with perturbed positions")
+    parser.add_argument(
+        "--perturb-replicates",
+        type=int,
+        default=0,
+        metavar="count",
+        help="Repeat tests with perturbed positions this many times",
+    )
+    parser.add_argument(
+        "--perturb-distance",
+        type=float,
+        default=DEFAULT_PERTURB_DISTANCE,
+        metavar="Å",
+        help=f"Perturb positions by up to this distance (default {DEFAULT_PERTURB_DISTANCE} Å)",
+    )
+    parser.add_argument(
+        "--perturb-seed", type=int, metavar="seed", help="Random seed for repeating tests with perturbed positions"
+    )
 
-    parser.add_argument("--toppar-directory", default="toppar", metavar="path",
-        help="Path to CHARMM parameter files (default toppar)")
-    parser.add_argument("--ffxml-directory", default="ffxml", metavar="path",
-        help="Path to OpenMM force field files (default ffxml)")
+    parser.add_argument(
+        "--toppar-directory", default="toppar", metavar="path", help="Path to CHARMM parameter files (default toppar)"
+    )
+    parser.add_argument(
+        "--ffxml-directory", default="ffxml", metavar="path", help="Path to OpenMM force field files (default ffxml)"
+    )
 
-    parser.add_argument("--dump", action="store_true",
-        help="Dump input files for debugging")
+    parser.add_argument("--dump", action="store_true", help="Dump input files for debugging")
 
     run(parser.parse_args())
+
 
 def run(args):
     """
     Runs the specified tests with the specified options and exits.  The return
     code will be the number of failed tests.
-    
+
     Parameters
     ----------
     args : argparse.Namespace
@@ -127,7 +190,11 @@ def run(args):
     if args.perturb_replicates:
         # Passing None (when --perturb-seed is not given) indicates to NumPy
         # that a random seed should be generated automatically.
-        perturb_spec = (numpy.random.default_rng(seed=args.perturb_seed), args.perturb_replicates, args.perturb_distance)
+        perturb_spec = (
+            numpy.random.default_rng(seed=args.perturb_seed),
+            args.perturb_replicates,
+            args.perturb_distance,
+        )
     else:
         perturb_spec = None
 
@@ -139,13 +206,24 @@ def run(args):
     for test_directory in args.test_directory:
         try:
             term_failure_count = run_test(
-                args.toppar_directory, args.ffxml_directory, test_directory,
-                args.charmm, args.openmm_charmm, args.parmed_charmm, args.openmm_ffxml, perturb_spec,
-                args.absolute_energy_tolerance * openmm.unit.kilocalorie_per_mole, args.relative_energy_tolerance,
-                args.absolute_force_tolerance * openmm.unit.kilocalorie_per_mole / openmm.unit.angstrom, args.relative_force_tolerance,
-                skip_set, args.dump
+                args.toppar_directory,
+                args.ffxml_directory,
+                test_directory,
+                args.charmm,
+                args.openmm_charmm,
+                args.parmed_charmm,
+                args.openmm_ffxml,
+                perturb_spec,
+                args.absolute_energy_tolerance * openmm.unit.kilocalorie_per_mole,
+                args.relative_energy_tolerance,
+                args.absolute_force_tolerance * openmm.unit.kilocalorie_per_mole / openmm.unit.angstrom,
+                args.relative_force_tolerance,
+                skip_set,
+                args.dump,
             )
-            test_results.append((test_directory, term_failure_count == 0, f"{term_failure_count} terms exceeded tolerance"))
+            test_results.append(
+                (test_directory, term_failure_count == 0, f"{term_failure_count} terms exceeded tolerance")
+            )
         except Exception as error:
             test_results.append((test_directory, False, f"{type(error).__name__}: {error}"))
 
@@ -163,16 +241,29 @@ def run(args):
     test_name_width = max(map(len, test_names))
     for test_name, success_flag, test_message in test_results:
         formatted_line = f"{"Succeeded" if success_flag else "Failed":9}  {test_message}"
-        print(f"    {test_name:{test_name_width}}  {formatted_line if success_flag else color_message(formatted_line)}")
+        print(
+            f"    {test_name:{test_name_width}}  {formatted_line if success_flag else color_message(formatted_line)}"
+        )
 
     sys.exit(failure_count)
 
+
 def run_test(
-        toppar_directory, ffxml_directory, test_directory,
-        do_charmm, do_openmm_charmm, do_parmed_charmm, do_openmm_ffxml, perturb_spec,
-        absolute_energy_tolerance, relative_energy_tolerance, absolute_force_tolerance, relative_force_tolerance,
-        skip_set, dump
-    ):
+    toppar_directory,
+    ffxml_directory,
+    test_directory,
+    do_charmm,
+    do_openmm_charmm,
+    do_parmed_charmm,
+    do_openmm_ffxml,
+    perturb_spec,
+    absolute_energy_tolerance,
+    relative_energy_tolerance,
+    absolute_force_tolerance,
+    relative_force_tolerance,
+    skip_set,
+    dump,
+):
     """
     Runs the specified test with the specified options.
 
@@ -219,7 +310,7 @@ def run_test(
         The number of failed checks.
     """
 
-    with open(os.path.join(test_directory, "test.yaml"), "r") as test_spec_file:
+    with open(os.path.join(test_directory, "test.yaml")) as test_spec_file:
         test_spec = yaml.safe_load(test_spec_file)
 
     # Generate reference coordinates.
@@ -240,14 +331,34 @@ def run_test(
     # Run tests and get results.
     results_sets = {}
     if do_charmm:
-        results_sets["charmm"] = get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, f"{dump_path}_charmm.inp" if dump else None)
+        results_sets["charmm"] = get_charmm_energies_forces(
+            toppar_directory, test_directory, test_spec, coordinates_list, f"{dump_path}_charmm.inp" if dump else None
+        )
     if do_openmm_charmm:
-        results_sets["openmm_charmm"] = get_openmm_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, f"{dump_path}_openmm_charmm.xml" if dump else None)
+        results_sets["openmm_charmm"] = get_openmm_charmm_energies_forces(
+            toppar_directory,
+            test_directory,
+            test_spec,
+            coordinates_list,
+            f"{dump_path}_openmm_charmm.xml" if dump else None,
+        )
     if do_parmed_charmm:
-        results_sets["parmed_charmm"] = get_parmed_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, f"{dump_path}_parmed_charmm.xml" if dump else None)
+        results_sets["parmed_charmm"] = get_parmed_charmm_energies_forces(
+            toppar_directory,
+            test_directory,
+            test_spec,
+            coordinates_list,
+            f"{dump_path}_parmed_charmm.xml" if dump else None,
+        )
     if do_openmm_ffxml:
-        results_sets["openmm_ffxml"] = get_openmm_ffxml_energies_forces(ffxml_directory, test_directory, test_spec, coordinates_list, f"{dump_path}_openmm_ffxml.xml" if dump else None)
-   
+        results_sets["openmm_ffxml"] = get_openmm_ffxml_energies_forces(
+            ffxml_directory,
+            test_directory,
+            test_spec,
+            coordinates_list,
+            f"{dump_path}_openmm_ffxml.xml" if dump else None,
+        )
+
     # Zero anything that's not being tested.
     for results in results_sets.values():
         for result in results:
@@ -275,7 +386,11 @@ def run_test(
             relative_difference = absolute_difference / max(magnitude_1, magnitude_2)
         else:
             relative_difference = 0.0
-        return absolute_difference > absolute_force_tolerance and relative_difference > relative_force_tolerance, absolute_difference, relative_difference
+        return (
+            absolute_difference > absolute_force_tolerance and relative_difference > relative_force_tolerance,
+            absolute_difference,
+            relative_difference,
+        )
 
     # Helper function for printing values.
     def format_energy_difference_data(label, difference_data):
@@ -286,37 +401,43 @@ def run_test(
         ]
 
         any_failures = any(failures)
-        formatted_line = f"{max(absolute_differences).value_in_unit(ENERGY_PRINT_UNIT):20.12e}  {max(relative_differences):12.8f}"
+        formatted_line = (
+            f"{max(absolute_differences).value_in_unit(ENERGY_PRINT_UNIT):20.12e}  {max(relative_differences):12.8f}"
+        )
         if any_failures:
             formatted_line = f"{color_message(formatted_line)}  E_1 (kcal/mol)        E_2 (kcal/mol)"
         print(f"        {label:20}  {formatted_line}")
 
         if any_failures:
-            for energy_1, energy_2, absolute_difference, relative_difference, failure in zip(energies_1, energies_2, absolute_differences, relative_differences, failures):
+            for energy_1, energy_2, absolute_difference, relative_difference, failure in zip(
+                energies_1, energies_2, absolute_differences, relative_differences, failures
+            ):
                 formatted_line = f"{energy_1.value_in_unit(ENERGY_PRINT_UNIT):20.12e}  {energy_2.value_in_unit(ENERGY_PRINT_UNIT):20.12e}"
                 print(f"{" " * 66}{color_message(formatted_line) if failure else formatted_line}")
-        
+
         return any_failures
 
     def format_force_difference_data(label, difference_data):
         failures, absolute_differences, relative_differences = zip(*difference_data)
 
         any_failures = any(failures)
-        formatted_line = f"{max(absolute_differences).value_in_unit(FORCE_PRINT_UNIT):20.12e}  {max(relative_differences):12.8f}"
+        formatted_line = (
+            f"{max(absolute_differences).value_in_unit(FORCE_PRINT_UNIT):20.12e}  {max(relative_differences):12.8f}"
+        )
         if any_failures:
             formatted_line = color_message(formatted_line)
         print(f"        {label:20}  {formatted_line}")
 
         return any_failures
-    
+
     if len(results_sets) < 2:
         raise ValueError("must specify at least 2 methods to compare")
-    
+
     print(f"Ran test {test_spec["name"]!r} at {test_directory}")
     failure_count = 0
     for (name_1, results_1), (name_2, results_2) in itertools.combinations(results_sets.items(), 2):
         print(f"    Comparing {name_1} vs. {name_2}")
-        
+
         # Print results for energies.
         print(f"        {"Energy error":20}  {"|ΔE| (kcal/mol)":20}  {"Relative":12}")
         for force_group in (None, *ForceGroup):
@@ -325,7 +446,9 @@ def run_test(
                 energy_1 = result_1[force_group]["energy"]
                 energy_2 = result_2[force_group]["energy"]
                 difference_data.append((energy_1, energy_2, *compare_energies(energy_1, energy_2)))
-            failure_count += format_energy_difference_data("TOTAL" if force_group is None else force_group.name, difference_data)
+            failure_count += format_energy_difference_data(
+                "TOTAL" if force_group is None else force_group.name, difference_data
+            )
         print()
 
         # Print results for forces.
@@ -335,11 +458,14 @@ def run_test(
             for result_1, result_2 in zip(results_1, results_2):
                 for force_1, force_2 in zip(result_1[force_group]["forces"], result_2[force_group]["forces"]):
                     difference_data.append(compare_forces(force_1, force_2))
-            failure_count += format_force_difference_data("TOTAL" if force_group is None else force_group.name, difference_data)
+            failure_count += format_force_difference_data(
+                "TOTAL" if force_group is None else force_group.name, difference_data
+            )
         print()
 
     return failure_count
-        
+
+
 def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, dump_path):
     """
     Computes energies and forces with CHARMM.
@@ -413,7 +539,6 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
         charmm_input_lines.append("coor force comp")
         charmm_input_lines.append("print coor comp")
 
-
     if dump_path is not None:
         with open(dump_path, "w") as dump_file:
             for line in charmm_input_lines:
@@ -427,10 +552,10 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
     if result.returncode:
         print(result.stdout.decode())
         raise RuntimeError(f"CHARMM exited with code {result.returncode}")
-    
+
     # Parse CHARMM output.
     lines = iter(result.stdout.decode().split("\n"))
-    
+
     # Helper function for skipping lines until one matches a predicate.
     def advance_until(predicate):
         while True:
@@ -451,7 +576,7 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
     def parse_energies_forces(force_group):
         # Look for the tag we embedded in the input.
         advance_until(lambda line: ENERGY_FORCE_TAG in line)
-        
+
         # Extract the energy labels and the values themselves.
         ener_labels = [advance_until(lambda line: line.startswith("ENER "))]
         ener_labels.extend(yield_until(lambda line: "-" * 9 in line))
@@ -467,7 +592,7 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
                     if label == desired_label:
                         return index_1, index_2
             return None
-    
+
         # Helper function for finding an energy value.
         def find_value(desired_label):
             # If there is no force (e.g., CMAP for a monomer) in the system,
@@ -487,7 +612,8 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
         energy = find_value("ENERgy")
 
         # Check to make sure that the energy decomposition makes sense.
-        expected_categories = set(category
+        expected_categories = set(
+            category
             for check_force_group in (ForceGroup if force_group is None else (force_group,))
             for category in FORCE_GROUP_DATA[check_force_group][1]
         )
@@ -501,7 +627,9 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
                     raise ValueError(f"expected zero energy from CHARMM for {category}, not {category_energy}")
         if abs(expected_energy - energy) > CHARMM_ENERGY_CHECK_PRECISION:
             print(result.stdout.decode())
-            raise ValueError(f"expected total energy {energy:.5f} from CHARMM to match sum {expected_energy:.5f} of terms")
+            raise ValueError(
+                f"expected total energy {energy:.5f} from CHARMM to match sum {expected_energy:.5f} of terms"
+            )
 
         # Look for the forces.
         advance_until(lambda line: "COORDINATE" in line)
@@ -520,7 +648,7 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
             # The CHARMM forces are inverted when read, so flip them.
             forces=openmm.unit.Quantity(-numpy.array(forces), openmm.unit.kilocalorie_per_mole / openmm.unit.angstrom),
         )
-    
+
     results = []
     for coordinates_index in range(len(coordinates_list)):
         result = {force_group: parse_energies_forces(force_group) for force_group in (None, *ForceGroup)}
@@ -532,7 +660,7 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
         old_forces = electrostatic_charmm["forces"]
         new_energy = old_energy * CHARMM_ELECTROSTATIC_SCALE
         new_forces = old_forces * CHARMM_ELECTROSTATIC_SCALE
-        
+
         for force_group in (None, ForceGroup.NONBONDED):
             result[force_group]["energy"] += new_energy - old_energy
             result[force_group]["forces"] += new_forces - old_forces
@@ -540,6 +668,7 @@ def get_charmm_energies_forces(toppar_directory, test_directory, test_spec, coor
         results.append(result)
 
     return results
+
 
 def get_openmm_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, dump_path):
     """
@@ -571,6 +700,7 @@ def get_openmm_charmm_energies_forces(toppar_directory, test_directory, test_spe
     psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
     system = psf_file.createSystem(parameter_set, **test_spec["create_system_options"])
     return evaluate_openmm(system, coordinates_list, dump_path)
+
 
 def get_parmed_charmm_energies_forces(toppar_directory, test_directory, test_spec, coordinates_list, dump_path):
     """
@@ -607,6 +737,7 @@ def get_parmed_charmm_energies_forces(toppar_directory, test_directory, test_spe
     system = psf_file.createSystem(parameter_set, **test_spec["create_system_options"])
     return evaluate_openmm(system, coordinates_list, dump_path)
 
+
 def get_openmm_ffxml_energies_forces(ffxml_directory, test_directory, test_spec, coordinates_list, dump_path):
     """
     Computes energies and forces with OpenMM using OpenMM ForceField.
@@ -638,6 +769,7 @@ def get_openmm_ffxml_energies_forces(ffxml_directory, test_directory, test_spec,
     system = force_field.createSystem(pdb_file.getTopology(), **test_spec["create_system_options"])
     return evaluate_openmm(system, coordinates_list, dump_path)
 
+
 def get_toppar_files(toppar_directory, test_spec):
     """
     Extracts a list of all topology, parameter, and stream files from a test
@@ -657,7 +789,11 @@ def get_toppar_files(toppar_directory, test_spec):
         A list of paths to files in the CHARMM parameter set directory.
     """
 
-    return [os.path.join(toppar_directory, file) for file in (*test_spec["rtf_files"], *test_spec["prm_files"], *test_spec["str_files"])]
+    return [
+        os.path.join(toppar_directory, file)
+        for file in (*test_spec["rtf_files"], *test_spec["prm_files"], *test_spec["str_files"])
+    ]
+
 
 def evaluate_openmm(system, coordinates_list, dump_path):
     """
@@ -694,13 +830,13 @@ def evaluate_openmm(system, coordinates_list, dump_path):
     if dump_path is not None:
         with open(dump_path, "w") as dump_file:
             dump_file.write(openmm.XmlSerializer.serialize(system))
-    
+
     context = openmm.Context(system, openmm.VerletIntegrator(0.001))
-    
+
     results = []
     for coordinates in coordinates_list:
         context.setPositions(coordinates)
-        
+
         result = {}
 
         # Evaluate energies and forces for the entire system.
@@ -715,6 +851,7 @@ def evaluate_openmm(system, coordinates_list, dump_path):
         results.append(result)
 
     return results
+
 
 def random_in_unit_ball(generator):
     """
@@ -739,6 +876,7 @@ def random_in_unit_ball(generator):
         if vector @ vector <= 1:
             return vector
 
+
 def color_message(message, ansi="1;38;5;216"):
     """
     Generates ANSI escape sequences to highlight a message with color or other
@@ -759,6 +897,7 @@ def color_message(message, ansi="1;38;5;216"):
     """
 
     return f"\x1b[{ansi}m{message}\x1b[0m" if DO_COLOR else message
+
 
 if __name__ == "__main__":
     main()

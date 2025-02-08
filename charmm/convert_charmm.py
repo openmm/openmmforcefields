@@ -1,7 +1,6 @@
 from parmed import modeller, openmm
 from parmed.charmm import CharmmParameterSet
 import argparse
-import copy
 import glob
 import hashlib
 import io
@@ -12,6 +11,7 @@ import openmm.unit as unit
 import os
 import xml.etree.ElementTree as etree
 import yaml
+
 
 def main():
     global verbose
@@ -31,6 +31,7 @@ def main():
     verbose = args.verbose
 
     convert_yaml(args.input, ffxml_dir=args.output_dir)
+
 
 def convert_yaml(yaml_filename, ffxml_dir):
     # Read YAML
@@ -99,7 +100,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                     citation = cite
                     references[-1]["Reference"] = citation
                     references[-1]["forcefield"] = ff
- 
+
         if "Override" in entry:
             override_level = int(entry["Override"])
             if verbose:
@@ -111,7 +112,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
             ffxml_include = entry["TestInclude"]
         else:
             ffxml_include = []
-        
+
         # Loads the main CHARMM parameter set.  This is abstracted into a
         # function because we need a few copies that get mutated in different
         # ways, and ParmEd has issues with deepcopy(), so we just reload it.
@@ -133,7 +134,9 @@ def convert_yaml(yaml_filename, ffxml_dir):
             # ParmEd does not handle CHARMM impropers properly, so save all of the
             # information about the impropers before discarding it from the
             # parameter set entirely
-            residue_impropers = {residue_name: residue._impr.copy() for residue_name, residue in params.residues.items()}
+            residue_impropers = {
+                residue_name: residue._impr.copy() for residue_name, residue in params.residues.items()
+            }
             patch_impropers = {patch_name: patch._impr.copy() for patch_name, patch in params.patches.items()}
             periodic_improper_types = params.improper_periodic_types.copy()
             harmonic_improper_types = params.improper_types.copy()
@@ -144,7 +147,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 patch._impr.clear()
             params.improper_periodic_types.clear()
             params.improper_types.clear()
-            
+
             if return_impropers:
                 return params, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types
             else:
@@ -159,14 +162,23 @@ def convert_yaml(yaml_filename, ffxml_dir):
             for split_spec in source_files["split"]:
                 split_params = CharmmParameterSet(*split_spec["input"])
                 split_fixes = split_spec.get("fixes", [])
-                split_data.append((os.path.join(ffxml_dir, split_spec["output"]), list(split_params.residues.keys()), list(split_params.patches.keys()), split_fixes))
+                split_data.append(
+                    (
+                        os.path.join(ffxml_dir, split_spec["output"]),
+                        list(split_params.residues.keys()),
+                        list(split_params.patches.keys()),
+                        split_fixes,
+                    )
+                )
 
         # Convert everything together to OpenMM so we can figure out which
         # patches apply to which residues
         if verbose:
             print("Determining patch applicability...")
         params_omm = openmm.OpenMMParameterSet.from_parameterset(load_params(), unique_atom_types=True)
-        valid_residues_for_patch, valid_patches_for_residue = params_omm._determine_valid_patch_combinations(params_omm._find_unused_residues())
+        valid_residues_for_patch, valid_patches_for_residue = params_omm._determine_valid_patch_combinations(
+            params_omm._find_unused_residues()
+        )
 
         # For the main file, remove all residues and patches that are supposed
         # to go into the split files, convert from a CHARMM to an OpenMM
@@ -175,7 +187,9 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose:
             print("Preparing to write main force field file...")
 
-        params_main, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types = load_params(return_impropers=True)
+        params_main, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types = (
+            load_params(return_impropers=True)
+        )
 
         for split_ffxml_filename, split_residue_names, split_patch_names, split_fixes in split_data:
             for split_residue_name in split_residue_names:
@@ -200,7 +214,16 @@ def convert_yaml(yaml_filename, ffxml_dir):
             print("Applying fixes to main force field file...")
         ffxml_tree = read_xml_file(ffxml_filename)
         apply_fixes(ffxml_tree, source_files.get("fixes", []))
-        apply_impropers(ffxml_tree, params_main_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue)
+        apply_impropers(
+            ffxml_tree,
+            params_main_omm,
+            residue_impropers,
+            patch_impropers,
+            periodic_improper_types,
+            harmonic_improper_types,
+            valid_residues_for_patch,
+            valid_patches_for_residue,
+        )
         write_xml_file(ffxml_tree, ffxml_filename)
 
         if verbose:
@@ -216,8 +239,16 @@ def convert_yaml(yaml_filename, ffxml_dir):
             # additional residues and patches applicable to the patches and
             # residues in the split file.  We will then remove the duplicated
             # entries from the written XML file.
-            write_residue_names = set(split_residue_names) | {residue_name for patch_name in split_patch_names for residue_name in valid_residues_for_patch.get(patch_name, [])}
-            write_patch_names = set(split_patch_names) | {patch_name for residue_name in split_residue_names for patch_name in valid_patches_for_residue.get(residue_name, [])}
+            write_residue_names = set(split_residue_names) | {
+                residue_name
+                for patch_name in split_patch_names
+                for residue_name in valid_residues_for_patch.get(patch_name, [])
+            }
+            write_patch_names = set(split_patch_names) | {
+                patch_name
+                for residue_name in split_residue_names
+                for patch_name in valid_patches_for_residue.get(residue_name, [])
+            }
 
             params_split = load_params()
             for residue_name in list(params_split.residues.keys()):
@@ -244,13 +275,22 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 print("Applying fixes to split force field file...")
             split_ffxml_tree = read_xml_file(split_ffxml_filename)
             apply_fixes(split_ffxml_tree, split_fixes)
-            apply_impropers(split_ffxml_tree, params_split_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue)
+            apply_impropers(
+                split_ffxml_tree,
+                params_split_omm,
+                residue_impropers,
+                patch_impropers,
+                periodic_improper_types,
+                harmonic_improper_types,
+                valid_residues_for_patch,
+                valid_patches_for_residue,
+            )
             clean_split(ffxml_tree, split_ffxml_tree)
             write_xml_file(split_ffxml_tree, split_ffxml_filename)
 
             if verbose:
                 print("Reading back split force field file...")
-            split_forcefield = app.ForceField(ffxml_filename, split_ffxml_filename, *ffxml_include)
+            app.ForceField(ffxml_filename, split_ffxml_filename, *ffxml_include)
 
         if "Test" in entry:
             for filename in entry["Test"]:
@@ -262,13 +302,18 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if verbose:
             print("Done.")
 
+
 def read_xml_file(xml_filename):
     return etree.parse(xml_filename)
 
+
 def write_xml_file(tree, xml_filename):
-    tree = etree.parse(io.StringIO(etree.canonicalize(etree.tostring(tree.getroot(), encoding="unicode"), strip_text=True)))
+    tree = etree.parse(
+        io.StringIO(etree.canonicalize(etree.tostring(tree.getroot(), encoding="unicode"), strip_text=True))
+    )
     etree.indent(tree)
     tree.write(xml_filename, encoding="unicode")
+
 
 def apply_fixes(tree, fixes):
     # Allows edits to be made to the force field XML file in an automated way.
@@ -282,6 +327,7 @@ def apply_fixes(tree, fixes):
             else:
                 raise ValueError(f"Unknown action {action!r}")
 
+
 def build_xml_element(data):
     element = etree.Element(data["tag"], data.get("attrib", {}))
     element.text = data.get("text", None)
@@ -290,12 +336,26 @@ def build_xml_element(data):
         element.append(build_xml_element(child))
     return element
 
-def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue):
+
+def apply_impropers(
+    tree,
+    params_omm,
+    residue_impropers,
+    patch_impropers,
+    periodic_improper_types,
+    harmonic_improper_types,
+    valid_residues_for_patch,
+    valid_patches_for_residue,
+):
     k_conversion = unit.kilocalorie.conversion_factor_to(unit.kilojoule)
     theta0_conversion = unit.degree.conversion_factor_to(unit.radian)
 
     periodic_improper_element = etree.Element("PeriodicTorsionForce", ordering="charmm")
-    harmonic_improper_element = etree.Element("CustomTorsionForce", ordering="charmm", energy=f"k*min(dtheta, 2*pi - dtheta)^2; dtheta = abs(theta - theta0); pi = {math.pi}")
+    harmonic_improper_element = etree.Element(
+        "CustomTorsionForce",
+        ordering="charmm",
+        energy=f"k*min(dtheta, 2*pi - dtheta)^2; dtheta = abs(theta - theta0); pi = {math.pi}",
+    )
 
     # Find the residues that ParmEd actually wrote
     residue_names = []
@@ -314,8 +374,11 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
     # names to residue objects.  Filter by only the residues and patches that
     # ParmEd actually wrote to the XML file.
     patch_compatible_residues = {
-        patch_name: [params_omm.residues[residue_name] for residue_name in residue_names if residue_name in residue_name_set]
-        for patch_name, residue_names in valid_residues_for_patch.items() if patch_name in patch_name_set
+        patch_name: [
+            params_omm.residues[residue_name] for residue_name in residue_names if residue_name in residue_name_set
+        ]
+        for patch_name, residue_names in valid_residues_for_patch.items()
+        if patch_name in patch_name_set
     }
 
     # Some patches might be applied to residues where atoms in a patch improper
@@ -323,9 +386,17 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
     # different patch.  Find the patches compatible with the residues compatible
     # with each patch.
     patch_compatible_patches = {
-        patch_name: [params_omm.patches[patch_name] for patch_name in patch_names
-            if patch_name in set(compatible_patch_name for compatible_residue in compatible_residues for compatible_patch_name in valid_patches_for_residue.get(compatible_residue.name, []))
-        ] for patch_name, compatible_residues in patch_compatible_residues.items()
+        patch_name: [
+            params_omm.patches[patch_name]
+            for patch_name in patch_names
+            if patch_name
+            in set(
+                compatible_patch_name
+                for compatible_residue in compatible_residues
+                for compatible_patch_name in valid_patches_for_residue.get(compatible_residue.name, [])
+            )
+        ]
+        for patch_name, compatible_residues in patch_compatible_residues.items()
     }
 
     # Look up all of the atom names in adjacent residues referred to by
@@ -357,26 +428,55 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
         adjacent_types[adjacent_name] = adjacent_types_for_name
 
     def get_periodic_attributes(improper_data):
-        return {"periodicity1": str(improper_data.per), "k1": str(improper_data.phi_k * k_conversion), "phase1": str(improper_data.phase * theta0_conversion)}
-    
+        return {
+            "periodicity1": str(improper_data.per),
+            "k1": str(improper_data.phi_k * k_conversion),
+            "phase1": str(improper_data.phase * theta0_conversion),
+        }
+
     def get_harmonic_attributes(improper_data):
         return {"k": str(improper_data.psi_k * k_conversion), "theta0": str(improper_data.psi_eq * theta0_conversion)}
-    
+
     def process_impropers(residue_or_patch, impropers):
         for atom_names in impropers:
-
             # Handle periodic impropers
             for type_names, improper_data in periodic_improper_types.items():
                 force_attributes = get_periodic_attributes(improper_data)
-                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
-                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+                if improper_matches(
+                    residue_or_patch,
+                    atom_names,
+                    type_names,
+                    adjacent_types,
+                    patch_compatible_residues,
+                    patch_compatible_patches,
+                ):
+                    for match_attributes in expand_names(
+                        residue_or_patch,
+                        atom_names,
+                        adjacent_types,
+                        patch_compatible_residues,
+                        patch_compatible_patches,
+                    ):
                         etree.SubElement(periodic_improper_element, "Improper", **match_attributes, **force_attributes)
 
             # Handle harmonic impropers
             for type_names, improper_data in harmonic_improper_types.items():
                 force_attributes = get_harmonic_attributes(improper_data)
-                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
-                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+                if improper_matches(
+                    residue_or_patch,
+                    atom_names,
+                    type_names,
+                    adjacent_types,
+                    patch_compatible_residues,
+                    patch_compatible_patches,
+                ):
+                    for match_attributes in expand_names(
+                        residue_or_patch,
+                        atom_names,
+                        adjacent_types,
+                        patch_compatible_residues,
+                        patch_compatible_patches,
+                    ):
                         etree.SubElement(harmonic_improper_element, "Improper", **match_attributes, **force_attributes)
 
     # Write residue and patch impropers
@@ -396,13 +496,18 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
         ]
         root.append(harmonic_improper_element)
 
+
 def is_adjacent_name(atom_name):
     return atom_name.startswith("-") or atom_name.startswith("+")
+
 
 def get_adjacent_name(atom_name):
     return atom_name[1:]
 
-def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+
+def improper_matches(
+    residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches
+):
     def name_type_match(atom_name, type_name):
         if is_adjacent_name(atom_name):
             return type_name in adjacent_types[get_adjacent_name(atom_name)]
@@ -411,17 +516,22 @@ def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, p
                 return type_name == residue_or_patch.map[atom_name].type
             elif isinstance(residue_or_patch, modeller.PatchTemplate):
                 return any(
-                    atom_name in compatible_residue_or_patch.map and type_name == compatible_residue_or_patch.map[atom_name].type
+                    atom_name in compatible_residue_or_patch.map
+                    and type_name == compatible_residue_or_patch.map[atom_name].type
                     for patch_compatible in (patch_compatible_residues, patch_compatible_patches)
                     for compatible_residue_or_patch in patch_compatible[residue_or_patch.name]
                 )
             else:
                 raise KeyError(atom_name)
 
-    return any(all(
-        type_name == "X" or name_type_match(atom_name, type_name)
-        for atom_name, type_name in zip(atom_names[::order], type_names)
-    ) for order in (1, -1))
+    return any(
+        all(
+            type_name == "X" or name_type_match(atom_name, type_name)
+            for atom_name, type_name in zip(atom_names[::order], type_names)
+        )
+        for order in (1, -1)
+    )
+
 
 def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
     def expand_name(atom_name, compatible_residue_or_patch):
@@ -435,12 +545,14 @@ def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_
             elif compatible_residue_or_patch is not None and atom_name in compatible_residue_or_patch.map:
                 # Atom in the compatible residue or patch of this patch
                 yield "type", f"{compatible_residue_or_patch.name}-{atom_name}"
-    
+
     if isinstance(residue_or_patch, modeller.PatchTemplate):
-        compatible_residues_and_patches = patch_compatible_residues[residue_or_patch.name] + patch_compatible_patches[residue_or_patch.name]
+        compatible_residues_and_patches = (
+            patch_compatible_residues[residue_or_patch.name] + patch_compatible_patches[residue_or_patch.name]
+        )
     else:
         compatible_residues_and_patches = [None]
-    
+
     # If residue_or_patch is a residue, compatible_residues_and_patches is [None] and we go
     # generate duplicates, which are screened out.
     # patch contains impropers not involving atoms in the residue or patch, this will
@@ -448,14 +560,18 @@ def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_
     # through this outer loop once, considering only the residue.  If it is a
     yielded = set()
     for compatible_residue_or_patch in compatible_residues_and_patches:
-        for specification in itertools.product(*(expand_name(atom_name, compatible_residue_or_patch) for atom_name in atom_names)):
+        for specification in itertools.product(
+            *(expand_name(atom_name, compatible_residue_or_patch) for atom_name in atom_names)
+        ):
             if specification in yielded:
                 continue
             yielded.add(specification)
             yield {f"{key_kind}{index + 1}": value for index, (key_kind, value) in enumerate(specification)}
 
+
 def element_to_key(element):
     return etree.canonicalize(etree.tostring(element, encoding="unicode"), strip_text=True)
+
 
 def clean_split(main_ffxml_tree, split_ffxml_tree):
     # Find the names of the residues and patches in the main file.
@@ -509,8 +625,12 @@ def clean_split(main_ffxml_tree, split_ffxml_tree):
 
     # Delete associated impropers in the split file.
     for impropers_element in split_ffxml_tree.findall("./CustomTorsionForce"):
-        impropers_element[:] = [element for element in impropers_element
-            if improper_element.tag != "Improper" or improper_element_to_key(improper_element) in main_impropers]
+        impropers_element[:] = [
+            element
+            for element in impropers_element
+            if improper_element.tag != "Improper" or improper_element_to_key(improper_element) in main_impropers
+        ]
+
 
 if __name__ == "__main__":
     main()
