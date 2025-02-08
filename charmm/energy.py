@@ -18,8 +18,8 @@ if not os.path.exists(os.path.join(prefix, filename + ".psf")):
 
 # Run CHARMM energy and force calculation
 
-print("Running CHARMM in docker container (may take a minute)...")
-command = f"docker run -i -v `pwd`:/mnt -t jchodera/charmm-lite:c40b1 /mnt/{prefix}/run-charmm.sh {prefix}"
+print("Running CHARMM (may take a minute)...")
+command = f"charmm < {prefix}/charmm.inp"
 charmm_output = subprocess.check_output(command, shell=True, universal_newlines=True)
 
 # Parse CHARMM energy and force output

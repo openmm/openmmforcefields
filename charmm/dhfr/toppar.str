@@ -6,7 +6,7 @@
 open read card unit 10 name toppar/top_all36_prot.rtf
 read  rtf card unit 10
 
-open read card unit 20 name toppar/par_all36_prot.prm
+open read card unit 20 name toppar/par_all36m_prot.prm
 read para card unit 20 flex
 
 ! Read additional topology and parameter file for water and ions

@@ -129,7 +129,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
 
             name_collisions = set(params.residues) & set(params.patches)
             if name_collisions:
-                raise ValueError(f"Collision between residue/patch names {sorted(name_collision)}")
+                raise ValueError(f"Collision between residue/patch names {sorted(name_collisions)}")
 
             # ParmEd does not handle CHARMM impropers properly, so save all of the
             # information about the impropers before discarding it from the
