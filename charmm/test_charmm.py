@@ -412,8 +412,10 @@ def run_test(
             for energy_1, energy_2, absolute_difference, relative_difference, failure in zip(
                 energies_1, energies_2, absolute_differences, relative_differences, failures
             ):
-                formatted_line = f"{energy_1.value_in_unit(ENERGY_PRINT_UNIT):20.12e}  " \
+                formatted_line = (
+                    f"{energy_1.value_in_unit(ENERGY_PRINT_UNIT):20.12e}  "
                     f"{energy_2.value_in_unit(ENERGY_PRINT_UNIT):20.12e}"
+                )
                 print(f"{" " * 66}{color_message(formatted_line) if failure else formatted_line}")
 
         return any_failures
