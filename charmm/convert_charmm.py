@@ -200,7 +200,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
             print("Applying fixes to main force field file...")
         ffxml_tree = read_xml_file(ffxml_filename)
         apply_fixes(ffxml_tree, source_files.get("fixes", []))
-        apply_impropers(ffxml_tree, params_main_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch)
+        apply_impropers(ffxml_tree, params_main_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue)
         write_xml_file(ffxml_tree, ffxml_filename)
 
         if verbose:
@@ -216,8 +216,8 @@ def convert_yaml(yaml_filename, ffxml_dir):
             # additional residues and patches applicable to the patches and
             # residues in the split file.  We will then remove the duplicated
             # entries from the written XML file.
-            write_residue_names = set(split_residue_names) | {residue_name for patch_name in split_patch_names for residue_name in valid_residues_for_patch.get(patch_name, ())}
-            write_patch_names = set(split_patch_names) | {patch_name for residue_name in split_residue_names for patch_name in valid_patches_for_residue.get(residue_name, ())}
+            write_residue_names = set(split_residue_names) | {residue_name for patch_name in split_patch_names for residue_name in valid_residues_for_patch.get(patch_name, [])}
+            write_patch_names = set(split_patch_names) | {patch_name for residue_name in split_residue_names for patch_name in valid_patches_for_residue.get(residue_name, [])}
 
             params_split = load_params()
             for residue_name in list(params_split.residues.keys()):
@@ -244,7 +244,7 @@ def convert_yaml(yaml_filename, ffxml_dir):
                 print("Applying fixes to split force field file...")
             split_ffxml_tree = read_xml_file(split_ffxml_filename)
             apply_fixes(split_ffxml_tree, split_fixes)
-            apply_impropers(split_ffxml_tree, params_split_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch)
+            apply_impropers(split_ffxml_tree, params_split_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue)
             clean_split(ffxml_tree, split_ffxml_tree)
             write_xml_file(split_ffxml_tree, split_ffxml_filename)
 
@@ -290,7 +290,7 @@ def build_xml_element(data):
         element.append(build_xml_element(child))
     return element
 
-def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch):
+def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, periodic_improper_types, harmonic_improper_types, valid_residues_for_patch, valid_patches_for_residue):
     k_conversion = unit.kilocalorie.conversion_factor_to(unit.kilojoule)
     theta0_conversion = unit.degree.conversion_factor_to(unit.radian)
 
@@ -316,6 +316,16 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
     patch_compatible_residues = {
         patch_name: [params_omm.residues[residue_name] for residue_name in residue_names if residue_name in residue_name_set]
         for patch_name, residue_names in valid_residues_for_patch.items() if patch_name in patch_name_set
+    }
+
+    # Some patches might be applied to residues where atoms in a patch improper
+    # normally found in the patched residue actually end up belonging to a
+    # different patch.  Find the patches compatible with the residues compatible
+    # with each patch.
+    patch_compatible_patches = {
+        patch_name: [params_omm.patches[patch_name] for patch_name in patch_names
+            if patch_name in set(compatible_patch_name for compatible_residue in compatible_residues for compatible_patch_name in valid_patches_for_residue.get(compatible_residue.name, []))
+        ] for patch_name, compatible_residues in patch_compatible_residues.items()
     }
 
     # Look up all of the atom names in adjacent residues referred to by
@@ -358,15 +368,15 @@ def apply_impropers(tree, params_omm, residue_impropers, patch_impropers, period
             # Handle periodic impropers
             for type_names, improper_data in periodic_improper_types.items():
                 force_attributes = get_periodic_attributes(improper_data)
-                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues):
-                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues):
+                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
                         etree.SubElement(periodic_improper_element, "Improper", **match_attributes, **force_attributes)
 
             # Handle harmonic impropers
             for type_names, improper_data in harmonic_improper_types.items():
                 force_attributes = get_harmonic_attributes(improper_data)
-                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues):
-                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues):
+                if improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+                    for match_attributes in expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
                         etree.SubElement(harmonic_improper_element, "Improper", **match_attributes, **force_attributes)
 
     # Write residue and patch impropers
@@ -392,7 +402,7 @@ def is_adjacent_name(atom_name):
 def get_adjacent_name(atom_name):
     return atom_name[1:]
 
-def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues):
+def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
     def name_type_match(atom_name, type_name):
         if is_adjacent_name(atom_name):
             return type_name in adjacent_types[get_adjacent_name(atom_name)]
@@ -401,8 +411,9 @@ def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, p
                 return type_name == residue_or_patch.map[atom_name].type
             elif isinstance(residue_or_patch, modeller.PatchTemplate):
                 return any(
-                    atom_name in compatible_residue.map and type_name == compatible_residue.map[atom_name].type
-                    for compatible_residue in patch_compatible_residues[residue_or_patch.name]
+                    atom_name in compatible_residue_or_patch.map and type_name == compatible_residue_or_patch.map[atom_name].type
+                    for patch_compatible in (patch_compatible_residues, patch_compatible_patches)
+                    for compatible_residue_or_patch in patch_compatible[residue_or_patch.name]
                 )
             else:
                 raise KeyError(atom_name)
@@ -412,8 +423,8 @@ def improper_matches(residue_or_patch, atom_names, type_names, adjacent_types, p
         for atom_name, type_name in zip(atom_names[::order], type_names)
     ) for order in (1, -1))
 
-def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues):
-    def expand_name(atom_name, compatible_residue):
+def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_residues, patch_compatible_patches):
+    def expand_name(atom_name, compatible_residue_or_patch):
         if is_adjacent_name(atom_name):
             for type_name in adjacent_types[get_adjacent_name(atom_name)]:
                 yield "class", type_name
@@ -421,23 +432,23 @@ def expand_names(residue_or_patch, atom_names, adjacent_types, patch_compatible_
             if atom_name in residue_or_patch.map:
                 # Atom in this residue or patch
                 yield "type", f"{residue_or_patch.name}-{atom_name}"
-            elif compatible_residue is not None and atom_name in compatible_residue.map:
-                # Atom in the compatible residue of this patch
-                yield "type", f"{compatible_residue.name}-{atom_name}"
+            elif compatible_residue_or_patch is not None and atom_name in compatible_residue_or_patch.map:
+                # Atom in the compatible residue or patch of this patch
+                yield "type", f"{compatible_residue_or_patch.name}-{atom_name}"
     
     if isinstance(residue_or_patch, modeller.PatchTemplate):
-        compatible_residues = patch_compatible_residues[residue_or_patch.name]
+        compatible_residues_and_patches = patch_compatible_residues[residue_or_patch.name] + patch_compatible_patches[residue_or_patch.name]
     else:
-        compatible_residues = [None]
+        compatible_residues_and_patches = [None]
     
-    # If residue_or_patch is a residue, compatible_residues is [None] and we go
-    # through this outer loop once, considering only the residue.  If it is a
-    # patch, we go through for each residue compatible with the patch.  If the
-    # patch contains impropers not involving atoms in the residue, this will
+    # If residue_or_patch is a residue, compatible_residues_and_patches is [None] and we go
     # generate duplicates, which are screened out.
+    # patch contains impropers not involving atoms in the residue or patch, this will
+    # patch, we go through for each residue or patch compatible with the patch.  If the
+    # through this outer loop once, considering only the residue.  If it is a
     yielded = set()
-    for compatible_residue in compatible_residues:
-        for specification in itertools.product(*(expand_name(atom_name, compatible_residue) for atom_name in atom_names)):
+    for compatible_residue_or_patch in compatible_residues_and_patches:
+        for specification in itertools.product(*(expand_name(atom_name, compatible_residue_or_patch) for atom_name in atom_names)):
             if specification in yielded:
                 continue
             yielded.add(specification)
