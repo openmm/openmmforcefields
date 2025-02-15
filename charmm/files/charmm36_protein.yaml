@@ -8,9 +8,25 @@
 - Destination: charmm36_protein.xml
   Source:
     include:
-     # Basic protein parameters only without anything else
-     - toppar/top_all36_prot.rtf
-     - toppar/par_all36m_prot.prm
+      # Basic protein parameters only without anything else
+      - toppar/top_all36_prot.rtf
+      - toppar/par_all36m_prot.prm
+
+    stream:
+      # Stream files that don't require additional non-protein parameters
+      - toppar/stream/prot/toppar_all36_prot_aldehydes.str
+      - toppar/stream/prot/toppar_all36_prot_arg0.str
+      - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
+      - toppar/stream/prot/toppar_all36_prot_fluoro_alkanes.str
+      - toppar/stream/prot/toppar_all36_prot_heme.str
+      - toppar/stream/prot/toppar_all36_prot_pyridines.str
+      - toppar/stream/prot/toppar_all36_prot_retinol.str
+
+    split:
+      # Split D-amino acids into a separate file
+      - input:
+        - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
+        output: charmm36_protein_d.xml
 
     fixes:
       # Here we manually add in the DISU (cysteine disulfide) patch to the force

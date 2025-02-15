@@ -26,8 +26,6 @@
      - >-
        Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
        Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
 
 - Destination: waters_ions_spc_e.xml
   Source:
@@ -53,8 +51,6 @@
      - >-
        Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
        Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
 
 - Destination: waters_ions_spc.xml
   Source:
@@ -80,8 +76,6 @@
      - >-
        Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
        Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
 
 - Destination: waters_ions_tip3p_pme_b.xml
   Source:
@@ -107,8 +101,6 @@
      - >-
        Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
        Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
 
 - Destination: waters_ions_tip3p_pme_f.xml
   Source:
@@ -134,8 +126,6 @@
      - >-
        Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
        Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
 
 - Destination: waters_ions_tip4p_2005.xml
   Source:
