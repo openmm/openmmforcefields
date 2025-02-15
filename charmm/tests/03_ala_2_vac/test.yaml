@@ -3,11 +3,13 @@ name: Ala-Ala peptide in vacuum
 psf_file: step1_pdbreader.psf
 pdb_file: test.pdb
 
-rtf_files: ["top_all36_prot.rtf"]
-prm_files: ["par_all36m_prot.prm"]
-str_files: []
-ffxml_files: ["charmm36_nowaters.xml"]
+charmm_files:
+  - top_all36_prot.rtf
+  - par_all36m_prot.prm
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
 
-charmm_commands: ["nbonds atom trunc cutnb 1000"]
+ffxml_files:
+  - charmm36_nowaters.xml
 create_system_options:
   removeCMMotion: false

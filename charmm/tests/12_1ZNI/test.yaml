@@ -1,4 +1,4 @@
-name: Alanine in vacuum
+name: 1ZNI protein
 
 psf_file: step1_pdbreader.psf
 pdb_file: test.pdb
@@ -6,10 +6,14 @@ pdb_file: test.pdb
 charmm_files:
   - top_all36_prot.rtf
   - par_all36m_prot.prm
+  - toppar_water_ions.str
 charmm_commands:
   - nbonds atom trunc cutnb 1000
 
 ffxml_files:
   - charmm36_nowaters.xml
+  - waters_ions_default.xml
 create_system_options:
+  flexibleConstraints: true
   removeCMMotion: false
+  rigidWater: true

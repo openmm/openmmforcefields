@@ -1,7 +1,7 @@
-name: Alanine in vacuum
+name: 1BNG protein
 
 psf_file: step1_pdbreader.psf
-pdb_file: test.pdb
+pdb_file: step1_pdbreader.pdb
 
 charmm_files:
   - top_all36_prot.rtf

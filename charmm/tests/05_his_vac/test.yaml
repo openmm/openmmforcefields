@@ -1,4 +1,4 @@
-name: Alanine in vacuum
+name: Histidine in vacuum
 
 psf_file: step1_pdbreader.psf
 pdb_file: test.pdb

@@ -1,4 +1,4 @@
-name: Alanine in vacuum
+name: Methanol in vacuum
 
 psf_file: step1_pdbreader.psf
 pdb_file: test.pdb
@@ -6,10 +6,19 @@ pdb_file: test.pdb
 charmm_files:
   - top_all36_prot.rtf
   - par_all36m_prot.prm
+  - top_all36_na.rtf
+  - par_all36_na.prm
+  - top_all36_carb.rtf
+  - par_all36_carb.prm
+  - top_all36_lipid.rtf
+  - par_all36_lipid.prm
+  - top_all36_cgenff.rtf
+  - par_all36_cgenff.prm
 charmm_commands:
   - nbonds atom trunc cutnb 1000
 
 ffxml_files:
   - charmm36_nowaters.xml
+  - charmm36_cgenff.xml
 create_system_options:
   removeCMMotion: false
