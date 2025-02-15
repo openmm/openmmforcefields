@@ -5,7 +5,6 @@ import copy
 import glob
 import hashlib
 import io
-import math
 import openmm.app as app
 import openmm.unit as unit
 import os
