@@ -6,6 +6,7 @@ import openmm.app
 import os
 import subprocess
 import sys
+import tempfile
 import yaml
 
 # The CHARMM value can be found throughout the CHARMM source code.  The OpenMM
@@ -702,56 +703,71 @@ class TestRunner:
         # Execute custom commands.
         charmm_input_lines.extend(test_spec["charmm_commands"])
 
-        for coordinates_index, coordinates in enumerate(coordinates_list):
-            # Set all coordinates.
-            for atom_index, coordinate in enumerate(coordinates):
-                x, y, z = coordinate.value_in_unit(openmm.unit.angstrom)
-                charmm_input_lines.append(
-                    f"coor set xdir {x:.16f} ydir {y:.16f} zdir {z:.16f} sele bynu {atom_index + 1} end"
-                )
+        with tempfile.TemporaryDirectory() as temporary_path:
+            for coordinates_index, coordinates in enumerate(coordinates_list):
+                # Load coordinates.  Ignore residue and atom name checks and
+                # read sequentially.
+                coordinates_path = os.path.join(temporary_path, f"{coordinates_index}.crd")
+                charmm_input_lines.append(f"read coor ignore name {coordinates_path}")
 
-            if not coordinates_index and "box" in test_spec:
-                box = test_spec["box"]
-                box_a = box["a"].value_in_unit(openmm.unit.angstrom)
-                box_b = box["b"].value_in_unit(openmm.unit.angstrom)
-                box_c = box["c"].value_in_unit(openmm.unit.angstrom)
-                charmm_input_lines.append(f"crys define cubic {box_a} {box_b} {box_c} 90 90 90")
-                charmm_input_lines.append(f"crys build cutoff {max(box_a, box_b, box_c)} noper 0")
+                # Set up periodic images.
+                if not coordinates_index and "box" in test_spec:
+                    box = test_spec["box"]
+                    box_a = box["a"].value_in_unit(openmm.unit.angstrom)
+                    box_b = box["b"].value_in_unit(openmm.unit.angstrom)
+                    box_c = box["c"].value_in_unit(openmm.unit.angstrom)
+                    charmm_input_lines.append(f"crys define cubic {box_a} {box_b} {box_c} 90 90 90")
+                    charmm_input_lines.append(f"crys build cutoff {max(box_a, box_b, box_c)} noper 0")
 
-            # Evaluate the energy and forces for the entire system.  Append a tag
-            # that we can search for in the output.
-            charmm_input_lines.append(f"!{ENERGY_FORCE_TAG}")
-            charmm_input_lines.append("skip none")
-            charmm_input_lines.append("ener")
-            charmm_input_lines.append("coor force comp")
-            charmm_input_lines.append("print coor comp")
-
-            # Evaluate energies and forces for each force group.  Turn off all terms
-            # (skip all), but leave (excl) some in.
-            for force_group in ForceGroup:
-                charmm_input_lines.append(f"! {ENERGY_FORCE_TAG}")
-                charmm_input_lines.append(f"skip all excl {' '.join(FORCE_GROUP_DATA[force_group][0])}")
+                # Evaluate the energy and forces for the entire system.  Append
+                # a tag that we can search for in the output.
+                charmm_input_lines.append(f"!{ENERGY_FORCE_TAG}")
+                charmm_input_lines.append("skip none")
                 charmm_input_lines.append("ener")
                 charmm_input_lines.append("coor force comp")
                 charmm_input_lines.append("print coor comp")
 
-            # Evaluate just electrostatic energies and forces.  This is used to get
-            # a good comparison between OpenMM and CHARMM because of their different
-            # values for the vacuum permittivity.
-            charmm_input_lines.append(f"! {ENERGY_FORCE_TAG}")
-            charmm_input_lines.append("skip all excl elec")
-            charmm_input_lines.append("ener")
-            charmm_input_lines.append("coor force comp")
-            charmm_input_lines.append("print coor comp")
+                # Evaluate energies and forces for each force group.  Turn off
+                # all terms (skip all), but leave (excl) some in.
+                for force_group in ForceGroup:
+                    charmm_input_lines.append(f"! {ENERGY_FORCE_TAG}")
+                    charmm_input_lines.append(f"skip all excl {' '.join(FORCE_GROUP_DATA[force_group][0])}")
+                    charmm_input_lines.append("ener")
+                    charmm_input_lines.append("coor force comp")
+                    charmm_input_lines.append("print coor comp")
 
-        if dump_in_path is not None:
-            with open(dump_in_path, "w") as dump_in_file:
-                for line in charmm_input_lines:
-                    print(line, file=dump_in_file)
+                # Evaluate just electrostatic energies and forces.  This is used
+                # to get a good comparison between OpenMM and CHARMM because of
+                # their different values for the vacuum permittivity.
+                charmm_input_lines.append(f"! {ENERGY_FORCE_TAG}")
+                charmm_input_lines.append("skip all excl elec")
+                charmm_input_lines.append("ener")
+                charmm_input_lines.append("coor force comp")
+                charmm_input_lines.append("print coor comp")
 
-        # Run CHARMM.
-        charmm_input_lines.append("stop")
-        result = subprocess.run(["charmm"], input="\n".join(charmm_input_lines).encode(), capture_output=True)
+            charmm_input_lines.append("stop")
+
+            if dump_in_path is not None:
+                with open(dump_in_path, "w") as dump_in_file:
+                    for line in charmm_input_lines:
+                        print(line, file=dump_in_file)
+
+            # Write coordinates into the temporary directory.  Only write X, Y,
+            # and Z coordinates and other numeric fields as names will be
+            # ignored.  Note that this is a fixed-width format.
+            psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
+            for coordinates_index, coordinates in enumerate(coordinates_list):
+                with open(os.path.join(temporary_path, f"{coordinates_index}.crd"), "w") as coordinates_file:
+                    coordinates_file.write(f"* TEST\n*\n{len(coordinates):10}  EXT\n")
+                    for atom_index, (atom, xyz) in enumerate(zip(psf_file.atom_list, coordinates)):
+                        x, y, z = xyz.value_in_unit(openmm.unit.angstrom)
+                        coordinates_file.write(
+                            f"{atom_index + 1:10}{atom.residue.idx:10}                    "
+                            f"{x:20.10f}{y:20.10f}{z:20.10f}            {atom.residue.idx:8}{1:20.10f}\n"
+                        )
+
+            # Run CHARMM.
+            result = subprocess.run(["charmm"], input="\n".join(charmm_input_lines).encode(), capture_output=True)
 
         if dump_out_path is not None:
             with open(dump_out_path, "wb") as dump_out_file:
