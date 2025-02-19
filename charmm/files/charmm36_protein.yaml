@@ -32,6 +32,42 @@
       # Here we manually add in the DISU (cysteine disulfide) patch to the force
       # field since ParmEd doesn't convert it automatically
       - action: append
+        target: ./AtomTypes
+        content:
+          tag: Type
+          attrib:
+            name: DISU-1CB
+            class: CT2
+            element: C
+            mass: '12.011'
+      - action: append
+        target: ./AtomTypes
+        content:
+          tag: Type
+          attrib:
+            name: DISU-1SG
+            class: SM
+            element: S
+            mass: '32.06'
+      - action: append
+        target: ./AtomTypes
+        content:
+          tag: Type
+          attrib:
+            name: DISU-2SG
+            class: SM
+            element: S
+            mass: '32.06'
+      - action: append
+        target: ./AtomTypes
+        content:
+          tag: Type
+          attrib:
+            name: DISU-2CB
+            class: CT2
+            element: C
+            mass: '12.011'
+      - action: append
         target: ./Patches
         content:
           tag: Patch
