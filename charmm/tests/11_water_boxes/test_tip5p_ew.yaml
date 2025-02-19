@@ -1,0 +1,30 @@
+name: TIP5P-EW water box
+
+psf_file: waterbox-5-site-tip5p-ew.psf
+pdb_file: waterbox-5-site.pdb
+
+charmm_files:
+  - non_charmm/toppar_water_ions_tip5p_ew.str
+charmm_commands:
+  - nbonds atom ewald pmew fftx 32 ffty 32 fftz 32 kappa 0.32 order 6 cutnb 12 vdw vswitched ctonnb 10 ctofnb 12
+
+ffxml_files:
+  - waters_ions_tip5p_ew.xml
+create_system_options:
+  flexibleConstraints: true
+  nonbondedCutoff: [12, angstrom]
+  nonbondedMethod: PME
+  removeCMMotion: false
+  rigidWater: true
+  switchDistance: [10, angstrom]
+ffxml_dispersion_correction: false
+openmm_pme:
+  fftx: 32
+  ffty: 32
+  fftz: 32
+  kappa: 0.32
+
+box:
+  a: [30, angstrom]
+  b: [30, angstrom]
+  c: [30, angstrom]

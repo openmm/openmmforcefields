@@ -505,8 +505,16 @@ class TestRunner:
             for force_group in (None, *ForceGroup):
                 difference_data = []
                 for result_1, result_2 in zip(results_1, results_2):
-                    for force_1, force_2 in zip(result_1[force_group]["forces"], result_2[force_group]["forces"]):
+                    for force_1, force_2, is_virtual_1, is_virtual_2 in zip(result_1[force_group]["forces"], result_2[force_group]["forces"], result_1[force_group]["mask"], result_2[force_group]["mask"]):
+                        if is_virtual_1 != is_virtual_2:
+                            raise ValueError("inconsistent specification of virtual sites")
+                        if is_virtual_1:
+                            # Skip virtual site comparison since CHARMM reports
+                            # the forces on these to be zero, and it is possible
+                            # for the order to be different in OpenMM.
+                            continue
                         difference_data.append(self._compare_forces(force_1, force_2))
+
                 failure_count += self._format_force_difference_data(
                     "TOTAL" if force_group is None else force_group.name, difference_data
                 )
@@ -704,6 +712,14 @@ class TestRunner:
         charmm_input_lines.extend(test_spec["charmm_commands"])
 
         with tempfile.TemporaryDirectory() as temporary_path:
+            # The PSF file is only used to check for the presence of lone pairs
+            # and to retrieve data needed to write the coordinate files.
+            psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
+            has_lone_pairs = len(psf_file.lonepair_list) > 0
+            virtual_site_mask = numpy.zeros(len(psf_file.atom_list))
+            for lone_pair in psf_file.lonepair_list:
+                virtual_site_mask[lone_pair[0]] = True
+
             for coordinates_index, coordinates in enumerate(coordinates_list):
                 # Load coordinates.  Ignore residue and atom name checks and
                 # read sequentially.
@@ -755,7 +771,6 @@ class TestRunner:
             # Write coordinates into the temporary directory.  Only write X, Y,
             # and Z coordinates and other numeric fields as names will be
             # ignored.  Note that this is a fixed-width format.
-            psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
             for coordinates_index, coordinates in enumerate(coordinates_list):
                 with open(os.path.join(temporary_path, f"{coordinates_index}.crd"), "w") as coordinates_file:
                     coordinates_file.write(f"* TEST\n*\n{len(coordinates):10}  EXT\n")
@@ -884,6 +899,7 @@ class TestRunner:
                 forces=openmm.unit.Quantity(
                     -numpy.array(forces), openmm.unit.kilocalorie_per_mole / openmm.unit.angstrom
                 ),
+                mask=virtual_site_mask,
             )
 
         results = []
@@ -1261,6 +1277,9 @@ class TestRunner:
             energy as "energy" and forces as "forces".
         """
 
+        # Get a mask of virtual sites.
+        virtual_site_mask = numpy.array([system.isVirtualSite(particle_index) for particle_index in range(system.getNumParticles())])
+
         # Set force groups of all forces in the System.
         for force_index, force in enumerate(system.getForces()):
             for force_group in ForceGroup:
@@ -1295,17 +1314,18 @@ class TestRunner:
         results = []
         for coordinates in coordinates_list:
             context.setPositions(coordinates)
+            context.computeVirtualSites()
 
             result = {}
 
             # Evaluate energies and forces for the entire system.
             state = context.getState(getEnergy=True, getForces=True)
-            result[None] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True))
+            result[None] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask)
 
             # Evaluate energies and forces for each force group.
             for force_group in ForceGroup:
                 state = context.getState(getEnergy=True, getForces=True, groups={force_group.value})
-                result[force_group] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True))
+                result[force_group] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask)
 
             results.append(result)
 
