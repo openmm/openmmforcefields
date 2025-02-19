@@ -94,6 +94,7 @@ FORCE_GROUP_DATA = {
     # and impropers would fail in that case even if the total energy was being
     # evaluated correctly, but this shouldn't happen for most systems.
 }
+CHARMM_ELECTROSTATIC_GROUPS = ("elec", "imel", "ewks", "ewse", "ewex")
 
 
 def main():
@@ -278,7 +279,6 @@ def run(args):
             term_failure_count = runner.run_test(test_path)
             test_results.append((test_path, term_failure_count == 0, f"{term_failure_count} terms exceeded tolerance"))
         except Exception as error:
-            raise error
             test_results.append((test_path, False, f"{type(error).__name__}: {error}"))
 
     if not test_results:
@@ -732,7 +732,7 @@ class TestRunner:
                     box_a = box["a"].value_in_unit(openmm.unit.angstrom)
                     box_b = box["b"].value_in_unit(openmm.unit.angstrom)
                     box_c = box["c"].value_in_unit(openmm.unit.angstrom)
-                    charmm_input_lines.append(f"crys define cubic {box_a} {box_b} {box_c} 90 90 90")
+                    charmm_input_lines.append(f"crys define orth {box_a} {box_b} {box_c} 90 90 90")
                     charmm_input_lines.append(f"crys build cutoff {max(box_a, box_b, box_c)} noper 0")
 
                 # Evaluate the energy and forces for the entire system.  Append
@@ -756,7 +756,7 @@ class TestRunner:
                 # to get a good comparison between OpenMM and CHARMM because of
                 # their different values for the vacuum permittivity.
                 charmm_input_lines.append(f"! {ENERGY_FORCE_TAG}")
-                charmm_input_lines.append("skip all excl elec")
+                charmm_input_lines.append(f"skip all excl {' '.join(CHARMM_ELECTROSTATIC_GROUPS)}")
                 charmm_input_lines.append("ener")
                 charmm_input_lines.append("coor force comp")
                 charmm_input_lines.append("print coor comp")
