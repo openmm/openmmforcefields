@@ -505,7 +505,12 @@ class TestRunner:
             for force_group in (None, *ForceGroup):
                 difference_data = []
                 for result_1, result_2 in zip(results_1, results_2):
-                    for force_1, force_2, is_virtual_1, is_virtual_2 in zip(result_1[force_group]["forces"], result_2[force_group]["forces"], result_1[force_group]["mask"], result_2[force_group]["mask"]):
+                    for force_1, force_2, is_virtual_1, is_virtual_2 in zip(
+                        result_1[force_group]["forces"],
+                        result_2[force_group]["forces"],
+                        result_1[force_group]["mask"],
+                        result_2[force_group]["mask"],
+                    ):
                         if is_virtual_1 != is_virtual_2:
                             raise ValueError("inconsistent specification of virtual sites")
                         if is_virtual_1:
@@ -715,7 +720,6 @@ class TestRunner:
             # The PSF file is only used to check for the presence of lone pairs
             # and to retrieve data needed to write the coordinate files.
             psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
-            has_lone_pairs = len(psf_file.lonepair_list) > 0
             virtual_site_mask = numpy.zeros(len(psf_file.atom_list))
             for lone_pair in psf_file.lonepair_list:
                 virtual_site_mask[lone_pair[0]] = True
@@ -1274,7 +1278,9 @@ class TestRunner:
         """
 
         # Get a mask of virtual sites.
-        virtual_site_mask = numpy.array([system.isVirtualSite(particle_index) for particle_index in range(system.getNumParticles())])
+        virtual_site_mask = numpy.array(
+            [system.isVirtualSite(particle_index) for particle_index in range(system.getNumParticles())]
+        )
 
         # Set force groups of all forces in the System.
         for force_index, force in enumerate(system.getForces()):
@@ -1316,12 +1322,16 @@ class TestRunner:
 
             # Evaluate energies and forces for the entire system.
             state = context.getState(getEnergy=True, getForces=True)
-            result[None] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask)
+            result[None] = dict(
+                energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask
+            )
 
             # Evaluate energies and forces for each force group.
             for force_group in ForceGroup:
                 state = context.getState(getEnergy=True, getForces=True, groups={force_group.value})
-                result[force_group] = dict(energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask)
+                result[force_group] = dict(
+                    energy=state.getPotentialEnergy(), forces=state.getForces(asNumpy=True), mask=virtual_site_mask
+                )
 
             results.append(result)
 
