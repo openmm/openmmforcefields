@@ -1,4 +1,3 @@
-import openmm
 import subprocess
 
 MOLECULE_COUNT = 855
@@ -17,6 +16,7 @@ SPECIFICATIONS = [
     ("waterbox-5-site-tip5p-ew.psf", "non_charmm/toppar_water_ions_tip5p_ew.str", "TP5E"),
 ]
 
+
 def main():
     for psf_path, str_path, residue_name in SPECIFICATIONS:
         input_lines = [
@@ -26,7 +26,7 @@ def main():
             f"read sequence {residue_name} {MOLECULE_COUNT}",
             f"generate {SYSTEM_NAME} noangle nodihedral",
             f"write psf card name {psf_path}",
-            f"* Water box",
+            "* Water box",
             f"* Input file:  {str_path}",
             f"* Output file: {psf_path}",
             "*",
@@ -34,6 +34,7 @@ def main():
         ]
 
         subprocess.run(["charmm"], input="\n".join(input_lines).encode(), check=True)
+
 
 if __name__ == "__main__":
     main()
