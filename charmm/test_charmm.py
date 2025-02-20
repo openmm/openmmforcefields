@@ -1137,12 +1137,8 @@ class TestRunner:
         if set(psf_system_impropers.keys()) != set(ffxml_system_impropers.keys()) or any(
             len(psf_system_impropers[key]) != len(ffxml_system_impropers[key]) for key in psf_system_impropers.keys()
         ):
-            import IPython
-
-            IPython.embed(colors="neutral")
-            raise SystemExit
-
             raise ValueError("PSF and FFXML system impropers do not match")
+
         for key, psf_list in psf_system_impropers.items():
             improper_count = len(psf_list)
             ffxml_list = ffxml_system_impropers.get(key, [])
