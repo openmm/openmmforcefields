@@ -266,6 +266,7 @@ def find_and_remove_xml_elements(root, target_elements):
     for child in root:
         find_and_remove_xml_elements(child, target_elements)
 
+
 def build_xml_element(data):
     element = etree.Element(data["tag"], data.get("attrib", {}))
     element.text = data.get("text", None)
