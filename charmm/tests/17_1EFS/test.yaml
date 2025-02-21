@@ -1,0 +1,15 @@
+name: 1EFS (DNA and RNA)
+
+psf_file: test.psf
+pdb_file: test.pdb
+
+charmm_files:
+  - top_all36_na.rtf
+  - par_all36_na.prm
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
+
+ffxml_files:
+  - charmm36_nowaters.xml
+create_system_options:
+  removeCMMotion: false

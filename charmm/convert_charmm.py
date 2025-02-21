@@ -236,12 +236,35 @@ def write_xml_file(tree, xml_filename):
 def apply_fixes(ffxml_tree, fixes):
     for fix in fixes:
         action = fix["action"]
-        for target_element in ffxml_tree.findall(fix.get("target", ".")):
-            if action == "append":
-                target_element.append(build_xml_element(fix["content"]))
-            else:
-                raise ValueError(f"Unknown action {action!r}")
+        target = fix.get("target", ".")
 
+        if isinstance(target, list):
+            target_elements = []
+            for target_item in target:
+                target_elements.extend(ffxml_tree.findall(target_item))
+        else:
+            target_elements = ffxml_tree.findall(target)
+
+        if action == "append":
+            content = fix["content"]
+            if not isinstance(content, list):
+                content = [content]
+
+            for target_element in target_elements:
+                for content_item in content:
+                    target_element.append(build_xml_element(content_item))
+
+        elif action == "remove":
+            find_and_remove_xml_elements(ffxml_tree.getroot(), target_elements)
+
+        else:
+            raise ValueError(f"Unknown action {action!r}")
+
+
+def find_and_remove_xml_elements(root, target_elements):
+    root[:] = [child for child in root if child not in target_elements]
+    for child in root:
+        find_and_remove_xml_elements(child, target_elements)
 
 def build_xml_element(data):
     element = etree.Element(data["tag"], data.get("attrib", {}))

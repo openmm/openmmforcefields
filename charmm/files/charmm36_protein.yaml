@@ -34,39 +34,30 @@
       - action: append
         target: ./AtomTypes
         content:
-          tag: Type
-          attrib:
-            name: DISU-1CB
-            class: CT2
-            element: C
-            mass: '12.011'
-      - action: append
-        target: ./AtomTypes
-        content:
-          tag: Type
-          attrib:
-            name: DISU-1SG
-            class: SM
-            element: S
-            mass: '32.06'
-      - action: append
-        target: ./AtomTypes
-        content:
-          tag: Type
-          attrib:
-            name: DISU-2SG
-            class: SM
-            element: S
-            mass: '32.06'
-      - action: append
-        target: ./AtomTypes
-        content:
-          tag: Type
-          attrib:
-            name: DISU-2CB
-            class: CT2
-            element: C
-            mass: '12.011'
+          - tag: Type
+            attrib:
+              name: DISU-1CB
+              class: CT2
+              element: C
+              mass: '12.011'
+          - tag: Type
+            attrib:
+              name: DISU-1SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2CB
+              class: CT2
+              element: C
+              mass: '12.011'
       - action: append
         target: ./Patches
         content:
