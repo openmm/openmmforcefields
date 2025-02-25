@@ -237,7 +237,7 @@
             attrib:
               atomName: P
       - action: append
-        target: ./Residues/Residue/AllowPatch[@name='DEO5']/..
+        target: ./Residues/Residue/AllowPatch[@name='DEO5_0']/..
         content:
           - tag: AllowPatch
             attrib:
@@ -247,12 +247,12 @@
               name: DEO5MET
       - action: remove
         target:
-          - ./Residues/Residue/AllowPatch[@name='DEO5']
-          - ./Patches/Patch[@name='DEO5']
+          - ./Residues/Residue/AllowPatch[@name='DEO5_0']
+          - ./Patches/Patch[@name='DEO5_0']
       - action: append
         target:
-          - ./Patches/Patch[@name='5TER']
-          - ./Patches/Patch[@name='5MET']
+          - ./Patches/Patch[@name='5TER_0']
+          - ./Patches/Patch[@name='5MET_0']
         content:
           tag: RemoveExternalBond
           attrib:

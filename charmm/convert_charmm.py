@@ -287,10 +287,15 @@ def strip_tree(
     def keep_template(template_name, check_template_names):
         return is_split == (template_name in check_template_names)
 
+    # Helper function to extract a true patch name from a patch name in the XML
+    # file (which will also contain a version number).
+    def get_patch_name(patch_versioned_name):
+        return patch_versioned_name.rsplit("_", maxsplit=1)[0]
+
     root = ffxml_tree.getroot()
 
     main_elements = []
-    allow_patch_entries = []
+    apply_patch_entries = []
     saved_residue_elements = {}
     saved_patch_elements = {}
 
@@ -306,15 +311,11 @@ def strip_tree(
             for residue_element in main_element:
                 residue_name = residue_element.attrib["name"]
 
-                # Save the information from all <AllowPatch> tags before
-                # discarding them.
-                item_elements = []
+                # We expect that ParmEd will have written information only in
+                # <ApplyToResidue> tags, not <AllowPatch> tags.
                 for item_element in residue_element:
                     if item_element.tag == "AllowPatch":
-                        allow_patch_entries.append((residue_name, item_element.attrib["name"]))
-                        continue
-                    item_elements.append(item_element)
-                residue_element[:] = item_elements
+                        raise ValueError("expected only <ApplyToResidue>, not <AllowPatch>")
 
                 if not keep_template(residue_name, check_residue_names):
                     continue
@@ -331,12 +332,22 @@ def strip_tree(
             patch_elements = []
 
             for patch_element in main_element:
-                patch_name = patch_element.attrib["name"]
+                patch_versioned_name = patch_element.attrib["name"]
 
-                if not keep_template(patch_name, check_patch_names):
+                # Save the information from all <ApplyToResidue> tags before
+                # discarding them.
+                item_elements = []
+                for item_element in patch_element:
+                    if item_element.tag == "ApplyToResidue":
+                        apply_patch_entries.append((patch_versioned_name, item_element.attrib["name"]))
+                        continue
+                    item_elements.append(item_element)
+                patch_element[:] = item_elements
+
+                if not keep_template(get_patch_name(patch_versioned_name), check_patch_names):
                     continue
 
-                saved_patch_elements[patch_name] = patch_element
+                saved_patch_elements[patch_versioned_name] = patch_element
                 patch_elements.append(patch_element)
 
             if not patch_elements:
@@ -353,17 +364,19 @@ def strip_tree(
     root[:] = main_elements
 
     # Add back <AllowPatch> and <ApplyToResidue> tags if possible.
-    for residue_name, patch_name in allow_patch_entries:
+    for patch_versioned_name, residue_name in apply_patch_entries:
         if residue_name in saved_residue_elements and (
-            patch_name in saved_patch_elements or patch_name in main_patch_names
+            patch_versioned_name in saved_patch_elements or get_patch_name(patch_versioned_name) in main_patch_names
         ):
-            etree.SubElement(saved_residue_elements[residue_name], "AllowPatch", name=patch_name)
-        elif patch_name in saved_patch_elements and (
+            etree.SubElement(saved_residue_elements[residue_name], "AllowPatch", name=patch_versioned_name)
+        elif patch_versioned_name in saved_patch_elements and (
             residue_name in saved_residue_elements or residue_name in main_residue_names
         ):
-            etree.SubElement(saved_patch_elements[patch_name], "ApplyToResidue", name=residue_name)
+            etree.SubElement(saved_patch_elements[patch_versioned_name], "ApplyToResidue", name=residue_name)
 
-    return set(saved_residue_elements), set(saved_patch_elements)
+    return set(saved_residue_elements), set(
+        get_patch_name(patch_versioned_name) for patch_versioned_name in saved_patch_elements
+    )
 
 
 def write_improper_script(
