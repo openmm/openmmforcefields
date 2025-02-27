@@ -147,6 +147,18 @@ def convert_yaml(yaml_filename, ffxml_dir):
         params.improper_periodic_types.clear()
         params.improper_types.clear()
 
+        # ParmEd does not handle CHARMM anisotropies properly, so save all of
+        # the information about them to deal with later.  The anisotropy
+        # information will be removed from the Drude force entry in the force
+        # field and applied in a script.
+        residue_anisotropies = {
+            residue_name: residue.anisotropies.copy() for residue_name, residue in params.residues.items()
+        }
+        patch_anisotropies = {patch_name: patch.anisotropies.copy() for patch_name, patch in params.patches.items()}
+        delete_anisotropies = {
+            patch_name: patch.delete_anisotropies.copy() for patch_name, patch in params.patches.items()
+        }
+
         # For each entry, store the name of the XML file to contain the
         # residues.  Load CHARMM parameter sets to determine residues and
         # patches to split out.
@@ -196,6 +208,13 @@ def convert_yaml(yaml_filename, ffxml_dir):
             periodic_improper_types,
             harmonic_improper_types,
         )
+        write_anisotropy_script(
+            main_ffxml_tree,
+            residue_anisotropies,
+            patch_anisotropies,
+            delete_anisotropies,
+        )
+
         apply_fixes(main_ffxml_tree, source_files.get("fixes", []))
         write_xml_file(main_ffxml_tree, ffxml_filename)
         app.ForceField(ffxml_filename)
@@ -354,6 +373,15 @@ def strip_tree(
                 continue
             main_element[:] = patch_elements
 
+        elif main_element.tag == "DrudeForce":
+            # Remove <DrudeForce> from split files; remove anisotropy
+            # information from main files.
+            if is_split:
+                continue
+            for particle_element in main_element:
+                for anisotropy_attrib in ("type3", "type4", "type5", "aniso12", "aniso34"):
+                    particle_element.attrib.pop(anisotropy_attrib, None)
+
         else:
             # Remove all other tags from split files.
             if is_split:
@@ -464,6 +492,52 @@ def write_improper_script(
         patch_order=repr(patch_order),
         periodic_improper_types=repr(periodic_improper_types),
         harmonic_improper_types=repr(harmonic_improper_types),
+    )
+
+
+def write_anisotropy_script(ffxml_tree, residue_anisotropies, patch_anisotropies, delete_anisotropies):
+    # Do not write a script to the file if there are no anisotropies present.
+    if not (residue_anisotropies or patch_anisotropies):
+        return
+
+    # Helper function to extract data from anisotropy objects.
+    def preprocess_template_anisotropies(template_anisotropies):
+        return {
+            residue: {
+                anisotropy.atom1.name: (
+                    anisotropy.atom2.name,
+                    anisotropy.atom3.name,
+                    anisotropy.atom4.name,
+                    anisotropy.a11,
+                    anisotropy.a22,
+                )
+                for anisotropy in anisotropies
+            }
+            for residue, anisotropies in template_anisotropies.items()
+            if anisotropies
+        }
+
+    residue_anisotropies = preprocess_template_anisotropies(residue_anisotropies)
+    patch_anisotropies = preprocess_template_anisotropies(patch_anisotropies)
+    delete_anisotropies = {
+        residue: [anisotropy[0] for anisotropy in anisotropies]
+        for residue, anisotropies in delete_anisotropies.items()
+        if anisotropies
+    }
+
+    residue_order = {residue: index for index, residue in enumerate(residue_anisotropies)}
+    patch_order = {patch: index for index, patch in enumerate(patch_anisotropies)}
+
+    with open("convert_charmm_anisotropy_script.txt") as script_file:
+        script_template = script_file.read()
+
+    script = etree.SubElement(ffxml_tree.getroot(), "Script")
+    script.text = script_template.format(
+        residue_anisotropies=repr(residue_anisotropies),
+        patch_anisotropies=repr(patch_anisotropies),
+        delete_anisotropies=repr(delete_anisotropies),
+        residue_order=repr(residue_order),
+        patch_order=repr(patch_order),
     )
 
 

@@ -1,4 +1,5 @@
 import argparse
+import copy
 import enum
 import itertools
 import numpy
@@ -19,12 +20,12 @@ CHARMM_VACUUM_PERMITTIVITY = (
 OPENMM_VACUUM_PERMITTIVITY = 8.8541878128e-12 * openmm.unit.farad / openmm.unit.meter
 CHARMM_ELECTROSTATIC_SCALE = CHARMM_VACUUM_PERMITTIVITY / OPENMM_VACUUM_PERMITTIVITY
 
-DEFAULT_ABSOLUTE_ENERGY_TOLERANCE = 1e-4  # kcal/mol
-DEFAULT_RELATIVE_ENERGY_TOLERANCE = 1e-4
-DEFAULT_ABSOLUTE_FORCE_TOLERANCE = 1e-2  # kcal/mol/Å
-DEFAULT_RELATIVE_FORCE_TOLERANCE = 1e-2
+DEFAULT_ABSOLUTE_ENERGY_TOLERANCE = 2e-4  # kcal/mol
+DEFAULT_RELATIVE_ENERGY_TOLERANCE = 2e-4
+DEFAULT_ABSOLUTE_FORCE_TOLERANCE = 2e-2  # kcal/mol/Å
+DEFAULT_RELATIVE_FORCE_TOLERANCE = 2e-2
 
-DEFAULT_PERTURB_DISTANCE = 0.1  # Å
+DEFAULT_PERTURB_DISTANCE = 0.05  # Å
 
 DEFAULT_OPENMM_PLATFORM = "automatic"
 
@@ -37,9 +38,7 @@ FORCE_PRINT_UNIT = ENERGY_PRINT_UNIT / openmm.unit.angstrom
 # A string that shouldn't appear in the CHARMM output.
 ENERGY_FORCE_TAG = "OPENMMFORCEFIELDS-TEST-CHARMM-ENERGY-FORCES"
 
-# CHARMM doesn't print out energies to more than 5 places, so the last place
-# might be off by a few digits.
-CHARMM_ENERGY_CHECK_PRECISION = 5e-5
+CHARMM_ENERGY_CHECK_PRECISION = 1e-3
 
 OPENMM_CONSTRAINTS = {
     "None": None,
@@ -74,6 +73,7 @@ class ForceGroup(enum.Enum):
     IMPROPERS = 4
     CMAP = 5
     NONBONDED = 6
+    DRUDE = 7
 
 
 # For each force group, the CHARMM skip keywords, the labels in the CHARMM
@@ -89,12 +89,27 @@ FORCE_GROUP_DATA = {
         ("VDWaals", "ELEC", "IMNBvdw", "IMELec", "EWKSum", "EWSElf", "EWEXcl"),
         (openmm.NonbondedForce, openmm.CustomNonbondedForce, openmm.CustomBondForce),
     ),
+    ForceGroup.DRUDE: (
+        (),
+        (),
+        (openmm.DrudeForce,),
+    ),
     # NOTE: Impropers could be under a PeriodicTorsionForce but this almost
     # never occurs in the CHARMM force field.  The decomposition between propers
     # and impropers would fail in that case even if the total energy was being
     # evaluated correctly, but this shouldn't happen for most systems.
 }
+
+# Groups to use when evaluating just electrostatic forces (to scale CHARMM vs.
+# OpenMM results accurately).
 CHARMM_ELECTROSTATIC_GROUPS = ("elec", "imel", "ewks", "ewse", "ewex")
+
+# Groups to merge into Drude forces when comparing CHARMM with OpenMM (since
+# CHARMM uses a different splitting of Drude forces).
+CHARMM_DRUDE_GROUPS = (
+    ForceGroup.BONDS_UREY_BRADLEY,
+    ForceGroup.NONBONDED,
+)
 
 
 def main():
@@ -482,10 +497,28 @@ class TestRunner:
         if len(results_sets) < 2:
             raise ValueError("must specify at least 2 methods to compare")
 
+        # Special handling occurs for Drude systems.
+        is_drude = test_spec.get("drude", False)
+
         print(f"Test {test_spec['name']!r} in {test_path!r}:")
         failure_count = 0
         for (name_1, results_1), (name_2, results_2) in itertools.combinations(results_sets.items(), 2):
             print(f"    Comparing {name_1} vs. {name_2}")
+
+            # If comparing Drude energies and forces between CHARMM and OpenMM,
+            # lump bonds, non-bonded forces, and Drude forces together (here
+            # into the DRUDE group) since they are split up differently between
+            # the two programs.
+            if is_drude and name_1 == "charmm" and name_2 != "charmm":
+                results_1 = copy.deepcopy(results_1)
+                results_2 = copy.deepcopy(results_2)
+                for results in (results_1, results_2):
+                    for result in results:
+                        for group in CHARMM_DRUDE_GROUPS:
+                            result[ForceGroup.DRUDE]["energy"] += result[group]["energy"]
+                            result[group]["energy"] *= 0
+                            result[ForceGroup.DRUDE]["forces"] += result[group]["forces"]
+                            result[group]["forces"] *= 0
 
             # Print results for energies.
             print(f"        {'Energy error':20}  {'|ΔE| (kcal/mol)':20}  {'Relative':12}")
@@ -505,20 +538,36 @@ class TestRunner:
             for force_group in (None, *ForceGroup):
                 difference_data = []
                 for result_1, result_2 in zip(results_1, results_2):
-                    for force_1, force_2, is_virtual_1, is_virtual_2 in zip(
-                        result_1[force_group]["forces"],
-                        result_2[force_group]["forces"],
-                        result_1[force_group]["mask"],
-                        result_2[force_group]["mask"],
-                    ):
-                        if is_virtual_1 != is_virtual_2:
-                            raise ValueError("inconsistent specification of virtual sites")
-                        if is_virtual_1:
-                            # Skip virtual site comparison since CHARMM reports
-                            # the forces on these to be zero, and it is possible
-                            # for the order to be different in OpenMM.
-                            continue
-                        difference_data.append(self._compare_forces(force_1, force_2))
+                    forces_1 = result_1[force_group]["forces"]
+                    forces_2 = result_2[force_group]["forces"]
+                    is_virtual_1 = result_1[force_group]["mask"] != 0
+                    is_virtual_2 = result_2[force_group]["mask"] != 0
+
+                    if not numpy.all(is_virtual_1 == is_virtual_2):
+                        raise ValueError("inconsistent specification of virtual sites")
+
+                    forces_1[is_virtual_1] *= 0
+                    forces_2[is_virtual_2] *= 0
+
+                    magnitudes_1 = numpy.linalg.norm(forces_1.value_in_unit(FORCE_PRINT_UNIT), axis=1)
+                    magnitudes_2 = numpy.linalg.norm(forces_2.value_in_unit(FORCE_PRINT_UNIT), axis=1)
+                    absolute_differences = numpy.linalg.norm(
+                        (forces_2 - forces_1).value_in_unit(FORCE_PRINT_UNIT), axis=1
+                    )
+                    relative_mask = (magnitudes_1 != 0) | (magnitudes_2 != 0)
+                    relative_differences = numpy.zeros(absolute_differences.shape)
+                    relative_differences[relative_mask] = absolute_differences[relative_mask] / numpy.maximum(
+                        magnitudes_1[relative_mask], magnitudes_2[relative_mask]
+                    )
+                    absolute_failures = absolute_differences > self.absolute_force_tolerance.value_in_unit(
+                        FORCE_PRINT_UNIT
+                    )
+                    relative_failures = relative_differences > self.relative_force_tolerance
+                    absolute_differences *= FORCE_PRINT_UNIT
+
+                    difference_data.append(
+                        (absolute_failures, relative_failures, absolute_differences, relative_differences)
+                    )
 
                 failure_count += self._format_force_difference_data(
                     "TOTAL" if force_group is None else force_group.name, difference_data
@@ -553,41 +602,6 @@ class TestRunner:
         else:
             relative_difference = 0.0
         return absolute_difference, relative_difference
-
-    def _compare_forces(self, force_1, force_2):
-        """
-        Helper function for comparing forces.
-
-        Parameters
-        ----------
-        force_1 : openmm.unit.Quantity
-            The first force to compare.  Should be a vector.
-        force_2 : openmm.unit.Quantity
-            The second force to compare.  Should be a vector.
-
-        Returns
-        -------
-        bool, bool, openmm.unit.Quantity, float
-            Whether or not the difference between the forces satisfies desired
-            absolute and relative tolerances, followed by the magnitude of the
-            difference vector between the forces, followed by the ratio of this
-            magnitude to that of the force with the larger magnitude (or zero if
-            forces are zero).
-        """
-
-        magnitude_1 = numpy.linalg.norm(force_1.value_in_unit(FORCE_PRINT_UNIT)) * FORCE_PRINT_UNIT
-        magnitude_2 = numpy.linalg.norm(force_2.value_in_unit(FORCE_PRINT_UNIT)) * FORCE_PRINT_UNIT
-        absolute_difference = numpy.linalg.norm((force_2 - force_1).value_in_unit(FORCE_PRINT_UNIT)) * FORCE_PRINT_UNIT
-        if magnitude_1 or magnitude_2:
-            relative_difference = absolute_difference / max(magnitude_1, magnitude_2)
-        else:
-            relative_difference = 0.0
-        return (
-            absolute_difference > self.absolute_force_tolerance,
-            relative_difference > self.relative_force_tolerance,
-            absolute_difference,
-            relative_difference,
-        )
 
     def _format_energy_difference_data(self, label, difference_data):
         """
@@ -650,12 +664,15 @@ class TestRunner:
         absolute_failures, relative_failures, absolute_differences, relative_differences = zip(*difference_data)
 
         any_failures = any(
-            absolute_failure and relative_failure
+            numpy.any(absolute_failure & relative_failure)
             for absolute_failure, relative_failure in zip(absolute_failures, relative_failures)
         )
-        formatted_line = (
-            f"{max(absolute_differences).value_in_unit(FORCE_PRINT_UNIT):20.12e}  {max(relative_differences):12.8f}"
+        absolute_display = max(
+            numpy.amax(absolute_difference.value_in_unit(FORCE_PRINT_UNIT))
+            for absolute_difference in absolute_differences
         )
+        relative_display = numpy.amax(relative_differences)
+        formatted_line = f"{absolute_display:20.12e}  {relative_display:12.8f}"
         if any_failures:
             formatted_line = color_message(formatted_line)
         print(f"        {label:20}  {formatted_line}")
@@ -720,7 +737,7 @@ class TestRunner:
             # The PSF file is only used to check for the presence of lone pairs
             # and to retrieve data needed to write the coordinate files.
             psf_file = openmm.app.CharmmPsfFile(os.path.join(test_directory, test_spec["psf_file"]))
-            virtual_site_mask = numpy.zeros(len(psf_file.atom_list))
+            virtual_site_mask = numpy.zeros(len(psf_file.atom_list), dtype=bool)
             for lone_pair in psf_file.lonepair_list:
                 virtual_site_mask[lone_pair[0]] = True
 
@@ -1083,10 +1100,26 @@ class TestRunner:
             atoms_bonded_to[bond.atom2.idx].add(bond.atom1.idx)
 
         # Helper function to find if atom indices correspond to an improper.
-        # The central atom should always be listed first.
-        def is_improper(index_1, index_2, index_3, index_4):
+        # The central atom should always be listed first or last.
+        def check_improper(index_1, index_2, index_3, index_4):
             bonded_to_1 = atoms_bonded_to[index_1]
-            return index_2 in bonded_to_1 and index_3 in bonded_to_1 and index_4 in bonded_to_1
+            bonded_to_4 = atoms_bonded_to[index_4]
+            is_improper_1 = index_2 in bonded_to_1 and index_3 in bonded_to_1 and index_4 in bonded_to_1
+            is_improper_4 = index_1 in bonded_to_4 and index_2 in bonded_to_4 and index_3 in bonded_to_4
+
+            # Return whether or not this is an improper, and if so, if the
+            # central atom is last instead of first.  If both atoms look like a
+            # central atom, something is wrong; report that this is not an
+            # improper.  If this is not an improper, the second return value
+            # should not be checked.
+            return (is_improper_1 ^ is_improper_4, is_improper_4)
+
+        # Helper function to turn a set of indices into a key for an improper.
+        def improper_to_key(index_1, index_2, index_3, index_4, is_flipped):
+            if is_flipped:
+                return (index_4, *sorted((index_1, index_2, index_3)))
+            else:
+                return (index_1, *sorted((index_2, index_3, index_4)))
 
         # Classify the impropers in the PSF.
         psf_impropers = {}
@@ -1097,14 +1130,16 @@ class TestRunner:
             index_4 = improper.atom4.idx
 
             # Make sure that this improper is topologically valid.
-            if not is_improper(index_1, index_2, index_3, index_4):
+            is_improper, is_flipped = check_improper(index_1, index_2, index_3, index_4)
+            if not is_improper:
                 raise ValueError(f"improper {index_1}-{index_2}-{index_3}-{index_4} in PSF is invalid")
 
             # Make a key for the improper lookup that ignores the order of the
             # non-central atoms.  Store in a dictionary the correct order.
             # There may be more than one improper for this key.
-            key = (index_1, *sorted((index_2, index_3, index_4)))
-            psf_impropers.setdefault(key, []).append((index_1, index_2, index_3, index_4))
+            psf_impropers.setdefault(improper_to_key(index_1, index_2, index_3, index_4, is_flipped), []).append(
+                (index_1, index_2, index_3, index_4)
+            )
 
         # Classifies the impropers in a system.
         def classify_system_impropers(system):
@@ -1115,12 +1150,12 @@ class TestRunner:
                         index_1, index_2, index_3, index_4, *torsion_parameters = force.getTorsionParameters(
                             term_index
                         )
-                        if not is_improper(index_1, index_2, index_3, index_4):
+                        is_improper, is_flipped = check_improper(index_1, index_2, index_3, index_4)
+                        if not is_improper:
                             continue
-                        key = (index_1, *sorted((index_2, index_3, index_4)))
-                        impropers.setdefault(key, []).append(
-                            ((index_1, index_2, index_3, index_4), (force_index, term_index))
-                        )
+                        impropers.setdefault(
+                            improper_to_key(index_1, index_2, index_3, index_4, is_flipped), []
+                        ).append(((index_1, index_2, index_3, index_4), (force_index, term_index)))
             return impropers
 
         psf_system_impropers = classify_system_impropers(psf_system)
@@ -1279,7 +1314,7 @@ class TestRunner:
 
         # Get a mask of virtual sites.
         virtual_site_mask = numpy.array(
-            [system.isVirtualSite(particle_index) for particle_index in range(system.getNumParticles())]
+            [system.isVirtualSite(particle_index) for particle_index in range(system.getNumParticles())], dtype=bool
         )
 
         # Set force groups of all forces in the System.

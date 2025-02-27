@@ -1,0 +1,16 @@
+name: 1VII protein in vacuum (Drude)
+
+psf_file: step2_drude.psf
+pdb_file: step2_drude.pdb
+
+charmm_files:
+  - drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
+
+ffxml_files:
+  - charmm_polar_2023.xml
+create_system_options:
+  removeCMMotion: false
+
+drude: true

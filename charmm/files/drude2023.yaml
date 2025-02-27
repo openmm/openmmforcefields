@@ -9,18 +9,27 @@
 - Destination: charmm_polar_2023.xml
   Source:
     include:
-     - toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str
-     - toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str
-     - toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str
-     - toppar/drude/drude_toppar_2023/toppar_drude_model_2023a.str
-     # - toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str
-     - toppar/drude/drude_toppar_2023/toppar_drude_lipid_2023a.str
+      - toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str
+      - toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str
+      - toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str
+      - toppar/drude/drude_toppar_2023/toppar_drude_model_2023a.str
+      # - toppar/drude/drude_toppar_2023/toppar_drude_nucleic_acid_2017d.str
+      - toppar/drude/drude_toppar_2023/toppar_drude_lipid_2023a.str
     exclude_residues:
-     - SWM6
+      - SWM6
+    exclude_patches:
+      # Won't support single amino acids since the terminal patches are
+      # different and cause ambiguity for assigning templates to polypeptides,
+      # but this shouldn't be a significant use case
+      - CTES
+      - NTES
     split:
       - input:
         - toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str
         output: charmm_polar_2023_d.xml
+    fixes:
+      - action: remove
+        target: ./Residues/Residue[@name!='PRO']/AllowPatch[@name='CTEP_0']
   References:
    protein:
      - >-
