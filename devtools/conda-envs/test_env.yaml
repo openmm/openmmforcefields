@@ -10,6 +10,7 @@ dependencies:
   - pytest-randomly
   - openmm
   - openff-toolkit >=0.11
+  - openff-interchange =0.4.1
   - pyyaml
   - ambertools >=22,<24
   - lxml
