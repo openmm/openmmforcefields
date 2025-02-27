@@ -1589,6 +1589,14 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         system = self._smirnoff_forcefield.create_openmm_system(
             molecule.to_topology(), charge_from_molecules=charge_from_molecules
         )
+
+        # Remove CMMotionRemover if present
+        # See https://github.com/openmm/openmmforcefields/issues/365
+        for f_idx in range(system.getNumForces()):
+            force = system.getForce(f_idx)
+            if "CMMotionRemover" in str(force):
+                system.removeForce(f_idx)
+
         self.cache_system(smiles, system)
 
         # Convert to ffxml
