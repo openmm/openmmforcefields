@@ -9,8 +9,8 @@ dependencies:
   - pytest-xdist
   - pytest-randomly
   - openmm
-  - openff-toolkit >=0.11
-  - openff-interchange =0.4.1
+  - openff-toolkit >=0.16.1
+  - openff-interchange !=0.4.2
   - pyyaml
   - ambertools >=24
   - lxml
