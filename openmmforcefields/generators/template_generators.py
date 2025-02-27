@@ -1592,9 +1592,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         # Remove CMMotionRemover if present
         # See https://github.com/openmm/openmmforcefields/issues/365
-        for f_idx in range(system.getNumForces()):
+        for f_idx in reversed(range(system.getNumForces())):
             force = system.getForce(f_idx)
-            if "CMMotionRemover" in str(force):
+            if isinstance(force, CMMotionRemover):
                 system.removeForce(f_idx)
 
         self.cache_system(smiles, system)
