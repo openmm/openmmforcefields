@@ -29,7 +29,7 @@ DEFAULT_PERTURB_DISTANCE = 0.05  # Å
 
 DEFAULT_OPENMM_PLATFORM = "automatic"
 
-DEFAULT_TOPPAR_DIRECTORY = "toppar"
+DEFAULT_TOPPAR_DIRECTORY = "tests/toppar"
 DEFAULT_FFXML_DIRECTORY = "ffxml"
 
 ENERGY_PRINT_UNIT = openmm.unit.kilocalorie_per_mole
@@ -231,13 +231,13 @@ def main():
     # Specify directories where parameter files can be found.
     parser.add_argument(
         "--toppar-directory",
-        default="toppar",
+        default=DEFAULT_TOPPAR_DIRECTORY,
         metavar="path",
         help="Path to CHARMM parameter files (default toppar)",
     )
     parser.add_argument(
         "--ffxml-directory",
-        default="ffxml",
+        default=DEFAULT_FFXML_DIRECTORY,
         metavar="path",
         help="Path to OpenMM force field files (default ffxml)",
     )

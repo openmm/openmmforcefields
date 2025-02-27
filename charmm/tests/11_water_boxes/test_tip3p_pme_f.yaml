@@ -4,7 +4,7 @@ psf_file: waterbox-3-site-tip3p-pme-f.psf
 pdb_file: waterbox-3-site.pdb
 
 charmm_files:
-  - non_charmm/toppar_water_ions_tip3p_pme_f.str
+  - toppar_water_ions_tip3p_pme_f.str
 charmm_commands:
   - nbonds atom ewald pmew fftx 32 ffty 32 fftz 32 kappa 0.32 order 6 cutnb 12 vdw vswitched ctonnb 10 ctofnb 12
 

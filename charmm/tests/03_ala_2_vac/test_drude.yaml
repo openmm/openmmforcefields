@@ -4,7 +4,7 @@ psf_file: step2_drude.psf
 pdb_file: step2_drude.pdb
 
 charmm_files:
-  - drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str
+  - toppar_drude_main_protein_2023a.str
 charmm_commands:
   - nbonds atom trunc cutnb 1000
 

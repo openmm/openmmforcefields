@@ -4,7 +4,7 @@ psf_file: waterbox-drude.psf
 pdb_file: waterbox-drude.pdb
 
 charmm_files:
-  - drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str
+  - toppar_drude_main_protein_2023a.str
 charmm_commands:
   - nbonds atom ewald pmew fftx 32 ffty 32 fftz 32 kappa 0.32 order 6 cutnb 12 vdw vswitched ctonnb 10 ctofnb 12
 
