@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-26</DateGenerated>
+    <DateGenerated>2025-02-27</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/top_all36_na.rtf" md5hash="ffd9d681ff73591157e2458e336ab4a3" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_na.rtf</Source>
@@ -7451,7 +7451,6 @@
       <Bond atomName1="N3" atomName2="C2" />
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -7546,7 +7545,6 @@
       <Bond atomName1="N3" atomName2="C2" />
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -7649,7 +7647,6 @@
       <Bond atomName1="N3" atomName2="C2" />
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -8766,7 +8763,6 @@
       <Bond atomName1="N7" atomName2="C8" />
       <Bond atomName1="C" atomName2="OT1" />
       <AllowPatch name="ACE_0" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -22264,7 +22260,6 @@
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
       <Bond atomName1="C6" atomName2="O6" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -22380,7 +22375,6 @@
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
       <Bond atomName1="C6" atomName2="O6" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -22488,7 +22482,6 @@
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
       <Bond atomName1="C6" atomName2="O6" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
@@ -22602,7 +22595,6 @@
       <Bond atomName1="C4" atomName2="C5" />
       <Bond atomName1="N7" atomName2="C8" />
       <Bond atomName1="C6" atomName2="O6" />
-      <AllowPatch name="DEO5_0" />
       <AllowPatch name="3TER_2" />
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
