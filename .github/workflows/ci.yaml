@@ -36,7 +36,6 @@ jobs:
           # No python 3.13 builds for openmm 8.1.2
           - python-version: "3.13"
             openmm-version: "8.1.2"
-
     steps:
     - uses: actions/checkout@v4
 
