@@ -251,9 +251,9 @@ class TestSystemGenerator:
                 nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
                 system = generator.create_system(nonperiodic_openmm_topology)
                 forces = {force.__class__.__name__: force for force in system.getForces()}
-                assert (
-                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff
-                ), "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                assert forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.NoCutoff, (
+                    "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                )
 
                 # Create periodic Topology
                 box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
@@ -261,9 +261,9 @@ class TestSystemGenerator:
                 periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
                 system = generator.create_system(periodic_openmm_topology)
                 forces = {force.__class__.__name__: force for force in system.getForces()}
-                assert (
-                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.PME
-                ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                assert forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.PME, (
+                    "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                )
 
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
@@ -306,9 +306,9 @@ class TestSystemGenerator:
                 nonperiodic_openmm_topology = molecule.to_topology().to_openmm()
                 system = generator.create_system(nonperiodic_openmm_topology)
                 forces = {force.__class__.__name__: force for force in system.getForces()}
-                assert (
-                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic
-                ), "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                assert forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.CutoffNonPeriodic, (
+                    "Expected CutoffNonPeriodic, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                )
 
                 # Create periodic Topology
                 box_vectors = unit.Quantity(np.diag([30, 30, 30]), unit.angstrom)
@@ -316,9 +316,9 @@ class TestSystemGenerator:
                 periodic_openmm_topology.setPeriodicBoxVectors(box_vectors)
                 system = generator.create_system(periodic_openmm_topology)
                 forces = {force.__class__.__name__: force for force in system.getForces()}
-                assert (
-                    forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.LJPME
-                ), "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                assert forces["NonbondedForce"].getNonbondedMethod() == openmm.NonbondedForce.LJPME, (
+                    "Expected LJPME, got {forces['NonbondedForce'].getNonbondedMethod()}"
+                )
 
     @pytest.mark.parametrize(
         "small_molecule_forcefield",

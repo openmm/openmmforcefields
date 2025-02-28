@@ -1,5 +1,6 @@
 [tool.ruff]
 line-length = 119
+extend-exclude = ["openmmforcefields/_version.py", "versioneer.py", "amber/", "charmm/"]
 
 [tool.ruff.lint]
 select = [

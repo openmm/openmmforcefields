@@ -1146,7 +1146,7 @@ class OpenMMSystemMixin:
                 Dict of format { 'class1' : typename1, ... }
             """
             return {
-                f"class{class_index+1}": molecule.atoms[atom_index].typename
+                f"class{class_index + 1}": molecule.atoms[atom_index].typename
                 for class_index, atom_index in enumerate(atom_indices)
             }
 
@@ -1239,9 +1239,9 @@ class OpenMMSystemMixin:
             nterms = len(torsions[atom_indices])
             for term in range(nterms):
                 periodicity, phase, k = torsions[atom_indices][term]
-                params[f"periodicity{term+1}"] = as_attrib(periodicity)
-                params[f"phase{term+1}"] = as_attrib(phase)
-                params[f"k{term+1}"] = as_attrib(k)
+                params[f"periodicity{term + 1}"] = as_attrib(periodicity)
+                params[f"phase{term + 1}"] = as_attrib(phase)
+                params[f"k{term + 1}"] = as_attrib(k)
 
             # This variable is not used - is it needed?
             torsion_type = etree.SubElement(  # noqa
@@ -1758,7 +1758,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         if model_cache_path is None:
             import os
 
-            self.ESPALOMA_MODEL_CACHE_PATH = f'{os.getenv("HOME")}/.espaloma'
+            self.ESPALOMA_MODEL_CACHE_PATH = f"{os.getenv('HOME')}/.espaloma"
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 

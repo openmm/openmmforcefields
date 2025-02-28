@@ -15,7 +15,7 @@ if __name__ == "__main__":
         "--protein",
         default=None,
         dest="protein",
-        help="Protein pdb file to test compatibility" "with openmm",
+        help="Protein pdb file to test compatibility with openmm",
         required=True,
     )
     args = parser.parse_args()
