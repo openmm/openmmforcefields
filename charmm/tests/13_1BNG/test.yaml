@@ -1,0 +1,15 @@
+name: 1BNG protein
+
+psf_file: step1_pdbreader.psf
+pdb_file: step1_pdbreader.pdb
+
+charmm_files:
+  - top_all36_prot.rtf
+  - par_all36m_prot.prm
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
+
+ffxml_files:
+  - charmm36_nowaters.xml
+create_system_options:
+  removeCMMotion: false
