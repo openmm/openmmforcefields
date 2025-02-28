@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-26</DateGenerated>
+    <DateGenerated>2025-02-27</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str" md5hash="772b85f388766661707343bb1947dc1a" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str</Source>
     <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="D.J. Price and C.L. Brooks III. A modified TIP3P water potential for simulation with Ewald summation. J. Chem. Phys. 121:10096-10103, 2004." forcefield="tip3p-pme-b">D.J. Price and C.L. Brooks III. A modified TIP3P water potential for simulation with Ewald summation. J. Chem. Phys. 121:10096-10103, 2004.</Reference>
@@ -449,81 +449,4 @@
     <NBFixPair class1="OC2D2" class2="SOD" epsilon="0.31388368000000005" sigma="0.28419669108676826" />
     <NBFixPair class1="OG2D2" class2="SOD" epsilon="0.31388368000000005" sigma="0.28419669108676826" />
   </LennardJonesForce>
-  <Script>import openmm
-
-residue_anisotropies = {}
-patch_anisotropies = {}
-delete_anisotropies = {}
-
-residue_order = {}
-patch_order = {}
-
-residue_data = []
-
-for residue in topology.residues():
-    # Extract the residue or patch names and atom names from the atom type names.
-    templates = []
-    atom_names = []
-    for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{atom_name_parts[1]}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
-
-    # Get all unique residue or patch names that have anisotropies.
-    templates = set(templates)
-    residue_templates = sorted(
-        (template for template in templates if template in residue_anisotropies), key=residue_order.get
-    )
-    patch_templates = sorted(
-        (template for template in templates if template in patch_anisotropies), key=patch_order.get
-    )
-
-    # Get atom indices and classes for lookup, and ensure atom name uniqueness.
-    atom_data = {
-        atom_name: (atom.index, self._atomTypes[data.atomType[atom]].atomClass)
-        for atom, atom_name in zip(residue.atoms(), atom_names)
-    }
-    if len(atom_data) != len(atom_names):
-        raise ValueError(f"CHARMM: atom name collision in residue with index {residue.index}")
-
-    residue_data.append((atom_data, residue_templates, patch_templates))
-
-anisotropy_table = {}
-
-for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
-    # Determine all anisotropies to try to add to this residue.
-    anisotropies = {}
-    for residue in residue_templates:
-        anisotropies.update(residue_anisotropies.get(residue, {}))
-    for patch in patch_templates:
-        for drude_atom in delete_anisotropies.get(patch, []):
-            if drude_atom in anisotropies:
-                del anisotropies[drude_atom]
-        anisotropies.update(patch_anisotropies.get(patch, {}))
-
-    # Find the atoms, and skip if any cannot be found.
-    for atom_1, (atom_2, atom_3, atom_4, aniso12, aniso34) in anisotropies.items():
-        atom_data_1 = atom_data.get(atom_1)
-        atom_data_2 = atom_data.get(atom_2)
-        atom_data_3 = atom_data.get(atom_3)
-        atom_data_4 = atom_data.get(atom_4)
-        if atom_data_1 is None or atom_data_2 is None or atom_data_3 is None or atom_data_4 is None:
-            continue
-        anisotropy_table[atom_data_1[0]] = (atom_data_2[0], atom_data_3[0], atom_data_4[0], aniso12, aniso34)
-
-# Add anisotropies to Drude particles.
-for force in sys.getForces():
-    if not isinstance(force, openmm.DrudeForce):
-        continue
-    for particle_index in range(force.getNumParticles()):
-        particle, particle1, particle2, particle3, particle4, charge, polarizability, aniso12, aniso34 = force.getParticleParameters(particle_index)
-        if particle1 in anisotropy_table:
-            particle2, particle3, particle4, aniso12, aniso34 = anisotropy_table[particle1]
-            force.setParticleParameters(particle_index, particle, particle1, particle2, particle3, particle4, charge, polarizability, aniso12, aniso34)</Script>
 </ForceField>

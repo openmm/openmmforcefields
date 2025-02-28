@@ -496,10 +496,6 @@ def write_improper_script(
 
 
 def write_anisotropy_script(ffxml_tree, residue_anisotropies, patch_anisotropies, delete_anisotropies):
-    # Do not write a script to the file if there are no anisotropies present.
-    if not (residue_anisotropies or patch_anisotropies):
-        return
-
     # Helper function to extract data from anisotropy objects.
     def preprocess_template_anisotropies(template_anisotropies):
         return {
@@ -527,6 +523,10 @@ def write_anisotropy_script(ffxml_tree, residue_anisotropies, patch_anisotropies
 
     residue_order = {residue: index for index, residue in enumerate(residue_anisotropies)}
     patch_order = {patch: index for index, patch in enumerate(patch_anisotropies)}
+
+    # Do not write a script to the file if there are no anisotropies present.
+    if not (residue_anisotropies or patch_anisotropies):
+        return
 
     with open("convert_charmm_anisotropy_script.txt") as script_file:
         script_template = script_file.read()
