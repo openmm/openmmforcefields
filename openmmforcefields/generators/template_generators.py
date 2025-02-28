@@ -1570,6 +1570,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
 
         """
+        from openmm import CMMotionRemover
+
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f"Generating a residue template for {smiles} using {self._forcefield}")
@@ -1589,6 +1591,15 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         system = self._smirnoff_forcefield.create_openmm_system(
             molecule.to_topology(), charge_from_molecules=charge_from_molecules
         )
+
+        # Remove CMMotionRemover if present
+        # See https://github.com/openmm/openmmforcefields/issues/365
+        # and https://github.com/openmm/openmmforcefields/pull/367
+        for f_idx in reversed(range(system.getNumForces())):
+            force = system.getForce(f_idx)
+            if isinstance(force, CMMotionRemover):
+                system.removeForce(f_idx)
+
         self.cache_system(smiles, system)
 
         # Convert to ffxml

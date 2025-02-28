@@ -11,7 +11,7 @@ dependencies:
   - openmm
   - openff-toolkit >=0.11
   - pyyaml
-  - ambertools >=22,<24
+  - ambertools >=24
   - lxml
   - networkx
   - tinydb
