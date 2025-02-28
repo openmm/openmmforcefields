@@ -1,7 +1,18 @@
-FROM ubuntu:14.04
-RUN apt-get update && apt-get install -y \
-        csh \
-        gfortran \
-        build-essential
+FROM ubuntu:latest AS build_charmm_base
+RUN \
+    apt-get update -y && \
+    apt-get install -y libgfortran5 libgomp1
+
+FROM build_charmm_base AS build_charmm
 ADD charmm.tar.gz /
-RUN cd charmm && tool/NewCharmmTree c40b1_gnu && cd c40b1_gnu && ./install.com gnu gfortran || cat /charmm/c40b1_gnu/build/gnu/gnu.log
+RUN \
+    apt-get update -y && \
+    apt-get install -y build-essential cmake gfortran && \
+    cd /charmm && \
+    mkdir cmake && \
+    cd cmake && \
+    cmake .. && \
+    make install
+
+FROM build_charmm_base
+COPY --from=build_charmm /usr/local/bin/charmm /usr/local/bin/charmm

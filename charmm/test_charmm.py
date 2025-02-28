@@ -216,6 +216,11 @@ def main():
         help="Dump input files for debugging",
     )
     parser.add_argument(
+        "--charmm-docker-image",
+        metavar="image_name",
+        help="Run CHARMM in this Docker image instead of looking on the system",
+    )
+    parser.add_argument(
         "--openmm-platform",
         default=DEFAULT_OPENMM_PLATFORM,
         choices=["automatic"]
@@ -282,6 +287,7 @@ def run(args):
         args.relative_force_tolerance,
         perturb_spec,
         args.dump,
+        args.charmm_docker_image,
         args.openmm_platform,
         args.openmm_ffxml_fix_impropers,
         args.toppar_directory,
@@ -350,6 +356,10 @@ class TestRunner:
         from the given generator.
     do_dump : bool
         Whether or not to dump input files for debugging.
+    charmm_docker_image : str or None
+        Docker image to run CHARMM in, or None to run CHARMM directly.  CHARMM
+        should be available as the "charmm" executable in the given image or on
+        the system.
     openmm_platform : str
         Name of an OpenMM Platform to use, or "automatic" to let OpenMM choose.
     openmm_ffxml_fix_impropers : bool
@@ -374,6 +384,7 @@ class TestRunner:
         relative_force_tolerance,
         perturb_spec,
         do_dump,
+        charmm_docker_image,
         openmm_platform,
         openmm_ffxml_fix_impropers,
         toppar_directory,
@@ -390,6 +401,7 @@ class TestRunner:
         self.relative_force_tolerance = relative_force_tolerance
         self.perturb_spec = perturb_spec
         self.do_dump = do_dump
+        self.charmm_docker_image = charmm_docker_image
         self.openmm_platform = openmm_platform
         self.openmm_ffxml_fix_impropers = openmm_ffxml_fix_impropers
         self.toppar_directory = toppar_directory
@@ -454,8 +466,10 @@ class TestRunner:
         dump_path = test_path.replace("/", "_")
 
         # Run tests and get results.
+        print(f"Test {test_spec['name']!r} in {test_path!r}:")
         results_sets = {}
         if self.do_charmm:
+            print("    (Running CHARMM)")
             results_sets["charmm"] = self.get_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -464,6 +478,7 @@ class TestRunner:
                 f"{dump_path}_charmm.log" if self.do_dump else None,
             )
         if self.do_openmm_charmm:
+            print("    (Running OpenMM reading CHARMM PSF file)")
             results_sets["openmm_charmm"] = self.get_openmm_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -471,6 +486,7 @@ class TestRunner:
                 f"{dump_path}_openmm_charmm.xml" if self.do_dump else None,
             )
         if self.do_parmed_charmm:
+            print("    (Running OpenMM using ParmEd to read CHARMM PSF file)")
             results_sets["parmed_charmm"] = self.get_parmed_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -478,12 +494,14 @@ class TestRunner:
                 f"{dump_path}_parmed_charmm.xml" if self.do_dump else None,
             )
         if self.do_openmm_ffxml:
+            print("    (Running OpenMM creating system from FFXML)")
             results_sets["openmm_ffxml"] = self.get_openmm_ffxml_energies_forces(
                 test_directory,
                 test_spec,
                 coordinates_list,
                 f"{dump_path}_openmm_ffxml.xml" if self.do_dump else None,
             )
+        print()
 
         # Zero anything that's not being tested.
         for results in results_sets.values():
@@ -500,7 +518,6 @@ class TestRunner:
         # Special handling occurs for Drude systems.
         is_drude = test_spec.get("drude", False)
 
-        print(f"Test {test_spec['name']!r} in {test_path!r}:")
         failure_count = 0
         for (name_1, results_1), (name_2, results_2) in itertools.combinations(results_sets.items(), 2):
             print(f"    Comparing {name_1} vs. {name_2}")
@@ -708,6 +725,15 @@ class TestRunner:
         # Prepare the CHARMM input line by line.
         charmm_input_lines = ["* Test", "*"]
 
+        # If CHARMM is running in a Docker image, the test and parameter
+        # directories will be mounted, so read from files under the mount point.
+        if self.charmm_docker_image is None:
+            toppar_read_directory = self.toppar_directory
+            test_read_directory = test_directory
+        else:
+            toppar_read_directory = "/test_charmm_toppar"
+            test_read_directory = "/test_charmm_test"
+
         # Load all input files.
         first_rtf = True
         first_para = True
@@ -717,18 +743,18 @@ class TestRunner:
                 if first_rtf:
                     first_rtf = False
                 charmm_input_lines.append(
-                    f"read rtf card {append}name {os.path.join(self.toppar_directory, charmm_file)}"
+                    f"read rtf card {append}name {os.path.join(toppar_read_directory, charmm_file)}"
                 )
             elif charmm_file.endswith(".prm") or charmm_file.endswith(".par"):
                 append = "" if first_para else "append "
                 if first_para:
                     first_para = False
                 charmm_input_lines.append(
-                    f"read para card {append}name {os.path.join(self.toppar_directory, charmm_file)} flex"
+                    f"read para card {append}name {os.path.join(toppar_read_directory, charmm_file)} flex"
                 )
             else:
-                charmm_input_lines.append(f"stream {os.path.join(self.toppar_directory, charmm_file)}")
-        charmm_input_lines.append(f"read psf card name {os.path.join(test_directory, test_spec['psf_file'])}")
+                charmm_input_lines.append(f"stream {os.path.join(toppar_read_directory, charmm_file)}")
+        charmm_input_lines.append(f"read psf card name {os.path.join(test_read_directory, test_spec['psf_file'])}")
 
         # Execute custom commands.
         charmm_input_lines.extend(test_spec["charmm_commands"])
@@ -741,10 +767,17 @@ class TestRunner:
             for lone_pair in psf_file.lonepair_list:
                 virtual_site_mask[lone_pair[0]] = True
 
+            # If CHARMM is running in a Docker image, the temporary directory
+            # will be mounted, so read from files under the mount point instead.
+            if self.charmm_docker_image is None:
+                coordinates_read_path = temporary_path
+            else:
+                coordinates_read_path = "/test_charmm_inputs"
+
             for coordinates_index, coordinates in enumerate(coordinates_list):
                 # Load coordinates.  Ignore residue and atom name checks and
                 # read sequentially.
-                coordinates_path = os.path.join(temporary_path, f"{coordinates_index}.crd")
+                coordinates_path = os.path.join(coordinates_read_path, f"{coordinates_index}.crd")
                 charmm_input_lines.append(f"read coor ignore name {coordinates_path}")
 
                 # Set up periodic images.
@@ -803,7 +836,24 @@ class TestRunner:
                         )
 
             # Run CHARMM.
-            result = subprocess.run(["charmm"], input="\n".join(charmm_input_lines).encode(), capture_output=True)
+            if self.charmm_docker_image is None:
+                charmm_command = ["charmm"]
+            else:
+                charmm_command = [
+                    "docker",
+                    "run",
+                    "--rm",
+                    "--mount",
+                    f"type=bind,src={os.path.abspath(self.toppar_directory)},dst=/test_charmm_toppar,ro",
+                    "--mount",
+                    f"type=bind,src={os.path.abspath(test_directory)},dst=/test_charmm_test,ro",
+                    "--mount",
+                    f"type=bind,src={os.path.abspath(temporary_path)},dst=/test_charmm_inputs,ro",
+                    "-i",
+                    self.charmm_docker_image,
+                    "charmm",
+                ]
+            result = subprocess.run(charmm_command, input="\n".join(charmm_input_lines).encode(), capture_output=True)
 
         if dump_out_path is not None:
             with open(dump_out_path, "wb") as dump_out_file:

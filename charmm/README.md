@@ -91,20 +91,29 @@ CHARMM docker image
 
 Prerequisites
 -------------
-* [Docker toolbox](https://www.docker.com/products/docker-toolbox)
-* [CHARMM lite nonprofit/academic version](http://charmm.chemistry.harvard.edu/charmm_lite.php) (free) - downloaded as `charmm.tar.gz`
+* [Docker](https://www.docker.com/products/docker-desktop)
+* [CHARMM (free for nonprofit/academic users)](https://brooks.chem.lsa.umich.edu/register/): downloaded as `charmm.tar.gz`
 
 Building the docker image
 -------------------------
-After starting the Docker daemon, run
+After starting the Docker daemon, run, *e.g.*,
 ```
-docker build -t omnia/charmm-lite:c40b1 .
+docker build -t test_charmm .
 ```
+(you can replace `test_charmm` with another name) and a Ubuntu-based Docker
+image containing the CHARMM binary will be built.  Note that to keep the image
+size small, only the binary and needed Fortran runtime libraries will be present
+in the final image, not development tools and other files.  Edit the
+`Dockerfile` before building to change this.
 
 Running CHARMM
 --------------
-The CHARMM executable is `/charmm/c40b1_gnu/exec/gnu/charmm`
+The CHARMM executable is `/usr/local/bin/charmm` inside the image.
 
 To manually start the docker image (for testing purposes):
 ```
-docker run -i -t omnia/charmm-lite:c40b1 /bin/bash
+docker run -i -t test_charmm
+```
+
+To run the tests using a dockerized CHARMM, pass
+`--charmm-docker-image test_charmm` to `test_charmm.py` or `test_charmm.sh`.
