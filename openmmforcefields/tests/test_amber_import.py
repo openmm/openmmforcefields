@@ -4,13 +4,12 @@ Test AMBER forcefield imports.
 """
 
 import pathlib
-from typing import List
 
 import pytest
 
 from openmmforcefields.utils import get_ffxml_path
 
-amber_ffxml_filenames: List[str] = ["amber/" + file.name for file in pathlib.Path(get_ffxml_path()).glob("amber/*xml")]
+amber_ffxml_filenames: list[str] = ["amber/" + file.name for file in pathlib.Path(get_ffxml_path()).glob("amber/*xml")]
 
 
 @pytest.mark.parametrize(
