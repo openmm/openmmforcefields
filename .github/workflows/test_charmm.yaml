@@ -50,5 +50,5 @@ jobs:
     # particular version of ParmEd.  But the output FFXML files do get tested:
     - name: Test CHARMM conversion
       run: |
-        ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1
+        ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/openmm/openmmforcefields-ci-charmm:c49b1
       working-directory: ./charmm
