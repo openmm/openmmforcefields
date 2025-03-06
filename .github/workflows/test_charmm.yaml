@@ -1,0 +1,54 @@
+name: CHARMM conversion validation
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, OpenMM ${{ matrix.openmm-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.12"]
+        openmm-version: ["8.2.0dev1"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Conda Environment
+      uses: mamba-org/setup-micromamba@v2
+      with:
+        environment-file: devtools/conda-envs/test_charmm_env.yaml
+        create-args: >-
+          python=${{ matrix.python-version }}
+          openmm=${{ matrix.openmm-version }}
+
+    - name: Log into GitHub container registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # NOTE: Currently, testing the conversion itself is not done as the
+    # conversion requires multiple modifications to the internals of a
+    # particular version of ParmEd.  But the output FFXML files do get tested:
+    - name: Test CHARMM conversion
+      run: |
+        ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/openmm/openmmforcefields-ci-charmm:c49b1
+      working-directory: ./charmm

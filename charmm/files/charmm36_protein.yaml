@@ -1,0 +1,124 @@
+# Conversion specification for CHARMM force field to OpenMM FFXML format.
+# Author: Chaya D. Stern, choderalab
+# Reworked by Evan Pretti to support the July 2024 release of CHARMM and provide
+# clearer information on reasons why particular files are included vs. excluded.
+
+- sourcePackage: charmm36
+  sourcePackageVersion: toppar_c36_jul24.tgz
+- Destination: charmm36_protein.xml
+  Source:
+    include:
+      # Basic protein parameters only without anything else
+      - toppar/top_all36_prot.rtf
+      - toppar/par_all36m_prot.prm
+
+    stream:
+      # Stream files that don't require additional non-protein parameters
+      - toppar/stream/prot/toppar_all36_prot_aldehydes.str
+      - toppar/stream/prot/toppar_all36_prot_arg0.str
+      - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
+      - toppar/stream/prot/toppar_all36_prot_fluoro_alkanes.str
+      - toppar/stream/prot/toppar_all36_prot_heme.str
+      - toppar/stream/prot/toppar_all36_prot_pyridines.str
+      - toppar/stream/prot/toppar_all36_prot_retinol.str
+
+    split:
+      # Split D-amino acids into a separate file
+      - input:
+        - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
+        output: charmm36_protein_d.xml
+
+    fixes:
+      # Here we manually add in the DISU (cysteine disulfide) patch to the force
+      # field since ParmEd doesn't convert it automatically
+      - action: append
+        target: ./AtomTypes
+        content:
+          - tag: Type
+            attrib:
+              name: DISU-1CB
+              class: CT2
+              element: C
+              mass: '12.011'
+          - tag: Type
+            attrib:
+              name: DISU-1SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2CB
+              class: CT2
+              element: C
+              mass: '12.011'
+      - action: append
+        target: ./Patches
+        content:
+          tag: Patch
+          attrib:
+            name: DISU
+            residues: '2'
+          children:
+            - tag: RemoveAtom
+              attrib:
+                name: 1:HG1
+            - tag: RemoveAtom
+              attrib:
+                name: 2:HG1
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.1'
+                name: 1:CB
+                type: DISU-1CB
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.1'
+                name: 2:CB
+                type: DISU-2CB
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.08'
+                name: 1:SG
+                type: DISU-1SG
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.08'
+                name: 2:SG
+                type: DISU-2SG
+            - tag: AddBond
+              attrib:
+                atomName1: 1:SG
+                atomName2: 2:SG
+            - tag: ApplyToResidue
+              attrib:
+                name: 1:CYS
+            - tag: ApplyToResidue
+              attrib:
+                name: 2:CYS
+
+  References:
+   protein:
+     - >-
+       Huang, J., Rauscher, S., Nawrocki, G., Ran, T., Feig, M, de Groot, B.L., Grubmuller, H., and MacKerell, A.D.,
+       Jr., "CHARMM36m: An Improved Force Field for Folded and Intrinsically Disordered Proteins," Nature Methods,
+       14:71-73, 2016, PMC5199616
+     - >-
+       Robert B. Best, R.B., Xiao Zhu, X., Shim, J., Lopes, P. Mittal, J., Feig, M. and MacKerell, A.D., Jr. Optimization
+       of the additive CHARMM all-atom protein force field targeting improved sampling of the backbone phi, psi and
+       sidechain chi1 and chi2 dihedral angles. JCTC, 8: 3257-3273, 2013, PMC3549273
+     - >-
+       MacKerell, A.D., Jr., Feig, M. and Brooks, III, C.L. "Improved treatment of the protein backbone in empirical
+       force fields," Journal of the American Chemical Society, 126: 698-699, 2004
+     - >-
+       MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.;
+       Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.;
+       Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub,
+       J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular
+       modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616.

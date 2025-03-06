@@ -1,0 +1,1040 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2025-02-27</DateGenerated>
+    <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_prot.rtf</Source>
+    <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/par_all36m_prot.prm</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_aldehydes.str" md5hash="dda2e0968eb30c1b8689e6f06b8502f7" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_aldehydes.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_arg0.str" md5hash="0a1f28f2151ee8dafd0e40b2694513a1" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_arg0.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str" md5hash="d6eae27ee5a51f5b4b19ae5126200210" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_fluoro_alkanes.str" md5hash="69f1197d3eb44818ce5195479f706777" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_fluoro_alkanes.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_heme.str" md5hash="7433bc89e1594604ef622c9c75d42b9b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_heme.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_pyridines.str" md5hash="1693884ee2f8b1a3015f0bc596cbf3f4" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_pyridines.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_retinol.str" md5hash="75d80c5939810d5b714f214cd390e590" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_retinol.str</Source>
+    <Reference Reference="Huang, J., Rauscher, S., Nawrocki, G., Ran, T., Feig, M, de Groot, B.L., Grubmuller, H., and MacKerell, A.D., Jr., &quot;CHARMM36m: An Improved Force Field for Folded and Intrinsically Disordered Proteins,&quot; Nature Methods, 14:71-73, 2016, PMC5199616" forcefield="protein">Huang, J., Rauscher, S., Nawrocki, G., Ran, T., Feig, M, de Groot, B.L., Grubmuller, H., and MacKerell, A.D., Jr., "CHARMM36m: An Improved Force Field for Folded and Intrinsically Disordered Proteins," Nature Methods, 14:71-73, 2016, PMC5199616</Reference>
+    <Reference Reference="Robert B. Best, R.B., Xiao Zhu, X., Shim, J., Lopes, P. Mittal, J., Feig, M. and MacKerell, A.D., Jr. Optimization of the additive CHARMM all-atom protein force field targeting improved sampling of the backbone phi, psi and sidechain chi1 and chi2 dihedral angles. JCTC, 8: 3257-3273, 2013, PMC3549273" forcefield="protein">Robert B. Best, R.B., Xiao Zhu, X., Shim, J., Lopes, P. Mittal, J., Feig, M. and MacKerell, A.D., Jr. Optimization of the additive CHARMM all-atom protein force field targeting improved sampling of the backbone phi, psi and sidechain chi1 and chi2 dihedral angles. JCTC, 8: 3257-3273, 2013, PMC3549273</Reference>
+    <Reference Reference="MacKerell, A.D., Jr., Feig, M. and Brooks, III, C.L. &quot;Improved treatment of the protein backbone in empirical force fields,&quot; Journal of the American Chemical Society, 126: 698-699, 2004" forcefield="protein">MacKerell, A.D., Jr., Feig, M. and Brooks, III, C.L. "Improved treatment of the protein backbone in empirical force fields," Journal of the American Chemical Society, 126: 698-699, 2004</Reference>
+    <Reference Reference="MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.; Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.; Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub, J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616." forcefield="protein">MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.; Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.; Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub, J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616.</Reference>
+  </Info>
+  <Residues>
+    <Residue name="ALDD">
+      <Atom charge="-0.27" name="CL" type="ALDD-CL" />
+      <Atom charge="0.09" name="HL1" type="ALDD-HL1" />
+      <Atom charge="0.09" name="HL2" type="ALDD-HL2" />
+      <Atom charge="0.09" name="HL3" type="ALDD-HL3" />
+      <Atom charge="0.51" name="CLP" type="ALDD-CLP" />
+      <Atom charge="-0.51" name="OL" type="ALDD-OL" />
+      <Atom charge="-0.47" name="NL" type="ALDD-NL" />
+      <Atom charge="0.31" name="HL" type="ALDD-HL" />
+      <Atom charge="0.07" name="CA" type="ALDD-CA" />
+      <Atom charge="0.09" name="HA" type="ALDD-HA" />
+      <Atom charge="-0.27" name="CB" type="ALDD-CB" />
+      <Atom charge="0.09" name="HB1" type="ALDD-HB1" />
+      <Atom charge="0.09" name="HB2" type="ALDD-HB2" />
+      <Atom charge="0.09" name="HB3" type="ALDD-HB3" />
+      <Atom charge="0.51" name="CRP" type="ALDD-CRP" />
+      <Atom charge="-0.51" name="OR" type="ALDD-OR" />
+      <Atom charge="-0.47" name="NR" type="ALDD-NR" />
+      <Atom charge="0.31" name="HR" type="ALDD-HR" />
+      <Atom charge="-0.11" name="CR" type="ALDD-CR" />
+      <Atom charge="0.09" name="HR1" type="ALDD-HR1" />
+      <Atom charge="0.09" name="HR2" type="ALDD-HR2" />
+      <Atom charge="0.09" name="HR3" type="ALDD-HR3" />
+      <Bond atomName1="CL" atomName2="CLP" />
+      <Bond atomName1="CLP" atomName2="NL" />
+      <Bond atomName1="NL" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="CRP" />
+      <Bond atomName1="CRP" atomName2="NR" />
+      <Bond atomName1="NR" atomName2="CR" />
+      <Bond atomName1="CLP" atomName2="OL" />
+      <Bond atomName1="CRP" atomName2="OR" />
+      <Bond atomName1="NL" atomName2="HL" />
+      <Bond atomName1="NR" atomName2="HR" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CL" atomName2="HL1" />
+      <Bond atomName1="CL" atomName2="HL2" />
+      <Bond atomName1="CL" atomName2="HL3" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CR" atomName2="HR1" />
+      <Bond atomName1="CR" atomName2="HR2" />
+      <Bond atomName1="CR" atomName2="HR3" />
+    </Residue>
+    <Residue name="DALA">
+      <Atom charge="-0.47" name="N" type="DALA-N" />
+      <Atom charge="0.31" name="HN" type="DALA-HN" />
+      <Atom charge="0.07" name="CA" type="DALA-CA" />
+      <Atom charge="0.09" name="HA" type="DALA-HA" />
+      <Atom charge="-0.27" name="CB" type="DALA-CB" />
+      <Atom charge="0.09" name="HB1" type="DALA-HB1" />
+      <Atom charge="0.09" name="HB2" type="DALA-HB2" />
+      <Atom charge="0.09" name="HB3" type="DALA-HB3" />
+      <Atom charge="0.51" name="C" type="DALA-C" />
+      <Atom charge="-0.51" name="O" type="DALA-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DARG">
+      <Atom charge="-0.47" name="N" type="DARG-N" />
+      <Atom charge="0.31" name="HN" type="DARG-HN" />
+      <Atom charge="0.07" name="CA" type="DARG-CA" />
+      <Atom charge="0.09" name="HA" type="DARG-HA" />
+      <Atom charge="-0.18" name="CB" type="DARG-CB" />
+      <Atom charge="0.09" name="HB1" type="DARG-HB1" />
+      <Atom charge="0.09" name="HB2" type="DARG-HB2" />
+      <Atom charge="-0.18" name="CG" type="DARG-CG" />
+      <Atom charge="0.09" name="HG1" type="DARG-HG1" />
+      <Atom charge="0.09" name="HG2" type="DARG-HG2" />
+      <Atom charge="0.2" name="CD" type="DARG-CD" />
+      <Atom charge="0.09" name="HD1" type="DARG-HD1" />
+      <Atom charge="0.09" name="HD2" type="DARG-HD2" />
+      <Atom charge="-0.7" name="NE" type="DARG-NE" />
+      <Atom charge="0.44" name="HE" type="DARG-HE" />
+      <Atom charge="0.64" name="CZ" type="DARG-CZ" />
+      <Atom charge="-0.8" name="NH1" type="DARG-NH1" />
+      <Atom charge="0.46" name="HH11" type="DARG-HH11" />
+      <Atom charge="0.46" name="HH12" type="DARG-HH12" />
+      <Atom charge="-0.8" name="NH2" type="DARG-NH2" />
+      <Atom charge="0.46" name="HH21" type="DARG-HH21" />
+      <Atom charge="0.46" name="HH22" type="DARG-HH22" />
+      <Atom charge="0.51" name="C" type="DARG-C" />
+      <Atom charge="-0.51" name="O" type="DARG-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD" atomName2="CG" />
+      <Bond atomName1="NE" atomName2="CD" />
+      <Bond atomName1="CZ" atomName2="NE" />
+      <Bond atomName1="NH2" atomName2="CZ" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="NE" atomName2="HE" />
+      <Bond atomName1="NH1" atomName2="HH11" />
+      <Bond atomName1="NH1" atomName2="HH12" />
+      <Bond atomName1="NH2" atomName2="HH21" />
+      <Bond atomName1="NH2" atomName2="HH22" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CZ" atomName2="NH1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="RN1_0" />
+      <AllowPatch name="RN2_0" />
+      <AllowPatch name="RN3_0" />
+    </Residue>
+    <Residue name="DASN">
+      <Atom charge="-0.47" name="N" type="DASN-N" />
+      <Atom charge="0.31" name="HN" type="DASN-HN" />
+      <Atom charge="0.07" name="CA" type="DASN-CA" />
+      <Atom charge="0.09" name="HA" type="DASN-HA" />
+      <Atom charge="-0.18" name="CB" type="DASN-CB" />
+      <Atom charge="0.09" name="HB1" type="DASN-HB1" />
+      <Atom charge="0.09" name="HB2" type="DASN-HB2" />
+      <Atom charge="0.55" name="CG" type="DASN-CG" />
+      <Atom charge="-0.55" name="OD1" type="DASN-OD1" />
+      <Atom charge="-0.62" name="ND2" type="DASN-ND2" />
+      <Atom charge="0.32" name="HD21" type="DASN-HD21" />
+      <Atom charge="0.3" name="HD22" type="DASN-HD22" />
+      <Atom charge="0.51" name="C" type="DASN-C" />
+      <Atom charge="-0.51" name="O" type="DASN-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="ND2" atomName2="CG" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="ND2" atomName2="HD21" />
+      <Bond atomName1="ND2" atomName2="HD22" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CG" atomName2="OD1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DASP">
+      <Atom charge="-0.47" name="N" type="DASP-N" />
+      <Atom charge="0.31" name="HN" type="DASP-HN" />
+      <Atom charge="0.07" name="CA" type="DASP-CA" />
+      <Atom charge="0.09" name="HA" type="DASP-HA" />
+      <Atom charge="-0.28" name="CB" type="DASP-CB" />
+      <Atom charge="0.09" name="HB1" type="DASP-HB1" />
+      <Atom charge="0.09" name="HB2" type="DASP-HB2" />
+      <Atom charge="0.62" name="CG" type="DASP-CG" />
+      <Atom charge="-0.76" name="OD1" type="DASP-OD1" />
+      <Atom charge="-0.76" name="OD2" type="DASP-OD2" />
+      <Atom charge="0.51" name="C" type="DASP-C" />
+      <Atom charge="-0.51" name="O" type="DASP-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="OD2" atomName2="CG" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CG" atomName2="OD1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="ASPP_0" />
+    </Residue>
+    <Residue name="DCYS">
+      <Atom charge="-0.47" name="N" type="DCYS-N" />
+      <Atom charge="0.31" name="HN" type="DCYS-HN" />
+      <Atom charge="0.07" name="CA" type="DCYS-CA" />
+      <Atom charge="0.09" name="HA" type="DCYS-HA" />
+      <Atom charge="-0.11" name="CB" type="DCYS-CB" />
+      <Atom charge="0.09" name="HB1" type="DCYS-HB1" />
+      <Atom charge="0.09" name="HB2" type="DCYS-HB2" />
+      <Atom charge="-0.23" name="SG" type="DCYS-SG" />
+      <Atom charge="0.16" name="HG1" type="DCYS-HG1" />
+      <Atom charge="0.51" name="C" type="DCYS-C" />
+      <Atom charge="-0.51" name="O" type="DCYS-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="SG" atomName2="CB" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="SG" atomName2="HG1" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="CYSD_0" />
+    </Residue>
+    <Residue name="DGLN">
+      <Atom charge="-0.47" name="N" type="DGLN-N" />
+      <Atom charge="0.31" name="HN" type="DGLN-HN" />
+      <Atom charge="0.07" name="CA" type="DGLN-CA" />
+      <Atom charge="0.09" name="HA" type="DGLN-HA" />
+      <Atom charge="-0.18" name="CB" type="DGLN-CB" />
+      <Atom charge="0.09" name="HB1" type="DGLN-HB1" />
+      <Atom charge="0.09" name="HB2" type="DGLN-HB2" />
+      <Atom charge="-0.18" name="CG" type="DGLN-CG" />
+      <Atom charge="0.09" name="HG1" type="DGLN-HG1" />
+      <Atom charge="0.09" name="HG2" type="DGLN-HG2" />
+      <Atom charge="0.55" name="CD" type="DGLN-CD" />
+      <Atom charge="-0.55" name="OE1" type="DGLN-OE1" />
+      <Atom charge="-0.62" name="NE2" type="DGLN-NE2" />
+      <Atom charge="0.32" name="HE21" type="DGLN-HE21" />
+      <Atom charge="0.3" name="HE22" type="DGLN-HE22" />
+      <Atom charge="0.51" name="C" type="DGLN-C" />
+      <Atom charge="-0.51" name="O" type="DGLN-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD" atomName2="CG" />
+      <Bond atomName1="NE2" atomName2="CD" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="NE2" atomName2="HE21" />
+      <Bond atomName1="NE2" atomName2="HE22" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD" atomName2="OE1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DGLU">
+      <Atom charge="-0.47" name="N" type="DGLU-N" />
+      <Atom charge="0.31" name="HN" type="DGLU-HN" />
+      <Atom charge="0.07" name="CA" type="DGLU-CA" />
+      <Atom charge="0.09" name="HA" type="DGLU-HA" />
+      <Atom charge="-0.18" name="CB" type="DGLU-CB" />
+      <Atom charge="0.09" name="HB1" type="DGLU-HB1" />
+      <Atom charge="0.09" name="HB2" type="DGLU-HB2" />
+      <Atom charge="-0.28" name="CG" type="DGLU-CG" />
+      <Atom charge="0.09" name="HG1" type="DGLU-HG1" />
+      <Atom charge="0.09" name="HG2" type="DGLU-HG2" />
+      <Atom charge="0.62" name="CD" type="DGLU-CD" />
+      <Atom charge="-0.76" name="OE1" type="DGLU-OE1" />
+      <Atom charge="-0.76" name="OE2" type="DGLU-OE2" />
+      <Atom charge="0.51" name="C" type="DGLU-C" />
+      <Atom charge="-0.51" name="O" type="DGLU-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD" atomName2="CG" />
+      <Bond atomName1="OE2" atomName2="CD" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD" atomName2="OE1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="GLUP_0" />
+    </Residue>
+    <Residue name="DHSD">
+      <Atom charge="-0.47" name="N" type="DHSD-N" />
+      <Atom charge="0.31" name="HN" type="DHSD-HN" />
+      <Atom charge="0.07" name="CA" type="DHSD-CA" />
+      <Atom charge="0.09" name="HA" type="DHSD-HA" />
+      <Atom charge="-0.09" name="CB" type="DHSD-CB" />
+      <Atom charge="0.09" name="HB1" type="DHSD-HB1" />
+      <Atom charge="0.09" name="HB2" type="DHSD-HB2" />
+      <Atom charge="-0.36" name="ND1" type="DHSD-ND1" />
+      <Atom charge="0.32" name="HD1" type="DHSD-HD1" />
+      <Atom charge="-0.05" name="CG" type="DHSD-CG" />
+      <Atom charge="0.25" name="CE1" type="DHSD-CE1" />
+      <Atom charge="0.13" name="HE1" type="DHSD-HE1" />
+      <Atom charge="-0.7" name="NE2" type="DHSD-NE2" />
+      <Atom charge="0.22" name="CD2" type="DHSD-CD2" />
+      <Atom charge="0.1" name="HD2" type="DHSD-HD2" />
+      <Atom charge="0.51" name="C" type="DHSD-C" />
+      <Atom charge="-0.51" name="O" type="DHSD-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="ND1" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="ND1" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="HS2_0" />
+    </Residue>
+    <Residue name="DHSE">
+      <Atom charge="-0.47" name="N" type="DHSE-N" />
+      <Atom charge="0.31" name="HN" type="DHSE-HN" />
+      <Atom charge="0.07" name="CA" type="DHSE-CA" />
+      <Atom charge="0.09" name="HA" type="DHSE-HA" />
+      <Atom charge="-0.08" name="CB" type="DHSE-CB" />
+      <Atom charge="0.09" name="HB1" type="DHSE-HB1" />
+      <Atom charge="0.09" name="HB2" type="DHSE-HB2" />
+      <Atom charge="-0.7" name="ND1" type="DHSE-ND1" />
+      <Atom charge="0.22" name="CG" type="DHSE-CG" />
+      <Atom charge="0.25" name="CE1" type="DHSE-CE1" />
+      <Atom charge="0.13" name="HE1" type="DHSE-HE1" />
+      <Atom charge="-0.36" name="NE2" type="DHSE-NE2" />
+      <Atom charge="0.32" name="HE2" type="DHSE-HE2" />
+      <Atom charge="-0.05" name="CD2" type="DHSE-CD2" />
+      <Atom charge="0.09" name="HD2" type="DHSE-HD2" />
+      <Atom charge="0.51" name="C" type="DHSE-C" />
+      <Atom charge="-0.51" name="O" type="DHSE-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="ND1" atomName2="CG" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="NE2" atomName2="CE1" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="ND1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DHSP">
+      <Atom charge="-0.47" name="N" type="DHSP-N" />
+      <Atom charge="0.31" name="HN" type="DHSP-HN" />
+      <Atom charge="0.07" name="CA" type="DHSP-CA" />
+      <Atom charge="0.09" name="HA" type="DHSP-HA" />
+      <Atom charge="-0.05" name="CB" type="DHSP-CB" />
+      <Atom charge="0.09" name="HB1" type="DHSP-HB1" />
+      <Atom charge="0.09" name="HB2" type="DHSP-HB2" />
+      <Atom charge="0.19" name="CD2" type="DHSP-CD2" />
+      <Atom charge="0.13" name="HD2" type="DHSP-HD2" />
+      <Atom charge="0.19" name="CG" type="DHSP-CG" />
+      <Atom charge="-0.51" name="NE2" type="DHSP-NE2" />
+      <Atom charge="0.44" name="HE2" type="DHSP-HE2" />
+      <Atom charge="-0.51" name="ND1" type="DHSP-ND1" />
+      <Atom charge="0.44" name="HD1" type="DHSP-HD1" />
+      <Atom charge="0.32" name="CE1" type="DHSP-CE1" />
+      <Atom charge="0.18" name="HE1" type="DHSP-HE1" />
+      <Atom charge="0.51" name="C" type="DHSP-C" />
+      <Atom charge="-0.51" name="O" type="DHSP-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="ND1" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="ND1" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="NE2" atomName2="CE1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="HS2_1" />
+    </Residue>
+    <Residue name="DILE">
+      <Atom charge="-0.47" name="N" type="DILE-N" />
+      <Atom charge="0.31" name="HN" type="DILE-HN" />
+      <Atom charge="0.07" name="CA" type="DILE-CA" />
+      <Atom charge="0.09" name="HA" type="DILE-HA" />
+      <Atom charge="-0.09" name="CB" type="DILE-CB" />
+      <Atom charge="0.09" name="HB" type="DILE-HB" />
+      <Atom charge="-0.27" name="CG2" type="DILE-CG2" />
+      <Atom charge="0.09" name="HG21" type="DILE-HG21" />
+      <Atom charge="0.09" name="HG22" type="DILE-HG22" />
+      <Atom charge="0.09" name="HG23" type="DILE-HG23" />
+      <Atom charge="-0.18" name="CG1" type="DILE-CG1" />
+      <Atom charge="0.09" name="HG11" type="DILE-HG11" />
+      <Atom charge="0.09" name="HG12" type="DILE-HG12" />
+      <Atom charge="-0.27" name="CD" type="DILE-CD" />
+      <Atom charge="0.09" name="HD1" type="DILE-HD1" />
+      <Atom charge="0.09" name="HD2" type="DILE-HD2" />
+      <Atom charge="0.09" name="HD3" type="DILE-HD3" />
+      <Atom charge="0.51" name="C" type="DILE-C" />
+      <Atom charge="-0.51" name="O" type="DILE-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG1" atomName2="CB" />
+      <Bond atomName1="CG2" atomName2="CB" />
+      <Bond atomName1="CD" atomName2="CG1" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CG1" atomName2="HG11" />
+      <Bond atomName1="CG1" atomName2="HG12" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="CD" atomName2="HD3" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DLEU">
+      <Atom charge="-0.47" name="N" type="DLEU-N" />
+      <Atom charge="0.31" name="HN" type="DLEU-HN" />
+      <Atom charge="0.07" name="CA" type="DLEU-CA" />
+      <Atom charge="0.09" name="HA" type="DLEU-HA" />
+      <Atom charge="-0.18" name="CB" type="DLEU-CB" />
+      <Atom charge="0.09" name="HB1" type="DLEU-HB1" />
+      <Atom charge="0.09" name="HB2" type="DLEU-HB2" />
+      <Atom charge="-0.09" name="CG" type="DLEU-CG" />
+      <Atom charge="0.09" name="HG" type="DLEU-HG" />
+      <Atom charge="-0.27" name="CD1" type="DLEU-CD1" />
+      <Atom charge="0.09" name="HD11" type="DLEU-HD11" />
+      <Atom charge="0.09" name="HD12" type="DLEU-HD12" />
+      <Atom charge="0.09" name="HD13" type="DLEU-HD13" />
+      <Atom charge="-0.27" name="CD2" type="DLEU-CD2" />
+      <Atom charge="0.09" name="HD21" type="DLEU-HD21" />
+      <Atom charge="0.09" name="HD22" type="DLEU-HD22" />
+      <Atom charge="0.09" name="HD23" type="DLEU-HD23" />
+      <Atom charge="0.51" name="C" type="DLEU-C" />
+      <Atom charge="-0.51" name="O" type="DLEU-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD1" atomName2="CG" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG" />
+      <Bond atomName1="CD1" atomName2="HD11" />
+      <Bond atomName1="CD1" atomName2="HD12" />
+      <Bond atomName1="CD1" atomName2="HD13" />
+      <Bond atomName1="CD2" atomName2="HD21" />
+      <Bond atomName1="CD2" atomName2="HD22" />
+      <Bond atomName1="CD2" atomName2="HD23" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DLYS">
+      <Atom charge="-0.47" name="N" type="DLYS-N" />
+      <Atom charge="0.31" name="HN" type="DLYS-HN" />
+      <Atom charge="0.07" name="CA" type="DLYS-CA" />
+      <Atom charge="0.09" name="HA" type="DLYS-HA" />
+      <Atom charge="-0.18" name="CB" type="DLYS-CB" />
+      <Atom charge="0.09" name="HB1" type="DLYS-HB1" />
+      <Atom charge="0.09" name="HB2" type="DLYS-HB2" />
+      <Atom charge="-0.18" name="CG" type="DLYS-CG" />
+      <Atom charge="0.09" name="HG1" type="DLYS-HG1" />
+      <Atom charge="0.09" name="HG2" type="DLYS-HG2" />
+      <Atom charge="-0.18" name="CD" type="DLYS-CD" />
+      <Atom charge="0.09" name="HD1" type="DLYS-HD1" />
+      <Atom charge="0.09" name="HD2" type="DLYS-HD2" />
+      <Atom charge="0.21" name="CE" type="DLYS-CE" />
+      <Atom charge="0.05" name="HE1" type="DLYS-HE1" />
+      <Atom charge="0.05" name="HE2" type="DLYS-HE2" />
+      <Atom charge="-0.3" name="NZ" type="DLYS-NZ" />
+      <Atom charge="0.33" name="HZ1" type="DLYS-HZ1" />
+      <Atom charge="0.33" name="HZ2" type="DLYS-HZ2" />
+      <Atom charge="0.33" name="HZ3" type="DLYS-HZ3" />
+      <Atom charge="0.51" name="C" type="DLYS-C" />
+      <Atom charge="-0.51" name="O" type="DLYS-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD" atomName2="CG" />
+      <Bond atomName1="CE" atomName2="CD" />
+      <Bond atomName1="NZ" atomName2="CE" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="CE" atomName2="HE1" />
+      <Bond atomName1="CE" atomName2="HE2" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="NZ" atomName2="HZ1" />
+      <Bond atomName1="NZ" atomName2="HZ2" />
+      <Bond atomName1="NZ" atomName2="HZ3" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="LSN_0" />
+    </Residue>
+    <Residue name="DMET">
+      <Atom charge="-0.47" name="N" type="DMET-N" />
+      <Atom charge="0.31" name="HN" type="DMET-HN" />
+      <Atom charge="0.07" name="CA" type="DMET-CA" />
+      <Atom charge="0.09" name="HA" type="DMET-HA" />
+      <Atom charge="-0.18" name="CB" type="DMET-CB" />
+      <Atom charge="0.09" name="HB1" type="DMET-HB1" />
+      <Atom charge="0.09" name="HB2" type="DMET-HB2" />
+      <Atom charge="-0.14" name="CG" type="DMET-CG" />
+      <Atom charge="0.09" name="HG1" type="DMET-HG1" />
+      <Atom charge="0.09" name="HG2" type="DMET-HG2" />
+      <Atom charge="-0.09" name="SD" type="DMET-SD" />
+      <Atom charge="-0.22" name="CE" type="DMET-CE" />
+      <Atom charge="0.09" name="HE1" type="DMET-HE1" />
+      <Atom charge="0.09" name="HE2" type="DMET-HE2" />
+      <Atom charge="0.09" name="HE3" type="DMET-HE3" />
+      <Atom charge="0.51" name="C" type="DMET-C" />
+      <Atom charge="-0.51" name="O" type="DMET-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="SD" atomName2="CG" />
+      <Bond atomName1="CE" atomName2="SD" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CE" atomName2="HE1" />
+      <Bond atomName1="CE" atomName2="HE2" />
+      <Bond atomName1="CE" atomName2="HE3" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DPHE">
+      <Atom charge="-0.47" name="N" type="DPHE-N" />
+      <Atom charge="0.31" name="HN" type="DPHE-HN" />
+      <Atom charge="0.07" name="CA" type="DPHE-CA" />
+      <Atom charge="0.09" name="HA" type="DPHE-HA" />
+      <Atom charge="-0.18" name="CB" type="DPHE-CB" />
+      <Atom charge="0.09" name="HB1" type="DPHE-HB1" />
+      <Atom charge="0.09" name="HB2" type="DPHE-HB2" />
+      <Atom charge="0.0" name="CG" type="DPHE-CG" />
+      <Atom charge="-0.115" name="CD1" type="DPHE-CD1" />
+      <Atom charge="0.115" name="HD1" type="DPHE-HD1" />
+      <Atom charge="-0.115" name="CE1" type="DPHE-CE1" />
+      <Atom charge="0.115" name="HE1" type="DPHE-HE1" />
+      <Atom charge="-0.115" name="CZ" type="DPHE-CZ" />
+      <Atom charge="0.115" name="HZ" type="DPHE-HZ" />
+      <Atom charge="-0.115" name="CD2" type="DPHE-CD2" />
+      <Atom charge="0.115" name="HD2" type="DPHE-HD2" />
+      <Atom charge="-0.115" name="CE2" type="DPHE-CE2" />
+      <Atom charge="0.115" name="HE2" type="DPHE-HE2" />
+      <Atom charge="0.51" name="C" type="DPHE-C" />
+      <Atom charge="-0.51" name="O" type="DPHE-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="CD1" />
+      <Bond atomName1="CZ" atomName2="CE2" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD1" atomName2="CG" />
+      <Bond atomName1="CZ" atomName2="CE1" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="CZ" atomName2="HZ" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DPRO">
+      <Atom charge="-0.29" name="N" type="DPRO-N" />
+      <Atom charge="0.0" name="CD" type="DPRO-CD" />
+      <Atom charge="0.09" name="HD1" type="DPRO-HD1" />
+      <Atom charge="0.09" name="HD2" type="DPRO-HD2" />
+      <Atom charge="0.02" name="CA" type="DPRO-CA" />
+      <Atom charge="0.09" name="HA" type="DPRO-HA" />
+      <Atom charge="-0.18" name="CB" type="DPRO-CB" />
+      <Atom charge="0.09" name="HB1" type="DPRO-HB1" />
+      <Atom charge="0.09" name="HB2" type="DPRO-HB2" />
+      <Atom charge="-0.18" name="CG" type="DPRO-CG" />
+      <Atom charge="0.09" name="HG1" type="DPRO-HG1" />
+      <Atom charge="0.09" name="HG2" type="DPRO-HG2" />
+      <Atom charge="0.51" name="C" type="DPRO-C" />
+      <Atom charge="-0.51" name="O" type="DPRO-O" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="N" atomName2="CD" />
+      <Bond atomName1="HA" atomName2="CA" />
+      <Bond atomName1="HG1" atomName2="CG" />
+      <Bond atomName1="HG2" atomName2="CG" />
+      <Bond atomName1="HD1" atomName2="CD" />
+      <Bond atomName1="HD2" atomName2="CD" />
+      <Bond atomName1="HB1" atomName2="CB" />
+      <Bond atomName1="HB2" atomName2="CB" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DSER">
+      <Atom charge="-0.47" name="N" type="DSER-N" />
+      <Atom charge="0.31" name="HN" type="DSER-HN" />
+      <Atom charge="0.07" name="CA" type="DSER-CA" />
+      <Atom charge="0.09" name="HA" type="DSER-HA" />
+      <Atom charge="0.05" name="CB" type="DSER-CB" />
+      <Atom charge="0.09" name="HB1" type="DSER-HB1" />
+      <Atom charge="0.09" name="HB2" type="DSER-HB2" />
+      <Atom charge="-0.66" name="OG" type="DSER-OG" />
+      <Atom charge="0.43" name="HG1" type="DSER-HG1" />
+      <Atom charge="0.51" name="C" type="DSER-C" />
+      <Atom charge="-0.51" name="O" type="DSER-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="OG" atomName2="CB" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="OG" atomName2="HG1" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="SERD_0" />
+    </Residue>
+    <Residue name="DTHR">
+      <Atom charge="-0.47" name="N" type="DTHR-N" />
+      <Atom charge="0.31" name="HN" type="DTHR-HN" />
+      <Atom charge="0.07" name="CA" type="DTHR-CA" />
+      <Atom charge="0.09" name="HA" type="DTHR-HA" />
+      <Atom charge="0.14" name="CB" type="DTHR-CB" />
+      <Atom charge="0.09" name="HB" type="DTHR-HB" />
+      <Atom charge="-0.66" name="OG1" type="DTHR-OG1" />
+      <Atom charge="0.43" name="HG1" type="DTHR-HG1" />
+      <Atom charge="-0.27" name="CG2" type="DTHR-CG2" />
+      <Atom charge="0.09" name="HG21" type="DTHR-HG21" />
+      <Atom charge="0.09" name="HG22" type="DTHR-HG22" />
+      <Atom charge="0.09" name="HG23" type="DTHR-HG23" />
+      <Atom charge="0.51" name="C" type="DTHR-C" />
+      <Atom charge="-0.51" name="O" type="DTHR-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="OG1" atomName2="CB" />
+      <Bond atomName1="CG2" atomName2="CB" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="OG1" atomName2="HG1" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DTRP">
+      <Atom charge="-0.47" name="N" type="DTRP-N" />
+      <Atom charge="0.31" name="HN" type="DTRP-HN" />
+      <Atom charge="0.07" name="CA" type="DTRP-CA" />
+      <Atom charge="0.09" name="HA" type="DTRP-HA" />
+      <Atom charge="-0.18" name="CB" type="DTRP-CB" />
+      <Atom charge="0.09" name="HB1" type="DTRP-HB1" />
+      <Atom charge="0.09" name="HB2" type="DTRP-HB2" />
+      <Atom charge="-0.03" name="CG" type="DTRP-CG" />
+      <Atom charge="-0.15" name="CD1" type="DTRP-CD1" />
+      <Atom charge="0.22" name="HD1" type="DTRP-HD1" />
+      <Atom charge="-0.51" name="NE1" type="DTRP-NE1" />
+      <Atom charge="0.37" name="HE1" type="DTRP-HE1" />
+      <Atom charge="0.24" name="CE2" type="DTRP-CE2" />
+      <Atom charge="0.11" name="CD2" type="DTRP-CD2" />
+      <Atom charge="-0.25" name="CE3" type="DTRP-CE3" />
+      <Atom charge="0.17" name="HE3" type="DTRP-HE3" />
+      <Atom charge="-0.2" name="CZ3" type="DTRP-CZ3" />
+      <Atom charge="0.14" name="HZ3" type="DTRP-HZ3" />
+      <Atom charge="-0.27" name="CZ2" type="DTRP-CZ2" />
+      <Atom charge="0.16" name="HZ2" type="DTRP-HZ2" />
+      <Atom charge="-0.14" name="CH2" type="DTRP-CH2" />
+      <Atom charge="0.14" name="HH2" type="DTRP-HH2" />
+      <Atom charge="0.51" name="C" type="DTRP-C" />
+      <Atom charge="-0.51" name="O" type="DTRP-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="NE1" atomName2="CD1" />
+      <Bond atomName1="CZ2" atomName2="CE2" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CZ3" atomName2="CH2" />
+      <Bond atomName1="CD2" atomName2="CE3" />
+      <Bond atomName1="NE1" atomName2="CE2" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="NE1" atomName2="HE1" />
+      <Bond atomName1="CE3" atomName2="HE3" />
+      <Bond atomName1="CZ2" atomName2="HZ2" />
+      <Bond atomName1="CZ3" atomName2="HZ3" />
+      <Bond atomName1="CH2" atomName2="HH2" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD1" atomName2="CG" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <Bond atomName1="CZ3" atomName2="CE3" />
+      <Bond atomName1="CH2" atomName2="CZ2" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DTYR">
+      <Atom charge="-0.47" name="N" type="DTYR-N" />
+      <Atom charge="0.31" name="HN" type="DTYR-HN" />
+      <Atom charge="0.07" name="CA" type="DTYR-CA" />
+      <Atom charge="0.09" name="HA" type="DTYR-HA" />
+      <Atom charge="-0.18" name="CB" type="DTYR-CB" />
+      <Atom charge="0.09" name="HB1" type="DTYR-HB1" />
+      <Atom charge="0.09" name="HB2" type="DTYR-HB2" />
+      <Atom charge="0.0" name="CG" type="DTYR-CG" />
+      <Atom charge="-0.115" name="CD1" type="DTYR-CD1" />
+      <Atom charge="0.115" name="HD1" type="DTYR-HD1" />
+      <Atom charge="-0.115" name="CE1" type="DTYR-CE1" />
+      <Atom charge="0.115" name="HE1" type="DTYR-HE1" />
+      <Atom charge="0.11" name="CZ" type="DTYR-CZ" />
+      <Atom charge="-0.54" name="OH" type="DTYR-OH" />
+      <Atom charge="0.43" name="HH" type="DTYR-HH" />
+      <Atom charge="-0.115" name="CD2" type="DTYR-CD2" />
+      <Atom charge="0.115" name="HD2" type="DTYR-HD2" />
+      <Atom charge="-0.115" name="CE2" type="DTYR-CE2" />
+      <Atom charge="0.115" name="HE2" type="DTYR-HE2" />
+      <Atom charge="0.51" name="C" type="DTYR-C" />
+      <Atom charge="-0.51" name="O" type="DTYR-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG" atomName2="CB" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="CD1" />
+      <Bond atomName1="CZ" atomName2="CE2" />
+      <Bond atomName1="OH" atomName2="CZ" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="OH" atomName2="HH" />
+      <Bond atomName1="O" atomName2="C" />
+      <Bond atomName1="CD1" atomName2="CG" />
+      <Bond atomName1="CE1" atomName2="CZ" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+    <Residue name="DVAL">
+      <Atom charge="-0.47" name="N" type="DVAL-N" />
+      <Atom charge="0.31" name="HN" type="DVAL-HN" />
+      <Atom charge="0.07" name="CA" type="DVAL-CA" />
+      <Atom charge="0.09" name="HA" type="DVAL-HA" />
+      <Atom charge="-0.09" name="CB" type="DVAL-CB" />
+      <Atom charge="0.09" name="HB" type="DVAL-HB" />
+      <Atom charge="-0.27" name="CG1" type="DVAL-CG1" />
+      <Atom charge="0.09" name="HG11" type="DVAL-HG11" />
+      <Atom charge="0.09" name="HG12" type="DVAL-HG12" />
+      <Atom charge="0.09" name="HG13" type="DVAL-HG13" />
+      <Atom charge="-0.27" name="CG2" type="DVAL-CG2" />
+      <Atom charge="0.09" name="HG21" type="DVAL-HG21" />
+      <Atom charge="0.09" name="HG22" type="DVAL-HG22" />
+      <Atom charge="0.09" name="HG23" type="DVAL-HG23" />
+      <Atom charge="0.51" name="C" type="DVAL-C" />
+      <Atom charge="-0.51" name="O" type="DVAL-O" />
+      <Bond atomName1="CB" atomName2="CA" />
+      <Bond atomName1="CG1" atomName2="CB" />
+      <Bond atomName1="CG2" atomName2="CB" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="C" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CG1" atomName2="HG11" />
+      <Bond atomName1="CG1" atomName2="HG12" />
+      <Bond atomName1="CG1" atomName2="HG13" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="O" atomName2="C" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_2" />
+      <AllowPatch name="CNEU_2" />
+      <AllowPatch name="PCTE_2" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT3_1" />
+    </Residue>
+  </Residues>
+</ForceField>

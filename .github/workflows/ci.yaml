@@ -30,7 +30,6 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         python-version: ["3.10", "3.11", "3.12"]
         amber-conversion: [false]
-        charmm-conversion: [false]
         openmm-version: ["8.1.2", "8.2.0"]
 
     steps:
@@ -73,25 +72,10 @@ jobs:
         KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
-      if: ${{ matrix.amber-conversion == 'true' }}
+      if: ${{ matrix.amber-conversion }}
       run: |
         python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
       working-directory: ./amber
-
-    - name: Test CHARMM conversion
-      if: ${{ matrix.charmm-conversion == 'true' }}
-      run: |
-
-        # TODO: Turn on these tests (in job matrix) when new ParmEd is released
-        # TODO: Find a way to avoid timing out when running full charmm36.yaml conversion below
-        python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
-        python convert_charmm.py --verbose --in files/waters.yaml
-        python convert_charmm.py --verbose
-
-        # TODO: Uncomment this when tests are expected to work
-        # python test_charmm.py --verbose
-
-      working-directory: ./charmm
 
     - name: Run docstrings
       continue-on-error: True

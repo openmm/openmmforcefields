@@ -1,49 +1,599 @@
-# for CharMM36 --> OpenMM ffxml conversion
+# Conversion specification for CHARMM force field to OpenMM FFXML format.
 # Author: Chaya D. Stern, choderalab
-# The include files structure is based on the file structure of unzipped toppar_c36_aug15.tgz
-# excluded files include files that need to be excluded from the conversion because of duplicate parameters with different
-# values. In addition, toppar_hbond.str and toppar_all36_lipid_list.str are not standard stream files.
+# Reworked by Evan Pretti to support the July 2024 release of CHARMM and provide
+# clearer information on reasons why particular files are included vs. excluded.
 
 - sourcePackage: charmm36
-  sourcePackageVersion: toppar_c36_jul20.tgz
+  sourcePackageVersion: toppar_c36_jul24.tgz
 - Destination: charmm36_nowaters.xml
   Source:
     include:
-     # Proteins should be listed first so patches can be tested on amino acids first
-     - toppar_c36_jul20/top_all36_prot.rtf
-     - toppar_c36_jul20/par_all36_prot.prm
-     - toppar_c36_jul20/top_all36_na.rtf
-     - toppar_c36_jul20/par_all36_na.prm
-     - toppar_c36_jul20/top_all36_cgenff.rtf
-     - toppar_c36_jul20/par_all36_cgenff.prm
-     - toppar_c36_jul20/top_all36_carb.rtf
-     - toppar_c36_jul20/par_all36_carb.prm
-     - toppar_c36_jul20/top_all36_lipid.rtf
-     - toppar_c36_jul20/par_all36_lipid.prm
+      # Proteins (list first so that patches can be tested on amino acids first)
+      - toppar/top_all36_prot.rtf
+      - toppar/par_all36m_prot.prm
+
+      # Nucleic acids
+      - toppar/top_all36_na.rtf
+      - toppar/par_all36_na.prm
+
+      # Carbohydrates
+      - toppar/top_all36_carb.rtf
+      - toppar/par_all36_carb.prm
+
+      # Lipids
+      - toppar/top_all36_lipid.rtf
+      - toppar/par_all36_lipid.prm
+
+      # General molecules (list after protein, nucleic acid, and carbohydrate
+      # parameters are loaded per note in top_all36_cgenff.rtf)
+      - toppar/top_all36_cgenff.rtf
+      - toppar/par_all36_cgenff.prm
+
     stream:
-     - toppar_c36_jul20/stream/carb/*.str
-     - toppar_c36_jul20/stream/lipid/*.str
-     - toppar_c36_jul20/stream/prot/*.str
-     - toppar_c36_jul20/stream/na/*.str
-     - toppar_c36_jul20/stream/misc/*.str
+      - toppar/stream/prot/*.str
+      - toppar/stream/na/*.str
+      - toppar/stream/carb/*.str
+      - toppar/stream/lipid/*.str
+      - toppar/stream/misc/*.str
+
     exclude:
-     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_list.str
-     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_glycolipid.str
-     - toppar_c36_jul20/stream/prot/toppar_all36_prot_aldehydes.str
-     - toppar_c36_jul20/stream/na/toppar_all36_na_modifications.str
-     - toppar_c36_jul20/stream/misc/toppar_hbond.str
-     - toppar_c36_jul20/stream/prot/toppar_all36_prot_d_aminoacids.str
-     - toppar_c36_jul20/stream/na/toppar_all36_na_reactive_rna.str
-     # Exclude default waters and ions, since we split these out:
-     - toppar_c36_jul20/toppar_water_ions.str
-     - toppar_c36_jul20/stream/misc/toppar_ions_won.str
-     # Exclude model compounds
-     - toppar_c36_jul20/stream/prot/toppar_all36_prot_model.str
-     - toppar_c36_jul20/stream/na/toppar_all36_na_model.str
-     - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_model.str
-     - toppar_c36_jul20/stream/carb/toppar_all36_carb_model.str
+      # Only include the standard copies of these stream files
+      # (toppar_all36_prot_heme.str and toppar_all36_na_rna_modified.str)
+      - toppar/stream/prot/toppar_all36_prot_heme_for_new_psf_gen_code_2022.str
+      - toppar/stream/na/toppar_all36_na_rna_modified_for_new_psf_gen_code_2022.str
+
+      # The non-LJPME-optimized lipid parameters are included above, so exclude
+      # these stream files that are for use with the LJPME-optimized parameters
+      - toppar/stream/lipid/toppar_all36_lipid_bacterial_ljpme.str
+      - toppar/stream/lipid/toppar_all36_lipid_ether_ljpme.str
+      - toppar/stream/lipid/toppar_all36_lipid_miscellaneous_ljpme.str
+      - toppar/stream/lipid/toppar_all36_lipid_yeast_ljpme.str
+
+      # Model compounds are not included in the force field
+      - toppar/stream/prot/toppar_all36_prot_model.str
+      - toppar/stream/na/toppar_all36_na_model.str
+      - toppar/stream/carb/toppar_all36_carb_model.str
+      - toppar/stream/lipid/toppar_all36_lipid_model.str
+
+      # Water and ions are split out elsewhere
+      - toppar/stream/misc/toppar_ions_won.str
+
+      # The glycolipid stream file contains values for CG2R61-CG301 (bond from
+      # 6-membered aromatic ring carbon to aliphatic carbon with no hydrogens)
+      # that are inconsistent with the CGenFF values
+      - toppar/stream/carb/toppar_all36_carb_glycolipid.str
+
+      # The following file includes other stream files that are already included
+      - toppar/stream/lipid/toppar_all36_lipid_list.str
+
+      # The following file is intended only for use during hydrogen bonding
+      # analysis and it is incorrect to use it for normal simulation
+      - toppar/stream/misc/toppar_hbond.str
+    
+    exclude_residues:
+      # Exclude DMPR (dimethylpropanamide) defined by CGenFF because the
+      # reactive RNA stream file contains a patch entry for DMPR
+      # (thio-substitution of DMPA: dimyristoyl-D-glycero-1-phosphatidic acid)
+      # that causes conflicting atom type names to be generated
+      - DMPR
+
+    exclude_patches:
+      # Exclude CNH3 (CYTP to protonated cytosine) as it is incorrectly marked
+      # as applying elsewhere
+      - CNH3
+
+    split:
+      # D-amino acids are topologically equivalent to L-amino acids and make it
+      # difficult to create protein systems in OpenMM; many of these as well as
+      # topologically equivalent terminal patches are present in the modified
+      # residue stream file
+      - input:
+        - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
+        - toppar/stream/prot/toppar_all36_prot_modify_res.str
+        output: charmm36_d_modified.xml
+        fixes:
+          # See nucleic acid fix comments below.
+          - action: append
+            target:
+              - ./Residues/Residue[@name='BUG']
+            content:
+              tag: ExternalBond
+              attrib:
+                atomName: P
+          - action: append
+            target: ./Residues/Residue/AllowPatch[@name='DEO5_0']/..
+            content:
+              - tag: AllowPatch
+                attrib:
+                  name: DEO5TER
+              - tag: AllowPatch
+                attrib:
+                  name: DEO5MET
+          - action: remove
+            target:
+              - ./Residues/Residue/AllowPatch[@name='DEO5_0']
+
+      # This file has a large number of carbohydrate patches that slow down
+      # OpenMM
+      - input:
+        - toppar/stream/carb/toppar_all36_carb_imlab.str
+        output: charmm36_carb_imlab.xml
+      
+      # CGenFF has some small molecule entries that cause clashes with some
+      # amino acids, so isolate these as well
+      - input:
+        - toppar/top_all36_cgenff.rtf
+        - toppar/par_all36_cgenff.prm
+        output: charmm36_cgenff.xml
+        fixes:
+          # The residues with this patch in this file are not nucleic acid
+          # residues meant to be part of a polymer, so just remove <AllowPatch>.
+          - action: remove
+            target:
+              - ./Residues/Residue/AllowPatch[@name='DEO5_0']
+
+    fixes:
+      # Here we manually set nucleic acid external bonds because CHARMM doesn't
+      # provide a reliable way to get at this information and ParmEd fails to
+      # guess it correctly for nucleic acids; we also fix RNA-to-DNA patches
+      # for the 5'-terminal ends
+      - action: append
+        target:
+          - ./Residues/Residue[@name='ADE']
+          - ./Residues/Residue[@name='CYT']
+          - ./Residues/Residue[@name='GUA']
+          - ./Residues/Residue[@name='THY']
+          - ./Residues/Residue[@name='URA']
+          - ./Residues/Residue[@name='12A']
+          - ./Residues/Residue[@name='13P']
+          - ./Residues/Residue[@name='1MA']
+          - ./Residues/Residue[@name='1MG']
+          - ./Residues/Residue[@name='1MI']
+          - ./Residues/Residue[@name='1MP']
+          - ./Residues/Residue[@name='1PC']
+          - ./Residues/Residue[@name='26A']
+          - ./Residues/Residue[@name='27G']
+          - ./Residues/Residue[@name='2MA']
+          - ./Residues/Residue[@name='2MG']
+          - ./Residues/Residue[@name='2MU']
+          - ./Residues/Residue[@name='2SC']
+          - ./Residues/Residue[@name='2SU']
+          - ./Residues/Residue[@name='3AU']
+          - ./Residues/Residue[@name='3MC']
+          - ./Residues/Residue[@name='3MP']
+          - ./Residues/Residue[@name='3MU']
+          - ./Residues/Residue[@name='3PC']
+          - ./Residues/Residue[@name='4AC']
+          - ./Residues/Residue[@name='4MC']
+          - ./Residues/Residue[@name='4OC']
+          - ./Residues/Residue[@name='4SU']
+          - ./Residues/Residue[@name='52U']
+          - ./Residues/Residue[@name='5AU']
+          - ./Residues/Residue[@name='5CU']
+          - ./Residues/Residue[@name='5DU']
+          - ./Residues/Residue[@name='5FC']
+          - ./Residues/Residue[@name='5HU']
+          - ./Residues/Residue[@name='5MC']
+          - ./Residues/Residue[@name='5MU']
+          - ./Residues/Residue[@name='5TU']
+          - ./Residues/Residue[@name='66A']
+          - ./Residues/Residue[@name='6AA']
+          - ./Residues/Residue[@name='6GA']
+          - ./Residues/Residue[@name='6IA']
+          - ./Residues/Residue[@name='6MA']
+          - ./Residues/Residue[@name='70U']
+          - ./Residues/Residue[@name='7MG']
+          - ./Residues/Residue[@name='8MA']
+          - ./Residues/Residue[@name='BCU']
+          - ./Residues/Residue[@name='BUG']
+          - ./Residues/Residue[@name='CMU']
+          - ./Residues/Residue[@name='CYU']
+          - ./Residues/Residue[@name='DAG']
+          - ./Residues/Residue[@name='DCG']
+          - ./Residues/Residue[@name='DWG']
+          - ./Residues/Residue[@name='E1X']
+          - ./Residues/Residue[@name='EQG']
+          - ./Residues/Residue[@name='GAU']
+          - ./Residues/Residue[@name='GCU']
+          - ./Residues/Residue[@name='GQG']
+          - ./Residues/Residue[@name='H2U']
+          - ./Residues/Residue[@name='HCU']
+          - ./Residues/Residue[@name='HIA']
+          - ./Residues/Residue[@name='HMC']
+          - ./Residues/Residue[@name='HNA']
+          - ./Residues/Residue[@name='HWG']
+          - ./Residues/Residue[@name='IAU']
+          - ./Residues/Residue[@name='IMG']
+          - ./Residues/Residue[@name='INO']
+          - ./Residues/Residue[@name='ISU']
+          - ./Residues/Residue[@name='IWG']
+          - ./Residues/Residue[@name='K2C']
+          - ./Residues/Residue[@name='M1G']
+          - ./Residues/Residue[@name='M2A']
+          - ./Residues/Residue[@name='M2G']
+          - ./Residues/Residue[@name='M3U']
+          - ./Residues/Residue[@name='M6A']
+          - ./Residues/Residue[@name='M7G']
+          - ./Residues/Residue[@name='MAC']
+          - ./Residues/Residue[@name='MAU']
+          - ./Residues/Residue[@name='MCU']
+          - ./Residues/Residue[@name='MDU']
+          - ./Residues/Residue[@name='MEU']
+          - ./Residues/Residue[@name='MFC']
+          - ./Residues/Residue[@name='MIA']
+          - ./Residues/Residue[@name='MIU']
+          - ./Residues/Residue[@name='MMA']
+          - ./Residues/Residue[@name='MMC']
+          - ./Residues/Residue[@name='MMG']
+          - ./Residues/Residue[@name='MMI']
+          - ./Residues/Residue[@name='MOU']
+          - ./Residues/Residue[@name='MQG']
+          - ./Residues/Residue[@name='MSU']
+          - ./Residues/Residue[@name='MTA']
+          - ./Residues/Residue[@name='MTG']
+          - ./Residues/Residue[@name='MWG']
+          - ./Residues/Residue[@name='N2G']
+          - ./Residues/Residue[@name='OAU']
+          - ./Residues/Residue[@name='OCU']
+          - ./Residues/Residue[@name='OEU']
+          - ./Residues/Residue[@name='OMA']
+          - ./Residues/Residue[@name='OMC']
+          - ./Residues/Residue[@name='OMG']
+          - ./Residues/Residue[@name='OMI']
+          - ./Residues/Residue[@name='OMP']
+          - ./Residues/Residue[@name='OMU']
+          - ./Residues/Residue[@name='PBG']
+          - ./Residues/Residue[@name='PSU']
+          - ./Residues/Residue[@name='QUG']
+          - ./Residues/Residue[@name='R2C']
+          - ./Residues/Residue[@name='RCG']
+          - ./Residues/Residue[@name='RIA']
+          - ./Residues/Residue[@name='RIG']
+          - ./Residues/Residue[@name='SAU']
+          - ./Residues/Residue[@name='SCU']
+          - ./Residues/Residue[@name='SEU']
+          - ./Residues/Residue[@name='SIA']
+          - ./Residues/Residue[@name='SMA']
+          - ./Residues/Residue[@name='STU']
+          - ./Residues/Residue[@name='T6A']
+          - ./Residues/Residue[@name='TMC']
+          - ./Residues/Residue[@name='U8U']
+          - ./Residues/Residue[@name='YYG']
+        content:
+          - tag: ExternalBond
+            attrib:
+              atomName: P
+      - action: append
+        target: ./Residues/Residue/AllowPatch[@name='DEO5_0']/..
+        content:
+          - tag: AllowPatch
+            attrib:
+              name: DEO5TER
+          - tag: AllowPatch
+            attrib:
+              name: DEO5MET
+      - action: remove
+        target:
+          - ./Residues/Residue/AllowPatch[@name='DEO5_0']
+          - ./Patches/Patch[@name='DEO5_0']
+      - action: append
+        target:
+          - ./Patches/Patch[@name='5TER_0']
+          - ./Patches/Patch[@name='5MET_0']
+        content:
+          tag: RemoveExternalBond
+          attrib:
+            atomName: P
+      - action: append
+        target: ./Patches
+        content:
+          - tag: Patch
+            attrib:
+              name: DEO5TER
+            children:
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.16'
+                name: C4'
+                type: DEO5-C4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H4'
+                type: DEO5-H4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.5'
+                name: O4'
+                type: DEO5-O4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.16'
+                name: C1'
+                type: DEO5-C1'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H1'
+                type: DEO5-H1'
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.18'
+                name: C2'
+                type: DEO5-C2'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H2'
+                type: DEO5-H2'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H2''
+                type: DEO5-H2''
+            - tag: RemoveAtom
+              attrib:
+                name: O2'
+            - tag: AddBond
+              attrib:
+                atomName1: C2'
+                atomName2: H2'
+            - tag: RemoveBond
+              attrib:
+                atomName1: C2'
+                atomName2: O2'
+            - tag: RemoveBond
+              attrib:
+                atomName1: O2'
+                atomName2: H2'
+            - tag: AddAtom
+              attrib:
+                charge: '0.43'
+                name: H5T
+                type: 5TER-H5T
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.66'
+                name: O5'
+                type: 5TER-O5'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.05'
+                name: C5'
+                type: 5TER-C5'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H5'
+                type: 5TER-H5'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H5''
+                type: 5TER-H5''
+            - tag: RemoveAtom
+              attrib:
+                name: P
+            - tag: RemoveAtom
+              attrib:
+                name: O1P
+            - tag: RemoveAtom
+              attrib:
+                name: O2P
+            - tag: AddBond
+              attrib:
+                atomName1: H5T
+                atomName2: O5'
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O1P
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O2P
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O5'
+            - tag: RemoveExternalBond
+              attrib:
+                atomName: P
+          - tag: Patch
+            attrib:
+              name: DEO5MET
+            children:
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.16'
+                name: C4'
+                type: DEO5-C4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H4'
+                type: DEO5-H4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.5'
+                name: O4'
+                type: DEO5-O4'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.16'
+                name: C1'
+                type: DEO5-C1'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H1'
+                type: DEO5-H1'
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.18'
+                name: C2'
+                type: DEO5-C2'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H2'
+                type: DEO5-H2'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H2''
+                type: DEO5-H2''
+            - tag: RemoveAtom
+              attrib:
+                name: O2'
+            - tag: AddBond
+              attrib:
+                atomName1: C2'
+                atomName2: H2'
+            - tag: RemoveBond
+              attrib:
+                atomName1: C2'
+                atomName2: O2'
+            - tag: RemoveBond
+              attrib:
+                atomName1: O2'
+                atomName2: H2'
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.27'
+                name: C5'
+                type: 5MET-C5'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H5'
+                type: 5MET-H5'
+            - tag: ChangeAtom
+              attrib:
+                charge: '0.09'
+                name: H5''
+                type: 5MET-H5''
+            - tag: AddAtom
+              attrib:
+                charge: '0.09'
+                name: H53'
+                type: 5MET-H53'
+            - tag: RemoveAtom
+              attrib:
+                name: O5'
+            - tag: RemoveAtom
+              attrib:
+                name: P
+            - tag: RemoveAtom
+              attrib:
+                name: O1P
+            - tag: RemoveAtom
+              attrib:
+                name: O2P
+            - tag: AddBond
+              attrib:
+                atomName1: C5'
+                atomName2: H53'
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O1P
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O2P
+            - tag: RemoveBond
+              attrib:
+                atomName1: P
+                atomName2: O5'
+            - tag: RemoveBond
+              attrib:
+                atomName1: O5'
+                atomName2: C5'
+            - tag: RemoveExternalBond
+              attrib:
+                atomName: P
+
+      # Here we manually add in the DISU (cysteine disulfide) patch to the force
+      # field since ParmEd doesn't convert it automatically
+      - action: append
+        target: ./AtomTypes
+        content:
+          - tag: Type
+            attrib:
+              name: DISU-1CB
+              class: CT2
+              element: C
+              mass: '12.011'
+          - tag: Type
+            attrib:
+              name: DISU-1SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2SG
+              class: SM
+              element: S
+              mass: '32.06'
+          - tag: Type
+            attrib:
+              name: DISU-2CB
+              class: CT2
+              element: C
+              mass: '12.011'
+      - action: append
+        target: ./Patches
+        content:
+          tag: Patch
+          attrib:
+            name: DISU
+            residues: '2'
+          children:
+            - tag: RemoveAtom
+              attrib:
+                name: 1:HG1
+            - tag: RemoveAtom
+              attrib:
+                name: 2:HG1
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.1'
+                name: 1:CB
+                type: DISU-1CB
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.1'
+                name: 2:CB
+                type: DISU-2CB
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.08'
+                name: 1:SG
+                type: DISU-1SG
+            - tag: ChangeAtom
+              attrib:
+                charge: '-0.08'
+                name: 2:SG
+                type: DISU-2SG
+            - tag: AddBond
+              attrib:
+                atomName1: 1:SG
+                atomName2: 2:SG
+            - tag: ApplyToResidue
+              attrib:
+                name: 1:CYS
+            - tag: ApplyToResidue
+              attrib:
+                name: 2:CYS
+
   References:
    protein:
+     - >-
+       Huang, J., Rauscher, S., Nawrocki, G., Ran, T., Feig, M, de Groot, B.L., Grubmuller, H., and MacKerell, A.D.,
+       Jr., "CHARMM36m: An Improved Force Field for Folded and Intrinsically Disordered Proteins," Nature Methods,
+       14:71-73, 2016, PMC5199616
      - >-
        Robert B. Best, R.B., Xiao Zhu, X., Shim, J., Lopes, P. Mittal, J., Feig, M. and MacKerell, A.D., Jr. Optimization
        of the additive CHARMM all-atom protein force field targeting improved sampling of the backbone phi, psi and
@@ -57,15 +607,34 @@
        Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub,
        J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular
        modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616.
+     - aldehydes:
+       - >-
+         Wymore, T., Hempel, J., Cho, S.S., MacKerell, Jr., A.D. Nicholas, Jr., H.B., Deerfield, II, D.W.  Molecular 
+         Recognition of Aldehydes by Aldehyde Dehydrogenase and Mechanism of Nucleophile Activation, Submitted for
+         publication.
      - arginine:
        - >-
          Li, L., Vorobyov, I.V., MacKerell, Jr., A.D., Allen, T.W., "Is arginine charged in a membrane?" Biophysical
          Journal, 94: L11-L13, 2008, PMCID: PMC2157258
+     - cofactors:
+       - >-
+         Aleksandrov A. A Molecular Mechanics Model for Flavins, Journal of Computational Chemistry, 2019,
+         40(32):2834-2842, doi: 10.1002/jcc.26061
+       - >-
+         Balduzzi et al. Additive CHARMM Force Field for Pterins and Folates, 2024, submitted
+       - >-
+         Poleto et al. Structural Dynamics of the Methyl-Coenzyme M Reductase Active Site Are Influenced by Coenzyme
+         F430 Modifications, Biochemistry 2024, 63, 14, 1783–1794, https://doi.org/10.1021/acs.biochem.4c00168.
      - fluoroalkanes:
        - >-
          Chen, I.-J., Yin, D. and MacKerell, Jr., A.D., "Combined Ab initio/Empirical Approach for Optimization of
          Lennard-Jones Parameters for Polar-Neutral Compounds," Journal of Computational Chemistry, 2002, 23:199-213.
-     - phosphotyorosine:
+     - modified:
+       - >-
+         Croitoru, A., Park, S.-J., Kumar, A., Lee, J., Im, Wonpil; MacKerell, A.D., Jr., and Aleksandrov, A.
+         Additive CHARMM36 Force Field for Nonstandard Amino Acids, Journal of Chemical Theory and Computation,
+         17:3554-3570, doi: 10.1021/acs.jctc.1c00254.
+     - phosphotyrosine:
        - >-
          Feng, M.-H., Philippopoulos, M., MacKerell, Jr., A.D. and Lim, C. Structural Characterization of the
          Phosphotyrosine Binding Region of a High-Affinity aSH2 Domain-Phosphopeptide Complex by Molecular Dynamics
@@ -75,83 +644,6 @@
          Yin, D., Ph.D. Thesis, "Parameterization for Empirical Force Field Calculations and A Theoretical Study of
          Membrane Permeability of Pyridine Derivative," Department of Pharmaceutical Sciences, School of Pharmacy,
          University of Maryland, 1997
-   carbohydrates:
-     - pyranose monosaccharides:
-       - >-
-         Guvench, O., Greene, S.N., Kamath, G., Brady, J.W., Venable, R.M., Pastor, R.W., MacKerell, Jr., A.D.
-         "Additive empirical force field for hexopyranose monosaccharides," Journal of Computational Chemistry, 29:
-         2543-2564, 2008. PMID: 18470966
-     - linear sugars inositol sugar alcohols:
-       - >-
-         Hatcher, E., Guvench, O., and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Acyclic
-         Polyalcohols, Acyclic Carbohydrates and Inositol," Journal of Chemical Theory and Computation, 5: 1315-1327,
-         2009, DOI: 10.1021/ct9000608.
-     - hexopyranose glycosidic linkages:
-       - >-
-         Guvench, O., Hatcher, E. R., Venable, R. M., Pastor, R. W., MacKerell, Jr., A. D. "Additive Empirical CHARMM
-         Force Field for glycosyl linked hexopyranoses," Journal of Chemical Theory and Computation, 5, 2353-2370, 2009,
-         DOI: 10.1021/ct900242e
-     - furanose monosaccharides:
-       - >-
-         Hatcher, E. R.; Guvench, O. and MacKerell, Jr., A.D. "CHARMM Additive All-Atom Force Field for
-         Aldopentofuranose Carbohydrates and Fructofuranose." Journal of Physical Chemistry B. 113:12466-76, 2009,
-         PMID: 19694450
-     - glycosidic linkages involving furanoses:
-       - >-
-         Raman, E. P., Guvench, O., MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field for Glycosidic Linkages
-         in Carbohydrates Involving Furanoses," Journal of Physical Chemistry B, 114: 12981-12994, 2010, PMID: 20845956
-     - carbohydrate derivatives and glycosidic linkages for glycoproteins:
-       - >-
-         Guvench, O.; Mallajosyula, S. S.; Raman, E. P.; Hatcher, E. R.; Vanommeslaeghe, K.; Foster, T. J.; Jamison,
-         F. W. and MacKerell, Jr., A.D., "CHARMM additive all-atom force field for carbohydrate derivatives and its
-         utility in polysaccharide and carbohydrate-protein modeling," Journal of Chemical Theory and Computation 2011
-         7 (10), 3162-3180
-     - O-glycan linkages:
-       - >-
-         Mallajosyula, S. S. and MacKerell, Jr., A.D., "Influence of Solvent and Intramolecular Hydrogen Bonding on the
-         Conformational Properties of O-Linked Glycopeptides," The Journal of Physical Chemistry B 2011 115 (38),
-         11215-11229.
-     - phosphates and sulfates:
-       - >-
-         Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field
-         for Phosphate and Sulfate Linked to Carbohydrates" Journal of Chemical Theory and Computation 2012 8 (2),
-         759-776.
-     - glycolipids:
-       - >-
-         Kern, N. R., Lee, H. S., Wu, E. L., Park, S., Vanommeslaeghe, K., MacKerell, A. D., ... Im, W. (2014). Lipid-
-         Linked Oligosaccharides in Membrane Sample Conformations That Faciliate Binding to Oligosaccharyltransferase.
-         Biophysical Journal, 107(8), 1885-1895.
-   lipids:
-     - >-
-       Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos
-       Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM
-       All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843
-     - PUFA modifications:
-       - >-
-         Jeffery B. Klauda, Viviana Monje, Taehoon Kim, and Wonpil Im. "Improving the CHARMM Force Field for
-         Polyunsaturated Fatty Acid Chains" J. Phys. Chem. B. 2012 ASAP http://dx.doi.org/10.1021/jp304056p
-     - atom nomenclature:
-       - >-
-         Sundaralingan, M., Ann. N.Y. Acad. Sci. USA, 195:324-355, 1972
-     - bacterial:
-       - >-
-         Lim, J.B. and Klauda, J.B. Branching at the Iso- and Anteiso- Positions in Complex Chlamydia Membranes: A
-         Molecular Dynamics Study. Biochimica et Biophysica Acta (BBA) - Biomembranes 1808:323-331 (2011).
-       - >-
-         Pandit, K.R. and Klauda, J.B. Membrane models of E. coli containing cyclic moieties in the aliphatic lipid
-         chain. Biochimica et Biophysica Acta (BBA) - Biomembranes 1818:1205-1210 (2012).
-     - cholesterol:
-       - >-
-         Lim, J.B., Rogaski, B. and Klauda, J.B.. "Update of the Cholesterol Force Field Parameters in CHARMM" 116:
-         203-210 (2012).
-       - >-
-         Suits, F., Pitman, M., MacKerell, A.D., Jr., Feller, S.E. "Molecular Level Organization of Saturated and
-         Polyunsaturated Fatty Acids in a Phosphatidylcholine Bilayer Containing Cholesterol" Biochemistry, 43(49):
-         15318-28, 2004
-     - sphingomyelin:
-       - >-
-         Venable, R.M., B. Rogaski, H. Rui, A.D. MacKerell, Jr., R.W. Pastor, and J.B. Klauda. An Experimentally Validated
-         All-atom Force Field for Sphingomyelin. In prep. (2013).
    nucleic acids:
      - >-
        Denning, E.J., Priyakumar, U.D., Nilsson, L., and MacKerell Jr., A.D., "Impact of 2'-hydroxyl sampling on the
@@ -163,115 +655,29 @@
        PMC3285246
      - >-
        Foloppe, N. and MacKerell, Jr., A.D. "All-Atom Empirical Force Field for Nucleic Acids: 1) Parameter Optimization
-       Based on Small Molecule and Condensed Phase Macromolecular Target Data. JCC, 2000, 21: 86-104.
+       Based on Small Molecule and Condensed Phase Macromolecular Target Data." JCC, 2000, 21: 86-104.
      - >-
        MacKerell, Jr., A.D. and Banavali, N. "All-Atom Empirical Force Field for Nucleic Acids: 2) Application to
-       Molecular Dynamics Simulations of DNA and RNA in Solution. JCC, 2000, 21: 105-120.
+       Molecular Dynamics Simulations of DNA and RNA in Solution." JCC, 2000, 21: 105-120.
+     - modified:
+       - >-
+         Wang, P., Nicklaus, M.C., Marquez, V.E., Brank, A.S., Christman, J., Banavali, N.K. and MacKerell, Jr.,
+         A.D., "Use of Oligodeoxyribonucleotides with Conformationally Constrained Abasic Sugar Targets to Probe the
+         Mechanism of Base Flipping by HhaI DNA (Cytosine C5)-Methyltransferase" Journal of the American Chemical
+         Society, 2000, 122:12422-12434
+       - >-
+         Hartono, YD; Xu, Y; Karshikoff, A; Nilsson, L; Villa, A "Modeling pKa Shift in DNA Triplexes Containing Locked
+         Nucleic Acids" J Chem Inf Model, 58:773-783. 2018 doi: 10.1021/acs.jcim.7b00741
+       - >-
+         Jasinski, M., Feig, M., & Trylska, J. "Improved Force Fields for Peptide Nucleic Acids with Optimized Backbone
+         Torsion  Parameters" J.Chem.Theory Comput., 14: 3603–3620, 2018, doi: 10.1021/acs.jctc.8b00291
+       - >-
+         Xu, Y., Vanommeslaeghe, K., Aleksandrov, A., MacKerell, A.D., Jr. Nilsson, L., "Additive CHARMM force field
+         for naturally occurring modified ribonucleotides," Journal of Computational Chemistry, DOI: 10.1002/jcc.24307, 2016
      - atp adp nad+ nadh ppi:
         - >-
           Pavelites, J.J., Bash, P.A., Gao, J., and MacKerell, Jr., A.D. A Molecular Mechanics Force Field for NAD+,
           NADH and the Pyrophosphate Groups of Nucleotides, Journal of Computational Chemistry, 1997, 18: 221-239.
-     - reactive RNA:
-        - >-
-          Mayaan E, Moser A, MacKerell AD Jr, York DM. "CHARMM force field parameters for simulation of reactive
-          intermediates in native and thio-substituted ribozymes." J Comput Chem. 2007 Jan 30;28(2):495-507.
-   cgenff:
-     - >-
-       K. Vanommeslaeghe, E. Hatcher, C. Acharya, S. Kundu, S. Zhong, J. Shim, E. Darian, O. Guvench, P. Lopes, I.
-       Vorobyov and A. D. Mackerell Jr., J. Comput. Chem. 2010, 31, 671-690.
-     - >-
-       W. Yu, X. He, K. Vanommeslaeghe, A. D. MacKerell Jr., J. Comput. Chem. 2012, 33, 2451-2468.
-   amines:
-     - >-
-       Chen, I.-J., Yin, D. and MacKerell, Jr., A.D., "Combined Ab initio/Empirical Approach for Optimization of
-       Lennard-Jones Parameters for Polar-Neutral Compounds," Journal of Computational Chemistry, 2002, 23:199-213.
-- Destination: toppar_all36_prot_model.xml
-  Override: 1
-  Source:
-    include:
-    stream:
-     - toppar_c36_jul20/stream/prot/toppar_all36_prot_model.str
-  TestInclude:
-     - ffxml/charmm36.xml
-  References:
-   protein:
-     - >-
-       >> All-hydrogen topology for small model compounds used in the <<
-       >> development of the CHARMM22 protein all-hydrogen parameters <<
-       MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.; Evanseck, J.D.; Field, M.J.; Fischer, S.;
-       Gao, J.; Guo, H.; Ha, S.; Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos, C.; Michnick, S.;
-       Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III, W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub,
-       J.; Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom empirical potential for molecular
-       modeling and dynamics Studies of proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616
-- Destination: toppar_all36_na_model.xml
-  Override: 1
-  Source:
-    include:
-    stream:
-      - toppar_c36_jul20/stream/na/toppar_all36_na_model.str
-  TestInclude:
-     - ffxml/charmm36.xml
-  References:
-   nucleic acids:
-     - >-
-       CHARMM27 All-Hydrogen Nucleic Acid Force Toppar Stream File
-       Collection of residues and patches for model compounds used
-       in the optimization the Charmm27 all-atom nucleic acid
-       force field.
-       N. Foloppe and A.D. MacKerell, Jr., July 2001
-- Destination: toppar_all36_lipid_model.xml
-  Override: 1
-  Source:
-    include:
-    stream:
-      - toppar_c36_jul20/stream/lipid/toppar_all36_lipid_model.str
-  TestInclude:
-     - ffxml/charmm36.xml
-  References:
-   lipids:
-     - >-
-       CHARMM36 All-Hydrogen Lipid Force Field Toppar Stream File
-       Collection of residues and patches for model compounds used
-       in the optimization the lipid force field.
-     - >-
-       Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos
-       Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM
-       All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843
-     - PUFA modifications:
-       - >-
-         Jeffery B. Klauda, Viviana Monje, Taehoon Kim, and Wonpil Im. "Improving the CHARMM Force Field for
-         Polyunsaturated Fatty Acid Chains" J. Phys. Chem. B. 2012 ASAP http://dx.doi.org/10.1021/jp304056p
-     - atom nomenclature:
-       - >-
-         Sundaralingan, M., Ann. N.Y. Acad. Sci. USA, 195:324-355, 1972
-     - bacterial:
-       - >-
-         Lim, J.B. and Klauda, J.B. Branching at the Iso- and Anteiso- Positions in Complex Chlamydia Membranes: A
-         Molecular Dynamics Study. Biochimica et Biophysica Acta (BBA) - Biomembranes 1808:323-331 (2011).
-       - >-
-         Pandit, K.R. and Klauda, J.B. Membrane models of E. coli containing cyclic moieties in the aliphatic lipid
-         chain. Biochimica et Biophysica Acta (BBA) - Biomembranes 1818:1205-1210 (2012).
-     - cholesterol:
-       - >-
-         Lim, J.B., Rogaski, B. and Klauda, J.B.. "Update of the Cholesterol Force Field Parameters in CHARMM" 116:
-         203-210 (2012).
-       - >-
-         Suits, F., Pitman, M., MacKerell, A.D., Jr., Feller, S.E. "Molecular Level Organization of Saturated and
-         Polyunsaturated Fatty Acids in a Phosphatidylcholine Bilayer Containing Cholesterol" Biochemistry, 43(49):
-         15318-28, 2004
-     - sphingomyelin:
-       - >-
-         Venable, R.M., B. Rogaski, H. Rui, A.D. MacKerell, Jr., R.W. Pastor, and J.B. Klauda. An Experimentally Validated
-         All-atom Force Field for Sphingomyelin. In prep. (2013).
-- Destination: toppar_all36_carb_model.xml
-  Override: 1
-  Source:
-    include:
-    stream:
-      - toppar_c36_jul20/stream/carb/toppar_all36_carb_model.str
-  TestInclude:
-     - ffxml/charmm36.xml
-  References:
    carbohydrates:
      - pyranose monosaccharides:
        - >-
@@ -313,8 +719,56 @@
          Mallajosyula, S. S.; Guvench, O; Hatcher E. R. and MacKerell, Jr., A.D., "CHARMM Additive All-Atom Force Field
          for Phosphate and Sulfate Linked to Carbohydrates" Journal of Chemical Theory and Computation 2012 8 (2),
          759-776.
-     - glycolipids:
+     - lignin:
        - >-
-         Kern, N. R., Lee, H. S., Wu, E. L., Park, S., Vanommeslaeghe, K., MacKerell, A. D., ... Im, W. (2014). Lipid-
-         Linked Oligosaccharides in Membrane Sample Conformations That Faciliate Binding to Oligosaccharyltransferase.
-         Biophysical Journal, 107(8), 1885-1895.
+         Vermaas et al., "Systematic parameterization of lignin for the CHARMM force field, " Green Chemistry 21: 109,
+         2019, DOI: 10.1039/c8gc03209b
+       - >-
+         Vermaas et al., "Automated Transformation of Lignin Topologies into Atomic Structures with LigninBuilder,"
+         ACS Sustainable Chem. Eng. 7:3443, 2019, DOI: 10.1021/acssuschemeng.8b05665
+   lipids:
+     - >-
+       Jeffery B. Klauda, Richard M. Venable, J. Alfredo Freites, Joseph W. O'Connor, Douglas J. Tobias, Carlos
+       Mondragon-Ramirez, Igor Vorobyov, Alexander D. MacKerell, Jr. and Richard W. Pastor "Update of the CHARMM
+       All-Atom Additive Force Field for Lipids: Validation on Six Lipid Types" J. Phys. Chem. B 2010, 114, 7830-7843
+     - PUFA modifications:
+       - >-
+         Jeffery B. Klauda, Viviana Monje, Taehoon Kim, and Wonpil Im. "Improving the CHARMM Force Field for
+         Polyunsaturated Fatty Acid Chains" J. Phys. Chem. B. 2012 ASAP http://dx.doi.org/10.1021/jp304056p
+     - atom nomenclature:
+       - >-
+         Sundaralingan, M., Ann. N.Y. Acad. Sci. USA, 195:324-355, 1972
+     - bacterial:
+       - >-
+         Lim, J.B. and Klauda, J.B. Branching at the Iso- and Anteiso- Positions in Complex Chlamydia Membranes: A
+         Molecular Dynamics Study. Biochimica et Biophysica Acta (BBA) - Biomembranes 1808:323-331 (2011).
+       - >-
+         Pandit, K.R. and Klauda, J.B. Membrane models of E. coli containing cyclic moieties in the aliphatic lipid
+         chain. Biochimica et Biophysica Acta (BBA) - Biomembranes 1818:1205-1210 (2012).
+     - cation-pi:
+       - >-
+         Khan, MacKerell, Jr., and Reuter, "Cation-π Interactions between Methylated Ammonium Groups and
+         Tryptophan in the CHARMM36 Additive Force Field," J. Chem. Theory Comput. 2019, 15, 1, 7-12, DOI:
+         10.1021/acs.jctc.8b00839
+     - cholesterol:
+       - >-
+         Lim, J.B., Rogaski, B. and Klauda, J.B.. "Update of the Cholesterol Force Field Parameters in CHARMM" 116:
+         203-210 (2012).
+       - >-
+         Suits, F., Pitman, M., MacKerell, A.D., Jr., Feller, S.E. "Molecular Level Organization of Saturated and
+         Polyunsaturated Fatty Acids in a Phosphatidylcholine Bilayer Containing Cholesterol" Biochemistry, 43(49):
+         15318-28, 2004
+     - sphingomyelin:
+       - >-
+         Venable, R.M., B. Rogaski, H. Rui, A.D. MacKerell, Jr., R.W. Pastor, and J.B. Klauda. An Experimentally Validated
+         All-atom Force Field for Sphingomyelin. In prep. (2013).
+   cgenff:
+     - >-
+       K. Vanommeslaeghe, E. Hatcher, C. Acharya, S. Kundu, S. Zhong, J. Shim, E. Darian, O. Guvench, P. Lopes, I.
+       Vorobyov and A. D. Mackerell Jr., J. Comput. Chem. 2010, 31, 671-690.
+     - >-
+       W. Yu, X. He, K. Vanommeslaeghe, A. D. MacKerell Jr., J. Comput. Chem. 2012, 33, 2451-2468.
+   amines:
+     - >-
+       Chen, I.-J., Yin, D. and MacKerell, Jr., A.D., "Combined Ab initio/Empirical Approach for Optimization of
+       Lennard-Jones Parameters for Polar-Neutral Compounds," Journal of Computational Chemistry, 2002, 23:199-213.
