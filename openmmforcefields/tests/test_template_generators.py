@@ -206,16 +206,16 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
                 reference_component_energy = reference_energy["components"][key]
                 template_component_energy = template_energy["components"][key]
                 print(
-                    f"{key:24} {(template_component_energy/unit.kilocalories_per_mole):20.3f} "
-                    f"{(reference_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol"
+                    f"{key:24} {(template_component_energy / unit.kilocalories_per_mole):20.3f} "
+                    f"{(reference_component_energy / unit.kilocalories_per_mole):20.3f} kcal/mol"
                 )
             print(
-                f'{"TOTAL":24} {(template_energy["total"]/unit.kilocalories_per_mole):20.3f} '
-                f'{(reference_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol'
+                f"{'TOTAL':24} {(template_energy['total'] / unit.kilocalories_per_mole):20.3f} "
+                f"{(reference_energy['total'] / unit.kilocalories_per_mole):20.3f} kcal/mol"
             )
             write_xml("reference_system.xml", reference_system)
             raise Exception(
-                f"Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds "
+                f"Energy deviation for {molecule.to_smiles()} ({delta / unit.kilocalories_per_mole} kcal/mol) exceeds "
                 f"threshold ({ENERGY_DEVIATION_TOLERANCE})"
             )
 
@@ -247,7 +247,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
                 print(f"{key:24} {deviation:24.10f}")
 
-            print(f'{"TOTAL":24} {relative_force_deviation:24.10f}')
+            print(f"{'TOTAL':24} {relative_force_deviation:24.10f}")
             write_xml("system-smirnoff.xml", reference_system)
             write_xml("openmm-smirnoff.xml", template_generated_system)
             raise Exception(
@@ -474,9 +474,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         openmm_topology = molecule.to_topology().to_openmm()
         system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
         # Ensure charges are no longer zero
-        assert not np.all(
-            self.charges_from_system(system) == 0
-        ), "System has zero charges despite molecule not being charged"
+        assert not np.all(self.charges_from_system(system) == 0), (
+            "System has zero charges despite molecule not being charged"
+        )
 
     def test_charge_from_molecules(self):
         """Test that user-specified partial charges are used if requested"""
@@ -575,9 +575,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 db_entries = table.all()
                 db.close()
                 n_entries = len(db_entries)
-                assert (
-                    n_entries == n_expected
-                ), f"Expected {n_expected} entries but database has {n_entries}\n db contents: {db_entries}"
+                assert n_entries == n_expected, (
+                    f"Expected {n_expected} entries but database has {n_entries}\n db contents: {db_entries}"
+                )
 
             check_cache(generator, len(self.molecules))
 
@@ -680,7 +680,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 except Exception as e:
                     n_failure += 1
                     print(e)
-            print(f"{n_failure}/{n_success+n_failure} ligands failed to parameterize for {system_name}")
+            print(f"{n_failure}/{n_success + n_failure} ligands failed to parameterize for {system_name}")
 
     def test_jacs_complexes(self):
         """Use template generator to parameterize the Schrodinger JACS set of complexes"""
@@ -947,14 +947,14 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 reference_component_energy = reference_energy["components"][key]
                 template_component_energy = template_energy["components"][key]
                 print(
-                    f"{key:24} {(template_component_energy/unit.kilocalories_per_mole):20.3f} {(reference_component_energy/unit.kilocalories_per_mole):20.3f} kcal/mol"
+                    f"{key:24} {(template_component_energy / unit.kilocalories_per_mole):20.3f} {(reference_component_energy / unit.kilocalories_per_mole):20.3f} kcal/mol"
                 )
             print(
-                f'{"TOTAL":24} {(template_energy["total"]/unit.kilocalories_per_mole):20.3f} {(reference_energy["total"]/unit.kilocalories_per_mole):20.3f} kcal/mol'
+                f"{'TOTAL':24} {(template_energy['total'] / unit.kilocalories_per_mole):20.3f} {(reference_energy['total'] / unit.kilocalories_per_mole):20.3f} kcal/mol"
             )
             write_xml("reference_system.xml", reference_system)
             raise Exception(
-                f"Energy deviation for {molecule.to_smiles()} ({delta/unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})"
+                f"Energy deviation for {molecule.to_smiles()} ({delta / unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})"
             )
 
         # Compare forces
@@ -984,7 +984,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 print(
                     f"{key:24} {relative_deviation(template_forces['components'][key], reference_forces['components'][key]):24.10f}"
                 )
-            print(f'{"TOTAL":24} {relative_force_deviation:24.10f}')
+            print(f"{'TOTAL':24} {relative_force_deviation:24.10f}")
             write_xml("system-smirnoff.xml", reference_system)
             write_xml("openmm-smirnoff.xml", template_generated_system)
             raise Exception(

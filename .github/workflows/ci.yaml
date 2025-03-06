@@ -58,6 +58,9 @@ jobs:
 
     - name: Test Installed Package
       run: |
+        # https://github.com/openforcefield/openff-units/issues/111
+        python -c "from openff.units import unit"
+
         pytest -v -n logical --rungaff --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/
 
