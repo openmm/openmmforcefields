@@ -3,7 +3,7 @@
 - MODE: GAFF
 - Source: gaff-1.4.dat
   Name: gaff-1.4
-  leaprc: leaprc.gaff
+  leaprc: files/gaff/leaprc.gaff
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -19,7 +19,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.7.dat
   Name: gaff-1.7
-  leaprc: leaprc.gaff
+  leaprc: files/gaff/leaprc.gaff
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -35,7 +35,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.8.dat
   Name: gaff-1.8
-  leaprc: leaprc.gaff
+  leaprc: files/gaff/leaprc.gaff
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -51,7 +51,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.81.dat
   Name: gaff-1.81
-  leaprc: leaprc.gaff
+  leaprc: files/gaff/leaprc.gaff
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -67,7 +67,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-1.81.dat
   Name: gaff
-  leaprc: leaprc.gaff
+  leaprc: files/gaff/leaprc.gaff
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -83,7 +83,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-2.1.dat
   Name: gaff-2.1
-  leaprc: leaprc.gaff2
+  leaprc: files/gaff/leaprc.gaff2
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml
@@ -99,7 +99,7 @@
     Journal of Molecular Graphics and Modelling , 25, 2006, 247260.
 - Source: gaff-2.11.dat
   Name: gaff-2.11
-  leaprc: leaprc.gaff2
+  leaprc: files/gaff/leaprc.gaff2
   Options:
     write_unused: True
     ffxml_dir: ../openmmforcefields/ffxml/amber/gaff/ffxml

@@ -84,7 +84,7 @@ def amber_frcmod_ions_to_openmm_xml(
         setname = os.path.basename(frcmod_file)
         setname = setname.replace("frcmod.", "")
 
-    date_generated = datetime.datetime.utcnow().isoformat()
+    date_generated = datetime.datetime.now().strftime("%Y-%m-%d")
     ambertools_version = re.sub(r".*/ambertools-([^/]*)/.*", r"\1", frcmod_file)
     frcmod_file_short = re.sub(r".*/dat/leap/", "", frcmod_file)
     atomic_ions_file_short = re.sub(r".*/dat/leap/", "", atomic_ions_file)
@@ -154,7 +154,7 @@ if len(sys.argv) < 2:
         "convert_amber_ions.py script to convert all Amber/AmberTools "
         "frcmod.ions* files to equivalent openmm xml files"
     )
-    print("Usage: python ./amber/convert_amber_ions.py /path/to/ambertools")
+    print("Usage: python convert_amber_ions.py /path/to/ambertools")
     sys.exit()
 
 ambertools_path = sys.argv[1]
@@ -162,7 +162,7 @@ ambertools_dat_leap_path = os.path.join(ambertools_path, "dat/leap/")
 frcmod_files = glob.glob(ambertools_dat_leap_path + "parm/frcmod.ions*")
 atomic_ions_file = ambertools_dat_leap_path + "lib/atomic_ions.lib"
 
-output_path = "amber/ffxml/ions"
+output_path = "../openmmforcefields/ffxml/amber/ions"
 os.makedirs(output_path, exist_ok=True)
 
 for frcmod_file in frcmod_files:

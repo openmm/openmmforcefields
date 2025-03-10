@@ -21,7 +21,6 @@ import parmed
 import yaml
 from lxml import etree as et
 from parmed.exceptions import ParameterWarning
-import importlib_resources
 
 warnings.filterwarnings("error", category=ParameterWarning)
 
@@ -217,7 +216,7 @@ def convert_leaprc(
     is_glycam=False,
 ):
     if verbose:
-        print(f"\nConverting {files:s} to ffxml...")
+        print(f"\nConverting {files} to ffxml...")
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
         files = [files]
@@ -261,8 +260,14 @@ def convert_leaprc(
     leaprc = StringIO("".join(new_lines))
     if verbose:
         print(f"Converting to ffxml {ffxml_name}...")
-    params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
-    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    if filter_warnings != "error":
+        with warnings.catch_warnings():
+            warnings.filterwarnings(filter_warnings, category=ParameterWarning)
+            params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
+            params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    else:
+        params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
+        params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if override_level:
         for name, residue in params.residues.items():
             residue.override_level = override_level
@@ -499,10 +504,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             elif MODE == "RECIPE":
                 _filename = os.path.join(AMBERHOME, "dat/leap/", source_file)
             elif MODE == "GAFF":
-                _filename = os.path.join(
-                    str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" / " gaff" / "dat"),
-                    source_file,
-                )
+                _filename = os.path.join("../openmmforcefields/ffxml/amber/gaff/dat", source_file)
             files.append(_filename)
             source.append(dict())
             source[-1]["Source"] = source_file
@@ -589,9 +591,10 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if "CharmmFFXMLFilename" in entry:
             charmm_ffxml_filename = entry["CharmmFFXMLFilename"]
             charmm_lipid2amber_filename = entry["CharmmLipid2AmberFilename"]
+            merged_ffxml_filename = os.path.splitext(ffxml_name)[0] + "_merged.xml"
             if verbose:
                 print("Merging lipid entries...")
-            merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename)
+            merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename, merged_ffxml_filename)
         if "Prefix" in entry:
             prefix = entry["Prefix"]
             if verbose:
@@ -633,8 +636,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 validate_rna(ffxml_name, entry["Source"])
                 tested = True
             elif test == "lipids":
-                # validate_lipids(ffxml_name, source_files)
-                validate_merged_lipids(ffxml_name, entry["Source"])
+                validate_lipids(ffxml_name, entry["Source"])
+                if "CharmmFFXMLFilename" in entry:
+                    validate_merged_lipids(merged_ffxml_filename, entry["Source"])
                 tested = True
             elif test == "protein_glycan":
                 validate_glyco_protein(ffxml_name, entry["Source"])
@@ -643,7 +647,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             raise Exception(f"No validation tests have been run for {source_files}")
 
 
-def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename):
+def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename, merged_ffxml_filename):
     """
     Merge lipid residue definitions in AMBER ffxml file according to entries in a CHARMM ffxml file.
 
@@ -655,7 +659,8 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
        CHARMM ffxml lipids
     charmmlipid2amber_filename : str
        CHARMM CSV file containing translation from CHARMM -> AMBER
-
+    merged_ffxml_filename : str
+       AMBER lipids ffxml filename merged with CHARMM lipids.
     """
     # Read the input files.
     charmmff = etree.parse(charmm_ffxml_filename)
@@ -711,7 +716,7 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
             parentNode.append(copy)
 
     # Write merged lipid ffxml file (overwriting original file)
-    amberff.write(ffxml_filename)
+    amberff.write(merged_ffxml_filename)
 
 
 def add_prefix_to_ffxml(ffxml_filename, prefix):
@@ -799,7 +804,6 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
 
     def compute_potential_components(system, positions, beta=beta):
         # Note: this is copied from perses
-        # TODO: consider moving this outside of assert_energies_glyco_protein()
         system = deepcopy(system)
         for index in range(system.getNumForces()):
             force = system.getForce(index)
@@ -808,22 +812,22 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
         platform = openmm.Platform.getPlatformByName("Reference")
         context = openmm.Context(system, integrator, platform)
         context.setPositions(positions)
-        energy_components = list()
+        energy_components = dict()
         for index in range(system.getNumForces()):
             force = system.getForce(index)
             forcename = force.__class__.__name__
             groups = 1 << index
             potential = beta * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
-            energy_components.append((forcename, potential))
+            energy_components.setdefault(forcename, 0.0)
+            energy_components[forcename] += potential
         del context, integrator
         return energy_components
 
     amber_energies = compute_potential_components(system_amber, parm_amber.positions)
     omm_energies = compute_potential_components(system_omm, parm_amber.positions)
-    for amber, omm in zip(amber_energies, omm_energies):
-        force_name = amber[0]
-        assert math.isclose(amber[1], omm[1], rel_tol=tolerance)
-        print(force_name, amber[1], omm[1])
+
+    for force_name in sorted(set(amber_energies) | set(omm_energies)):
+        assert math.isclose(amber_energies.get(force_name, 0.0), omm_energies.get(force_name, 0.0), rel_tol=tolerance)
 
 
 def assert_energies(
@@ -857,8 +861,39 @@ def assert_energies(
     else:
         system_omm = ff.createSystem(parm_amber.topology)
         parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm, xyz=parm_amber.positions)
-    system_omm = parm_omm.createSystem(splitDihedrals=True)
-    omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+    
+    try:
+        system_omm = parm_omm.createSystem(splitDihedrals=True)
+    except parmed.exceptions.ParameterError:
+        # Unfortunately ParmEd does not understand how to interpret the systems
+        # it creates with NBFIX/LJEDIT.  To handle this, first get the nonbonded
+        # energies from the two systems.
+        nonbonded_names = ("NonbondedForce", "CustomNonbondedForce", "CustomBondForce")
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+        amber_energy_nb = sum(energy for name, energy in amber_energies if name in nonbonded_names)
+        omm_energy_nb = sum(energy for name, energy in amber_energies if name in nonbonded_names)
+        
+        # Delete all of the nonbonded forces from the OpenMM system (that has
+        # not been sent through ParmEd yet).
+        for force_index in range(system_omm.getNumForces() - 1, -1, -1):
+            if isinstance(system_omm.getForce(force_index), (openmm.NonbondedForce, openmm.CustomBondForce, openmm.CustomNonbondedForce)):
+                system_omm.removeForce(force_index)
+
+        # Send the system round-trip through ParmEd to split the dihedrals and
+        # re-evaluate the energies.
+        parm_omm = parmed.openmm.load_topology(parm_amber.topology if openmm_topology is None else openmm_topology, system_omm, xyz=openmm_positions)
+        system_omm = parm_omm.createSystem(splitDihedrals=True)
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+
+        # Remove the nonbonded energies from both lists, and add back the ones
+        # we manually calculated above.
+        amber_energies = [(name, energy) for name, energy in amber_energies if name not in nonbonded_names]
+        omm_energies = [(name, energy) for name, energy in omm_energies if name not in nonbonded_names]
+        amber_energies.append(("NonbondedForce", amber_energy_nb))
+        omm_energies.append(("NonbondedForce", omm_energy_nb))
+
+    else:
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
 
     # calc rel energies and assert
     _energies = []
@@ -1238,16 +1273,16 @@ def validate_phospho_protein(
     ffxml_name,
     leaprc_name,
     supp_leaprc_name="oldff/leaprc.ff99SBildn",
-    supp_ffxml_name="ffxml/ff99SBildn.xml",
+    supp_ffxml_name="../openmmforcefields/ffxml/amber/ff99SBildn.xml",
     phospho="phospho10",
 ):
     if "14" in leaprc_name:
         # Use AMBER14SB
         supp_leaprc_name = "oldff/leaprc.ff14SB"
-        supp_ffxml_name = "ffxml/ff14SB.xml"
+        supp_ffxml_name = "../openmmforcefields/ffxml/amber/ff14SB.xml"
         phospho = "phospho14"
 
-    # this function assumes ffxml/ff14SB.xml already exists
+    # this function assumes ffxml/amber/ff14SB.xml already exists
     if verbose:
         print(f"Phosphorylated protein energy validation for {ffxml_name}")
     for pdbname in glob.iglob(f"files/{phospho}/*.pdb"):
@@ -1300,7 +1335,7 @@ def validate_water_ion(ffxml_name, source_recipe_files, solvent_name, recipe_nam
         print(f"Water and ions energy validation for {ffxml_name}")
     if solvent_name == "tip3p":
         HOH = "TP3"
-        solvent_frcmod = None
+        solvent_frcmod = "frcmod.tip3p"
     elif solvent_name == "tip4pew":
         HOH = "T4E"
         solvent_frcmod = "frcmod.tip4pew"
@@ -1346,6 +1381,7 @@ quit"""
     # this test does it's own energy assertion because of differences
     if verbose:
         print("Running LEaP...")
+
     os.system(f"tleap -f {leap_script_file[1]} > {os.devnull}")
     if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
         raise LeapException(leap_script_file[1])
@@ -1543,6 +1579,7 @@ quit"""
 
     if verbose:
         print("Running LEaP...")
+
     os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
     if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
         raise LeapException(leap_script_lipids_file[1])
@@ -1879,7 +1916,7 @@ def validate_glyco_protein(
     ffxml_name,
     leaprc_name,
     supp_leaprc_name="oldff/leaprc.ff14SB",
-    supp_ffxml_name="ffxml/protein.ff14SB.xml",
+    supp_ffxml_name="../openmmforcefields/ffxml/amber/protein.ff14SB.xml",
 ):
     modify_glycan_ffxml(ffxml_name)
 
