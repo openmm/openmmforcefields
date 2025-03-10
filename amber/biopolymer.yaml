@@ -4,7 +4,7 @@
 
 - MODE: LEAPRC
 - sourcePackage: AmberTools
-  sourcePackageVersion: 20.15
+  sourcePackageVersion: "24.8"
 
 - Source: oldff/leaprc.ff14ipq
   Reference:
@@ -121,6 +121,15 @@
     Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P.
     Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA.
     J. Chem. Theor. and Comp., 2015, 12, 5723-5736.
+  Test:
+  - dna
+- Source: ./files/DNA.OL21/leaprc.DNA.OL21
+  Prefix: DNA
+  Reference:
+  - >-
+    Zgarbova, M.; Sponer, J.; Jurecka, P.
+    Z-DNA as a Touchstone for Additive Empirical Force Fields and a Refinement of the Alpha/Gamma DNA Torsions for AMBER.
+    J. Chem. Theory Comput., 2021, 17, 6292-6301.
   Test:
   - dna
 - Source: leaprc.DNA.bsc1
