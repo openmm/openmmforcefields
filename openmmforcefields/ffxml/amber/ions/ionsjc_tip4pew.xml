@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Monovalent ion parameters for Ewald and TIP4P/EW water from Joung & Cheatham JPCB (2008) -->
-    <DateGenerated>2022-09-28T04:59:42.509755</DateGenerated>
-    <Source Source="parm/frcmod.ionsjc_tip4pew" md5hash="7aa9de49a8df5ebc45f74e1f47d13c2a" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">parm/frcmod.ionsjc_tip4pew</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-10</DateGenerated>
+    <Source Source="parm/frcmod.ionsjc_tip4pew" md5hash="7aa9de49a8df5ebc45f74e1f47d13c2a" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ionsjc_tip4pew">parm/frcmod.ionsjc_tip4pew</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ionsjc_tip4pew">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ionsjc_tip4pew-Li+" element="Li" mass="6.94" name="ionsjc_tip4pew-Li+"/><!--          0.029               lithium   pol: J. Phys. Chem. 11,1541,(1978) -->

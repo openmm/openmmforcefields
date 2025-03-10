@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-01-26</DateGenerated>
+    <DateGenerated>2025-03-10</DateGenerated>
     <Source Source="leaprc.protein.ff14SBonlysc" md5hash="90a6e56450fc04da9136e90e25d04cf5" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.protein.ff14SBonlysc</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
     <Reference>Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006). Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.</Reference>
@@ -1909,15 +1909,15 @@
     <Residue name="NME">
       <Atom name="N" type="protein-N" charge="-0.4157"/>
       <Atom name="H" type="protein-H" charge="0.2719"/>
-      <Atom name="CH3" type="protein-CT" charge="-0.149"/>
-      <Atom name="HH31" type="protein-H1" charge="0.0976"/>
-      <Atom name="HH32" type="protein-H1" charge="0.0976"/>
-      <Atom name="HH33" type="protein-H1" charge="0.0976"/>
+      <Atom name="C" type="protein-CT" charge="-0.149"/>
+      <Atom name="H1" type="protein-H1" charge="0.0976"/>
+      <Atom name="H2" type="protein-H1" charge="0.0976"/>
+      <Atom name="H3" type="protein-H1" charge="0.0976"/>
       <Bond atomName1="N" atomName2="H"/>
-      <Bond atomName1="N" atomName2="CH3"/>
-      <Bond atomName1="CH3" atomName2="HH31"/>
-      <Bond atomName1="CH3" atomName2="HH32"/>
-      <Bond atomName1="CH3" atomName2="HH33"/>
+      <Bond atomName1="N" atomName2="C"/>
+      <Bond atomName1="C" atomName2="H1"/>
+      <Bond atomName1="C" atomName2="H2"/>
+      <Bond atomName1="C" atomName2="H3"/>
       <ExternalBond atomName="N"/>
     </Residue>
     <Residue name="ACE">
@@ -2821,663 +2821,663 @@
     </Residue>
   </Residues>
   <HarmonicBondForce>
-    <Bond type1="protein-C" type2="protein-C" length="0.1525" k="259407.99999999994"/>
-    <Bond type1="protein-C" type2="protein-CA" length="0.1409" k="392459.19999999995"/>
-    <Bond type1="protein-C" type2="protein-CB" length="0.1419" k="374049.5999999999"/>
-    <Bond type1="protein-C" type2="protein-CT" length="0.1522" k="265265.6"/>
-    <Bond type1="protein-C" type2="protein-CX" length="0.1522" k="265265.6"/>
-    <Bond type1="protein-C" type2="protein-N" length="0.1335" k="410031.99999999994"/>
-    <Bond type1="protein-C" type2="protein-NA" length="0.1388" k="349782.3999999999"/>
-    <Bond type1="protein-C" type2="protein-O" length="0.12290000000000001" k="476975.9999999999"/>
-    <Bond type1="protein-C" type2="protein-O2" length="0.125" k="548940.7999999999"/>
-    <Bond type1="protein-C" type2="protein-OH" length="0.13640000000000002" k="376559.99999999994"/>
-    <Bond type1="protein-C" type2="protein-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-C" type2="protein-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CA" type2="protein-CA" length="0.13999999999999999" k="392459.19999999995"/>
-    <Bond type1="protein-CA" type2="protein-CB" length="0.1404" k="392459.19999999995"/>
-    <Bond type1="protein-CA" type2="protein-CN" length="0.13999999999999999" k="392459.19999999995"/>
-    <Bond type1="protein-CA" type2="protein-CT" length="0.15100000000000002" k="265265.6"/>
-    <Bond type1="protein-CA" type2="protein-HA" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CA" type2="protein-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CA" type2="protein-N2" length="0.134" k="402500.79999999993"/>
-    <Bond type1="protein-CA" type2="protein-NA" length="0.1381" k="357313.5999999999"/>
-    <Bond type1="protein-CA" type2="protein-OH" length="0.13640000000000002" k="376559.99999999994"/>
-    <Bond type1="protein-CB" type2="protein-CB" length="0.137" k="435135.99999999994"/>
-    <Bond type1="protein-CB" type2="protein-NB" length="0.1391" k="346435.19999999995"/>
-    <Bond type1="protein-CT" type2="protein-CT" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-CX" type2="protein-CT" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-CT" type2="protein-HC" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-CT" type2="protein-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-CX" type2="protein-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-CT" type2="protein-HP" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-CX" type2="protein-HP" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-CT" type2="protein-N2" length="0.1463" k="282001.5999999999"/>
-    <Bond type1="protein-CT" type2="protein-OH" length="0.141" k="267775.99999999994"/>
-    <Bond type1="protein-C*" type2="protein-HC" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-C*" type2="protein-CB" length="0.1459" k="324678.39999999997"/>
-    <Bond type1="protein-C*" type2="protein-CT" length="0.14950000000000002" k="265265.6"/>
-    <Bond type1="protein-C*" type2="protein-CW" length="0.13520000000000001" k="456892.79999999993"/>
-    <Bond type1="protein-CB" type2="protein-CN" length="0.1419" k="374049.5999999999"/>
-    <Bond type1="protein-CC" type2="protein-CT" length="0.1504" k="265265.6"/>
-    <Bond type1="protein-CC" type2="protein-CV" length="0.1375" k="428441.5999999999"/>
-    <Bond type1="protein-CC" type2="protein-CW" length="0.1371" k="433462.3999999999"/>
-    <Bond type1="protein-CC" type2="protein-NA" length="0.1385" k="353129.5999999999"/>
-    <Bond type1="protein-CC" type2="protein-NB" length="0.1394" k="343087.99999999994"/>
-    <Bond type1="protein-CN" type2="protein-NA" length="0.13799999999999998" k="358150.3999999999"/>
-    <Bond type1="protein-CR" type2="protein-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CR" type2="protein-NA" length="0.1343" k="399153.5999999999"/>
-    <Bond type1="protein-CR" type2="protein-NB" length="0.1335" k="408358.3999999999"/>
-    <Bond type1="protein-CT" type2="protein-N" length="0.1449" k="282001.5999999999"/>
-    <Bond type1="protein-CX" type2="protein-N" length="0.1449" k="282001.5999999999"/>
-    <Bond type1="protein-CT" type2="protein-N3" length="0.1471" k="307105.5999999999"/>
-    <Bond type1="protein-CX" type2="protein-N3" length="0.1471" k="307105.5999999999"/>
-    <Bond type1="protein-CT" type2="protein-S" length="0.18100000000000002" k="189953.59999999998"/>
-    <Bond type1="protein-CT" type2="protein-SH" length="0.18100000000000002" k="198321.59999999998"/>
-    <Bond type1="protein-CV" type2="protein-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CV" type2="protein-NB" length="0.1394" k="343087.99999999994"/>
-    <Bond type1="protein-CW" type2="protein-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="protein-CW" type2="protein-NA" length="0.1381" k="357313.5999999999"/>
-    <Bond type1="protein-H" type2="protein-N2" length="0.101" k="363171.19999999995"/>
-    <Bond type1="protein-H" type2="protein-NA" length="0.101" k="363171.19999999995"/>
-    <Bond type1="protein-H" type2="protein-N" length="0.101" k="363171.19999999995"/>
-    <Bond type1="protein-H" type2="protein-N3" length="0.101" k="363171.19999999995"/>
-    <Bond type1="protein-HO" type2="protein-OH" length="0.096" k="462750.3999999999"/>
-    <Bond type1="protein-HS" type2="protein-SH" length="0.13360000000000002" k="229283.19999999995"/>
-    <Bond type1="protein-S" type2="protein-S" length="0.20379999999999998" k="138908.79999999996"/>
-    <Bond type1="EP" type2="protein-O" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="protein-OH" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="protein-N3" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="protein-NB" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="protein-S" length="0.06999999999999999" k="502079.9999999999"/>
-    <Bond type1="EP" type2="protein-SH" length="0.06999999999999999" k="502079.9999999999"/>
-    <Bond type1="protein-C" type2="protein-2C" length="0.1522" k="265265.6"/>
-    <Bond type1="protein-C*" type2="protein-2C" length="0.14950000000000002" k="265265.6"/>
-    <Bond type1="protein-C8" type2="protein-C8" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-C8" type2="protein-CX" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-C8" type2="protein-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-C8" type2="protein-HC" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-C8" type2="protein-HP" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-C8" type2="protein-N2" length="0.1463" k="282001.5999999999"/>
-    <Bond type1="protein-C8" type2="protein-N3" length="0.1471" k="307105.5999999999"/>
-    <Bond type1="protein-CA" type2="protein-2C" length="0.15100000000000002" k="265265.6"/>
-    <Bond type1="protein-CC" type2="protein-2C" length="0.1504" k="265265.6"/>
-    <Bond type1="protein-CO" type2="protein-O2" length="0.125" k="548940.7999999999"/>
-    <Bond type1="protein-CO" type2="protein-2C" length="0.1522" k="265265.6"/>
-    <Bond type1="protein-CT" type2="protein-2C" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-CT" type2="protein-3C" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-CX" type2="protein-2C" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-CX" type2="protein-3C" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-H1" type2="protein-2C" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-H1" type2="protein-3C" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-HC" type2="protein-2C" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-HC" type2="protein-3C" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="protein-OH" type2="protein-2C" length="0.141" k="267775.99999999994"/>
-    <Bond type1="protein-OH" type2="protein-3C" length="0.141" k="267775.99999999994"/>
-    <Bond type1="protein-S" type2="protein-2C" length="0.18100000000000002" k="189953.59999999998"/>
-    <Bond type1="protein-SH" type2="protein-2C" length="0.18100000000000002" k="198321.59999999998"/>
-    <Bond type1="protein-2C" type2="protein-2C" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="protein-2C" type2="protein-3C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="C" class2="C" length="0.1525" k="259407.99999999994"/>
+    <Bond class1="C" class2="CA" length="0.1409" k="392459.19999999995"/>
+    <Bond class1="C" class2="CB" length="0.1419" k="374049.5999999999"/>
+    <Bond class1="C" class2="CT" length="0.1522" k="265265.6"/>
+    <Bond class1="C" class2="CX" length="0.1522" k="265265.6"/>
+    <Bond class1="C" class2="N" length="0.1335" k="410031.99999999994"/>
+    <Bond class1="C" class2="NA" length="0.1388" k="349782.3999999999"/>
+    <Bond class1="C" class2="O" length="0.12290000000000001" k="476975.9999999999"/>
+    <Bond class1="C" class2="O2" length="0.125" k="548940.7999999999"/>
+    <Bond class1="C" class2="OH" length="0.13640000000000002" k="376559.99999999994"/>
+    <Bond class1="C" class2="H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="C" class2="H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CA" class2="CA" length="0.13999999999999999" k="392459.19999999995"/>
+    <Bond class1="CA" class2="CB" length="0.1404" k="392459.19999999995"/>
+    <Bond class1="CA" class2="CN" length="0.13999999999999999" k="392459.19999999995"/>
+    <Bond class1="CA" class2="CT" length="0.15100000000000002" k="265265.6"/>
+    <Bond class1="CA" class2="HA" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CA" class2="H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CA" class2="N2" length="0.134" k="402500.79999999993"/>
+    <Bond class1="CA" class2="NA" length="0.1381" k="357313.5999999999"/>
+    <Bond class1="CA" class2="OH" length="0.13640000000000002" k="376559.99999999994"/>
+    <Bond class1="CB" class2="CB" length="0.137" k="435135.99999999994"/>
+    <Bond class1="CB" class2="NB" length="0.1391" k="346435.19999999995"/>
+    <Bond class1="CT" class2="CT" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="CX" class2="CT" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="CT" class2="HC" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="CT" class2="H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="CX" class2="H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="CT" class2="HP" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="CX" class2="HP" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="CT" class2="N2" length="0.1463" k="282001.5999999999"/>
+    <Bond class1="CT" class2="OH" length="0.141" k="267775.99999999994"/>
+    <Bond class1="C*" class2="HC" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="C*" class2="CB" length="0.1459" k="324678.39999999997"/>
+    <Bond class1="C*" class2="CT" length="0.14950000000000002" k="265265.6"/>
+    <Bond class1="C*" class2="CW" length="0.13520000000000001" k="456892.79999999993"/>
+    <Bond class1="CB" class2="CN" length="0.1419" k="374049.5999999999"/>
+    <Bond class1="CC" class2="CT" length="0.1504" k="265265.6"/>
+    <Bond class1="CC" class2="CV" length="0.1375" k="428441.5999999999"/>
+    <Bond class1="CC" class2="CW" length="0.1371" k="433462.3999999999"/>
+    <Bond class1="CC" class2="NA" length="0.1385" k="353129.5999999999"/>
+    <Bond class1="CC" class2="NB" length="0.1394" k="343087.99999999994"/>
+    <Bond class1="CN" class2="NA" length="0.13799999999999998" k="358150.3999999999"/>
+    <Bond class1="CR" class2="H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CR" class2="NA" length="0.1343" k="399153.5999999999"/>
+    <Bond class1="CR" class2="NB" length="0.1335" k="408358.3999999999"/>
+    <Bond class1="CT" class2="N" length="0.1449" k="282001.5999999999"/>
+    <Bond class1="CX" class2="N" length="0.1449" k="282001.5999999999"/>
+    <Bond class1="CT" class2="N3" length="0.1471" k="307105.5999999999"/>
+    <Bond class1="CX" class2="N3" length="0.1471" k="307105.5999999999"/>
+    <Bond class1="CT" class2="S" length="0.18100000000000002" k="189953.59999999998"/>
+    <Bond class1="CT" class2="SH" length="0.18100000000000002" k="198321.59999999998"/>
+    <Bond class1="CV" class2="H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CV" class2="NB" length="0.1394" k="343087.99999999994"/>
+    <Bond class1="CW" class2="H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="CW" class2="NA" length="0.1381" k="357313.5999999999"/>
+    <Bond class1="H" class2="N2" length="0.101" k="363171.19999999995"/>
+    <Bond class1="H" class2="NA" length="0.101" k="363171.19999999995"/>
+    <Bond class1="H" class2="N" length="0.101" k="363171.19999999995"/>
+    <Bond class1="H" class2="N3" length="0.101" k="363171.19999999995"/>
+    <Bond class1="HO" class2="OH" length="0.096" k="462750.3999999999"/>
+    <Bond class1="HS" class2="SH" length="0.13360000000000002" k="229283.19999999995"/>
+    <Bond class1="S" class2="S" length="0.20379999999999998" k="138908.79999999996"/>
+    <Bond class1="EP" class2="O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="N3" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="S" length="0.06999999999999999" k="502079.9999999999"/>
+    <Bond class1="EP" class2="SH" length="0.06999999999999999" k="502079.9999999999"/>
+    <Bond class1="C" class2="2C" length="0.1522" k="265265.6"/>
+    <Bond class1="C*" class2="2C" length="0.14950000000000002" k="265265.6"/>
+    <Bond class1="C8" class2="C8" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="C8" class2="CX" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="C8" class2="H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="C8" class2="HC" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="C8" class2="HP" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="C8" class2="N2" length="0.1463" k="282001.5999999999"/>
+    <Bond class1="C8" class2="N3" length="0.1471" k="307105.5999999999"/>
+    <Bond class1="CA" class2="2C" length="0.15100000000000002" k="265265.6"/>
+    <Bond class1="CC" class2="2C" length="0.1504" k="265265.6"/>
+    <Bond class1="CO" class2="O2" length="0.125" k="548940.7999999999"/>
+    <Bond class1="CO" class2="2C" length="0.1522" k="265265.6"/>
+    <Bond class1="CT" class2="2C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="CT" class2="3C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="CX" class2="2C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="CX" class2="3C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="H1" class2="2C" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="H1" class2="3C" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="HC" class2="2C" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="HC" class2="3C" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="OH" class2="2C" length="0.141" k="267775.99999999994"/>
+    <Bond class1="OH" class2="3C" length="0.141" k="267775.99999999994"/>
+    <Bond class1="S" class2="2C" length="0.18100000000000002" k="189953.59999999998"/>
+    <Bond class1="SH" class2="2C" length="0.18100000000000002" k="198321.59999999998"/>
+    <Bond class1="2C" class2="2C" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="2C" class2="3C" length="0.1526" k="259407.99999999994"/>
   </HarmonicBondForce>
   <HarmonicAngleForce>
-    <Angle type1="protein-C" type2="protein-C" type3="protein-O" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="protein-C" type2="protein-C" type3="protein-OH" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="protein-CA" type2="protein-C" type3="protein-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-C" type3="protein-OH" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CB" type2="protein-C" type3="protein-NA" angle="1.9425514574696887" k="585.76"/>
-    <Angle type1="protein-CB" type2="protein-C" type3="protein-O" angle="2.2479840765686965" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-C" type3="protein-O" angle="2.101376419401173" k="669.44"/>
-    <Angle type1="protein-CX" type2="protein-C" type3="protein-O" angle="2.101376419401173" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-C" type3="protein-O2" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="protein-CX" type2="protein-C" type3="protein-O2" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="protein-CT" type2="protein-C" type3="protein-N" angle="2.035053907825388" k="585.76"/>
-    <Angle type1="protein-CX" type2="protein-C" type3="protein-N" angle="2.035053907825388" k="585.76"/>
-    <Angle type1="protein-CT" type2="protein-C" type3="protein-CT" angle="2.0420352248333655" k="527.184"/>
-    <Angle type1="protein-CT" type2="protein-C" type3="protein-OH" angle="1.9198621771937625" k="669.44"/>
-    <Angle type1="protein-CX" type2="protein-C" type3="protein-OH" angle="1.9198621771937625" k="669.44"/>
-    <Angle type1="protein-NA" type2="protein-C" type3="protein-O" angle="2.1048670779051615" k="669.44"/>
-    <Angle type1="protein-N" type2="protein-C" type3="protein-O" angle="2.1450096507010312" k="669.44"/>
-    <Angle type1="protein-O" type2="protein-C" type3="protein-O" angle="2.199114857512855" k="669.44"/>
-    <Angle type1="protein-O" type2="protein-C" type3="protein-OH" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="protein-O2" type2="protein-C" type3="protein-O2" angle="2.199114857512855" k="669.44"/>
-    <Angle type1="protein-H4" type2="protein-C" type3="protein-C" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-H4" type2="protein-C" type3="protein-CT" angle="2.007128639793479" k="418.40000000000003"/>
-    <Angle type1="protein-H4" type2="protein-C" type3="protein-O" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-H4" type2="protein-C" type3="protein-OH" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-H5" type2="protein-C" type3="protein-N" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-H5" type2="protein-C" type3="protein-O" angle="2.076941809873252" k="418.40000000000003"/>
-    <Angle type1="protein-H5" type2="protein-C" type3="protein-OH" angle="1.8675022996339325" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CA" type3="protein-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CA" type3="protein-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-CB" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-CT" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-OH" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-CN" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="protein-CB" type2="protein-CA" type3="protein-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CB" type2="protein-CA" type3="protein-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CB" type2="protein-CA" type3="protein-N2" angle="2.155481626212997" k="585.76"/>
-    <Angle type1="protein-CN" type2="protein-CA" type3="protein-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-N2" type2="protein-CA" type3="protein-NA" angle="2.0245819323134224" k="585.76"/>
-    <Angle type1="protein-N2" type2="protein-CA" type3="protein-N2" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-C" type2="protein-CB" type3="protein-CB" angle="2.080432468377241" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CB" type3="protein-NB" angle="2.2689280275926285" k="585.76"/>
-    <Angle type1="protein-CA" type2="protein-CB" type3="protein-CB" angle="2.0472712125893486" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CB" type3="protein-NB" angle="2.3108159296404924" k="585.76"/>
-    <Angle type1="protein-CB" type2="protein-CB" type3="protein-NB" angle="1.9268434942017398" k="585.76"/>
-    <Angle type1="protein-C*" type2="protein-CB" type3="protein-CA" angle="2.3544491609403506" k="527.184"/>
-    <Angle type1="protein-C*" type2="protein-CB" type3="protein-CN" angle="1.8989182261698305" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CB" type3="protein-CN" angle="2.028072590817411" k="527.184"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-H1" type2="protein-CX" type3="protein-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-N" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CX" type3="protein-N" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-S" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-SH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CT" type3="protein-N2" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HP" type2="protein-CT" type3="protein-HP" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-HP" type2="protein-CX" type3="protein-HP" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-HP" type2="protein-CT" type3="protein-N3" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HP" type2="protein-CX" type3="protein-N3" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-HP" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-HP" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-N" angle="1.9216075064457567" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-N" angle="1.9216075064457567" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-CT" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CT" type3="protein-CX" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-CT" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-CT" type3="protein-CT" angle="1.9739673840055867" k="527.184"/>
-    <Angle type1="protein-CC" type2="protein-CT" type3="protein-CX" angle="1.9739673840055867" k="527.184"/>
-    <Angle type1="protein-CC" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-CX" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CX" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-HP" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CX" type3="protein-HP" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-S" angle="2.0018926520374962" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-S" angle="2.0018926520374962" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-SH" angle="1.8954275676658419" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-SH" angle="1.8954275676658419" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-CA" angle="1.9896753472735358" k="527.184"/>
-    <Angle type1="protein-CX" type2="protein-CT" type3="protein-CA" angle="1.9896753472735358" k="527.184"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-N2" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-N" angle="1.9146261894377796" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-CX" type3="protein-N" angle="1.9146261894377796" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-CT" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-CT" type2="protein-CX" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-C*" type2="protein-CT" type3="protein-CT" angle="2.0176006153054447" k="527.184"/>
-    <Angle type1="protein-C*" type2="protein-CT" type3="protein-CX" angle="2.0176006153054447" k="527.184"/>
-    <Angle type1="protein-C*" type2="protein-CT" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-CC" type3="protein-NA" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CT" type2="protein-CC" type3="protein-CV" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CT" type2="protein-CC" type3="protein-NB" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CV" type2="protein-CC" type3="protein-NA" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CW" type2="protein-CC" type3="protein-NA" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CW" type2="protein-CC" type3="protein-NB" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CT" type2="protein-CC" type3="protein-CW" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-H5" type2="protein-CR" type3="protein-NA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-H5" type2="protein-CR" type3="protein-NB" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-NA" type2="protein-CR" type3="protein-NA" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-NA" type2="protein-CR" type3="protein-NB" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CC" type2="protein-CV" type3="protein-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-CV" type3="protein-NB" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-H4" type2="protein-CV" type3="protein-NB" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-CW" type3="protein-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-CW" type3="protein-NA" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-C*" type2="protein-CW" type3="protein-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-C*" type2="protein-CW" type3="protein-NA" angle="1.8971728969178363" k="585.76"/>
-    <Angle type1="protein-H4" type2="protein-CW" type3="protein-NA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CB" type2="protein-C*" type3="protein-CT" angle="2.2444934180647076" k="585.76"/>
-    <Angle type1="protein-CB" type2="protein-C*" type3="protein-CW" angle="1.8570303241219668" k="527.184"/>
-    <Angle type1="protein-CT" type2="protein-C*" type3="protein-CW" angle="2.181661564992912" k="585.76"/>
-    <Angle type1="protein-CA" type2="protein-CN" type3="protein-CB" angle="2.1415189921970423" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-CN" type3="protein-NA" angle="2.3177972466484698" k="585.76"/>
-    <Angle type1="protein-CB" type2="protein-CN" type3="protein-NA" angle="1.8221237390820801" k="585.76"/>
-    <Angle type1="protein-C" type2="protein-N" type3="protein-CT" angle="2.1275563581810877" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-N" type3="protein-CX" angle="2.1275563581810877" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-N" type3="protein-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N" type3="protein-H" angle="2.0601866490541068" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-N" type3="protein-H" angle="2.0601866490541068" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N" type3="protein-CT" angle="2.059488517353309" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N" type3="protein-CX" angle="2.059488517353309" k="418.40000000000003"/>
-    <Angle type1="protein-H" type2="protein-N" type3="protein-H" angle="2.0943951023931953" k="292.88"/>
-    <Angle type1="protein-CA" type2="protein-N2" type3="protein-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-N2" type3="protein-CT" angle="2.150245638457014" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N2" type3="protein-H" angle="2.0664698343612864" k="418.40000000000003"/>
-    <Angle type1="protein-H" type2="protein-N2" type3="protein-H" angle="2.0943951023931953" k="292.88"/>
-    <Angle type1="protein-CT" type2="protein-N3" type3="protein-H" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-N3" type3="protein-H" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N3" type3="protein-CT" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-N3" type3="protein-CX" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H" type2="protein-N3" type3="protein-H" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-C" type2="protein-NA" type3="protein-C" angle="2.2060961745208325" k="585.76"/>
-    <Angle type1="protein-C" type2="protein-NA" type3="protein-CA" angle="2.1851522234969005" k="585.76"/>
-    <Angle type1="protein-C" type2="protein-NA" type3="protein-H" angle="2.038544566329377" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-NA" type3="protein-H" angle="2.059488517353309" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-NA" type3="protein-CR" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CC" type2="protein-NA" type3="protein-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CR" type2="protein-NA" type3="protein-CW" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CR" type2="protein-NA" type3="protein-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CW" type2="protein-NA" type3="protein-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="protein-CN" type2="protein-NA" type3="protein-CW" angle="1.9477874452256716" k="585.76"/>
-    <Angle type1="protein-CN" type2="protein-NA" type3="protein-H" angle="2.1485003092050197" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-NB" type3="protein-CR" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="protein-CR" type2="protein-NB" type3="protein-CV" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="protein-C" type2="protein-OH" type3="protein-HO" angle="1.9722220547535925" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-OH" type3="protein-HO" angle="1.9722220547535925" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-OH" type3="protein-HO" angle="1.8936822384138476" k="460.24"/>
-    <Angle type1="protein-CT" type2="protein-S" type3="protein-CT" angle="1.726130630222392" k="518.816"/>
-    <Angle type1="protein-CT" type2="protein-S" type3="protein-S" angle="1.8099064343181197" k="569.024"/>
-    <Angle type1="protein-CT" type2="protein-SH" type3="protein-HS" angle="1.6755160819145565" k="359.824"/>
-    <Angle type1="protein-HS" type2="protein-SH" type3="protein-HS" angle="1.6069246423111792" k="292.88"/>
-    <Angle type1="protein-CB" type2="protein-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="protein-CC" type2="protein-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="protein-CR" type2="protein-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="protein-CV" type2="protein-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="protein-CT" type2="protein-N3" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="protein-H" type2="protein-N3" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="protein-C" type2="protein-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="EP" type2="protein-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="protein-C" type2="protein-OH" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="protein-CT" type2="protein-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="protein-HO" type2="protein-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="EP" type2="protein-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="protein-CT" type2="protein-S" type3="EP" angle="1.5707963267948966" k="1255.2"/>
-    <Angle type1="protein-CT" type2="protein-SH" type3="EP" angle="1.5707963267948966" k="1255.2"/>
-    <Angle type1="EP" type2="protein-S" type3="EP" angle="3.141592653589793" k="1255.2"/>
-    <Angle type1="EP" type2="protein-SH" type3="EP" angle="3.141592653589793" k="1255.2"/>
-    <Angle type1="protein-HS" type2="protein-SH" type3="EP" angle="1.5707963267948966" k="1255.2"/>
-    <Angle type1="EP" type2="protein-S" type3="protein-S" angle="1.6877333866785167" k="1255.2"/>
-    <Angle type1="protein-N" type2="protein-C" type3="protein-2C" angle="2.035053907825388" k="585.76"/>
-    <Angle type1="protein-O" type2="protein-C" type3="protein-2C" angle="2.101376419401173" k="669.44"/>
-    <Angle type1="protein-OH" type2="protein-C" type3="protein-2C" angle="1.9198621771937625" k="669.44"/>
-    <Angle type1="protein-CB" type2="protein-C*" type3="protein-2C" angle="2.2444934180647076" k="585.76"/>
-    <Angle type1="protein-CW" type2="protein-C*" type3="protein-2C" angle="2.181661564992912" k="585.76"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-C8" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-CX" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-HP" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-N2" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-C8" type2="protein-C8" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-CX" type2="protein-C8" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-C8" type3="protein-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-H1" type2="protein-C8" type3="protein-N2" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-C8" type3="protein-HC" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-HP" type2="protein-C8" type3="protein-HP" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-HP" type2="protein-C8" type3="protein-N3" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-CA" type3="protein-2C" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CV" type2="protein-CC" type3="protein-2C" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-CW" type2="protein-CC" type3="protein-2C" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-NA" type2="protein-CC" type3="protein-2C" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-NB" type2="protein-CC" type3="protein-2C" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="protein-O2" type2="protein-CO" type3="protein-O2" angle="2.199114857512855" k="669.44"/>
-    <Angle type1="protein-O2" type2="protein-CO" type3="protein-2C" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="protein-HC" type2="protein-CT" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-CT" type3="protein-3C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-C8" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-2C" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-CX" type3="protein-3C" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C8" type2="protein-CX" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-CX" type3="protein-N" angle="1.9146261894377796" k="669.44"/>
-    <Angle type1="protein-C8" type2="protein-CX" type3="protein-N3" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-H1" type2="protein-CX" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-CX" type3="protein-3C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HP" type2="protein-CX" type3="protein-C8" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HP" type2="protein-CX" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HP" type2="protein-CX" type3="protein-3C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-N" type2="protein-CX" type3="protein-2C" angle="1.9146261894377796" k="669.44"/>
-    <Angle type1="protein-N" type2="protein-CX" type3="protein-3C" angle="1.9146261894377796" k="669.44"/>
-    <Angle type1="protein-N3" type2="protein-CX" type3="protein-2C" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-N3" type2="protein-CX" type3="protein-3C" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="protein-C8" type2="protein-N2" type3="protein-CA" angle="2.150245638457014" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-N2" type3="protein-H" angle="2.0664698343612864" k="418.40000000000003"/>
-    <Angle type1="protein-C8" type2="protein-N3" type3="protein-H" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HO" type2="protein-OH" type3="protein-2C" angle="1.8936822384138476" k="460.24"/>
-    <Angle type1="protein-HO" type2="protein-OH" type3="protein-3C" angle="1.8936822384138476" k="460.24"/>
-    <Angle type1="protein-CT" type2="protein-S" type3="protein-2C" angle="1.726130630222392" k="518.816"/>
-    <Angle type1="protein-2C" type2="protein-S" type3="protein-S" angle="1.8099064343181197" k="569.024"/>
-    <Angle type1="protein-HS" type2="protein-SH" type3="protein-2C" angle="1.6755160819145565" k="359.824"/>
-    <Angle type1="protein-C" type2="protein-2C" type3="protein-CX" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-C" type2="protein-2C" type3="protein-2C" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-C*" type2="protein-2C" type3="protein-CX" angle="2.0176006153054447" k="527.184"/>
-    <Angle type1="protein-C*" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CA" type2="protein-2C" type3="protein-CX" angle="1.9896753472735358" k="527.184"/>
-    <Angle type1="protein-CA" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CC" type2="protein-2C" type3="protein-CX" angle="1.9739673840055867" k="527.184"/>
-    <Angle type1="protein-CC" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CO" type2="protein-2C" type3="protein-CX" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-CO" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CO" type2="protein-2C" type3="protein-2C" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="protein-CT" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-2C" type3="protein-3C" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-S" angle="2.0018926520374962" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-SH" angle="1.8954275676658419" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-2C" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CX" type2="protein-2C" type3="protein-3C" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-H1" type2="protein-2C" type3="protein-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-H1" type2="protein-2C" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-2C" type3="protein-S" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-2C" type3="protein-SH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-H1" type2="protein-2C" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-2C" type3="protein-HC" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="protein-HC" type2="protein-2C" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-2C" type3="protein-3C" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-S" type2="protein-2C" type3="protein-2C" angle="2.0018926520374962" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-CX" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CT" type2="protein-3C" type3="protein-2C" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-CX" type2="protein-3C" type3="protein-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-3C" type3="protein-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-3C" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-CX" type2="protein-3C" type3="protein-2C" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="protein-H1" type2="protein-3C" type3="protein-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="protein-HC" type2="protein-3C" type3="protein-2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="C" class3="O" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="C" class2="C" class3="OH" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="CA" class2="C" class3="CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="CA" class2="C" class3="OH" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CB" class2="C" class3="NA" angle="1.9425514574696887" k="585.76"/>
+    <Angle class1="CB" class2="C" class3="O" angle="2.2479840765686965" k="669.44"/>
+    <Angle class1="CT" class2="C" class3="O" angle="2.101376419401173" k="669.44"/>
+    <Angle class1="CX" class2="C" class3="O" angle="2.101376419401173" k="669.44"/>
+    <Angle class1="CT" class2="C" class3="O2" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="CX" class2="C" class3="O2" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="CT" class2="C" class3="N" angle="2.035053907825388" k="585.76"/>
+    <Angle class1="CX" class2="C" class3="N" angle="2.035053907825388" k="585.76"/>
+    <Angle class1="CT" class2="C" class3="CT" angle="2.0420352248333655" k="527.184"/>
+    <Angle class1="CT" class2="C" class3="OH" angle="1.9198621771937625" k="669.44"/>
+    <Angle class1="CX" class2="C" class3="OH" angle="1.9198621771937625" k="669.44"/>
+    <Angle class1="NA" class2="C" class3="O" angle="2.1048670779051615" k="669.44"/>
+    <Angle class1="N" class2="C" class3="O" angle="2.1450096507010312" k="669.44"/>
+    <Angle class1="O" class2="C" class3="O" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="O" class2="C" class3="OH" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="O2" class2="C" class3="O2" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="H4" class2="C" class3="C" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H4" class2="C" class3="CT" angle="2.007128639793479" k="418.40000000000003"/>
+    <Angle class1="H4" class2="C" class3="O" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H4" class2="C" class3="OH" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H5" class2="C" class3="N" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H5" class2="C" class3="O" angle="2.076941809873252" k="418.40000000000003"/>
+    <Angle class1="H5" class2="C" class3="OH" angle="1.8675022996339325" k="418.40000000000003"/>
+    <Angle class1="C" class2="CA" class3="CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="C" class2="CA" class3="HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CA" class2="CA" class3="CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="CA" class2="CA" class3="CB" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="CA" class2="CA" class3="CT" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CA" class2="CA" class3="HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CA" class2="CA" class3="H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CA" class2="CA" class3="OH" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CA" class2="CA" class3="CN" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="CB" class2="CA" class3="HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CB" class2="CA" class3="H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CB" class2="CA" class3="N2" angle="2.155481626212997" k="585.76"/>
+    <Angle class1="CN" class2="CA" class3="HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="N2" class2="CA" class3="NA" angle="2.0245819323134224" k="585.76"/>
+    <Angle class1="N2" class2="CA" class3="N2" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="C" class2="CB" class3="CB" angle="2.080432468377241" k="527.184"/>
+    <Angle class1="C" class2="CB" class3="NB" angle="2.2689280275926285" k="585.76"/>
+    <Angle class1="CA" class2="CB" class3="CB" angle="2.0472712125893486" k="527.184"/>
+    <Angle class1="CA" class2="CB" class3="NB" angle="2.3108159296404924" k="585.76"/>
+    <Angle class1="CB" class2="CB" class3="NB" angle="1.9268434942017398" k="585.76"/>
+    <Angle class1="C*" class2="CB" class3="CA" angle="2.3544491609403506" k="527.184"/>
+    <Angle class1="C*" class2="CB" class3="CN" angle="1.8989182261698305" k="527.184"/>
+    <Angle class1="CA" class2="CB" class3="CN" angle="2.028072590817411" k="527.184"/>
+    <Angle class1="H1" class2="CT" class3="H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="H1" class2="CX" class3="H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="H1" class2="CT" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="N" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CX" class3="N" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="S" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="SH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="N2" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HP" class2="CT" class3="HP" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="HP" class2="CX" class3="HP" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="HP" class2="CT" class3="N3" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HP" class2="CX" class3="N3" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="CT" class3="HC" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="C" class2="CT" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CX" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CT" class3="HP" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CX" class3="HP" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CT" class3="N" angle="1.9216075064457567" k="527.184"/>
+    <Angle class1="C" class2="CX" class3="N" angle="1.9216075064457567" k="527.184"/>
+    <Angle class1="C" class2="CT" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="C" class2="CX" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="C" class2="CT" class3="CT" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="CT" class3="CX" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="CX" class3="CT" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="CA" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CC" class2="CT" class3="CT" angle="1.9739673840055867" k="527.184"/>
+    <Angle class1="CC" class2="CT" class3="CX" angle="1.9739673840055867" k="527.184"/>
+    <Angle class1="CC" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CT" class2="CT" class3="CX" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CT" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CX" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="HP" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CX" class3="HP" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="S" angle="2.0018926520374962" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="S" angle="2.0018926520374962" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="SH" angle="1.8954275676658419" k="418.40000000000003"/>
+    <Angle class1="CX" class2="CT" class3="SH" angle="1.8954275676658419" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CT" class3="CA" angle="1.9896753472735358" k="527.184"/>
+    <Angle class1="CX" class2="CT" class3="CA" angle="1.9896753472735358" k="527.184"/>
+    <Angle class1="CT" class2="CT" class3="N2" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="CT" class2="CT" class3="N" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="CT" class2="CX" class3="N" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="CT" class2="CT" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="CT" class2="CX" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="C*" class2="CT" class3="CT" angle="2.0176006153054447" k="527.184"/>
+    <Angle class1="C*" class2="CT" class3="CX" angle="2.0176006153054447" k="527.184"/>
+    <Angle class1="C*" class2="CT" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="CC" class3="NA" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="CC" class3="CV" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="CC" class3="NB" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CV" class2="CC" class3="NA" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CW" class2="CC" class3="NA" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CW" class2="CC" class3="NB" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="CC" class3="CW" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="H5" class2="CR" class3="NA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="H5" class2="CR" class3="NB" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="NA" class2="CR" class3="NA" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="NA" class2="CR" class3="NB" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CC" class2="CV" class3="H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CC" class2="CV" class3="NB" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="H4" class2="CV" class3="NB" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CC" class2="CW" class3="H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CC" class2="CW" class3="NA" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="C*" class2="CW" class3="H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="C*" class2="CW" class3="NA" angle="1.8971728969178363" k="585.76"/>
+    <Angle class1="H4" class2="CW" class3="NA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CB" class2="C*" class3="CT" angle="2.2444934180647076" k="585.76"/>
+    <Angle class1="CB" class2="C*" class3="CW" angle="1.8570303241219668" k="527.184"/>
+    <Angle class1="CT" class2="C*" class3="CW" angle="2.181661564992912" k="585.76"/>
+    <Angle class1="CA" class2="CN" class3="CB" angle="2.1415189921970423" k="527.184"/>
+    <Angle class1="CA" class2="CN" class3="NA" angle="2.3177972466484698" k="585.76"/>
+    <Angle class1="CB" class2="CN" class3="NA" angle="1.8221237390820801" k="585.76"/>
+    <Angle class1="C" class2="N" class3="CT" angle="2.1275563581810877" k="418.40000000000003"/>
+    <Angle class1="C" class2="N" class3="CX" angle="2.1275563581810877" k="418.40000000000003"/>
+    <Angle class1="C" class2="N" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N" class3="H" angle="2.0601866490541068" k="418.40000000000003"/>
+    <Angle class1="CX" class2="N" class3="H" angle="2.0601866490541068" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N" class3="CT" angle="2.059488517353309" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N" class3="CX" angle="2.059488517353309" k="418.40000000000003"/>
+    <Angle class1="H" class2="N" class3="H" angle="2.0943951023931953" k="292.88"/>
+    <Angle class1="CA" class2="N2" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CA" class2="N2" class3="CT" angle="2.150245638457014" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N2" class3="H" angle="2.0664698343612864" k="418.40000000000003"/>
+    <Angle class1="H" class2="N2" class3="H" angle="2.0943951023931953" k="292.88"/>
+    <Angle class1="CT" class2="N3" class3="H" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="N3" class3="H" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N3" class3="CT" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="N3" class3="CX" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H" class2="N3" class3="H" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="C" class2="NA" class3="C" angle="2.2060961745208325" k="585.76"/>
+    <Angle class1="C" class2="NA" class3="CA" angle="2.1851522234969005" k="585.76"/>
+    <Angle class1="C" class2="NA" class3="H" angle="2.038544566329377" k="418.40000000000003"/>
+    <Angle class1="CA" class2="NA" class3="H" angle="2.059488517353309" k="418.40000000000003"/>
+    <Angle class1="CC" class2="NA" class3="CR" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CC" class2="NA" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CR" class2="NA" class3="CW" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CR" class2="NA" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CW" class2="NA" class3="H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="CN" class2="NA" class3="CW" angle="1.9477874452256716" k="585.76"/>
+    <Angle class1="CN" class2="NA" class3="H" angle="2.1485003092050197" k="418.40000000000003"/>
+    <Angle class1="CC" class2="NB" class3="CR" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="CR" class2="NB" class3="CV" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="C" class2="OH" class3="HO" angle="1.9722220547535925" k="418.40000000000003"/>
+    <Angle class1="CA" class2="OH" class3="HO" angle="1.9722220547535925" k="418.40000000000003"/>
+    <Angle class1="CT" class2="OH" class3="HO" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="CT" class2="S" class3="CT" angle="1.726130630222392" k="518.816"/>
+    <Angle class1="CT" class2="S" class3="S" angle="1.8099064343181197" k="569.024"/>
+    <Angle class1="CT" class2="SH" class3="HS" angle="1.6755160819145565" k="359.824"/>
+    <Angle class1="HS" class2="SH" class3="HS" angle="1.6069246423111792" k="292.88"/>
+    <Angle class1="CB" class2="NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="CC" class2="NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="CR" class2="NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="CV" class2="NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="CT" class2="N3" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="H" class2="N3" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="C" class2="O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="EP" class2="O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="C" class2="OH" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="CT" class2="OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="HO" class2="OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="EP" class2="OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="CT" class2="S" class3="EP" angle="1.5707963267948966" k="1255.2"/>
+    <Angle class1="CT" class2="SH" class3="EP" angle="1.5707963267948966" k="1255.2"/>
+    <Angle class1="EP" class2="S" class3="EP" angle="3.141592653589793" k="1255.2"/>
+    <Angle class1="EP" class2="SH" class3="EP" angle="3.141592653589793" k="1255.2"/>
+    <Angle class1="HS" class2="SH" class3="EP" angle="1.5707963267948966" k="1255.2"/>
+    <Angle class1="EP" class2="S" class3="S" angle="1.6877333866785167" k="1255.2"/>
+    <Angle class1="N" class2="C" class3="2C" angle="2.035053907825388" k="585.76"/>
+    <Angle class1="O" class2="C" class3="2C" angle="2.101376419401173" k="669.44"/>
+    <Angle class1="OH" class2="C" class3="2C" angle="1.9198621771937625" k="669.44"/>
+    <Angle class1="CB" class2="C*" class3="2C" angle="2.2444934180647076" k="585.76"/>
+    <Angle class1="CW" class2="C*" class3="2C" angle="2.181661564992912" k="585.76"/>
+    <Angle class1="C8" class2="C8" class3="C8" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="C8" class2="C8" class3="CX" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="C8" class2="C8" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C8" class2="C8" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C8" class2="C8" class3="HP" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C8" class2="C8" class3="N2" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="C8" class2="C8" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="CX" class2="C8" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="C8" class3="H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="H1" class2="C8" class3="N2" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="C8" class3="HC" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="HP" class2="C8" class3="HP" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="HP" class2="C8" class3="N3" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CA" class2="CA" class3="2C" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CV" class2="CC" class3="2C" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CW" class2="CC" class3="2C" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="NA" class2="CC" class3="2C" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="NB" class2="CC" class3="2C" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="O2" class2="CO" class3="O2" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="O2" class2="CO" class3="2C" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="HC" class2="CT" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="CT" class3="3C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="CX" class3="C8" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="CX" class3="2C" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="CX" class3="3C" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C8" class2="CX" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C8" class2="CX" class3="N" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="C8" class2="CX" class3="N3" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="H1" class2="CX" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CX" class3="3C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HP" class2="CX" class3="C8" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HP" class2="CX" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HP" class2="CX" class3="3C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="N" class2="CX" class3="2C" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="N" class2="CX" class3="3C" angle="1.9146261894377796" k="669.44"/>
+    <Angle class1="N3" class2="CX" class3="2C" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="N3" class2="CX" class3="3C" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="C8" class2="N2" class3="CA" angle="2.150245638457014" k="418.40000000000003"/>
+    <Angle class1="C8" class2="N2" class3="H" angle="2.0664698343612864" k="418.40000000000003"/>
+    <Angle class1="C8" class2="N3" class3="H" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HO" class2="OH" class3="2C" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="HO" class2="OH" class3="3C" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="CT" class2="S" class3="2C" angle="1.726130630222392" k="518.816"/>
+    <Angle class1="2C" class2="S" class3="S" angle="1.8099064343181197" k="569.024"/>
+    <Angle class1="HS" class2="SH" class3="2C" angle="1.6755160819145565" k="359.824"/>
+    <Angle class1="C" class2="2C" class3="CX" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="C" class2="2C" class3="2C" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="C*" class2="2C" class3="CX" angle="2.0176006153054447" k="527.184"/>
+    <Angle class1="C*" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CA" class2="2C" class3="CX" angle="1.9896753472735358" k="527.184"/>
+    <Angle class1="CA" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CC" class2="2C" class3="CX" angle="1.9739673840055867" k="527.184"/>
+    <Angle class1="CC" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CO" class2="2C" class3="CX" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="CO" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CO" class2="2C" class3="2C" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="CT" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="2C" class3="3C" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CX" class2="2C" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="S" angle="2.0018926520374962" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="SH" angle="1.8954275676658419" k="418.40000000000003"/>
+    <Angle class1="CX" class2="2C" class3="2C" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CX" class2="2C" class3="3C" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="H1" class2="2C" class3="H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="H1" class2="2C" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="2C" class3="S" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="2C" class3="SH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="2C" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="2C" class3="HC" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="HC" class2="2C" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="2C" class3="3C" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="S" class2="2C" class3="2C" angle="2.0018926520374962" k="418.40000000000003"/>
+    <Angle class1="CT" class2="3C" class3="CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CT" class2="3C" class3="CX" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CT" class2="3C" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="3C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="3C" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CT" class2="3C" class3="2C" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="CX" class2="3C" class3="H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="3C" class3="HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="3C" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="CX" class2="3C" class3="2C" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="H1" class2="3C" class3="OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="HC" class2="3C" class3="2C" angle="1.911135530933791" k="418.40000000000003"/>
   </HarmonicAngleForce>
   <PeriodicTorsionForce ordering="amber">
-    <Proper type1="" type2="protein-C" type3="protein-C" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="protein-C" type3="protein-CA" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="protein-C" type3="protein-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
-    <Proper type1="" type2="protein-C" type3="protein-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-C" type3="protein-CX" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-C" type3="protein-N" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.46"/>
-    <Proper type1="" type2="protein-C" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="5.6484000000000005"/>
-    <Proper type1="" type2="protein-C" type3="protein-O" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.7152"/>
-    <Proper type1="" type2="protein-C" type3="protein-OH" type4="" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999"/>
-    <Proper type1="" type2="protein-CA" type3="protein-CA" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="protein-CA" type3="protein-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="14.644"/>
-    <Proper type1="" type2="protein-CA" type3="protein-CN" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="protein-CA" type3="protein-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-CA" type3="protein-N2" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
-    <Proper type1="" type2="protein-CA" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
-    <Proper type1="" type2="protein-CA" type3="protein-OH" type4="" periodicity1="2" phase1="3.141592653589793" k1="3.7656"/>
-    <Proper type1="" type2="protein-CB" type3="protein-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="22.8028"/>
-    <Proper type1="" type2="protein-CB" type3="protein-CN" type4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
-    <Proper type1="" type2="protein-CB" type3="protein-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
-    <Proper type1="" type2="protein-CC" type3="protein-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-CC" type3="protein-CV" type4="" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
-    <Proper type1="" type2="protein-CC" type3="protein-CW" type4="" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
-    <Proper type1="" type2="protein-CC" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
-    <Proper type1="" type2="protein-CC" type3="protein-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
-    <Proper type1="" type2="protein-CN" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.3806"/>
-    <Proper type1="" type2="protein-CT" type3="protein-CT" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-CT" type3="protein-CX" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-CT" type3="protein-N" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-CX" type3="protein-N" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-CT" type3="protein-N2" type4="" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-CT" type3="protein-N3" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-CX" type3="protein-N3" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-CT" type3="protein-OH" type4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="" type2="protein-CT" type3="protein-S" type4="" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
-    <Proper type1="" type2="protein-CT" type3="protein-SH" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="protein-C*" type3="protein-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="7.0082"/>
-    <Proper type1="" type2="protein-C*" type3="protein-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-C*" type3="protein-CW" type4="" periodicity1="2" phase1="3.141592653589793" k1="27.300600000000003"/>
-    <Proper type1="" type2="protein-CR" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="9.727800000000002"/>
-    <Proper type1="" type2="protein-CR" type3="protein-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="20.92"/>
-    <Proper type1="" type2="protein-CV" type3="protein-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
-    <Proper type1="" type2="protein-CW" type3="protein-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
-    <Proper type1="protein-C" type2="protein-N" type3="protein-CX" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.75728" periodicity3="2" phase3="0.0" k3="1.12968" periodicity4="1" phase4="0.0" k4="0.0"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="3.141592653589793" k2="2.3012" periodicity3="2" phase3="3.141592653589793" k3="6.610720000000001" periodicity4="1" phase4="3.141592653589793" k4="1.8828"/>
-    <Proper type1="protein-CT" type2="protein-CT" type3="protein-N" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
-    <Proper type1="protein-CT" type2="protein-CX" type3="protein-N" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
-    <Proper type1="protein-CT" type2="protein-CT" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-CT" type2="protein-CX" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-H" type2="protein-N" type3="protein-C" type4="protein-O" periodicity1="2" phase1="3.141592653589793" k1="10.46" periodicity2="1" phase2="0.0" k2="8.368"/>
-    <Proper type1="protein-CT" type2="protein-S" type3="protein-S" type4="protein-CT" periodicity1="2" phase1="0.0" k1="14.644" periodicity2="3" phase2="0.0" k2="2.5104"/>
-    <Proper type1="protein-H1" type2="protein-CT" type3="protein-C" type4="protein-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
-    <Proper type1="protein-H1" type2="protein-CX" type3="protein-C" type4="protein-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-C" type4="protein-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-CT" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-CT" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-CT" type4="protein-CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HO" type2="protein-OH" type3="protein-CT" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-HO" type2="protein-OH" type3="protein-CT" type4="protein-CX" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-HO" type2="protein-OH" type3="protein-C" type4="protein-O" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999" periodicity2="1" phase2="0.0" k2="7.9496"/>
-    <Proper type1="protein-CT" type2="protein-CT" type3="protein-CT" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-CT" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="protein-OH" type2="protein-CT" type3="protein-CT" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="protein-H1" type2="protein-CT" type3="protein-CT" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-H1" type2="protein-CX" type3="protein-CT" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-CT" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-CT" type2="protein-C" type3="protein-N" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper type1="protein-O" type2="protein-C" type3="protein-N" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper type1="protein-H1" type2="protein-CT" type3="protein-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-CT" type2="protein-CT" type3="protein-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-N" type2="protein-CT" type3="protein-CT" type4="protein-OH" periodicity1="1" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="6.23416" periodicity3="3" phase3="0.0" k3="0.6527040000000001" periodicity4="4" phase4="0.0" k4="0.0"/>
-    <Proper type1="EP" type2="protein-S" type3="protein-S" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="EP" type2="protein-S" type3="protein-S" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-C8" type2="protein-CX" type3="protein-N" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
-    <Proper type1="protein-2C" type2="protein-CX" type3="protein-N" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
-    <Proper type1="protein-3C" type2="protein-CX" type3="protein-N" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
-    <Proper type1="protein-N" type2="protein-C" type3="protein-CX" type4="protein-C8" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-N" type2="protein-C" type3="protein-CX" type4="protein-2C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-N" type2="protein-C" type3="protein-CX" type4="protein-3C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
-    <Proper type1="protein-N" type2="protein-C" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-O" type2="protein-C" type3="protein-2C" type4="protein-HC" periodicity1="3" phase1="3.141592653589793" k1="0.33472" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="1" phase3="0.0" k3="3.3472000000000004"/>
-    <Proper type1="protein-OH" type2="protein-C" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-CB" type2="protein-C*" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-CW" type2="protein-C*" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-C8" type3="protein-C8" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-C8" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-CX" type2="protein-C8" type3="protein-C8" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-C8" type3="protein-C8" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="" type2="protein-C8" type3="protein-CX" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-C8" type3="protein-N2" type4="" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-C8" type3="protein-N3" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="protein-CA" type3="protein-2C" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-CV" type4="protein-H4" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-CV" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-CW" type4="protein-H4" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-CW" type4="protein-NA" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-NA" type4="protein-CR" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-NA" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
-    <Proper type1="protein-2C" type2="protein-CC" type3="protein-NB" type4="protein-CR" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
-    <Proper type1="protein-CV" type2="protein-CC" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-CW" type2="protein-CC" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-NA" type2="protein-CC" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-NB" type2="protein-CC" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-O2" type2="protein-CO" type3="protein-2C" type4="protein-HC" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-H1" type2="protein-CT" type3="protein-S" type4="protein-2C" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-2C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-2C" type4="protein-3C" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-H1" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-HC" type2="protein-CT" type3="protein-3C" type4="protein-2C" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="" type2="protein-CX" type3="protein-2C" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-H1" type2="protein-CX" type3="protein-2C" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="" type2="protein-CX" type3="protein-3C" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-H1" type2="protein-CX" type3="protein-3C" type4="protein-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="protein-HO" type2="protein-OH" type3="protein-2C" type4="protein-H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="protein-HO" type2="protein-OH" type3="protein-3C" type4="protein-H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="EP" type2="protein-S" type3="protein-S" type4="protein-2C" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="protein-S" type3="protein-2C" type4="" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
-    <Proper type1="" type2="protein-SH" type3="protein-2C" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="protein-2C" type3="protein-2C" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-2C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-2C" type3="protein-2C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="protein-CT" type2="protein-2C" type3="protein-3C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-3C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-2C" type3="protein-3C" type4="protein-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-2C" type3="protein-3C" type4="protein-CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="protein-HC" type2="protein-2C" type3="protein-3C" type4="protein-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-C8" type4="protein-C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-C8" type4="protein-C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-C8" type4="protein-C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-CX" type2="protein-C8" type3="protein-C8" type4="protein-C8" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-C8" type4="protein-N2" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-N2" type4="protein-CA" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="0.0"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-C8" type4="protein-C8" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-C8" type4="protein-N3" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-C8" type2="protein-N2" type3="protein-CA" type4="protein-N2" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="2" phase2="3.141592653589793" k2="10.0416"/>
-    <Proper type1="protein-H" type2="protein-N2" type3="protein-CA" type4="protein-N2" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="2" phase2="3.141592653589793" k2="10.0416"/>
-    <Proper type1="protein-C8" type2="protein-C8" type3="protein-N3" type4="protein-H" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-SH" periodicity1="4" phase1="0.0" k1="0.3138" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="1.4100080000000002" periodicity4="1" phase4="3.141592653589793" k4="1.125496"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-SH" periodicity1="4" phase1="0.0" k1="0.138072" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="2.033424" periodicity4="1" phase4="0.0" k4="0.644336"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-SH" periodicity1="4" phase1="0.0" k1="0.138072" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="2.033424" periodicity4="1" phase4="0.0" k4="0.644336"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-SH" type4="protein-HS" periodicity1="4" phase1="0.0" k1="0.12552" periodicity2="3" phase2="0.0" k2="1.054368" periodicity3="2" phase3="0.0" k3="2.560608" periodicity4="1" phase4="0.0" k4="0.384928"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-CO" periodicity1="4" phase1="0.0" k1="0.644336" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="1.9204560000000002" periodicity4="1" phase4="0.0" k4="1.774016"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-CO" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="2.7070480000000003" periodicity4="1" phase4="3.141592653589793" k4="9.012336"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-CO" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="2.7070480000000003" periodicity4="1" phase4="3.141592653589793" k4="9.012336"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-CO" type4="protein-O2" periodicity1="4" phase1="3.141592653589793" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="3.217496" periodicity4="1" phase4="0.0" k4="0.0"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.44768800000000003" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.267752" periodicity4="1" phase4="0.0" k4="4.376464"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.246856" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.242648" periodicity4="1" phase4="3.141592653589793" k4="2.878592"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.246856" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.242648" periodicity4="1" phase4="3.141592653589793" k4="2.878592"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-C" type4="protein-O" periodicity1="1" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-C" type4="protein-OH" periodicity1="4" phase1="3.141592653589793" k1="0.832616" periodicity2="3" phase2="0.0" k2="0.033472" periodicity3="2" phase3="3.141592653589793" k3="2.4057999999999997" periodicity4="1" phase4="3.141592653589793" k4="5.016616000000001"/>
-    <Proper type1="protein-2C" type2="protein-C" type3="protein-OH" type4="protein-HO" periodicity1="4" phase1="0.0" k1="0.47279200000000005" periodicity2="3" phase2="0.0" k2="2.004136" periodicity3="2" phase3="3.141592653589793" k3="11.321904" periodicity4="1" phase4="3.141592653589793" k4="1.874432"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.033472" periodicity2="3" phase2="3.141592653589793" k2="1.259384" periodicity3="2" phase3="3.141592653589793" k3="2.02924" periodicity4="1" phase4="3.141592653589793" k4="3.464352"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-CT" type4="protein-CC" periodicity1="4" phase1="0.0" k1="0.10460000000000001" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="1.020896" periodicity4="1" phase4="3.141592653589793" k4="0.598312"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-CT" type4="protein-CC" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="0.924664" periodicity4="1" phase4="3.141592653589793" k4="1.280304"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-CT" type4="protein-CC" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="0.924664" periodicity4="1" phase4="3.141592653589793" k4="1.280304"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-CC" type4="protein-NA" periodicity1="4" phase1="3.141592653589793" k1="0.154808" periodicity2="3" phase2="0.0" k2="2.8702240000000003" periodicity3="2" phase3="3.141592653589793" k3="1.640128" periodicity4="1" phase4="3.141592653589793" k4="0.66944"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-CC" type4="protein-CV" periodicity1="4" phase1="3.141592653589793" k1="0.04184" periodicity2="3" phase2="3.141592653589793" k2="0.510448" periodicity3="2" phase3="0.0" k3="3.138" periodicity4="1" phase4="3.141592653589793" k4="2.8200160000000003"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-CC" type4="protein-NB" periodicity1="4" phase1="3.141592653589793" k1="0.19664800000000002" periodicity2="3" phase2="0.0" k2="3.0961600000000002" periodicity3="2" phase3="0.0" k3="0.853536" periodicity4="1" phase4="0.0" k4="2.8869599999999997"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-3C" type4="protein-CT" periodicity1="4" phase1="0.0" k1="0.468608" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="1.209176" periodicity4="1" phase4="3.141592653589793" k4="1.6987040000000002"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-3C" type4="protein-2C" periodicity1="4" phase1="0.0" k1="0.48116000000000003" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="3.07524" periodicity4="1" phase4="0.0" k4="0.6778080000000001"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-3C" type4="protein-CT" periodicity1="4" phase1="3.141592653589793" k1="0.004184" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="0.903744" periodicity4="1" phase4="0.0" k4="1.4100080000000002"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-3C" type4="protein-2C" periodicity1="4" phase1="3.141592653589793" k1="0.40584800000000004" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="0.602496" periodicity4="1" phase4="0.0" k4="1.29704"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-3C" type4="protein-CT" periodicity1="4" phase1="3.141592653589793" k1="0.004184" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="0.903744" periodicity4="1" phase4="0.0" k4="1.4100080000000002"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-3C" type4="protein-2C" periodicity1="4" phase1="3.141592653589793" k1="0.40584800000000004" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="0.602496" periodicity4="1" phase4="0.0" k4="1.29704"/>
-    <Proper type1="protein-CX" type2="protein-3C" type3="protein-2C" type4="protein-CT" periodicity1="4" phase1="0.0" k1="0.9623200000000001" periodicity2="3" phase2="0.0" k2="0.44768800000000003" periodicity3="2" phase3="0.0" k3="0.221752" periodicity4="1" phase4="0.0" k4="1.8702480000000001"/>
-    <Proper type1="protein-CT" type2="protein-3C" type3="protein-2C" type4="protein-CT" periodicity1="4" phase1="0.0" k1="0.937216" periodicity2="3" phase2="0.0" k2="0.44768800000000003" periodicity3="2" phase3="3.141592653589793" k3="0.322168" periodicity4="1" phase4="0.0" k4="0.8451680000000001"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-3C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.6527040000000001" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="3.141592653589793" k3="0.497896" periodicity4="1" phase4="3.141592653589793" k4="2.916248"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-3C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.39748" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="0.0" k3="0.025104" periodicity4="1" phase4="0.0" k4="2.8200160000000003"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-3C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.39748" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="0.0" k3="0.025104" periodicity4="1" phase4="0.0" k4="2.8200160000000003"/>
-    <Proper type1="protein-CX" type2="protein-3C" type3="protein-OH" type4="protein-HO" periodicity1="4" phase1="0.0" k1="0.054392" periodicity2="3" phase2="0.0" k2="0.987424" periodicity3="2" phase3="0.0" k3="1.050184" periodicity4="1" phase4="3.141592653589793" k4="0.025104"/>
-    <Proper type1="protein-CT" type2="protein-3C" type3="protein-OH" type4="protein-HO" periodicity1="4" phase1="0.0" k1="0.200832" periodicity2="3" phase2="0.0" k2="0.987424" periodicity3="2" phase3="3.141592653589793" k3="0.330536" periodicity4="1" phase4="0.0" k4="2.690312"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-3C" periodicity1="4" phase1="0.0" k1="0.79496" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="2.59408" periodicity4="1" phase4="0.0" k4="2.953904"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-3C" periodicity1="4" phase1="0.0" k1="0.305432" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.0836560000000002" periodicity4="1" phase4="0.0" k4="0.410032"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-3C" periodicity1="4" phase1="0.0" k1="0.305432" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.0836560000000002" periodicity4="1" phase4="0.0" k4="0.410032"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-3C" type4="protein-CT" periodicity1="4" phase1="0.0" k1="0.748936" periodicity2="3" phase2="0.0" k2="0.594128" periodicity3="2" phase3="3.141592653589793" k3="0.112968" periodicity4="1" phase4="0.0" k4="1.585736"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.539736" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="0.912112" periodicity4="1" phase4="3.141592653589793" k4="2.7656240000000003"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.66944" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="1.029264" periodicity4="1" phase4="0.0" k4="2.786544"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-OH" periodicity1="4" phase1="0.0" k1="0.66944" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="1.029264" periodicity4="1" phase4="0.0" k4="2.786544"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-OH" type4="protein-HO" periodicity1="4" phase1="0.0" k1="0.029288" periodicity2="3" phase2="0.0" k2="1.1171280000000001" periodicity3="2" phase3="0.0" k3="1.857696" periodicity4="1" phase4="0.0" k4="0.882824"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-CT" type4="protein-C*" periodicity1="4" phase1="0.0" k1="0.309616" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.476952" periodicity4="1" phase4="3.141592653589793" k4="0.07112800000000001"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-CT" type4="protein-C*" periodicity1="4" phase1="0.0" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.309592" periodicity4="1" phase4="0.0" k4="0.330536"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-CT" type4="protein-C*" periodicity1="4" phase1="0.0" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.309592" periodicity4="1" phase4="0.0" k4="0.330536"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-C*" type4="protein-CB" periodicity1="4" phase1="3.141592653589793" k1="0.39748" periodicity2="3" phase2="0.0" k2="3.4266959999999997" periodicity3="2" phase3="0.0" k3="1.707072" periodicity4="1" phase4="0.0" k4="1.52716"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-C*" type4="protein-CW" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="0.0" k3="0.0" periodicity4="1" phase4="0.0" k4="0.0"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-CT" type4="protein-CA" periodicity1="4" phase1="3.141592653589793" k1="0.050208" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.962296" periodicity4="1" phase4="0.0" k4="0.23012000000000002"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-CT" type4="protein-CA" periodicity1="4" phase1="3.141592653589793" k1="0.029288" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.21336" periodicity4="1" phase4="3.141592653589793" k4="0.050208"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-CT" type4="protein-CA" periodicity1="4" phase1="3.141592653589793" k1="0.029288" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.21336" periodicity4="1" phase4="3.141592653589793" k4="0.050208"/>
-    <Proper type1="protein-CX" type2="protein-CT" type3="protein-CA" type4="protein-CA" periodicity1="4" phase1="3.141592653589793" k1="0.200832" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="0.288696" periodicity4="1" phase4="0.0" k4="0.0"/>
-    <Proper type1="protein-CA" type2="protein-C" type3="protein-OH" type4="protein-HO" periodicity1="4" phase1="0.0" k1="0.27196000000000004" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="3.694472" periodicity4="1" phase4="0.0" k4="0.0"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-2C" periodicity1="4" phase1="0.0" k1="0.60668" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.6443120000000002" periodicity4="1" phase4="3.141592653589793" k4="1.761464"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-2C" periodicity1="4" phase1="0.0" k1="0.32635200000000003" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="0.769856" periodicity4="1" phase4="3.141592653589793" k4="0.41840000000000005"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-2C" periodicity1="4" phase1="0.0" k1="0.32635200000000003" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="0.769856" periodicity4="1" phase4="3.141592653589793" k4="0.41840000000000005"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-2C" type4="protein-C" periodicity1="4" phase1="0.0" k1="0.577392" periodicity2="3" phase2="3.141592653589793" k2="1.723808" periodicity3="2" phase3="0.0" k3="0.347272" periodicity4="1" phase4="3.141592653589793" k4="0.820064"/>
-    <Proper type1="protein-2C" type2="protein-2C" type3="protein-C" type4="protein-O" periodicity1="1" phase1="0.0" k1="0.0"/>
-    <Proper type1="protein-2C" type2="protein-2C" type3="protein-C" type4="protein-OH" periodicity1="4" phase1="3.141592653589793" k1="0.276144" periodicity2="3" phase2="3.141592653589793" k2="0.10460000000000001" periodicity3="2" phase3="3.141592653589793" k3="4.619136" periodicity4="1" phase4="3.141592653589793" k4="3.447616"/>
-    <Proper type1="protein-2C" type2="protein-2C" type3="protein-C" type4="protein-N" periodicity1="4" phase1="0.0" k1="0.17572800000000002" periodicity2="3" phase2="3.141592653589793" k2="0.35564000000000007" periodicity3="2" phase3="3.141592653589793" k3="3.53548" periodicity4="1" phase4="3.141592653589793" k4="2.548056"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-2C" type4="protein-CO" periodicity1="4" phase1="3.141592653589793" k1="0.234304" periodicity2="3" phase2="3.141592653589793" k2="2.543872" periodicity3="2" phase3="3.141592653589793" k3="0.928848" periodicity4="1" phase4="3.141592653589793" k4="5.719528"/>
-    <Proper type1="protein-2C" type2="protein-2C" type3="protein-CO" type4="protein-O2" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="2" phase2="3.141592653589793" k2="1.63176"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-2C" type4="protein-S" periodicity1="4" phase1="0.0" k1="0.117152" periodicity2="3" phase2="0.0" k2="0.066944" periodicity3="2" phase3="0.0" k3="1.02508" periodicity4="1" phase4="0.0" k4="1.744728"/>
-    <Proper type1="protein-2C" type2="protein-2C" type3="protein-S" type4="protein-CT" periodicity1="4" phase1="0.0" k1="0.238488" periodicity2="3" phase2="0.0" k2="1.732176" periodicity3="2" phase3="0.0" k3="1.849328" periodicity4="1" phase4="3.141592653589793" k4="1.033448"/>
-    <Proper type1="protein-C" type2="protein-CX" type3="protein-2C" type4="protein-S" periodicity1="4" phase1="0.0" k1="1.1631520000000002" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="1.6484960000000002" periodicity4="1" phase4="0.0" k4="2.518768"/>
-    <Proper type1="protein-N" type2="protein-CX" type3="protein-2C" type4="protein-S" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="0.08786400000000001" periodicity4="1" phase4="0.0" k4="1.962296"/>
-    <Proper type1="protein-N3" type2="protein-CX" type3="protein-2C" type4="protein-S" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="0.08786400000000001" periodicity4="1" phase4="0.0" k4="1.962296"/>
-    <Proper type1="protein-CX" type2="protein-2C" type3="protein-S" type4="protein-S" periodicity1="4" phase1="3.141592653589793" k1="0.56484" periodicity2="3" phase2="0.0" k2="1.263568" periodicity3="2" phase3="0.0" k3="2.786544" periodicity4="1" phase4="0.0" k4="0.234304"/>
-    <Proper type1="protein-2C" type2="protein-S" type3="protein-S" type4="protein-2C" periodicity1="4" phase1="0.0" k1="1.585736" periodicity2="3" phase2="0.0" k2="2.8534880000000005" periodicity3="2" phase3="0.0" k3="18.744320000000002" periodicity4="1" phase4="0.0" k4="1.75728"/>
-    <Improper type1="protein-C" type2="" type3="" type4="protein-O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-C" type2="" type3="protein-O2" type4="protein-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-N" type2="" type3="" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="protein-N2" type2="" type3="" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="protein-NA" type2="" type3="" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="protein-CA" type2="" type3="protein-N2" type4="protein-N2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-N" type2="" type3="protein-CT" type4="protein-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="protein-N" type2="" type3="protein-CX" type4="protein-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="protein-CA" type2="" type3="" type4="protein-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CW" type2="" type3="" type4="protein-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CR" type2="" type3="" type4="protein-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CV" type2="" type3="" type4="protein-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CA" type2="" type3="" type4="protein-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CA" type2="" type3="" type4="protein-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-C" type2="protein-CT" type3="protein-O" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-CC" type2="protein-CT" type3="protein-CV" type4="protein-NA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CC" type2="protein-CT" type3="protein-CW" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CC" type2="protein-CT" type3="protein-CW" type4="protein-NA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-C*" type2="protein-CB" type3="protein-CT" type4="protein-CW" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CA" type2="protein-CA" type3="protein-CA" type4="protein-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-C" type2="protein-CA" type3="protein-CA" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CA" type2="protein-CA" type3="protein-CA" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-C" type2="protein-H5" type3="protein-O" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-N" type2="protein-C" type3="protein-CT" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-N" type2="protein-C" type3="protein-CX" type4="protein-H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-N" type2="protein-C" type3="protein-CT" type4="protein-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="protein-CB" type2="protein-C*" type3="protein-CA" type4="protein-CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="protein-CN" type2="protein-CA" type3="protein-CB" type4="protein-NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="protein-CB" type2="protein-C" type3="protein-CB" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="protein-CB" type2="protein-CA" type3="protein-CB" type4="protein-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="CJ" type2="protein-H1" type3="protein-H1" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="CJ" type2="protein-CT" type3="protein-H1" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="CJ" type2="protein-CT" type3="protein-H1" type4="protein-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="protein-CO" type2="" type3="protein-O2" type4="protein-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-C" type2="protein-2C" type3="protein-O" type4="protein-OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="protein-CA" type2="protein-2C" type3="protein-CA" type4="protein-CA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Proper class1="" class2="C" class3="C" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="C" class3="CA" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="C" class3="CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
+    <Proper class1="" class2="C" class3="CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="C" class3="CX" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="C" class3="N" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.46"/>
+    <Proper class1="" class2="C" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="5.6484000000000005"/>
+    <Proper class1="" class2="C" class3="O" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.7152"/>
+    <Proper class1="" class2="C" class3="OH" class4="" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999"/>
+    <Proper class1="" class2="CA" class3="CA" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="CA" class3="CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="14.644"/>
+    <Proper class1="" class2="CA" class3="CN" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="CA" class3="CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="CA" class3="N2" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
+    <Proper class1="" class2="CA" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
+    <Proper class1="" class2="CA" class3="OH" class4="" periodicity1="2" phase1="3.141592653589793" k1="3.7656"/>
+    <Proper class1="" class2="CB" class3="CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="22.8028"/>
+    <Proper class1="" class2="CB" class3="CN" class4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
+    <Proper class1="" class2="CB" class3="NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
+    <Proper class1="" class2="CC" class3="CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="CC" class3="CV" class4="" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
+    <Proper class1="" class2="CC" class3="CW" class4="" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
+    <Proper class1="" class2="CC" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
+    <Proper class1="" class2="CC" class3="NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
+    <Proper class1="" class2="CN" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.3806"/>
+    <Proper class1="" class2="CT" class3="CT" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="CT" class3="CX" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="CT" class3="N" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="CX" class3="N" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="CT" class3="N2" class4="" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="CT" class3="N3" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="CX" class3="N3" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="CT" class3="OH" class4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="" class2="CT" class3="S" class4="" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
+    <Proper class1="" class2="CT" class3="SH" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="C*" class3="CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="7.0082"/>
+    <Proper class1="" class2="C*" class3="CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="C*" class3="CW" class4="" periodicity1="2" phase1="3.141592653589793" k1="27.300600000000003"/>
+    <Proper class1="" class2="CR" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="9.727800000000002"/>
+    <Proper class1="" class2="CR" class3="NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="20.92"/>
+    <Proper class1="" class2="CV" class3="NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
+    <Proper class1="" class2="CW" class3="NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
+    <Proper class1="C" class2="N" class3="CX" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.75728" periodicity3="2" phase3="0.0" k3="1.12968" periodicity4="1" phase4="0.0" k4="0.0"/>
+    <Proper class1="N" class2="CX" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="3.141592653589793" k2="2.3012" periodicity3="2" phase3="3.141592653589793" k3="6.610720000000001" periodicity4="1" phase4="3.141592653589793" k4="1.8828"/>
+    <Proper class1="CT" class2="CT" class3="N" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
+    <Proper class1="CT" class2="CX" class3="N" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
+    <Proper class1="CT" class2="CT" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="CT" class2="CX" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="CX" class2="CT" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="H" class2="N" class3="C" class4="O" periodicity1="2" phase1="3.141592653589793" k1="10.46" periodicity2="1" phase2="0.0" k2="8.368"/>
+    <Proper class1="CT" class2="S" class3="S" class4="CT" periodicity1="2" phase1="0.0" k1="14.644" periodicity2="3" phase2="0.0" k2="2.5104"/>
+    <Proper class1="H1" class2="CT" class3="C" class4="O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
+    <Proper class1="H1" class2="CX" class3="C" class4="O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
+    <Proper class1="HC" class2="CT" class3="C" class4="O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
+    <Proper class1="HC" class2="CT" class3="CT" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="HC" class2="CT" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="CT" class3="CT" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HO" class2="OH" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="HO" class2="OH" class3="CT" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="HO" class2="OH" class3="C" class4="O" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999" periodicity2="1" phase2="0.0" k2="7.9496"/>
+    <Proper class1="CT" class2="CT" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="CX" class2="CT" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="OH" class2="CT" class3="CT" class4="OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="H1" class2="CT" class3="CT" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="H1" class2="CX" class3="CT" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="HC" class2="CT" class3="CT" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="CT" class2="C" class3="N" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="O" class2="C" class3="N" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="H1" class2="CT" class3="OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="CT" class2="CT" class3="OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="N" class2="CT" class3="CT" class4="OH" periodicity1="1" phase1="0.0" k1="0.0" periodicity2="2" phase2="0.0" k2="6.23416" periodicity3="3" phase3="0.0" k3="0.6527040000000001" periodicity4="4" phase4="0.0" k4="0.0"/>
+    <Proper class1="EP" class2="S" class3="S" class4="CT" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="EP" class2="S" class3="S" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="C8" class2="CX" class3="N" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
+    <Proper class1="2C" class2="CX" class3="N" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
+    <Proper class1="3C" class2="CX" class3="N" class4="C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="8.368" periodicity4="1" phase4="0.0" k4="8.368"/>
+    <Proper class1="N" class2="C" class3="CX" class4="C8" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="N" class2="C" class3="CX" class4="2C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="N" class2="C" class3="CX" class4="3C" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="1.6736000000000002" periodicity3="2" phase3="0.0" k3="0.8368000000000001" periodicity4="1" phase4="0.0" k4="0.8368000000000001"/>
+    <Proper class1="N" class2="C" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="O" class2="C" class3="2C" class4="HC" periodicity1="3" phase1="3.141592653589793" k1="0.33472" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="1" phase3="0.0" k3="3.3472000000000004"/>
+    <Proper class1="OH" class2="C" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="CB" class2="C*" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="CW" class2="C*" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="C8" class3="C8" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="C8" class2="C8" class3="C8" class4="HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="CX" class2="C8" class3="C8" class4="HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="C8" class3="C8" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="" class2="C8" class3="CX" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="C8" class3="N2" class4="" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="C8" class3="N3" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="CA" class3="2C" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="2C" class2="CC" class3="CV" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
+    <Proper class1="2C" class2="CC" class3="CV" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="21.547600000000003"/>
+    <Proper class1="2C" class2="CC" class3="CW" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
+    <Proper class1="2C" class2="CC" class3="CW" class4="NA" periodicity1="2" phase1="3.141592653589793" k1="22.489"/>
+    <Proper class1="2C" class2="CC" class3="NA" class4="CR" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
+    <Proper class1="2C" class2="CC" class3="NA" class4="H" periodicity1="2" phase1="3.141592653589793" k1="5.8576"/>
+    <Proper class1="2C" class2="CC" class3="NB" class4="CR" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
+    <Proper class1="CV" class2="CC" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="CW" class2="CC" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="NA" class2="CC" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="NB" class2="CC" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="O2" class2="CO" class3="2C" class4="HC" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="H1" class2="CT" class3="S" class4="2C" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
+    <Proper class1="HC" class2="CT" class3="2C" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="HC" class2="CT" class3="2C" class4="3C" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="H1" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="HC" class2="CT" class3="3C" class4="2C" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="" class2="CX" class3="2C" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="H1" class2="CX" class3="2C" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="" class2="CX" class3="3C" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="H1" class2="CX" class3="3C" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="HO" class2="OH" class3="2C" class4="H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="HO" class2="OH" class3="3C" class4="H1" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="EP" class2="S" class3="S" class4="2C" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="S" class3="2C" class4="" periodicity1="3" phase1="0.0" k1="1.3946666666666667"/>
+    <Proper class1="" class2="SH" class3="2C" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="2C" class3="2C" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="CX" class2="2C" class3="2C" class4="HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="2C" class3="2C" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="CT" class2="2C" class3="3C" class4="HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="CX" class2="2C" class3="3C" class4="HC" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="2C" class3="3C" class4="CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="2C" class3="3C" class4="CX" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="HC" class2="2C" class3="3C" class4="HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="C" class2="CX" class3="C8" class4="C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="N" class2="CX" class3="C8" class4="C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="N3" class2="CX" class3="C8" class4="C8" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="CX" class2="C8" class3="C8" class4="C8" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="C8" class2="C8" class3="C8" class4="N2" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="C8" class2="C8" class3="N2" class4="CA" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="0.0"/>
+    <Proper class1="C8" class2="C8" class3="C8" class4="C8" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="C8" class2="C8" class3="C8" class4="N3" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="C8" class2="N2" class3="CA" class4="N2" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="2" phase2="3.141592653589793" k2="10.0416"/>
+    <Proper class1="H" class2="N2" class3="CA" class4="N2" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="2" phase2="3.141592653589793" k2="10.0416"/>
+    <Proper class1="C8" class2="C8" class3="N3" class4="H" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="SH" periodicity1="4" phase1="0.0" k1="0.3138" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="1.4100080000000002" periodicity4="1" phase4="3.141592653589793" k4="1.125496"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="SH" periodicity1="4" phase1="0.0" k1="0.138072" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="2.033424" periodicity4="1" phase4="0.0" k4="0.644336"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="SH" periodicity1="4" phase1="0.0" k1="0.138072" periodicity2="3" phase2="0.0" k2="1.050184" periodicity3="2" phase3="3.141592653589793" k3="2.033424" periodicity4="1" phase4="0.0" k4="0.644336"/>
+    <Proper class1="CX" class2="2C" class3="SH" class4="HS" periodicity1="4" phase1="0.0" k1="0.12552" periodicity2="3" phase2="0.0" k2="1.054368" periodicity3="2" phase3="0.0" k3="2.560608" periodicity4="1" phase4="0.0" k4="0.384928"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="CO" periodicity1="4" phase1="0.0" k1="0.644336" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="1.9204560000000002" periodicity4="1" phase4="0.0" k4="1.774016"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="CO" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="2.7070480000000003" periodicity4="1" phase4="3.141592653589793" k4="9.012336"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="CO" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.24267200000000003" periodicity3="2" phase3="3.141592653589793" k3="2.7070480000000003" periodicity4="1" phase4="3.141592653589793" k4="9.012336"/>
+    <Proper class1="CX" class2="2C" class3="CO" class4="O2" periodicity1="4" phase1="3.141592653589793" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="3.217496" periodicity4="1" phase4="0.0" k4="0.0"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="C" periodicity1="4" phase1="0.0" k1="0.44768800000000003" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.267752" periodicity4="1" phase4="0.0" k4="4.376464"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="C" periodicity1="4" phase1="0.0" k1="0.246856" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.242648" periodicity4="1" phase4="3.141592653589793" k4="2.878592"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="C" periodicity1="4" phase1="0.0" k1="0.246856" periodicity2="3" phase2="0.0" k2="0.138072" periodicity3="2" phase3="3.141592653589793" k3="1.242648" periodicity4="1" phase4="3.141592653589793" k4="2.878592"/>
+    <Proper class1="CX" class2="2C" class3="C" class4="O" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="CX" class2="2C" class3="C" class4="OH" periodicity1="4" phase1="3.141592653589793" k1="0.832616" periodicity2="3" phase2="0.0" k2="0.033472" periodicity3="2" phase3="3.141592653589793" k3="2.4057999999999997" periodicity4="1" phase4="3.141592653589793" k4="5.016616000000001"/>
+    <Proper class1="2C" class2="C" class3="OH" class4="HO" periodicity1="4" phase1="0.0" k1="0.47279200000000005" periodicity2="3" phase2="0.0" k2="2.004136" periodicity3="2" phase3="3.141592653589793" k3="11.321904" periodicity4="1" phase4="3.141592653589793" k4="1.874432"/>
+    <Proper class1="CX" class2="2C" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.033472" periodicity2="3" phase2="3.141592653589793" k2="1.259384" periodicity3="2" phase3="3.141592653589793" k3="2.02924" periodicity4="1" phase4="3.141592653589793" k4="3.464352"/>
+    <Proper class1="C" class2="CX" class3="CT" class4="CC" periodicity1="4" phase1="0.0" k1="0.10460000000000001" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="1.020896" periodicity4="1" phase4="3.141592653589793" k4="0.598312"/>
+    <Proper class1="N" class2="CX" class3="CT" class4="CC" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="0.924664" periodicity4="1" phase4="3.141592653589793" k4="1.280304"/>
+    <Proper class1="N3" class2="CX" class3="CT" class4="CC" periodicity1="4" phase1="0.0" k1="0.372376" periodicity2="3" phase2="0.0" k2="0.916296" periodicity3="2" phase3="3.141592653589793" k3="0.924664" periodicity4="1" phase4="3.141592653589793" k4="1.280304"/>
+    <Proper class1="CX" class2="CT" class3="CC" class4="NA" periodicity1="4" phase1="3.141592653589793" k1="0.154808" periodicity2="3" phase2="0.0" k2="2.8702240000000003" periodicity3="2" phase3="3.141592653589793" k3="1.640128" periodicity4="1" phase4="3.141592653589793" k4="0.66944"/>
+    <Proper class1="CX" class2="CT" class3="CC" class4="CV" periodicity1="4" phase1="3.141592653589793" k1="0.04184" periodicity2="3" phase2="3.141592653589793" k2="0.510448" periodicity3="2" phase3="0.0" k3="3.138" periodicity4="1" phase4="3.141592653589793" k4="2.8200160000000003"/>
+    <Proper class1="CX" class2="CT" class3="CC" class4="NB" periodicity1="4" phase1="3.141592653589793" k1="0.19664800000000002" periodicity2="3" phase2="0.0" k2="3.0961600000000002" periodicity3="2" phase3="0.0" k3="0.853536" periodicity4="1" phase4="0.0" k4="2.8869599999999997"/>
+    <Proper class1="C" class2="CX" class3="3C" class4="CT" periodicity1="4" phase1="0.0" k1="0.468608" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="1.209176" periodicity4="1" phase4="3.141592653589793" k4="1.6987040000000002"/>
+    <Proper class1="C" class2="CX" class3="3C" class4="2C" periodicity1="4" phase1="0.0" k1="0.48116000000000003" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="3.07524" periodicity4="1" phase4="0.0" k4="0.6778080000000001"/>
+    <Proper class1="N" class2="CX" class3="3C" class4="CT" periodicity1="4" phase1="3.141592653589793" k1="0.004184" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="0.903744" periodicity4="1" phase4="0.0" k4="1.4100080000000002"/>
+    <Proper class1="N" class2="CX" class3="3C" class4="2C" periodicity1="4" phase1="3.141592653589793" k1="0.40584800000000004" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="0.602496" periodicity4="1" phase4="0.0" k4="1.29704"/>
+    <Proper class1="N3" class2="CX" class3="3C" class4="CT" periodicity1="4" phase1="3.141592653589793" k1="0.004184" periodicity2="3" phase2="0.0" k2="0.619232" periodicity3="2" phase3="3.141592653589793" k3="0.903744" periodicity4="1" phase4="0.0" k4="1.4100080000000002"/>
+    <Proper class1="N3" class2="CX" class3="3C" class4="2C" periodicity1="4" phase1="3.141592653589793" k1="0.40584800000000004" periodicity2="3" phase2="0.0" k2="0.47279200000000005" periodicity3="2" phase3="3.141592653589793" k3="0.602496" periodicity4="1" phase4="0.0" k4="1.29704"/>
+    <Proper class1="CX" class2="3C" class3="2C" class4="CT" periodicity1="4" phase1="0.0" k1="0.9623200000000001" periodicity2="3" phase2="0.0" k2="0.44768800000000003" periodicity3="2" phase3="0.0" k3="0.221752" periodicity4="1" phase4="0.0" k4="1.8702480000000001"/>
+    <Proper class1="CT" class2="3C" class3="2C" class4="CT" periodicity1="4" phase1="0.0" k1="0.937216" periodicity2="3" phase2="0.0" k2="0.44768800000000003" periodicity3="2" phase3="3.141592653589793" k3="0.322168" periodicity4="1" phase4="0.0" k4="0.8451680000000001"/>
+    <Proper class1="C" class2="CX" class3="3C" class4="OH" periodicity1="4" phase1="0.0" k1="0.6527040000000001" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="3.141592653589793" k3="0.497896" periodicity4="1" phase4="3.141592653589793" k4="2.916248"/>
+    <Proper class1="N" class2="CX" class3="3C" class4="OH" periodicity1="4" phase1="0.0" k1="0.39748" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="0.0" k3="0.025104" periodicity4="1" phase4="0.0" k4="2.8200160000000003"/>
+    <Proper class1="N3" class2="CX" class3="3C" class4="OH" periodicity1="4" phase1="0.0" k1="0.39748" periodicity2="3" phase2="0.0" k2="1.31796" periodicity3="2" phase3="0.0" k3="0.025104" periodicity4="1" phase4="0.0" k4="2.8200160000000003"/>
+    <Proper class1="CX" class2="3C" class3="OH" class4="HO" periodicity1="4" phase1="0.0" k1="0.054392" periodicity2="3" phase2="0.0" k2="0.987424" periodicity3="2" phase3="0.0" k3="1.050184" periodicity4="1" phase4="3.141592653589793" k4="0.025104"/>
+    <Proper class1="CT" class2="3C" class3="OH" class4="HO" periodicity1="4" phase1="0.0" k1="0.200832" periodicity2="3" phase2="0.0" k2="0.987424" periodicity3="2" phase3="3.141592653589793" k3="0.330536" periodicity4="1" phase4="0.0" k4="2.690312"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="3C" periodicity1="4" phase1="0.0" k1="0.79496" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="2.59408" periodicity4="1" phase4="0.0" k4="2.953904"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="3C" periodicity1="4" phase1="0.0" k1="0.305432" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.0836560000000002" periodicity4="1" phase4="0.0" k4="0.410032"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="3C" periodicity1="4" phase1="0.0" k1="0.305432" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.0836560000000002" periodicity4="1" phase4="0.0" k4="0.410032"/>
+    <Proper class1="CX" class2="2C" class3="3C" class4="CT" periodicity1="4" phase1="0.0" k1="0.748936" periodicity2="3" phase2="0.0" k2="0.594128" periodicity3="2" phase3="3.141592653589793" k3="0.112968" periodicity4="1" phase4="0.0" k4="1.585736"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="OH" periodicity1="4" phase1="0.0" k1="0.539736" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="0.912112" periodicity4="1" phase4="3.141592653589793" k4="2.7656240000000003"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="OH" periodicity1="4" phase1="0.0" k1="0.66944" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="1.029264" periodicity4="1" phase4="0.0" k4="2.786544"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="OH" periodicity1="4" phase1="0.0" k1="0.66944" periodicity2="3" phase2="0.0" k2="1.6777840000000002" periodicity3="2" phase3="3.141592653589793" k3="1.029264" periodicity4="1" phase4="0.0" k4="2.786544"/>
+    <Proper class1="CX" class2="2C" class3="OH" class4="HO" periodicity1="4" phase1="0.0" k1="0.029288" periodicity2="3" phase2="0.0" k2="1.1171280000000001" periodicity3="2" phase3="0.0" k3="1.857696" periodicity4="1" phase4="0.0" k4="0.882824"/>
+    <Proper class1="C" class2="CX" class3="CT" class4="C*" periodicity1="4" phase1="0.0" k1="0.309616" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.476952" periodicity4="1" phase4="3.141592653589793" k4="0.07112800000000001"/>
+    <Proper class1="N" class2="CX" class3="CT" class4="C*" periodicity1="4" phase1="0.0" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.309592" periodicity4="1" phase4="0.0" k4="0.330536"/>
+    <Proper class1="N3" class2="CX" class3="CT" class4="C*" periodicity1="4" phase1="0.0" k1="0.129704" periodicity2="3" phase2="0.0" k2="0.9790560000000001" periodicity3="2" phase3="3.141592653589793" k3="1.309592" periodicity4="1" phase4="0.0" k4="0.330536"/>
+    <Proper class1="CX" class2="CT" class3="C*" class4="CB" periodicity1="4" phase1="3.141592653589793" k1="0.39748" periodicity2="3" phase2="0.0" k2="3.4266959999999997" periodicity3="2" phase3="0.0" k3="1.707072" periodicity4="1" phase4="0.0" k4="1.52716"/>
+    <Proper class1="CX" class2="CT" class3="C*" class4="CW" periodicity1="4" phase1="0.0" k1="0.0" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="0.0" k3="0.0" periodicity4="1" phase4="0.0" k4="0.0"/>
+    <Proper class1="C" class2="CX" class3="CT" class4="CA" periodicity1="4" phase1="3.141592653589793" k1="0.050208" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.962296" periodicity4="1" phase4="0.0" k4="0.23012000000000002"/>
+    <Proper class1="N" class2="CX" class3="CT" class4="CA" periodicity1="4" phase1="3.141592653589793" k1="0.029288" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.21336" periodicity4="1" phase4="3.141592653589793" k4="0.050208"/>
+    <Proper class1="N3" class2="CX" class3="CT" class4="CA" periodicity1="4" phase1="3.141592653589793" k1="0.029288" periodicity2="3" phase2="0.0" k2="0.803328" periodicity3="2" phase3="3.141592653589793" k3="1.21336" periodicity4="1" phase4="3.141592653589793" k4="0.050208"/>
+    <Proper class1="CX" class2="CT" class3="CA" class4="CA" periodicity1="4" phase1="3.141592653589793" k1="0.200832" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="0.288696" periodicity4="1" phase4="0.0" k4="0.0"/>
+    <Proper class1="CA" class2="C" class3="OH" class4="HO" periodicity1="4" phase1="0.0" k1="0.27196000000000004" periodicity2="3" phase2="0.0" k2="0.0" periodicity3="2" phase3="3.141592653589793" k3="3.694472" periodicity4="1" phase4="0.0" k4="0.0"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="2C" periodicity1="4" phase1="0.0" k1="0.60668" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="1.6443120000000002" periodicity4="1" phase4="3.141592653589793" k4="1.761464"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="2C" periodicity1="4" phase1="0.0" k1="0.32635200000000003" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="0.769856" periodicity4="1" phase4="3.141592653589793" k4="0.41840000000000005"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="2C" periodicity1="4" phase1="0.0" k1="0.32635200000000003" periodicity2="3" phase2="0.0" k2="0.602496" periodicity3="2" phase3="3.141592653589793" k3="0.769856" periodicity4="1" phase4="3.141592653589793" k4="0.41840000000000005"/>
+    <Proper class1="CX" class2="2C" class3="2C" class4="C" periodicity1="4" phase1="0.0" k1="0.577392" periodicity2="3" phase2="3.141592653589793" k2="1.723808" periodicity3="2" phase3="0.0" k3="0.347272" periodicity4="1" phase4="3.141592653589793" k4="0.820064"/>
+    <Proper class1="2C" class2="2C" class3="C" class4="O" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="2C" class2="2C" class3="C" class4="OH" periodicity1="4" phase1="3.141592653589793" k1="0.276144" periodicity2="3" phase2="3.141592653589793" k2="0.10460000000000001" periodicity3="2" phase3="3.141592653589793" k3="4.619136" periodicity4="1" phase4="3.141592653589793" k4="3.447616"/>
+    <Proper class1="2C" class2="2C" class3="C" class4="N" periodicity1="4" phase1="0.0" k1="0.17572800000000002" periodicity2="3" phase2="3.141592653589793" k2="0.35564000000000007" periodicity3="2" phase3="3.141592653589793" k3="3.53548" periodicity4="1" phase4="3.141592653589793" k4="2.548056"/>
+    <Proper class1="CX" class2="2C" class3="2C" class4="CO" periodicity1="4" phase1="3.141592653589793" k1="0.234304" periodicity2="3" phase2="3.141592653589793" k2="2.543872" periodicity3="2" phase3="3.141592653589793" k3="0.928848" periodicity4="1" phase4="3.141592653589793" k4="5.719528"/>
+    <Proper class1="2C" class2="2C" class3="CO" class4="O2" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="2" phase2="3.141592653589793" k2="1.63176"/>
+    <Proper class1="CX" class2="2C" class3="2C" class4="S" periodicity1="4" phase1="0.0" k1="0.117152" periodicity2="3" phase2="0.0" k2="0.066944" periodicity3="2" phase3="0.0" k3="1.02508" periodicity4="1" phase4="0.0" k4="1.744728"/>
+    <Proper class1="2C" class2="2C" class3="S" class4="CT" periodicity1="4" phase1="0.0" k1="0.238488" periodicity2="3" phase2="0.0" k2="1.732176" periodicity3="2" phase3="0.0" k3="1.849328" periodicity4="1" phase4="3.141592653589793" k4="1.033448"/>
+    <Proper class1="C" class2="CX" class3="2C" class4="S" periodicity1="4" phase1="0.0" k1="1.1631520000000002" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="1.6484960000000002" periodicity4="1" phase4="0.0" k4="2.518768"/>
+    <Proper class1="N" class2="CX" class3="2C" class4="S" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="0.08786400000000001" periodicity4="1" phase4="0.0" k4="1.962296"/>
+    <Proper class1="N3" class2="CX" class3="2C" class4="S" periodicity1="4" phase1="0.0" k1="0.267776" periodicity2="3" phase2="0.0" k2="1.3514320000000002" periodicity3="2" phase3="3.141592653589793" k3="0.08786400000000001" periodicity4="1" phase4="0.0" k4="1.962296"/>
+    <Proper class1="CX" class2="2C" class3="S" class4="S" periodicity1="4" phase1="3.141592653589793" k1="0.56484" periodicity2="3" phase2="0.0" k2="1.263568" periodicity3="2" phase3="0.0" k3="2.786544" periodicity4="1" phase4="0.0" k4="0.234304"/>
+    <Proper class1="2C" class2="S" class3="S" class4="2C" periodicity1="4" phase1="0.0" k1="1.585736" periodicity2="3" phase2="0.0" k2="2.8534880000000005" periodicity3="2" phase3="0.0" k3="18.744320000000002" periodicity4="1" phase4="0.0" k4="1.75728"/>
+    <Improper class1="C" class2="" class3="" class4="O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="" class3="O2" class4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="N" class2="" class3="" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="N2" class2="" class3="" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="NA" class2="" class3="" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="CA" class2="" class3="N2" class4="N2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="N" class2="" class3="CT" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="N" class2="" class3="CX" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="CA" class2="" class3="" class4="HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CW" class2="" class3="" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CR" class2="" class3="" class4="H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CV" class2="" class3="" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CA" class2="" class3="" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CA" class2="" class3="" class4="H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="C" class2="CT" class3="O" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="CC" class2="CT" class3="CV" class4="NA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CC" class2="CT" class3="CW" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CC" class2="CT" class3="CW" class4="NA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="C*" class2="CB" class3="CT" class4="CW" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CA" class2="CA" class3="CA" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="C" class2="CA" class3="CA" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CA" class2="CA" class3="CA" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="C" class2="H5" class3="O" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="N" class2="C" class3="CT" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="N" class2="C" class3="CX" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="N" class2="C" class3="CT" class4="O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CB" class2="C*" class3="CA" class4="CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CN" class2="CA" class3="CB" class4="NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CB" class2="C" class3="CB" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CB" class2="CA" class3="CB" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="H1" class3="H1" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="CT" class3="H1" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="CT" class3="H1" class4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CO" class2="" class3="O2" class4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="C" class2="2C" class3="O" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="CA" class2="2C" class3="CA" class4="CA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
-    <Atom type="protein-C" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CA" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CB" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CC" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CN" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CR" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CT" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="protein-CV" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CW" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-C*" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-CX" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="protein-H" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
-    <Atom type="protein-HC" sigma="0.2649532787749369" epsilon="0.06568879999999999"/>
-    <Atom type="protein-H1" sigma="0.2471353044121301" epsilon="0.06568879999999999"/>
-    <Atom type="protein-HA" sigma="0.25996424595335105" epsilon="0.06276"/>
-    <Atom type="protein-H4" sigma="0.2510552587719476" epsilon="0.06276"/>
-    <Atom type="protein-H5" sigma="0.24214627159054422" epsilon="0.06276"/>
-    <Atom type="protein-HO" sigma="1.0" epsilon="0.0"/>
-    <Atom type="protein-HS" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
-    <Atom type="protein-HP" sigma="0.19599771799087468" epsilon="0.06568879999999999"/>
-    <Atom type="protein-N" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="protein-NA" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="protein-NB" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="protein-N2" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="protein-N3" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="protein-O" sigma="0.2959921901149463" epsilon="0.87864"/>
-    <Atom type="protein-O2" sigma="0.2959921901149463" epsilon="0.87864"/>
-    <Atom type="protein-OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
-    <Atom type="protein-S" sigma="0.35635948725613575" epsilon="1.046"/>
-    <Atom type="protein-SH" sigma="0.35635948725613575" epsilon="1.046"/>
-    <Atom type="protein-CO" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="protein-2C" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="protein-3C" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="protein-C8" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="C" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CA" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CB" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CC" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CN" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CR" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CT" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="CV" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CW" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="C*" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="CX" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="H" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
+    <Atom class="HC" sigma="0.2649532787749369" epsilon="0.06568879999999999"/>
+    <Atom class="H1" sigma="0.2471353044121301" epsilon="0.06568879999999999"/>
+    <Atom class="HA" sigma="0.25996424595335105" epsilon="0.06276"/>
+    <Atom class="H4" sigma="0.2510552587719476" epsilon="0.06276"/>
+    <Atom class="H5" sigma="0.24214627159054422" epsilon="0.06276"/>
+    <Atom class="HO" sigma="1.0" epsilon="0.0"/>
+    <Atom class="HS" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
+    <Atom class="HP" sigma="0.19599771799087468" epsilon="0.06568879999999999"/>
+    <Atom class="N" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="NA" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="NB" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="N2" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="N3" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="O" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="O2" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
+    <Atom class="S" sigma="0.35635948725613575" epsilon="1.046"/>
+    <Atom class="SH" sigma="0.35635948725613575" epsilon="1.046"/>
+    <Atom class="CO" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="2C" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="3C" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="C8" sigma="0.3399669508423535" epsilon="0.4577296"/>
   </NonbondedForce>
 </ForceField>

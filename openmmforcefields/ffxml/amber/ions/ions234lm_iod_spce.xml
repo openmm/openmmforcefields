@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of divalent to tetravalent ions for SPC/E water model (12-6 IOD set) -->
-    <DateGenerated>2022-09-28T04:59:42.403505</DateGenerated>
-    <Source Source="parm/frcmod.ions234lm_iod_spce" md5hash="07b58df625785b10fe11a7b220e8ceba" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">parm/frcmod.ions234lm_iod_spce</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-10</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_iod_spce" md5hash="07b58df625785b10fe11a7b220e8ceba" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions234lm_iod_spce">parm/frcmod.ions234lm_iod_spce</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions234lm_iod_spce">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions234lm_iod_spce-Be2+" element="Be" mass="9.01" name="ions234lm_iod_spce-Be2+"/>

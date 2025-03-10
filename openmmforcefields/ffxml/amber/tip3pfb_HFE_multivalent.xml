@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-01-26</DateGenerated>
+    <DateGenerated>2025-03-10</DateGenerated>
     <Source Source="parm/frcmod.ions234lm_hfe_tip3p" md5hash="06e6525fdf7340d7a50db770bc3f90c5" sourcePackage="AmberTools" sourcePackageVersion="20.15">parm/frcmod.ions234lm_hfe_tip3p</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="20.15">lib/atomic_ions.lib</Source>
     <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>
@@ -204,53 +204,53 @@
   </Residues>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
-    <Atom type="tip3pfb_HFE_multivalent-Be2+" sigma="0.16160902747065756" epsilon="3.3472e-06"/>
-    <Atom type="tip3pfb_HFE_multivalent-Cu2+" sigma="0.20383762671050965" epsilon="0.00168209352"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ni2+" sigma="0.20704486209581485" epsilon="0.00236358344"/>
-    <Atom type="tip3pfb_HFE_multivalent-Pt2+" sigma="0.2090048392757236" epsilon="0.00288846624"/>
-    <Atom type="tip3pfb_HFE_multivalent-Zn2+" sigma="0.20936119876297973" epsilon="0.00299398672"/>
-    <Atom type="tip3pfb_HFE_multivalent-Co2+" sigma="0.21577566953359018" epsilon="0.00554580832"/>
-    <Atom type="tip3pfb_HFE_multivalent-Pd2+" sigma="0.21648838850810248" epsilon="0.00591923032"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ag2+" sigma="0.2250410162022497" epsilon="0.012329536720000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Cr2+" sigma="0.22682281363853038" epsilon="0.0142138848"/>
-    <Atom type="tip3pfb_HFE_multivalent-Fe2+" sigma="0.22753553261304266" epsilon="0.015031229200000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Mg2+" sigma="0.22878279081843914" epsilon="0.01655449808"/>
-    <Atom type="tip3pfb_HFE_multivalent-V2+" sigma="0.22985186928020754" epsilon="0.01795869032"/>
-    <Atom type="tip3pfb_HFE_multivalent-Mn2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
-    <Atom type="tip3pfb_HFE_multivalent-Hg2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
-    <Atom type="tip3pfb_HFE_multivalent-Cd2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
-    <Atom type="tip3pfb_HFE_multivalent-Yb2+" sigma="0.2719022887764316" epsilon="0.19966935008"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ca2+" sigma="0.2722586482636877" epsilon="0.20268659984"/>
-    <Atom type="tip3pfb_HFE_multivalent-Sn2+" sigma="0.2749313444181087" epsilon="0.22628971536"/>
-    <Atom type="tip3pfb_HFE_multivalent-Pb2+" sigma="0.2886511846774699" epsilon="0.37512380016"/>
-    <Atom type="tip3pfb_HFE_multivalent-Eu2+" sigma="0.29684745288436104" epsilon="0.48608615792"/>
-    <Atom type="tip3pfb_HFE_multivalent-Sr2+" sigma="0.29791653134612944" epsilon="0.5017316820000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Sm2+" sigma="0.299341969295154" epsilon="0.52299970712"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ba2+" sigma="0.32820708776290103" epsilon="1.0385202632000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ra2+" sigma="0.32820708776290103" epsilon="1.0385202632000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Al3+" sigma="0.17479432849913457" epsilon="3.481088e-05"/>
-    <Atom type="tip3pfb_HFE_multivalent-Fe3+" sigma="0.19279048260556944" epsilon="0.00046095128"/>
-    <Atom type="tip3pfb_HFE_multivalent-Cr3+" sigma="0.21167753543014461" epsilon="0.00376430296"/>
-    <Atom type="tip3pfb_HFE_multivalent-In3+" sigma="0.21417205184093757" epsilon="0.00477804432"/>
-    <Atom type="tip3pfb_HFE_multivalent-Tl3+" sigma="0.21488477081544982" epsilon="0.00510728328"/>
-    <Atom type="tip3pfb_HFE_multivalent-Y3+" sigma="0.25907334723521064" epsilon="0.11041584368"/>
-    <Atom type="tip3pfb_HFE_multivalent-La3+" sigma="0.2900766226264945" epsilon="0.39325717248000003"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ce3+" sigma="0.28419669108676826" epsilon="0.32168445512000005"/>
-    <Atom type="tip3pfb_HFE_multivalent-Pr3+" sigma="0.27938583800881045" epsilon="0.2695012724"/>
-    <Atom type="tip3pfb_HFE_multivalent-Nd3+" sigma="0.2758222431362491" epsilon="0.23454240432"/>
-    <Atom type="tip3pfb_HFE_multivalent-Sm3+" sigma="0.2711895698019193" epsilon="0.19372564336"/>
-    <Atom type="tip3pfb_HFE_multivalent-Eu3+" sigma="0.26780415467298596" epsilon="0.16712607256"/>
-    <Atom type="tip3pfb_HFE_multivalent-Gd3+" sigma="0.26637871672396146" epsilon="0.15671933488"/>
-    <Atom type="tip3pfb_HFE_multivalent-Tb3+" sigma="0.2638842003131685" epsilon="0.13960849032"/>
-    <Atom type="tip3pfb_HFE_multivalent-Dy3+" sigma="0.26156786364600365" epsilon="0.12494139464000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Er3+" sigma="0.25497521313176513" epsilon="0.08927271096"/>
-    <Atom type="tip3pfb_HFE_multivalent-Tm3+" sigma="0.2531934156954844" epsilon="0.08108064815999999"/>
-    <Atom type="tip3pfb_HFE_multivalent-Lu3+" sigma="0.2531934156954844" epsilon="0.08108064815999999"/>
-    <Atom type="tip3pfb_HFE_multivalent-Hf4+" sigma="0.19368138132370977" epsilon="0.0005155106400000001"/>
-    <Atom type="tip3pfb_HFE_multivalent-Zr4+" sigma="0.20294672799236932" epsilon="0.00152628136"/>
-    <Atom type="tip3pfb_HFE_multivalent-Ce4+" sigma="0.24107719312877582" epsilon="0.03940482832"/>
-    <Atom type="tip3pfb_HFE_multivalent-U4+" sigma="0.21541931004633408" epsilon="0.0053666912800000004"/>
-    <Atom type="tip3pfb_HFE_multivalent-Pu4+" sigma="0.22682281363853038" epsilon="0.0142138848"/>
-    <Atom type="tip3pfb_HFE_multivalent-Th4+" sigma="0.2606769649278633" epsilon="0.11960507919999999"/>
+    <Atom class="tip3pfb_HFE_multivalent-Be2+" sigma="0.16160902747065756" epsilon="3.3472e-06"/>
+    <Atom class="tip3pfb_HFE_multivalent-Cu2+" sigma="0.20383762671050965" epsilon="0.00168209352"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ni2+" sigma="0.20704486209581485" epsilon="0.00236358344"/>
+    <Atom class="tip3pfb_HFE_multivalent-Pt2+" sigma="0.2090048392757236" epsilon="0.00288846624"/>
+    <Atom class="tip3pfb_HFE_multivalent-Zn2+" sigma="0.20936119876297973" epsilon="0.00299398672"/>
+    <Atom class="tip3pfb_HFE_multivalent-Co2+" sigma="0.21577566953359018" epsilon="0.00554580832"/>
+    <Atom class="tip3pfb_HFE_multivalent-Pd2+" sigma="0.21648838850810248" epsilon="0.00591923032"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ag2+" sigma="0.2250410162022497" epsilon="0.012329536720000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Cr2+" sigma="0.22682281363853038" epsilon="0.0142138848"/>
+    <Atom class="tip3pfb_HFE_multivalent-Fe2+" sigma="0.22753553261304266" epsilon="0.015031229200000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Mg2+" sigma="0.22878279081843914" epsilon="0.01655449808"/>
+    <Atom class="tip3pfb_HFE_multivalent-V2+" sigma="0.22985186928020754" epsilon="0.01795869032"/>
+    <Atom class="tip3pfb_HFE_multivalent-Mn2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
+    <Atom class="tip3pfb_HFE_multivalent-Hg2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
+    <Atom class="tip3pfb_HFE_multivalent-Cd2+" sigma="0.23858267671798283" epsilon="0.033437523840000004"/>
+    <Atom class="tip3pfb_HFE_multivalent-Yb2+" sigma="0.2719022887764316" epsilon="0.19966935008"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ca2+" sigma="0.2722586482636877" epsilon="0.20268659984"/>
+    <Atom class="tip3pfb_HFE_multivalent-Sn2+" sigma="0.2749313444181087" epsilon="0.22628971536"/>
+    <Atom class="tip3pfb_HFE_multivalent-Pb2+" sigma="0.2886511846774699" epsilon="0.37512380016"/>
+    <Atom class="tip3pfb_HFE_multivalent-Eu2+" sigma="0.29684745288436104" epsilon="0.48608615792"/>
+    <Atom class="tip3pfb_HFE_multivalent-Sr2+" sigma="0.29791653134612944" epsilon="0.5017316820000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Sm2+" sigma="0.299341969295154" epsilon="0.52299970712"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ba2+" sigma="0.32820708776290103" epsilon="1.0385202632000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ra2+" sigma="0.32820708776290103" epsilon="1.0385202632000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Al3+" sigma="0.17479432849913457" epsilon="3.481088e-05"/>
+    <Atom class="tip3pfb_HFE_multivalent-Fe3+" sigma="0.19279048260556944" epsilon="0.00046095128"/>
+    <Atom class="tip3pfb_HFE_multivalent-Cr3+" sigma="0.21167753543014461" epsilon="0.00376430296"/>
+    <Atom class="tip3pfb_HFE_multivalent-In3+" sigma="0.21417205184093757" epsilon="0.00477804432"/>
+    <Atom class="tip3pfb_HFE_multivalent-Tl3+" sigma="0.21488477081544982" epsilon="0.00510728328"/>
+    <Atom class="tip3pfb_HFE_multivalent-Y3+" sigma="0.25907334723521064" epsilon="0.11041584368"/>
+    <Atom class="tip3pfb_HFE_multivalent-La3+" sigma="0.2900766226264945" epsilon="0.39325717248000003"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ce3+" sigma="0.28419669108676826" epsilon="0.32168445512000005"/>
+    <Atom class="tip3pfb_HFE_multivalent-Pr3+" sigma="0.27938583800881045" epsilon="0.2695012724"/>
+    <Atom class="tip3pfb_HFE_multivalent-Nd3+" sigma="0.2758222431362491" epsilon="0.23454240432"/>
+    <Atom class="tip3pfb_HFE_multivalent-Sm3+" sigma="0.2711895698019193" epsilon="0.19372564336"/>
+    <Atom class="tip3pfb_HFE_multivalent-Eu3+" sigma="0.26780415467298596" epsilon="0.16712607256"/>
+    <Atom class="tip3pfb_HFE_multivalent-Gd3+" sigma="0.26637871672396146" epsilon="0.15671933488"/>
+    <Atom class="tip3pfb_HFE_multivalent-Tb3+" sigma="0.2638842003131685" epsilon="0.13960849032"/>
+    <Atom class="tip3pfb_HFE_multivalent-Dy3+" sigma="0.26156786364600365" epsilon="0.12494139464000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Er3+" sigma="0.25497521313176513" epsilon="0.08927271096"/>
+    <Atom class="tip3pfb_HFE_multivalent-Tm3+" sigma="0.2531934156954844" epsilon="0.08108064815999999"/>
+    <Atom class="tip3pfb_HFE_multivalent-Lu3+" sigma="0.2531934156954844" epsilon="0.08108064815999999"/>
+    <Atom class="tip3pfb_HFE_multivalent-Hf4+" sigma="0.19368138132370977" epsilon="0.0005155106400000001"/>
+    <Atom class="tip3pfb_HFE_multivalent-Zr4+" sigma="0.20294672799236932" epsilon="0.00152628136"/>
+    <Atom class="tip3pfb_HFE_multivalent-Ce4+" sigma="0.24107719312877582" epsilon="0.03940482832"/>
+    <Atom class="tip3pfb_HFE_multivalent-U4+" sigma="0.21541931004633408" epsilon="0.0053666912800000004"/>
+    <Atom class="tip3pfb_HFE_multivalent-Pu4+" sigma="0.22682281363853038" epsilon="0.0142138848"/>
+    <Atom class="tip3pfb_HFE_multivalent-Th4+" sigma="0.2606769649278633" epsilon="0.11960507919999999"/>
   </NonbondedForce>
 </ForceField>
