@@ -1,0 +1,4 @@
+The parm19ipq.dat is missing a newline between the end of the nonbonded
+parameters and END, and ParmEd won't read it, so the files are copied with an
+extra line added to parm19ipq.dat and the leaprc modified to point to the
+modified parm19ipq.dat.
