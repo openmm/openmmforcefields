@@ -5,7 +5,6 @@
 - MODE: LEAPRC
 - sourcePackage: AmberTools
   sourcePackageVersion: "24.8"
-
 - Source: oldff/leaprc.ff14ipq
   Reference:
   - >-
@@ -315,6 +314,17 @@
     L. Raguette; A. Cuomo; K. Belfon; C. Tian; Q. Wu; C. Simmerling.
     Updated Amber force field parameters for phosphorylated amino acids for ff14SB and ff19SB.
     In Prep, 2020.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein_phospho
+- Source: leaprc.phosfb18
+  Reference:
+  - >-
+    Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P.
+    Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids.
+    J. Phys.
   Options:
     filter_warnings: always
     write_unused: True
