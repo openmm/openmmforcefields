@@ -320,9 +320,9 @@
 - Source: leaprc.phosaa14SB
   Reference:
   - >-
-    L. Raguette; A. Cuomo; K. Belfon; C. Tian; Q. Wu; C. Simmerling.
-    Updated Amber force field parameters for phosphorylated amino acids for ff14SB and ff19SB.
-    In Prep, 2020.
+    Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C.
+    phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids.
+    J. Chem. Theory Comput., 2024, 20, 7199-7209.
   Options:
     filter_warnings: always
     write_unused: True
@@ -333,7 +333,7 @@
   - >-
     Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P.
     Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids.
-    J. Phys.
+    J. Phys. Chem. B., 2021, 125, 11927-11942.
   Options:
     filter_warnings: always
     write_unused: True
