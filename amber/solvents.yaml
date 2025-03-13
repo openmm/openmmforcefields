@@ -3,7 +3,7 @@
 - sourcePackage: AmberTools
   sourcePackageVersion: "24.8"
 - sourcePackage2: OpenMM
-  sourcePackageVersion2: "8.2.0"
+  sourcePackageVersion2: "7.5.0"
 - Source:
   - parm/frcmod.ionsjc_tip3p
   - parm/frcmod.ions234lm_126_tip3p
