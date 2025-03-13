@@ -182,8 +182,8 @@
     <Residue name="Tm">
       <Atom charge="3.0" name="Tm" type="ions234lm_126_tip4pew-Tm3+"/>
     </Residue>
-    <Residue name="U">
-      <Atom charge="4.0" name="U" type="ions234lm_126_tip4pew-U4+"/>
+    <Residue name="U4+">
+      <Atom charge="4.0" name="U4+" type="ions234lm_126_tip4pew-U4+"/>
     </Residue>
     <Residue name="V2+">
       <Atom charge="2.0" name="V2+" type="ions234lm_126_tip4pew-V2+"/>

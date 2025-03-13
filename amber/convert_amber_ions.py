@@ -44,8 +44,9 @@ def amber_frcmod_ions_to_openmm_xml(
 
     ionname_to_residuename["Na+"] = "NA"  # this is a duplicate in atomic_ions.lib
     ionname_to_residuename["Cl-"] = "CL"  # this is a duplicate in atomic_ions.lib
-    ionname_to_residuename["Cu2+"] = "CU"  # consistent with previous residue names
+    ionname_to_residuename["Cu2+"] = "CU" # consistent with previous residue names
     ionname_to_residuename["Cu+"] = "CU1"
+    ionname_to_residuename["U4+"] = "U4+" # to avoid collision with uracil, don't use U
 
     with open(frcmod_file) as fh:
         lines = fh.readlines()
