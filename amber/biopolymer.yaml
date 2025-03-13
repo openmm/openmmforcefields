@@ -94,6 +94,19 @@
     Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.
   Test:
   - protein
+- Source: files/ff19SB/leaprc.protein.ff19SB
+  SourceWithCMAP: leaprc.protein.ff19SB
+  CMAPFRCMOD: files/ff19SB/frcmod.ff19SB_only_cmap
+  Prefix: protein
+  Options:
+    keep_types: ["P"]
+  Reference:
+  - >-
+    Tian, C.; Kasavajhala, K.; Belfon, K.A.A.; Raguette, L.; Huang, H.; Migues, A.N.; Bickel, J.; Wang, Y.; Pincay, J.; Wu, Q.; Simmerling, C.
+    ff19SB: Amino-Acid-Specific Protein Backbone Parameters Trained against Quantum Mechanics Energy Surfaces in Solution.
+    J. Chem. Theory Comput., 2020, 16, 528-552.
+  Test:
+  - protein
 - Source: leaprc.protein.ff03.r1
   Prefix: protein
   Reference:
@@ -182,6 +195,8 @@
   - >-
     Wang, L.-P., McKiernan, K.A., Gomes, J., Beauchamp, K.A., Head-Gordon, T., Rice, J.E., Swope, W.C., Martinez, T.J., and Pande, V.S. (2017).
     Building a More Predictive Protein Force Field: A Systematic and Reproducible Route to AMBER-FB15. J. Phys. Chem. B 121, 4023-4039.
+  Options:
+    keep_types: ["P"]
   Test:
   - protein
 - Source: oldff/leaprc.ff10
@@ -329,11 +344,28 @@
   Test:
   - protein_phospho
 - Source: leaprc.phosfb18
+  Prefix: protein
   Reference:
   - >-
     Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P.
     Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids.
     J. Phys. Chem. B., 2021, 125, 11927-11942.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein_phospho
+- Source: files/ff19SB/leaprc.phosaa19SB
+  SourceWithCMAP: leaprc.phosaa19SB
+  CMAPFRCMOD: files/ff19SB/frcmod.phosaa19SB_only_cmap
+  CMAPExtraFFXML:
+    - ../openmmforcefields/ffxml/amber/protein.ff19SB.xml
+  Prefix: protein
+  Reference:
+  - >-
+    Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C.
+    phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids.
+    J. Chem. Theory Comput., 2024, 20, 7199-7209.
   Options:
     filter_warnings: always
     write_unused: True

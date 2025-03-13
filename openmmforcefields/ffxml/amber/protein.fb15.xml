@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="leaprc.protein.fb15" md5hash="50fb6c8edfa5238267eb0513d9bb504e" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.protein.fb15</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="leaprc.protein.fb15" md5hash="50fb6c8edfa5238267eb0513d9bb504e" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.protein.fb15</Source>
     <Reference>Wang, L.-P., McKiernan, K.A., Gomes, J., Beauchamp, K.A., Head-Gordon, T., Rice, J.E., Swope, W.C., Martinez, T.J., and Pande, V.S. (2017). Building a More Predictive Protein Force Field: A Systematic and Reproducible Route to AMBER-FB15. J. Phys. Chem. B 121, 4023-4039.</Reference>
   </Info>
   <AtomTypes>
@@ -32,6 +32,7 @@
     <Type element="O" name="protein-O" class="O" mass="16.0"/>
     <Type element="O" name="protein-O2" class="O2" mass="16.0"/>
     <Type element="O" name="protein-OH" class="OH" mass="16.0"/>
+    <Type element="P" name="protein-P" class="P" mass="30.97"/>
     <Type element="S" name="protein-S" class="S" mass="32.06"/>
     <Type element="S" name="protein-SH" class="SH" mass="32.06"/>
     <Type element="C" name="protein-6+" class="6+" mass="12.01078"/>
@@ -2825,6 +2826,8 @@
     <Bond class1="CV" class2="NB" length="0.137319" k="342373.40627199993"/>
     <Bond class1="CW" class2="H4" length="0.10774800000000001" k="313838.47606399993"/>
     <Bond class1="CW" class2="NA" length="0.138186" k="353987.6128799999"/>
+    <Bond class1="O2" class2="P" length="0.148" k="439319.99999999994"/>
+    <Bond class1="OH" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
     <Bond class1="H" class2="N2" length="0.10211200000000001" k="373267.4430399999"/>
     <Bond class1="H" class2="NA" length="0.10262800000000001" k="372239.24177599995"/>
     <Bond class1="H" class2="N" length="0.101114" k="384032.8917759999"/>
@@ -3038,6 +3041,9 @@
     <Angle class1="C" class2="OH" class3="HO" angle="1.9572783711650916" k="414.40871504"/>
     <Angle class1="CA" class2="OH" class3="HO" angle="1.9722220547535925" k="418.40000000000003"/>
     <Angle class1="CT" class2="OH" class3="HO" angle="1.878149680735724" k="459.73030512"/>
+    <Angle class1="HO" class2="OH" class3="P" angle="1.8936822384138476" k="376.56"/>
+    <Angle class1="O2" class2="P" class3="OH" angle="1.888969849433463" k="376.56"/>
+    <Angle class1="O2" class2="P" class3="O2" angle="2.092649773141201" k="1171.52"/>
     <Angle class1="CT" class2="S" class3="CT" angle="1.7291294549431686" k="518.80236016"/>
     <Angle class1="CT" class2="S" class3="S" angle="1.8099064343181197" k="569.024"/>
     <Angle class1="CT" class2="SH" class3="HS" angle="1.670373469273555" k="360.79033664"/>
@@ -3337,6 +3343,7 @@
     <Proper class1="" class2="CR" class3="NB" class4="" periodicity1="2" phase1="3.056537348619428" k1="21.023135600000003"/>
     <Proper class1="" class2="CV" class3="NB" class4="" periodicity1="2" phase1="3.1150542241815184" k1="10.085741200000001"/>
     <Proper class1="" class2="CW" class3="NA" class4="" periodicity1="2" phase1="3.405939698498079" k1="6.26897088"/>
+    <Proper class1="" class2="OH" class3="P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
     <Proper class1="N" class2="CT" class3="C" class4="N" periodicity1="6" phase1="0.0" k1="-0.00573208" periodicity2="5" phase2="0.0" k2="-0.41388128" periodicity3="4" phase3="0.0" k3="-0.018869840000000002" periodicity4="3" phase4="2.408649837262259" k4="0.93123288" periodicity5="2" phase5="3.127190196602336" k5="7.1925052" periodicity6="1" phase6="3.5063231830911583" k6="1.59381112"/>
     <Proper class1="C" class2="N" class3="CT" class4="C" periodicity1="6" phase1="0.0" k1="0.29250344" periodicity2="5" phase2="0.0" k2="-0.379698" periodicity3="4" phase3="0.0" k3="-0.31873712" periodicity4="3" phase4="0.20624800116912273" k4="-0.52329288" periodicity5="2" phase5="0.6211427840313091" k5="1.2049083200000001" periodicity6="1" phase6="-0.010236530595871941" k6="0.5628316800000001"/>
     <Proper class1="CT" class2="CT" class3="N" class4="C" periodicity1="6" phase1="0.0" k1="-0.28124848" periodicity2="5" phase2="0.0" k2="0.32145672" periodicity3="4" phase3="0.0" k3="-0.40906968" periodicity4="3" phase4="-0.22895403660586813" k4="0.10104360000000001" periodicity5="2" phase5="-1.2225823716039292" k5="2.74729808" periodicity6="1" phase6="-0.2266322251019401" k6="-1.86204736"/>
@@ -3655,6 +3662,7 @@
     <Atom class="O" sigma="0.2959921901149463" epsilon="0.87864"/>
     <Atom class="O2" sigma="0.2959921901149463" epsilon="0.87864"/>
     <Atom class="OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
+    <Atom class="P" sigma="0.37417746161894255" epsilon="0.8368000000000001"/>
     <Atom class="S" sigma="0.35635948725613575" epsilon="1.046"/>
     <Atom class="SH" sigma="0.35635948725613575" epsilon="1.046"/>
     <Atom class="6+" sigma="0.3399669508423535" epsilon="0.4577296"/>

@@ -1,52 +1,52 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-11</DateGenerated>
+    <DateGenerated>2025-03-13</DateGenerated>
     <Source Source="leaprc.phosfb18" md5hash="8f01016c5c2e378082063283b646805c" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.phosfb18</Source>
-    <Reference>Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P. Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids. J. Phys.</Reference>
+    <Reference>Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P. Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids. J. Phys. Chem. B., 2021, 125, 11927-11942.</Reference>
   </Info>
   <AtomTypes>
-    <Type element="O" name="OP" class="OP" mass="16.0"/>
-    <Type element="O" name="OQ" class="OQ" mass="16.0"/>
-    <Type element="O" name="OR" class="OR" mass="16.0"/>
-    <Type element="O" name="OT" class="OT" mass="16.0"/>
-    <Type element="O" name="OV" class="OV" mass="16.0"/>
-    <Type element="O" name="OX" class="OX" mass="16.0"/>
-    <Type element="O" name="OZ" class="OZ" mass="16.0"/>
-    <Type element="C" name="gt" class="gt" mass="12.01"/>
-    <Type element="C" name="GT" class="GT" mass="12.01"/>
-    <Type element="C" name="bs" class="bs" mass="12.01"/>
-    <Type element="C" name="BS" class="BS" mass="12.01"/>
-    <Type element="C" name="bt" class="bt" mass="12.01"/>
-    <Type element="C" name="BT" class="BT" mass="12.01"/>
-    <Type element="C" name="by" class="by" mass="12.01"/>
-    <Type element="C" name="BY" class="BY" mass="12.01"/>
+    <Type element="O" name="protein-OP" class="OP" mass="16.0"/>
+    <Type element="O" name="protein-OQ" class="OQ" mass="16.0"/>
+    <Type element="O" name="protein-OR" class="OR" mass="16.0"/>
+    <Type element="O" name="protein-OT" class="OT" mass="16.0"/>
+    <Type element="O" name="protein-OV" class="OV" mass="16.0"/>
+    <Type element="O" name="protein-OX" class="OX" mass="16.0"/>
+    <Type element="O" name="protein-OZ" class="OZ" mass="16.0"/>
+    <Type element="C" name="protein-gt" class="gt" mass="12.01"/>
+    <Type element="C" name="protein-GT" class="GT" mass="12.01"/>
+    <Type element="C" name="protein-bs" class="bs" mass="12.01"/>
+    <Type element="C" name="protein-BS" class="BS" mass="12.01"/>
+    <Type element="C" name="protein-bt" class="bt" mass="12.01"/>
+    <Type element="C" name="protein-BT" class="BT" mass="12.01"/>
+    <Type element="C" name="protein-by" class="by" mass="12.01"/>
+    <Type element="C" name="protein-BY" class="BY" mass="12.01"/>
   </AtomTypes>
   <Residues>
     <Residue name="PTR">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="0.141279"/>
-      <Atom name="HA" type="H1" charge="0.027982"/>
-      <Atom name="CB" type="BY" charge="-0.251171"/>
-      <Atom name="HB2" type="HC" charge="0.08193"/>
-      <Atom name="HB3" type="HC" charge="0.08193"/>
-      <Atom name="CG" type="CA" charge="0.073446"/>
-      <Atom name="CD1" type="CA" charge="-0.198084"/>
-      <Atom name="HD1" type="HA" charge="0.112503"/>
-      <Atom name="CE1" type="CA" charge="-0.254266"/>
-      <Atom name="HE1" type="HA" charge="0.161606"/>
-      <Atom name="CZ" type="C" charge="0.477009"/>
-      <Atom name="CE2" type="CA" charge="-0.254266"/>
-      <Atom name="HE2" type="HA" charge="0.161606"/>
-      <Atom name="CD2" type="CA" charge="-0.198084"/>
-      <Atom name="HD2" type="HA" charge="0.112503"/>
-      <Atom name="OH" type="OV" charge="-0.557944"/>
-      <Atom name="P" type="P" charge="1.380671"/>
-      <Atom name="O1P" type="OT" charge="-0.94355"/>
-      <Atom name="O2P" type="OT" charge="-0.94355"/>
-      <Atom name="O3P" type="OT" charge="-0.94355"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="0.141279"/>
+      <Atom name="HA" type="protein-H1" charge="0.027982"/>
+      <Atom name="CB" type="protein-BY" charge="-0.251171"/>
+      <Atom name="HB2" type="protein-HC" charge="0.08193"/>
+      <Atom name="HB3" type="protein-HC" charge="0.08193"/>
+      <Atom name="CG" type="protein-CA" charge="0.073446"/>
+      <Atom name="CD1" type="protein-CA" charge="-0.198084"/>
+      <Atom name="HD1" type="protein-HA" charge="0.112503"/>
+      <Atom name="CE1" type="protein-CA" charge="-0.254266"/>
+      <Atom name="HE1" type="protein-HA" charge="0.161606"/>
+      <Atom name="CZ" type="protein-C" charge="0.477009"/>
+      <Atom name="CE2" type="protein-CA" charge="-0.254266"/>
+      <Atom name="HE2" type="protein-HA" charge="0.161606"/>
+      <Atom name="CD2" type="protein-CA" charge="-0.198084"/>
+      <Atom name="HD2" type="protein-HA" charge="0.112503"/>
+      <Atom name="OH" type="protein-OV" charge="-0.557944"/>
+      <Atom name="P" type="protein-P" charge="1.380671"/>
+      <Atom name="O1P" type="protein-OT" charge="-0.94355"/>
+      <Atom name="O2P" type="protein-OT" charge="-0.94355"/>
+      <Atom name="O3P" type="protein-OT" charge="-0.94355"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
@@ -75,21 +75,21 @@
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="S1P">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="0.021706"/>
-      <Atom name="HA" type="H1" charge="0.122918"/>
-      <Atom name="CB" type="bs" charge="0.025023"/>
-      <Atom name="HB2" type="H1" charge="0.105184"/>
-      <Atom name="HB3" type="H1" charge="0.105184"/>
-      <Atom name="OG" type="OR" charge="-0.46569"/>
-      <Atom name="P" type="P" charge="1.322975"/>
-      <Atom name="O1P" type="OQ" charge="-0.752781"/>
-      <Atom name="O2P" type="OP" charge="-0.82181"/>
-      <Atom name="O3P" type="OP" charge="-0.82181"/>
-      <Atom name="H1P" type="HO" charge="0.427101"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="0.021706"/>
+      <Atom name="HA" type="protein-H1" charge="0.122918"/>
+      <Atom name="CB" type="protein-bs" charge="0.025023"/>
+      <Atom name="HB2" type="protein-H1" charge="0.105184"/>
+      <Atom name="HB3" type="protein-H1" charge="0.105184"/>
+      <Atom name="OG" type="protein-OR" charge="-0.46569"/>
+      <Atom name="P" type="protein-P" charge="1.322975"/>
+      <Atom name="O1P" type="protein-OQ" charge="-0.752781"/>
+      <Atom name="O2P" type="protein-OP" charge="-0.82181"/>
+      <Atom name="O3P" type="protein-OP" charge="-0.82181"/>
+      <Atom name="H1P" type="protein-HO" charge="0.427101"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
@@ -108,20 +108,20 @@
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="SEP">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="-0.278702"/>
-      <Atom name="HA" type="H1" charge="0.198553"/>
-      <Atom name="CB" type="BS" charge="0.253803"/>
-      <Atom name="HB2" type="H1" charge="0.04323"/>
-      <Atom name="HB3" type="H1" charge="0.04323"/>
-      <Atom name="OG" type="OZ" charge="-0.430343"/>
-      <Atom name="P" type="P" charge="1.387088"/>
-      <Atom name="O1P" type="OX" charge="-0.982953"/>
-      <Atom name="O2P" type="OX" charge="-0.982953"/>
-      <Atom name="O3P" type="OX" charge="-0.982953"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="-0.278702"/>
+      <Atom name="HA" type="protein-H1" charge="0.198553"/>
+      <Atom name="CB" type="protein-BS" charge="0.253803"/>
+      <Atom name="HB2" type="protein-H1" charge="0.04323"/>
+      <Atom name="HB3" type="protein-H1" charge="0.04323"/>
+      <Atom name="OG" type="protein-OZ" charge="-0.430343"/>
+      <Atom name="P" type="protein-P" charge="1.387088"/>
+      <Atom name="O1P" type="protein-OX" charge="-0.982953"/>
+      <Atom name="O2P" type="protein-OX" charge="-0.982953"/>
+      <Atom name="O3P" type="protein-OX" charge="-0.982953"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
@@ -139,24 +139,24 @@
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="T1P">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="0.043873"/>
-      <Atom name="HA" type="H1" charge="0.104472"/>
-      <Atom name="CB" type="bt" charge="0.352701"/>
-      <Atom name="HB" type="H1" charge="0.037488"/>
-      <Atom name="CG2" type="gt" charge="-0.28753"/>
-      <Atom name="HG21" type="HC" charge="0.054266"/>
-      <Atom name="HG22" type="HC" charge="0.054266"/>
-      <Atom name="HG23" type="HC" charge="0.054266"/>
-      <Atom name="OG1" type="OR" charge="-0.490763"/>
-      <Atom name="P" type="P" charge="1.261944"/>
-      <Atom name="O1P" type="OQ" charge="-0.705351"/>
-      <Atom name="O2P" type="OP" charge="-0.815354"/>
-      <Atom name="O3P" type="OP" charge="-0.815354"/>
-      <Atom name="H1P" type="HO" charge="0.419076"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="0.043873"/>
+      <Atom name="HA" type="protein-H1" charge="0.104472"/>
+      <Atom name="CB" type="protein-bt" charge="0.352701"/>
+      <Atom name="HB" type="protein-H1" charge="0.037488"/>
+      <Atom name="CG2" type="protein-gt" charge="-0.28753"/>
+      <Atom name="HG21" type="protein-HC" charge="0.054266"/>
+      <Atom name="HG22" type="protein-HC" charge="0.054266"/>
+      <Atom name="HG23" type="protein-HC" charge="0.054266"/>
+      <Atom name="OG1" type="protein-OR" charge="-0.490763"/>
+      <Atom name="P" type="protein-P" charge="1.261944"/>
+      <Atom name="O1P" type="protein-OQ" charge="-0.705351"/>
+      <Atom name="O2P" type="protein-OP" charge="-0.815354"/>
+      <Atom name="O3P" type="protein-OP" charge="-0.815354"/>
+      <Atom name="H1P" type="protein-HO" charge="0.419076"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
@@ -178,23 +178,23 @@
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="TPO">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="-0.31351"/>
-      <Atom name="HA" type="H1" charge="0.215772"/>
-      <Atom name="CB" type="BT" charge="0.623861"/>
-      <Atom name="HB" type="H1" charge="0.009989"/>
-      <Atom name="CG2" type="GT" charge="-0.406805"/>
-      <Atom name="HG21" type="HC" charge="0.071662"/>
-      <Atom name="HG22" type="HC" charge="0.071662"/>
-      <Atom name="HG23" type="HC" charge="0.071662"/>
-      <Atom name="OG1" type="OZ" charge="-0.54523"/>
-      <Atom name="P" type="P" charge="1.366055"/>
-      <Atom name="O1P" type="OX" charge="-0.965706"/>
-      <Atom name="O2P" type="OX" charge="-0.965706"/>
-      <Atom name="O3P" type="OX" charge="-0.965706"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="-0.31351"/>
+      <Atom name="HA" type="protein-H1" charge="0.215772"/>
+      <Atom name="CB" type="protein-BT" charge="0.623861"/>
+      <Atom name="HB" type="protein-H1" charge="0.009989"/>
+      <Atom name="CG2" type="protein-GT" charge="-0.406805"/>
+      <Atom name="HG21" type="protein-HC" charge="0.071662"/>
+      <Atom name="HG22" type="protein-HC" charge="0.071662"/>
+      <Atom name="HG23" type="protein-HC" charge="0.071662"/>
+      <Atom name="OG1" type="protein-OZ" charge="-0.54523"/>
+      <Atom name="P" type="protein-P" charge="1.366055"/>
+      <Atom name="O1P" type="protein-OX" charge="-0.965706"/>
+      <Atom name="O2P" type="protein-OX" charge="-0.965706"/>
+      <Atom name="O3P" type="protein-OX" charge="-0.965706"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
@@ -215,31 +215,31 @@
       <ExternalBond atomName="C"/>
     </Residue>
     <Residue name="Y1P">
-      <Atom name="N" type="N" charge="-0.5163"/>
-      <Atom name="H" type="H" charge="0.2936"/>
-      <Atom name="CA" type="CT" charge="0.275503"/>
-      <Atom name="HA" type="H1" charge="0.008223"/>
-      <Atom name="CB" type="by" charge="-0.354052"/>
-      <Atom name="HB2" type="HC" charge="0.110326"/>
-      <Atom name="HB3" type="HC" charge="0.110326"/>
-      <Atom name="CG" type="CA" charge="0.119728"/>
-      <Atom name="CD1" type="CA" charge="-0.198938"/>
-      <Atom name="HD1" type="HA" charge="0.137143"/>
-      <Atom name="CE1" type="CA" charge="-0.284884"/>
-      <Atom name="HE1" type="HA" charge="0.177179"/>
-      <Atom name="CZ" type="C" charge="0.452616"/>
-      <Atom name="CE2" type="CA" charge="-0.284884"/>
-      <Atom name="HE2" type="HA" charge="0.177179"/>
-      <Atom name="CD2" type="CA" charge="-0.198938"/>
-      <Atom name="HD2" type="HA" charge="0.137143"/>
-      <Atom name="OG" type="OR" charge="-0.534452"/>
-      <Atom name="P" type="P" charge="1.393215"/>
-      <Atom name="O1P" type="OQ" charge="-0.752821"/>
-      <Atom name="O2P" type="OP" charge="-0.822464"/>
-      <Atom name="O3P" type="OP" charge="-0.822464"/>
-      <Atom name="H1P" type="HO" charge="0.423316"/>
-      <Atom name="C" type="C" charge="0.5366"/>
-      <Atom name="O" type="O" charge="-0.5819"/>
+      <Atom name="N" type="protein-N" charge="-0.5163"/>
+      <Atom name="H" type="protein-H" charge="0.2936"/>
+      <Atom name="CA" type="protein-CT" charge="0.275503"/>
+      <Atom name="HA" type="protein-H1" charge="0.008223"/>
+      <Atom name="CB" type="protein-by" charge="-0.354052"/>
+      <Atom name="HB2" type="protein-HC" charge="0.110326"/>
+      <Atom name="HB3" type="protein-HC" charge="0.110326"/>
+      <Atom name="CG" type="protein-CA" charge="0.119728"/>
+      <Atom name="CD1" type="protein-CA" charge="-0.198938"/>
+      <Atom name="HD1" type="protein-HA" charge="0.137143"/>
+      <Atom name="CE1" type="protein-CA" charge="-0.284884"/>
+      <Atom name="HE1" type="protein-HA" charge="0.177179"/>
+      <Atom name="CZ" type="protein-C" charge="0.452616"/>
+      <Atom name="CE2" type="protein-CA" charge="-0.284884"/>
+      <Atom name="HE2" type="protein-HA" charge="0.177179"/>
+      <Atom name="CD2" type="protein-CA" charge="-0.198938"/>
+      <Atom name="HD2" type="protein-HA" charge="0.137143"/>
+      <Atom name="OG" type="protein-OR" charge="-0.534452"/>
+      <Atom name="P" type="protein-P" charge="1.393215"/>
+      <Atom name="O1P" type="protein-OQ" charge="-0.752821"/>
+      <Atom name="O2P" type="protein-OP" charge="-0.822464"/>
+      <Atom name="O3P" type="protein-OP" charge="-0.822464"/>
+      <Atom name="H1P" type="protein-HO" charge="0.423316"/>
+      <Atom name="C" type="protein-C" charge="0.5366"/>
+      <Atom name="O" type="protein-O" charge="-0.5819"/>
       <Bond atomName1="N" atomName2="H"/>
       <Bond atomName1="N" atomName2="CA"/>
       <Bond atomName1="CA" atomName2="HA"/>
