@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of monovalent ions for TIP3P, SPC/E and TIP4P/EW water models (12-6 IOD set) -->
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="parm/frcmod.ions1lm_iod" md5hash="1c384cb45aec5c706021dd4d847ce20a" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions1lm_iod">parm/frcmod.ions1lm_iod</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions1lm_iod">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="parm/frcmod.ions1lm_iod" md5hash="1c384cb45aec5c706021dd4d847ce20a" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions1lm_iod</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions1lm_iod-Li+" element="Li" mass="6.94" name="ions1lm_iod-Li+"/>

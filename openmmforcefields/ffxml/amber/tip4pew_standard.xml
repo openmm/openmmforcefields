@@ -1,10 +1,10 @@
 <ForceField>
  <Info>
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="parm/frcmod.ionsjc_tip4pew" md5hash="7aa9de49a8df5ebc45f74e1f47d13c2a" sourcePackage="AmberTools" sourcePackageVersion="20.15">parm/frcmod.ionsjc_tip4pew</Source>
-    <Source Source="parm/frcmod.ions234lm_126_tip4pew" md5hash="3902b775a0fe5d42cab716a82c183747" sourcePackage="AmberTools" sourcePackageVersion="20.15">parm/frcmod.ions234lm_126_tip4pew</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="20.15">lib/atomic_ions.lib</Source>
-    <Source Source="tip4pew.xml" md5hash="cb450d015f4c238271cef8825f5ad7bd" sourcePackage="OpenMM" sourcePackageVersion="7.5.0">tip4pew.xml</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="parm/frcmod.ionsjc_tip4pew" md5hash="7aa9de49a8df5ebc45f74e1f47d13c2a" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionsjc_tip4pew</Source>
+    <Source Source="parm/frcmod.ions234lm_126_tip4pew" md5hash="3902b775a0fe5d42cab716a82c183747" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions234lm_126_tip4pew</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
+    <Source Source="tip4pew.xml" md5hash="cb450d015f4c238271cef8825f5ad7bd" sourcePackage="OpenMM" sourcePackageVersion="8.2.0">tip4pew.xml</Source>
     <Reference>Joung, I.S., and Cheatham, Thomas E. (2008). Determination of Alkali and Halide Monovalent Ion Parameters for Use in Explicitly Solvated Biomolecular Simulations. J. Phys. Chem. B 112, 9020-9041.</Reference>
     <Reference>Joung, I.S., and Cheatham, T.E. (2009). Molecular Dynamics Simulations of the Dynamic and Energetic Properties of Alkali and Halide Ions Using Water-Model-Specific Ion Parameters. J. Phys. Chem. B 113, 13279q13290.</Reference>
     <Reference>Li, P., Roberts, B.P., Chakravorty, D.K., and Merz, K.M. (2013). Rational Design of Particle Mesh Ewald Compatible Lennard-Jones Parameters for +2 Metal Cations in Explicit Solvent. J. Chem. Theory Comput. 9, 2733-2748.</Reference>

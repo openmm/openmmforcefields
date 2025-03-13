@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Monovalent ion parameters for TIP3P water from Aqvist (adapeted) in parm99.dat -->
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="parm/frcmod.ionsff99_tip3p" md5hash="7a95d0238cc433073d73ad21b478f7d0" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ionsff99_tip3p">parm/frcmod.ionsff99_tip3p</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ionsff99_tip3p">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="parm/frcmod.ionsff99_tip3p" md5hash="7a95d0238cc433073d73ad21b478f7d0" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionsff99_tip3p</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ionsff99_tip3p-Li+" element="Li" mass="6.94" name="ionsff99_tip3p-Li+"/><!--          0.029          lithium   pol: J. Phys. Chem. 11,1541,(1978) -->

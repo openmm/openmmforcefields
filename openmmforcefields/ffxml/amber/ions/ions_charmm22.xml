@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Ion parameters from CHARMM22. Beglov D & Roux B (1994) J. Chem. Phys. 100, 9050-9063. -->
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="parm/frcmod.ions_charmm22" md5hash="011995a91088b5185d05794261faa582" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions_charmm22">parm/frcmod.ions_charmm22</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions_charmm22">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="parm/frcmod.ions_charmm22" md5hash="011995a91088b5185d05794261faa582" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions_charmm22</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions_charmm22-Na+" element="Na" mass="22.99" name="ions_charmm22-Na+"/><!--          0.250               sodium -->

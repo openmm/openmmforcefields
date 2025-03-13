@@ -5,6 +5,11 @@ import glob
 import datetime
 import subprocess
 
+# Can't reliably get AmberTools version from installation path, and failing to
+# do so silently inserts filesystem paths into the generated force field file,
+# so specify it here.  This should be updated as necessary.
+AMBERTOOLS_VERSION = "24.8"
+
 # from openmm import unit
 
 kilocalorie_to_kilojoule = 4.184  # 1.0*unit.kilocalorie/unit.kilojoule
@@ -85,7 +90,6 @@ def amber_frcmod_ions_to_openmm_xml(
         setname = setname.replace("frcmod.", "")
 
     date_generated = datetime.datetime.now().strftime("%Y-%m-%d")
-    ambertools_version = re.sub(r".*/ambertools-([^/]*)/.*", r"\1", frcmod_file)
     frcmod_file_short = re.sub(r".*/dat/leap/", "", frcmod_file)
     atomic_ions_file_short = re.sub(r".*/dat/leap/", "", atomic_ions_file)
 
@@ -99,11 +103,11 @@ def amber_frcmod_ions_to_openmm_xml(
     output_lines.append(f"    <DateGenerated>{date_generated}</DateGenerated>")
     output_lines.append(
         f'    <Source Source="{frcmod_file_short}" md5hash="{md5sum(frcmod_file)}" '
-        f'sourcePackage="AmberTools" sourcePackageVersion="{ambertools_version}">{frcmod_file_short}</Source>'
+        f'sourcePackage="AmberTools" sourcePackageVersion="{AMBERTOOLS_VERSION}">{frcmod_file_short}</Source>'
     )
     output_lines.append(
         f'    <Source Source="{atomic_ions_file_short}" md5hash="{md5sum(atomic_ions_file)}" '
-        f'sourcePackage="AmberTools" sourcePackageVersion="{ambertools_version}">{atomic_ions_file_short}</Source>'
+        f'sourcePackage="AmberTools" sourcePackageVersion="{AMBERTOOLS_VERSION}">{atomic_ions_file_short}</Source>'
     )
     output_lines.append("  </Info>")
 

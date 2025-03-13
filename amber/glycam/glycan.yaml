@@ -4,7 +4,7 @@
 
 - MODE: LEAPRC
 - sourcePackage: AmberTools
-  sourcePackageVersion: 20.15
+  sourcePackageVersion: "24.8"
 - Source: glycam/leaprc.GLYCAM_06j-1
   Reference:
   - >-

@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of divalent to tetravalent ions for TIP4P/EW water model (12-6 HFE set) -->
-    <DateGenerated>2025-03-10</DateGenerated>
-    <Source Source="parm/frcmod.ions234lm_hfe_tip4pew" md5hash="8409f4a567b72ca99a35153b02e08d8f" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions234lm_hfe_tip4pew">parm/frcmod.ions234lm_hfe_tip4pew</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="/Users/pretti/miniforge3/envs/ommff-amber/dat/leap/parm/frcmod.ions234lm_hfe_tip4pew">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-03-13</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_hfe_tip4pew" md5hash="8409f4a567b72ca99a35153b02e08d8f" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions234lm_hfe_tip4pew</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions234lm_hfe_tip4pew-Be2+" element="Be" mass="9.01" name="ions234lm_hfe_tip4pew-Be2+"/>
