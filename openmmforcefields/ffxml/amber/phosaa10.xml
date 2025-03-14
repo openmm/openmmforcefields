@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="leaprc.phosaa10" md5hash="99ff5cc879e5461e52852acbb7b6e312" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.phosaa10</Source>
     <Reference>Homeyer N., Horn A. H. C., Lanig H., Sticht H. (2006). AMBER force-field parameters for phosphorylated amino acids in different protonation states: phosphoserine, phosphothreonine, phosphotyrosine, and phosphohistidine. J. Mol. Model. 12, 281. Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates. J. Chem. Theory Comput. 8, 4405-4412.</Reference>
   </Info>

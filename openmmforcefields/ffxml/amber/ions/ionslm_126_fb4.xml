@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of atomic ions for the TIP4P-FB water model (12-6 set) -->
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="parm/frcmod.ionslm_126_fb4" md5hash="a61544aaeedc659b9101c33b9f728e3f" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionslm_126_fb4</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>

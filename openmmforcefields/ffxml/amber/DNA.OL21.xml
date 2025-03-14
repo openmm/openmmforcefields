@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="./files/DNA.OL21/leaprc.DNA.OL21" md5hash="0d0c0ad847034aa80e4dacd33830b168" sourcePackage="AmberTools" sourcePackageVersion="24.8">./files/DNA.OL21/leaprc.DNA.OL21</Source>
     <Reference>Zgarbova, M.; Sponer, J.; Jurecka, P. Z-DNA as a Touchstone for Additive Empirical Force Fields and a Refinement of the Alpha/Gamma DNA Torsions for AMBER. J. Chem. Theory Comput., 2021, 17, 6292-6301.</Reference>
   </Info>

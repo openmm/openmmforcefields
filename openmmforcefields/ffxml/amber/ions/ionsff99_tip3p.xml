@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
     <!-- Monovalent ion parameters for TIP3P water from Aqvist (adapeted) in parm99.dat -->
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="parm/frcmod.ionsff99_tip3p" md5hash="7a95d0238cc433073d73ad21b478f7d0" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionsff99_tip3p</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>

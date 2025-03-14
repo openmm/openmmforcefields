@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
     <!-- Ion parameters from CHARMM22. Beglov D & Roux B (1994) J. Chem. Phys. 100, 9050-9063. -->
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="parm/frcmod.ions_charmm22" md5hash="011995a91088b5185d05794261faa582" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions_charmm22</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>

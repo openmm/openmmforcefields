@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-13</DateGenerated>
+    <DateGenerated>2025-03-14</DateGenerated>
     <Source Source="leaprc.protein.ff03.r1" md5hash="0bc4d048031a1f64ea910a6266ba6b51" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.protein.ff03.r1</Source>
     <Reference>Duan, Y., Wu, C., Chowdhury, S., Lee, M.C., Xiong, G., Zhang, W., Yang, R., Cieplak, P., Luo, R., Lee, T., et al. (2003). A point-charge force field for molecular mechanics simulations of proteins based on condensed-phase quantum mechanical calculations. J. Comput. Chem. 24, 1999-2012.</Reference>
     <Reference>Lee, M.C., and Duan, Y. (2004). Distinguish protein decoys by Using a scoring function based on a new AMBER force field, short molecular dynamics simulations, and the generalized born solvent model. Proteins 55, 620-634.</Reference>
