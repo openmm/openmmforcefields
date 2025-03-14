@@ -38,6 +38,14 @@ def test_ffxml_import(filename):
         # Must be used with ff14SB.xml
         filenames = ["amber/ff14SB.xml", "amber/phosaa14SB.xml"]
         app.ForceField(*filenames)
+    elif filename == "amber/phosfb18.xml":
+        # Must be used with protein.fb15.xml
+        filenames = ["amber/protein.fb15.xml", "amber/phosfb18.xml"]
+        app.ForceField(*filenames)
+    elif filename == "amber/phosaa19SB.xml":
+        # Must be used with ff19SB.xml
+        filenames = ["amber/protein.ff19SB.xml", "amber/phosaa19SB.xml"]
+        app.ForceField(*filenames)
     elif filename == "amber/GLYCAM_06j-1.xml":
         # Must be used with protein.ff14SB.xml
         filenames = ["amber/protein.ff14SB.xml", "amber/GLYCAM_06j-1.xml"]
