@@ -9,7 +9,7 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 ## Supported force fields
 
-**AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 20.15 from [conda-forge](https://anaconda.org/conda-forge/ambertools/files) (except ff19SB---see FAQ below), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.11 (GAFF 2.x).
+**AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 24.8 from [conda-forge](https://anaconda.org/conda-forge/ambertools/files), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.2.20 (GAFF 2.x).
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [July 2020 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
@@ -149,14 +149,14 @@ You can check which GAFF version is in use with
 
 ```pycon
 >>> gaff.gaff_version
-'2.11'
+'2.2.20'
 ````
 
 Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 
 ```python
 molecules = Molecule.from_file("molecules.sdf")
-gaff = GAFFTemplateGenerator(molecules=molecules, forcefield="gaff-2.11")
+gaff = GAFFTemplateGenerator(molecules=molecules, forcefield="gaff-2.2.20")
 ```
 You can also add molecules to the generator later, even after the generator has been registered:
 ```python
@@ -166,7 +166,7 @@ gaff.add_molecules([molecule1, molecule2])
 To check which GAFF versions are supported, examine the `INSTALLED_FORCEFIELDS` attribute:
 ```pycon
 >>> print(GAFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
 ```
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 ```python
@@ -335,7 +335,7 @@ The `openmmforcefields` package provides the `openmmforcefields.generators.Syste
 
 ### Using `SystemGenerator` to automate the use of AMBER force fields with GAFF, OpenFF, or espaloma for small molecule parameterization
 
-Here's an example that uses GAFF 2.11 along with the new `ff14SB` generation of AMBER force fields (and compatible solvent models) to generate an OpenMM `System` object from an [Open Force Field `Topology`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology) object:
+Here's an example that uses GAFF 2.2.20 along with the new `ff14SB` generation of AMBER force fields (and compatible solvent models) to generate an OpenMM `System` object from an [Open Force Field `Topology`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology) object:
 ```python
 # Define the keyword arguments to feed to ForceField
 from openmm import unit
@@ -355,7 +355,7 @@ system_generator = SystemGenerator(
         "amber/ff14SB.xml",
         "amber/tip3p_standard.xml",
     ],
-    small_molecule_forcefield="gaff-2.11",
+    small_molecule_forcefield="gaff-2.2.20",
     forcefield_kwargs=forcefield_kwargs,
     cache="db.json",
 )
@@ -383,7 +383,7 @@ system_generator = SystemGenerator(
 )
 ```
 
-To use the [Open Force Field `openff-1.2.0`](https://github.com/openforcefield/openff-forcefields), an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.11, we would have instead specified `small_molecule_forcefield='openff-1.2.0'`.
+To use the [Open Force Field `openff-1.2.0`](https://github.com/openforcefield/openff-forcefields), an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-1.2.0'`.
 
 To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
 
@@ -395,7 +395,7 @@ To use [espaloma](https://github.com/choderalab/espaloma) for assigning small mo
 
 **Q:** Do you support the new [Amber ff19SB protein force field](https://chemrxiv.org/articles/ff19SB_Amino-Acid_Specific_Protein_Backbone_Parameters_Trained_Against_Quantum_Mechanics_Energy_Surfaces_in_Solution/8279681/1)?
 <br>
-**A:** [ParmEd](http://github.com/parmed/parmed), which is used to convert these force fields to OpenMM format, [does not currently support the conversion of AMBER CMAP forces to OpenMM](https://github.com/ParmEd/ParmEd/issues/1066), so we do not yet support this force field, but hope to add support soon.
+**A:** Support for this has now been added to openmmforcefields and ff19SB should be available in the next release of the package.
 
 **Q:** Do you plan to support other small molecule force fields?
 <br>
