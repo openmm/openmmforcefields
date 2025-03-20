@@ -794,6 +794,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 continue
             if "opc" in small_molecule_forcefield:
                 continue
+            if "spce" in small_molecule_forcefield:
+                continue
 
             print(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
@@ -1063,11 +1065,13 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
                 continue
             if "opc" in small_molecule_forcefield:
                 continue
+            if "spce" in small_molecule_forcefield:
+                continue
 
             # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
             # due to an equilibrium angle > \pi
             # See https://github.com/openmm/openmm/issues/3185
-            if "openff-2.0.0-rc.1" not in small_molecule_forcefield:
+            if "openff-2.0.0-rc.1" in small_molecule_forcefield:
                 continue
 
             print(f"Testing energies for {small_molecule_forcefield}...")
