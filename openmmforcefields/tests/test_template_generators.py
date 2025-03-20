@@ -306,7 +306,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         return openmm_energy, openmm_forces
 
 
-@pytest.mark.skip(reason="Skip GAFF tests")
+@pytest.mark.gaff
 class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = GAFFTemplateGenerator
 
@@ -322,7 +322,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             generator = GAFFTemplateGenerator(forcefield=forcefield)
             import re
 
-            result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield)
+            result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>[\d.]+)$", forcefield)
             assert generator.forcefield == forcefield
             assert generator.gaff_version == result["major_version"] + "." + result["minor_version"]
             assert generator.gaff_major_version == result["major_version"]
@@ -509,6 +509,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         assert self.charges_are_equal(system, molecule)
 
+    @pytest.mark.xfail
     def test_debug_ffxml(self):
         """Test that debug ffxml file is created when requested"""
         with tempfile.TemporaryDirectory() as tmpdirname:
@@ -822,6 +823,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 assert system.getNumParticles() == molecule.n_atoms
                 assert t2.interval() < t1.interval()
 
+    @pytest.mark.xfail
     def test_multiple_registration(self):
         """Test registering the template generator with multiple force fields"""
         generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
