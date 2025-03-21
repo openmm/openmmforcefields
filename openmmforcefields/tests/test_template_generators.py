@@ -55,7 +55,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         """
         molecules = [molecule for molecule in molecules if molecule.n_atoms <= max_atoms]
 
-        return random.choice(molecules, min(len(molecules), max_molecules))
+        return random.sample(molecules, min(len(molecules), max_molecules))
 
     def setUp(self):
         from openff.units import unit
