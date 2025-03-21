@@ -1067,7 +1067,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
             # due to an equilibrium angle > \pi
             # See https://github.com/openmm/openmm/issues/3185
-            if "openff-2.0.0-rc.1" not in small_molecule_forcefield:
+            if "openff-2.0.0-rc.1" in small_molecule_forcefield:
                 continue
 
             print(f"Testing energies for {small_molecule_forcefield}...")
