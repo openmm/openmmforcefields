@@ -306,7 +306,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         return openmm_energy, openmm_forces
 
 
-@pytest.mark.skip(reason="Skip GAFF tests")
+@pytest.mark.rungaff
 class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = GAFFTemplateGenerator
 
