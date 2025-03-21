@@ -794,6 +794,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 continue
             if "opc" in small_molecule_forcefield:
                 continue
+            if "spce" in small_molecule_forcefield:
+                continue
 
             print(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
