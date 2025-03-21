@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+import random
 import copy
 import logging
 import os
@@ -8,9 +9,7 @@ import unittest
 import numpy as np
 import openmm
 import pytest
-from openff.toolkit.topology import Molecule
-from openff.toolkit.typing.engines.smirnoff import ForceField as OFFForceField
-from openff.units import unit as OFFUnit
+from openff.toolkit import Molecule, ForceField as OFFForceField, unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
 
 from openmmforcefields.generators import (
@@ -30,30 +29,33 @@ CI = "CI" in os.environ
 
 
 class TemplateGeneratorBaseCase(unittest.TestCase):
-    def filter_molecules(self, molecules):
+    def filter_molecules(
+        self,
+        molecules: list[Molecule],
+        max_molecules: int = 50,
+        max_atoms: int = 40,
+    ) -> list[Molecule]:
         """
-        Filter molecules to speed up tests, especially on travis.
+        Filter molecules, randomly selected from input, for the purpose of running fewer tests.
 
         Parameters
         ----------
-        molecules : list of openff.toolkit.topology.Molecule
+        molecules
             The input list of molecules to be filtered
+        max_molecules
+            The maximum number of molecules to return
+        max_atoms
+            The maximum number of atoms in a molecule to not filter out
 
         Returns
         -------
-        molecules : list of openff.toolkit.topology.Molecule
+        molecules
             The filtered list of molecules to be filtered
 
         """
-        # TODO: Eliminate molecules without fully-specified stereochemistry
-        # Select some small molecules for fast testing
-        MAX_ATOMS = 40
-        molecules = [molecule for molecule in molecules if molecule.n_atoms < MAX_ATOMS]
-        # Cut down number of tests for continuous integration
-        MAX_MOLECULES = 50 if not CI else 4
-        molecules = molecules[:MAX_MOLECULES]
+        molecules = [molecule for molecule in molecules if molecule.n_atoms <= max_atoms]
 
-        return molecules
+        return random.choice(molecules, min(len(molecules), max_molecules))
 
     def setUp(self):
         from openff.units import unit
@@ -651,9 +653,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 molecules = [molecules]
 
             print(f"Read {len(molecules)} molecules from {ligand_sdf_filename}")
-            # molecules = self.filter_molecules(molecules)
-            MAX_MOLECULES = len(molecules) if not CI else 3
-            molecules = molecules[:MAX_MOLECULES]
+
+            molecules = self.filter_molecules(molecules, max_molecules=3 if CI else len(molecules))
+
             print(f"{len(molecules)} molecules remain after filtering")
 
             # Create template generator with local cache
@@ -729,11 +731,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 ligand_structures = [ligand_structures]
             assert len(ligand_structures) == len(molecules)
 
-            # Filter molecules
-            MAX_MOLECULES = 6 if not CI else 3
-            molecules = molecules[:MAX_MOLECULES]
-            ligand_structures = ligand_structures[:MAX_MOLECULES]
-            print(f"{len(molecules)} molecules remain after filtering")
+            ligand_structures = self.filter_molecules(molecules, max_molecules=3 if CI else 6)
+
+            print(f"{len(ligand_structures)} molecules remain after filtering")
 
             # Create complexes
             complex_structures = [(protein_structure + ligand_structure) for ligand_structure in ligand_structures]
