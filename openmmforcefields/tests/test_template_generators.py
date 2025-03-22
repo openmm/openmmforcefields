@@ -62,6 +62,34 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         return random.sample(molecules, min(len(molecules), max_molecules))
 
+    def _filter_openff(self, force_field) -> bool:
+        """
+        Return True only for Parsley and force fields among SMIRNOFF force fields.
+
+        Skips over (returns False) smirnoff99Frosst, ff14SB, water models, and 2.0.0rc1.
+        """
+        if "ff14sb" in forcefield:
+            return False
+        if "tip" in molecule_forcefield:
+            return False
+        if "opc" in molecule_forcefield:
+            return False
+        if "spce" in molecule_forcefield:
+            return False
+
+        # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
+        # due to an equilibrium angle > \pi
+        # See https://github.com/openmm/openmm/issues/3185
+        if "openff-2.0.0-rc.1" in small_molecule_forcefield:
+            return False
+
+        # smirnoff99Frosst is older and produces some weird geometries with some molecules
+        # it's not so relevant today so skip over it in testing, though users can access it
+        if "smirnoff99" in force_field:
+            return False
+
+        return True
+
     def setUp(self):
         from openff.units import unit
 
@@ -798,16 +826,10 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         """Test parameterizing molecules with template generator for all supported force fields"""
         # Test all supported small molecule force fields
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
-            if "ff14sb" in small_molecule_forcefield:
-                continue
-            if "tip" in small_molecule_forcefield:
-                continue
-            if "opc" in small_molecule_forcefield:
-                continue
-            if "spce" in small_molecule_forcefield:
-                continue
+            if not self._filter_openff(small_molecule_forcefield):
+                _logger.debug(f"skipping {small_molecule_forcefield}")
 
-            print(f"Testing {small_molecule_forcefield}")
+            _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, forcefield=small_molecule_forcefield)
@@ -1069,22 +1091,10 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            if "ff14sb" in small_molecule_forcefield:
-                continue
-            if "tip" in small_molecule_forcefield:
-                continue
-            if "opc" in small_molecule_forcefield:
-                continue
-            if "spce" in small_molecule_forcefield:
-                continue
+            if not self._filter_openff(small_molecule_forcefield):
+                _logger.debug(f"skipping {small_molecule_forcefield}")
 
-            # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
-            # due to an equilibrium angle > \pi
-            # See https://github.com/openmm/openmm/issues/3185
-            if "openff-2.0.0-rc.1" in small_molecule_forcefield:
-                continue
-
-            print(f"Testing energies for {small_molecule_forcefield}...")
+            _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
@@ -1124,16 +1134,10 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
         # Test all supported SMIRNOFF force fields
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            if "ff14sb" in small_molecule_forcefield:
-                continue
-            if "tip" in small_molecule_forcefield:
-                continue
-            if "opc" in small_molecule_forcefield:
-                continue
-            if "spce" in small_molecule_forcefield:
-                continue
+            if not self._filter_openff(small_molecule_forcefield):
+                _logger.debug(f"skipping {small_molecule_forcefield}")
 
-            print(f"Testing energies for {small_molecule_forcefield}...")
+            _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
             generator = SMIRNOFFTemplateGenerator(molecules=[molecule], forcefield=small_molecule_forcefield)
