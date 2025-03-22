@@ -27,11 +27,14 @@ CI = "CI" in os.environ
 # Tests
 ################################################################################
 
+
 class EnergyError(BaseException):
     pass
 
+
 class ForceError(BaseException):
     pass
+
 
 class TemplateGeneratorBaseCase(unittest.TestCase):
     def filter_molecules(
@@ -68,19 +71,19 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         Skips over (returns False) smirnoff99Frosst, ff14SB, water models, and 2.0.0rc1.
         """
-        if "ff14sb" in forcefield:
+        if "ff14sb" in force_field:
             return False
-        if "tip" in molecule_forcefield:
+        if "tip" in force_field:
             return False
-        if "opc" in molecule_forcefield:
+        if "opc" in force_field:
             return False
-        if "spce" in molecule_forcefield:
+        if "spce" in force_field:
             return False
 
         # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
         # due to an equilibrium angle > \pi
         # See https://github.com/openmm/openmm/issues/3185
-        if "openff-2.0.0-rc.1" in small_molecule_forcefield:
+        if "openff-2.0.0-rc.1" in force_field:
             return False
 
         # smirnoff99Frosst is older and produces some weird geometries with some molecules
