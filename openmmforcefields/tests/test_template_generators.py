@@ -1063,7 +1063,12 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         platform = openmm.Platform.getPlatformByName("Reference")
         context = openmm.Context(system, integrator, platform)
         context.setPositions(molecule.conformers[0].to_openmm())
+
+        # RDKit-generated conformer is occassionally a bad starting point for dynamics,
+        # so minimize with MM first, see https://github.com/openmm/openmmforcefields/pull/370#issuecomment-2749237209
+        openmm.LocalEnergyMinimizer.minimize(context)
         integrator.step(nsteps)
+
         # Copy the molecule, storing new conformer
         new_molecule = copy.deepcopy(molecule)
         new_positions = context.getState(getPositions=True).getPositions()
