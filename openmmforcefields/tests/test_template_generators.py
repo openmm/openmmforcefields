@@ -65,7 +65,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         return random.sample(molecules, min(len(molecules), max_molecules))
 
-    def _filter_openff(self, force_field) -> bool:
+    def _filter_openff(self, force_field: str) -> bool:
         """
         Return True only for Parsley and force fields among SMIRNOFF force fields.
 
@@ -831,6 +831,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
             if not self._filter_openff(small_molecule_forcefield):
                 _logger.debug(f"skipping {small_molecule_forcefield}")
+                continue
 
             _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
@@ -1096,6 +1097,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if not self._filter_openff(small_molecule_forcefield):
                 _logger.debug(f"skipping {small_molecule_forcefield}")
+                continue
 
             _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
@@ -1139,6 +1141,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         for small_molecule_forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if not self._filter_openff(small_molecule_forcefield):
                 _logger.debug(f"skipping {small_molecule_forcefield}")
+                continue
 
             _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
