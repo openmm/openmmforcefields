@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS build_charmm_base
+FROM ubuntu:24.04 AS build_charmm_base
 RUN \
     apt-get update -y && \
     apt-get install -y libgfortran5 libgomp1
