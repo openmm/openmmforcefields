@@ -1,0 +1,33 @@
+name: DHFR test 2 (protein-only)
+
+psf_file: step3_pbcsetup.psf
+pdb_file: step3_pbcsetup.pdb
+
+charmm_files:
+  - top_all36_prot.rtf
+  - par_all36m_prot.prm
+  - toppar_water_ions.str
+charmm_commands:
+  - nbonds atom ewald pmew fftx 64 ffty 64 fftz 64 kappa 0.32 order 6 cutnb 12 vdw vswitched ctonnb 10 ctofnb 12
+
+ffxml_files:
+  - charmm36_protein.xml
+  - waters_ions_default.xml
+create_system_options:
+  flexibleConstraints: true
+  nonbondedCutoff: [12, angstrom]
+  nonbondedMethod: PME
+  removeCMMotion: false
+  rigidWater: true
+  switchDistance: [10, angstrom]
+ffxml_dispersion_correction: false
+openmm_pme:
+  fftx: 64
+  ffty: 64
+  fftz: 64
+  kappa: 0.32
+
+box:
+  a: [80, angstrom]
+  b: [80, angstrom]
+  c: [80, angstrom]

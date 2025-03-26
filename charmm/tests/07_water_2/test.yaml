@@ -1,0 +1,16 @@
+name: Water dimer in vacuum
+
+psf_file: step1_pdbreader.psf
+pdb_file: step1_pdbreader.pdb
+
+charmm_files:
+  - toppar_water_ions.str
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
+
+ffxml_files:
+  - waters_ions_default.xml
+create_system_options:
+  flexibleConstraints: true
+  removeCMMotion: false
+  rigidWater: true
