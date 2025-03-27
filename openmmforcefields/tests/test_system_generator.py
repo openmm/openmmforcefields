@@ -187,7 +187,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -221,7 +221,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -268,7 +268,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -323,7 +323,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -356,7 +356,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -381,7 +381,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],
@@ -416,7 +416,7 @@ class TestSystemGenerator:
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
         [
-            pytest.param("gaff-2.11", marks=pytest.mark.gaff),
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
             "openff-2.0.0",
             pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
         ],

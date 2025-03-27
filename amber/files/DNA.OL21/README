@@ -1,0 +1,5 @@
+The ff-nucleic-OL21.lib has 3 extra entries in the velocities table for DTN.
+ParmEd fails due to this even though they are ignored by Amber.  This may not
+actually be a ParmEd bug since the entries shouldn't be in the file.  Here the
+relevant files are copied, with the final 3 lines removed from
+ff-nucleic-OL21.lib.

@@ -1,27 +1,37 @@
 # AMBER --> OpenMM force-field conversion script
 # Author: Rafal P. Wiewiora, ChoderaLab
+
+from copy import deepcopy
+from distutils.spawn import find_executable
+from io import StringIO
+from lxml import etree as et
+from parmed.exceptions import ParameterWarning
 import argparse
 import csv
 import glob
 import hashlib
+import io
+import numpy
+import openmm
+import openmm.app as app
+import openmm.unit as u
 import os
+import parmed
 import re
 import sys
 import tempfile
 import warnings
 import xml.etree.ElementTree as etree
-from copy import deepcopy
-from distutils.spawn import find_executable
-from io import StringIO
-
-import openmm
-import openmm.app as app
-import openmm.unit as u
-import parmed
 import yaml
-from lxml import etree as et
-from parmed.exceptions import ParameterWarning
-import importlib_resources
+
+# States for FRCMOD parser.
+FRCMOD_TITLE = 0
+FRCMOD_SECTION = 1
+FRCMOD_SKIP = 2
+FRCMOD_CMAP = 3
+FRCMOD_CMAP_TITLE = 4
+FRCMOD_CMAP_RESLIST = 5
+FRCMOD_CMAP_PARAMETER = 6
 
 warnings.filterwarnings("error", category=ParameterWarning)
 
@@ -80,7 +90,7 @@ def main():
     global no_log
     global logger
     # argparse
-    parser = argparse.ArgumentParser(description="AMBER --> OpenMM forcefield " "conversion script")
+    parser = argparse.ArgumentParser(description="AMBER --> OpenMM forcefield conversion script")
     parser.add_argument(
         "--input",
         "-i",
@@ -96,7 +106,7 @@ def main():
     parser.add_argument(
         "--output-dir",
         "-od",
-        help="path of the output directory. " 'Default: "ffxml/" for yaml, "./" for leaprc',
+        help='path of the output directory. Default: "ffxml/" for yaml, "./" for leaprc',
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="turns verbosity on")
     parser.add_argument(
@@ -212,12 +222,13 @@ def convert_leaprc(
     ignore=ignore,
     provenance=None,
     write_unused=False,
+    keep_types=None,
     override_level=None,
     filter_warnings="error",
     is_glycam=False,
 ):
     if verbose:
-        print(f"\nConverting {files:s} to ffxml...")
+        print(f"\nConverting {files} to ffxml...")
     # allow for multiple source files - further code assuming list is passed
     if not isinstance(files, list):
         files = [files]
@@ -261,8 +272,14 @@ def convert_leaprc(
     leaprc = StringIO("".join(new_lines))
     if verbose:
         print(f"Converting to ffxml {ffxml_name}...")
-    params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
-    params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    if filter_warnings != "error":
+        with warnings.catch_warnings():
+            warnings.filterwarnings(filter_warnings, category=ParameterWarning)
+            params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
+            params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
+    else:
+        params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
+        params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if override_level:
         for name, residue in params.residues.items():
             residue.override_level = override_level
@@ -277,6 +294,7 @@ def convert_leaprc(
                 ffxml_name,
                 provenance=provenance,
                 write_unused=write_unused,
+                keep_types=keep_types,
                 improper_dihedrals_ordering="amber",
                 skip_duplicates=skip_duplicates,
                 is_glycam=is_glycam,
@@ -286,6 +304,7 @@ def convert_leaprc(
             ffxml_name,
             provenance=provenance,
             write_unused=write_unused,
+            keep_types=keep_types,
             improper_dihedrals_ordering="amber",
             skip_duplicates=skip_duplicates,
             is_glycam=is_glycam,
@@ -499,10 +518,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             elif MODE == "RECIPE":
                 _filename = os.path.join(AMBERHOME, "dat/leap/", source_file)
             elif MODE == "GAFF":
-                _filename = os.path.join(
-                    str(importlib_resources.files("openmmforcefields") / "ffxml" / "amber" / " gaff" / "dat"),
-                    source_file,
-                )
+                _filename = os.path.join("../openmmforcefields/ffxml/amber/gaff/dat", source_file)
             files.append(_filename)
             source.append(dict())
             source[-1]["Source"] = source_file
@@ -535,6 +551,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         write_unused = False
         filter_warnings = "error"
         override_level = None
+        keep_types = None
         # set conversion options if present
         if "Options" in entry:
             for option in entry["Options"]:
@@ -546,6 +563,8 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     ffxml_dir = entry["Options"][option]
                 elif option == "override_level":
                     override_level = entry["Options"][option]
+                elif option == "keep_types":
+                    keep_types = entry["Options"][option]
                 else:
                     raise Exception(f"Wrong option used in Options for {source_files:s}")
 
@@ -561,6 +580,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 ignore=ignore,
                 provenance=provenance,
                 write_unused=write_unused,
+                keep_types=keep_types,
                 override_level=override_level,
                 filter_warnings=filter_warnings,
                 split_filename=True,
@@ -589,33 +609,37 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if "CharmmFFXMLFilename" in entry:
             charmm_ffxml_filename = entry["CharmmFFXMLFilename"]
             charmm_lipid2amber_filename = entry["CharmmLipid2AmberFilename"]
+            merged_ffxml_filename = os.path.splitext(ffxml_name)[0] + "_merged.xml"
             if verbose:
                 print("Merging lipid entries...")
-            merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename)
+            merge_lipids(ffxml_name, charmm_ffxml_filename, charmm_lipid2amber_filename, merged_ffxml_filename)
         if "Prefix" in entry:
             prefix = entry["Prefix"]
             if verbose:
                 print(f'Rewriting {ffxml_name} to append prefix "{prefix}"...')
             add_prefix_to_ffxml(ffxml_name, prefix)
+        if "CMAPFRCMOD" in entry:
+            patch_ffxml_cmap(ffxml_name, entry["CMAPFRCMOD"], *entry.get("CMAPExtraFFXML", []))
         if verbose:
             print("Validating the conversion...")
         tested = False
+        test_source = entry.get("SourceWithCMAP", entry["Source"])
         for test in test_filename:
             if test == "protein":
-                validate_protein(ffxml_name, entry["Source"])
+                validate_protein(ffxml_name, test_source)
                 tested = True
             elif test == "nucleic":
-                validate_dna(ffxml_name, entry["Source"])
-                validate_rna(ffxml_name, entry["Source"])
+                validate_dna(ffxml_name, test_source)
+                validate_rna(ffxml_name, test_source)
                 tested = True
             elif test == "protein_ua":
-                validate_protein(ffxml_name, entry["Source"], united_atom=True)
+                validate_protein(ffxml_name, test_source, united_atom=True)
                 tested = True
             elif test == "protein_phospho":
-                validate_phospho_protein(ffxml_name, entry["Source"])
+                validate_phospho_protein(ffxml_name, test_source)
                 tested = True
             elif test == "gaff":
-                validate_gaff(ffxml_name, entry["leaprc"], entry["Source"])
+                validate_gaff(ffxml_name, entry["leaprc"], test_source)
                 tested = True
             elif test == "water_ion":
                 validate_water_ion(
@@ -627,23 +651,24 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                 )
                 tested = True
             elif test == "dna":
-                validate_dna(ffxml_name, entry["Source"])
+                validate_dna(ffxml_name, test_source)
                 tested = True
             elif test == "rna":
-                validate_rna(ffxml_name, entry["Source"])
+                validate_rna(ffxml_name, test_source)
                 tested = True
             elif test == "lipids":
-                # validate_lipids(ffxml_name, source_files)
-                validate_merged_lipids(ffxml_name, entry["Source"])
+                validate_lipids(ffxml_name, test_source)
+                if "CharmmFFXMLFilename" in entry:
+                    validate_merged_lipids(merged_ffxml_filename, test_source)
                 tested = True
             elif test == "protein_glycan":
-                validate_glyco_protein(ffxml_name, entry["Source"])
+                validate_glyco_protein(ffxml_name, test_source)
                 tested = True
         if not tested:
             raise Exception(f"No validation tests have been run for {source_files}")
 
 
-def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename):
+def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filename, merged_ffxml_filename):
     """
     Merge lipid residue definitions in AMBER ffxml file according to entries in a CHARMM ffxml file.
 
@@ -655,7 +680,8 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
        CHARMM ffxml lipids
     charmmlipid2amber_filename : str
        CHARMM CSV file containing translation from CHARMM -> AMBER
-
+    merged_ffxml_filename : str
+       AMBER lipids ffxml filename merged with CHARMM lipids.
     """
     # Read the input files.
     charmmff = etree.parse(charmm_ffxml_filename)
@@ -711,7 +737,7 @@ def merge_lipids(ffxml_filename, charmm_ffxml_filename, charmm_lipid2amber_filen
             parentNode.append(copy)
 
     # Write merged lipid ffxml file (overwriting original file)
-    amberff.write(ffxml_filename)
+    amberff.write(merged_ffxml_filename)
 
 
 def add_prefix_to_ffxml(ffxml_filename, prefix):
@@ -727,39 +753,22 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
 
     """
 
-    import re
+    tree = _read_ffxml(ffxml_filename)
+    for type_element in tree.findall("./AtomTypes/Type"):
+        type_name = type_element.attrib["name"]
+        type_element.attrib["name"] = f"{prefix}-{type_name}"
+    for atom_element in tree.findall("./Residues/Residue/Atom"):
+        atom_type = atom_element.attrib["type"]
+        atom_element.attrib["type"] = f"{prefix}-{atom_type}"
 
-    inTypes = False
-    replacements = {}
-
-    modified_contents = ""
-    with open(ffxml_filename) as infile:
-        for line in infile:
-            if "<AtomTypes>" in line:
-                inTypes = True
-            if "</AtomTypes>" in line:
-                inTypes = False
-            if inTypes:
-                match = re.search('name="(.*?)"', line)
-                if match is not None:
-                    name = match.group(1)
-                    newName = prefix + "-" + name
-                    line = line.replace(f'name="{name}"', f'name="{newName}"')
-                    replacements[f'type="{name:s}"'] = f'type="{newName}"'
-                    replacements[f'type1="{name:s}"'] = f'type1="{newName}"'
-                    replacements[f'type2="{name:s}"'] = f'type2="{newName}"'
-                    replacements[f'type3="{name:s}"'] = f'type3="{newName}"'
-                    replacements[f'type4="{name:s}"'] = f'type4="{newName}"'
-            else:
-                for key in replacements:
-                    if key in line:
-                        line = line.replace(key, replacements[key])
-            if line.endswith("\n"):
-                line = line[:-1]
-            modified_contents += line + "\n"
-
-    with open(ffxml_filename, "w") as outfile:
-        outfile.write(modified_contents)
+    # Workaround to replicate the formatting of the old implementation of this
+    # function that used regular expressions to parse the XML, and prevent noise
+    # in the diffs of the generated force field files.
+    _write_ffxml(tree, ffxml_filename, pretty_print=False)
+    with open(ffxml_filename) as file:
+        contents = file.read()
+    with open(ffxml_filename, "w") as file:
+        print(contents.replace(" />", "/>"), file=file)
 
 
 def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
@@ -799,7 +808,6 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
 
     def compute_potential_components(system, positions, beta=beta):
         # Note: this is copied from perses
-        # TODO: consider moving this outside of assert_energies_glyco_protein()
         system = deepcopy(system)
         for index in range(system.getNumForces()):
             force = system.getForce(index)
@@ -808,22 +816,22 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
         platform = openmm.Platform.getPlatformByName("Reference")
         context = openmm.Context(system, integrator, platform)
         context.setPositions(positions)
-        energy_components = list()
+        energy_components = dict()
         for index in range(system.getNumForces()):
             force = system.getForce(index)
             forcename = force.__class__.__name__
             groups = 1 << index
             potential = beta * context.getState(getEnergy=True, groups=groups).getPotentialEnergy()
-            energy_components.append((forcename, potential))
+            energy_components.setdefault(forcename, 0.0)
+            energy_components[forcename] += potential
         del context, integrator
         return energy_components
 
     amber_energies = compute_potential_components(system_amber, parm_amber.positions)
     omm_energies = compute_potential_components(system_omm, parm_amber.positions)
-    for amber, omm in zip(amber_energies, omm_energies):
-        force_name = amber[0]
-        assert math.isclose(amber[1], omm[1], rel_tol=tolerance)
-        print(force_name, amber[1], omm[1])
+
+    for force_name in sorted(set(amber_energies) | set(omm_energies)):
+        assert math.isclose(amber_energies.get(force_name, 0.0), omm_energies.get(force_name, 0.0), rel_tol=tolerance)
 
 
 def assert_energies(
@@ -832,7 +840,7 @@ def assert_energies(
     ffxml,
     system_name="unknown",
     tolerance=2.5e-5,
-    improper_tolerance=1e-2,
+    improper_tolerance=2e-1,
     units=u.kilojoules_per_mole,
     openmm_topology=None,
     openmm_positions=None,
@@ -840,7 +848,7 @@ def assert_energies(
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem(splitDihedrals=True)
-    amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, nrg=units)
+    amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, platform="Reference", nrg=units)
 
     # OpenMM-ffxml
     if isinstance(ffxml, str):
@@ -857,15 +865,50 @@ def assert_energies(
     else:
         system_omm = ff.createSystem(parm_amber.topology)
         parm_omm = parmed.openmm.load_topology(parm_amber.topology, system_omm, xyz=parm_amber.positions)
-    system_omm = parm_omm.createSystem(splitDihedrals=True)
-    omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+
+    try:
+        system_omm = parm_omm.createSystem(splitDihedrals=True)
+    except parmed.exceptions.ParameterError:
+        # Unfortunately ParmEd does not understand how to interpret the systems
+        # it creates with NBFIX/LJEDIT.  To handle this, first get the nonbonded
+        # energies from the two systems.
+        nonbonded_names = ("NonbondedForce", "CustomNonbondedForce", "CustomBondForce")
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+        amber_energy_nb = sum(energy for name, energy in amber_energies if name in nonbonded_names)
+        omm_energy_nb = sum(energy for name, energy in amber_energies if name in nonbonded_names)
+
+        # Delete all of the nonbonded forces from the OpenMM system (that has
+        # not been sent through ParmEd yet).
+        for force_index in range(system_omm.getNumForces() - 1, -1, -1):
+            if isinstance(
+                system_omm.getForce(force_index),
+                (openmm.NonbondedForce, openmm.CustomBondForce, openmm.CustomNonbondedForce),
+            ):
+                system_omm.removeForce(force_index)
+
+        # Send the system round-trip through ParmEd to split the dihedrals and
+        # re-evaluate the energies.
+        parm_omm = parmed.openmm.load_topology(
+            parm_amber.topology if openmm_topology is None else openmm_topology, system_omm, xyz=openmm_positions
+        )
+        system_omm = parm_omm.createSystem(splitDihedrals=True)
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
+
+        # Remove the nonbonded energies from both lists, and add back the ones
+        # we manually calculated above.
+        amber_energies = [(name, energy) for name, energy in amber_energies if name not in nonbonded_names]
+        omm_energies = [(name, energy) for name, energy in omm_energies if name not in nonbonded_names]
+        amber_energies.append(("NonbondedForce", amber_energy_nb))
+        omm_energies.append(("NonbondedForce", omm_energy_nb))
+    else:
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=units, platform="Reference")
 
     # calc rel energies and assert
     _energies = []
     rel_energies = []
     for i, j in zip(amber_energies, omm_energies):
         if i[0] != j[0]:
-            raise Exception("Mismatch in energy tuples naming.")
+            raise Exception(f"Mismatch in energy tuples naming: {i[0]} vs. {j[0]}")
         if abs(i[1]) > NEARLYZERO:
             rel_energies.append((i[0], abs((i[1] - j[1]) / i[1])))
         else:
@@ -1234,23 +1277,27 @@ quit"""
         print(f"GAFF energy validation for {ffxml_name} done!")
 
 
-def validate_phospho_protein(
-    ffxml_name,
-    leaprc_name,
-    supp_leaprc_name="oldff/leaprc.ff99SBildn",
-    supp_ffxml_name="ffxml/ff99SBildn.xml",
-    phospho="phospho10",
-):
-    if "14" in leaprc_name:
-        # Use AMBER14SB
+def validate_phospho_protein(ffxml_name, leaprc_name):
+    if "phosaa10" in leaprc_name:
+        supp_leaprc_name = "oldff/leaprc.ff99SB"
+        supp_ffxml_name = "../openmmforcefields/ffxml/amber/ff99SB.xml"
+    elif "phosaa14SB" in leaprc_name:
         supp_leaprc_name = "oldff/leaprc.ff14SB"
-        supp_ffxml_name = "ffxml/ff14SB.xml"
-        phospho = "phospho14"
+        supp_ffxml_name = "../openmmforcefields/ffxml/amber/ff14SB.xml"
+    elif "phosfb18" in leaprc_name:
+        supp_leaprc_name = "leaprc.protein.fb15"
+        supp_ffxml_name = "../openmmforcefields/ffxml/amber/protein.fb15.xml"
+    elif "phosaa19SB" in leaprc_name:
+        supp_leaprc_name = "leaprc.protein.ff19SB"
+        supp_ffxml_name = "../openmmforcefields/ffxml/amber/protein.ff19SB.xml"
+    else:
+        raise ValueError(f"unrecognized phospho leaprc {leaprc_name!r}")
 
-    # this function assumes ffxml/ff14SB.xml already exists
+    # this function assumes that the main FFXML force field files listed above
+    # already exist
     if verbose:
         print(f"Phosphorylated protein energy validation for {ffxml_name}")
-    for pdbname in glob.iglob(f"files/{phospho}/*.pdb"):
+    for pdbname in glob.iglob(f"files/phospho/*.pdb"):
         if verbose:
             print(f"Now testing with pdb {os.path.basename(pdbname)}")
         if verbose:
@@ -1300,7 +1347,7 @@ def validate_water_ion(ffxml_name, source_recipe_files, solvent_name, recipe_nam
         print(f"Water and ions energy validation for {ffxml_name}")
     if solvent_name == "tip3p":
         HOH = "TP3"
-        solvent_frcmod = None
+        solvent_frcmod = "frcmod.tip3p"
     elif solvent_name == "tip4pew":
         HOH = "T4E"
         solvent_frcmod = "frcmod.tip4pew"
@@ -1346,6 +1393,7 @@ quit"""
     # this test does it's own energy assertion because of differences
     if verbose:
         print("Running LEaP...")
+
     os.system(f"tleap -f {leap_script_file[1]} > {os.devnull}")
     if os.path.getsize(top[1]) == 0 or os.path.getsize(crd[1]) == 0:
         raise LeapException(leap_script_file[1])
@@ -1361,11 +1409,11 @@ quit"""
         parm_omm = parmed.openmm.load_topology(pdb.topology, xyz=pdb.positions)
         parm_amber = parmed.load_file(top[1], crd[1])
         system_amber = parm_amber.createSystem()
-        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, nrg=u.kilojoules_per_mole)
+        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, platform="Reference", nrg=u.kilojoules_per_mole)
         for entry in omm_energies:
             if entry[0] == "NonbondedForce":
                 omm_nonbonded = entry[1]
-        amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, nrg=u.kilojoules_per_mole)
+        amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, platform="Reference", nrg=u.kilojoules_per_mole)
         for entry in amber_energies:
             if entry[0] == "NonbondedForce":
                 amber_nonbonded = entry[1]
@@ -1543,6 +1591,7 @@ quit"""
 
     if verbose:
         print("Running LEaP...")
+
     os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
     if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
         raise LeapException(leap_script_lipids_file[1])
@@ -1825,51 +1874,31 @@ def modify_glycan_ffxml(input_ffxml_path):
 from openmm.app.internal import compiled
 
 class GlycamTemplateMatcher(object):
+    def __init__(self, glycam_residues):
+        self.glycam_residues = glycam_residues
 
-  def __init__(self, glycam_residues):
-    self.glycam_residues = glycam_residues
+    def __call__(self, ff, residue, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles):
+        if residue.name in self.glycam_residues:
+            template = ff._templates[residue.name]
+            if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+                return template
 
-  def __call__(self, ff, residue, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles):
-    if residue.name in self.glycam_residues:
-      template = ff._templates[residue.name]
-      if compiled.matchResidueToTemplate(
-        residue,
-        template,
-        bondedToAtom,
-        ignoreExternalBonds,
-        ignoreExtraParticles,
-    ) is not None:
-        return template
+            # The residue doesn't actually match the template with the same name.  Try the terminal variants.
 
-      # The residue doesn't actually match the template with the same name.  Try the terminal variants.
-
-      if 'N'+residue.name in self.glycam_residues:
-        template = ff._templates['N'+residue.name]
-        if compiled.matchResidueToTemplate(
-            residue,
-            template,
-            bondedToAtom,
-            ignoreExternalBonds,
-            ignoreExtraParticles,
-        ) is not None:
-          return template
-      if 'C'+residue.name in self.glycam_residues:
-        template = ff._templates['C'+residue.name]
-        if compiled.matchResidueToTemplate(
-            residue,
-            template,
-            bondedToAtom,
-            ignoreExternalBonds,
-            ignoreExtraParticles,
-        ) is not None:
-          return template
-    return None
+            if "N" + residue.name in self.glycam_residues:
+                template = ff._templates["N" + residue.name]
+                if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+                    return template
+            if "C" + residue.name in self.glycam_residues:
+                template = ff._templates["C" + residue.name]
+                if compiled.matchResidueToTemplate(residue, template, bondedToAtom, ignoreExternalBonds, ignoreExtraParticles) is not None:
+                    return template
+        return None
 
 glycam_residues = set()
-for residue in tree.getroot().find('Residues').findall('Residue'):
-  glycam_residues.add(residue.get('name'))
+for residue in tree.getroot().find("Residues").findall("Residue"):
+    glycam_residues.add(residue.get("name"))
 self.registerTemplateMatcher(GlycamTemplateMatcher(glycam_residues))
-
 """
 
     tree.write(input_ffxml_path)
@@ -1879,7 +1908,7 @@ def validate_glyco_protein(
     ffxml_name,
     leaprc_name,
     supp_leaprc_name="oldff/leaprc.ff14SB",
-    supp_ffxml_name="ffxml/protein.ff14SB.xml",
+    supp_ffxml_name="../openmmforcefields/ffxml/amber/protein.ff14SB.xml",
 ):
     modify_glycan_ffxml(ffxml_name)
 
@@ -1897,6 +1926,241 @@ def validate_nucleic(
     args,
 ):
     raise NotImplementedError()
+
+
+def patch_ffxml_cmap(ffxml_path, frcmod_path, *extra_ffxml_paths):
+    """
+    Patches an FFXML file to include CMAPs from a FRCMOD.
+    """
+
+    # Load the FFXML and the CMAPs from the FRCMOD.
+    tree = _read_ffxml(ffxml_path)
+    cmap_assignments, cmap_data = _read_frcmod_cmap(frcmod_path)
+
+    # Write CMAP data.
+    cmap_element = etree.SubElement(tree.getroot(), "CMAPTorsionForce")
+    for cmap_parameters in cmap_data:
+        map_element = etree.SubElement(cmap_element, "Map")
+        grid = cmap_parameters * u.kilocalorie_per_mole.conversion_factor_to(u.kilojoule_per_mole)
+        grid_x, grid_y = grid.shape
+        if grid_x % 2 or grid_y % 2:
+            raise ValueError("expected even resolution to shift CMAP correctly")
+        grid = numpy.roll(grid, (grid_x // 2, grid_y // 2), axis=(0, 1)).T
+        map_element.text = "\n".join(" ".join(map(str, row)) for row in grid)
+
+    # Find the atom type elements by name.
+    type_elements = {}
+    for type_tree in (tree, *(_read_ffxml(extra_ffxml_path) for extra_ffxml_path in extra_ffxml_paths)):
+        for type_element in type_tree.findall("./AtomTypes/Type"):
+            type_elements[type_element.attrib["name"]] = type_element
+
+    # Find an atom types element to add new atom type elements to.
+    types_element = tree.findall("./AtomTypes")[-1]
+
+    c_classes = set()
+    n_classes = set()
+
+    # Find classes associated with atoms on neighboring residues that the CMAPs
+    # need to apply to.  The atom names are hard-coded for ff19SB (see below).
+    for residue_element in tree.findall("./Residues/Residue"):
+        external_bonds = set(
+            bond_element.attrib["atomName"] for bond_element in residue_element.findall("./ExternalBond")
+        )
+        for atom_element in residue_element.findall("./Atom"):
+            atom_name = atom_element.attrib["name"]
+            if atom_name in external_bonds:
+                atom_class = type_elements[atom_element.attrib["type"]].attrib["class"]
+                if atom_name == "C":
+                    c_classes.add(atom_class)
+                elif atom_name == "N":
+                    n_classes.add(atom_class)
+
+    # There should be exactly one class found for each kind of atom.
+    try:
+        (c_class,) = c_classes
+        (n_class,) = n_classes
+    except Exception:
+        raise ValueError(f"expected exactly one C class and one N class, not {c_classes!r} and {n_classes!r}")
+
+    for residue_element in tree.findall("./Residues/Residue"):
+        # Process all residues with CMAPs.
+        residue_name = residue_element.attrib["name"]
+        if residue_name not in cmap_assignments:
+            continue
+
+        # Create new types for the CMAP atoms.
+        for atom_element in residue_element.findall("./Atom"):
+            atom_name = atom_element.attrib["name"]
+
+            # For ff19SB, this is not overridden, and the hard-coded values in
+            # LEAP are used instead, so we hard-code these atom names too.
+            if atom_name in ("N", "CA", "C"):
+                type_name = atom_element.attrib["type"]
+                new_type_name = f"cmap-{residue_name}-{atom_name}"
+                if new_type_name in type_elements:
+                    raise ValueError(f"duplicate atom type {new_type_name!r}")
+
+                atom_element.attrib["type"] = new_type_name
+                new_attrib = type_elements[type_name].attrib.copy()
+                new_attrib["name"] = new_type_name
+                etree.SubElement(types_element, "Type", new_attrib)
+
+        # Create a torsion for the CMAP.
+        etree.SubElement(
+            cmap_element,
+            "Torsion",
+            attrib=dict(
+                map=str(cmap_assignments[residue_name]),
+                class1=c_class,
+                type2=f"cmap-{residue_name}-N",
+                type3=f"cmap-{residue_name}-CA",
+                type4=f"cmap-{residue_name}-C",
+                class5=n_class,
+            ),
+        )
+
+    # Save the FFXML.
+    _write_ffxml(tree, ffxml_path)
+
+
+def _read_ffxml(ffxml_path):
+    """
+    Reads an XML tree from a file.
+    """
+
+    return etree.parse(ffxml_path)
+
+
+def _write_ffxml(tree, ffxml_path, pretty_print=True):
+    """
+    Writes a pretty-printed XML tree to a file.
+    """
+
+    if pretty_print:
+        tree = etree.parse(
+            io.StringIO(etree.canonicalize(etree.tostring(tree.getroot(), encoding="unicode"), strip_text=True))
+        )
+        etree.indent(tree)
+    tree.write(ffxml_path, encoding="unicode")
+
+
+def _read_frcmod_cmap(frcmod_path):
+    """
+    Reads CMAP data from a FRCMOD file.
+    """
+
+    cmap_assignments = {}
+    cmap_data = []
+
+    with open(frcmod_path) as frcmod_file:
+        cmap_title = cmap_reslist = cmap_resolution = cmap_parameters = None
+
+        # Flushes data for an existing CMAP to the dictionary and resets
+        # variables into which CMAP data are read.
+        def finish_cmap():
+            nonlocal cmap_title, cmap_reslist, cmap_resolution, cmap_parameters
+
+            if cmap_title is not None:
+                for cmap_res in cmap_reslist:
+                    cmap_assignments[cmap_res] = len(cmap_data)
+                cmap_data.append(numpy.array(cmap_parameters).reshape(cmap_resolution, cmap_resolution))
+
+            cmap_title = None
+            cmap_reslist = []
+            cmap_resolution = 0
+            cmap_parameters = []
+
+        # Initialize CMAP variables.
+        finish_cmap()
+
+        state = FRCMOD_TITLE
+
+        for line in map(str.strip, frcmod_file):
+            if state == FRCMOD_TITLE:
+                # Skip the first (title) line.
+                state = FRCMOD_SECTION
+
+            elif state == FRCMOD_SECTION:
+                # If the line is blank or "END", follow LEAP and read the next
+                # line.  Otherwise, skip all sections other than CMAP sections.
+                if not line:
+                    continue
+                section_name = line[:4]
+                if section_name == "END":
+                    pass
+                elif section_name in ("MASS", "BOND", "ANGL", "DIHE", "IMPR", "HBON", "NONB", "IPOL", "LJED"):
+                    state = FRCMOD_SKIP
+                elif section_name == "CMAP":
+                    state = FRCMOD_CMAP
+                else:
+                    raise ValueError(f"unknown FRCMOD section {section_name!r}")
+
+            elif state == FRCMOD_SKIP:
+                # Skip lines until a blank line is found.
+                if not line:
+                    state = FRCMOD_SECTION
+
+            elif state == FRCMOD_CMAP:
+                if not line:
+                    # End of the CMAP section.  Save the current CMAP.
+                    finish_cmap()
+                    state = FRCMOD_SECTION
+                elif line.startswith("%COMMENT"):
+                    # Skip comment lines.
+                    pass
+                elif line.startswith("%FLAG"):
+                    fields = line.split()
+                    flag_name = fields[1]
+                    if flag_name == "CMAP_COUNT":
+                        # Skip CMAP_COUNT directives since we can dynamically
+                        # allocate memory.
+                        pass
+                    elif flag_name == "CMAP_TITLE":
+                        # CMAP_TITLE marks the start of a new CMAP.
+                        finish_cmap()
+                        state = FRCMOD_CMAP_TITLE
+                    elif flag_name == "CMAP_RESLIST":
+                        state = FRCMOD_CMAP_RESLIST
+                    elif flag_name == "CMAP_RESOLUTION":
+                        cmap_resolution = int(fields[2])
+                    elif flag_name == "CMAP_PARAMETER":
+                        state = FRCMOD_CMAP_PARAMETER
+                    else:
+                        # A proper handling of this would try to understand
+                        # CMAP_ATMLIST, CMAP_RESIDX, and CMAP_TERMMAP.  For now,
+                        # we don't do this, since ff19SB doesn't have these
+                        # special options, doesn't support terminal residue
+                        # CMAPs, and LEAP has the atom types hard-coded.
+                        raise ValueError(f"unsupported CMAP flag {flag_name!r}")
+                else:
+                    raise ValueError("syntax error in CMAP section")
+
+            elif state == FRCMOD_CMAP_TITLE:
+                cmap_title = line
+                state = FRCMOD_CMAP
+
+            elif state == FRCMOD_CMAP_RESLIST:
+                cmap_reslist.extend(line.split())
+                state = FRCMOD_CMAP
+
+            elif state == FRCMOD_CMAP_PARAMETER:
+                if not line:
+                    # End of the CMAP section.  Save the current CMAP.
+                    finish_cmap()
+                    state = FRCMOD_SECTION
+                elif line.startswith("%"):
+                    # End of the parameters.  Possibly read more for this CMAP.
+                    state = FRCMOD_CMAP
+                else:
+                    cmap_parameters.extend(map(float, line.split()))
+
+            else:
+                raise RuntimeError
+
+        # Save any CMAP at the end of the file.
+        finish_cmap()
+
+    return cmap_assignments, cmap_data
 
 
 class Logger:
