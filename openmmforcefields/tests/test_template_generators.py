@@ -5,6 +5,7 @@ import logging
 import os
 import tempfile
 import unittest
+from typing import TYPE_CHECKING
 
 import numpy as np
 import openmm
@@ -18,6 +19,9 @@ from openmmforcefields.generators import (
     SMIRNOFFTemplateGenerator,
 )
 from openmmforcefields.utils import get_data_filename
+
+if TYPE_CHECKING:
+    import parmed
 
 _logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
 
@@ -39,10 +43,10 @@ class ForceError(BaseException):
 class TemplateGeneratorBaseCase(unittest.TestCase):
     def filter_molecules(
         self,
-        molecules: list[Molecule],
+        molecules: list[Molecule] | list["parmed.Structure"],
         max_molecules: int = 50,
         max_atoms: int = 40,
-    ) -> list[Molecule]:
+    ) -> list[Molecule] | list["parmed.Structure"]:
         """
         Filter molecules, randomly selected from input, for the purpose of running fewer tests.
 
@@ -61,7 +65,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
             The filtered list of molecules to be filtered
 
         """
-        molecules = [molecule for molecule in molecules if molecule.n_atoms <= max_atoms]
+        molecules = [molecule for molecule in molecules if len(molecule.atoms) <= max_atoms]
 
         return random.sample(molecules, min(len(molecules), max_molecules))
 
