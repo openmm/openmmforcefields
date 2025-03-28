@@ -25,6 +25,7 @@ def pytest_configure(config):
 
 
 def pytest_collection_modifyitems(config, items):
+    # why is this named skip_slow ??
     skip_slow = pytest.mark.skip(reason="need --runespaloma option to run")
 
     if not config.getoption("--runespaloma"):
