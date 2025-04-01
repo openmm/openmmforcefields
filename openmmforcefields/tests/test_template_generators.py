@@ -542,11 +542,11 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         molecule = self.molecules[0]
 
-        # Populate the molecule with arbitrary partial charges that still sum to 0.0
+        # Populate the molecule with arbitrary partial charges that still sum to the total formal charge
         molecule.partial_charges = unit.Quantity(
             np.linspace(-0.5, 0.5, molecule.n_atoms),
             unit.elementary_charge,
-        )
+        ) + molecule.total_charge / molecule.n_atoms
 
         assert molecule.partial_charges is not None
 
