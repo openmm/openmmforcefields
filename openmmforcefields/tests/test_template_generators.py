@@ -116,7 +116,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # DEBUG END
 
         # Filter molecules as appropriate
-        self.molecules = self.filter_molecules(molecules)
+        self.molecules = self.filter_molecules(molecules, max_atoms=25 if CI else 40)
 
         # Suppress DEBUG logging from various packages
         import logging
