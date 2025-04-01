@@ -1,0 +1,9 @@
+name: openmmforcefields-test-charmm
+channels:
+  - conda-forge/label/openmm_dev
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - openmm
+  - pyyaml
