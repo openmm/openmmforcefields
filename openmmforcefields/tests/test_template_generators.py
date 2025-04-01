@@ -778,7 +778,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 ligand_structures = [ligand_structures]
             assert len(ligand_structures) == len(molecules)
 
-            ligand_structures = self.filter_molecules(molecules, max_molecules=3 if CI else 6)
+            ligand_structures = self.filter_molecules(ligand_structures, max_molecules=3 if CI else 6, max_atoms=50)
 
             print(f"{len(ligand_structures)} molecules remain after filtering")
 
