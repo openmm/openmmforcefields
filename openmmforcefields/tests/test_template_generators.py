@@ -355,7 +355,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         return openmm_energy, openmm_forces
 
 
-@pytest.mark.rungaff
+@pytest.mark.gaff
 class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = GAFFTemplateGenerator
 
