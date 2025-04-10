@@ -25,18 +25,16 @@ def pytest_configure(config):
 
 
 def pytest_collection_modifyitems(config, items):
-    # why is this named skip_slow ??
-    skip_slow = pytest.mark.skip(reason="need --runespaloma option to run")
+    skip_espaloma = pytest.mark.skip(reason="need --runespaloma option to run")
 
     if not config.getoption("--runespaloma"):
         for item in items:
             if "espaloma" in item.keywords:
-                item.add_marker(skip_slow)
-    del skip_slow
+                item.add_marker(skip_espaloma)
 
-    skip_slow = pytest.mark.skip(reason="need --rungaff option to run")
+    skip_gaff = pytest.mark.skip(reason="need --rungaff option to run")
 
     if not config.getoption("--rungaff"):
         for item in items:
             if "gaff" in item.keywords:
-                item.add_marker(skip_slow)
+                item.add_marker(skip_gaff)
