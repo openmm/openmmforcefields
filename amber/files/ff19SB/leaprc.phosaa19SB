@@ -1,0 +1,44 @@
+logFile leap.log
+#
+# ----- leaprc for loading phosphorylated amino acid residues
+#
+# This file contains optimized parameters for phosphorylated amino acids:
+#
+# PTR:   phosphotyrosine with a -2 net charge
+# SEP:   phosphoserine with a -2 net charge  
+# TPO:   phosphothreonine with a -2 net charge
+# Y1P:   phosphotyrosine with a -1 net charge
+# S1P:   phosphoserine with a -1 net charge  
+# T1P:   phosphothreonine with a -1 net charge
+# H1D:   phosphohistidine (ND1) with a 0 net charge
+# H2D:   phosphohistidine (ND1) with a -1 net charge
+# H1E:   phosphohistidine (NE2) with a 0 net charge
+# H2E:   phosphohistidine (NE2) with a -1 net charge
+#
+# To use these residues, load this file into leap, after the Amber-FF, e.g.:
+#
+# > source leaprc.ff19B
+# > source leaprc.phosaa19SB
+#
+#
+#	load atom type hybridizations
+#
+addAtomTypes {
+	{ "OP"  "O" "sp3" }
+	{ "OQ"  "O" "sp3" }
+	{ "OR"  "O" "sp3" }
+	{ "OT"  "O" "sp3" }
+	{ "OV"  "O" "sp3" }
+	{ "OX"  "O" "sp3" }
+	{ "OZ"  "O" "sp3" }
+	{ "CG"  "C" "sp2" }
+}
+#
+#	Load the phosphorylated amino acid parameter set.
+#
+phosaa = loadamberparams files/ff19SB/frcmod.phosaa19SB_without_cmap
+#
+#       Load the phosphorylated amino acid libraries.
+#
+# load individual residues
+loadoff phosaa19SB.lib

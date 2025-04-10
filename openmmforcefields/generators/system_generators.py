@@ -101,7 +101,7 @@ class SystemGenerator:
             Small molecule force field to use.
             Must be supported by one of the registered template generators:
                 [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
-            Supported GAFF force fields include: ['gaff-2.11', 'gaff-2.1', 'gaff-1.81', 'gaff-1.8', 'gaff-1.4']
+            Supported GAFF force fields include: ['gaff-2.2.20', 'gaff-2.11', 'gaff-2.1', 'gaff-1.81', 'gaff-1.8', 'gaff-1.4']
             (See ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
             Supported SMIRNOFF force fields include: [`openff-1.0.0`, `smirnoff99Frosst-1.1.0`]
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
@@ -135,7 +135,7 @@ class SystemGenerator:
         Examples
         --------
 
-        Here's an example that uses GAFF 2.11 along with the new ``ff14SB`` generation of AMBER force fields
+        Here's an example that uses GAFF 2.2.20 along with the new ``ff14SB`` generation of AMBER force fields
         (and compatible solvent models) to generate an OpenMM ``System`` object from an
         `Open Force Field Topology <https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology>`_ object:
 
@@ -153,7 +153,7 @@ class SystemGenerator:
         ...     "amber/tip3p_standard.xml",
         ...     "amber/tip3p_HFE_multivalent.xml",
         ... ]
-        >>> small_molecule_forcefield = "gaff-2.11"
+        >>> small_molecule_forcefield = "gaff-2.2.20"
         >>> forcefield_kwargs = {
         ...     "constraints": app.HBonds,
         ...     "rigidWater": True,
@@ -169,7 +169,7 @@ class SystemGenerator:
         If the ``cache`` argument is specified, parameterized molecules are cached in the corresponding file.
 
         >>> cache = 'db.json'
-        >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield='gaff-2.11', forcefield_kwargs=forcefield_kwargs, cache=cache)  # doctest: +SKIP
+        >>> system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield='gaff-2.2.20', forcefield_kwargs=forcefield_kwargs, cache=cache)  # doctest: +SKIP
 
         To use a barostat, you need to define a barostat whose parameters will be copied into each system (with a different random number seed):
 

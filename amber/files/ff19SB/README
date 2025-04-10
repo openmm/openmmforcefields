@@ -1,0 +1,3 @@
+Since ParmEd doesn't support CMAPs and we handle them using custom patching of
+the generated FFXML, we have a FRCMOD without the CMAPs and one with only the
+CMAPs to facilitate the conversion of this special case.
