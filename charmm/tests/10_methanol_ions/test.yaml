@@ -1,0 +1,26 @@
+name: Methanol and ions
+
+psf_file: methanol_ions.psf
+pdb_file: methanol_ions.pdb
+
+charmm_files:
+  - top_all36_prot.rtf
+  - par_all36m_prot.prm
+  - top_all36_na.rtf
+  - par_all36_na.prm
+  - top_all36_carb.rtf
+  - par_all36_carb.prm
+  - top_all36_lipid.rtf
+  - par_all36_lipid.prm
+  - top_all36_cgenff.rtf
+  - par_all36_cgenff.prm
+  - toppar_water_ions.str
+charmm_commands:
+  - nbonds atom trunc cutnb 1000
+
+ffxml_files:
+  - charmm36_nowaters.xml
+  - waters_ions_default.xml
+  - charmm36_cgenff.xml
+create_system_options:
+  removeCMMotion: false

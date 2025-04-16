@@ -1,10 +1,15 @@
 - sourcePackage: charmm36
-  sourcePackageVersion: toppar_c36_jul20.tgz
+  sourcePackageVersion: toppar_c36_jul24.tgz
+
 - Destination: waters_ions_default.xml
   Source:
     stream:
-     - toppar_c36_jul20/toppar_water_ions.str
+     - toppar/toppar_water_ions.str
+     - toppar/stream/misc/toppar_ions_won.str
     exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
+     # Include regular TIP3P, not "MMFF" analog
      - TP3M
   References:
    tip3p:
@@ -15,22 +20,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-     - cations:
-       - >-
-         Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
-         Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
-  Test:
-    - tests/watbox216.pdb
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_spc_e.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_spc_e.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_spc_e.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    spc-e:
      - >-
@@ -41,18 +45,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-  Test:
-    - tests/watbox216.pdb
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_spc.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_spc.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_spc.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    spc:
      - >-
@@ -63,18 +70,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-  Test:
-    - tests/watbox216.pdb
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip3p_pme_b.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip3p_pme_b.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip3p_pme_b.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip3p-pme-b:
      - >-
@@ -85,18 +95,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-  Test:
-    - tests/watbox216.pdb
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip3p_pme_f.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip3p_pme_f.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip3p_pme_f.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip3p-pme-f:
      - >-
@@ -107,18 +120,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
-  Test:
-    - tests/watbox216.pdb
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip4p_2005.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip4p_2005.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip4p_2005.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p-2005:
      - >-
@@ -129,16 +145,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip4p_ew.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip4p_ew.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip4p_ew.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p-ew:
      - >-
@@ -148,16 +169,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip4p.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip4p.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip4p.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip4p:
      - >-
@@ -167,16 +193,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip5p_ew.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip5p_ew.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip5p_ew.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip5p-ew:
      - >-
@@ -187,16 +218,21 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.
+
 - Destination: waters_ions_tip5p.xml
   Source:
-    include:
     stream:
-     - toppar_c36_jul20/non_charmm/toppar_water_ions_tip5p.str
-    exclude:
+     - toppar/non_charmm/toppar_water_ions_tip5p.str
+     - toppar/stream/misc/toppar_ions_won.str
+    exclude_residues:
+     # Collision between thulium(III) and 4'-methyl,3'-phosphate tetrahydrofuran
+     - TM3P
   References:
    tip5p:
      - >-
@@ -207,7 +243,9 @@
      - >-
        Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for
        Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063
-     - zinc:
-       - >-
-         Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
-         Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded
+       Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)
+     - >-
+       Won, Y., "Force Field for Monovalent, Divalent, and Trivalent Cations Developed under the Solvent Boundary
+       Potential," Journal of Physical Chemistry A., 116: 11763-11767, 2012.

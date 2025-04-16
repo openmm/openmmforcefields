@@ -1,0 +1,2173 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2025-02-27</DateGenerated>
+    <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str" md5hash="f3c4caab3ff08e7b822f7b944db3f197" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str</Source>
+    <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str" md5hash="192af93e684f3891df130182b8302c58" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str</Source>
+    <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str" md5hash="6d8a686b8b5ecf19de7e598d928a7c1a" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str</Source>
+    <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_model_2023a.str" md5hash="5310828b6b7cbe378985d8b777808c4e" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_model_2023a.str</Source>
+    <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_lipid_2023a.str" md5hash="a26755ddb7c467158002905d45c210c6" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_lipid_2023a.str</Source>
+    <Reference Reference="Lopes, P.E.M., Huang, J., Shim, J., Luo, Y., Li, H., Roux, B., and MacKerell, A.D., Jr., &quot;Polarizable Force Field for Peptides and Proteins based on the Classical Drude Oscillator,&quot; Journal of Chemical Theory and Computation, 9: 5430-5449, 2013 DOI: 10.1021/ct400781b, NIHMS53671" forcefield="protein">Lopes, P.E.M., Huang, J., Shim, J., Luo, Y., Li, H., Roux, B., and MacKerell, A.D., Jr., "Polarizable Force Field for Peptides and Proteins based on the Classical Drude Oscillator," Journal of Chemical Theory and Computation, 9: 5430-5449, 2013 DOI: 10.1021/ct400781b, NIHMS53671</Reference>
+    <Reference Reference="SWM4-NDP, negative Drude (this will be the default model): Lamoureux, G., Harder, E., Vorobyov, I.V., Deng, Y., Roux, B. MacKerell, A.D., Jr., A polarizable model of water for molecular dynamics simulations of biomolecules, Chemical Physics Letters, 2006, 418: 245-249." forcefield="water">SWM4-NDP, negative Drude (this will be the default model): Lamoureux, G., Harder, E., Vorobyov, I.V., Deng, Y., Roux, B. MacKerell, A.D., Jr., A polarizable model of water for molecular dynamics simulations of biomolecules, Chemical Physics Letters, 2006, 418: 245-249.</Reference>
+    <Reference Reference="SWM6: Wenbo Yu, Pedro E. M. Lopes, Benoit Roux and Alexander D. MacKerell, Jr.  &quot;Six-site Polarizable Model of Water Based on the Classical Drude Oscillator&quot; Journal of Chemical Physics, 138: 034508, 2013" forcefield="water">SWM6: Wenbo Yu, Pedro E. M. Lopes, Benoit Roux and Alexander D. MacKerell, Jr.  "Six-site Polarizable Model of Water Based on the Classical Drude Oscillator" Journal of Chemical Physics, 138: 034508, 2013</Reference>
+    <Reference Reference="Yu, H., Whitfield, T.W., Harder, E., Lamoureux, G., Vorobyov, I., Anisimov, V. M., MacKerell, A.D., Jr., and Roux, B. &quot;Simulating Monovalent and Divalent Ions in Aqueous Solution Using a Drude Polarizable Force Field,&quot; Journal of Chemical Theory and Computation, 6: 774-786, 2010" forcefield="atomic ions">Yu, H., Whitfield, T.W., Harder, E., Lamoureux, G., Vorobyov, I., Anisimov, V. M., MacKerell, A.D., Jr., and Roux, B. "Simulating Monovalent and Divalent Ions in Aqueous Solution Using a Drude Polarizable Force Field," Journal of Chemical Theory and Computation, 6: 774-786, 2010</Reference>
+    <Reference Reference="Luo, Y., Jiang, W., Yu, H., MacKerell, A.D., Jr., and Roux, B., &quot;Simulation study of ion pairing in concentrated aqueous salt solutions with a polarizable force field,&quot; Faraday Discussions, 160, 135-149, 2013, PMC3695446" forcefield="atomic ions">Luo, Y., Jiang, W., Yu, H., MacKerell, A.D., Jr., and Roux, B., "Simulation study of ion pairing in concentrated aqueous salt solutions with a polarizable force field," Faraday Discussions, 160, 135-149, 2013, PMC3695446</Reference>
+    <Reference Reference="Lemkul, J.A. and MacKerell, A.D., Jr. &quot;Balancing the Interactions of Mg2+ in Aqueous Solution and with Nucleic Acid Moieties For a Polarizable Force Field Based on the Classical Drude Oscillator Model,&quot; J. Phys. Chem B, 120, 11436-11448, 2016, PMC5148688" forcefield="atomic ions">Lemkul, J.A. and MacKerell, A.D., Jr. "Balancing the Interactions of Mg2+ in Aqueous Solution and with Nucleic Acid Moieties For a Polarizable Force Field Based on the Classical Drude Oscillator Model," J. Phys. Chem B, 120, 11436-11448, 2016, PMC5148688</Reference>
+    <Reference Reference="['Aytenfisu, A.H., Yang, M., and MacKerell, A.D., Jr., &quot;CHARMM Drude Polarizable Force Field for Glycosidic Linkages Involving Pyranoses and Furanoses,&quot; Submitted for publication']" forcefield="carbohydrates" type="glycosidic linkages/disaccharides">['Aytenfisu, A.H., Yang, M., and MacKerell, A.D., Jr., "CHARMM Drude Polarizable Force Field for Glycosidic Linkages Involving Pyranoses and Furanoses," Submitted for publication']</Reference>
+    <Reference Reference="['Yang, M., Aytenfisu, A.H., and MacKerell, A.D., Jr., &quot;Proper Balance of Solvent-Solute and Solute-Solute Interactions in the Treatment of the Diffusion of Glucose using the Drude Polarizable Force Field,&quot; Submitted for publication', 'Patel, D.S., He, X., and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Hexopyranose Monosaccharides based on the Classical Drude Oscillator,” Journal of Physical Chemistry B., ASAP article, 2014, 10.1021/jp412696m, NIHMSID #566721']" forcefield="carbohydrates" type="hexopyranoses">['Yang, M., Aytenfisu, A.H., and MacKerell, A.D., Jr., "Proper Balance of Solvent-Solute and Solute-Solute Interactions in the Treatment of the Diffusion of Glucose using the Drude Polarizable Force Field," Submitted for publication', 'Patel, D.S., He, X., and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Hexopyranose Monosaccharides based on the Classical Drude Oscillator,” Journal of Physical Chemistry B., ASAP article, 2014, 10.1021/jp412696m, NIHMSID #566721']</Reference>
+    <Reference Reference="['He, X., Lopes, P.E.M., and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Acyclic Poly-Alcohols Based on the Classical Drude Oscillator,” Biopolymers, 99: 724-738 2013, DOI: 10.1002/bip.22286']" forcefield="carbohydrates" type="polyalcohols">['He, X., Lopes, P.E.M., and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Acyclic Poly-Alcohols Based on the Classical Drude Oscillator,” Biopolymers, 99: 724-738 2013, DOI: 10.1002/bip.22286']</Reference>
+    <Reference Reference="['Jana, M. and MacKerell, A.D., Jr., “CHARMM Drude Polarizable Force Field for Aldopentofuranoses and Methyl-aldopentofuranosides,” Journal of Physical Chemistry B, 119: 7846-7859, 2015, doi: 10.1021/acs.jpcb.5b01767, PMC4483154']" forcefield="carbohydrates" type="furanoses">['Jana, M. and MacKerell, A.D., Jr., “CHARMM Drude Polarizable Force Field for Aldopentofuranoses and Methyl-aldopentofuranosides,” Journal of Physical Chemistry B, 119: 7846-7859, 2015, doi: 10.1021/acs.jpcb.5b01767, PMC4483154']</Reference>
+    <Reference Reference="Carboxylate and N-Acetyl Amine Carbohydrate Derivatives - &gt;- Pandey, P.; Aytenfisu, A. H.; MacKerell, A. D. Jr.; Mallajosyula, S. S., &quot;Drude Polarizable Force Field Parametrization of Carboxylate and N-Acetyl Amine Carbohydrate Derivatives&quot;, Journal of Chemical Theory and Computation 2019, 15 (9), 4982-5000" forcefield="carbohydrates">Carboxylate and N-Acetyl Amine Carbohydrate Derivatives - &gt;- Pandey, P.; Aytenfisu, A. H.; MacKerell, A. D. Jr.; Mallajosyula, S. S., "Drude Polarizable Force Field Parametrization of Carboxylate and N-Acetyl Amine Carbohydrate Derivatives", Journal of Chemical Theory and Computation 2019, 15 (9), 4982-5000</Reference>
+    <Reference Reference="Li, H., Chowdhary, J., Huang, L., He, X, MacKerell, A.D., Jr., and Roux, B, &quot;Drude Polarizable Force Field for Molecular Dynamics Simulations of Saturated and Unsaturated Zwitterionic Lipids,&quot; In preparation, 2017." forcefield="lipids">Li, H., Chowdhary, J., Huang, L., He, X, MacKerell, A.D., Jr., and Roux, B, "Drude Polarizable Force Field for Molecular Dynamics Simulations of Saturated and Unsaturated Zwitterionic Lipids," In preparation, 2017.</Reference>
+    <Reference Reference="Chowdhary, J., Harder, E., Lopes, P.E.M., MacKerell, Jr., A.D, and Roux, B., “A Polarizable Model for Phosphatidylcholine-Containing Biological Membranes,” Journal of Physical Chemistry, B.,117: 9142-9160, 2013." forcefield="lipids">Chowdhary, J., Harder, E., Lopes, P.E.M., MacKerell, Jr., A.D, and Roux, B., “A Polarizable Model for Phosphatidylcholine-Containing Biological Membranes,” Journal of Physical Chemistry, B.,117: 9142-9160, 2013.</Reference>
+    <Reference Reference="['Igor V. Vorobyov, Victor M. Anisimov and Alexander D. MacKerell, Jr. &quot;Polarizable Empirical Force Field for Alkanes Based on the Classical Drude Oscillator Model,&quot; Journal of Physical Chemistry B, 109: 18988-18999, 2005.']" forcefield="model compounds" type="Alkanes">['Igor V. Vorobyov, Victor M. Anisimov and Alexander D. MacKerell, Jr. "Polarizable Empirical Force Field for Alkanes Based on the Classical Drude Oscillator Model," Journal of Physical Chemistry B, 109: 18988-18999, 2005.']</Reference>
+    <Reference Reference="['Harder, E., Anisimov, V.M., Vorobyov, I.V., Lopes, P.E., Noskov, S., MacKerell, A.D., Jr.  and Roux, B. Atomic Level Anisotropy in the Electrostatic Modeling of Lone Pairs for a Polarizable Force Field based on the Classical Drude Oscillator, Journal of Chemical Theory and Computation, 2: 1587-1597, 2006']" forcefield="model compounds" type="Anisotropic polarizability model">['Harder, E., Anisimov, V.M., Vorobyov, I.V., Lopes, P.E., Noskov, S., MacKerell, A.D., Jr.  and Roux, B. Atomic Level Anisotropy in the Electrostatic Modeling of Lone Pairs for a Polarizable Force Field based on the Classical Drude Oscillator, Journal of Chemical Theory and Computation, 2: 1587-1597, 2006']</Reference>
+    <Reference Reference="['Vorobyov, I.V., Anisimov, V.M., Greene, S., Venable, R.M., Moser, A., Pastor, R.W. and MacKerell, A.D., Jr., Additive and Classical Drude Polarizable Force Fields for Linear and Cyclic Ethers, Journal of Chemical Theory and Computation, 3: 1120-1133, 2007.', 'Baker, C. and MacKerell, Jr. A.D., “Polarizability Rescaling and atom-based Thole Scaling in the CHARMM Drude Polarizable Force Field for Ethers” Journal of Molecular Modeling, 16: 567-576, 2010, PMC2818097']" forcefield="model compounds" type="Ethers">['Vorobyov, I.V., Anisimov, V.M., Greene, S., Venable, R.M., Moser, A., Pastor, R.W. and MacKerell, A.D., Jr., Additive and Classical Drude Polarizable Force Fields for Linear and Cyclic Ethers, Journal of Chemical Theory and Computation, 3: 1120-1133, 2007.', 'Baker, C. and MacKerell, Jr. A.D., “Polarizability Rescaling and atom-based Thole Scaling in the CHARMM Drude Polarizable Force Field for Ethers” Journal of Molecular Modeling, 16: 567-576, 2010, PMC2818097']</Reference>
+    <Reference Reference="['Zhu, X. and MacKerell, A.D., Jr. “Polarizable Empirical Force Field for Sulfur-Containing Compounds Based on the Classical Drude Oscillator Model,” Journal of Computational Chemistry, 12: 2330-2341, 2010. PMC2923574']" forcefield="model compounds" type="Sulfur containing compounds">['Zhu, X. and MacKerell, A.D., Jr. “Polarizable Empirical Force Field for Sulfur-Containing Compounds Based on the Classical Drude Oscillator Model,” Journal of Computational Chemistry, 12: 2330-2341, 2010. PMC2923574']</Reference>
+    <Reference Reference="['Anisimov, V.M., Vorobyov, I.V., Roux, B., and MacKerell, A.D., Jr. Polarizable empirical force field for the primary and secondary alcohol series based on the classical Drude model. Journal of Chemical Theory and Computation, 3, 1927-1946, 2007.']" forcefield="model compounds" type="Alcohols">['Anisimov, V.M., Vorobyov, I.V., Roux, B., and MacKerell, A.D., Jr. Polarizable empirical force field for the primary and secondary alcohol series based on the classical Drude model. Journal of Chemical Theory and Computation, 3, 1927-1946, 2007.']</Reference>
+    <Reference Reference="['Harder, E., Anisimov, V.M., Whitfield, T., MacKerell, A.D., Jr., Roux, B. &quot;Understanding the Dielectric Properties of Liquid Amides from a Polarizable Force Field,&quot; Journal of Physical Chemistry, 112:3509-3521. 2008, PMID: 18302362', 'Lin, B., Lopes, P.E.M., Roux, B., and MacKerell, A.D., Jr., “Kirkwood-Buff Analysis of Aqueous N-Methylacetamide and Acetamide Solutions Modeled by the CHARMM Additive and Drude Polarizable Force Fields,” Journal of Chemical Physics, 139: 084509, 2013, PMC3772949']" forcefield="model compounds" type="Amides">['Harder, E., Anisimov, V.M., Whitfield, T., MacKerell, A.D., Jr., Roux, B. "Understanding the Dielectric Properties of Liquid Amides from a Polarizable Force Field," Journal of Physical Chemistry, 112:3509-3521. 2008, PMID: 18302362', 'Lin, B., Lopes, P.E.M., Roux, B., and MacKerell, A.D., Jr., “Kirkwood-Buff Analysis of Aqueous N-Methylacetamide and Acetamide Solutions Modeled by the CHARMM Additive and Drude Polarizable Force Fields,” Journal of Chemical Physics, 139: 084509, 2013, PMC3772949']</Reference>
+    <Reference Reference="['Lopes, P., Lamoureux, G., Roux, B., MacKerell, A.D., Jr., &quot;Polarizable Empirical Force Field for Aromatic Compounds Based on the Classical Drude Oscillator,&quot; Journal of Physical Chemistry, B. 111:2873-2885, 2007']" forcefield="model compounds" type="Aromatics">['Lopes, P., Lamoureux, G., Roux, B., MacKerell, A.D., Jr., "Polarizable Empirical Force Field for Aromatic Compounds Based on the Classical Drude Oscillator," Journal of Physical Chemistry, B. 111:2873-2885, 2007']</Reference>
+    <Reference Reference="['Lopes, P.E.M., Lamoureux, G., MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Nitrogen-containing Heteroaromatic Compounds Based on the Classical Drude Oscillator” Journal of Computational Chemistry, 30: 1821-1838, 2009, PMC251901']" forcefield="model compounds" type="Heterocycles">['Lopes, P.E.M., Lamoureux, G., MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Nitrogen-containing Heteroaromatic Compounds Based on the Classical Drude Oscillator” Journal of Computational Chemistry, 30: 1821-1838, 2009, PMC251901']</Reference>
+    <Reference Reference="Nucleic Acid Bases&quot; - &gt;- Baker, C.M., Anisimov, V.M., and MacKerell, A.D., Jr., “Development of CHARMM Polarizable Force Field for Nucleic Acid Bases Based on the Classical Drude Oscillator Model,” Journal of Physical Chemistry, B. 115; 580–596, 2011, PMC3166616" forcefield="model compounds">Nucleic Acid Bases" - &gt;- Baker, C.M., Anisimov, V.M., and MacKerell, A.D., Jr., “Development of CHARMM Polarizable Force Field for Nucleic Acid Bases Based on the Classical Drude Oscillator Model,” Journal of Physical Chemistry, B. 115; 580–596, 2011, PMC3166616</Reference>
+    <Reference Reference="['Lin, F-Y. and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Halogen-Containing Compounds Based on the Classical Drude  Oscillator,&quot; Journal of Chemical Theory and Computation, 2018, 14 (2), 1083-1098', 'Lin, F-Y., Lopes, P.E.M., Harder, E., Roux, B., and  MacKerell, A.D., Jr.,“Polarizable Force Field for Molecular Ions based  on the Classical Drude Oscillator,&quot; Journal of Chemical Information  and Modeling, 2018, 58 (5), 993–1004.']" forcefield="model compounds" type="Halogenated benzenes and ethanes">['Lin, F-Y. and MacKerell, A.D., Jr., “Polarizable Empirical Force Field for Halogen-Containing Compounds Based on the Classical Drude  Oscillator," Journal of Chemical Theory and Computation, 2018, 14 (2), 1083-1098', 'Lin, F-Y., Lopes, P.E.M., Harder, E., Roux, B., and  MacKerell, A.D., Jr.,“Polarizable Force Field for Molecular Ions based  on the Classical Drude Oscillator," Journal of Chemical Information  and Modeling, 2018, 58 (5), 993–1004.']</Reference>
+  </Info>
+  <Residues>
+    <Residue name="ALDD">
+      <Atom charge="2.286247214362781" name="CAY" type="ALDD-CAY" />
+      <Atom charge="-2.388247214362781" name="DCAY" type="Drude-ALDD-CAY" />
+      <Atom charge="0.048" name="HY1" type="ALDD-HY1" />
+      <Atom charge="0.048" name="HY2" type="ALDD-HY2" />
+      <Atom charge="0.048" name="HY3" type="ALDD-HY3" />
+      <Atom charge="1.8613205186135353" name="CY" type="ALDD-CY" />
+      <Atom charge="-1.3653205186135353" name="DCY" type="Drude-ALDD-CY" />
+      <Atom charge="1.3204701080914898" name="OY" type="ALDD-OY" />
+      <Atom charge="-1.3204701080914898" name="DOY" type="Drude-ALDD-OY" />
+      <Atom charge="-0.311" name="LPY1" type="ALDD-LPY1" />
+      <Atom charge="-0.227" name="LPY2" type="ALDD-LPY2" />
+      <Atom charge="1.9594411482736152" name="N" type="ALDD-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-ALDD-N" />
+      <Atom charge="0.296" name="HN" type="ALDD-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="ALDD-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-ALDD-CA" />
+      <Atom charge="-0.017" name="HA" type="ALDD-HA" />
+      <Atom charge="2.2318136839948455" name="CB" type="ALDD-CB" />
+      <Atom charge="-2.3308136839948457" name="DCB" type="Drude-ALDD-CB" />
+      <Atom charge="0.033" name="HB1" type="ALDD-HB1" />
+      <Atom charge="0.033" name="HB2" type="ALDD-HB2" />
+      <Atom charge="0.033" name="HB3" type="ALDD-HB3" />
+      <Atom charge="1.8603205186135354" name="C" type="ALDD-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-ALDD-C" />
+      <Atom charge="1.3204701080914898" name="O" type="ALDD-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-ALDD-O" />
+      <Atom charge="-0.311" name="LPOA" type="ALDD-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="ALDD-LPOB" />
+      <Atom charge="1.9594411482736152" name="NT" type="ALDD-NT" />
+      <Atom charge="-2.3654411482736153" name="DNT" type="Drude-ALDD-NT" />
+      <Atom charge="0.296" name="HNT" type="ALDD-HNT" />
+      <Atom charge="2.166666003079377" name="CAT" type="ALDD-CAT" />
+      <Atom charge="-2.221666003079377" name="DCAT" type="Drude-ALDD-CAT" />
+      <Atom charge="0.055" name="HTC1" type="ALDD-HTC1" />
+      <Atom charge="0.055" name="HTC2" type="ALDD-HTC2" />
+      <Atom charge="0.055" name="HTC3" type="ALDD-HTC3" />
+      <Bond atomName1="CAY" atomName2="CY" />
+      <Bond atomName1="CY" atomName2="N" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="C" atomName2="NT" />
+      <Bond atomName1="NT" atomName2="CAT" />
+      <Bond atomName1="CY" atomName2="OY" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="NT" atomName2="HNT" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CAY" atomName2="HY1" />
+      <Bond atomName1="CAY" atomName2="HY2" />
+      <Bond atomName1="CAY" atomName2="HY3" />
+      <Bond atomName1="CAT" atomName2="HTC1" />
+      <Bond atomName1="CAT" atomName2="HTC2" />
+      <Bond atomName1="CAT" atomName2="HTC3" />
+      <VirtualSite atomName1="OY" atomName2="CAY" atomName3="CY" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPY1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OY" atomName2="CAY" atomName3="CY" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPY2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <AllowPatch name="NTER_0" />
+      <AllowPatch name="ACE_3" />
+      <AllowPatch name="CTER_1" />
+      <AllowPatch name="CNEU_1" />
+      <AllowPatch name="CNES_1" />
+      <AllowPatch name="CT1_1" />
+      <AllowPatch name="CT2_1" />
+      <AllowPatch name="CT2S_2" />
+      <AllowPatch name="CT3_2" />
+      <AllowPatch name="DNTER_0" />
+      <AllowPatch name="DNTES_0" />
+      <AllowPatch name="DCTER_1" />
+      <AllowPatch name="DCTES_1" />
+      <AllowPatch name="DCNEU_1" />
+      <AllowPatch name="DCT1_1" />
+      <AllowPatch name="DCT2_1" />
+    </Residue>
+    <Residue name="DALA">
+      <Atom charge="1.9594411482736152" name="N" type="DALA-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DALA-N" />
+      <Atom charge="0.296" name="HN" type="DALA-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DALA-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DALA-CA" />
+      <Atom charge="-0.017" name="HA" type="DALA-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DALA-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DALA-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DALA-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DALA-O" />
+      <Atom charge="-0.311" name="LPOA" type="DALA-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DALA-LPOB" />
+      <Atom charge="2.2318136839948455" name="CB" type="DALA-CB" />
+      <Atom charge="-2.3308136839948457" name="DCB" type="Drude-DALA-CB" />
+      <Atom charge="0.033" name="HB1" type="DALA-HB1" />
+      <Atom charge="0.033" name="HB2" type="DALA-HB2" />
+      <Atom charge="0.033" name="HB3" type="DALA-HB3" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DARG">
+      <Atom charge="1.9594411482736152" name="N" type="DARG-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DARG-N" />
+      <Atom charge="0.296" name="HN" type="DARG-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DARG-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DARG-CA" />
+      <Atom charge="-0.017" name="HA" type="DARG-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DARG-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DARG-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DARG-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DARG-O" />
+      <Atom charge="-0.311" name="LPOA" type="DARG-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DARG-LPOB" />
+      <Atom charge="2.055826596443818" name="CB" type="DARG-CB" />
+      <Atom charge="-2.121826596443818" name="DCB" type="Drude-DARG-CB" />
+      <Atom charge="0.033" name="HB1" type="DARG-HB1" />
+      <Atom charge="0.033" name="HB2" type="DARG-HB2" />
+      <Atom charge="1.8134602692931496" name="CG" type="DARG-CG" />
+      <Atom charge="-1.9694602692931495" name="DCG" type="Drude-DARG-CG" />
+      <Atom charge="0.078" name="HG1" type="DARG-HG1" />
+      <Atom charge="0.078" name="HG2" type="DARG-HG2" />
+      <Atom charge="2.503631105111761" name="CD" type="DARG-CD" />
+      <Atom charge="-2.262631105111761" name="DCD" type="Drude-DARG-CD" />
+      <Atom charge="0.068" name="HD1" type="DARG-HD1" />
+      <Atom charge="0.068" name="HD2" type="DARG-HD2" />
+      <Atom charge="1.2637755144628071" name="NE" type="DARG-NE" />
+      <Atom charge="-1.993775514462807" name="DNE" type="Drude-DARG-NE" />
+      <Atom charge="0.404" name="HE" type="DARG-HE" />
+      <Atom charge="3.1334619260761105" name="CZ" type="DARG-CZ" />
+      <Atom charge="-2.066461926076111" name="DCZ" type="Drude-DARG-CZ" />
+      <Atom charge="0.9462020173203308" name="NH1" type="DARG-NH1" />
+      <Atom charge="-1.7552020173203309" name="DNH1" type="Drude-DARG-NH1" />
+      <Atom charge="0.375" name="HH11" type="DARG-HH11" />
+      <Atom charge="0.375" name="HH12" type="DARG-HH12" />
+      <Atom charge="0.9462020173203308" name="NH2" type="DARG-NH2" />
+      <Atom charge="-1.7552020173203309" name="DNH2" type="Drude-DARG-NH2" />
+      <Atom charge="0.375" name="HH21" type="DARG-HH21" />
+      <Atom charge="0.375" name="HH22" type="DARG-HH22" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="CD" atomName2="NE" />
+      <Bond atomName1="NE" atomName2="HE" />
+      <Bond atomName1="NE" atomName2="CZ" />
+      <Bond atomName1="CZ" atomName2="NH1" />
+      <Bond atomName1="NH1" atomName2="HH11" />
+      <Bond atomName1="NH1" atomName2="HH12" />
+      <Bond atomName1="CZ" atomName2="NH2" />
+      <Bond atomName1="NH2" atomName2="HH21" />
+      <Bond atomName1="NH2" atomName2="HH22" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CTEP_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DPROP_0" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTEP_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DASN">
+      <Atom charge="1.9594411482736152" name="N" type="DASN-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DASN-N" />
+      <Atom charge="0.296" name="HN" type="DASN-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DASN-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DASN-CA" />
+      <Atom charge="-0.017" name="HA" type="DASN-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DASN-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DASN-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DASN-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DASN-O" />
+      <Atom charge="-0.311" name="LPOA" type="DASN-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DASN-LPOB" />
+      <Atom charge="1.3876371944178998" name="CB" type="DASN-CB" />
+      <Atom charge="-1.6896371944178998" name="DCB" type="Drude-DASN-CB" />
+      <Atom charge="0.082" name="HB1" type="DASN-HB1" />
+      <Atom charge="0.082" name="HB2" type="DASN-HB2" />
+      <Atom charge="3.089382122346228" name="CG" type="DASN-CG" />
+      <Atom charge="-2.1833821223462277" name="DCG" type="Drude-DASN-CG" />
+      <Atom charge="1.6675290868987966" name="OD1" type="DASN-OD1" />
+      <Atom charge="-1.6325290868987967" name="DOD1" type="Drude-DASN-OD1" />
+      <Atom charge="1.4919161182852507" name="ND2" type="DASN-ND2" />
+      <Atom charge="-2.2739161182852508" name="DND2" type="Drude-DASN-ND2" />
+      <Atom charge="0.303" name="HD21" type="DASN-HD21" />
+      <Atom charge="0.351" name="HD22" type="DASN-HD22" />
+      <Atom charge="-0.411" name="LPDA" type="DASN-LPDA" />
+      <Atom charge="-0.264" name="LPDB" type="DASN-LPDB" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="OD1" />
+      <Bond atomName1="CG" atomName2="ND2" />
+      <Bond atomName1="ND2" atomName2="HD21" />
+      <Bond atomName1="ND2" atomName2="HD22" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD1" atomName2="CB" atomName3="CG" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPDA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD1" atomName2="CB" atomName3="CG" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPDB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DASP">
+      <Atom charge="1.9594411482736152" name="N" type="DASP-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DASP-N" />
+      <Atom charge="0.296" name="HN" type="DASP-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DASP-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DASP-CA" />
+      <Atom charge="-0.017" name="HA" type="DASP-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DASP-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DASP-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DASP-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DASP-O" />
+      <Atom charge="-0.311" name="LPOA" type="DASP-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DASP-LPOB" />
+      <Atom charge="1.8080374623516478" name="CB" type="DASP-CB" />
+      <Atom charge="-2.0540374623516477" name="DCB" type="Drude-DASP-CB" />
+      <Atom charge="0.007" name="HB1" type="DASP-HB1" />
+      <Atom charge="0.007" name="HB2" type="DASP-HB2" />
+      <Atom charge="2.5071866193957586" name="CG" type="DASP-CG" />
+      <Atom charge="-1.7491866193957586" name="DCG" type="Drude-DASP-CG" />
+      <Atom charge="1.453867927454149" name="OD1" type="DASP-OD1" />
+      <Atom charge="-1.4508679274541492" name="DOD1" type="Drude-DASP-OD1" />
+      <Atom charge="1.453867927454149" name="OD2" type="DASP-OD2" />
+      <Atom charge="-1.4508679274541492" name="DOD2" type="Drude-DASP-OD2" />
+      <Atom charge="-0.383" name="LP1A" type="DASP-LP1A" />
+      <Atom charge="-0.383" name="LP1B" type="DASP-LP1B" />
+      <Atom charge="-0.383" name="LP2A" type="DASP-LP2A" />
+      <Atom charge="-0.383" name="LP2B" type="DASP-LP2B" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="OD1" />
+      <Bond atomName1="CG" atomName2="OD2" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD1" atomName2="CB" atomName3="CG" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LP1A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD1" atomName2="CB" atomName3="CG" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LP1B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD2" atomName2="CB" atomName3="CG" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LP2A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OD2" atomName2="CB" atomName3="CG" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LP2B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="ASPP_0" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DCYS">
+      <Atom charge="1.9594411482736152" name="N" type="DCYS-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DCYS-N" />
+      <Atom charge="0.296" name="HN" type="DCYS-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DCYS-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DCYS-CA" />
+      <Atom charge="-0.017" name="HA" type="DCYS-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DCYS-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DCYS-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DCYS-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DCYS-O" />
+      <Atom charge="-0.311" name="LPOA" type="DCYS-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DCYS-LPOB" />
+      <Atom charge="2.3269881492106377" name="CB" type="DCYS-CB" />
+      <Atom charge="-2.220988149210638" name="DCB" type="Drude-DCYS-CB" />
+      <Atom charge="0.013" name="HB1" type="DCYS-HB1" />
+      <Atom charge="0.013" name="HB2" type="DCYS-HB2" />
+      <Atom charge="2.612226622300818" name="SG" type="DCYS-SG" />
+      <Atom charge="-2.5622266223008183" name="DSG" type="Drude-DCYS-SG" />
+      <Atom charge="0.148" name="HG1" type="DCYS-HG1" />
+      <Atom charge="-0.165" name="LPGA" type="DCYS-LPGA" />
+      <Atom charge="-0.165" name="LPGB" type="DCYS-LPGB" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="SG" />
+      <Bond atomName1="SG" atomName2="HG1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="SG" atomName2="HG1" atomName3="CB" p1="-0.006536680706074368" p2="0.012974054544381716" p3="0.07357951966428052" siteName="LPGA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="SG" atomName2="HG1" atomName3="CB" p1="-0.006536680706074368" p2="0.012974054544381716" p3="-0.07357951966428052" siteName="LPGB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DGLN">
+      <Atom charge="1.9594411482736152" name="N" type="DGLN-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DGLN-N" />
+      <Atom charge="0.296" name="HN" type="DGLN-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DGLN-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DGLN-CA" />
+      <Atom charge="-0.017" name="HA" type="DGLN-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DGLN-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DGLN-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DGLN-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DGLN-O" />
+      <Atom charge="-0.311" name="LPOA" type="DGLN-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DGLN-LPOB" />
+      <Atom charge="1.705426559977227" name="CB" type="DGLN-CB" />
+      <Atom charge="-1.771426559977227" name="DCB" type="Drude-DGLN-CB" />
+      <Atom charge="0.033" name="HB1" type="DGLN-HB1" />
+      <Atom charge="0.033" name="HB2" type="DGLN-HB2" />
+      <Atom charge="1.8813821223462277" name="CG" type="DGLN-CG" />
+      <Atom charge="-2.1833821223462277" name="DCG" type="Drude-DGLN-CG" />
+      <Atom charge="0.082" name="HG1" type="DGLN-HG1" />
+      <Atom charge="0.082" name="HG2" type="DGLN-HG2" />
+      <Atom charge="3.089382122346228" name="CD" type="DGLN-CD" />
+      <Atom charge="-2.1833821223462277" name="DCD" type="Drude-DGLN-CD" />
+      <Atom charge="1.6675290868987966" name="OE1" type="DGLN-OE1" />
+      <Atom charge="-1.6325290868987967" name="DOE1" type="Drude-DGLN-OE1" />
+      <Atom charge="1.4919161182852507" name="NE2" type="DGLN-NE2" />
+      <Atom charge="-2.2739161182852508" name="DNE2" type="Drude-DGLN-NE2" />
+      <Atom charge="0.303" name="HE21" type="DGLN-HE21" />
+      <Atom charge="0.351" name="HE22" type="DGLN-HE22" />
+      <Atom charge="-0.411" name="LPEA" type="DGLN-LPEA" />
+      <Atom charge="-0.264" name="LPEB" type="DGLN-LPEB" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="CD" atomName2="OE1" />
+      <Bond atomName1="CD" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="HE21" />
+      <Bond atomName1="NE2" atomName2="HE22" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE1" atomName2="CG" atomName3="CD" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPEA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE1" atomName2="CG" atomName3="CD" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPEB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DGLU">
+      <Atom charge="1.9594411482736152" name="N" type="DGLU-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DGLU-N" />
+      <Atom charge="0.296" name="HN" type="DGLU-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DGLU-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DGLU-CA" />
+      <Atom charge="-0.017" name="HA" type="DGLU-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DGLU-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DGLU-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DGLU-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DGLU-O" />
+      <Atom charge="-0.311" name="LPOA" type="DGLU-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DGLU-LPOB" />
+      <Atom charge="2.0727901703268476" name="CB" type="DGLU-CB" />
+      <Atom charge="-2.1387901703268475" name="DCB" type="Drude-DGLU-CB" />
+      <Atom charge="0.033" name="HB1" type="DGLU-HB1" />
+      <Atom charge="0.033" name="HB2" type="DGLU-HB2" />
+      <Atom charge="1.8722754197349687" name="CG" type="DGLU-CG" />
+      <Atom charge="-2.1182754197349687" name="DCG" type="Drude-DGLU-CG" />
+      <Atom charge="0.007" name="HG1" type="DGLU-HG1" />
+      <Atom charge="0.007" name="HG2" type="DGLU-HG2" />
+      <Atom charge="2.5071866193957586" name="CD" type="DGLU-CD" />
+      <Atom charge="-1.7491866193957586" name="DCD" type="Drude-DGLU-CD" />
+      <Atom charge="1.453867927454149" name="OE1" type="DGLU-OE1" />
+      <Atom charge="-1.4508679274541492" name="DOE1" type="Drude-DGLU-OE1" />
+      <Atom charge="1.453867927454149" name="OE2" type="DGLU-OE2" />
+      <Atom charge="-1.4508679274541492" name="DOE2" type="Drude-DGLU-OE2" />
+      <Atom charge="-0.383" name="LP1A" type="DGLU-LP1A" />
+      <Atom charge="-0.383" name="LP1B" type="DGLU-LP1B" />
+      <Atom charge="-0.383" name="LP2A" type="DGLU-LP2A" />
+      <Atom charge="-0.383" name="LP2B" type="DGLU-LP2B" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="CD" atomName2="OE1" />
+      <Bond atomName1="CD" atomName2="OE2" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE1" atomName2="CG" atomName3="CD" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LP1A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE1" atomName2="CG" atomName3="CD" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LP1B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE2" atomName2="CG" atomName3="CD" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LP2A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OE2" atomName2="CG" atomName3="CD" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LP2B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="GLUP_0" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DHSD">
+      <Atom charge="1.9594411482736152" name="N" type="DHSD-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DHSD-N" />
+      <Atom charge="0.296" name="HN" type="DHSD-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DHSD-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DHSD-CA" />
+      <Atom charge="-0.017" name="HA" type="DHSD-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DHSD-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DHSD-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DHSD-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DHSD-O" />
+      <Atom charge="-0.311" name="LPOA" type="DHSD-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DHSD-LPOB" />
+      <Atom charge="2.096430186187897" name="CB" type="DHSD-CB" />
+      <Atom charge="-2.115430186187897" name="DCB" type="Drude-DHSD-CB" />
+      <Atom charge="0.075" name="HB1" type="DHSD-HB1" />
+      <Atom charge="0.075" name="HB2" type="DHSD-HB2" />
+      <Atom charge="2.0839011662383076" name="ND1" type="DHSD-ND1" />
+      <Atom charge="-2.1409011662383075" name="DND1" type="Drude-DHSD-ND1" />
+      <Atom charge="0.252" name="HD1" type="DHSD-HD1" />
+      <Atom charge="1.707189369338249" name="CG" type="DHSD-CG" />
+      <Atom charge="-1.957189369338249" name="DCG" type="Drude-DHSD-CG" />
+      <Atom charge="2.154406839445477" name="CE1" type="DHSD-CE1" />
+      <Atom charge="-2.120406839445477" name="DCE1" type="Drude-DHSD-CE1" />
+      <Atom charge="0.104" name="HE1" type="DHSD-HE1" />
+      <Atom charge="1.857725751845817" name="NE2" type="DHSD-NE2" />
+      <Atom charge="-1.857725751845817" name="DNE2" type="Drude-DHSD-NE2" />
+      <Atom charge="-0.332" name="LPE2" type="DHSD-LPE2" />
+      <Atom charge="2.1409722637404136" name="CD2" type="DHSD-CD2" />
+      <Atom charge="-2.1359722637404137" name="DCD2" type="Drude-DHSD-CD2" />
+      <Atom charge="0.113" name="HD2" type="DHSD-HD2" />
+      <Atom charge="0.0" name="LPA" type="DHSD-LPA" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <VirtualSite atomName1="ND1" atomName2="CE1" atomName3="CG" p1="0.1173" p2="0" p3="0" siteName="LPA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="NE2" atomName2="CD2" atomName3="CE1" p1="-0.034999999466919514" p2="6.108652257930598e-06" p3="1.0661609584274853e-09" siteName="LPE2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="HS2_0" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DHSE">
+      <Atom charge="1.9594411482736152" name="N" type="DHSE-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DHSE-N" />
+      <Atom charge="0.296" name="HN" type="DHSE-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DHSE-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DHSE-CA" />
+      <Atom charge="-0.017" name="HA" type="DHSE-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DHSE-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DHSE-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DHSE-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DHSE-O" />
+      <Atom charge="-0.311" name="LPOA" type="DHSE-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DHSE-LPOB" />
+      <Atom charge="2.004239045525659" name="CB" type="DHSE-CB" />
+      <Atom charge="-1.9892390455256588" name="DCB" type="Drude-DHSE-CB" />
+      <Atom charge="0.039" name="HB1" type="DHSE-HB1" />
+      <Atom charge="0.039" name="HB2" type="DHSE-HB2" />
+      <Atom charge="2.1409011662383075" name="ND1" type="DHSE-ND1" />
+      <Atom charge="-2.1409011662383075" name="DND1" type="Drude-DHSE-ND1" />
+      <Atom charge="-0.252" name="LPD1" type="DHSE-LPD1" />
+      <Atom charge="1.698725751845817" name="NE2" type="DHSE-NE2" />
+      <Atom charge="-1.857725751845817" name="DNE2" type="Drude-DHSE-NE2" />
+      <Atom charge="0.236" name="HE2" type="DHSE-HE2" />
+      <Atom charge="1.783189369338249" name="CG" type="DHSE-CG" />
+      <Atom charge="-1.957189369338249" name="DCG" type="Drude-DHSE-CG" />
+      <Atom charge="2.1144068394454774" name="CE1" type="DHSE-CE1" />
+      <Atom charge="-2.120406839445477" name="DCE1" type="Drude-DHSE-CE1" />
+      <Atom charge="0.145" name="HE1" type="DHSE-HE1" />
+      <Atom charge="2.162972263740414" name="CD2" type="DHSE-CD2" />
+      <Atom charge="-2.1359722637404137" name="DCD2" type="Drude-DHSE-CD2" />
+      <Atom charge="0.09" name="HD2" type="DHSE-HD2" />
+      <Atom charge="0.0" name="LPA" type="DHSE-LPA" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <VirtualSite atomName1="ND1" atomName2="CE1" atomName3="CG" p1="0.1173" p2="0" p3="0" siteName="LPA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="ND1" atomName2="CG" atomName3="CE1" p1="-0.034999999466919514" p2="6.108652257930598e-06" p3="1.0661609584274853e-09" siteName="LPD1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="NNEU_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DNNEU_0" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DHSP">
+      <Atom charge="1.9594411482736152" name="N" type="DHSP-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DHSP-N" />
+      <Atom charge="0.296" name="HN" type="DHSP-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DHSP-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DHSP-CA" />
+      <Atom charge="-0.017" name="HA" type="DHSP-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DHSP-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DHSP-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DHSP-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DHSP-O" />
+      <Atom charge="-0.311" name="LPOA" type="DHSP-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DHSP-LPOB" />
+      <Atom charge="1.1824068419974227" name="CB" type="DHSP-CB" />
+      <Atom charge="-1.1654068419974228" name="DCB" type="Drude-DHSP-CB" />
+      <Atom charge="0.078" name="HB1" type="DHSP-HB1" />
+      <Atom charge="0.078" name="HB2" type="DHSP-HB2" />
+      <Atom charge="1.7769354670510666" name="ND1" type="DHSP-ND1" />
+      <Atom charge="-1.9479354670510667" name="DND1" type="Drude-DHSP-ND1" />
+      <Atom charge="0.34" name="HD1" type="DHSP-HD1" />
+      <Atom charge="1.7769354670510666" name="NE2" type="DHSP-NE2" />
+      <Atom charge="-1.9479354670510667" name="DNE2" type="Drude-DHSP-NE2" />
+      <Atom charge="0.34" name="HE2" type="DHSP-HE2" />
+      <Atom charge="2.1289011662383075" name="CG" type="DHSP-CG" />
+      <Atom charge="-2.1409011662383075" name="DCG" type="Drude-DHSP-CG" />
+      <Atom charge="2.295371839678731" name="CE1" type="DHSP-CE1" />
+      <Atom charge="-2.125371839678731" name="DCE1" type="Drude-DHSP-CE1" />
+      <Atom charge="0.17" name="HE1" type="DHSP-HE1" />
+      <Atom charge="2.1289011662383075" name="CD2" type="DHSP-CD2" />
+      <Atom charge="-2.1409011662383075" name="DCD2" type="Drude-DHSP-CD2" />
+      <Atom charge="0.173" name="HD2" type="DHSP-HD2" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DILE">
+      <Atom charge="1.9594411482736152" name="N" type="DILE-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DILE-N" />
+      <Atom charge="0.296" name="HN" type="DILE-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DILE-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DILE-CA" />
+      <Atom charge="-0.017" name="HA" type="DILE-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DILE-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DILE-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DILE-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DILE-O" />
+      <Atom charge="-0.311" name="LPOA" type="DILE-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DILE-LPOB" />
+      <Atom charge="1.0908990818142998" name="CB" type="DILE-CB" />
+      <Atom charge="-1.1858990818142998" name="DCB" type="Drude-DILE-CB" />
+      <Atom charge="0.095" name="HB" type="DILE-HB" />
+      <Atom charge="2.3082616753037732" name="CG2" type="DILE-CG2" />
+      <Atom charge="-2.4852616753037733" name="DCG2" type="Drude-DILE-CG2" />
+      <Atom charge="0.059" name="HG21" type="DILE-HG21" />
+      <Atom charge="0.059" name="HG22" type="DILE-HG22" />
+      <Atom charge="0.059" name="HG23" type="DILE-HG23" />
+      <Atom charge="2.079853462469149" name="CG1" type="DILE-CG1" />
+      <Atom charge="-2.2358534624691493" name="DCG1" type="Drude-DILE-CG1" />
+      <Atom charge="0.078" name="HG11" type="DILE-HG11" />
+      <Atom charge="0.078" name="HG12" type="DILE-HG12" />
+      <Atom charge="2.3082616753037732" name="CD1" type="DILE-CD1" />
+      <Atom charge="-2.4852616753037733" name="DCD1" type="Drude-DILE-CD1" />
+      <Atom charge="0.059" name="HD11" type="DILE-HD11" />
+      <Atom charge="0.059" name="HD12" type="DILE-HD12" />
+      <Atom charge="0.059" name="HD13" type="DILE-HD13" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CB" atomName2="CG1" />
+      <Bond atomName1="CG1" atomName2="HG11" />
+      <Bond atomName1="CG1" atomName2="HG12" />
+      <Bond atomName1="CB" atomName2="CG2" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="CG1" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="HD11" />
+      <Bond atomName1="CD1" atomName2="HD12" />
+      <Bond atomName1="CD1" atomName2="HD13" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DLEU">
+      <Atom charge="1.9594411482736152" name="N" type="DLEU-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DLEU-N" />
+      <Atom charge="0.296" name="HN" type="DLEU-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DLEU-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DLEU-CA" />
+      <Atom charge="-0.017" name="HA" type="DLEU-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DLEU-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DLEU-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DLEU-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DLEU-O" />
+      <Atom charge="-0.311" name="LPOA" type="DLEU-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DLEU-LPOB" />
+      <Atom charge="2.153631820443403" name="CB" type="DLEU-CB" />
+      <Atom charge="-2.2196318204434027" name="DCB" type="Drude-DLEU-CB" />
+      <Atom charge="0.033" name="HB1" type="DLEU-HB1" />
+      <Atom charge="0.033" name="HB2" type="DLEU-HB2" />
+      <Atom charge="1.4581219250220683" name="CG" type="DLEU-CG" />
+      <Atom charge="-1.5531219250220683" name="DCG" type="Drude-DLEU-CG" />
+      <Atom charge="0.095" name="HG" type="DLEU-HG" />
+      <Atom charge="2.3082616753037732" name="CD1" type="DLEU-CD1" />
+      <Atom charge="-2.4852616753037733" name="DCD1" type="Drude-DLEU-CD1" />
+      <Atom charge="0.059" name="HD11" type="DLEU-HD11" />
+      <Atom charge="0.059" name="HD12" type="DLEU-HD12" />
+      <Atom charge="0.059" name="HD13" type="DLEU-HD13" />
+      <Atom charge="2.3082616753037732" name="CD2" type="DLEU-CD2" />
+      <Atom charge="-2.4852616753037733" name="DCD2" type="Drude-DLEU-CD2" />
+      <Atom charge="0.059" name="HD21" type="DLEU-HD21" />
+      <Atom charge="0.059" name="HD22" type="DLEU-HD22" />
+      <Atom charge="0.059" name="HD23" type="DLEU-HD23" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="HD11" />
+      <Bond atomName1="CD1" atomName2="HD12" />
+      <Bond atomName1="CD1" atomName2="HD13" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="HD21" />
+      <Bond atomName1="CD2" atomName2="HD22" />
+      <Bond atomName1="CD2" atomName2="HD23" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DLYS">
+      <Atom charge="1.9594411482736152" name="N" type="DLYS-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DLYS-N" />
+      <Atom charge="0.296" name="HN" type="DLYS-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DLYS-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DLYS-CA" />
+      <Atom charge="-0.017" name="HA" type="DLYS-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DLYS-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DLYS-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DLYS-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DLYS-O" />
+      <Atom charge="-0.311" name="LPOA" type="DLYS-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DLYS-LPOB" />
+      <Atom charge="2.077712593800518" name="CB" type="DLYS-CB" />
+      <Atom charge="-2.143712593800518" name="DCB" type="Drude-DLYS-CB" />
+      <Atom charge="0.033" name="HB1" type="DLYS-HB1" />
+      <Atom charge="0.033" name="HB2" type="DLYS-HB2" />
+      <Atom charge="1.5758846449406414" name="CG" type="DLYS-CG" />
+      <Atom charge="-1.7318846449406413" name="DCG" type="Drude-DLYS-CG" />
+      <Atom charge="0.078" name="HG1" type="DLYS-HG1" />
+      <Atom charge="0.078" name="HG2" type="DLYS-HG2" />
+      <Atom charge="1.9394053794209303" name="CD" type="DLYS-CD" />
+      <Atom charge="-2.09540537942093" name="DCD" type="Drude-DLYS-CD" />
+      <Atom charge="0.078" name="HD1" type="DLYS-HD1" />
+      <Atom charge="0.078" name="HD2" type="DLYS-HD2" />
+      <Atom charge="2.276158038387988" name="CE" type="DLYS-CE" />
+      <Atom charge="-2.233158038387988" name="DCE" type="Drude-DLYS-CE" />
+      <Atom charge="0.143" name="HE1" type="DLYS-HE1" />
+      <Atom charge="0.143" name="HE2" type="DLYS-HE2" />
+      <Atom charge="1.6280909072094385" name="NZ" type="DLYS-NZ" />
+      <Atom charge="-1.9770909072094385" name="DNZ" type="Drude-DLYS-NZ" />
+      <Atom charge="0.34" name="HZ1" type="DLYS-HZ1" />
+      <Atom charge="0.34" name="HZ2" type="DLYS-HZ2" />
+      <Atom charge="0.34" name="HZ3" type="DLYS-HZ3" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="CD" atomName2="CE" />
+      <Bond atomName1="CE" atomName2="HE1" />
+      <Bond atomName1="CE" atomName2="HE2" />
+      <Bond atomName1="CE" atomName2="NZ" />
+      <Bond atomName1="NZ" atomName2="HZ1" />
+      <Bond atomName1="NZ" atomName2="HZ2" />
+      <Bond atomName1="NZ" atomName2="HZ3" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CTEP_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="LSN_0" />
+      <AllowPatch name="KAC_0" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DPROP_0" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTEP_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DMET">
+      <Atom charge="1.9594411482736152" name="N" type="DMET-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DMET-N" />
+      <Atom charge="0.296" name="HN" type="DMET-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DMET-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DMET-CA" />
+      <Atom charge="-0.017" name="HA" type="DMET-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DMET-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DMET-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DMET-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DMET-O" />
+      <Atom charge="-0.311" name="LPOA" type="DMET-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DMET-LPOB" />
+      <Atom charge="2.1738905168473934" name="CB" type="DMET-CB" />
+      <Atom charge="-2.2398905168473933" name="DCB" type="Drude-DMET-CB" />
+      <Atom charge="0.033" name="HB1" type="DMET-HB1" />
+      <Atom charge="0.033" name="HB2" type="DMET-HB2" />
+      <Atom charge="1.93761350343604" name="CG" type="DMET-CG" />
+      <Atom charge="-1.97861350343604" name="DCG" type="Drude-DMET-CG" />
+      <Atom charge="0.082" name="HG1" type="DMET-HG1" />
+      <Atom charge="0.082" name="HG2" type="DMET-HG2" />
+      <Atom charge="2.4852616753037733" name="SD" type="DMET-SD" />
+      <Atom charge="-2.4852616753037733" name="DSD" type="Drude-DMET-SD" />
+      <Atom charge="2.0251389190532962" name="CE" type="DMET-CE" />
+      <Atom charge="-2.1861389190532963" name="DCE" type="Drude-DMET-CE" />
+      <Atom charge="0.082" name="HE1" type="DMET-HE1" />
+      <Atom charge="0.082" name="HE2" type="DMET-HE2" />
+      <Atom charge="0.082" name="HE3" type="DMET-HE3" />
+      <Atom charge="-0.104" name="LP1A" type="DMET-LP1A" />
+      <Atom charge="-0.104" name="LP1B" type="DMET-LP1B" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="SD" />
+      <Bond atomName1="SD" atomName2="CE" />
+      <Bond atomName1="CE" atomName2="HE1" />
+      <Bond atomName1="CE" atomName2="HE2" />
+      <Bond atomName1="CE" atomName2="HE3" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="SD" atomName2="CG" atomName3="CE" p1="-0.006100901992336076" p2="0.012109117574756266" p3="0.06867421835332847" siteName="LP1A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="SD" atomName2="CE" atomName3="CG" p1="-0.006100901992336076" p2="0.012109117574756266" p3="0.06867421835332847" siteName="LP1B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DPHE">
+      <Atom charge="1.9594411482736152" name="N" type="DPHE-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DPHE-N" />
+      <Atom charge="0.296" name="HN" type="DPHE-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DPHE-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DPHE-CA" />
+      <Atom charge="-0.017" name="HA" type="DPHE-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DPHE-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DPHE-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DPHE-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DPHE-O" />
+      <Atom charge="-0.311" name="LPOA" type="DPHE-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DPHE-LPOB" />
+      <Atom charge="1.8745026758589414" name="CB" type="DPHE-CB" />
+      <Atom charge="-2.0245026758589413" name="DCB" type="Drude-DPHE-CB" />
+      <Atom charge="0.079" name="HB1" type="DPHE-HB1" />
+      <Atom charge="0.079" name="HB2" type="DPHE-HB2" />
+      <Atom charge="2.1975043328189217" name="CG" type="DPHE-CG" />
+      <Atom charge="-2.1605043328189217" name="DCG" type="Drude-DPHE-CG" />
+      <Atom charge="2.1108167277044982" name="CD1" type="DPHE-CD1" />
+      <Atom charge="-2.1978167277044984" name="DCD1" type="Drude-DPHE-CD1" />
+      <Atom charge="0.099" name="HD1" type="DPHE-HD1" />
+      <Atom charge="2.1108167277044982" name="CD2" type="DPHE-CD2" />
+      <Atom charge="-2.1978167277044984" name="DCD2" type="Drude-DPHE-CD2" />
+      <Atom charge="0.099" name="HD2" type="DPHE-HD2" />
+      <Atom charge="2.0851865107777714" name="CE1" type="DPHE-CE1" />
+      <Atom charge="-2.1991865107777713" name="DCE1" type="Drude-DPHE-CE1" />
+      <Atom charge="0.096" name="HE1" type="DPHE-HE1" />
+      <Atom charge="2.0851865107777714" name="CE2" type="DPHE-CE2" />
+      <Atom charge="-2.1991865107777713" name="DCE2" type="Drude-DPHE-CE2" />
+      <Atom charge="0.096" name="HE2" type="DPHE-HE2" />
+      <Atom charge="2.068923520562262" name="CZ" type="DPHE-CZ" />
+      <Atom charge="-2.201923520562262" name="DCZ" type="Drude-DPHE-CZ" />
+      <Atom charge="0.1" name="HZ" type="DPHE-HZ" />
+      <Atom charge="0.0" name="LP" type="DPHE-LP" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="CZ" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CE2" />
+      <Bond atomName1="CE2" atomName2="CZ" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="CZ" atomName2="HZ" />
+      <VirtualSite atomName1="CG" atomName2="CD2" atomName3="CD1" p1="0.1419" p2="0" p3="0" siteName="LP" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DPRO">
+      <Atom charge="1.6277830152749726" name="N" type="DPRO-N" />
+      <Atom charge="-1.8307830152749727" name="DN" type="Drude-DPRO-N" />
+      <Atom charge="2.2857509169243553" name="CA" type="DPRO-CA" />
+      <Atom charge="-2.3327509169243554" name="DCA" type="Drude-DPRO-CA" />
+      <Atom charge="0.016" name="HA" type="DPRO-HA" />
+      <Atom charge="2.0508762389433253" name="CD" type="DPRO-CD" />
+      <Atom charge="-2.083876238943325" name="DCD" type="Drude-DPRO-CD" />
+      <Atom charge="0.092" name="HD1" type="DPRO-HD1" />
+      <Atom charge="0.092" name="HD2" type="DPRO-HD2" />
+      <Atom charge="1.9221072823339977" name="CB" type="DPRO-CB" />
+      <Atom charge="-2.0371072823339977" name="DCB" type="Drude-DPRO-CB" />
+      <Atom charge="0.136" name="HB1" type="DPRO-HB1" />
+      <Atom charge="0.136" name="HB2" type="DPRO-HB2" />
+      <Atom charge="2.080333107125572" name="CG" type="DPRO-CG" />
+      <Atom charge="-2.494333107125572" name="DCG" type="Drude-DPRO-CG" />
+      <Atom charge="0.142" name="HG1" type="DPRO-HG1" />
+      <Atom charge="0.142" name="HG2" type="DPRO-HG2" />
+      <Atom charge="2.1750344561157657" name="C" type="DPRO-C" />
+      <Atom charge="-1.5800344561157658" name="DC" type="Drude-DPRO-C" />
+      <Atom charge="1.2752231038072388" name="O" type="DPRO-O" />
+      <Atom charge="-1.2752231038072388" name="DO" type="Drude-DPRO-O" />
+      <Atom charge="-0.314" name="LPOA" type="DPRO-LPOA" />
+      <Atom charge="-0.225" name="LPOB" type="DPRO-LPOB" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="HG1" />
+      <Bond atomName1="CG" atomName2="HG2" />
+      <Bond atomName1="CG" atomName2="CD" />
+      <Bond atomName1="CD" atomName2="HD1" />
+      <Bond atomName1="CD" atomName2="HD2" />
+      <Bond atomName1="CD" atomName2="N" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="PROP_0" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTEP_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DPROP_0" />
+      <AllowPatch name="DCTEP_0" />
+      <AllowPatch name="DCTES_0" />
+    </Residue>
+    <Residue name="DSER">
+      <Atom charge="1.9594411482736152" name="N" type="DSER-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DSER-N" />
+      <Atom charge="0.296" name="HN" type="DSER-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DSER-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DSER-CA" />
+      <Atom charge="-0.017" name="HA" type="DSER-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DSER-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DSER-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DSER-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DSER-O" />
+      <Atom charge="-0.311" name="LPOA" type="DSER-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DSER-LPOB" />
+      <Atom charge="2.1025941327588797" name="CB" type="DSER-CB" />
+      <Atom charge="-2.16259413275888" name="DCB" type="Drude-DSER-CB" />
+      <Atom charge="0.08" name="HB1" type="DSER-HB1" />
+      <Atom charge="0.08" name="HB2" type="DSER-HB2" />
+      <Atom charge="1.7594861389418097" name="OG" type="DSER-OG" />
+      <Atom charge="-1.7594861389418097" name="DOG" type="Drude-DSER-OG" />
+      <Atom charge="0.36" name="HG1" type="DSER-HG1" />
+      <Atom charge="-0.23" name="LPGA" type="DSER-LPGA" />
+      <Atom charge="-0.23" name="LPGB" type="DSER-LPGB" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="OG" />
+      <Bond atomName1="OG" atomName2="HG1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OG" atomName2="HG1" atomName3="CB" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPGA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OG" atomName2="HG1" atomName3="CB" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPGB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DTHR">
+      <Atom charge="1.9594411482736152" name="N" type="DTHR-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DTHR-N" />
+      <Atom charge="0.296" name="HN" type="DTHR-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DTHR-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DTHR-CA" />
+      <Atom charge="-0.017" name="HA" type="DTHR-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DTHR-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DTHR-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DTHR-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DTHR-O" />
+      <Atom charge="-0.311" name="LPOA" type="DTHR-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DTHR-LPOB" />
+      <Atom charge="2.2324836738736273" name="CB" type="DTHR-CB" />
+      <Atom charge="-2.2324836738736273" name="DCB" type="Drude-DTHR-CB" />
+      <Atom charge="0.1" name="HB" type="DTHR-HB" />
+      <Atom charge="1.7594861389418097" name="OG1" type="DTHR-OG1" />
+      <Atom charge="-1.7594861389418097" name="DOG1" type="Drude-DTHR-OG1" />
+      <Atom charge="0.36" name="HG1" type="DTHR-HG1" />
+      <Atom charge="-0.23" name="LPGA" type="DTHR-LPGA" />
+      <Atom charge="-0.23" name="LPGB" type="DTHR-LPGB" />
+      <Atom charge="1.8733042703017488" name="CG2" type="DTHR-CG2" />
+      <Atom charge="-2.053304270301749" name="DCG2" type="Drude-DTHR-CG2" />
+      <Atom charge="0.06" name="HG21" type="DTHR-HG21" />
+      <Atom charge="0.06" name="HG22" type="DTHR-HG22" />
+      <Atom charge="0.06" name="HG23" type="DTHR-HG23" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CB" atomName2="OG1" />
+      <Bond atomName1="OG1" atomName2="HG1" />
+      <Bond atomName1="CB" atomName2="CG2" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OG1" atomName2="HG1" atomName3="CB" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPGA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OG1" atomName2="HG1" atomName3="CB" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPGB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DTRP">
+      <Atom charge="1.9594411482736152" name="N" type="DTRP-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DTRP-N" />
+      <Atom charge="0.296" name="HN" type="DTRP-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DTRP-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DTRP-CA" />
+      <Atom charge="-0.017" name="HA" type="DTRP-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DTRP-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DTRP-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DTRP-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DTRP-O" />
+      <Atom charge="-0.311" name="LPOA" type="DTRP-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DTRP-LPOB" />
+      <Atom charge="1.8486431334377156" name="CB" type="DTRP-CB" />
+      <Atom charge="-1.8946431334377156" name="DCB" type="Drude-DTRP-CB" />
+      <Atom charge="0.045" name="HB1" type="DTRP-HB1" />
+      <Atom charge="0.045" name="HB2" type="DTRP-HB2" />
+      <Atom charge="1.8568800005465433" name="CG" type="DTRP-CG" />
+      <Atom charge="-1.9548800005465434" name="DCG" type="Drude-DTRP-CG" />
+      <Atom charge="2.2622907504490883" name="CD1" type="DTRP-CD1" />
+      <Atom charge="-2.203290750449088" name="DCD1" type="Drude-DTRP-CD1" />
+      <Atom charge="0.083" name="HD1" type="DTRP-HD1" />
+      <Atom charge="1.762585053498481" name="NE1" type="DTRP-NE1" />
+      <Atom charge="-2.038585053498481" name="DNE1" type="Drude-DTRP-NE1" />
+      <Atom charge="0.294" name="HE1" type="DTRP-HE1" />
+      <Atom charge="2.006338904524162" name="CE2" type="DTRP-CE2" />
+      <Atom charge="-1.9533389045241623" name="DCE2" type="Drude-DTRP-CE2" />
+      <Atom charge="1.8535679003873475" name="CD2" type="DTRP-CD2" />
+      <Atom charge="-1.9525679003873475" name="DCD2" type="Drude-DTRP-CD2" />
+      <Atom charge="2.1761142128995288" name="CE3" type="DTRP-CE3" />
+      <Atom charge="-2.2101142128995286" name="DCE3" type="Drude-DTRP-CE3" />
+      <Atom charge="0.094" name="HE3" type="DTRP-HE3" />
+      <Atom charge="2.0527051190717582" name="CZ3" type="DTRP-CZ3" />
+      <Atom charge="-2.206705119071758" name="DCZ3" type="Drude-DTRP-CZ3" />
+      <Atom charge="0.087" name="HZ3" type="DTRP-HZ3" />
+      <Atom charge="2.0876072415911797" name="CZ2" type="DTRP-CZ2" />
+      <Atom charge="-2.20260724159118" name="DCZ2" type="Drude-DTRP-CZ2" />
+      <Atom charge="0.11" name="HZ2" type="DTRP-HZ2" />
+      <Atom charge="2.021432814945026" name="CH2" type="DTRP-CH2" />
+      <Atom charge="-2.209432814945026" name="DCH2" type="Drude-DTRP-CH2" />
+      <Atom charge="0.14" name="HH2" type="DTRP-HH2" />
+      <Atom charge="0.0" name="LP" type="DTRP-LP" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="NE1" />
+      <Bond atomName1="NE1" atomName2="CE2" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CG" />
+      <Bond atomName1="CD2" atomName2="CE3" />
+      <Bond atomName1="CE3" atomName2="CZ3" />
+      <Bond atomName1="CZ3" atomName2="CH2" />
+      <Bond atomName1="CH2" atomName2="CZ2" />
+      <Bond atomName1="CZ2" atomName2="CE2" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="NE1" atomName2="HE1" />
+      <Bond atomName1="CE3" atomName2="HE3" />
+      <Bond atomName1="CZ3" atomName2="HZ3" />
+      <Bond atomName1="CH2" atomName2="HH2" />
+      <Bond atomName1="CZ2" atomName2="HZ2" />
+      <VirtualSite atomName1="CZ2" atomName2="CH2" atomName3="CE2" p1="0.141" p2="0" p3="0" siteName="LP" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DTYR">
+      <Atom charge="1.9594411482736152" name="N" type="DTYR-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DTYR-N" />
+      <Atom charge="0.296" name="HN" type="DTYR-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DTYR-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DTYR-CA" />
+      <Atom charge="-0.017" name="HA" type="DTYR-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DTYR-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DTYR-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DTYR-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DTYR-O" />
+      <Atom charge="-0.311" name="LPOA" type="DTYR-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DTYR-LPOB" />
+      <Atom charge="2.054602819928097" name="CB" type="DTYR-CB" />
+      <Atom charge="-2.246602819928097" name="DCB" type="Drude-DTYR-CB" />
+      <Atom charge="0.075" name="HB1" type="DTYR-HB1" />
+      <Atom charge="0.075" name="HB2" type="DTYR-HB2" />
+      <Atom charge="2.1524619260761106" name="CG" type="DTYR-CG" />
+      <Atom charge="-2.066461926076111" name="DCG" type="Drude-DTYR-CG" />
+      <Atom charge="1.87100943670394" name="CD1" type="DTYR-CD1" />
+      <Atom charge="-2.07300943670394" name="DCD1" type="Drude-DTYR-CD1" />
+      <Atom charge="0.118" name="HD1" type="DTYR-HD1" />
+      <Atom charge="1.87100943670394" name="CD2" type="DTYR-CD2" />
+      <Atom charge="-2.07300943670394" name="DCD2" type="Drude-DTYR-CD2" />
+      <Atom charge="0.118" name="HD2" type="DTYR-HD2" />
+      <Atom charge="1.9493208673587326" name="CE1" type="DTYR-CE1" />
+      <Atom charge="-2.0853208673587327" name="DCE1" type="Drude-DTYR-CE1" />
+      <Atom charge="0.123" name="HE1" type="DTYR-HE1" />
+      <Atom charge="1.9493208673587326" name="CE2" type="DTYR-CE2" />
+      <Atom charge="-2.0853208673587327" name="DCE2" type="Drude-DTYR-CE2" />
+      <Atom charge="0.123" name="HE2" type="DTYR-HE2" />
+      <Atom charge="2.1772835258545173" name="CZ" type="DTYR-CZ" />
+      <Atom charge="-1.8802835258545172" name="DCZ" type="Drude-DTYR-CZ" />
+      <Atom charge="1.4341667329991676" name="OH" type="DTYR-OH" />
+      <Atom charge="-1.4341667329991676" name="DOH" type="Drude-DTYR-OH" />
+      <Atom charge="0.319" name="HH" type="DTYR-HH" />
+      <Atom charge="-0.233" name="LP1A" type="DTYR-LP1A" />
+      <Atom charge="-0.233" name="LP1B" type="DTYR-LP1B" />
+      <Atom charge="0.0" name="LP" type="DTYR-LP" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB1" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="CZ" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="CE2" />
+      <Bond atomName1="CE2" atomName2="CZ" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="CZ" atomName2="OH" />
+      <Bond atomName1="OH" atomName2="HH" />
+      <VirtualSite atomName1="CG" atomName2="CD2" atomName3="CD1" p1="0.1421" p2="0" p3="0" siteName="LP" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OH" atomName2="HH" atomName3="CZ" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LP1A" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OH" atomName2="HH" atomName3="CZ" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LP1B" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+    <Residue name="DVAL">
+      <Atom charge="1.9594411482736152" name="N" type="DVAL-N" />
+      <Atom charge="-2.3654411482736153" name="DN" type="Drude-DVAL-N" />
+      <Atom charge="0.296" name="HN" type="DVAL-HN" />
+      <Atom charge="1.9617107313132722" name="CA" type="DVAL-CA" />
+      <Atom charge="-1.7917107313132723" name="DCA" type="Drude-DVAL-CA" />
+      <Atom charge="-0.017" name="HA" type="DVAL-HA" />
+      <Atom charge="1.8603205186135354" name="C" type="DVAL-C" />
+      <Atom charge="-1.3653205186135353" name="DC" type="Drude-DVAL-C" />
+      <Atom charge="1.3204701080914898" name="O" type="DVAL-O" />
+      <Atom charge="-1.3204701080914898" name="DO" type="Drude-DVAL-O" />
+      <Atom charge="-0.311" name="LPOA" type="DVAL-LPOA" />
+      <Atom charge="-0.227" name="LPOB" type="DVAL-LPOB" />
+      <Atom charge="1.8348947243275306" name="CB" type="DVAL-CB" />
+      <Atom charge="-1.9088947243275307" name="DCB" type="Drude-DVAL-CB" />
+      <Atom charge="0.074" name="HB" type="DVAL-HB" />
+      <Atom charge="2.3082616753037732" name="CG1" type="DVAL-CG1" />
+      <Atom charge="-2.4852616753037733" name="DCG1" type="Drude-DVAL-CG1" />
+      <Atom charge="0.059" name="HG11" type="DVAL-HG11" />
+      <Atom charge="0.059" name="HG12" type="DVAL-HG12" />
+      <Atom charge="0.059" name="HG13" type="DVAL-HG13" />
+      <Atom charge="2.3082616753037732" name="CG2" type="DVAL-CG2" />
+      <Atom charge="-2.4852616753037733" name="DCG2" type="Drude-DVAL-CG2" />
+      <Atom charge="0.059" name="HG21" type="DVAL-HG21" />
+      <Atom charge="0.059" name="HG22" type="DVAL-HG22" />
+      <Atom charge="0.059" name="HG23" type="DVAL-HG23" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="N" atomName2="HN" />
+      <Bond atomName1="C" atomName2="O" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CB" atomName2="CG1" />
+      <Bond atomName1="CG1" atomName2="HG11" />
+      <Bond atomName1="CG1" atomName2="HG12" />
+      <Bond atomName1="CG1" atomName2="HG13" />
+      <Bond atomName1="CB" atomName2="CG2" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPOA" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="O" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPOB" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+      <AllowPatch name="NTER_1" />
+      <AllowPatch name="ACE_0" />
+      <AllowPatch name="CTER_0" />
+      <AllowPatch name="CNEU_0" />
+      <AllowPatch name="CNES_0" />
+      <AllowPatch name="CT1_0" />
+      <AllowPatch name="CT2_0" />
+      <AllowPatch name="CT2S_1" />
+      <AllowPatch name="CT3_1" />
+      <AllowPatch name="DNTER_1" />
+      <AllowPatch name="DNTES_1" />
+      <AllowPatch name="DCTER_0" />
+      <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCT1_0" />
+      <AllowPatch name="DCT2_0" />
+    </Residue>
+  </Residues>
+  <Patches>
+    <Patch name="DNTER_0">
+      <AddAtom charge="0.34" name="HT1" type="DNTER-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DNTER-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DNTER-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="1.8603205186135354" name="C" type="DNTER-C" />
+      <ChangeAtom charge="2.1807107313132725" name="CA" type="DNTER-CA" />
+      <ChangeAtom charge="-1.3653205186135353" name="DC" type="Drude-DNTER-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DNTER-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DNTER-N" />
+      <ChangeAtom charge="-1.3204701080914898" name="DO" type="Drude-DNTER-O" />
+      <ChangeAtom charge="-0.017" name="HA" type="DNTER-HA" />
+      <ChangeAtom charge="-0.311" name="LPOA" type="DNTER-LPOA" />
+      <ChangeAtom charge="-0.227" name="LPOB" type="DNTER-LPOB" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DNTER-N" />
+      <ChangeAtom charge="1.3204701080914898" name="O" type="DNTER-O" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DNTER_1">
+      <AddAtom charge="0.34" name="HT1" type="DNTER-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DNTER-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DNTER-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="1.8603205186135354" name="C" type="DNTER-C" />
+      <ChangeAtom charge="2.1807107313132725" name="CA" type="DNTER-CA" />
+      <ChangeAtom charge="-1.3653205186135353" name="DC" type="Drude-DNTER-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DNTER-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DNTER-N" />
+      <ChangeAtom charge="-1.3204701080914898" name="DO" type="Drude-DNTER-O" />
+      <ChangeAtom charge="-0.017" name="HA" type="DNTER-HA" />
+      <ChangeAtom charge="-0.311" name="LPOA" type="DNTER-LPOA" />
+      <ChangeAtom charge="-0.227" name="LPOB" type="DNTER-LPOB" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DNTER-N" />
+      <ChangeAtom charge="1.3204701080914898" name="O" type="DNTER-O" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <RemoveExternalBond atomName="N" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DNTES_0">
+      <AddAtom charge="0.34" name="HT1" type="DNTES-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DNTES-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DNTES-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="2.419158038387988" name="CA" type="DNTES-CA" />
+      <ChangeAtom charge="-2.233158038387988" name="DCA" type="Drude-DNTES-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DNTES-N" />
+      <ChangeAtom charge="0.143" name="HA" type="DNTES-HA" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DNTES-N" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DNTES_1">
+      <AddAtom charge="0.34" name="HT1" type="DNTES-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DNTES-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DNTES-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="2.419158038387988" name="CA" type="DNTES-CA" />
+      <ChangeAtom charge="-2.233158038387988" name="DCA" type="Drude-DNTES-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DNTES-N" />
+      <ChangeAtom charge="0.143" name="HA" type="DNTES-HA" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DNTES-N" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <RemoveExternalBond atomName="N" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DPROP_0">
+      <AddAtom charge="0.266" name="HT1" type="DPROP-HT1" />
+      <AddAtom charge="0.266" name="HT2" type="DPROP-HT2" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <ChangeAtom charge="2.538321653062669" name="C" type="DPROP-C" />
+      <ChangeAtom charge="2.293931223836688" name="CA" type="DPROP-CA" />
+      <ChangeAtom charge="2.1532761446913558" name="CB" type="DPROP-CB" />
+      <ChangeAtom charge="2.2989312238366884" name="CD" type="DPROP-CD" />
+      <ChangeAtom charge="2.3410496480796272" name="CG" type="DPROP-CG" />
+      <ChangeAtom charge="-2.010321653062669" name="DC" type="Drude-DPROP-C" />
+      <ChangeAtom charge="-2.179931223836688" name="DCA" type="Drude-DPROP-CA" />
+      <ChangeAtom charge="-2.269276144691356" name="DCB" type="Drude-DPROP-CB" />
+      <ChangeAtom charge="-2.179931223836688" name="DCD" type="Drude-DPROP-CD" />
+      <ChangeAtom charge="-2.484049648079627" name="DCG" type="Drude-DPROP-CG" />
+      <ChangeAtom charge="-2.1104417974686633" name="DN" type="Drude-DPROP-N" />
+      <ChangeAtom charge="-1.4331164459794978" name="DO" type="Drude-DPROP-O" />
+      <ChangeAtom charge="0.104" name="HA" type="DPROP-HA" />
+      <ChangeAtom charge="0.084" name="HB1" type="DPROP-HB1" />
+      <ChangeAtom charge="0.084" name="HB2" type="DPROP-HB2" />
+      <ChangeAtom charge="0.104" name="HD1" type="DPROP-HD1" />
+      <ChangeAtom charge="0.104" name="HD2" type="DPROP-HD2" />
+      <ChangeAtom charge="0.071" name="HG1" type="DPROP-HG1" />
+      <ChangeAtom charge="0.071" name="HG2" type="DPROP-HG2" />
+      <ChangeAtom charge="-0.371" name="LPOA" type="DPROP-LPOA" />
+      <ChangeAtom charge="-0.215" name="LPOB" type="DPROP-LPOB" />
+      <ChangeAtom charge="2.0404417974686635" name="N" type="DPROP-N" />
+      <ChangeAtom charge="1.4331164459794978" name="O" type="DPROP-O" />
+      <RemoveExternalBond atomName="N" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="PRO" />
+    </Patch>
+    <Patch name="DNNEU_0">
+      <AddAtom charge="0.192" name="HT1" type="DNNEU-HT1" />
+      <AddAtom charge="0.192" name="HT2" type="DNNEU-HT2" />
+      <AddAtom charge="-0.428" name="LP1D" type="DNNEU-LP1D" />
+      <AddAtom charge="0.0" name="LPX" type="DNNEU-LPX" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <ChangeAtom charge="1.8603205186135354" name="C" type="DNNEU-C" />
+      <ChangeAtom charge="1.7347107313132724" name="CA" type="DNNEU-CA" />
+      <ChangeAtom charge="-1.3653205186135353" name="DC" type="Drude-DNNEU-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DNNEU-CA" />
+      <ChangeAtom charge="-2.089648760358873" name="DN" type="Drude-DNNEU-N" />
+      <ChangeAtom charge="-1.3204701080914898" name="DO" type="Drude-DNNEU-O" />
+      <ChangeAtom charge="0.094" name="HA" type="DNNEU-HA" />
+      <ChangeAtom charge="-0.311" name="LPOA" type="DNNEU-LPOA" />
+      <ChangeAtom charge="-0.227" name="LPOB" type="DNNEU-LPOB" />
+      <ChangeAtom charge="2.139648760358873" name="N" type="DNNEU-N" />
+      <ChangeAtom charge="1.3204701080914898" name="O" type="DNNEU-O" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <RemoveExternalBond atomName="N" />
+      <VirtualSite atomName1="N" atomName2="CA" atomName3="LPX" p1="-0.007444993754338436" p2="0.026992074169982973" p3="0" siteName="LP1D" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="N" atomName2="HT2" atomName3="HT1" p1="0.0605" p2="0" p3="0" siteName="LPX" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.5" wx3="0.5" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="HSE" />
+    </Patch>
+    <Patch name="DCTER_0">
+      <AddAtom charge="-1.4508679274541492" name="DOT1" type="Drude-DCTER-OT1" />
+      <AddAtom charge="-1.4508679274541492" name="DOT2" type="Drude-DCTER-OT2" />
+      <AddAtom charge="-0.383" name="LPT1" type="DCTER-LPT1" />
+      <AddAtom charge="-0.383" name="LPT2" type="DCTER-LPT2" />
+      <AddAtom charge="-0.383" name="LPT3" type="DCTER-LPT3" />
+      <AddAtom charge="-0.383" name="LPT4" type="DCTER-LPT4" />
+      <AddAtom charge="1.453867927454149" name="OT1" type="DCTER-OT1" />
+      <AddAtom charge="1.453867927454149" name="OT2" type="DCTER-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <ChangeAtom charge="2.2321866193957587" name="C" type="DCTER-C" />
+      <ChangeAtom charge="1.9617107313132722" name="CA" type="DCTER-CA" />
+      <ChangeAtom charge="-1.7491866193957586" name="DC" type="Drude-DCTER-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DCTER-CA" />
+      <ChangeAtom charge="-2.3654411482736153" name="DN" type="Drude-DCTER-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCTER-HA" />
+      <ChangeAtom charge="0.296" name="HN" type="DCTER-HN" />
+      <ChangeAtom charge="1.9594411482736152" name="N" type="DCTER-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCTER_1">
+      <AddAtom charge="-1.4508679274541492" name="DOT1" type="Drude-DCTER-OT1" />
+      <AddAtom charge="-1.4508679274541492" name="DOT2" type="Drude-DCTER-OT2" />
+      <AddAtom charge="-0.383" name="LPT1" type="DCTER-LPT1" />
+      <AddAtom charge="-0.383" name="LPT2" type="DCTER-LPT2" />
+      <AddAtom charge="-0.383" name="LPT3" type="DCTER-LPT3" />
+      <AddAtom charge="-0.383" name="LPT4" type="DCTER-LPT4" />
+      <AddAtom charge="1.453867927454149" name="OT1" type="DCTER-OT1" />
+      <AddAtom charge="1.453867927454149" name="OT2" type="DCTER-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <ChangeAtom charge="2.2321866193957587" name="C" type="DCTER-C" />
+      <ChangeAtom charge="1.9617107313132722" name="CA" type="DCTER-CA" />
+      <ChangeAtom charge="-1.7491866193957586" name="DC" type="Drude-DCTER-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DCTER-CA" />
+      <ChangeAtom charge="-2.3654411482736153" name="DN" type="Drude-DCTER-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCTER-HA" />
+      <ChangeAtom charge="0.296" name="HN" type="DCTER-HN" />
+      <ChangeAtom charge="1.9594411482736152" name="N" type="DCTER-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DCTEP_0">
+      <AddAtom charge="-1.4508679274541492" name="DOT1" type="Drude-DCTEP-OT1" />
+      <AddAtom charge="-1.4508679274541492" name="DOT2" type="Drude-DCTEP-OT2" />
+      <AddAtom charge="-0.383" name="LPT1" type="DCTEP-LPT1" />
+      <AddAtom charge="-0.383" name="LPT2" type="DCTEP-LPT2" />
+      <AddAtom charge="-0.383" name="LPT3" type="DCTEP-LPT3" />
+      <AddAtom charge="-0.383" name="LPT4" type="DCTEP-LPT4" />
+      <AddAtom charge="1.453867927454149" name="OT1" type="DCTEP-OT1" />
+      <AddAtom charge="1.453867927454149" name="OT2" type="DCTEP-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <ChangeAtom charge="2.4571866193957588" name="C" type="DCTEP-C" />
+      <ChangeAtom charge="1.9843718396787309" name="CA" type="DCTEP-CA" />
+      <ChangeAtom charge="2.1532761446913558" name="CB" type="DCTEP-CB" />
+      <ChangeAtom charge="2.142371839678731" name="CD" type="DCTEP-CD" />
+      <ChangeAtom charge="2.3410496480796272" name="CG" type="DCTEP-CG" />
+      <ChangeAtom charge="-1.7491866193957586" name="DC" type="Drude-DCTEP-C" />
+      <ChangeAtom charge="-2.125371839678731" name="DCA" type="Drude-DCTEP-CA" />
+      <ChangeAtom charge="-2.269276144691356" name="DCB" type="Drude-DCTEP-CB" />
+      <ChangeAtom charge="-2.125371839678731" name="DCD" type="Drude-DCTEP-CD" />
+      <ChangeAtom charge="-2.484049648079627" name="DCG" type="Drude-DCTEP-CG" />
+      <ChangeAtom charge="-2.053304270301749" name="DN" type="Drude-DCTEP-N" />
+      <ChangeAtom charge="-0.014" name="HA" type="DCTEP-HA" />
+      <ChangeAtom charge="0.084" name="HB1" type="DCTEP-HB1" />
+      <ChangeAtom charge="0.084" name="HB2" type="DCTEP-HB2" />
+      <ChangeAtom charge="0.072" name="HD1" type="DCTEP-HD1" />
+      <ChangeAtom charge="0.072" name="HD2" type="DCTEP-HD2" />
+      <ChangeAtom charge="0.071" name="HG1" type="DCTEP-HG1" />
+      <ChangeAtom charge="0.071" name="HG2" type="DCTEP-HG2" />
+      <ChangeAtom charge="1.814304270301749" name="N" type="DCTEP-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="PRO" />
+    </Patch>
+    <Patch name="DCTES_0">
+      <AddAtom charge="-1.4508679274541492" name="DOT1" type="Drude-DCTES-OT1" />
+      <AddAtom charge="-1.4508679274541492" name="DOT2" type="Drude-DCTES-OT2" />
+      <AddAtom charge="-0.383" name="LPT1" type="DCTES-LPT1" />
+      <AddAtom charge="-0.383" name="LPT2" type="DCTES-LPT2" />
+      <AddAtom charge="-0.383" name="LPT3" type="DCTES-LPT3" />
+      <AddAtom charge="-0.383" name="LPT4" type="DCTES-LPT4" />
+      <AddAtom charge="1.453867927454149" name="OT1" type="DCTES-OT1" />
+      <AddAtom charge="1.453867927454149" name="OT2" type="DCTES-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <ChangeAtom charge="2.2751866193957584" name="C" type="DCTES-C" />
+      <ChangeAtom charge="-1.7491866193957586" name="DC" type="Drude-DCTES-C" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="GLY" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="PRO" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCTES_1">
+      <AddAtom charge="-1.4508679274541492" name="DOT1" type="Drude-DCTES-OT1" />
+      <AddAtom charge="-1.4508679274541492" name="DOT2" type="Drude-DCTES-OT2" />
+      <AddAtom charge="-0.383" name="LPT1" type="DCTES-LPT1" />
+      <AddAtom charge="-0.383" name="LPT2" type="DCTES-LPT2" />
+      <AddAtom charge="-0.383" name="LPT3" type="DCTES-LPT3" />
+      <AddAtom charge="-0.383" name="LPT4" type="DCTES-LPT4" />
+      <AddAtom charge="1.453867927454149" name="OT1" type="DCTES-OT1" />
+      <AddAtom charge="1.453867927454149" name="OT2" type="DCTES-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <ChangeAtom charge="2.2751866193957584" name="C" type="DCTES-C" />
+      <ChangeAtom charge="-1.7491866193957586" name="DC" type="Drude-DCTES-C" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="-0.03288924172750679" p3="0" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="OT1" atomName3="C" p1="-0.011970705016398403" p2="0.03288924172750679" p3="0" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DCNEU_0">
+      <AddAtom charge="-1.6663059805572336" name="DOT1" type="Drude-DCNEU-OT1" />
+      <AddAtom charge="-1.963334406026505" name="DOT2" type="Drude-DCNEU-OT2" />
+      <AddAtom charge="0.374" name="HT" type="DCNEU-HT" />
+      <AddAtom charge="-0.319" name="LPT1" type="DCNEU-LPT1" />
+      <AddAtom charge="-0.319" name="LPT2" type="DCNEU-LPT2" />
+      <AddAtom charge="-0.285" name="LPT3" type="DCNEU-LPT3" />
+      <AddAtom charge="-0.285" name="LPT4" type="DCNEU-LPT4" />
+      <AddAtom charge="1.6663059805572336" name="OT1" type="DCNEU-OT1" />
+      <AddAtom charge="1.963334406026505" name="OT2" type="DCNEU-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="HT" atomName2="OT2" />
+      <ChangeAtom charge="2.7645268573119237" name="C" type="DCNEU-C" />
+      <ChangeAtom charge="1.8947107313132723" name="CA" type="DCNEU-CA" />
+      <ChangeAtom charge="-1.9065268573119238" name="DC" type="Drude-DCNEU-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DCNEU-CA" />
+      <ChangeAtom charge="-2.3654411482736153" name="DN" type="Drude-DCNEU-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCNEU-HA" />
+      <ChangeAtom charge="0.296" name="HN" type="DCNEU-HN" />
+      <ChangeAtom charge="1.9594411482736152" name="N" type="DCNEU-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCNEU_1">
+      <AddAtom charge="-1.6663059805572336" name="DOT1" type="Drude-DCNEU-OT1" />
+      <AddAtom charge="-1.963334406026505" name="DOT2" type="Drude-DCNEU-OT2" />
+      <AddAtom charge="0.374" name="HT" type="DCNEU-HT" />
+      <AddAtom charge="-0.319" name="LPT1" type="DCNEU-LPT1" />
+      <AddAtom charge="-0.319" name="LPT2" type="DCNEU-LPT2" />
+      <AddAtom charge="-0.285" name="LPT3" type="DCNEU-LPT3" />
+      <AddAtom charge="-0.285" name="LPT4" type="DCNEU-LPT4" />
+      <AddAtom charge="1.6663059805572336" name="OT1" type="DCNEU-OT1" />
+      <AddAtom charge="1.963334406026505" name="OT2" type="DCNEU-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="HT" atomName2="OT2" />
+      <ChangeAtom charge="2.7645268573119237" name="C" type="DCNEU-C" />
+      <ChangeAtom charge="1.8947107313132723" name="CA" type="DCNEU-CA" />
+      <ChangeAtom charge="-1.9065268573119238" name="DC" type="Drude-DCNEU-C" />
+      <ChangeAtom charge="-1.7917107313132723" name="DCA" type="Drude-DCNEU-CA" />
+      <ChangeAtom charge="-2.3654411482736153" name="DN" type="Drude-DCNEU-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCNEU-HA" />
+      <ChangeAtom charge="0.296" name="HN" type="DCNEU-HN" />
+      <ChangeAtom charge="1.9594411482736152" name="N" type="DCNEU-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DCT1_0">
+      <AddAtom charge="2.2962872001035097" name="CT" type="DCT1-CT" />
+      <AddAtom charge="-2.3262872001035095" name="DCT" type="Drude-DCT1-CT" />
+      <AddAtom charge="-1.6499603496320785" name="DOT1" type="Drude-DCT1-OT1" />
+      <AddAtom charge="-1.4847209377411248" name="DOT2" type="Drude-DCT1-OT2" />
+      <AddAtom charge="0.116" name="HT1" type="DCT1-HT1" />
+      <AddAtom charge="0.116" name="HT2" type="DCT1-HT2" />
+      <AddAtom charge="0.116" name="HT3" type="DCT1-HT3" />
+      <AddAtom charge="-0.349" name="LPT1" type="DCT1-LPT1" />
+      <AddAtom charge="-0.258" name="LPT2" type="DCT1-LPT2" />
+      <AddAtom charge="-0.17" name="LPT3" type="DCT1-LPT3" />
+      <AddAtom charge="-0.17" name="LPT4" type="DCT1-LPT4" />
+      <AddAtom charge="1.6499603496320785" name="OT1" type="DCT1-OT1" />
+      <AddAtom charge="1.4847209377411248" name="OT2" type="DCT1-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="CT" atomName2="HT1" />
+      <AddBond atomName1="CT" atomName2="HT2" />
+      <AddBond atomName1="CT" atomName2="HT3" />
+      <AddBond atomName1="CT" atomName2="OT2" />
+      <ChangeAtom charge="2.728185446309965" name="C" type="DCT1-C" />
+      <ChangeAtom charge="1.759297471742985" name="CA" type="DCT1-CA" />
+      <ChangeAtom charge="-2.031185446309965" name="DC" type="Drude-DCT1-C" />
+      <ChangeAtom charge="-1.700297471742985" name="DCA" type="Drude-DCT1-CA" />
+      <ChangeAtom charge="-2.4183207668819215" name="DN" type="Drude-DCT1-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCT1-HA" />
+      <ChangeAtom charge="0.272" name="HN" type="DCT1-HN" />
+      <ChangeAtom charge="2.0363207668819214" name="N" type="DCT1-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="CT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="CT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCT1_1">
+      <AddAtom charge="2.2962872001035097" name="CT" type="DCT1-CT" />
+      <AddAtom charge="-2.3262872001035095" name="DCT" type="Drude-DCT1-CT" />
+      <AddAtom charge="-1.6499603496320785" name="DOT1" type="Drude-DCT1-OT1" />
+      <AddAtom charge="-1.4847209377411248" name="DOT2" type="Drude-DCT1-OT2" />
+      <AddAtom charge="0.116" name="HT1" type="DCT1-HT1" />
+      <AddAtom charge="0.116" name="HT2" type="DCT1-HT2" />
+      <AddAtom charge="0.116" name="HT3" type="DCT1-HT3" />
+      <AddAtom charge="-0.349" name="LPT1" type="DCT1-LPT1" />
+      <AddAtom charge="-0.258" name="LPT2" type="DCT1-LPT2" />
+      <AddAtom charge="-0.17" name="LPT3" type="DCT1-LPT3" />
+      <AddAtom charge="-0.17" name="LPT4" type="DCT1-LPT4" />
+      <AddAtom charge="1.6499603496320785" name="OT1" type="DCT1-OT1" />
+      <AddAtom charge="1.4847209377411248" name="OT2" type="DCT1-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="CT" atomName2="HT1" />
+      <AddBond atomName1="CT" atomName2="HT2" />
+      <AddBond atomName1="CT" atomName2="HT3" />
+      <AddBond atomName1="CT" atomName2="OT2" />
+      <ChangeAtom charge="2.728185446309965" name="C" type="DCT1-C" />
+      <ChangeAtom charge="1.759297471742985" name="CA" type="DCT1-CA" />
+      <ChangeAtom charge="-2.031185446309965" name="DC" type="Drude-DCT1-C" />
+      <ChangeAtom charge="-1.700297471742985" name="DCA" type="Drude-DCT1-CA" />
+      <ChangeAtom charge="-2.4183207668819215" name="DN" type="Drude-DCT1-N" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCT1-HA" />
+      <ChangeAtom charge="0.272" name="HN" type="DCT1-HN" />
+      <ChangeAtom charge="2.0363207668819214" name="N" type="DCT1-N" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <VirtualSite atomName1="OT1" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="CA" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="CT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="CT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DCT2_0">
+      <AddAtom charge="-2.2739161182852508" name="DNT" type="Drude-DCT2-NT" />
+      <AddAtom charge="0.303" name="HTC1" type="DCT2-HTC1" />
+      <AddAtom charge="0.351" name="HTC2" type="DCT2-HTC2" />
+      <AddAtom charge="1.4919161182852507" name="NT" type="DCT2-NT" />
+      <AddBond atomName1="C" atomName2="NT" />
+      <AddBond atomName1="HTC1" atomName2="NT" />
+      <AddBond atomName1="HTC2" atomName2="NT" />
+      <ChangeAtom charge="2.9093821223462277" name="C" type="DCT2-C" />
+      <ChangeAtom charge="1.869297471742985" name="CA" type="DCT2-CA" />
+      <ChangeAtom charge="-2.1833821223462277" name="DC" type="Drude-DCT2-C" />
+      <ChangeAtom charge="-1.700297471742985" name="DCA" type="Drude-DCT2-CA" />
+      <ChangeAtom charge="-2.4183207668819215" name="DN" type="Drude-DCT2-N" />
+      <ChangeAtom charge="-1.6325290868987967" name="DO" type="Drude-DCT2-O" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCT2-HA" />
+      <ChangeAtom charge="0.272" name="HN" type="DCT2-HN" />
+      <ChangeAtom charge="-0.411" name="LPOA" type="DCT2-LPOA" />
+      <ChangeAtom charge="-0.264" name="LPOB" type="DCT2-LPOB" />
+      <ChangeAtom charge="2.0363207668819214" name="N" type="DCT2-N" />
+      <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2-O" />
+      <RemoveExternalBond atomName="C" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCT2_1">
+      <AddBond atomName1="HTC1" atomName2="NT" />
+      <AddBond atomName1="HTC2" atomName2="NT" />
+      <ChangeAtom charge="2.9093821223462277" name="C" type="DCT2-C" />
+      <ChangeAtom charge="1.869297471742985" name="CA" type="DCT2-CA" />
+      <ChangeAtom charge="-2.1833821223462277" name="DC" type="Drude-DCT2-C" />
+      <ChangeAtom charge="-1.700297471742985" name="DCA" type="Drude-DCT2-CA" />
+      <ChangeAtom charge="-2.4183207668819215" name="DN" type="Drude-DCT2-N" />
+      <ChangeAtom charge="-2.2739161182852508" name="DNT" type="Drude-DCT2-NT" />
+      <ChangeAtom charge="-1.6325290868987967" name="DO" type="Drude-DCT2-O" />
+      <ChangeAtom charge="-0.017" name="HA" type="DCT2-HA" />
+      <ChangeAtom charge="0.272" name="HN" type="DCT2-HN" />
+      <ChangeAtom charge="0.303" name="HTC1" type="DCT2-HTC1" />
+      <ChangeAtom charge="0.351" name="HTC2" type="DCT2-HTC2" />
+      <ChangeAtom charge="-0.411" name="LPOA" type="DCT2-LPOA" />
+      <ChangeAtom charge="-0.264" name="LPOB" type="DCT2-LPOB" />
+      <ChangeAtom charge="2.0363207668819214" name="N" type="DCT2-N" />
+      <ChangeAtom charge="1.4919161182852507" name="NT" type="DCT2-NT" />
+      <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2-O" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+  </Patches>
+</ForceField>

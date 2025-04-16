@@ -11,7 +11,7 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 **AMBER:** All major AMBER force fields distributed with [AmberTools](https://ambermd.org/AmberTools.php) 24.8 from [conda-forge](https://anaconda.org/conda-forge/ambertools/files), as well as all released [GAFF small molecule force fields](http://ambermd.org/antechamber/gaff.html) through 1.81 (GAFF 1.x) and 2.2.20 (GAFF 2.x).
 
-**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [July 2020 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
+**CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [July 2024 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
 **Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
 
@@ -65,10 +65,9 @@ forcefield = ForceField(
 
 ### Using the CHARMM force fields
 
-Similarly, the CHARMM force fields will be registered in the `charmm/` relative path.
-For example, model system small molecule templates corresponding to amino acids can be accessed with:
+Similarly, the CHARMM force fields will be registered in the `charmm/` relative path:
 ```python
-forcefield = ForceField("charmm/toppar_all36_prot_model.xml")
+forcefield = ForceField("charmm/charmm36.xml")
 ```
 
 ## Using AMBER GAFF 1.x and 2.x for small molecules

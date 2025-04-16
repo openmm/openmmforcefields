@@ -537,11 +537,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         self._database_table_name = os.path.basename(forcefield)
 
-        # Track which OpenMM ForceField objects have loaded the relevant GAFF parameters
-        self._gaff_parameters_loaded = dict()
-        # Track which atom types we have told OpenMM about
-        self._gaff_atom_types_observed = set()
-
     @property
     def gaff_version(self):
         """The current GAFF version in use"""
@@ -735,21 +730,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         kwargs = {}
         if "write_unused" in signature(params.write).parameters:
             kwargs["write_unused"] = True
-
-        # We need to make sure we don't duplicate atom types we have already told
-        # OpenMM about. To do this we will keep track of atom types we have already
-        # seen and ensure we only record new atom types in the xml.
-
-        # iterate over a copy of the atom types
-        for atom_type in params.atom_types.copy().keys():
-            if atom_type not in self._gaff_atom_types_observed:
-                self._gaff_atom_types_observed.add(atom_type)
-                _logger.debug(f"added {atom_type} to set of seen types")
-            # if we have seen the atom type, delete it from the OG params,
-            # not the copy!
-            else:
-                del params.atom_types[atom_type]
-                _logger.debug(f"{atom_type} already recorded")
 
         params.write(ffxml, **kwargs)
         ffxml_contents = ffxml.getvalue()
