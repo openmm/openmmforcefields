@@ -1,11 +1,9 @@
 # Load the protein force field second, as documented in the Amber manual.  This
 # way its HYP parameters will get used instead of GLYCAM's.  This turns out to
 # be critical for simulation with ff19SB as otherwise the resulting combination
-# of torsions and CMAPs that are applied will be nonsensical.  We do so even
-# here with ff14SB for consistency, since we have GLYCAM's HYP get overridden by
-# the protein force fields' HYP.
+# of torsions and CMAPs that are applied will be nonsensical.
 source leaprc.GLYCAM_06j-1
-source oldff/leaprc.ff14SB
+source leaprc.protein.ff19SB
 
 ## Testing residues made for linking to proteins.
 ##
@@ -70,6 +68,13 @@ translate m6  { 60.0   0.0   0.0 }
  
 Glycoprotein = combine { m2 m3 m4 m5 m6 }
 
-saveamberparm Glycoprotein Glycoprotein_shortened.parm7 Glycoprotein_shortened.rst7
+# LEaP in AmberTools 24 has a bug that causes CMAPs to be missing when
+# concatenating or making branched sequences like above.  Saving and loading is
+# a workaround.  If this is eventually fixed in LEaP, this will be unnecessary.
+saveOff Glycoprotein Glycoprotein_shortened.ff19SB.lib
+loadOff Glycoprotein_shortened.ff19SB.lib
+
+saveamberparm Glycoprotein Glycoprotein_shortened.ff19SB.parm7 Glycoprotein_shortened.ff19SB.rst7
 
 quit
+

@@ -281,8 +281,17 @@ def convert_leaprc(
         params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
         params = parmed.openmm.OpenMMParameterSet.from_parameterset(params, remediate_residues=(not write_unused))
     if override_level:
-        for name, residue in params.residues.items():
-            residue.override_level = override_level
+        if isinstance(override_level, int):
+            for name, residue in params.residues.items():
+                residue.override_level = override_level
+        elif isinstance(override_level, dict):
+            for name, residue in params.residues.items():
+                if name in override_level:
+                    residue.override_level = override_level[name]
+                elif "*" in override_level:
+                    residue.override_level = override_level["*"]
+        else:
+            raise TypeError("unrecognized override format (expected int or dict)")
     if is_glycam:
         skip_duplicates = False
     else:
@@ -569,8 +578,8 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     raise Exception(f"Wrong option used in Options for {source_files:s}")
 
         # Convert files
+        is_glycam = False
         if MODE == "LEAPRC":
-            is_glycam = False
             for source_file in source_files:
                 if "GLYCAM" in source_file:
                     is_glycam = True
@@ -620,6 +629,9 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
             add_prefix_to_ffxml(ffxml_name, prefix)
         if "CMAPFRCMOD" in entry:
             patch_ffxml_cmap(ffxml_name, entry["CMAPFRCMOD"], *entry.get("CMAPExtraFFXML", []))
+        if is_glycam:
+            modify_glycan_ffxml(ffxml_name)
+
         if verbose:
             print("Validating the conversion...")
         tested = False
@@ -662,7 +674,15 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
                     validate_merged_lipids(merged_ffxml_filename, test_source)
                 tested = True
             elif test == "protein_glycan":
-                validate_glyco_protein(ffxml_name, test_source)
+                validate_glyco_protein(
+                    ffxml_name,
+                    test_source,
+                    "oldff/leaprc.ff14SB",
+                    "../openmmforcefields/ffxml/amber/protein.ff14SB.xml",
+                )
+                validate_glyco_protein(
+                    ffxml_name, test_source, "leaprc.ff19SB", "../openmmforcefields/ffxml/amber/protein.ff19SB.xml"
+                )
                 tested = True
         if not tested:
             raise Exception(f"No validation tests have been run for {source_files}")
@@ -771,40 +791,19 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
         print(contents.replace(" />", "/>"), file=file)
 
 
-def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
+def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-3):
     import math
 
     # Get AMBER system
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem()
 
-    # Create topology where residue names are named from HYP to CHYP or NHYP (etc) where necessary
-    source_topology = parm_amber.topology
-    destination_topology = app.Topology()
-
-    new_atoms = {}
-    for chain in source_topology.chains():
-        new_chain = destination_topology.addChain(chain.id)
-        for residue in chain.residues():
-            new_name = residue.name
-            if residue.index in [0, 5, 13, 21, 29]:
-                new_name = "N" + residue.name
-            elif residue.index in [4, 9, 17, 25, 33]:
-                new_name = "C" + residue.name
-            new_residue = destination_topology.addResidue(new_name, new_chain, residue.id)
-            for atom in residue.atoms():
-                new_atom = destination_topology.addAtom(atom.name, atom.element, new_residue, atom.id)
-                new_atoms[atom] = new_atom
-    for bond in source_topology.bonds():
-        order = bond.order
-        destination_topology.addBond(new_atoms[bond[0]], new_atoms[bond[1]], order=order)
-
     # Get OpenMM system
     if isinstance(ffxml, str):
         ff = app.ForceField(ffxml)
     else:
         ff = app.ForceField(*ffxml)
-    system_omm = ff.createSystem(destination_topology, ignoreExternalBonds=True)
+    system_omm = ff.createSystem(parm_amber.topology, ignoreExternalBonds=True)
 
     def compute_potential_components(system, positions, beta=beta):
         # Note: this is copied from perses
@@ -827,8 +826,15 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-1):
         del context, integrator
         return energy_components
 
-    amber_energies = compute_potential_components(system_amber, parm_amber.positions)
-    omm_energies = compute_potential_components(system_omm, parm_amber.positions)
+    context_relax = openmm.Context(
+        system_amber, openmm.VerletIntegrator(1.0 * u.femtosecond), openmm.Platform.getPlatformByName("Reference")
+    )
+    context_relax.setPositions(parm_amber.positions)
+    openmm.LocalEnergyMinimizer.minimize(context_relax)
+    relaxed_positions = context_relax.getState(positions=True).getPositions(asNumpy=True)
+
+    amber_energies = compute_potential_components(system_amber, relaxed_positions)
+    omm_energies = compute_potential_components(system_omm, relaxed_positions)
 
     for force_name in sorted(set(amber_energies) | set(omm_energies)):
         assert math.isclose(amber_energies.get(force_name, 0.0), omm_energies.get(force_name, 0.0), rel_tol=tolerance)
@@ -848,7 +854,9 @@ def assert_energies(
     # AMBER
     parm_amber = parmed.load_file(prmtop, inpcrd)
     system_amber = parm_amber.createSystem(splitDihedrals=True)
-    amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, platform="Reference", nrg=units)
+    amber_energies = parmed.openmm.energy_decomposition_system(
+        parm_amber, system_amber, platform="Reference", nrg=units
+    )
 
     # OpenMM-ffxml
     if isinstance(ffxml, str):
@@ -1297,7 +1305,7 @@ def validate_phospho_protein(ffxml_name, leaprc_name):
     # already exist
     if verbose:
         print(f"Phosphorylated protein energy validation for {ffxml_name}")
-    for pdbname in glob.iglob(f"files/phospho/*.pdb"):
+    for pdbname in glob.iglob("files/phospho/*.pdb"):
         if verbose:
             print(f"Now testing with pdb {os.path.basename(pdbname)}")
         if verbose:
@@ -1409,11 +1417,15 @@ quit"""
         parm_omm = parmed.openmm.load_topology(pdb.topology, xyz=pdb.positions)
         parm_amber = parmed.load_file(top[1], crd[1])
         system_amber = parm_amber.createSystem()
-        omm_energies = parmed.openmm.energy_decomposition_system(parm_omm, system_omm, platform="Reference", nrg=u.kilojoules_per_mole)
+        omm_energies = parmed.openmm.energy_decomposition_system(
+            parm_omm, system_omm, platform="Reference", nrg=u.kilojoules_per_mole
+        )
         for entry in omm_energies:
             if entry[0] == "NonbondedForce":
                 omm_nonbonded = entry[1]
-        amber_energies = parmed.openmm.energy_decomposition_system(parm_amber, system_amber, platform="Reference", nrg=u.kilojoules_per_mole)
+        amber_energies = parmed.openmm.energy_decomposition_system(
+            parm_amber, system_amber, platform="Reference", nrg=u.kilojoules_per_mole
+        )
         for entry in amber_energies:
             if entry[0] == "NonbondedForce":
                 amber_nonbonded = entry[1]
@@ -1910,12 +1922,16 @@ def validate_glyco_protein(
     supp_leaprc_name="oldff/leaprc.ff14SB",
     supp_ffxml_name="../openmmforcefields/ffxml/amber/protein.ff14SB.xml",
 ):
-    modify_glycan_ffxml(ffxml_name)
-
     if verbose:
         print(f"Glycosylated protein energy validation for {ffxml_name}")
-    top = "files/glycam/Glycoprotein_shortened.parm7"
-    crd = "files/glycam/Glycoprotein_shortened.rst7"
+    if "ff14SB" in supp_leaprc_name:
+        top = "files/glycam/Glycoprotein_shortened.parm7"
+        crd = "files/glycam/Glycoprotein_shortened.rst7"
+    elif "ff19SB" in supp_leaprc_name:
+        top = "files/glycam/Glycoprotein_shortened.ff19SB.parm7"
+        crd = "files/glycam/Glycoprotein_shortened.ff19SB.rst7"
+    else:
+        raise ValueError("unrecognized leaprc for glycoprotein validation")
     assert_energies_glyco_protein(top, crd, (supp_ffxml_name, ffxml_name))
     if verbose:
         print(f"Glycosylated protein energy validation for {ffxml_name} was successful!")

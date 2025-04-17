@@ -69,6 +69,10 @@
   - lipids
 - Source: leaprc.protein.ff14SB
   Prefix: protein
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -76,6 +80,10 @@
   Test:
   - protein
 - Source: oldff/leaprc.ff14SB.redq
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -85,6 +93,10 @@
   - nucleic
 - Source: leaprc.protein.ff14SBonlysc
   Prefix: protein
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -100,6 +112,9 @@
   Prefix: protein
   Options:
     keep_types: ["P"]
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Tian, C.; Kasavajhala, K.; Belfon, K.A.A.; Raguette, L.; Huang, H.; Migues, A.N.; Bickel, J.; Wang, Y.; Pincay, J.; Wu, Q.; Simmerling, C.
@@ -200,6 +215,9 @@
   Test:
   - protein
 - Source: oldff/leaprc.ff10
+  Options:
+    override_level:
+      HYP: 2
   Reference:
   - >-
     Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006).
@@ -305,6 +323,10 @@
   Test:
   - dna
 - Source: oldff/leaprc.ff14SB
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
