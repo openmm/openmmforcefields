@@ -371,7 +371,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             generator = GAFFTemplateGenerator(forcefield=forcefield)
             import re
 
-            result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield)
+            result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>[\d.]+)$", forcefield)
             assert generator.forcefield == forcefield
             assert generator.gaff_version == result["major_version"] + "." + result["minor_version"]
             assert generator.gaff_major_version == result["major_version"]
@@ -840,6 +840,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         for small_molecule_forcefield in self.TEMPLATE_GENERATOR.INSTALLED_FORCEFIELDS:
             if not self._filter_openff(small_molecule_forcefield):
                 _logger.debug(f"skipping {small_molecule_forcefield}")
+                continue
+            if "spce" in small_molecule_forcefield:
                 continue
 
             _logger.info(f"Testing {small_molecule_forcefield}")

@@ -1,0 +1,220 @@
+phosaa19SB without CMAPs for openmmforcefields conversion
+MASS
+OP      16.00   0.434   Monoanionic Phosphate oxygen (analog to O2)
+OQ      16.00   0.434   Monoanionic Phosphate oxygen, protonated (analog to OH)
+OR      16.00   0.434   Monoanionic Phosphate oxygen, bridging (analog to OS)
+OT      16.00   0.434   TYR 2- Phosphate oxygen (analog to OP)
+OV      16.00   0.434   TYR 2- Phosphate oxygen, bridging (analog to OR)
+OX      16.00   0.434   SER/THR 2- Phosphate oxygen (analog to OP)
+OZ      16.00   0.434   SER/THR 2- Phosphate oxygen, bridging (analog to OR)
+CG	12.01	0.360	Y1P/PTR C Gamma (CA) from parm99.dat
+
+BOND
+HO-OQ   553.0   0.960   from HO-OH
+OP-P    525.0   1.480   from O2-P
+OQ-P    230.0   1.610   from OH-P
+OR-P    230.0   1.610   from OS-P
+C -OR   450.0   1.323   from C -OS
+CT-OR   320.0   1.410   from CT-OS
+OT-P    525.0   1.480   # repeat parameters for TYR 2-
+OV-P    230.0   1.610   
+C -OV   450.0   1.323   
+CT-OV   320.0   1.410   
+OX-P    525.0   1.480   # repeat parameters for SER/THR 2-
+OZ-P    230.0   1.610   
+C -OZ   450.0   1.323   
+CT-OZ   320.0   1.410  
+CG-CT   317.0   1.510   Y1P/PTR C Gamma (CA) from parm99.dat
+CG-CA   469.0   1.400   Y1P/PTR C Gamma (CA) from parm99.dat
+3C-OZ   320.0   1.410   from CT-OS
+3C-OR   320.0   1.410   from CT-OS
+2C-OR   320.0   1.410   from CT-OS
+2C-OZ   320.0   1.410   from CT-OS
+
+ANGL
+OP-P -OP        140.0   119.90  from O2-P -O2
+OP-P -OQ        90.0    108.23  from O2-P -OH ! raised to prevent simulation instabilities
+OQ-P -OR        90.0    108.23  "" ""
+OQ-P -OQ        90.0    108.23  "" ""
+OR-P -OR        90.0    102.60  from OS-P -OS ! raised to prevent simulation instabilities
+OR-P -OP        100.0   108.23  from O2-P -OS
+HO-OQ-P         100.0   113.28  from HO-OH-P  ! raised to prevent simulation instabilities, equilibrium from G03 calculations   
+C -OR-P         100.0   120.50  from Sticht et al. (frcmod.y1p)
+CA-C -OR        70.0    120.00  "" ""
+CT-OR-P         100.0   120.50  from CT-OS-P
+CT-CT-OR        50.0    109.50  from CT-CT-OS
+H1-CT-OR        50.0    109.50  from H1-CT-OS
+OT-P -OT        140.0   119.90  # repeat parameters for TYR 2-
+OV-P -OV        90.0    102.60  
+OV-P -OT        100.0   108.23  
+C -OV-P         100.0   120.50  
+CA-C -OV        70.0    120.00  
+CT-OV-P         100.0   120.50  
+CT-CT-OV        50.0    109.50  
+H1-CT-OV        50.0    109.50  
+OX-P -OX        140.0   119.90  # repeat parameters for SER/THR 2-
+OZ-P -OZ        90.0    102.60  
+OZ-P -OX        100.0   108.23  
+C -OZ-P         100.0   120.50  
+CA-C -OZ        70.0    120.00  
+CT-OZ-P         100.0   120.50  
+CT-CT-OZ        50.0    109.50  
+H1-CT-OZ        50.0    109.50  
+CA-CG-CT        70.0    120.00 Y1P/PTR C Gamma (CA) from parm99.dat
+CA-CA-CG        63.0    120.00 Y1P/PTR C Gamma (CA) from parm99.dat
+CA-CG-CA        63.0    120.00 Y1P/PTR C Gamma (CA) from parm99.dat
+CG-CA-HA        50.0    120.00 Y1P/PTR C Gamma (CA) from parm99.dat
+CG-CT-HC        50.0    109.50 Y1P/PTR C Gamma (CA) from parm99.dat
+XC-CT-CG        63.0    114.00 Y1P/PTR C Gamma (CA) from parm14ipq.dat
+CW-NA-P         76.7    125.10 FRCMOD H1D
+NA-P -OQ        42.9    102.38 FRCMOD H1D
+CT-3C-OR        50.0    109.50  from CT-CT-OS
+CT-3C-OZ        50.0    109.50  from CT-CT-OS 
+H1-3C-OR        50.0    109.50  from H1-CT-OZ
+H1-3C-OZ        50.0    109.50  from H1-CT-OZ
+H1-2C-OR        50.0    109.50  from H1-CT-OZ
+H1-2C-OZ        50.0    109.50  from H1-CT-OZ  
+2C-OZ-P         100.0   120.50  from CT-OZ-P  
+2C-OR-P         100.0   120.50  from CT-OZ-P  
+3C-OR-P         100.0   120.50  from CT-OZ-P  
+3C-OZ-P         100.0   120.50  from CT-OZ-P 
+XC-3C-OZ        50.0    109.50  from CT-CT-OZ
+XC-3C-OR        50.0    109.50  from CT-CT-OZ
+XC-2C-OZ        50.0    109.50  from CT-CT-OZ
+XC-2C-OR        50.0    109.50  from CT-CT-OZ
+
+DIHE
+N -XC-CT-CG       1    0.152093       0   -1
+N -XC-CT-CG       1    0.172788     180   -2
+N -XC-CT-CG       1    0.490342       0   -3
+N -XC-CT-CG       1    0.045151     180    4
+N -XC-2C-OR       1    0.568610       0   -1
+N -XC-2C-OR       1    2.135747       0   -2
+N -XC-2C-OR       1    0.528750       0   -3
+N -XC-2C-OR       1    1.001315     180    4
+N -XC-3C-OR       1    1.618134       0   -1
+N -XC-3C-OR       1    3.587218       0   -2
+N -XC-3C-OR       1    0.382207     180   -3
+N -XC-3C-OR       1    1.155987     180    4
+XC-CT-CG-CA       1    1.612275     180   -1
+XC-CT-CG-CA       1    0.668517       0   -2
+XC-CT-CG-CA       1    0.811112       0   -3
+XC-CT-CG-CA       1    0.060012       0    4
+OR-P -OQ-HO       1    2.882939     180   -1
+OR-P -OQ-HO       1    8.414260       0   -2
+OR-P -OQ-HO       1    1.286146     180   -3
+OR-P -OQ-HO       1    3.811133       0    4
+CA-C -OV-P        1    1.978807       0   -1
+CA-C -OV-P        1    0.822761     180   -2
+CA-C -OV-P        1    4.128925     180   -3
+CA-C -OV-P        1    0.552489       0    4
+XC-2C-OR-P        1    0.718472     180   -1
+XC-2C-OR-P        1    1.245926       0   -2
+XC-2C-OR-P        1    0.281261       0   -3
+XC-2C-OR-P        1    0.698948     180    4
+XC-3C-OR-P        1    1.219656     180   -1
+XC-3C-OR-P        1    0.283841       0   -2
+XC-3C-OR-P        1    1.326347       0   -3
+XC-3C-OR-P        1    0.048013       0    4
+CA-C -OR-P        1   17.975292     180   -1
+CA-C -OR-P        1    1.361336     180   -2
+CA-C -OR-P        1    1.356729     180   -3
+CA-C -OR-P        1    0.569342       0    4
+C -OV-P -OT       1    0.478425     180    3
+2C-OR-P -OP       1    0.310007       0    3
+3C-OR-P -OP       1    0.169699       0    3
+C -OR-P -OP       1    1.818751       0    3
+N-XC-2C-OZ        1    4.756087     180   -1
+N-XC-2C-OZ        1    2.944541       0   -2
+N-XC-2C-OZ        1    4.185407       0   -3
+N-XC-2C-OZ        1    1.023558       0    4
+XC-2C-OZ-P        1    9.760012     180   -1
+XC-2C-OZ-P        1    5.220046     180   -2
+XC-2C-OZ-P        1    0.900465       0   -3
+XC-2C-OZ-P        1    2.088619     180    4
+2C-OZ-P-OX        1    1.380772       0    3
+N-XC-3C-OZ        1    2.526785     180   -1
+N-XC-3C-OZ        1    2.862925       0   -2
+N-XC-3C-OZ        1    2.367925       0   -3
+N-XC-3C-OZ        1    3.293070       0    4
+XC-3C-OZ-P        1    3.860126     180   -1
+XC-3C-OZ-P        1    1.912253     180   -2
+XC-3C-OZ-P        1    4.361018       0   -3
+XC-3C-OZ-P        1    0.201139     180    4
+3C-OZ-P-OX        1    0.892577     180    3
+CC-NA-P-OP	  1    0.021517     180    3
+CW-NA-P-OP	  1    0.181761       0    3
+NA-P-OQ-HO	  1    0.980088     180   -1
+NA-P-OQ-HO	  1    1.740034       0   -2
+NA-P-OQ-HO        1    0.396909       0   -3
+NA-P-OQ-HO	  1    0.030054       0    4
+H1-2C-OZ-P        1    0.000000       0   -1
+H1-2C-OZ-P        1    0.000000       0   -2
+H1-2C-OZ-P        1    0.000000       0   -3
+H1-2C-OZ-P        1    0.000000       0    4
+H1-3C-OZ-P        1    0.000000       0   -1
+H1-3C-OZ-P        1    0.000000       0   -2
+H1-3C-OZ-P        1    0.000000       0   -3
+H1-3C-OZ-P        1    0.000000       0    4
+H1-3C-OR-P        1    0.000000       0   -1
+H1-3C-OR-P        1    0.000000       0   -2
+H1-3C-OR-P        1    0.000000       0   -3
+H1-3C-OR-P        1    0.000000       0    4
+CT-3C-OZ-P        1    0.000000       0   -1
+CT-3C-OZ-P        1    0.000000       0   -2
+CT-3C-OZ-P        1    0.000000       0   -3
+CT-3C-OZ-P        1    0.000000       0    4
+CT-3C-OR-P        1    0.000000       0   -1
+CT-3C-OR-P        1    0.000000       0   -2
+CT-3C-OR-P        1    0.000000       0   -3
+CT-3C-OR-P        1    0.000000       0    4
+HC-CT-3C-OZ       1    0.000000       0   -1
+HC-CT-3C-OZ       1    0.000000       0   -2
+HC-CT-3C-OZ       1    0.000000       0   -3
+HC-CT-3C-OZ       1    0.000000       0    4
+HC-CT-3C-OR       1    0.000000       0   -1
+HC-CT-3C-OR       1    0.000000       0   -2
+HC-CT-3C-OR       1    0.000000       0   -3
+HC-CT-3C-OR       1    0.000000       0    4
+H1-2C-OR-P        1    0.000000       0   -1
+H1-2C-OR-P        1    0.000000       0   -2
+H1-2C-OR-P        1    0.000000       0   -3
+H1-2C-OR-P        1    0.000000       0    4
+2C-OR-P-OQ        1    0.000000       0   -1
+2C-OR-P-OQ        1    0.000000       0   -2
+2C-OR-P-OQ        1    0.000000       0   -3
+2C-OR-P-OQ        1    0.000000       0    4
+3C-OR-P-OQ        1    0.000000       0   -1
+3C-OR-P-OQ        1    0.000000       0   -2
+3C-OR-P-OQ        1    0.000000       0   -3
+3C-OR-P-OQ        1    0.000000       0    4
+C-OR-P-OQ         1    0.000000       0   -1
+C-OR-P-OQ         1    0.000000       0   -2
+C-OR-P-OQ         1    0.000000       0   -3
+C-OR-P-OQ         1    0.000000       0    4
+OP-P-OQ-HO        1    0.000000       0   -1
+OP-P-OQ-HO        1    0.000000       0   -2
+OP-P-OQ-HO        1    0.000000       0   -3
+OP-P-OQ-HO        1    0.000000       0    4
+CA-CA-CG-CA       1    0.000000     180    2
+HA-CA-CG-CA       1    0.000000     180    2
+CA-CG-CA-HA       1    0.000000     180    2
+HC-CT-CG-CA       1    0.000000     180    2
+CT-CG-CA-CA       1    0.000000     180    2
+CT-CG-CA-HA       1    0.000000     180    2
+CW-NA-P-OQ        1    0.000000       0    3
+CC-NA-P-OQ        1    0.000000       0    3
+CR-NA-P-OQ        1    0.000000       0    3
+
+IMPR
+CA-CG-CA-HA     1.100  180   2
+
+NONB
+OP      1.7493  0.2100          modified acc. to FEP solvation energies for phosphate monoanions
+OQ      1.8091  0.2100          a uniform radius increase of 0.0881 A was applied
+OR      1.7718  0.1700          
+OT      1.6337  0.2100          modified acc. to FEP solvation energies for TYR 2-
+OV      1.6562  0.1700          a uniform radius increase of -0.0275 A was applied
+OX      1.8401  0.2100          modified acc. to FEP solvation energies for SER/THR 2-
+OZ      1.8626  0.1700          a uniform radius increase of 0.1789 A was applied
+CG      1.9080  0.0860          Y1P/PTR C Gamma (CA) from parm14ipq.dat
