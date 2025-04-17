@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="leaprc.protein.ff14SB" md5hash="2fbe80b999846068f2a1b6f3c50fcbb9" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.protein.ff14SB</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
@@ -512,7 +512,7 @@
       <ExternalBond atomName="N"/>
       <ExternalBond atomName="C"/>
     </Residue>
-    <Residue name="HYP">
+    <Residue name="HYP" override="2">
       <Atom name="N" type="protein-N" charge="-0.2548"/>
       <Atom name="CD" type="protein-CT" charge="0.0595"/>
       <Atom name="HD22" type="protein-H1" charge="0.07"/>
@@ -1419,7 +1419,7 @@
       <Bond atomName1="C" atomName2="OXT"/>
       <ExternalBond atomName="N"/>
     </Residue>
-    <Residue name="CHYP">
+    <Residue name="CHYP" override="2">
       <Atom name="N" type="protein-N" charge="-0.2802"/>
       <Atom name="CD" type="protein-CT" charge="0.0778"/>
       <Atom name="HD22" type="protein-H1" charge="0.0331"/>

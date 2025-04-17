@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="gaff-2.2.20.dat" md5hash="51ef91e0f806bbd735bb38f0278e3024" sourcePackage="AmberTools" sourcePackageVersion="24.8">gaff-2.2.20.dat</Source>
     <Reference>Wang, J., Wolf, R.M., Caldwell, J.W., Kollman, P.A., and Case, D.A. (2004). Development and testing of a general amber force field. J. Comput. Chem. 25, 1157-1174.</Reference>
     <Reference>Wang, J., Wang, W., Kollman P. A.; Case, D. A. Automatic atom type and bond type perception in molecular mechanical calculations. Journal of Molecular Graphics and Modelling , 25, 2006, 247260.</Reference>

@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="oldff/leaprc.lipid17" md5hash="52abaf4be36f148c288fada7d8ab0752" sourcePackage="AmberTools" sourcePackageVersion="24.8">oldff/leaprc.lipid17</Source>
     <Reference>Skjevik, A.A.; Madej, Benjamin D.; Walker, R.C.; Teigen, K. Lipid11: A modular framework for lipid simulations using amber. J. Phys. Chem. B, 2012, 116, 11124-11136.</Reference>
     <Reference>Dickson, C.J.; Rosso, L.; Betz, R.M.; Walker, R.C.; Gould, I.R. GAFFlipid: a General Amber Force Field for the accurate molecular dynamics simulation of phospholipid. Soft Matter, 2012, 8, 9617.</Reference>

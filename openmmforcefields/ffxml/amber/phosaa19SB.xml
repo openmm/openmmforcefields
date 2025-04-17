@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="files/ff19SB/leaprc.phosaa19SB" md5hash="5a67c851284400a640208146efd192f4" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19SB/leaprc.phosaa19SB</Source>
     <Reference>Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C. phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids. J. Chem. Theory Comput., 2024, 20, 7199-7209.</Reference>
   </Info>

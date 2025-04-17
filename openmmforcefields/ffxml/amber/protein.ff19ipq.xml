@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="files/ff19ipq/leaprc.protein.ff19ipq" md5hash="cece3a1fad40905c9c0df402000c3c86" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19ipq/leaprc.protein.ff19ipq</Source>
     <Reference>Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T. Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model. J. Chem. Theory Comput., 2016, 12, 3926-3947.</Reference>
   </Info>

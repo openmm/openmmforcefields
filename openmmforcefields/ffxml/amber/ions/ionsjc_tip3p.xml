@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
     <!-- Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008) -->
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="parm/frcmod.ionsjc_tip3p" md5hash="0e5e74a17e42382511afd4116f70ff16" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionsjc_tip3p</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>

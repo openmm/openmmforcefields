@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="oldff/leaprc.ff14ipq" md5hash="934934001f08f6cb027728fa5069498d" sourcePackage="AmberTools" sourcePackageVersion="24.8">oldff/leaprc.ff14ipq</Source>
     <Reference>Cerutti, D.S.; Swope, W.C.; Rice, J.E.; Case, D.A. ff14ipq: A Self-Consistent Force Field for Condensed-Phase Simulations of Proteins. J. Chem. Theory Comput., 2014, 10, 4515-4534.</Reference>
   </Info>

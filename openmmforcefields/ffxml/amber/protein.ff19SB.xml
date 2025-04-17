@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="files/ff19SB/leaprc.protein.ff19SB" md5hash="87a7957b891156ec5b5953fb45b385ef" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19SB/leaprc.protein.ff19SB</Source>
     <Reference>Tian, C.; Kasavajhala, K.; Belfon, K.A.A.; Raguette, L.; Huang, H.; Migues, A.N.; Bickel, J.; Wang, Y.; Pincay, J.; Wu, Q.; Simmerling, C. ff19SB: Amino-Acid-Specific Protein Backbone Parameters Trained against Quantum Mechanics Energy Surfaces in Solution. J. Chem. Theory Comput., 2020, 16, 528-552.</Reference>
   </Info>
@@ -598,7 +598,7 @@
       <ExternalBond atomName="N" />
       <ExternalBond atomName="C" />
     </Residue>
-    <Residue name="HYP">
+    <Residue name="HYP" override="2">
       <Atom charge="-0.2548" name="N" type="cmap-HYP-N" />
       <Atom charge="0.0595" name="CD" type="protein-CT" />
       <Atom charge="0.07" name="HD22" type="protein-H1" />
@@ -1505,7 +1505,7 @@
       <Bond atomName1="C" atomName2="OXT" />
       <ExternalBond atomName="N" />
     </Residue>
-    <Residue name="CHYP">
+    <Residue name="CHYP" override="2">
       <Atom charge="-0.2802" name="N" type="protein-N" />
       <Atom charge="0.0778" name="CD" type="protein-CT" />
       <Atom charge="0.0331" name="HD22" type="protein-H1" />

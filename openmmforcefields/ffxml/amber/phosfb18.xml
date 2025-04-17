@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-03-14</DateGenerated>
+    <DateGenerated>2025-04-17</DateGenerated>
     <Source Source="leaprc.phosfb18" md5hash="8f01016c5c2e378082063283b646805c" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.phosfb18</Source>
     <Reference>Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P. Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids. J. Phys. Chem. B., 2021, 125, 11927-11942.</Reference>
   </Info>
