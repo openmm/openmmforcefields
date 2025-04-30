@@ -7,3 +7,4 @@ python convert_amber.py --input solvents.yaml --verbose
 python convert_amber.py --input biopolymer.yaml --verbose
 python convert_amber.py --input gaff.yaml --verbose
 python convert_amber.py --input glycam/glycan.yaml --verbose
+python convert_amber.py --combination-tests --verbose

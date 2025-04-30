@@ -58,6 +58,31 @@ set m6 tail m6.5.ND2
 m6 = sequence { m6 0GB }
 impose m6 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
 
+# Amber manual GLYCAM examples
+m7 = sequence { NALA ALA OLS ALA OLS ALA OLS ALA OLS ALA OLS ALA CALA }
+set m7 tail m7.3.OG
+m7 = sequence { m7 3GB 0GB }
+set m7 tail m7.5.OG
+m7 = sequence { m7 4GB 0GA }
+set m7 tail m7.7.OG
+m7 = sequence { m7 4YB 4YB 3MB 0MA }
+set m7 tail m7.9.OG
+m7 = sequence { m7 4YB 4YB VMB }
+set m7 tail m7.24.O3
+m7 = sequence { m7 0MA }
+set m7 tail m7.24.O6
+m7 = sequence { m7 0MA }
+set m7 tail m7.11.OG
+m7 = sequence { m7 4YB 4YB VMB }
+set m7 tail m7.29.O6
+m7 = sequence { m7 VMA }
+set m7 tail m7.30.O6
+m7 = sequence { m7 2MA 0MA }
+set m7 tail m7.30.O3
+m7 = sequence { m7 2MA 0MA }
+set m7 tail m7.29.O3
+m7 = sequence { m7 2MA 2MA 0MA }
+
 ##
 ## Built 5 molecules
 ##	Now, translate them away from each other
@@ -67,8 +92,9 @@ translate m3  { 30.0   0.0   0.0 }
 translate m4  { 30.0  30.0   0.0 }
 translate m5  { 30.0  60.0   0.0 } 
 translate m6  { 60.0   0.0   0.0 }
+translate m7  { 60.0  60.0  60.0 }
  
-Glycoprotein = combine { m2 m3 m4 m5 m6 }
+Glycoprotein = combine { m2 m3 m4 m5 m6 m7 }
 
 saveamberparm Glycoprotein Glycoprotein_shortened.parm7 Glycoprotein_shortened.rst7
 

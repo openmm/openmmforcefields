@@ -18,6 +18,7 @@ import openmm.unit as u
 import os
 import parmed
 import re
+import subprocess
 import sys
 import tempfile
 import warnings
@@ -146,6 +147,11 @@ def main():
         action="store_true",
         help="validate resulting XML through lipids tests",
     )
+    parser.add_argument(
+        "--combination-tests",
+        action="store_true",
+        help="validate combinations of force fields",
+    )
     args = parser.parse_args()
     verbose = args.verbose
 
@@ -153,6 +159,12 @@ def main():
         logger = Logger(args.log_filename)  # log to file
     else:
         logger = Logger()  # be silent
+
+    # Special force field combination tests to be run after all force fields
+    # have been converted
+    if args.combination_tests:
+        validate_combinations()
+        return
 
     # input is either a YAML or a leaprc - default is leaprc
     # output directory hardcoded here for ffxml/
@@ -791,7 +803,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
         print(contents.replace(" />", "/>"), file=file)
 
 
-def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-3):
+def assert_energies_direct(prmtop, inpcrd, ffxml, tolerance=1e-3, minimize=True):
     import math
 
     # Get AMBER system
@@ -830,7 +842,8 @@ def assert_energies_glyco_protein(prmtop, inpcrd, ffxml, tolerance=1e-3):
         system_amber, openmm.VerletIntegrator(1.0 * u.femtosecond), openmm.Platform.getPlatformByName("Reference")
     )
     context_relax.setPositions(parm_amber.positions)
-    openmm.LocalEnergyMinimizer.minimize(context_relax)
+    if minimize:
+        openmm.LocalEnergyMinimizer.minimize(context_relax)
     relaxed_positions = context_relax.getState(positions=True).getPositions(asNumpy=True)
 
     amber_energies = compute_potential_components(system_amber, relaxed_positions)
@@ -1007,6 +1020,100 @@ def assert_energies(
         logger.log(omm_energies_log)
         logger.log(rel_energies_log)
 
+
+def validate_combinations():
+    """
+    Tests combinations of protein-DNA-RNA force fields.
+    """
+
+    protein_ffs = [
+        # Some force fields don't work because they use different parmXX data
+        # files from the nucleic acid force fields.  Test the working ones here.
+        ("protein.ff14SB.xml", "leaprc.protein.ff14SB"),
+        ("protein.ff14SBonlysc.xml", "leaprc.protein.ff14SBonlysc"),
+        ("protein.ff19SB.xml", "leaprc.protein.ff19SB"),
+    ]
+    dna_ffs = [
+        ("DNA.OL15.xml", "leaprc.DNA.OL15"),
+        ("DNA.OL21.xml", "leaprc.DNA.OL21"),
+        ("DNA.bsc0.xml", "oldff/leaprc.DNA.bsc0"),
+        ("DNA.bsc1.xml", "leaprc.DNA.bsc1"),
+    ]
+    rna_ffs = [
+        # RNA.ROC defines some DNA residues in the LEaP lib file so it causes
+        # problems when trying to load it in LEaP with a DNA model.
+        ("RNA.OL3.xml", "leaprc.RNA.OL3"),
+        ("RNA.YIL.xml", "leaprc.RNA.YIL"),
+    ]
+    for protein_ffxml, protein_leaprc in protein_ffs:
+        for dna_ffxml, dna_leaprc in dna_ffs:
+            for rna_ffxml, rna_leaprc in rna_ffs:
+                validate_combination([protein_ffxml, dna_ffxml, rna_ffxml], [protein_leaprc, dna_leaprc, rna_leaprc])
+
+def validate_combination(ffxmls, leaprcs):
+    """
+    Tests a particular combination of protein-DNA-RNA force fields.
+    """
+
+    with tempfile.TemporaryDirectory() as temp_path:
+        leap_path = os.path.join(temp_path, "test.in")
+        top_path = os.path.join(temp_path, "test.top")
+        crd_path = os.path.join(temp_path, "test.crd")
+
+        if verbose:
+            print(f"Making LEaP input for {', '.join(leaprcs)}...")
+        with open(leap_path, "w") as leap_file:
+            print("""addPdbAtomMap {
+    { "H1'" "H1*" }
+    { "H2'" "H2'1" }
+    { "H2''" "H2'2" }
+    { "H3'" "H3*" }
+    { "H4'" "H4*" }
+    { "H5'" "H5'1" }
+    { "H5''" "H5'2" }
+    { "HO2'" "HO'2" }
+    { "HO5'" "H5T"  }
+    { "HO3'" "H3T" }
+    { "OP1" "O1P" }
+    { "OP2" "O2P" }
+}""", file=leap_file)
+
+            for leaprc in leaprcs:
+                print(f"source {leaprc}", file=leap_file)
+
+            print("""addPdbResMap {
+    { 0 "DG" "DG5" } { 1 "DG" "DG3" }
+    { 0 "DA" "DA5" } { 1 "DA" "DA3" }
+    { 0 "DC" "DC5" } { 1 "DC" "DC3" }
+    { 0 "DT" "DT5" } { 1 "DT" "DT3" }
+    { 0 "G" "G5" } { 1 "G" "G3" }
+    { 0 "A" "A5" } { 1 "A" "A3" }
+    { 0 "C" "C5" } { 1 "C" "C3" }
+    { 0 "U" "U5" } { 1 "U" "U3" }
+}""", file=leap_file)
+
+            print(f"""system = loadPdb files/combined_test_system.pdb
+saveAmberParm system {top_path} {crd_path}
+quit""", file=leap_file)
+
+        try:
+            subprocess.run(["tleap", "-f", leap_path], check=True, capture_output=True)
+        except subprocess.CalledProcessError:
+            if verbose:
+                print("WARNING: Combination not supported by LEaP")
+            return
+
+        if verbose:
+            print("Calculating and validating energies...")
+
+        # There are some issues with round-trip of these systems through ParmEd.
+        # Evaluate directly.
+        assert_energies_direct(
+            top_path,
+            crd_path,
+            [os.path.join("..", "openmmforcefields", "ffxml", "amber", ffxml) for ffxml in ffxmls],
+            minimize=False,
+        )
 
 def validate_protein(ffxml_name, leaprc_name, united_atom=False):
     if verbose:
@@ -1587,38 +1694,41 @@ quit"""
 def validate_lipids(ffxml_name, leaprc_name):
     if verbose:
         print(f"Lipids energy validation for {ffxml_name}")
-    if verbose:
-        print("Preparing temporary files for validation...")
-    lipids_top = tempfile.mkstemp()
-    lipids_crd = tempfile.mkstemp()
-    leap_script_lipids_file = tempfile.mkstemp()
 
-    if verbose:
-        print("Preparing LeaP scripts...")
-    leap_script_lipids_string = f"""source {leaprc_name}
-x = loadPdb files/POPC-nowater-amber.pdb
-saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
-quit"""
-    write_file(leap_script_lipids_file[0], leap_script_lipids_string)
-
-    if verbose:
-        print("Running LEaP...")
-
-    os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
-    if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
-        raise LeapException(leap_script_lipids_file[1])
-
-    try:
+    for test_system_name in ("POPC", "POPE"):
         if verbose:
-            print("Calculating and validating lipids energies...")
-        assert_energies(lipids_top[1], lipids_crd[1], ffxml_name, system_name="lipids")
+            print(f"Preparing temporary files for validation with system {test_system_name}...")
+        lipids_top = tempfile.mkstemp()
+        lipids_crd = tempfile.mkstemp()
+        leap_script_lipids_file = tempfile.mkstemp()
+
         if verbose:
-            print("Lipids energy validation successful!")
-    finally:
+            print("Preparing LeaP scripts...")
+        leap_script_lipids_string = f"""source {leaprc_name}
+    x = loadPdb files/{test_system_name}-nowater-amber.pdb
+    saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
+    quit"""
+        write_file(leap_script_lipids_file[0], leap_script_lipids_string)
+
         if verbose:
-            print("Deleting temp files...")
-        for f in (lipids_top, lipids_crd, leap_script_lipids_file):
-            os.unlink(f[1])
+            print("Running LEaP...")
+
+        os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
+        if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
+            raise LeapException(leap_script_lipids_file[1])
+
+        try:
+            if verbose:
+                print("Calculating and validating lipids energies...")
+            assert_energies(lipids_top[1], lipids_crd[1], ffxml_name, system_name="lipids")
+            if verbose:
+                print("Lipids energy validation successful!")
+        finally:
+            if verbose:
+                print("Deleting temp files...")
+            for f in (lipids_top, lipids_crd, leap_script_lipids_file):
+                os.unlink(f[1])
+
     if verbose:
         print(f"Lipids energy validation for {ffxml_name} done!")
 
@@ -1626,45 +1736,49 @@ quit"""
 def validate_merged_lipids(ffxml_name, leaprc_name):
     if verbose:
         print(f"Lipids (merged) energy validation for {ffxml_name}")
-    if verbose:
-        print("Preparing temporary files for validation...")
-    lipids_top = tempfile.mkstemp()
-    lipids_crd = tempfile.mkstemp()
-    leap_script_lipids_file = tempfile.mkstemp()
-    pdbfile = app.PDBFile("files/POPC-nowater-charmm.pdb")
 
-    if verbose:
-        print("Preparing LeaP scripts...")
-    leap_script_lipids_string = f"""source {leaprc_name}
-x = loadPdb files/POPC-nowater-amber.pdb
-saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
-quit"""
-    write_file(leap_script_lipids_file[0], leap_script_lipids_string)
 
-    if verbose:
-        print("Running LEaP...")
-    os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
-    if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
-        raise LeapException(leap_script_lipids_file[1])
+    for test_system_name in ("POPC", "POPE"):
+        if verbose:
+            print(f"Preparing temporary files for validation with system {test_system_name}...")
+        lipids_top = tempfile.mkstemp()
+        lipids_crd = tempfile.mkstemp()
+        leap_script_lipids_file = tempfile.mkstemp()
+        pdbfile = app.PDBFile(f"files/{test_system_name}-nowater-charmm.pdb")
 
-    try:
         if verbose:
-            print("Calculating and validating lipids energies...")
-        assert_energies(
-            lipids_top[1],
-            lipids_crd[1],
-            ffxml_name,
-            system_name="lipids",
-            openmm_topology=pdbfile.topology,
-            openmm_positions=pdbfile.positions,
-        )
+            print("Preparing LeaP scripts...")
+        leap_script_lipids_string = f"""source {leaprc_name}
+    x = loadPdb files/{test_system_name}-nowater-amber.pdb
+    saveAmberParm x {lipids_top[1]} {lipids_crd[1]}
+    quit"""
+        write_file(leap_script_lipids_file[0], leap_script_lipids_string)
+
         if verbose:
-            print("Lipids energy validation successful!")
-    finally:
-        if verbose:
-            print("Deleting temp files...")
-        for f in (lipids_top, lipids_crd, leap_script_lipids_file):
-            os.unlink(f[1])
+            print("Running LEaP...")
+        os.system(f"tleap -f {leap_script_lipids_file[1]} > {os.devnull}")
+        if os.path.getsize(lipids_top[1]) == 0 or os.path.getsize(lipids_crd[1]) == 0:
+            raise LeapException(leap_script_lipids_file[1])
+
+        try:
+            if verbose:
+                print("Calculating and validating lipids energies...")
+            assert_energies(
+                lipids_top[1],
+                lipids_crd[1],
+                ffxml_name,
+                system_name="lipids",
+                openmm_topology=pdbfile.topology,
+                openmm_positions=pdbfile.positions,
+            )
+            if verbose:
+                print("Lipids energy validation successful!")
+        finally:
+            if verbose:
+                print("Deleting temp files...")
+            for f in (lipids_top, lipids_crd, leap_script_lipids_file):
+                os.unlink(f[1])
+
     if verbose:
         print(f"Lipids energy validation for {ffxml_name} done!")
 
@@ -1932,7 +2046,7 @@ def validate_glyco_protein(
         crd = "files/glycam/Glycoprotein_shortened.ff19SB.rst7"
     else:
         raise ValueError("unrecognized leaprc for glycoprotein validation")
-    assert_energies_glyco_protein(top, crd, (supp_ffxml_name, ffxml_name))
+    assert_energies_direct(top, crd, (supp_ffxml_name, ffxml_name))
     if verbose:
         print(f"Glycosylated protein energy validation for {ffxml_name} was successful!")
 
