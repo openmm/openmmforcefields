@@ -392,9 +392,9 @@ To use [espaloma](https://github.com/choderalab/espaloma) for assigning small mo
 <br>
 **A:** You need at least OpenMM 7.4.2 to use the `openmmforcefields` package.
 
-**Q:** Do you support the new [Amber ff19SB protein force field](https://chemrxiv.org/articles/ff19SB_Amino-Acid_Specific_Protein_Backbone_Parameters_Trained_Against_Quantum_Mechanics_Energy_Surfaces_in_Solution/8279681/1)?
+**Q:** Do you support the new [Amber ff19SB protein force field](https://doi.org/10.1021/acs.jctc.9b00591)?
 <br>
-**A:** Support for this has now been added to openmmforcefields and ff19SB should be available in the next release of the package.
+**A:** ff19SB and phosaa19SB have now been added to openmmforcefields.
 
 **Q:** Do you plan to support other small molecule force fields?
 <br>

@@ -20,7 +20,7 @@ usage: convert_amber.py [-h] [--input INPUT] [--input-format INPUT_FORMAT]
                         [--output-dir OUTPUT_DIR] [--verbose]
                         [--log LOG_FILENAME] [--protein-test] [--nucleic-test]
                         [--protein-ua-test] [--phospho-protein-test]
-                        [--gaff-test] [--lipids-test]
+                        [--gaff-test] [--lipids-test] [--combination-tests]
 
 AMBER --> OpenMM forcefield conversion script
 
@@ -45,6 +45,7 @@ options:
   --gaff-test           validate resulting XML through small-molecule (GAFF)
                         test
   --lipids-test         validate resulting XML through lipids tests
+  --combination-tests   validate combinations of force fields
 ```
 
 ## Converting the AMBER force fields
