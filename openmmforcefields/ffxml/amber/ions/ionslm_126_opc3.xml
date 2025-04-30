@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of atomic ions for the OPC3 water model (12-6 set) -->
-    <DateGenerated>2025-04-17</DateGenerated>
+    <DateGenerated>2025-04-30</DateGenerated>
     <Source Source="parm/frcmod.ionslm_126_opc3" md5hash="5764d233aceb45e3c28df84ac16d1085" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionslm_126_opc3</Source>
     <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>

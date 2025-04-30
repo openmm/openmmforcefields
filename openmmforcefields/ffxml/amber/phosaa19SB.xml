@@ -1,48 +1,48 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-04-17</DateGenerated>
+    <DateGenerated>2025-04-30</DateGenerated>
     <Source Source="files/ff19SB/leaprc.phosaa19SB" md5hash="5a67c851284400a640208146efd192f4" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19SB/leaprc.phosaa19SB</Source>
     <Reference>Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C. phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids. J. Chem. Theory Comput., 2024, 20, 7199-7209.</Reference>
   </Info>
   <AtomTypes>
-    <Type class="OP" element="O" mass="16.0" name="protein-OP" />
-    <Type class="OQ" element="O" mass="16.0" name="protein-OQ" />
-    <Type class="OR" element="O" mass="16.0" name="protein-OR" />
-    <Type class="OT" element="O" mass="16.0" name="protein-OT" />
-    <Type class="OV" element="O" mass="16.0" name="protein-OV" />
-    <Type class="OX" element="O" mass="16.0" name="protein-OX" />
-    <Type class="OZ" element="O" mass="16.0" name="protein-OZ" />
-    <Type class="CG" element="C" mass="12.01" name="protein-CG" />
-    <Type class="N" element="N" mass="14.01" name="cmap-S1P-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-S1P-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-S1P-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-SEP-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-SEP-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-SEP-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-T1P-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-T1P-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-T1P-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-TPO-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-TPO-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-TPO-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-Y1P-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-Y1P-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-Y1P-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-PTR-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-PTR-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-PTR-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-H1D-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-H1D-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-H1D-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-H2D-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-H2D-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-H2D-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-H1E-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-H1E-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-H1E-C" />
-    <Type class="N" element="N" mass="14.01" name="cmap-H2E-N" />
-    <Type class="XC" element="C" mass="12.01" name="cmap-H2E-CA" />
-    <Type class="C" element="C" mass="12.01" name="cmap-H2E-C" />
+    <Type class="protein-OP" element="O" mass="16.0" name="protein-OP" />
+    <Type class="protein-OQ" element="O" mass="16.0" name="protein-OQ" />
+    <Type class="protein-OR" element="O" mass="16.0" name="protein-OR" />
+    <Type class="protein-OT" element="O" mass="16.0" name="protein-OT" />
+    <Type class="protein-OV" element="O" mass="16.0" name="protein-OV" />
+    <Type class="protein-OX" element="O" mass="16.0" name="protein-OX" />
+    <Type class="protein-OZ" element="O" mass="16.0" name="protein-OZ" />
+    <Type class="protein-CG" element="C" mass="12.01" name="protein-CG" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-S1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-S1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-S1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-SEP-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-SEP-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-SEP-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-T1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-T1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-T1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-TPO-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-TPO-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-TPO-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-Y1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-Y1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-Y1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-PTR-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-PTR-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-PTR-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H1D-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H1D-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H1D-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H2D-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H2D-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H2D-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H1E-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H1E-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H1E-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H2E-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H2E-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H2E-C" />
   </AtomTypes>
   <Residues>
     <Residue name="S1P">
@@ -481,134 +481,134 @@
     </Residue>
   </Residues>
   <HarmonicBondForce>
-    <Bond class1="HO" class2="OQ" k="462750.3999999999" length="0.096" />
-    <Bond class1="OP" class2="P" k="439319.99999999994" length="0.148" />
-    <Bond class1="OQ" class2="P" k="192463.99999999997" length="0.16100000000000003" />
-    <Bond class1="OR" class2="P" k="192463.99999999997" length="0.16100000000000003" />
-    <Bond class1="C" class2="OR" k="376559.99999999994" length="0.1323" />
-    <Bond class1="CT" class2="OR" k="267775.99999999994" length="0.141" />
-    <Bond class1="OT" class2="P" k="439319.99999999994" length="0.148" />
-    <Bond class1="OV" class2="P" k="192463.99999999997" length="0.16100000000000003" />
-    <Bond class1="C" class2="OV" k="376559.99999999994" length="0.1323" />
-    <Bond class1="CT" class2="OV" k="267775.99999999994" length="0.141" />
-    <Bond class1="OX" class2="P" k="439319.99999999994" length="0.148" />
-    <Bond class1="OZ" class2="P" k="192463.99999999997" length="0.16100000000000003" />
-    <Bond class1="C" class2="OZ" k="376559.99999999994" length="0.1323" />
-    <Bond class1="CT" class2="OZ" k="267775.99999999994" length="0.141" />
-    <Bond class1="CG" class2="CT" k="265265.6" length="0.15100000000000002" />
-    <Bond class1="CG" class2="CA" k="392459.19999999995" length="0.13999999999999999" />
-    <Bond class1="3C" class2="OZ" k="267775.99999999994" length="0.141" />
-    <Bond class1="3C" class2="OR" k="267775.99999999994" length="0.141" />
-    <Bond class1="2C" class2="OR" k="267775.99999999994" length="0.141" />
-    <Bond class1="2C" class2="OZ" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-HO" class2="protein-OQ" k="462750.3999999999" length="0.096" />
+    <Bond class1="protein-OP" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OQ" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-OR" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OR" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-OT" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OV" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OV" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OV" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-OX" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OZ" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OZ" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OZ" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-CG" class2="protein-CT" k="265265.6" length="0.15100000000000002" />
+    <Bond class1="protein-CG" class2="protein-CA" k="392459.19999999995" length="0.13999999999999999" />
+    <Bond class1="protein-3C" class2="protein-OZ" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-3C" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-2C" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-2C" class2="protein-OZ" k="267775.99999999994" length="0.141" />
   </HarmonicBondForce>
   <HarmonicAngleForce>
-    <Angle angle="2.092649773141201" class1="OP" class2="P" class3="OP" k="1171.52" />
-    <Angle angle="1.888969849433463" class1="OP" class2="P" class3="OQ" k="753.12" />
-    <Angle angle="1.888969849433463" class1="OQ" class2="P" class3="OR" k="753.12" />
-    <Angle angle="1.888969849433463" class1="OQ" class2="P" class3="OQ" k="753.12" />
-    <Angle angle="1.790707812546182" class1="OR" class2="P" class3="OR" k="753.12" />
-    <Angle angle="1.888969849433463" class1="OR" class2="P" class3="OP" k="836.8000000000001" />
-    <Angle angle="1.9771089766591765" class1="HO" class2="OQ" class3="P" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="C" class2="OR" class3="P" k="836.8000000000001" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="C" class3="OR" k="585.76" />
-    <Angle angle="2.1031217486531673" class1="CT" class2="OR" class3="P" k="836.8000000000001" />
-    <Angle angle="1.911135530933791" class1="CT" class2="CT" class3="OR" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="CT" class3="OR" k="418.40000000000003" />
-    <Angle angle="2.092649773141201" class1="OT" class2="P" class3="OT" k="1171.52" />
-    <Angle angle="1.790707812546182" class1="OV" class2="P" class3="OV" k="753.12" />
-    <Angle angle="1.888969849433463" class1="OV" class2="P" class3="OT" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="C" class2="OV" class3="P" k="836.8000000000001" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="C" class3="OV" k="585.76" />
-    <Angle angle="2.1031217486531673" class1="CT" class2="OV" class3="P" k="836.8000000000001" />
-    <Angle angle="1.911135530933791" class1="CT" class2="CT" class3="OV" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="CT" class3="OV" k="418.40000000000003" />
-    <Angle angle="2.092649773141201" class1="OX" class2="P" class3="OX" k="1171.52" />
-    <Angle angle="1.790707812546182" class1="OZ" class2="P" class3="OZ" k="753.12" />
-    <Angle angle="1.888969849433463" class1="OZ" class2="P" class3="OX" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="C" class2="OZ" class3="P" k="836.8000000000001" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="C" class3="OZ" k="585.76" />
-    <Angle angle="2.1031217486531673" class1="CT" class2="OZ" class3="P" k="836.8000000000001" />
-    <Angle angle="1.911135530933791" class1="CT" class2="CT" class3="OZ" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="CT" class3="OZ" k="418.40000000000003" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="CG" class3="CT" k="585.76" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="CA" class3="CG" k="527.184" />
-    <Angle angle="2.0943951023931953" class1="CA" class2="CG" class3="CA" k="527.184" />
-    <Angle angle="2.0943951023931953" class1="CG" class2="CA" class3="HA" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="CG" class2="CT" class3="HC" k="418.40000000000003" />
-    <Angle angle="1.9896753472735358" class1="XC" class2="CT" class3="CG" k="527.184" />
-    <Angle angle="2.1834068942449063" class1="CW" class2="NA" class3="P" k="641.8256" />
-    <Angle angle="1.7868680881917944" class1="NA" class2="P" class3="OQ" k="358.98720000000003" />
-    <Angle angle="1.911135530933791" class1="CT" class2="3C" class3="OR" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="CT" class2="3C" class3="OZ" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="3C" class3="OR" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="3C" class3="OZ" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="2C" class3="OR" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="H1" class2="2C" class3="OZ" k="418.40000000000003" />
-    <Angle angle="2.1031217486531673" class1="2C" class2="OZ" class3="P" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="2C" class2="OR" class3="P" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="3C" class2="OR" class3="P" k="836.8000000000001" />
-    <Angle angle="2.1031217486531673" class1="3C" class2="OZ" class3="P" k="836.8000000000001" />
-    <Angle angle="1.911135530933791" class1="XC" class2="3C" class3="OZ" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="XC" class2="3C" class3="OR" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="XC" class2="2C" class3="OZ" k="418.40000000000003" />
-    <Angle angle="1.911135530933791" class1="XC" class2="2C" class3="OR" k="418.40000000000003" />
+    <Angle angle="2.092649773141201" class1="protein-OP" class2="protein-P" class3="protein-OP" k="1171.52" />
+    <Angle angle="1.888969849433463" class1="protein-OP" class2="protein-P" class3="protein-OQ" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OQ" class2="protein-P" class3="protein-OR" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OQ" class2="protein-P" class3="protein-OQ" k="753.12" />
+    <Angle angle="1.790707812546182" class1="protein-OR" class2="protein-P" class3="protein-OR" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OR" class2="protein-P" class3="protein-OP" k="836.8000000000001" />
+    <Angle angle="1.9771089766591765" class1="protein-HO" class2="protein-OQ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OR" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="2.092649773141201" class1="protein-OT" class2="protein-P" class3="protein-OT" k="1171.52" />
+    <Angle angle="1.790707812546182" class1="protein-OV" class2="protein-P" class3="protein-OV" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OV" class2="protein-P" class3="protein-OT" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OV" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OV" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OV" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OV" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OV" k="418.40000000000003" />
+    <Angle angle="2.092649773141201" class1="protein-OX" class2="protein-P" class3="protein-OX" k="1171.52" />
+    <Angle angle="1.790707812546182" class1="protein-OZ" class2="protein-P" class3="protein-OZ" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OZ" class2="protein-P" class3="protein-OX" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OZ" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CG" class3="protein-CT" k="585.76" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CA" class3="protein-CG" k="527.184" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CG" class3="protein-CA" k="527.184" />
+    <Angle angle="2.0943951023931953" class1="protein-CG" class2="protein-CA" class3="protein-HA" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CG" class2="protein-CT" class3="protein-HC" k="418.40000000000003" />
+    <Angle angle="1.9896753472735358" class1="protein-XC" class2="protein-CT" class3="protein-CG" k="527.184" />
+    <Angle angle="2.1834068942449063" class1="protein-CW" class2="protein-NA" class3="protein-P" k="641.8256" />
+    <Angle angle="1.7868680881917944" class1="protein-NA" class2="protein-P" class3="protein-OQ" k="358.98720000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-2C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-2C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="2.1031217486531673" class1="protein-2C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-2C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-3C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-3C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-2C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-2C" class3="protein-OR" k="418.40000000000003" />
   </HarmonicAngleForce>
   <PeriodicTorsionForce ordering="amber">
-    <Proper class1="N" class2="XC" class3="CT" class4="CG" k1="0.636357112" k2="0.7229449920000001" k3="2.051590928" k4="0.188911784" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
-    <Proper class1="N" class2="XC" class3="2C" class4="OR" k1="2.37906424" k2="8.935965448" k3="2.2122900000000003" k4="4.18950196" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
-    <Proper class1="N" class2="XC" class3="3C" class4="OR" k1="6.770272656" k2="15.008920112" k3="1.5991540880000001" k4="4.836649608000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="3.141592653589793" phase4="3.141592653589793" />
-    <Proper class1="XC" class2="CT" class3="CG" class4="CA" k1="6.7457586" k2="2.7970751280000004" k3="3.3936926080000003" k4="0.25109020800000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="OR" class2="P" class3="OQ" class4="HO" k1="12.062216776" k2="35.20526384" k3="5.3812348640000005" k4="15.945780472000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="3.141592653589793" phase4="0.0" />
-    <Proper class1="CA" class2="C" class3="OV" class4="P" k1="8.279328488" k2="3.442432024" k3="17.2754222" k4="2.3116139760000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
-    <Proper class1="XC" class2="2C" class3="OR" class4="P" k1="3.0060868480000003" k2="5.2129543840000006" k3="1.176796024" k4="2.9243984320000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
-    <Proper class1="XC" class2="3C" class3="OR" class4="P" k1="5.1030407040000005" k2="1.1875907440000002" k3="5.549435848" k4="0.200886392" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="CA" class2="C" class3="OR" class4="P" k1="75.208621728" k2="5.6958298240000005" k3="5.676554136000001" k4="2.3821269280000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
-    <Proper class1="C" class2="OV" class3="P" class4="OT" k1="2.0017302" periodicity1="3" phase1="3.141592653589793" />
-    <Proper class1="2C" class2="OR" class3="P" class4="OP" k1="1.2970692879999999" periodicity1="3" phase1="0.0" />
-    <Proper class1="3C" class2="OR" class3="P" class4="OP" k1="0.710020616" periodicity1="3" phase1="0.0" />
-    <Proper class1="C" class2="OR" class3="P" class4="OP" k1="7.609654184" periodicity1="3" phase1="0.0" />
-    <Proper class1="N" class2="XC" class3="2C" class4="OZ" k1="19.899468008" k2="12.319959544000001" k3="17.511742888" k4="4.282566672" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="XC" class2="2C" class3="OZ" class4="P" k1="40.835890208" k2="21.840672464" k3="3.76754556" k4="8.738781896" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
-    <Proper class1="2C" class2="OZ" class3="P" class4="OX" k1="5.777150048000001" periodicity1="3" phase1="0.0" />
-    <Proper class1="N" class2="XC" class3="3C" class4="OZ" k1="10.572068439999999" k2="11.978478200000001" k3="9.907398200000001" k4="13.77820488" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="XC" class2="3C" class3="OZ" class4="P" k1="16.150767184000003" k2="8.000866552" k3="18.246499311999997" k4="0.841565576" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
-    <Proper class1="3C" class2="OZ" class3="P" class4="OX" k1="3.734542168" periodicity1="3" phase1="3.141592653589793" />
-    <Proper class1="CC" class2="NA" class3="P" class4="OP" k1="0.09002712800000001" periodicity1="3" phase1="3.141592653589793" />
-    <Proper class1="CW" class2="NA" class3="P" class4="OP" k1="0.760488024" periodicity1="3" phase1="0.0" />
-    <Proper class1="NA" class2="P" class3="OQ" class4="HO" k1="4.100688192" k2="7.280302256000001" k3="1.6606672560000002" k4="0.125745936" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="H1" class2="2C" class3="OZ" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="H1" class2="3C" class3="OZ" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="H1" class2="3C" class3="OR" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="CT" class2="3C" class3="OZ" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="CT" class2="3C" class3="OR" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="HC" class2="CT" class3="3C" class4="OZ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="HC" class2="CT" class3="3C" class4="OR" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="H1" class2="2C" class3="OR" class4="P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="2C" class2="OR" class3="P" class4="OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="3C" class2="OR" class3="P" class4="OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="C" class2="OR" class3="P" class4="OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="OP" class2="P" class3="OQ" class4="HO" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
-    <Proper class1="CA" class2="CA" class3="CG" class4="CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Proper class1="HA" class2="CA" class3="CG" class4="CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Proper class1="HC" class2="CT" class3="CG" class4="CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Proper class1="CT" class2="CG" class3="CA" class4="CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Proper class1="CT" class2="CG" class3="CA" class4="HA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Proper class1="CW" class2="NA" class3="P" class4="OQ" k1="0.0" periodicity1="3" phase1="0.0" />
-    <Proper class1="CC" class2="NA" class3="P" class4="OQ" k1="0.0" periodicity1="3" phase1="0.0" />
-    <Proper class1="CR" class2="NA" class3="P" class4="OQ" k1="0.0" periodicity1="3" phase1="0.0" />
-    <Improper class1="CA" class2="CA" class3="CG" class4="HA" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-CT" class4="protein-CG" k1="0.636357112" k2="0.7229449920000001" k3="2.051590928" k4="0.188911784" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-2C" class4="protein-OR" k1="2.37906424" k2="8.935965448" k3="2.2122900000000003" k4="4.18950196" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-3C" class4="protein-OR" k1="6.770272656" k2="15.008920112" k3="1.5991540880000001" k4="4.836649608000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="3.141592653589793" phase4="3.141592653589793" />
+    <Proper class1="protein-XC" class2="protein-CT" class3="protein-CG" class4="protein-CA" k1="6.7457586" k2="2.7970751280000004" k3="3.3936926080000003" k4="0.25109020800000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-OR" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="12.062216776" k2="35.20526384" k3="5.3812348640000005" k4="15.945780472000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-C" class3="protein-OV" class4="protein-P" k1="8.279328488" k2="3.442432024" k3="17.2754222" k4="2.3116139760000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-2C" class3="protein-OR" class4="protein-P" k1="3.0060868480000003" k2="5.2129543840000006" k3="1.176796024" k4="2.9243984320000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-XC" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="5.1030407040000005" k2="1.1875907440000002" k3="5.549435848" k4="0.200886392" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-C" class3="protein-OR" class4="protein-P" k1="75.208621728" k2="5.6958298240000005" k3="5.676554136000001" k4="2.3821269280000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-C" class2="protein-OV" class3="protein-P" class4="protein-OT" k1="2.0017302" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-2C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="1.2970692879999999" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-3C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="0.710020616" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="7.609654184" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-2C" class4="protein-OZ" k1="19.899468008" k2="12.319959544000001" k3="17.511742888" k4="4.282566672" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-2C" class3="protein-OZ" class4="protein-P" k1="40.835890208" k2="21.840672464" k3="3.76754556" k4="8.738781896" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-2C" class2="protein-OZ" class3="protein-P" class4="protein-OX" k1="5.777150048000001" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-3C" class4="protein-OZ" k1="10.572068439999999" k2="11.978478200000001" k3="9.907398200000001" k4="13.77820488" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="16.150767184000003" k2="8.000866552" k3="18.246499311999997" k4="0.841565576" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-3C" class2="protein-OZ" class3="protein-P" class4="protein-OX" k1="3.734542168" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-CC" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="0.09002712800000001" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-CW" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="0.760488024" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-NA" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="4.100688192" k2="7.280302256000001" k3="1.6606672560000002" k4="0.125745936" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-2C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CT" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CT" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-3C" class4="protein-OZ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-3C" class4="protein-OR" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-2C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-2C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-3C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-OP" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-CA" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-HA" class2="protein-CA" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CT" class2="protein-CG" class3="protein-CA" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CT" class2="protein-CG" class3="protein-CA" class4="protein-HA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CW" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CC" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CR" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Improper class1="protein-CA" class2="protein-CA" class3="protein-CG" class4="protein-HA" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge" />
-    <Atom class="OP" epsilon="0.87864" sigma="0.31168982552857916" />
-    <Atom class="OQ" epsilon="0.87864" sigma="0.32234497419753755" />
-    <Atom class="OR" epsilon="0.7112800000000001" sigma="0.31569886976021067" />
-    <Atom class="OT" epsilon="0.87864" sigma="0.29109224716517446" />
-    <Atom class="OV" epsilon="0.7112800000000001" sigma="0.29510129139680596" />
-    <Atom class="OX" epsilon="0.87864" sigma="0.3278685462500077" />
-    <Atom class="OZ" epsilon="0.7112800000000001" sigma="0.33187759048163923" />
-    <Atom class="CG" epsilon="0.359824" sigma="0.3399669508423535" />
+    <Atom class="protein-OP" epsilon="0.87864" sigma="0.31168982552857916" />
+    <Atom class="protein-OQ" epsilon="0.87864" sigma="0.32234497419753755" />
+    <Atom class="protein-OR" epsilon="0.7112800000000001" sigma="0.31569886976021067" />
+    <Atom class="protein-OT" epsilon="0.87864" sigma="0.29109224716517446" />
+    <Atom class="protein-OV" epsilon="0.7112800000000001" sigma="0.29510129139680596" />
+    <Atom class="protein-OX" epsilon="0.87864" sigma="0.3278685462500077" />
+    <Atom class="protein-OZ" epsilon="0.7112800000000001" sigma="0.33187759048163923" />
+    <Atom class="protein-CG" epsilon="0.359824" sigma="0.3399669508423535" />
   </NonbondedForce>
   <CMAPTorsionForce>
     <Map>5.72848176 5.8870971999999995 10.199085760000001 9.91202152 5.1666124 -1.9681536 -6.320726960000001 -6.935607600000001 -5.888310560000001 -6.05219784 -5.35962032 -3.66907512 -4.04437992 -5.0996684000000005 -4.438303520000001 -2.96758568 -1.4777469600000002 -1.3631472 -0.7916128 0.23940848 3.63999632 8.841754320000001 11.060236640000001 9.25701632
@@ -683,15 +683,15 @@
 28.46567664 19.62183032 16.01547336 15.244989760000001 14.978427120000001 11.92908608 5.772748480000001 3.071056 3.45895464 7.909015200000001 -4.6926070399999995 10.7599928 14.96938968 14.611574 14.155936400000002 13.85146672 12.96864272 14.48864808 14.31404976 12.05150992 10.138961680000001 9.35124 13.13361784 27.280935200000002
 17.952205120000002 11.96318568 9.12409064 9.7629456 9.564958720000002 6.58231064 0.65801768 -2.25542704 -1.2762455200000002 2.7715652800000004 -5.261547360000001 9.69985088 14.68224176 11.481983840000002 7.3389452 6.99539696 8.2993824 10.114150559999999 9.66914032 7.1301636 6.0686828 7.72918688 13.443233840000001 21.321873200000002
 9.390527760000001 6.422983920000001 5.65358816 6.691554880000001 6.2841588 2.9357036 -4.07517416 -6.3712278399999995 -5.27489432 -0.32672856000000006 -5.325437040000001 8.00604216 7.031337520000001 2.2078131200000004 0.3020848 0.45919400000000005 2.5765908800000004 4.66386296 4.11207704 2.7942425600000003 3.70037144 7.6989784000000006 14.5954656 17.50150464</Map>
-    <Torsion class1="C" class5="N" map="1" type2="cmap-S1P-N" type3="cmap-S1P-CA" type4="cmap-S1P-C" />
-    <Torsion class1="C" class5="N" map="1" type2="cmap-SEP-N" type3="cmap-SEP-CA" type4="cmap-SEP-C" />
-    <Torsion class1="C" class5="N" map="2" type2="cmap-T1P-N" type3="cmap-T1P-CA" type4="cmap-T1P-C" />
-    <Torsion class1="C" class5="N" map="2" type2="cmap-TPO-N" type3="cmap-TPO-CA" type4="cmap-TPO-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-Y1P-N" type3="cmap-Y1P-CA" type4="cmap-Y1P-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-PTR-N" type3="cmap-PTR-CA" type4="cmap-PTR-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-H1D-N" type3="cmap-H1D-CA" type4="cmap-H1D-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-H2D-N" type3="cmap-H2D-CA" type4="cmap-H2D-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-H1E-N" type3="cmap-H1E-CA" type4="cmap-H1E-C" />
-    <Torsion class1="C" class5="N" map="0" type2="cmap-H2E-N" type3="cmap-H2E-CA" type4="cmap-H2E-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="1" type2="cmap-S1P-N" type3="cmap-S1P-CA" type4="cmap-S1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="1" type2="cmap-SEP-N" type3="cmap-SEP-CA" type4="cmap-SEP-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="2" type2="cmap-T1P-N" type3="cmap-T1P-CA" type4="cmap-T1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="2" type2="cmap-TPO-N" type3="cmap-TPO-CA" type4="cmap-TPO-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-Y1P-N" type3="cmap-Y1P-CA" type4="cmap-Y1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-PTR-N" type3="cmap-PTR-CA" type4="cmap-PTR-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H1D-N" type3="cmap-H1D-CA" type4="cmap-H1D-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H2D-N" type3="cmap-H2D-CA" type4="cmap-H2D-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H1E-N" type3="cmap-H1E-CA" type4="cmap-H1E-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H2E-N" type3="cmap-H2E-CA" type4="cmap-H2E-C" />
   </CMAPTorsionForce>
 </ForceField>

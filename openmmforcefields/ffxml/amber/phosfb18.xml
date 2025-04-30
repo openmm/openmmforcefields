@@ -1,25 +1,25 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-04-17</DateGenerated>
+    <DateGenerated>2025-04-30</DateGenerated>
     <Source Source="leaprc.phosfb18" md5hash="8f01016c5c2e378082063283b646805c" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.phosfb18</Source>
     <Reference>Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P. Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids. J. Phys. Chem. B., 2021, 125, 11927-11942.</Reference>
   </Info>
   <AtomTypes>
-    <Type element="O" name="protein-OP" class="OP" mass="16.0"/>
-    <Type element="O" name="protein-OQ" class="OQ" mass="16.0"/>
-    <Type element="O" name="protein-OR" class="OR" mass="16.0"/>
-    <Type element="O" name="protein-OT" class="OT" mass="16.0"/>
-    <Type element="O" name="protein-OV" class="OV" mass="16.0"/>
-    <Type element="O" name="protein-OX" class="OX" mass="16.0"/>
-    <Type element="O" name="protein-OZ" class="OZ" mass="16.0"/>
-    <Type element="C" name="protein-gt" class="gt" mass="12.01"/>
-    <Type element="C" name="protein-GT" class="GT" mass="12.01"/>
-    <Type element="C" name="protein-bs" class="bs" mass="12.01"/>
-    <Type element="C" name="protein-BS" class="BS" mass="12.01"/>
-    <Type element="C" name="protein-bt" class="bt" mass="12.01"/>
-    <Type element="C" name="protein-BT" class="BT" mass="12.01"/>
-    <Type element="C" name="protein-by" class="by" mass="12.01"/>
-    <Type element="C" name="protein-BY" class="BY" mass="12.01"/>
+    <Type element="O" name="protein-OP" class="protein-OP" mass="16.0"/>
+    <Type element="O" name="protein-OQ" class="protein-OQ" mass="16.0"/>
+    <Type element="O" name="protein-OR" class="protein-OR" mass="16.0"/>
+    <Type element="O" name="protein-OT" class="protein-OT" mass="16.0"/>
+    <Type element="O" name="protein-OV" class="protein-OV" mass="16.0"/>
+    <Type element="O" name="protein-OX" class="protein-OX" mass="16.0"/>
+    <Type element="O" name="protein-OZ" class="protein-OZ" mass="16.0"/>
+    <Type element="C" name="protein-gt" class="protein-gt" mass="12.01"/>
+    <Type element="C" name="protein-GT" class="protein-GT" mass="12.01"/>
+    <Type element="C" name="protein-bs" class="protein-bs" mass="12.01"/>
+    <Type element="C" name="protein-BS" class="protein-BS" mass="12.01"/>
+    <Type element="C" name="protein-bt" class="protein-bt" mass="12.01"/>
+    <Type element="C" name="protein-BT" class="protein-BT" mass="12.01"/>
+    <Type element="C" name="protein-by" class="protein-by" mass="12.01"/>
+    <Type element="C" name="protein-BY" class="protein-BY" mass="12.01"/>
   </AtomTypes>
   <Residues>
     <Residue name="PTR">
@@ -270,187 +270,187 @@
     </Residue>
   </Residues>
   <HarmonicBondForce>
-    <Bond class1="BY" class2="CA" length="0.146905" k="244649.21614399992"/>
-    <Bond class1="by" class2="CA" length="0.148461" k="250533.21718399995"/>
-    <Bond class1="BY" class2="CT" length="0.155246" k="242187.73547199994"/>
-    <Bond class1="bs" class2="CT" length="0.153675" k="226302.27572799995"/>
-    <Bond class1="BS" class2="CT" length="0.156868" k="261821.08015999992"/>
-    <Bond class1="bt" class2="CT" length="0.15310100000000001" k="239771.24953599996"/>
-    <Bond class1="bt" class2="gt" length="0.15118900000000002" k="231086.22785599995"/>
-    <Bond class1="BT" class2="CT" length="0.153646" k="239197.37209599995"/>
-    <Bond class1="BT" class2="GT" length="0.148905" k="223332.16291199997"/>
-    <Bond class1="by" class2="CT" length="0.15282400000000002" k="244223.22636799997"/>
-    <Bond class1="BY" class2="HC" length="0.109263" k="291340.12900799996"/>
-    <Bond class1="gt" class2="HC" length="0.10887500000000001" k="299129.4985439999"/>
-    <Bond class1="GT" class2="HC" length="0.108574" k="293627.55528"/>
-    <Bond class1="by" class2="HC" length="0.10894600000000002" k="294933.43188799993"/>
-    <Bond class1="bs" class2="H1" length="0.10875800000000001" k="292400.31276799995"/>
-    <Bond class1="BS" class2="H1" length="0.108638" k="281123.26961599995"/>
-    <Bond class1="bt" class2="H1" length="0.10853800000000001" k="286479.1159679999"/>
-    <Bond class1="BT" class2="H1" length="0.10837200000000001" k="279920.5537119999"/>
-    <Bond class1="BS" class2="OZ" length="0.14446900000000001" k="312777.36345599993"/>
-    <Bond class1="BT" class2="OZ" length="0.144511" k="276663.4017599999"/>
-    <Bond class1="OZ" class2="P" length="0.178716" k="237634.39705599996"/>
-    <Bond class1="OX" class2="P" length="0.154006" k="380738.52732799994"/>
-    <Bond class1="C" class2="OV" length="0.132224" k="370678.8357119999"/>
-    <Bond class1="OV" class2="P" length="0.18306" k="215844.28404799997"/>
-    <Bond class1="OT" class2="P" length="0.15290900000000002" k="397197.7640959999"/>
-    <Bond class1="bs" class2="OR" length="0.142508" k="269088.48732799996"/>
-    <Bond class1="bt" class2="OR" length="0.143327" k="264803.07553599996"/>
-    <Bond class1="C" class2="OR" length="0.136721" k="371257.44943999994"/>
-    <Bond class1="OR" class2="P" length="0.169847" k="215633.62801599997"/>
-    <Bond class1="OQ" class2="P" length="0.170708" k="229739.74971199996"/>
-    <Bond class1="OP" class2="P" length="0.151011" k="418028.96287999995"/>
-    <Bond class1="HO" class2="OQ" length="0.097863" k="459634.6170399999"/>
+    <Bond class1="protein-BY" class2="protein-CA" length="0.146905" k="244649.21614399992"/>
+    <Bond class1="protein-by" class2="protein-CA" length="0.148461" k="250533.21718399995"/>
+    <Bond class1="protein-BY" class2="protein-CT" length="0.155246" k="242187.73547199994"/>
+    <Bond class1="protein-bs" class2="protein-CT" length="0.153675" k="226302.27572799995"/>
+    <Bond class1="protein-BS" class2="protein-CT" length="0.156868" k="261821.08015999992"/>
+    <Bond class1="protein-bt" class2="protein-CT" length="0.15310100000000001" k="239771.24953599996"/>
+    <Bond class1="protein-bt" class2="protein-gt" length="0.15118900000000002" k="231086.22785599995"/>
+    <Bond class1="protein-BT" class2="protein-CT" length="0.153646" k="239197.37209599995"/>
+    <Bond class1="protein-BT" class2="protein-GT" length="0.148905" k="223332.16291199997"/>
+    <Bond class1="protein-by" class2="protein-CT" length="0.15282400000000002" k="244223.22636799997"/>
+    <Bond class1="protein-BY" class2="protein-HC" length="0.109263" k="291340.12900799996"/>
+    <Bond class1="protein-gt" class2="protein-HC" length="0.10887500000000001" k="299129.4985439999"/>
+    <Bond class1="protein-GT" class2="protein-HC" length="0.108574" k="293627.55528"/>
+    <Bond class1="protein-by" class2="protein-HC" length="0.10894600000000002" k="294933.43188799993"/>
+    <Bond class1="protein-bs" class2="protein-H1" length="0.10875800000000001" k="292400.31276799995"/>
+    <Bond class1="protein-BS" class2="protein-H1" length="0.108638" k="281123.26961599995"/>
+    <Bond class1="protein-bt" class2="protein-H1" length="0.10853800000000001" k="286479.1159679999"/>
+    <Bond class1="protein-BT" class2="protein-H1" length="0.10837200000000001" k="279920.5537119999"/>
+    <Bond class1="protein-BS" class2="protein-OZ" length="0.14446900000000001" k="312777.36345599993"/>
+    <Bond class1="protein-BT" class2="protein-OZ" length="0.144511" k="276663.4017599999"/>
+    <Bond class1="protein-OZ" class2="protein-P" length="0.178716" k="237634.39705599996"/>
+    <Bond class1="protein-OX" class2="protein-P" length="0.154006" k="380738.52732799994"/>
+    <Bond class1="protein-C" class2="protein-OV" length="0.132224" k="370678.8357119999"/>
+    <Bond class1="protein-OV" class2="protein-P" length="0.18306" k="215844.28404799997"/>
+    <Bond class1="protein-OT" class2="protein-P" length="0.15290900000000002" k="397197.7640959999"/>
+    <Bond class1="protein-bs" class2="protein-OR" length="0.142508" k="269088.48732799996"/>
+    <Bond class1="protein-bt" class2="protein-OR" length="0.143327" k="264803.07553599996"/>
+    <Bond class1="protein-C" class2="protein-OR" length="0.136721" k="371257.44943999994"/>
+    <Bond class1="protein-OR" class2="protein-P" length="0.169847" k="215633.62801599997"/>
+    <Bond class1="protein-OQ" class2="protein-P" length="0.170708" k="229739.74971199996"/>
+    <Bond class1="protein-OP" class2="protein-P" length="0.151011" k="418028.96287999995"/>
+    <Bond class1="protein-HO" class2="protein-OQ" length="0.097863" k="459634.6170399999"/>
   </HarmonicBondForce>
   <HarmonicAngleForce>
-    <Angle class1="CA" class2="BY" class3="CT" angle="1.8682697209060346" k="535.4026312"/>
-    <Angle class1="CA" class2="by" class3="CT" angle="1.9077686162737686" k="513.11354272"/>
-    <Angle class1="BY" class2="CA" class3="CA" angle="2.0399975529316623" k="586.2123740800001"/>
-    <Angle class1="by" class2="CA" class3="CA" angle="2.0956512158558556" k="569.8870755199999"/>
-    <Angle class1="CT" class2="bt" class3="gt" angle="1.8967782779739604" k="360.44908960000004"/>
-    <Angle class1="CT" class2="BT" class3="GT" angle="1.876554100733551" k="364.07586448"/>
-    <Angle class1="CT" class2="BY" class3="HC" angle="1.9284210973126177" k="364.85032288"/>
-    <Angle class1="bt" class2="gt" class3="HC" angle="1.895337683209364" k="396.076268"/>
-    <Angle class1="BT" class2="GT" class3="HC" angle="1.8802945158534998" k="386.4392608"/>
-    <Angle class1="CT" class2="by" class3="HC" angle="1.9225026858191048" k="370.22902224"/>
-    <Angle class1="BY" class2="CT" class3="H1" angle="1.9340007403983182" k="398.5862496"/>
-    <Angle class1="CT" class2="bs" class3="H1" angle="1.8763190048833072" k="384.62348848000005"/>
-    <Angle class1="bs" class2="CT" class3="H1" angle="1.9769478827692175" k="408.67471040000004"/>
-    <Angle class1="CT" class2="BS" class3="H1" angle="1.8564096850399574" k="407.24160672"/>
-    <Angle class1="BS" class2="CT" class3="H1" angle="1.9577255245194527" k="403.94997024"/>
-    <Angle class1="CT" class2="bt" class3="H1" angle="1.8934869360705493" k="390.38058880000006"/>
-    <Angle class1="bt" class2="CT" class3="H1" angle="1.9618272227945646" k="396.12806592"/>
-    <Angle class1="gt" class2="bt" class3="H1" angle="1.9306655907306822" k="381.24449008"/>
-    <Angle class1="CT" class2="BT" class3="H1" angle="1.8975921250041652" k="391.86615984"/>
-    <Angle class1="BT" class2="CT" class3="H1" angle="1.9771545297526536" k="405.57654208"/>
-    <Angle class1="GT" class2="BT" class3="H1" angle="1.9156965998680278" k="382.74612768000003"/>
-    <Angle class1="by" class2="CT" class3="H1" angle="1.949497693359701" k="402.78941232"/>
-    <Angle class1="HC" class2="BY" class3="HC" angle="1.90738935622731" k="273.32657808000005"/>
-    <Angle class1="HC" class2="gt" class3="HC" angle="1.8934268967442809" k="291.70822896"/>
-    <Angle class1="HC" class2="GT" class3="HC" angle="1.9030733315200534" k="290.56214768"/>
-    <Angle class1="HC" class2="by" class3="HC" angle="1.9076960105768856" k="281.37584096"/>
-    <Angle class1="H1" class2="bs" class3="H1" angle="1.9257661024544837" k="297.63453024"/>
-    <Angle class1="H1" class2="BS" class3="H1" angle="1.9394880555665885" k="308.42322528000005"/>
-    <Angle class1="BY" class2="CT" class3="N" angle="1.9668803000449384" k="667.34657744"/>
-    <Angle class1="bs" class2="CT" class3="N" angle="1.924766901457717" k="664.99767984"/>
-    <Angle class1="BS" class2="CT" class3="N" angle="1.9676740757887454" k="682.6563355200001"/>
-    <Angle class1="bt" class2="CT" class3="N" angle="1.9014440666633168" k="660.16348624"/>
-    <Angle class1="BT" class2="CT" class3="N" angle="1.862715559627413" k="670.48859408"/>
-    <Angle class1="by" class2="CT" class3="N" angle="1.93633476920701" k="664.6289857600001"/>
-    <Angle class1="BY" class2="CT" class3="C" angle="1.9378060817664413" k="496.48649408000006"/>
-    <Angle class1="bs" class2="CT" class3="C" angle="1.9758331409759686" k="499.00275168"/>
-    <Angle class1="BS" class2="CT" class3="C" angle="1.9479237554402526" k="511.68077376"/>
-    <Angle class1="bt" class2="CT" class3="C" angle="1.9874812938708537" k="499.24257855999997"/>
-    <Angle class1="BT" class2="CT" class3="C" angle="1.9631756641746554" k="496.71309952"/>
-    <Angle class1="by" class2="CT" class3="C" angle="1.8955150086613666" k="507.6748448"/>
-    <Angle class1="CA" class2="BY" class3="HC" angle="1.9415997294285763" k="381.78682016"/>
-    <Angle class1="CA" class2="by" class3="HC" angle="1.9255030813362082" k="388.94288272"/>
-    <Angle class1="H1" class2="BS" class3="OZ" angle="1.8430940445777173" k="433.18633968"/>
-    <Angle class1="H1" class2="BT" class3="OZ" angle="1.8647314149134664" k="409.71284448"/>
-    <Angle class1="CT" class2="BS" class3="OZ" angle="2.0729757236810205" k="530.07380512"/>
-    <Angle class1="CT" class2="BT" class3="OZ" angle="2.0624328878014233" k="488.02811968000003"/>
-    <Angle class1="GT" class2="BT" class3="OZ" angle="1.9137320572619827" k="422.95277776"/>
-    <Angle class1="BS" class2="OZ" class3="P" angle="2.2133204413606875" k="933.69549872"/>
-    <Angle class1="BT" class2="OZ" class3="P" angle="2.22487888433202" k="863.5219528"/>
-    <Angle class1="OZ" class2="P" class3="OX" angle="2.0694730224051927" k="974.78279712"/>
-    <Angle class1="OX" class2="P" class3="OX" angle="2.0819189653011643" k="1185.99739312"/>
-    <Angle class1="CA" class2="C" class3="OV" angle="2.094959890939141" k="612.72738624"/>
-    <Angle class1="C" class2="OV" class3="P" angle="1.9031234224695859" k="867.19098608"/>
-    <Angle class1="OV" class2="P" class3="OT" angle="1.8529738298744813" k="835.7322432"/>
-    <Angle class1="OT" class2="P" class3="OT" angle="2.1265753086085417" k="1161.4153889600002"/>
-    <Angle class1="H1" class2="bs" class3="OR" angle="1.8815385865443215" k="393.27867824"/>
-    <Angle class1="H1" class2="bt" class3="OR" angle="1.8953780003150853" k="404.59807184000005"/>
-    <Angle class1="CT" class2="bs" class3="OR" angle="1.9903659740585498" k="435.80075392"/>
-    <Angle class1="CT" class2="bt" class3="OR" angle="1.9223290255585312" k="437.97124576"/>
-    <Angle class1="gt" class2="bt" class3="OR" angle="1.9820414516582379" k="419.89126128000004"/>
-    <Angle class1="bs" class2="OR" class3="P" angle="2.121369515048618" k="804.5213604800001"/>
-    <Angle class1="bt" class2="OR" class3="P" angle="2.145552273565476" k="786.84948336"/>
-    <Angle class1="CA" class2="C" class3="OR" angle="2.0594513418402416" k="605.90788464"/>
-    <Angle class1="C" class2="OR" class3="P" angle="1.9923048603245903" k="861.6768088"/>
-    <Angle class1="HO" class2="OQ" class3="P" angle="2.0106357043924366" k="570.2806225600001"/>
-    <Angle class1="OR" class2="P" class3="OP" angle="1.907817834558675" k="857.7061091200001"/>
-    <Angle class1="OQ" class2="P" class3="OR" angle="1.8095770906882684" k="768.54021568"/>
-    <Angle class1="OP" class2="P" class3="OQ" angle="1.9611256004352629" k="788.660988"/>
-    <Angle class1="OP" class2="P" class3="OP" angle="2.154833934527582" k="1168.0135569600002"/>
+    <Angle class1="protein-CA" class2="protein-BY" class3="protein-CT" angle="1.8682697209060346" k="535.4026312"/>
+    <Angle class1="protein-CA" class2="protein-by" class3="protein-CT" angle="1.9077686162737686" k="513.11354272"/>
+    <Angle class1="protein-BY" class2="protein-CA" class3="protein-CA" angle="2.0399975529316623" k="586.2123740800001"/>
+    <Angle class1="protein-by" class2="protein-CA" class3="protein-CA" angle="2.0956512158558556" k="569.8870755199999"/>
+    <Angle class1="protein-CT" class2="protein-bt" class3="protein-gt" angle="1.8967782779739604" k="360.44908960000004"/>
+    <Angle class1="protein-CT" class2="protein-BT" class3="protein-GT" angle="1.876554100733551" k="364.07586448"/>
+    <Angle class1="protein-CT" class2="protein-BY" class3="protein-HC" angle="1.9284210973126177" k="364.85032288"/>
+    <Angle class1="protein-bt" class2="protein-gt" class3="protein-HC" angle="1.895337683209364" k="396.076268"/>
+    <Angle class1="protein-BT" class2="protein-GT" class3="protein-HC" angle="1.8802945158534998" k="386.4392608"/>
+    <Angle class1="protein-CT" class2="protein-by" class3="protein-HC" angle="1.9225026858191048" k="370.22902224"/>
+    <Angle class1="protein-BY" class2="protein-CT" class3="protein-H1" angle="1.9340007403983182" k="398.5862496"/>
+    <Angle class1="protein-CT" class2="protein-bs" class3="protein-H1" angle="1.8763190048833072" k="384.62348848000005"/>
+    <Angle class1="protein-bs" class2="protein-CT" class3="protein-H1" angle="1.9769478827692175" k="408.67471040000004"/>
+    <Angle class1="protein-CT" class2="protein-BS" class3="protein-H1" angle="1.8564096850399574" k="407.24160672"/>
+    <Angle class1="protein-BS" class2="protein-CT" class3="protein-H1" angle="1.9577255245194527" k="403.94997024"/>
+    <Angle class1="protein-CT" class2="protein-bt" class3="protein-H1" angle="1.8934869360705493" k="390.38058880000006"/>
+    <Angle class1="protein-bt" class2="protein-CT" class3="protein-H1" angle="1.9618272227945646" k="396.12806592"/>
+    <Angle class1="protein-gt" class2="protein-bt" class3="protein-H1" angle="1.9306655907306822" k="381.24449008"/>
+    <Angle class1="protein-CT" class2="protein-BT" class3="protein-H1" angle="1.8975921250041652" k="391.86615984"/>
+    <Angle class1="protein-BT" class2="protein-CT" class3="protein-H1" angle="1.9771545297526536" k="405.57654208"/>
+    <Angle class1="protein-GT" class2="protein-BT" class3="protein-H1" angle="1.9156965998680278" k="382.74612768000003"/>
+    <Angle class1="protein-by" class2="protein-CT" class3="protein-H1" angle="1.949497693359701" k="402.78941232"/>
+    <Angle class1="protein-HC" class2="protein-BY" class3="protein-HC" angle="1.90738935622731" k="273.32657808000005"/>
+    <Angle class1="protein-HC" class2="protein-gt" class3="protein-HC" angle="1.8934268967442809" k="291.70822896"/>
+    <Angle class1="protein-HC" class2="protein-GT" class3="protein-HC" angle="1.9030733315200534" k="290.56214768"/>
+    <Angle class1="protein-HC" class2="protein-by" class3="protein-HC" angle="1.9076960105768856" k="281.37584096"/>
+    <Angle class1="protein-H1" class2="protein-bs" class3="protein-H1" angle="1.9257661024544837" k="297.63453024"/>
+    <Angle class1="protein-H1" class2="protein-BS" class3="protein-H1" angle="1.9394880555665885" k="308.42322528000005"/>
+    <Angle class1="protein-BY" class2="protein-CT" class3="protein-N" angle="1.9668803000449384" k="667.34657744"/>
+    <Angle class1="protein-bs" class2="protein-CT" class3="protein-N" angle="1.924766901457717" k="664.99767984"/>
+    <Angle class1="protein-BS" class2="protein-CT" class3="protein-N" angle="1.9676740757887454" k="682.6563355200001"/>
+    <Angle class1="protein-bt" class2="protein-CT" class3="protein-N" angle="1.9014440666633168" k="660.16348624"/>
+    <Angle class1="protein-BT" class2="protein-CT" class3="protein-N" angle="1.862715559627413" k="670.48859408"/>
+    <Angle class1="protein-by" class2="protein-CT" class3="protein-N" angle="1.93633476920701" k="664.6289857600001"/>
+    <Angle class1="protein-BY" class2="protein-CT" class3="protein-C" angle="1.9378060817664413" k="496.48649408000006"/>
+    <Angle class1="protein-bs" class2="protein-CT" class3="protein-C" angle="1.9758331409759686" k="499.00275168"/>
+    <Angle class1="protein-BS" class2="protein-CT" class3="protein-C" angle="1.9479237554402526" k="511.68077376"/>
+    <Angle class1="protein-bt" class2="protein-CT" class3="protein-C" angle="1.9874812938708537" k="499.24257855999997"/>
+    <Angle class1="protein-BT" class2="protein-CT" class3="protein-C" angle="1.9631756641746554" k="496.71309952"/>
+    <Angle class1="protein-by" class2="protein-CT" class3="protein-C" angle="1.8955150086613666" k="507.6748448"/>
+    <Angle class1="protein-CA" class2="protein-BY" class3="protein-HC" angle="1.9415997294285763" k="381.78682016"/>
+    <Angle class1="protein-CA" class2="protein-by" class3="protein-HC" angle="1.9255030813362082" k="388.94288272"/>
+    <Angle class1="protein-H1" class2="protein-BS" class3="protein-OZ" angle="1.8430940445777173" k="433.18633968"/>
+    <Angle class1="protein-H1" class2="protein-BT" class3="protein-OZ" angle="1.8647314149134664" k="409.71284448"/>
+    <Angle class1="protein-CT" class2="protein-BS" class3="protein-OZ" angle="2.0729757236810205" k="530.07380512"/>
+    <Angle class1="protein-CT" class2="protein-BT" class3="protein-OZ" angle="2.0624328878014233" k="488.02811968000003"/>
+    <Angle class1="protein-GT" class2="protein-BT" class3="protein-OZ" angle="1.9137320572619827" k="422.95277776"/>
+    <Angle class1="protein-BS" class2="protein-OZ" class3="protein-P" angle="2.2133204413606875" k="933.69549872"/>
+    <Angle class1="protein-BT" class2="protein-OZ" class3="protein-P" angle="2.22487888433202" k="863.5219528"/>
+    <Angle class1="protein-OZ" class2="protein-P" class3="protein-OX" angle="2.0694730224051927" k="974.78279712"/>
+    <Angle class1="protein-OX" class2="protein-P" class3="protein-OX" angle="2.0819189653011643" k="1185.99739312"/>
+    <Angle class1="protein-CA" class2="protein-C" class3="protein-OV" angle="2.094959890939141" k="612.72738624"/>
+    <Angle class1="protein-C" class2="protein-OV" class3="protein-P" angle="1.9031234224695859" k="867.19098608"/>
+    <Angle class1="protein-OV" class2="protein-P" class3="protein-OT" angle="1.8529738298744813" k="835.7322432"/>
+    <Angle class1="protein-OT" class2="protein-P" class3="protein-OT" angle="2.1265753086085417" k="1161.4153889600002"/>
+    <Angle class1="protein-H1" class2="protein-bs" class3="protein-OR" angle="1.8815385865443215" k="393.27867824"/>
+    <Angle class1="protein-H1" class2="protein-bt" class3="protein-OR" angle="1.8953780003150853" k="404.59807184000005"/>
+    <Angle class1="protein-CT" class2="protein-bs" class3="protein-OR" angle="1.9903659740585498" k="435.80075392"/>
+    <Angle class1="protein-CT" class2="protein-bt" class3="protein-OR" angle="1.9223290255585312" k="437.97124576"/>
+    <Angle class1="protein-gt" class2="protein-bt" class3="protein-OR" angle="1.9820414516582379" k="419.89126128000004"/>
+    <Angle class1="protein-bs" class2="protein-OR" class3="protein-P" angle="2.121369515048618" k="804.5213604800001"/>
+    <Angle class1="protein-bt" class2="protein-OR" class3="protein-P" angle="2.145552273565476" k="786.84948336"/>
+    <Angle class1="protein-CA" class2="protein-C" class3="protein-OR" angle="2.0594513418402416" k="605.90788464"/>
+    <Angle class1="protein-C" class2="protein-OR" class3="protein-P" angle="1.9923048603245903" k="861.6768088"/>
+    <Angle class1="protein-HO" class2="protein-OQ" class3="protein-P" angle="2.0106357043924366" k="570.2806225600001"/>
+    <Angle class1="protein-OR" class2="protein-P" class3="protein-OP" angle="1.907817834558675" k="857.7061091200001"/>
+    <Angle class1="protein-OQ" class2="protein-P" class3="protein-OR" angle="1.8095770906882684" k="768.54021568"/>
+    <Angle class1="protein-OP" class2="protein-P" class3="protein-OQ" angle="1.9611256004352629" k="788.660988"/>
+    <Angle class1="protein-OP" class2="protein-P" class3="protein-OP" angle="2.154833934527582" k="1168.0135569600002"/>
   </HarmonicAngleForce>
   <PeriodicTorsionForce ordering="amber">
-    <Proper class1="" class2="OR" class3="P" class4="" periodicity1="3" phase1="0.017011898752113928" k1="-0.12397192"/>
-    <Proper class1="" class2="OV" class3="P" class4="" periodicity1="3" phase1="-0.11728752199742054" k1="-1.31264632"/>
-    <Proper class1="" class2="OZ" class3="P" class4="" periodicity1="3" phase1="0.15480634132876706" k1="-0.1700796"/>
-    <Proper class1="" class2="C" class3="OR" class4="" periodicity1="6" phase1="0.029947057437419506" k1="0.19631328000000003" periodicity2="5" phase2="-0.0017694147956718513" k2="-0.14690024000000002" periodicity3="4" phase3="0.0085259333959923" k3="-0.04259312" periodicity4="3" phase4="0.0012007865253720988" k4="-0.07422416" periodicity5="2" phase5="3.3640613957611007" k5="6.52649608" periodicity6="1" phase6="0.0027082274003196014" k6="-0.00138072"/>
-    <Proper class1="" class2="C" class3="OV" class4="" periodicity1="6" phase1="0.3510871162056005" k1="2.26601256" periodicity2="5" phase2="0.027352800037255133" k2="-0.32379976" periodicity3="4" phase3="-0.20666059700429418" k3="1.46255904" periodicity4="3" phase4="-0.014229494858584569" k4="-0.21781904000000002" periodicity5="2" phase5="3.0706797515483384" k5="7.20978512" periodicity6="1" phase6="0.0012451178883727547" k6="-0.18564408000000002"/>
-    <Proper class1="HO" class2="OQ" class3="P" class4="OR" periodicity1="6" phase1="-0.09198129504105396" k1="-0.20304951999999998" periodicity2="5" phase2="0.06261473411284776" k2="-0.88424656" periodicity3="4" phase3="-0.05695655121080735" k3="0.59592712" periodicity4="3" phase4="0.10101895897373099" k4="0.6709044" periodicity5="2" phase5="-0.050708447021592856" k5="1.6208816000000001" periodicity6="1" phase6="-0.17927760277097954" k6="-3.4589128000000002"/>
-    <Proper class1="HO" class2="OQ" class3="P" class4="OP" periodicity1="6" phase1="0.36209054447479877" k1="0.85098376" periodicity2="5" phase2="0.026358485962393964" k2="0.9764619200000001" periodicity3="4" phase3="-0.0033913492695501818" k3="-0.18920048000000003" periodicity4="3" phase4="-0.32213227844793985" k4="-1.0137832" periodicity5="2" phase5="-0.08744675511144749" k5="-1.65276368" periodicity6="1" phase6="-0.10218536251283881" k6="3.1117244800000003"/>
-    <Proper class1="" class2="CA" class3="BY" class4="" periodicity1="1" phase1="0.0" k1="0.0"/>
-    <Proper class1="" class2="CA" class3="by" class4="" periodicity1="1" phase1="0.0" k1="0.0"/>
-    <Proper class1="CA" class2="CA" class3="BY" class4="CT" periodicity1="6" phase1="0.05138772916646905" k1="-0.08937024" periodicity2="5" phase2="-0.027525936699052973" k2="-0.78642464" periodicity3="4" phase3="-0.4333614135458376" k3="-0.65023544" periodicity4="3" phase4="-0.034258544288621094" k4="2.12187376" periodicity5="2" phase5="0.21337068984651156" k5="0.1165244" periodicity6="1" phase6="-0.00017313666179783748" k6="-1.04612552"/>
-    <Proper class1="CA" class2="CA" class3="by" class4="CT" periodicity1="6" phase1="-0.011845375100360316" k1="0.3527112" periodicity2="5" phase2="-0.011820591424981996" k2="-0.4112872" periodicity3="4" phase3="-0.3556101369621439" k3="-0.44162120000000005" periodicity4="3" phase4="0.02135811765543021" k4="1.43565592" periodicity5="2" phase5="0.26112062925304885" k5="-0.5357612" periodicity6="1" phase6="0.009105731773504815" k6="-0.78437448"/>
-    <Proper class1="" class2="by" class3="CT" class4="" periodicity1="3" phase1="0.07592356779100533" k1="0.67789168"/>
-    <Proper class1="" class2="BY" class3="CT" class4="" periodicity1="3" phase1="-0.11503395286724546" k1="1.6838089600000001"/>
-    <Proper class1="CA" class2="BY" class3="CT" class4="N" periodicity1="6" phase1="-0.08590336045390891" k1="-1.3344449600000001" periodicity2="5" phase2="-0.013241813034880978" k2="0.9526968000000001" periodicity3="4" phase3="0.3657044232239783" k3="1.14503528" periodicity4="3" phase4="-0.0332111722044993" k4="0.85742712" periodicity5="2" phase5="-0.044155782877905336" k5="-1.0357073600000002" periodicity6="1" phase6="0.3807362459397046" k6="-1.9095776"/>
-    <Proper class1="CA" class2="by" class3="CT" class4="N" periodicity1="6" phase1="0.025548478656543392" k1="-0.83583768" periodicity2="5" phase2="0.009398598021989463" k2="0.11292616000000001" periodicity3="4" phase3="0.38294321477885146" k3="0.16409648" periodicity4="3" phase4="-0.0019797269705371682" k4="0.5814504800000001" periodicity5="2" phase5="-0.1276388952580737" k5="-1.1503071200000001" periodicity6="1" phase6="0.423468189213833" k6="-1.7888692"/>
-    <Proper class1="CA" class2="BY" class3="CT" class4="C" periodicity1="6" phase1="0.13362991244846945" k1="0.20091568" periodicity2="5" phase2="0.0348741219157995" k2="0.45028208" periodicity3="4" phase3="0.004482529117897037" k3="0.61714" periodicity4="3" phase4="0.015027982991371976" k4="-0.01280304" periodicity5="2" phase5="-0.012039281180256885" k5="0.1407916" periodicity6="1" phase6="-0.22399590526680266" k6="-1.71527264"/>
-    <Proper class1="CA" class2="by" class3="CT" class4="C" periodicity1="6" phase1="0.12589339147315418" k1="-0.19606224" periodicity2="5" phase2="-0.1549119337485127" k2="1.1715200000000001" periodicity3="4" phase3="0.12211841883401565" k3="1.26771016" periodicity4="3" phase4="0.015641466223447982" k4="-0.00041840000000000003" periodicity5="2" phase5="0.021112549829674605" k5="-0.62308128" periodicity6="1" phase6="-0.188863474621708" k6="-2.02769192"/>
-    <Proper class1="CT" class2="bt" class3="gt" class4="HC" periodicity1="3" phase1="0.10547583175162371" k1="0.50408832"/>
-    <Proper class1="CT" class2="BT" class3="GT" class4="HC" periodicity1="3" phase1="0.09053581335455226" k1="0.3041768"/>
-    <Proper class1="" class2="bt" class3="OR" class4="" periodicity1="3" phase1="0.31697517957414695" k1="1.4618896"/>
-    <Proper class1="" class2="BT" class3="OZ" class4="" periodicity1="3" phase1="-0.16453323578305665" k1="1.67786768"/>
-    <Proper class1="GT" class2="BT" class3="OZ" class4="P" periodicity1="6" phase1="0.0026963591614060393" k1="0.39618296" periodicity2="5" phase2="-0.012627108072328575" k2="-0.44509392000000003" periodicity3="4" phase3="0.02093906410202637" k3="-0.58211992" periodicity4="3" phase4="0.0692242959901503" k4="-0.65818504" periodicity5="2" phase5="0.11854311186130526" k5="0.9281785600000001" periodicity6="1" phase6="0.0059156189667095805" k6="0.038702"/>
-    <Proper class1="CT" class2="BT" class3="OZ" class4="P" periodicity1="6" phase1="0.024401971870908323" k1="0.21392792000000002" periodicity2="5" phase2="-0.05244662042365401" k2="-0.34526368" periodicity3="4" phase3="0.00021781709064889231" k3="0.46070024000000004" periodicity4="3" phase4="8.133234314293576e-05" k4="-0.00238488" periodicity5="2" phase5="-0.18867393186494139" k5="2.10354784" periodicity6="1" phase6="0.2474695365085752" k6="-2.1292376"/>
-    <Proper class1="gt" class2="bt" class3="OR" class4="P" periodicity1="6" phase1="0.028592507404946708" k1="0.17522592" periodicity2="5" phase2="-0.014641567094980431" k2="0.5014524" periodicity3="4" phase3="-0.0008925613794699001" k3="0.01782384" periodicity4="3" phase4="-0.1794732541801281" k4="-0.8296872000000001" periodicity5="2" phase5="0.014065433908897102" k5="1.21992888" periodicity6="1" phase6="-0.11312752972529205" k6="-1.8019651200000002"/>
-    <Proper class1="CT" class2="bt" class3="OR" class4="P" periodicity1="6" phase1="-0.00346587482861034" k1="-0.052216320000000004" periodicity2="5" phase2="0.012264254120838956" k2="-0.22359296" periodicity3="4" phase3="-0.0139434353941827" k3="0.5558444" periodicity4="3" phase4="-0.29193267186775673" k4="-1.82698544" periodicity5="2" phase5="0.014599853725857766" k5="-0.2263544" periodicity6="1" phase6="-0.14524472955464132" k6="0.87730112"/>
-    <Proper class1="" class2="BT" class3="GT" class4="" periodicity1="3" phase1="0.43096385475237303" k1="1.91493312"/>
-    <Proper class1="" class2="bt" class3="gt" class4="" periodicity1="3" phase1="0.15607484662911653" k1="0.44772984"/>
-    <Proper class1="" class2="BT" class3="CT" class4="" periodicity1="3" phase1="0.06074164675960745" k1="-0.045898480000000005"/>
-    <Proper class1="" class2="bt" class3="CT" class4="" periodicity1="3" phase1="0.13503263356829728" k1="0.13137759999999998"/>
-    <Proper class1="GT" class2="BT" class3="CT" class4="C" periodicity1="6" phase1="0.12067799860234472" k1="0.5869315199999999" periodicity2="5" phase2="0.13566287196119245" k2="0.29685480000000003" periodicity3="4" phase3="-0.06946026450501992" k3="-0.8058384" periodicity4="3" phase4="0.09062517421225437" k4="1.07273576" periodicity5="2" phase5="0.2119801860314477" k5="-0.7890187200000001" periodicity6="1" phase6="0.4581581788935471" k6="-1.34469576"/>
-    <Proper class1="gt" class2="bt" class3="CT" class4="C" periodicity1="6" phase1="0.14591214346060397" k1="0.32061992" periodicity2="5" phase2="0.20581306511952574" k2="0.876548" periodicity3="4" phase3="-0.14791578144189343" k3="-0.9939928800000001" periodicity4="3" phase4="0.18197692899211398" k4="0.94943328" periodicity5="2" phase5="0.16835341244982183" k5="-1.33724824" periodicity6="1" phase6="-0.41727977528503674" k6="2.39395928"/>
-    <Proper class1="GT" class2="BT" class3="CT" class4="N" periodicity1="6" phase1="-0.002876651673137054" k1="0.27831968" periodicity2="5" phase2="-0.22764853032537638" k2="-1.1429432800000001" periodicity3="4" phase3="0.0253931443531159" k3="-0.7243759200000001" periodicity4="3" phase4="0.10306535752169435" k4="1.4752784" periodicity5="2" phase5="-0.022766772894714835" k5="-1.79753008" periodicity6="1" phase6="0.6594668982795258" k6="3.5737636"/>
-    <Proper class1="gt" class2="bt" class3="CT" class4="N" periodicity1="6" phase1="0.0005283111645786835" k1="-0.054852240000000003" periodicity2="5" phase2="-0.1482709559446743" k2="-0.4930844" periodicity3="4" phase3="0.07669447972161123" k3="-0.8826148" periodicity4="3" phase4="0.09831910915382097" k4="0.74722056" periodicity5="2" phase5="-0.052609808708715476" k5="-0.69408376" periodicity6="1" phase6="0.1999073945295525" k6="0.37819176"/>
-    <Proper class1="" class2="BS" class3="OZ" class4="" periodicity1="3" phase1="0.02078041367302009" k1="1.75610848"/>
-    <Proper class1="" class2="bs" class3="OR" class4="" periodicity1="3" phase1="0.07183443588650781" k1="0.79387216"/>
-    <Proper class1="CT" class2="BS" class3="OZ" class4="P" periodicity1="6" phase1="-0.08349777314588512" k1="-0.620278" periodicity2="5" phase2="-0.007820645845261391" k2="-1.47096888" periodicity3="4" phase3="-0.029677229535061182" k3="0.46626496" periodicity4="3" phase4="5.061454830783555e-05" k4="-0.05673504" periodicity5="2" phase5="-0.09585889304020975" k5="4.30433184" periodicity6="1" phase6="-0.09544071215143192" k6="-3.5940141600000004"/>
-    <Proper class1="CT" class2="bs" class3="OR" class4="P" periodicity1="6" phase1="0.04592188154799841" k1="0.31367448" periodicity2="5" phase2="0.02295526845393022" k2="0.18271528" periodicity3="4" phase3="0.030795811052664348" k3="-0.9014846400000001" periodicity4="3" phase4="-0.011313224211427244" k4="-0.33463632" periodicity5="2" phase5="-0.16145761657519223" k5="1.7090803200000002" periodicity6="1" phase6="-0.05042378382059257" k6="-1.85296808"/>
-    <Proper class1="" class2="BS" class3="CT" class4="" periodicity1="3" phase1="0.3642811072189769" k1="0.27526536"/>
-    <Proper class1="" class2="bs" class3="CT" class4="" periodicity1="3" phase1="-0.10162319196077144" k1="0.33764879999999997"/>
-    <Proper class1="OZ" class2="BS" class3="CT" class4="C" periodicity1="6" phase1="0.20381867738327178" k1="-0.25484744" periodicity2="5" phase2="0.060423822302819286" k2="0.97826104" periodicity3="4" phase3="0.13674218357062573" k3="1.6485378400000001" periodicity4="3" phase4="0.10183682026121553" k4="-0.09301032000000001" periodicity5="2" phase5="0.05480927263207873" k5="0.48923512" periodicity6="1" phase6="-0.3317401414472434" k6="-3.51405792"/>
-    <Proper class1="OR" class2="bs" class3="CT" class4="C" periodicity1="6" phase1="0.1350619550997308" k1="0.30827712" periodicity2="5" phase2="0.20013673079326455" k2="0.93265544" periodicity3="4" phase3="-0.0050893800988154655" k3="0.2043884" periodicity4="3" phase4="0.08675368486548055" k4="0.15158632" periodicity5="2" phase5="-0.03221930159059092" k5="-0.6304451200000001" periodicity6="1" phase6="-0.0003307398932529255" k6="-2.23915128"/>
-    <Proper class1="OZ" class2="BS" class3="CT" class4="N" periodicity1="6" phase1="-0.10093849929521406" k1="0.38794048" periodicity2="5" phase2="0.04332535521980644" k2="-1.77707032" periodicity3="4" phase3="-0.02861606934984863" k3="-1.3790464" periodicity4="3" phase4="0.16780520453177042" k4="0.4311612" periodicity5="2" phase5="-0.049031185610426305" k5="0.65006808" periodicity6="1" phase6="0.5505052949458191" k6="-1.90982864"/>
-    <Proper class1="OR" class2="bs" class3="CT" class4="N" periodicity1="6" phase1="-0.019840728403746337" k1="-0.39254288000000004" periodicity2="5" phase2="-0.05771524583664928" k2="-0.39225" periodicity3="4" phase3="0.07924004243564495" k3="-1.0832376000000001" periodicity4="3" phase4="-0.02654802871916055" k4="0.86801264" periodicity5="2" phase5="0.040016385490950386" k5="0.72157264" periodicity6="1" phase6="0.08022877145689974" k6="0.48124368"/>
-    <Proper class1="N" class2="C" class3="CT" class4="by" periodicity1="6" phase1="-0.02469693251449536" k1="-0.7440825600000001" periodicity2="5" phase2="0.0345039375814515" k2="0.6514488" periodicity3="4" phase3="0.0037372735272954575" k3="-0.12916008" periodicity4="3" phase4="-0.0034164820107789" k4="0.23836248000000002" periodicity5="2" phase5="0.14213106216908342" k5="-2.9111016800000002" periodicity6="1" phase6="0.35819182799169386" k6="1.40502904"/>
-    <Proper class1="N" class2="C" class3="CT" class4="bt" periodicity1="6" phase1="0.010268993719959036" k1="0.30036936000000003" periodicity2="5" phase2="-0.004202054707101548" k2="0.26304808" periodicity3="4" phase3="0.15829804703030692" k3="-1.2610576" periodicity4="3" phase4="0.009413084254781018" k4="0.18928416" periodicity5="2" phase5="-0.2907660937957237" k5="-3.2622648" periodicity6="1" phase6="0.3072746395915625" k6="0.2817924"/>
-    <Proper class1="N" class2="C" class3="CT" class4="bs" periodicity1="6" phase1="0.18358036297592117" k1="0.71709576" periodicity2="5" phase2="0.012851033815359448" k2="0.38551376000000004" periodicity3="4" phase3="-0.1342580564462622" k3="-0.8752091200000001" periodicity4="3" phase4="0.5458272889516986" k4="-1.80238352" periodicity5="2" phase5="-0.03872309651522259" k5="-2.81244296" periodicity6="1" phase6="0.006442708400811868" k6="-0.6613230400000001"/>
-    <Proper class1="N" class2="C" class3="CT" class4="BY" periodicity1="6" phase1="0.007418521985601898" k1="0.23497344" periodicity2="5" phase2="0.008444426519924164" k2="0.54626304" periodicity3="4" phase3="-0.04639451670943847" k3="-0.9650396" periodicity4="3" phase4="-0.006135704985386065" k4="0.17631375999999999" periodicity5="2" phase5="-0.18569465483178707" k5="-3.10841912" periodicity6="1" phase6="0.2379838465569112" k6="1.0134066400000001"/>
-    <Proper class1="N" class2="C" class3="CT" class4="BT" periodicity1="6" phase1="-0.4982152305560689" k1="2.0763936800000002" periodicity2="5" phase2="0.3643341652282375" k2="-1.73087896" periodicity3="4" phase3="-0.624264305398501" k3="-3.31694968" periodicity4="3" phase4="0.031080648786589823" k4="0.16187896000000002" periodicity5="2" phase5="-0.24957597438280715" k5="-1.66770056" periodicity6="1" phase6="0.15055279940873165" k6="-0.62161688"/>
-    <Proper class1="N" class2="C" class3="CT" class4="BS" periodicity1="6" phase1="-0.1268754882432514" k1="1.01077072" periodicity2="5" phase2="0.5800524974516067" k2="-2.91231504" periodicity3="4" phase3="-0.5731994621436509" k3="-3.40008576" periodicity4="3" phase4="-0.3331945243129303" k4="-1.761464" periodicity5="2" phase5="-0.18606937702219029" k5="-0.28250368" periodicity6="1" phase6="0.5265670570571656" k6="-1.75556456"/>
-    <Proper class1="by" class2="CT" class3="N" class4="C" periodicity1="6" phase1="-0.0012253956678252187" k1="0.03234232" periodicity2="5" phase2="0.052015524098411405" k2="0.54157696" periodicity3="4" phase3="0.0008052949168701836" k3="-0.0531368" periodicity4="3" phase4="-0.22060699945820525" k4="-0.20576912000000003" periodicity5="2" phase5="-1.3347841786939636" k5="4.15337312" periodicity6="1" phase6="-0.5046970343321255" k6="-3.2731013600000005"/>
-    <Proper class1="bt" class2="CT" class3="N" class4="C" periodicity1="6" phase1="-0.04265061093098543" k1="-1.8199144800000002" periodicity2="5" phase2="0.16207738299257543" k2="1.51218128" periodicity3="4" phase3="0.19268731647990237" k3="-0.8844976000000001" periodicity4="3" phase4="-0.23596380248065296" k4="-0.6587708000000001" periodicity5="2" phase5="-1.2297734771879962" k5="4.3528244" periodicity6="1" phase6="-0.29539610323541426" k6="-2.03254536"/>
-    <Proper class1="bs" class2="CT" class3="N" class4="C" periodicity1="6" phase1="0.13000608532255362" k1="-1.67163352" periodicity2="5" phase2="0.2040602309517478" k2="1.2903874400000002" periodicity3="4" phase3="-0.058494360814739556" k3="0.66048624" periodicity4="3" phase4="-0.23117426994733012" k4="0.10033232" periodicity5="2" phase5="-1.297768712318892" k5="4.482946800000001" periodicity6="1" phase6="-0.3804507100740784" k6="-2.1927507200000003"/>
-    <Proper class1="BY" class2="CT" class3="N" class4="C" periodicity1="6" phase1="0.1600178944752221" k1="-1.04541424" periodicity2="5" phase2="-0.04535569673865144" k2="-0.39271024" periodicity3="4" phase3="0.03810891515144579" k3="-0.52149376" periodicity4="3" phase4="-0.2449122800885531" k4="-0.1037632" periodicity5="2" phase5="-0.9753310012518532" k5="5.23569024" periodicity6="1" phase6="-0.1653709938240139" k6="-3.75078864"/>
-    <Proper class1="BT" class2="CT" class3="N" class4="C" periodicity1="6" phase1="0.03085113798995257" k1="-0.6724943200000001" periodicity2="5" phase2="0.04594806148677832" k2="-1.46799824" periodicity3="4" phase3="-0.24036377752493066" k3="-1.00273744" periodicity4="3" phase4="-0.31432908589519837" k4="1.93125072" periodicity5="2" phase5="-1.2979010082761933" k5="4.59959672" periodicity6="1" phase6="-0.13178876462054062" k6="-3.3850652"/>
-    <Proper class1="BS" class2="CT" class3="N" class4="C" periodicity1="6" phase1="0.46328281464325277" k1="-1.58540128" periodicity2="5" phase2="0.1393959566982831" k2="-2.4345022400000005" periodicity3="4" phase3="0.1758119024752944" k3="0.49362832" periodicity4="3" phase4="-0.3479018903207109" k4="1.59607048" periodicity5="2" phase5="-1.266303742031013" k5="4.3906059200000005" periodicity6="1" phase6="-0.11217702341465595" k6="-3.9317884800000003"/>
-    <Improper class1="C" class2="CA" class3="CA" class4="OR" periodicity1="2" phase1="3.141592653589793" k1="4.72072352"/>
-    <Improper class1="C" class2="CA" class3="CA" class4="OV" periodicity1="2" phase1="3.141592653589793" k1="4.73227136"/>
-    <Improper class1="CA" class2="CA" class3="CA" class4="by" periodicity1="2" phase1="3.141592653589793" k1="4.17680352"/>
-    <Improper class1="CA" class2="BY" class3="CA" class4="CA" periodicity1="2" phase1="3.141592653589793" k1="3.9586916000000003"/>
+    <Proper class1="" class2="protein-OR" class3="protein-P" class4="" periodicity1="3" phase1="0.017011898752113928" k1="-0.12397192"/>
+    <Proper class1="" class2="protein-OV" class3="protein-P" class4="" periodicity1="3" phase1="-0.11728752199742054" k1="-1.31264632"/>
+    <Proper class1="" class2="protein-OZ" class3="protein-P" class4="" periodicity1="3" phase1="0.15480634132876706" k1="-0.1700796"/>
+    <Proper class1="" class2="protein-C" class3="protein-OR" class4="" periodicity1="6" phase1="0.029947057437419506" k1="0.19631328000000003" periodicity2="5" phase2="-0.0017694147956718513" k2="-0.14690024000000002" periodicity3="4" phase3="0.0085259333959923" k3="-0.04259312" periodicity4="3" phase4="0.0012007865253720988" k4="-0.07422416" periodicity5="2" phase5="3.3640613957611007" k5="6.52649608" periodicity6="1" phase6="0.0027082274003196014" k6="-0.00138072"/>
+    <Proper class1="" class2="protein-C" class3="protein-OV" class4="" periodicity1="6" phase1="0.3510871162056005" k1="2.26601256" periodicity2="5" phase2="0.027352800037255133" k2="-0.32379976" periodicity3="4" phase3="-0.20666059700429418" k3="1.46255904" periodicity4="3" phase4="-0.014229494858584569" k4="-0.21781904000000002" periodicity5="2" phase5="3.0706797515483384" k5="7.20978512" periodicity6="1" phase6="0.0012451178883727547" k6="-0.18564408000000002"/>
+    <Proper class1="protein-HO" class2="protein-OQ" class3="protein-P" class4="protein-OR" periodicity1="6" phase1="-0.09198129504105396" k1="-0.20304951999999998" periodicity2="5" phase2="0.06261473411284776" k2="-0.88424656" periodicity3="4" phase3="-0.05695655121080735" k3="0.59592712" periodicity4="3" phase4="0.10101895897373099" k4="0.6709044" periodicity5="2" phase5="-0.050708447021592856" k5="1.6208816000000001" periodicity6="1" phase6="-0.17927760277097954" k6="-3.4589128000000002"/>
+    <Proper class1="protein-HO" class2="protein-OQ" class3="protein-P" class4="protein-OP" periodicity1="6" phase1="0.36209054447479877" k1="0.85098376" periodicity2="5" phase2="0.026358485962393964" k2="0.9764619200000001" periodicity3="4" phase3="-0.0033913492695501818" k3="-0.18920048000000003" periodicity4="3" phase4="-0.32213227844793985" k4="-1.0137832" periodicity5="2" phase5="-0.08744675511144749" k5="-1.65276368" periodicity6="1" phase6="-0.10218536251283881" k6="3.1117244800000003"/>
+    <Proper class1="" class2="protein-CA" class3="protein-BY" class4="" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="protein-CA" class3="protein-by" class4="" periodicity1="1" phase1="0.0" k1="0.0"/>
+    <Proper class1="protein-CA" class2="protein-CA" class3="protein-BY" class4="protein-CT" periodicity1="6" phase1="0.05138772916646905" k1="-0.08937024" periodicity2="5" phase2="-0.027525936699052973" k2="-0.78642464" periodicity3="4" phase3="-0.4333614135458376" k3="-0.65023544" periodicity4="3" phase4="-0.034258544288621094" k4="2.12187376" periodicity5="2" phase5="0.21337068984651156" k5="0.1165244" periodicity6="1" phase6="-0.00017313666179783748" k6="-1.04612552"/>
+    <Proper class1="protein-CA" class2="protein-CA" class3="protein-by" class4="protein-CT" periodicity1="6" phase1="-0.011845375100360316" k1="0.3527112" periodicity2="5" phase2="-0.011820591424981996" k2="-0.4112872" periodicity3="4" phase3="-0.3556101369621439" k3="-0.44162120000000005" periodicity4="3" phase4="0.02135811765543021" k4="1.43565592" periodicity5="2" phase5="0.26112062925304885" k5="-0.5357612" periodicity6="1" phase6="0.009105731773504815" k6="-0.78437448"/>
+    <Proper class1="" class2="protein-by" class3="protein-CT" class4="" periodicity1="3" phase1="0.07592356779100533" k1="0.67789168"/>
+    <Proper class1="" class2="protein-BY" class3="protein-CT" class4="" periodicity1="3" phase1="-0.11503395286724546" k1="1.6838089600000001"/>
+    <Proper class1="protein-CA" class2="protein-BY" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="-0.08590336045390891" k1="-1.3344449600000001" periodicity2="5" phase2="-0.013241813034880978" k2="0.9526968000000001" periodicity3="4" phase3="0.3657044232239783" k3="1.14503528" periodicity4="3" phase4="-0.0332111722044993" k4="0.85742712" periodicity5="2" phase5="-0.044155782877905336" k5="-1.0357073600000002" periodicity6="1" phase6="0.3807362459397046" k6="-1.9095776"/>
+    <Proper class1="protein-CA" class2="protein-by" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="0.025548478656543392" k1="-0.83583768" periodicity2="5" phase2="0.009398598021989463" k2="0.11292616000000001" periodicity3="4" phase3="0.38294321477885146" k3="0.16409648" periodicity4="3" phase4="-0.0019797269705371682" k4="0.5814504800000001" periodicity5="2" phase5="-0.1276388952580737" k5="-1.1503071200000001" periodicity6="1" phase6="0.423468189213833" k6="-1.7888692"/>
+    <Proper class1="protein-CA" class2="protein-BY" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.13362991244846945" k1="0.20091568" periodicity2="5" phase2="0.0348741219157995" k2="0.45028208" periodicity3="4" phase3="0.004482529117897037" k3="0.61714" periodicity4="3" phase4="0.015027982991371976" k4="-0.01280304" periodicity5="2" phase5="-0.012039281180256885" k5="0.1407916" periodicity6="1" phase6="-0.22399590526680266" k6="-1.71527264"/>
+    <Proper class1="protein-CA" class2="protein-by" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.12589339147315418" k1="-0.19606224" periodicity2="5" phase2="-0.1549119337485127" k2="1.1715200000000001" periodicity3="4" phase3="0.12211841883401565" k3="1.26771016" periodicity4="3" phase4="0.015641466223447982" k4="-0.00041840000000000003" periodicity5="2" phase5="0.021112549829674605" k5="-0.62308128" periodicity6="1" phase6="-0.188863474621708" k6="-2.02769192"/>
+    <Proper class1="protein-CT" class2="protein-bt" class3="protein-gt" class4="protein-HC" periodicity1="3" phase1="0.10547583175162371" k1="0.50408832"/>
+    <Proper class1="protein-CT" class2="protein-BT" class3="protein-GT" class4="protein-HC" periodicity1="3" phase1="0.09053581335455226" k1="0.3041768"/>
+    <Proper class1="" class2="protein-bt" class3="protein-OR" class4="" periodicity1="3" phase1="0.31697517957414695" k1="1.4618896"/>
+    <Proper class1="" class2="protein-BT" class3="protein-OZ" class4="" periodicity1="3" phase1="-0.16453323578305665" k1="1.67786768"/>
+    <Proper class1="protein-GT" class2="protein-BT" class3="protein-OZ" class4="protein-P" periodicity1="6" phase1="0.0026963591614060393" k1="0.39618296" periodicity2="5" phase2="-0.012627108072328575" k2="-0.44509392000000003" periodicity3="4" phase3="0.02093906410202637" k3="-0.58211992" periodicity4="3" phase4="0.0692242959901503" k4="-0.65818504" periodicity5="2" phase5="0.11854311186130526" k5="0.9281785600000001" periodicity6="1" phase6="0.0059156189667095805" k6="0.038702"/>
+    <Proper class1="protein-CT" class2="protein-BT" class3="protein-OZ" class4="protein-P" periodicity1="6" phase1="0.024401971870908323" k1="0.21392792000000002" periodicity2="5" phase2="-0.05244662042365401" k2="-0.34526368" periodicity3="4" phase3="0.00021781709064889231" k3="0.46070024000000004" periodicity4="3" phase4="8.133234314293576e-05" k4="-0.00238488" periodicity5="2" phase5="-0.18867393186494139" k5="2.10354784" periodicity6="1" phase6="0.2474695365085752" k6="-2.1292376"/>
+    <Proper class1="protein-gt" class2="protein-bt" class3="protein-OR" class4="protein-P" periodicity1="6" phase1="0.028592507404946708" k1="0.17522592" periodicity2="5" phase2="-0.014641567094980431" k2="0.5014524" periodicity3="4" phase3="-0.0008925613794699001" k3="0.01782384" periodicity4="3" phase4="-0.1794732541801281" k4="-0.8296872000000001" periodicity5="2" phase5="0.014065433908897102" k5="1.21992888" periodicity6="1" phase6="-0.11312752972529205" k6="-1.8019651200000002"/>
+    <Proper class1="protein-CT" class2="protein-bt" class3="protein-OR" class4="protein-P" periodicity1="6" phase1="-0.00346587482861034" k1="-0.052216320000000004" periodicity2="5" phase2="0.012264254120838956" k2="-0.22359296" periodicity3="4" phase3="-0.0139434353941827" k3="0.5558444" periodicity4="3" phase4="-0.29193267186775673" k4="-1.82698544" periodicity5="2" phase5="0.014599853725857766" k5="-0.2263544" periodicity6="1" phase6="-0.14524472955464132" k6="0.87730112"/>
+    <Proper class1="" class2="protein-BT" class3="protein-GT" class4="" periodicity1="3" phase1="0.43096385475237303" k1="1.91493312"/>
+    <Proper class1="" class2="protein-bt" class3="protein-gt" class4="" periodicity1="3" phase1="0.15607484662911653" k1="0.44772984"/>
+    <Proper class1="" class2="protein-BT" class3="protein-CT" class4="" periodicity1="3" phase1="0.06074164675960745" k1="-0.045898480000000005"/>
+    <Proper class1="" class2="protein-bt" class3="protein-CT" class4="" periodicity1="3" phase1="0.13503263356829728" k1="0.13137759999999998"/>
+    <Proper class1="protein-GT" class2="protein-BT" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.12067799860234472" k1="0.5869315199999999" periodicity2="5" phase2="0.13566287196119245" k2="0.29685480000000003" periodicity3="4" phase3="-0.06946026450501992" k3="-0.8058384" periodicity4="3" phase4="0.09062517421225437" k4="1.07273576" periodicity5="2" phase5="0.2119801860314477" k5="-0.7890187200000001" periodicity6="1" phase6="0.4581581788935471" k6="-1.34469576"/>
+    <Proper class1="protein-gt" class2="protein-bt" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.14591214346060397" k1="0.32061992" periodicity2="5" phase2="0.20581306511952574" k2="0.876548" periodicity3="4" phase3="-0.14791578144189343" k3="-0.9939928800000001" periodicity4="3" phase4="0.18197692899211398" k4="0.94943328" periodicity5="2" phase5="0.16835341244982183" k5="-1.33724824" periodicity6="1" phase6="-0.41727977528503674" k6="2.39395928"/>
+    <Proper class1="protein-GT" class2="protein-BT" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="-0.002876651673137054" k1="0.27831968" periodicity2="5" phase2="-0.22764853032537638" k2="-1.1429432800000001" periodicity3="4" phase3="0.0253931443531159" k3="-0.7243759200000001" periodicity4="3" phase4="0.10306535752169435" k4="1.4752784" periodicity5="2" phase5="-0.022766772894714835" k5="-1.79753008" periodicity6="1" phase6="0.6594668982795258" k6="3.5737636"/>
+    <Proper class1="protein-gt" class2="protein-bt" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="0.0005283111645786835" k1="-0.054852240000000003" periodicity2="5" phase2="-0.1482709559446743" k2="-0.4930844" periodicity3="4" phase3="0.07669447972161123" k3="-0.8826148" periodicity4="3" phase4="0.09831910915382097" k4="0.74722056" periodicity5="2" phase5="-0.052609808708715476" k5="-0.69408376" periodicity6="1" phase6="0.1999073945295525" k6="0.37819176"/>
+    <Proper class1="" class2="protein-BS" class3="protein-OZ" class4="" periodicity1="3" phase1="0.02078041367302009" k1="1.75610848"/>
+    <Proper class1="" class2="protein-bs" class3="protein-OR" class4="" periodicity1="3" phase1="0.07183443588650781" k1="0.79387216"/>
+    <Proper class1="protein-CT" class2="protein-BS" class3="protein-OZ" class4="protein-P" periodicity1="6" phase1="-0.08349777314588512" k1="-0.620278" periodicity2="5" phase2="-0.007820645845261391" k2="-1.47096888" periodicity3="4" phase3="-0.029677229535061182" k3="0.46626496" periodicity4="3" phase4="5.061454830783555e-05" k4="-0.05673504" periodicity5="2" phase5="-0.09585889304020975" k5="4.30433184" periodicity6="1" phase6="-0.09544071215143192" k6="-3.5940141600000004"/>
+    <Proper class1="protein-CT" class2="protein-bs" class3="protein-OR" class4="protein-P" periodicity1="6" phase1="0.04592188154799841" k1="0.31367448" periodicity2="5" phase2="0.02295526845393022" k2="0.18271528" periodicity3="4" phase3="0.030795811052664348" k3="-0.9014846400000001" periodicity4="3" phase4="-0.011313224211427244" k4="-0.33463632" periodicity5="2" phase5="-0.16145761657519223" k5="1.7090803200000002" periodicity6="1" phase6="-0.05042378382059257" k6="-1.85296808"/>
+    <Proper class1="" class2="protein-BS" class3="protein-CT" class4="" periodicity1="3" phase1="0.3642811072189769" k1="0.27526536"/>
+    <Proper class1="" class2="protein-bs" class3="protein-CT" class4="" periodicity1="3" phase1="-0.10162319196077144" k1="0.33764879999999997"/>
+    <Proper class1="protein-OZ" class2="protein-BS" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.20381867738327178" k1="-0.25484744" periodicity2="5" phase2="0.060423822302819286" k2="0.97826104" periodicity3="4" phase3="0.13674218357062573" k3="1.6485378400000001" periodicity4="3" phase4="0.10183682026121553" k4="-0.09301032000000001" periodicity5="2" phase5="0.05480927263207873" k5="0.48923512" periodicity6="1" phase6="-0.3317401414472434" k6="-3.51405792"/>
+    <Proper class1="protein-OR" class2="protein-bs" class3="protein-CT" class4="protein-C" periodicity1="6" phase1="0.1350619550997308" k1="0.30827712" periodicity2="5" phase2="0.20013673079326455" k2="0.93265544" periodicity3="4" phase3="-0.0050893800988154655" k3="0.2043884" periodicity4="3" phase4="0.08675368486548055" k4="0.15158632" periodicity5="2" phase5="-0.03221930159059092" k5="-0.6304451200000001" periodicity6="1" phase6="-0.0003307398932529255" k6="-2.23915128"/>
+    <Proper class1="protein-OZ" class2="protein-BS" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="-0.10093849929521406" k1="0.38794048" periodicity2="5" phase2="0.04332535521980644" k2="-1.77707032" periodicity3="4" phase3="-0.02861606934984863" k3="-1.3790464" periodicity4="3" phase4="0.16780520453177042" k4="0.4311612" periodicity5="2" phase5="-0.049031185610426305" k5="0.65006808" periodicity6="1" phase6="0.5505052949458191" k6="-1.90982864"/>
+    <Proper class1="protein-OR" class2="protein-bs" class3="protein-CT" class4="protein-N" periodicity1="6" phase1="-0.019840728403746337" k1="-0.39254288000000004" periodicity2="5" phase2="-0.05771524583664928" k2="-0.39225" periodicity3="4" phase3="0.07924004243564495" k3="-1.0832376000000001" periodicity4="3" phase4="-0.02654802871916055" k4="0.86801264" periodicity5="2" phase5="0.040016385490950386" k5="0.72157264" periodicity6="1" phase6="0.08022877145689974" k6="0.48124368"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-by" periodicity1="6" phase1="-0.02469693251449536" k1="-0.7440825600000001" periodicity2="5" phase2="0.0345039375814515" k2="0.6514488" periodicity3="4" phase3="0.0037372735272954575" k3="-0.12916008" periodicity4="3" phase4="-0.0034164820107789" k4="0.23836248000000002" periodicity5="2" phase5="0.14213106216908342" k5="-2.9111016800000002" periodicity6="1" phase6="0.35819182799169386" k6="1.40502904"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-bt" periodicity1="6" phase1="0.010268993719959036" k1="0.30036936000000003" periodicity2="5" phase2="-0.004202054707101548" k2="0.26304808" periodicity3="4" phase3="0.15829804703030692" k3="-1.2610576" periodicity4="3" phase4="0.009413084254781018" k4="0.18928416" periodicity5="2" phase5="-0.2907660937957237" k5="-3.2622648" periodicity6="1" phase6="0.3072746395915625" k6="0.2817924"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-bs" periodicity1="6" phase1="0.18358036297592117" k1="0.71709576" periodicity2="5" phase2="0.012851033815359448" k2="0.38551376000000004" periodicity3="4" phase3="-0.1342580564462622" k3="-0.8752091200000001" periodicity4="3" phase4="0.5458272889516986" k4="-1.80238352" periodicity5="2" phase5="-0.03872309651522259" k5="-2.81244296" periodicity6="1" phase6="0.006442708400811868" k6="-0.6613230400000001"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-BY" periodicity1="6" phase1="0.007418521985601898" k1="0.23497344" periodicity2="5" phase2="0.008444426519924164" k2="0.54626304" periodicity3="4" phase3="-0.04639451670943847" k3="-0.9650396" periodicity4="3" phase4="-0.006135704985386065" k4="0.17631375999999999" periodicity5="2" phase5="-0.18569465483178707" k5="-3.10841912" periodicity6="1" phase6="0.2379838465569112" k6="1.0134066400000001"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-BT" periodicity1="6" phase1="-0.4982152305560689" k1="2.0763936800000002" periodicity2="5" phase2="0.3643341652282375" k2="-1.73087896" periodicity3="4" phase3="-0.624264305398501" k3="-3.31694968" periodicity4="3" phase4="0.031080648786589823" k4="0.16187896000000002" periodicity5="2" phase5="-0.24957597438280715" k5="-1.66770056" periodicity6="1" phase6="0.15055279940873165" k6="-0.62161688"/>
+    <Proper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-BS" periodicity1="6" phase1="-0.1268754882432514" k1="1.01077072" periodicity2="5" phase2="0.5800524974516067" k2="-2.91231504" periodicity3="4" phase3="-0.5731994621436509" k3="-3.40008576" periodicity4="3" phase4="-0.3331945243129303" k4="-1.761464" periodicity5="2" phase5="-0.18606937702219029" k5="-0.28250368" periodicity6="1" phase6="0.5265670570571656" k6="-1.75556456"/>
+    <Proper class1="protein-by" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="-0.0012253956678252187" k1="0.03234232" periodicity2="5" phase2="0.052015524098411405" k2="0.54157696" periodicity3="4" phase3="0.0008052949168701836" k3="-0.0531368" periodicity4="3" phase4="-0.22060699945820525" k4="-0.20576912000000003" periodicity5="2" phase5="-1.3347841786939636" k5="4.15337312" periodicity6="1" phase6="-0.5046970343321255" k6="-3.2731013600000005"/>
+    <Proper class1="protein-bt" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="-0.04265061093098543" k1="-1.8199144800000002" periodicity2="5" phase2="0.16207738299257543" k2="1.51218128" periodicity3="4" phase3="0.19268731647990237" k3="-0.8844976000000001" periodicity4="3" phase4="-0.23596380248065296" k4="-0.6587708000000001" periodicity5="2" phase5="-1.2297734771879962" k5="4.3528244" periodicity6="1" phase6="-0.29539610323541426" k6="-2.03254536"/>
+    <Proper class1="protein-bs" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="0.13000608532255362" k1="-1.67163352" periodicity2="5" phase2="0.2040602309517478" k2="1.2903874400000002" periodicity3="4" phase3="-0.058494360814739556" k3="0.66048624" periodicity4="3" phase4="-0.23117426994733012" k4="0.10033232" periodicity5="2" phase5="-1.297768712318892" k5="4.482946800000001" periodicity6="1" phase6="-0.3804507100740784" k6="-2.1927507200000003"/>
+    <Proper class1="protein-BY" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="0.1600178944752221" k1="-1.04541424" periodicity2="5" phase2="-0.04535569673865144" k2="-0.39271024" periodicity3="4" phase3="0.03810891515144579" k3="-0.52149376" periodicity4="3" phase4="-0.2449122800885531" k4="-0.1037632" periodicity5="2" phase5="-0.9753310012518532" k5="5.23569024" periodicity6="1" phase6="-0.1653709938240139" k6="-3.75078864"/>
+    <Proper class1="protein-BT" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="0.03085113798995257" k1="-0.6724943200000001" periodicity2="5" phase2="0.04594806148677832" k2="-1.46799824" periodicity3="4" phase3="-0.24036377752493066" k3="-1.00273744" periodicity4="3" phase4="-0.31432908589519837" k4="1.93125072" periodicity5="2" phase5="-1.2979010082761933" k5="4.59959672" periodicity6="1" phase6="-0.13178876462054062" k6="-3.3850652"/>
+    <Proper class1="protein-BS" class2="protein-CT" class3="protein-N" class4="protein-C" periodicity1="6" phase1="0.46328281464325277" k1="-1.58540128" periodicity2="5" phase2="0.1393959566982831" k2="-2.4345022400000005" periodicity3="4" phase3="0.1758119024752944" k3="0.49362832" periodicity4="3" phase4="-0.3479018903207109" k4="1.59607048" periodicity5="2" phase5="-1.266303742031013" k5="4.3906059200000005" periodicity6="1" phase6="-0.11217702341465595" k6="-3.9317884800000003"/>
+    <Improper class1="protein-C" class2="protein-CA" class3="protein-CA" class4="protein-OR" periodicity1="2" phase1="3.141592653589793" k1="4.72072352"/>
+    <Improper class1="protein-C" class2="protein-CA" class3="protein-CA" class4="protein-OV" periodicity1="2" phase1="3.141592653589793" k1="4.73227136"/>
+    <Improper class1="protein-CA" class2="protein-CA" class3="protein-CA" class4="protein-by" periodicity1="2" phase1="3.141592653589793" k1="4.17680352"/>
+    <Improper class1="protein-CA" class2="protein-BY" class3="protein-CA" class4="protein-CA" periodicity1="2" phase1="3.141592653589793" k1="3.9586916000000003"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
-    <Atom class="OP" sigma="0.31168982552857916" epsilon="0.87864"/>
-    <Atom class="OQ" sigma="0.32234497419753755" epsilon="0.87864"/>
-    <Atom class="OR" sigma="0.31569886976021067" epsilon="0.7112800000000001"/>
-    <Atom class="OT" sigma="0.29109224716517446" epsilon="0.87864"/>
-    <Atom class="OV" sigma="0.29510129139680596" epsilon="0.7112800000000001"/>
-    <Atom class="OX" sigma="0.3278685462500077" epsilon="0.87864"/>
-    <Atom class="OZ" sigma="0.33187759048163923" epsilon="0.7112800000000001"/>
-    <Atom class="gt" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="GT" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="bs" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="BS" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="bt" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="BT" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="by" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom class="BY" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-OP" sigma="0.31168982552857916" epsilon="0.87864"/>
+    <Atom class="protein-OQ" sigma="0.32234497419753755" epsilon="0.87864"/>
+    <Atom class="protein-OR" sigma="0.31569886976021067" epsilon="0.7112800000000001"/>
+    <Atom class="protein-OT" sigma="0.29109224716517446" epsilon="0.87864"/>
+    <Atom class="protein-OV" sigma="0.29510129139680596" epsilon="0.7112800000000001"/>
+    <Atom class="protein-OX" sigma="0.3278685462500077" epsilon="0.87864"/>
+    <Atom class="protein-OZ" sigma="0.33187759048163923" epsilon="0.7112800000000001"/>
+    <Atom class="protein-gt" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-GT" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-bs" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-BS" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-bt" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-BT" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-by" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="protein-BY" sigma="0.3399669508423535" epsilon="0.4577296"/>
   </NonbondedForce>
 </ForceField>

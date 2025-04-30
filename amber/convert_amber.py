@@ -792,6 +792,11 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     for atom_element in tree.findall("./Residues/Residue/Atom"):
         atom_type = atom_element.attrib["type"]
         atom_element.attrib["type"] = f"{prefix}-{atom_type}"
+    for attrib_name in ("class", "class1", "class2", "class3", "class4", "class5"):
+        for element in tree.findall(f".//*[@{attrib_name}]"):
+            attrib_value = element.attrib[attrib_name]
+            if attrib_value:
+                element.attrib[attrib_name] = f"{prefix}-{attrib_value}"
 
     # Workaround to replicate the formatting of the old implementation of this
     # function that used regular expressions to parse the XML, and prevent noise

@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-04-17</DateGenerated>
+    <DateGenerated>2025-04-30</DateGenerated>
     <Source Source="oldff/leaprc.ff94" md5hash="a2968266400ca17619d621348b8c2ee4" sourcePackage="AmberTools" sourcePackageVersion="24.8">oldff/leaprc.ff94</Source>
     <Reference>Cornell, W.D., Cieplak, P., Bayly, C.I., Gould, I.R., Merz, K.M., Ferguson, D.M., Spellmeyer, D.C., Fox, T., Caldwell, J.W., and Kollman, P.A. (1995). A Second Generation Force Field for the Simulation of Proteins, Nucleic Acids, and Organic Molecules. J. Am. Chem. Soc. 117, 5179-5197.</Reference>
   </Info>
