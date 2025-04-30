@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 HFE set) -->
-    <DateGenerated>2022-09-28T04:59:42.503991</DateGenerated>
-    <Source Source="parm/frcmod.ions234lm_hfe_tip3p" md5hash="06e6525fdf7340d7a50db770bc3f90c5" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">parm/frcmod.ions234lm_hfe_tip3p</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="parm/frcmod.ions234lm_hfe_tip3p" md5hash="06e6525fdf7340d7a50db770bc3f90c5" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions234lm_hfe_tip3p</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions234lm_hfe_tip3p-Be2+" element="Be" mass="9.01" name="ions234lm_hfe_tip3p-Be2+"/>
@@ -182,8 +182,8 @@
     <Residue name="Tm">
       <Atom charge="3.0" name="Tm" type="ions234lm_hfe_tip3p-Tm3+"/>
     </Residue>
-    <Residue name="U">
-      <Atom charge="4.0" name="U" type="ions234lm_hfe_tip3p-U4+"/>
+    <Residue name="U4+">
+      <Atom charge="4.0" name="U4+" type="ions234lm_hfe_tip3p-U4+"/>
     </Residue>
     <Residue name="V2+">
       <Atom charge="2.0" name="V2+" type="ions234lm_hfe_tip3p-V2+"/>

@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-01-26</DateGenerated>
-    <Source Source="leaprc.phosaa10" md5hash="99ff5cc879e5461e52852acbb7b6e312" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.phosaa10</Source>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="leaprc.phosaa10" md5hash="99ff5cc879e5461e52852acbb7b6e312" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.phosaa10</Source>
     <Reference>Homeyer N., Horn A. H. C., Lanig H., Sticht H. (2006). AMBER force-field parameters for phosphorylated amino acids in different protonation states: phosphoserine, phosphothreonine, phosphotyrosine, and phosphohistidine. J. Mol. Model. 12, 281. Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates. J. Chem. Theory Comput. 8, 4405-4412.</Reference>
   </Info>
   <AtomTypes>
@@ -262,71 +262,71 @@
     </Residue>
   </Residues>
   <HarmonicBondForce>
-    <Bond type1="HO" type2="OQ" length="0.096" k="462750.3999999999"/>
-    <Bond type1="OP" type2="P" length="0.148" k="439319.99999999994"/>
-    <Bond type1="OQ" type2="P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="OR" type2="P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="C" type2="OR" length="0.1323" k="376559.99999999994"/>
-    <Bond type1="CT" type2="OR" length="0.141" k="267775.99999999994"/>
-    <Bond type1="OT" type2="P" length="0.148" k="439319.99999999994"/>
-    <Bond type1="OV" type2="P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="C" type2="OV" length="0.1323" k="376559.99999999994"/>
-    <Bond type1="CT" type2="OV" length="0.141" k="267775.99999999994"/>
-    <Bond type1="OX" type2="P" length="0.148" k="439319.99999999994"/>
-    <Bond type1="OZ" type2="P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="C" type2="OZ" length="0.1323" k="376559.99999999994"/>
-    <Bond type1="CT" type2="OZ" length="0.141" k="267775.99999999994"/>
+    <Bond class1="HO" class2="OQ" length="0.096" k="462750.3999999999"/>
+    <Bond class1="OP" class2="P" length="0.148" k="439319.99999999994"/>
+    <Bond class1="OQ" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="OR" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="C" class2="OR" length="0.1323" k="376559.99999999994"/>
+    <Bond class1="CT" class2="OR" length="0.141" k="267775.99999999994"/>
+    <Bond class1="OT" class2="P" length="0.148" k="439319.99999999994"/>
+    <Bond class1="OV" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="C" class2="OV" length="0.1323" k="376559.99999999994"/>
+    <Bond class1="CT" class2="OV" length="0.141" k="267775.99999999994"/>
+    <Bond class1="OX" class2="P" length="0.148" k="439319.99999999994"/>
+    <Bond class1="OZ" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="C" class2="OZ" length="0.1323" k="376559.99999999994"/>
+    <Bond class1="CT" class2="OZ" length="0.141" k="267775.99999999994"/>
   </HarmonicBondForce>
   <HarmonicAngleForce>
-    <Angle type1="OP" type2="P" type3="OP" angle="2.092649773141201" k="1171.52"/>
-    <Angle type1="OP" type2="P" type3="OQ" angle="1.888969849433463" k="753.12"/>
-    <Angle type1="OQ" type2="P" type3="OR" angle="1.888969849433463" k="753.12"/>
-    <Angle type1="OQ" type2="P" type3="OQ" angle="1.888969849433463" k="753.12"/>
-    <Angle type1="OR" type2="P" type3="OR" angle="1.790707812546182" k="753.12"/>
-    <Angle type1="OR" type2="P" type3="OP" angle="1.888969849433463" k="836.8000000000001"/>
-    <Angle type1="HO" type2="OQ" type3="P" angle="1.9771089766591765" k="836.8000000000001"/>
-    <Angle type1="C" type2="OR" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CA" type2="C" type3="OR" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="CT" type2="OR" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CT" type2="CT" type3="OR" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="H1" type2="CT" type3="OR" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="OT" type2="P" type3="OT" angle="2.092649773141201" k="1171.52"/>
-    <Angle type1="OV" type2="P" type3="OV" angle="1.790707812546182" k="753.12"/>
-    <Angle type1="OV" type2="P" type3="OT" angle="1.888969849433463" k="836.8000000000001"/>
-    <Angle type1="C" type2="OV" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CA" type2="C" type3="OV" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="CT" type2="OV" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CT" type2="CT" type3="OV" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="H1" type2="CT" type3="OV" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="OX" type2="P" type3="OX" angle="2.092649773141201" k="1171.52"/>
-    <Angle type1="OZ" type2="P" type3="OZ" angle="1.790707812546182" k="753.12"/>
-    <Angle type1="OZ" type2="P" type3="OX" angle="1.888969849433463" k="836.8000000000001"/>
-    <Angle type1="C" type2="OZ" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CA" type2="C" type3="OZ" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="CT" type2="OZ" type3="P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="CT" type2="CT" type3="OZ" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="H1" type2="CT" type3="OZ" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="OP" class2="P" class3="OP" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="OP" class2="P" class3="OQ" angle="1.888969849433463" k="753.12"/>
+    <Angle class1="OQ" class2="P" class3="OR" angle="1.888969849433463" k="753.12"/>
+    <Angle class1="OQ" class2="P" class3="OQ" angle="1.888969849433463" k="753.12"/>
+    <Angle class1="OR" class2="P" class3="OR" angle="1.790707812546182" k="753.12"/>
+    <Angle class1="OR" class2="P" class3="OP" angle="1.888969849433463" k="836.8000000000001"/>
+    <Angle class1="HO" class2="OQ" class3="P" angle="1.9771089766591765" k="836.8000000000001"/>
+    <Angle class1="C" class2="OR" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CA" class2="C" class3="OR" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="OR" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CT" class2="CT" class3="OR" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="OR" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="OT" class2="P" class3="OT" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="OV" class2="P" class3="OV" angle="1.790707812546182" k="753.12"/>
+    <Angle class1="OV" class2="P" class3="OT" angle="1.888969849433463" k="836.8000000000001"/>
+    <Angle class1="C" class2="OV" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CA" class2="C" class3="OV" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="OV" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CT" class2="CT" class3="OV" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="OV" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="OX" class2="P" class3="OX" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="OZ" class2="P" class3="OZ" angle="1.790707812546182" k="753.12"/>
+    <Angle class1="OZ" class2="P" class3="OX" angle="1.888969849433463" k="836.8000000000001"/>
+    <Angle class1="C" class2="OZ" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CA" class2="C" class3="OZ" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="CT" class2="OZ" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="CT" class2="CT" class3="OZ" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="H1" class2="CT" class3="OZ" angle="1.911135530933791" k="418.40000000000003"/>
   </HarmonicAngleForce>
   <PeriodicTorsionForce ordering="amber">
-    <Proper type1="" type2="OQ" type3="P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="OR" type3="P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="C" type3="OR" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
-    <Proper type1="" type2="CT" type3="OR" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
-    <Proper type1="" type2="OV" type3="P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="C" type3="OV" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
-    <Proper type1="" type2="CT" type3="OV" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
-    <Proper type1="" type2="OZ" type3="P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="C" type3="OZ" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
-    <Proper type1="" type2="CT" type3="OZ" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="OQ" class3="P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="OR" class3="P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="C" class3="OR" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
+    <Proper class1="" class2="CT" class3="OR" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="OV" class3="P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="C" class3="OV" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
+    <Proper class1="" class2="CT" class3="OV" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="OZ" class3="P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="C" class3="OZ" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
+    <Proper class1="" class2="CT" class3="OZ" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
-    <Atom type="OP" sigma="0.31168982552857916" epsilon="0.87864"/>
-    <Atom type="OQ" sigma="0.32234497419753755" epsilon="0.87864"/>
-    <Atom type="OR" sigma="0.31569886976021067" epsilon="0.7112800000000001"/>
-    <Atom type="OT" sigma="0.29109224716517446" epsilon="0.87864"/>
-    <Atom type="OV" sigma="0.29510129139680596" epsilon="0.7112800000000001"/>
-    <Atom type="OX" sigma="0.3278685462500077" epsilon="0.87864"/>
-    <Atom type="OZ" sigma="0.33187759048163923" epsilon="0.7112800000000001"/>
+    <Atom class="OP" sigma="0.31168982552857916" epsilon="0.87864"/>
+    <Atom class="OQ" sigma="0.32234497419753755" epsilon="0.87864"/>
+    <Atom class="OR" sigma="0.31569886976021067" epsilon="0.7112800000000001"/>
+    <Atom class="OT" sigma="0.29109224716517446" epsilon="0.87864"/>
+    <Atom class="OV" sigma="0.29510129139680596" epsilon="0.7112800000000001"/>
+    <Atom class="OX" sigma="0.3278685462500077" epsilon="0.87864"/>
+    <Atom class="OZ" sigma="0.33187759048163923" epsilon="0.7112800000000001"/>
   </NonbondedForce>
 </ForceField>

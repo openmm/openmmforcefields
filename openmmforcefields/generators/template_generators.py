@@ -406,7 +406,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = GAFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='gaff-2.11')
+    >>> template_generator = GAFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='gaff-2.2.20')
 
     You can also add some Molecules later on after the generator has been registered:
 
@@ -422,7 +422,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     You can see which force fields are supported with
 
     >>> template_generator.INSTALLED_FORCEFIELDS
-    ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+    ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
 
     """
 
@@ -432,6 +432,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         "gaff-1.81",
         "gaff-2.1",
         "gaff-2.11",
+        "gaff-2.2.20",
     ]
 
     def __init__(self, molecules=None, forcefield=None, cache=None, **kwargs):
@@ -452,7 +453,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
         forcefield : str, optional, default=None
-            GAFF force field to use, one of ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+            GAFF force field to use, one of
+            ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
             If not specified, the latest GAFF supported version is used.
             GAFFTemplateGenerator.INSTALLED_FORCEFIELDS contains a complete up-to-date list of supported force fields.
         Examples
@@ -477,12 +479,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         You can check which GAFF version is in use with
 
         >>> gaff.forcefield
-        'gaff-2.11'
+        'gaff-2.2.20'
 
         Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.11')  # doctest: +SKIP
+        >>> gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.2.20')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
@@ -495,11 +497,11 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         To check which GAFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
         >>> print(GAFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-        ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11']
+        ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
 
         You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-2.11')
+        >>> gaff = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-2.2.20')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """
@@ -519,7 +521,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         self._forcefield = forcefield
         import re
 
-        result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>\d+)$", forcefield)
+        result = re.match(r"^gaff-(?P<major_version>\d+)\.(?P<minor_version>[\d.]+)$", forcefield)
         if result is None:
             msg = "'forcefield' must be of form 'gaff-X.Y', where X and Y denote major and minor version\n"
             msg += f"Provided 'forcefield' argument was '{forcefield}'\n"

@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of atomic ions for the TIP4P-FB water model (12-6 IOD set) -->
-    <DateGenerated>2022-09-28T04:59:42.445657</DateGenerated>
-    <Source Source="parm/frcmod.ionslm_iod_fb4" md5hash="5949de55c7a406ae582289ff8e5d2574" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">parm/frcmod.ionslm_iod_fb4</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="parm/frcmod.ionslm_iod_fb4" md5hash="5949de55c7a406ae582289ff8e5d2574" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ionslm_iod_fb4</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ionslm_iod_fb4-Li+" element="Li" mass="6.94" name="ionslm_iod_fb4-Li+"/>
@@ -201,8 +201,8 @@
     <Residue name="Tm">
       <Atom charge="3.0" name="Tm" type="ionslm_iod_fb4-Tm3+"/>
     </Residue>
-    <Residue name="U">
-      <Atom charge="4.0" name="U" type="ionslm_iod_fb4-U4+"/>
+    <Residue name="U4+">
+      <Atom charge="4.0" name="U4+" type="ionslm_iod_fb4-U4+"/>
     </Residue>
     <Residue name="V2+">
       <Atom charge="2.0" name="V2+" type="ionslm_iod_fb4-V2+"/>

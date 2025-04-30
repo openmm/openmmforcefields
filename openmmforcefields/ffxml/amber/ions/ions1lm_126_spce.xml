@@ -1,9 +1,9 @@
 <ForceField>
   <Info>
     <!-- Li/Merz ion parameters of monovalent ions for SPC/E water model (12-6 normal usage set) -->
-    <DateGenerated>2022-09-28T04:59:42.417055</DateGenerated>
-    <Source Source="parm/frcmod.ions1lm_126_spce" md5hash="2926fce0babc64832f4dcdb0b6ef4f4b" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">parm/frcmod.ions1lm_126_spce</Source>
-    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="22.0-py38h6177452_1">lib/atomic_ions.lib</Source>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="parm/frcmod.ions1lm_126_spce" md5hash="2926fce0babc64832f4dcdb0b6ef4f4b" sourcePackage="AmberTools" sourcePackageVersion="24.8">parm/frcmod.ions1lm_126_spce</Source>
+    <Source Source="lib/atomic_ions.lib" md5hash="e900cee0c71ec2795d25b3555de486e1" sourcePackage="AmberTools" sourcePackageVersion="24.8">lib/atomic_ions.lib</Source>
   </Info>
   <AtomTypes>
     <Type class="ions1lm_126_spce-Li+" element="Li" mass="6.94" name="ions1lm_126_spce-Li+"/>

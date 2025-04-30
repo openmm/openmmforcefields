@@ -1,0 +1,697 @@
+<ForceField>
+  <Info>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="files/ff19SB/leaprc.phosaa19SB" md5hash="5a67c851284400a640208146efd192f4" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19SB/leaprc.phosaa19SB</Source>
+    <Reference>Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C. phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids. J. Chem. Theory Comput., 2024, 20, 7199-7209.</Reference>
+  </Info>
+  <AtomTypes>
+    <Type class="protein-OP" element="O" mass="16.0" name="protein-OP" />
+    <Type class="protein-OQ" element="O" mass="16.0" name="protein-OQ" />
+    <Type class="protein-OR" element="O" mass="16.0" name="protein-OR" />
+    <Type class="protein-OT" element="O" mass="16.0" name="protein-OT" />
+    <Type class="protein-OV" element="O" mass="16.0" name="protein-OV" />
+    <Type class="protein-OX" element="O" mass="16.0" name="protein-OX" />
+    <Type class="protein-OZ" element="O" mass="16.0" name="protein-OZ" />
+    <Type class="protein-CG" element="C" mass="12.01" name="protein-CG" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-S1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-S1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-S1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-SEP-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-SEP-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-SEP-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-T1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-T1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-T1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-TPO-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-TPO-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-TPO-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-Y1P-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-Y1P-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-Y1P-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-PTR-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-PTR-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-PTR-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H1D-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H1D-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H1D-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H2D-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H2D-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H2D-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H1E-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H1E-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H1E-C" />
+    <Type class="protein-N" element="N" mass="14.01" name="cmap-H2E-N" />
+    <Type class="protein-XC" element="C" mass="12.01" name="cmap-H2E-CA" />
+    <Type class="protein-C" element="C" mass="12.01" name="cmap-H2E-C" />
+  </AtomTypes>
+  <Residues>
+    <Residue name="S1P">
+      <Atom charge="-0.5163" name="N" type="cmap-S1P-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.021706" name="CA" type="cmap-S1P-CA" />
+      <Atom charge="0.122918" name="HA" type="protein-H1" />
+      <Atom charge="0.025023" name="CB" type="protein-2C" />
+      <Atom charge="0.105184" name="HB2" type="protein-H1" />
+      <Atom charge="0.105184" name="HB3" type="protein-H1" />
+      <Atom charge="-0.46569" name="OG" type="protein-OR" />
+      <Atom charge="1.322975" name="P" type="protein-P" />
+      <Atom charge="-0.752781" name="O1P" type="protein-OQ" />
+      <Atom charge="-0.82181" name="O2P" type="protein-OP" />
+      <Atom charge="-0.82181" name="O3P" type="protein-OP" />
+      <Atom charge="0.427101" name="H1P" type="protein-HO" />
+      <Atom charge="0.5366" name="C" type="cmap-S1P-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="OG" />
+      <Bond atomName1="OG" atomName2="P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="O1P" atomName2="H1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="SEP">
+      <Atom charge="-0.5163" name="N" type="cmap-SEP-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="-0.278702" name="CA" type="cmap-SEP-CA" />
+      <Atom charge="0.198553" name="HA" type="protein-H1" />
+      <Atom charge="0.253803" name="CB" type="protein-2C" />
+      <Atom charge="0.04323" name="HB2" type="protein-H1" />
+      <Atom charge="0.04323" name="HB3" type="protein-H1" />
+      <Atom charge="-0.430343" name="OG" type="protein-OZ" />
+      <Atom charge="1.387088" name="P" type="protein-P" />
+      <Atom charge="-0.982953" name="O1P" type="protein-OX" />
+      <Atom charge="-0.982953" name="O2P" type="protein-OX" />
+      <Atom charge="-0.982953" name="O3P" type="protein-OX" />
+      <Atom charge="0.5366" name="C" type="cmap-SEP-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="OG" />
+      <Bond atomName1="OG" atomName2="P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="T1P">
+      <Atom charge="-0.5163" name="N" type="cmap-T1P-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.043873" name="CA" type="cmap-T1P-CA" />
+      <Atom charge="0.104472" name="HA" type="protein-H1" />
+      <Atom charge="0.352701" name="CB" type="protein-3C" />
+      <Atom charge="0.037488" name="HB" type="protein-H1" />
+      <Atom charge="-0.28753" name="CG2" type="protein-CT" />
+      <Atom charge="0.054266" name="HG21" type="protein-HC" />
+      <Atom charge="0.054266" name="HG22" type="protein-HC" />
+      <Atom charge="0.054266" name="HG23" type="protein-HC" />
+      <Atom charge="-0.490763" name="OG1" type="protein-OR" />
+      <Atom charge="1.261944" name="P" type="protein-P" />
+      <Atom charge="-0.705351" name="O1P" type="protein-OQ" />
+      <Atom charge="-0.815354" name="O2P" type="protein-OP" />
+      <Atom charge="-0.815354" name="O3P" type="protein-OP" />
+      <Atom charge="0.419076" name="H1P" type="protein-HO" />
+      <Atom charge="0.5366" name="C" type="cmap-T1P-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CB" atomName2="OG1" />
+      <Bond atomName1="CB" atomName2="CG2" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="OG1" atomName2="P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="O1P" atomName2="H1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="TPO">
+      <Atom charge="-0.5163" name="N" type="cmap-TPO-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="-0.31351" name="CA" type="cmap-TPO-CA" />
+      <Atom charge="0.215772" name="HA" type="protein-H1" />
+      <Atom charge="0.623861" name="CB" type="protein-3C" />
+      <Atom charge="0.009989" name="HB" type="protein-H1" />
+      <Atom charge="-0.406805" name="CG2" type="protein-CT" />
+      <Atom charge="0.071662" name="HG21" type="protein-HC" />
+      <Atom charge="0.071662" name="HG22" type="protein-HC" />
+      <Atom charge="0.071662" name="HG23" type="protein-HC" />
+      <Atom charge="-0.54523" name="OG1" type="protein-OZ" />
+      <Atom charge="1.366055" name="P" type="protein-P" />
+      <Atom charge="-0.965706" name="O1P" type="protein-OX" />
+      <Atom charge="-0.965706" name="O2P" type="protein-OX" />
+      <Atom charge="-0.965706" name="O3P" type="protein-OX" />
+      <Atom charge="0.5366" name="C" type="cmap-TPO-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB" />
+      <Bond atomName1="CB" atomName2="OG1" />
+      <Bond atomName1="CB" atomName2="CG2" />
+      <Bond atomName1="CG2" atomName2="HG22" />
+      <Bond atomName1="CG2" atomName2="HG21" />
+      <Bond atomName1="CG2" atomName2="HG23" />
+      <Bond atomName1="OG1" atomName2="P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="Y1P">
+      <Atom charge="-0.5163" name="N" type="cmap-Y1P-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.275503" name="CA" type="cmap-Y1P-CA" />
+      <Atom charge="0.008223" name="HA" type="protein-H1" />
+      <Atom charge="-0.354052" name="CB" type="protein-CT" />
+      <Atom charge="0.110326" name="HB2" type="protein-HC" />
+      <Atom charge="0.110326" name="HB3" type="protein-HC" />
+      <Atom charge="0.119728" name="CG" type="protein-CG" />
+      <Atom charge="-0.198938" name="CD1" type="protein-CA" />
+      <Atom charge="0.137143" name="HD1" type="protein-HA" />
+      <Atom charge="-0.284884" name="CE1" type="protein-CA" />
+      <Atom charge="0.177179" name="HE1" type="protein-HA" />
+      <Atom charge="0.452616" name="CZ" type="protein-C" />
+      <Atom charge="-0.284884" name="CE2" type="protein-CA" />
+      <Atom charge="0.177179" name="HE2" type="protein-HA" />
+      <Atom charge="-0.198938" name="CD2" type="protein-CA" />
+      <Atom charge="0.137143" name="HD2" type="protein-HA" />
+      <Atom charge="-0.534452" name="OG" type="protein-OR" />
+      <Atom charge="1.393215" name="P" type="protein-P" />
+      <Atom charge="-0.752821" name="O1P" type="protein-OQ" />
+      <Atom charge="-0.822464" name="O2P" type="protein-OP" />
+      <Atom charge="-0.822464" name="O3P" type="protein-OP" />
+      <Atom charge="0.423316" name="H1P" type="protein-HO" />
+      <Atom charge="0.5366" name="C" type="cmap-Y1P-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="CZ" />
+      <Bond atomName1="CZ" atomName2="OG" />
+      <Bond atomName1="CZ" atomName2="CE2" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="OG" atomName2="P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="O1P" atomName2="H1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="PTR">
+      <Atom charge="-0.5163" name="N" type="cmap-PTR-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.141279" name="CA" type="cmap-PTR-CA" />
+      <Atom charge="0.027982" name="HA" type="protein-H1" />
+      <Atom charge="-0.251171" name="CB" type="protein-CT" />
+      <Atom charge="0.08193" name="HB2" type="protein-HC" />
+      <Atom charge="0.08193" name="HB3" type="protein-HC" />
+      <Atom charge="0.073446" name="CG" type="protein-CG" />
+      <Atom charge="-0.198084" name="CD1" type="protein-CA" />
+      <Atom charge="0.112503" name="HD1" type="protein-HA" />
+      <Atom charge="-0.254266" name="CE1" type="protein-CA" />
+      <Atom charge="0.161606" name="HE1" type="protein-HA" />
+      <Atom charge="0.477009" name="CZ" type="protein-C" />
+      <Atom charge="-0.254266" name="CE2" type="protein-CA" />
+      <Atom charge="0.161606" name="HE2" type="protein-HA" />
+      <Atom charge="-0.198084" name="CD2" type="protein-CA" />
+      <Atom charge="0.112503" name="HD2" type="protein-HA" />
+      <Atom charge="-0.557944" name="OH" type="protein-OV" />
+      <Atom charge="1.380671" name="P" type="protein-P" />
+      <Atom charge="-0.94355" name="O1P" type="protein-OT" />
+      <Atom charge="-0.94355" name="O2P" type="protein-OT" />
+      <Atom charge="-0.94355" name="O3P" type="protein-OT" />
+      <Atom charge="0.5366" name="C" type="cmap-PTR-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="CD1" />
+      <Bond atomName1="CD1" atomName2="HD1" />
+      <Bond atomName1="CD1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="CZ" />
+      <Bond atomName1="CZ" atomName2="OH" />
+      <Bond atomName1="CZ" atomName2="CE2" />
+      <Bond atomName1="CE2" atomName2="HE2" />
+      <Bond atomName1="CE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="OH" atomName2="P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="H1D">
+      <Atom charge="-0.4157" name="N" type="cmap-H1D-N" />
+      <Atom charge="0.2719" name="H" type="protein-H" />
+      <Atom charge="0.005819" name="CA" type="cmap-H1D-CA" />
+      <Atom charge="0.154583" name="HA" type="protein-H1" />
+      <Atom charge="-0.150679" name="CB" type="protein-CT" />
+      <Atom charge="0.094798" name="HB2" type="protein-HC" />
+      <Atom charge="0.094798" name="HB3" type="protein-HC" />
+      <Atom charge="0.095621" name="CG" type="protein-CC" />
+      <Atom charge="-0.103268" name="ND1" type="protein-NA" />
+      <Atom charge="0.028957" name="CE1" type="protein-CR" />
+      <Atom charge="0.197929" name="HE1" type="protein-H5" />
+      <Atom charge="-0.137133" name="NE2" type="protein-NA" />
+      <Atom charge="0.34115" name="HE2" type="protein-H" />
+      <Atom charge="-0.289457" name="CD2" type="protein-CW" />
+      <Atom charge="0.23897" name="HD2" type="protein-H4" />
+      <Atom charge="1.250101" name="P" type="protein-P" />
+      <Atom charge="-0.647486" name="O1P" type="protein-OQ" />
+      <Atom charge="-0.734707" name="O2P" type="protein-OP" />
+      <Atom charge="-0.734707" name="O3P" type="protein-OP" />
+      <Atom charge="0.409111" name="H1P" type="protein-HO" />
+      <Atom charge="0.5973" name="C" type="cmap-H1D-C" />
+      <Atom charge="-0.5679" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="ND1" atomName2="P" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="O1P" atomName2="H1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="H2D">
+      <Atom charge="-0.5163" name="N" type="cmap-H2D-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.038181" name="CA" type="cmap-H2D-CA" />
+      <Atom charge="0.176397" name="HA" type="protein-H1" />
+      <Atom charge="-0.082771" name="CB" type="protein-CT" />
+      <Atom charge="0.084382" name="HB2" type="protein-HC" />
+      <Atom charge="0.084382" name="HB3" type="protein-HC" />
+      <Atom charge="0.133673" name="CG" type="protein-CC" />
+      <Atom charge="-0.063926" name="ND1" type="protein-NA" />
+      <Atom charge="-0.03278" name="CE1" type="protein-CR" />
+      <Atom charge="0.207086" name="HE1" type="protein-H5" />
+      <Atom charge="-0.105531" name="NE2" type="protein-NA" />
+      <Atom charge="0.29438" name="HE2" type="protein-H" />
+      <Atom charge="-0.388691" name="CD2" type="protein-CW" />
+      <Atom charge="0.228345" name="HD2" type="protein-H4" />
+      <Atom charge="1.363654" name="P" type="protein-P" />
+      <Atom charge="-0.889594" name="O1P" type="protein-OP" />
+      <Atom charge="-0.889594" name="O2P" type="protein-OP" />
+      <Atom charge="-0.889594" name="O3P" type="protein-OP" />
+      <Atom charge="0.5366" name="C" type="cmap-H2D-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="ND1" atomName2="P" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="HE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="H1E">
+      <Atom charge="-0.4157" name="N" type="cmap-H1E-N" />
+      <Atom charge="0.2719" name="H" type="protein-H" />
+      <Atom charge="0.190918" name="CA" type="cmap-H1E-CA" />
+      <Atom charge="0.057577" name="HA" type="protein-H1" />
+      <Atom charge="-0.416964" name="CB" type="protein-CT" />
+      <Atom charge="0.126295" name="HB2" type="protein-HC" />
+      <Atom charge="0.126295" name="HB3" type="protein-HC" />
+      <Atom charge="0.212851" name="CG" type="protein-CC" />
+      <Atom charge="-0.274851" name="ND1" type="protein-NA" />
+      <Atom charge="0.367148" name="HD1" type="protein-H" />
+      <Atom charge="0.061606" name="CE1" type="protein-CR" />
+      <Atom charge="0.197625" name="HE1" type="protein-H5" />
+      <Atom charge="-0.125163" name="NE2" type="protein-NA" />
+      <Atom charge="-0.223933" name="CD2" type="protein-CW" />
+      <Atom charge="0.278286" name="HD2" type="protein-H4" />
+      <Atom charge="1.274711" name="P" type="protein-P" />
+      <Atom charge="-0.665309" name="O1P" type="protein-OQ" />
+      <Atom charge="-0.748215" name="O2P" type="protein-OP" />
+      <Atom charge="-0.748215" name="O3P" type="protein-OP" />
+      <Atom charge="0.423737" name="H1P" type="protein-HO" />
+      <Atom charge="0.5973" name="C" type="cmap-H1E-C" />
+      <Atom charge="-0.5679" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="NE2" atomName2="P" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="O1P" atomName2="H1P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+    <Residue name="H2E">
+      <Atom charge="-0.5163" name="N" type="cmap-H2E-N" />
+      <Atom charge="0.2936" name="H" type="protein-H" />
+      <Atom charge="0.330527" name="CA" type="cmap-H2E-CA" />
+      <Atom charge="0.031846" name="HA" type="protein-H1" />
+      <Atom charge="-0.410313" name="CB" type="protein-CT" />
+      <Atom charge="0.101457" name="HB2" type="protein-HC" />
+      <Atom charge="0.101457" name="HB3" type="protein-HC" />
+      <Atom charge="0.240309" name="CG" type="protein-CC" />
+      <Atom charge="-0.372805" name="ND1" type="protein-NA" />
+      <Atom charge="0.355424" name="HD1" type="protein-H" />
+      <Atom charge="0.039056" name="CE1" type="protein-CR" />
+      <Atom charge="0.212475" name="HE1" type="protein-H5" />
+      <Atom charge="-0.052173" name="NE2" type="protein-NA" />
+      <Atom charge="-0.225382" name="CD2" type="protein-CW" />
+      <Atom charge="0.2656" name="HD2" type="protein-H4" />
+      <Atom charge="1.349034" name="P" type="protein-P" />
+      <Atom charge="-0.899504" name="O1P" type="protein-OP" />
+      <Atom charge="-0.899504" name="O2P" type="protein-OP" />
+      <Atom charge="-0.899504" name="O3P" type="protein-OP" />
+      <Atom charge="0.5366" name="C" type="cmap-H2E-C" />
+      <Atom charge="-0.5819" name="O" type="protein-O" />
+      <Bond atomName1="N" atomName2="H" />
+      <Bond atomName1="N" atomName2="CA" />
+      <Bond atomName1="CA" atomName2="HA" />
+      <Bond atomName1="CA" atomName2="CB" />
+      <Bond atomName1="CA" atomName2="C" />
+      <Bond atomName1="CB" atomName2="HB3" />
+      <Bond atomName1="CB" atomName2="HB2" />
+      <Bond atomName1="CB" atomName2="CG" />
+      <Bond atomName1="CG" atomName2="CD2" />
+      <Bond atomName1="CG" atomName2="ND1" />
+      <Bond atomName1="ND1" atomName2="HD1" />
+      <Bond atomName1="ND1" atomName2="CE1" />
+      <Bond atomName1="CE1" atomName2="HE1" />
+      <Bond atomName1="CE1" atomName2="NE2" />
+      <Bond atomName1="NE2" atomName2="CD2" />
+      <Bond atomName1="NE2" atomName2="P" />
+      <Bond atomName1="CD2" atomName2="HD2" />
+      <Bond atomName1="P" atomName2="O1P" />
+      <Bond atomName1="P" atomName2="O2P" />
+      <Bond atomName1="P" atomName2="O3P" />
+      <Bond atomName1="C" atomName2="O" />
+      <ExternalBond atomName="N" />
+      <ExternalBond atomName="C" />
+    </Residue>
+  </Residues>
+  <HarmonicBondForce>
+    <Bond class1="protein-HO" class2="protein-OQ" k="462750.3999999999" length="0.096" />
+    <Bond class1="protein-OP" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OQ" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-OR" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OR" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-OT" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OV" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OV" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OV" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-OX" class2="protein-P" k="439319.99999999994" length="0.148" />
+    <Bond class1="protein-OZ" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
+    <Bond class1="protein-C" class2="protein-OZ" k="376559.99999999994" length="0.1323" />
+    <Bond class1="protein-CT" class2="protein-OZ" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-CG" class2="protein-CT" k="265265.6" length="0.15100000000000002" />
+    <Bond class1="protein-CG" class2="protein-CA" k="392459.19999999995" length="0.13999999999999999" />
+    <Bond class1="protein-3C" class2="protein-OZ" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-3C" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-2C" class2="protein-OR" k="267775.99999999994" length="0.141" />
+    <Bond class1="protein-2C" class2="protein-OZ" k="267775.99999999994" length="0.141" />
+  </HarmonicBondForce>
+  <HarmonicAngleForce>
+    <Angle angle="2.092649773141201" class1="protein-OP" class2="protein-P" class3="protein-OP" k="1171.52" />
+    <Angle angle="1.888969849433463" class1="protein-OP" class2="protein-P" class3="protein-OQ" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OQ" class2="protein-P" class3="protein-OR" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OQ" class2="protein-P" class3="protein-OQ" k="753.12" />
+    <Angle angle="1.790707812546182" class1="protein-OR" class2="protein-P" class3="protein-OR" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OR" class2="protein-P" class3="protein-OP" k="836.8000000000001" />
+    <Angle angle="1.9771089766591765" class1="protein-HO" class2="protein-OQ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OR" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="2.092649773141201" class1="protein-OT" class2="protein-P" class3="protein-OT" k="1171.52" />
+    <Angle angle="1.790707812546182" class1="protein-OV" class2="protein-P" class3="protein-OV" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OV" class2="protein-P" class3="protein-OT" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OV" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OV" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OV" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OV" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OV" k="418.40000000000003" />
+    <Angle angle="2.092649773141201" class1="protein-OX" class2="protein-P" class3="protein-OX" k="1171.52" />
+    <Angle angle="1.790707812546182" class1="protein-OZ" class2="protein-P" class3="protein-OZ" k="753.12" />
+    <Angle angle="1.888969849433463" class1="protein-OZ" class2="protein-P" class3="protein-OX" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OZ" k="585.76" />
+    <Angle angle="2.1031217486531673" class1="protein-CT" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-CT" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-CT" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CG" class3="protein-CT" k="585.76" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CA" class3="protein-CG" k="527.184" />
+    <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-CG" class3="protein-CA" k="527.184" />
+    <Angle angle="2.0943951023931953" class1="protein-CG" class2="protein-CA" class3="protein-HA" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CG" class2="protein-CT" class3="protein-HC" k="418.40000000000003" />
+    <Angle angle="1.9896753472735358" class1="protein-XC" class2="protein-CT" class3="protein-CG" k="527.184" />
+    <Angle angle="2.1834068942449063" class1="protein-CW" class2="protein-NA" class3="protein-P" k="641.8256" />
+    <Angle angle="1.7868680881917944" class1="protein-NA" class2="protein-P" class3="protein-OQ" k="358.98720000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-CT" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-2C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-H1" class2="protein-2C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="2.1031217486531673" class1="protein-2C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-2C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-3C" class2="protein-OR" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="2.1031217486531673" class1="protein-3C" class2="protein-OZ" class3="protein-P" k="836.8000000000001" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-3C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-3C" class3="protein-OR" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-2C" class3="protein-OZ" k="418.40000000000003" />
+    <Angle angle="1.911135530933791" class1="protein-XC" class2="protein-2C" class3="protein-OR" k="418.40000000000003" />
+  </HarmonicAngleForce>
+  <PeriodicTorsionForce ordering="amber">
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-CT" class4="protein-CG" k1="0.636357112" k2="0.7229449920000001" k3="2.051590928" k4="0.188911784" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-2C" class4="protein-OR" k1="2.37906424" k2="8.935965448" k3="2.2122900000000003" k4="4.18950196" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-3C" class4="protein-OR" k1="6.770272656" k2="15.008920112" k3="1.5991540880000001" k4="4.836649608000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="3.141592653589793" phase4="3.141592653589793" />
+    <Proper class1="protein-XC" class2="protein-CT" class3="protein-CG" class4="protein-CA" k1="6.7457586" k2="2.7970751280000004" k3="3.3936926080000003" k4="0.25109020800000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-OR" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="12.062216776" k2="35.20526384" k3="5.3812348640000005" k4="15.945780472000001" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-C" class3="protein-OV" class4="protein-P" k1="8.279328488" k2="3.442432024" k3="17.2754222" k4="2.3116139760000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-2C" class3="protein-OR" class4="protein-P" k1="3.0060868480000003" k2="5.2129543840000006" k3="1.176796024" k4="2.9243984320000003" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-XC" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="5.1030407040000005" k2="1.1875907440000002" k3="5.549435848" k4="0.200886392" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-C" class3="protein-OR" class4="protein-P" k1="75.208621728" k2="5.6958298240000005" k3="5.676554136000001" k4="2.3821269280000004" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="3.141592653589793" phase4="0.0" />
+    <Proper class1="protein-C" class2="protein-OV" class3="protein-P" class4="protein-OT" k1="2.0017302" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-2C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="1.2970692879999999" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-3C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="0.710020616" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-C" class2="protein-OR" class3="protein-P" class4="protein-OP" k1="7.609654184" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-2C" class4="protein-OZ" k1="19.899468008" k2="12.319959544000001" k3="17.511742888" k4="4.282566672" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-2C" class3="protein-OZ" class4="protein-P" k1="40.835890208" k2="21.840672464" k3="3.76754556" k4="8.738781896" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-2C" class2="protein-OZ" class3="protein-P" class4="protein-OX" k1="5.777150048000001" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-N" class2="protein-XC" class3="protein-3C" class4="protein-OZ" k1="10.572068439999999" k2="11.978478200000001" k3="9.907398200000001" k4="13.77820488" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-XC" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="16.150767184000003" k2="8.000866552" k3="18.246499311999997" k4="0.841565576" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="3.141592653589793" phase3="0.0" phase4="3.141592653589793" />
+    <Proper class1="protein-3C" class2="protein-OZ" class3="protein-P" class4="protein-OX" k1="3.734542168" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-CC" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="0.09002712800000001" periodicity1="3" phase1="3.141592653589793" />
+    <Proper class1="protein-CW" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="0.760488024" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-NA" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="4.100688192" k2="7.280302256000001" k3="1.6606672560000002" k4="0.125745936" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="3.141592653589793" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-2C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CT" class2="protein-3C" class3="protein-OZ" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CT" class2="protein-3C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-3C" class4="protein-OZ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-3C" class4="protein-OR" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-H1" class2="protein-2C" class3="protein-OR" class4="protein-P" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-2C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-3C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-C" class2="protein-OR" class3="protein-P" class4="protein-OQ" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-OP" class2="protein-P" class3="protein-OQ" class4="protein-HO" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="1" periodicity2="2" periodicity3="3" periodicity4="4" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
+    <Proper class1="protein-CA" class2="protein-CA" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-HA" class2="protein-CA" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-HC" class2="protein-CT" class3="protein-CG" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CT" class2="protein-CG" class3="protein-CA" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CT" class2="protein-CG" class3="protein-CA" class4="protein-HA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Proper class1="protein-CW" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CC" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CR" class2="protein-NA" class3="protein-P" class4="protein-OQ" k1="0.0" periodicity1="3" phase1="0.0" />
+    <Improper class1="protein-CA" class2="protein-CA" class3="protein-CG" class4="protein-HA" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
+  </PeriodicTorsionForce>
+  <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
+    <UseAttributeFromResidue name="charge" />
+    <Atom class="protein-OP" epsilon="0.87864" sigma="0.31168982552857916" />
+    <Atom class="protein-OQ" epsilon="0.87864" sigma="0.32234497419753755" />
+    <Atom class="protein-OR" epsilon="0.7112800000000001" sigma="0.31569886976021067" />
+    <Atom class="protein-OT" epsilon="0.87864" sigma="0.29109224716517446" />
+    <Atom class="protein-OV" epsilon="0.7112800000000001" sigma="0.29510129139680596" />
+    <Atom class="protein-OX" epsilon="0.87864" sigma="0.3278685462500077" />
+    <Atom class="protein-OZ" epsilon="0.7112800000000001" sigma="0.33187759048163923" />
+    <Atom class="protein-CG" epsilon="0.359824" sigma="0.3399669508423535" />
+  </NonbondedForce>
+  <CMAPTorsionForce>
+    <Map>5.72848176 5.8870971999999995 10.199085760000001 9.91202152 5.1666124 -1.9681536 -6.320726960000001 -6.935607600000001 -5.888310560000001 -6.05219784 -5.35962032 -3.66907512 -4.04437992 -5.0996684000000005 -4.438303520000001 -2.96758568 -1.4777469600000002 -1.3631472 -0.7916128 0.23940848 3.63999632 8.841754320000001 11.060236640000001 9.25701632
+5.70827304 9.68905616 12.45099824 8.0320248 1.20114272 -4.42198592 -6.44181192 -5.923749040000001 -5.11565128 -5.01331064 -1.98263024 -4.43508184 -6.266376800000001 -6.04265832 -2.14969736 -2.95612152 -1.906858 -1.41979856 0.6329973600000001 3.99567816 7.28087128 9.64612832 10.12871088 9.22375352
+12.22401624 15.191392720000001 11.43541592 4.375794560000001 -0.6919917600000001 -3.52916216 -3.02097352 -2.3894824000000003 -1.18808864 0.03635896 3.72664696 -4.86544808 -4.52871976 -4.05852184 -2.8896377600000003 -1.2261212 -0.30601775999999997 3.9467672000000005 4.07299848 6.58825192 11.111658 10.73961672 11.3685556 10.616314240000001
+25.46729672 13.73808032 7.25417736 2.57918496 0.47731072 0.3135908 1.803304 2.4081012 3.83229296 5.25020872 4.53010048 1.95878144 -0.41727032000000003 -0.22463896000000003 0.5608652000000001 1.7093732000000001 2.9997606400000003 4.24219944 4.95544592 8.27787664 10.724177760000002 13.06173672 15.408123920000001 18.04960864
+15.862548160000001 10.392846800000001 6.5109316 5.30271792 4.63972128 4.749174720000001 4.9382078400000005 5.44593624 5.97847576 5.993287120000001 4.974776 1.6382452 2.8618560000000004 3.3805046400000003 3.9649257600000003 5.07284896 5.85479672 5.721285280000001 5.9030800800000005 9.23279096 12.33635664 15.548413440000001 20.05608768 23.1002824
+13.677537840000001 10.104945760000001 9.627886080000001 10.376696560000001 9.07672776 7.99022664 5.1802104 5.770196240000001 6.1747472000000005 6.964100640000001 5.44438816 7.55705712 4.10320696 4.72097456 5.23184096 6.605615520000001 7.1207496 6.50185232 9.132123920000002 9.445505520000001 12.752832000000001 17.39033576 23.711774000000002 19.64873344
+16.21835552 12.267906400000001 16.17772888 14.6992288 13.705235920000002 6.71046656 4.0719106400000005 4.82461224 5.65580568 6.8447311200000005 5.049795120000001 4.78034552 3.12841864 3.52117072 4.43068864 6.10667352 7.38944608 7.04129544 7.28367456 9.0474816 12.232426080000002 16.820474960000002 21.26045208 15.8471092
+13.18537392 14.922821760000001 18.267343999999998 17.36138248 12.16050312 6.36223224 2.908926 3.0583366400000003 5.748648640000001 3.6463560000000004 3.7840514400000003 3.33803704 0.8612764 1.7380336 2.96256488 4.8239009600000005 6.46858952 7.108741520000001 7.69759768 8.58063088 10.621418720000001 13.02818104 13.35327784 10.93798016
+10.73555824 16.034343200000002 19.15213448 16.666964 11.156008400000001 4.99084256 1.2304725600000002 0.7710275200000001 2.2264737599999997 2.2255532799999997 1.99497304 0.20539256 -1.86719368 -0.23505712 5.3536372 3.09582528 5.39346888 6.64745552 10.43226008 6.1227819199999995 6.401854720000001 6.30537168 5.621162160000001 6.37060024
+12.40317512 17.283183519999998 20.01257408 15.042023920000002 9.73169112 3.45715552 -0.17643928 0.49965328000000003 2.25509232 1.62535848 -0.7250872 -1.69443632 -3.9567669600000004 -2.02225272 0.019999520000000003 1.8756872 4.02362728 5.676432800000001 5.890318880000001 3.88120392 1.8409600000000002 2.1719980800000003 1.04775728 5.64915312
+14.72876784 19.3265236 19.340581840000002 12.3764812 6.832932240000001 2.07911328 -0.53086592 0.503126 2.5727416 1.33063752 -2.61809616 -5.32882608 -4.4959172 -2.39504712 -0.62178424 2.17095208 4.41801112 5.78090728 5.43384448 2.675668 0.0 -0.8449588 1.5361556 7.324008320000001
+20.2089292 21.798640000000002 15.28544904 8.58293208 4.3652508800000005 0.78445816 -0.75634168 0.9700604 2.6965879999999998 0.24547528000000002 -4.54897032 -5.7168084 -4.339226399999999 -2.05091312 -0.55224616 1.78414128 4.1792720800000005 5.81509056 5.1559432 2.1950937600000002 -0.03217496 -0.36045160000000004 3.4707953600000003 10.61510088
+23.66813488 19.02473168 10.64422152 5.81969296 2.48809928 -0.004225840000000001 2.2030015200000004 1.7463179199999999 2.13618304 -1.0360002400000001 -2.12283608 -6.7887492 -3.62727696 -1.36590864 -0.011296800000000001 1.95698232 4.52976576 5.39259024 4.1204868800000005 2.0290308 0.33279536 1.04570712 6.40059952 14.63885368
+17.37485496 12.99521112 7.06895168 3.3777432000000003 1.11721168 -0.30451152 -0.04673528 1.7920072 1.99857128 -1.34833584 -6.08198792 -8.20633024 -1.1221906400000001 0.7804833600000001 1.85556216 4.440144480000001 5.10581888 4.548802960000001 3.2255292800000004 2.1495300000000004 1.8694112 4.581145279999999 11.81440264 21.35634936
+14.025981360000001 9.043548640000001 4.08027864 1.2292592 -0.004937120000000001 -0.63797632 0.048952800000000005 1.0625268 1.26938376 -0.8304821600000001 -3.3133096 -3.51175672 0.49802152 2.5678044800000004 2.8334048000000003 3.5208778400000003 4.243914880000001 5.25129656 2.43897912 3.01741712 4.28542016 9.103003280000001 17.240674079999998 20.09495704
+12.56292024 7.49383688 3.69919992 2.2449252 1.4367019200000002 1.6709222400000001 1.46519496 1.7434728000000002 1.6630563200000001 -0.3759324 0.48500928 -2.73658704 1.51699288 2.80729664 2.92490888 3.6535106400000004 3.8862247200000004 2.5917787999999997 3.14862736 4.85641064 8.45234944 14.35664288 21.317061600000002 19.02259784
+12.90764 8.82288448 8.4797128 8.96744168 8.18260696 5.668357680000001 4.15086272 3.5440572 3.5384088 4.26755448 0.9934071200000001 0.49488352 3.99877432 4.23855936 4.02074032 6.42566168 5.01146968 4.4973816 5.57128888 8.51510944 12.5204108 18.85168144 25.75703872 19.61057536
+14.833242320000002 14.551784640000001 16.819596320000002 18.215629760000002 15.53443888 10.82384064 7.03125384 6.45917552 6.49888168 5.8818672 5.313972880000001 5.96738816 7.00723768 7.069202720000001 6.35244168 9.48583928 7.94579256 8.10687656 9.16689296 11.5513964 15.60744968 21.15823696 25.44608384 19.501540320000004
+17.424686400000002 20.400932960000002 24.39811736 23.60453808 18.05554992 12.06766016 7.7464668 7.959725280000001 9.5832428 9.232330720000002 9.3232072 10.6323808 10.17364704 10.839237760000001 9.70361648 9.555377360000001 11.02555128 13.355620880000002 12.44158424 13.965397040000001 16.35404264 19.43660464 21.06313464 18.311819919999998
+19.364932720000002 24.79543 27.17085416 23.132122640000002 17.861579680000002 12.214016480000002 7.172003600000001 7.33994936 9.998086400000002 10.4721336 14.35187312 12.15230248 10.893671600000001 11.2708592 10.86860944 10.94254072 12.216819760000002 12.782161839999999 13.871215200000002 13.96259376 14.0695368 14.679480320000001 14.752658480000001 15.41230792
+21.49651336 25.18123664 22.82376184 20.13453768 16.45910288 11.259897120000002 5.805467360000001 5.83496456 8.04503704 8.02817552 8.53498344 9.406719840000001 9.50621536 10.99182824 10.3267396 10.38983432 11.358848720000001 11.92540416 12.479240240000001 13.46750104 9.831563200000002 9.01204312 9.83068456 14.206144400000001
+20.96924568 17.258288720000003 16.875829279999998 16.29559216 15.91317456 8.734183680000001 3.80907176 3.6806648 4.42261352 3.50866056 3.47196688 7.803369200000001 7.55684792 9.5526996 8.7880736 8.78899408 9.02539008 9.42353952 9.798133040000002 8.00600032 5.0787065600000005 5.333093760000001 9.142625760000001 16.54847312
+12.63793936 9.510817760000002 11.42152504 12.641453920000002 10.25130208 5.4525051200000005 1.0377993600000002 -0.8266747200000001 1.4160329600000001 -0.890146 -1.18005536 -0.7920312 6.1457102400000005 6.521768160000001 4.24650896 4.17931392 4.7643208 5.391293200000001 7.03698592 2.99800336 1.32532384 4.06019544 10.23954504 16.5784724
+6.1544966400000005 7.749186400000001 12.728522960000001 10.75124824 7.56337496 2.25605464 -3.08356616 -5.00665808 -3.95760376 -4.10232832 -1.28515744 -3.5868595200000004 6.745988720000001 -0.5083141600000001 -1.4701739200000001 -0.67847744 0.4589848 1.2685469600000001 0.8727824000000001 -0.25300648000000003 0.9313165600000001 5.6478560799999995 11.94109416 11.963311200000001</Map>
+    <Map>5.37857384 3.12615928 4.9793784 4.99941976 3.13749792 -1.2068329599999998 -5.527064 -6.3318564 -5.048665440000001 -2.64863936 4.02199552 7.18639656 2.49521208 -0.23986872 -0.6847952800000001 -0.5863876 -0.49162 -0.32367424 -0.66747352 0.06200688 3.4468628800000003 8.57577744 10.335944399999999 7.285892080000001
+3.53660968 6.2113572 6.528713600000001 4.35537664 0.12706808 -2.9227332 -4.62516096 -5.131634160000001 -3.46903808 -0.9200197600000001 3.8575643200000003 1.7455229600000002 -0.37413328 -1.42532144 -1.7773632000000001 -1.3779167200000002 -1.75175712 -1.37000896 -0.38748024000000003 2.58767848 6.00353792 8.22750128 8.89179496 8.2357856
+8.78188128 10.0064544 5.58743912 1.1154962400000001 -1.53410544 -2.44487856 -0.6591473600000001 -0.8727824000000001 0.50860704 3.91764656 4.04203688 1.4070792 0.57291512 2.52408168 -0.28354967999999997 -0.36409168000000003 -0.69805856 0.06556328 2.09505432 3.8415396000000004 6.68741272 8.47477568 8.833260800000001 7.4623732
+15.66920552 9.39751504 2.29195336 -0.78843296 -1.06219208 1.99413624 5.31146248 5.62178976 6.91439472 6.434740960000001 4.0421624 3.3135188 3.4272399200000003 2.704956 2.52324488 2.4634136800000004 2.06777464 2.53855832 6.9920497600000004 4.8043616799999995 7.87633816 10.05549088 12.000799839999999 14.191165680000001
+14.84198688 6.082490000000001 1.5105913600000003 1.06261048 2.6656264000000003 6.17512376 9.9303056 14.7868836 9.53006416 7.0841396 5.688399040000001 5.92102944 5.8746288799999995 6.04998032 5.92274488 8.68719736 8.8276124 4.21065208 3.85974 6.277422560000001 9.8782148 12.86927272 16.7002268 21.82181936
+12.332047120000002 6.962259680000001 5.030799760000001 5.31844976 6.72385536 8.850917279999999 10.310714879999999 9.7512304 9.97984416 8.55577792 7.44927728 7.78215632 7.9314414399999995 8.24837944 8.33779152 8.294821840000001 7.28509712 5.8048816 5.08017096 7.37124568 10.95572032 15.38306176 21.44617984 20.4413504
+12.38305008 10.30569408 10.21766272 10.93124392 10.981661120000002 9.66654624 10.008588240000002 7.81985416 8.69343152 8.885435280000001 7.97190072 8.15909288 8.48762056 8.74083624 12.41723336 9.29592752 8.624813920000001 7.7416552 7.114892 8.24197792 11.900509360000001 17.20716024 21.85160944 17.45234264
+11.56353 13.08286592 14.7534116 14.11154416 12.375728080000002 8.80342888 4.50495464 4.192995600000001 8.70393336 7.50856456 7.45241528 7.065102400000001 7.47961128 8.04775664 8.2391328 8.49209744 8.431806 8.257877120000002 8.1359972 9.084510000000002 11.247428800000002 14.773745840000002 15.49008848 12.50250328
+11.2085176 14.85667272 16.75466064 21.477015920000003 11.03032104 6.42896704 0.7316979200000001 1.5208003200000002 4.326548880000001 5.499491440000001 5.42171088 4.74791952 5.285186960000001 6.306543200000001 6.19073008 7.11685848 7.8650832 8.1719796 7.7652948 9.70692184 7.628645360000001 11.181237920000001 7.441034800000001 7.9780512
+11.43566696 15.68594152 17.476024080000002 12.990525040000001 8.37498728 1.6454835200000002 -2.13743824 -1.01704672 1.82669256 2.98909144 2.09735552 2.3570564000000003 3.1245693599999997 3.7554747200000005 4.327887759999999 5.04205472 6.004332880000001 6.57298032 6.4961620799999995 5.095066000000001 2.86637472 1.18398832 1.9183221600000002 6.362818000000001
+12.514929760000001 16.87750288 14.07338608 9.485588240000002 4.30433184 -1.38586632 -4.234919280000001 -2.42793336 -0.36794096000000004 0.35346432 -0.44869216 0.12221464 1.07097848 1.5317205600000001 2.48768088 6.16508216 4.72821288 5.69990504 5.2325104 2.75964088 0.0 -1.36390032 1.15348696 6.8497100799999995
+14.13635528 17.0280432 9.576088160000001 5.84266312 2.6306900000000004 -1.397456 -0.43731168000000004 -1.26570184 -1.44904472 -2.5281819999999997 -2.74411824 -1.6749807200000002 -0.76910288 0.24003607999999999 0.54019624 2.00187664 3.449708 4.2915288 3.11390016 0.6163031999999999 -1.88660744 -2.1498228800000003 1.896398 8.384275760000001
+19.27790552 12.61220776 5.900486 3.47527224 2.05338168 0.9859596 0.7524924000000001 1.2767476 0.6673898400000001 -1.84112736 -3.6911666400000005 -2.18873408 -1.34908896 -0.5696097600000001 -0.07213216 1.9484888 5.4843872000000005 3.3679526400000004 1.6703364800000002 -0.96771736 -2.8028616000000004 -1.50799728 3.83748112 11.518928559999999
+17.3146472 8.91790312 2.39467056 0.62575904 0.1292856 2.8308525600000003 4.22408272 0.72420856 1.0536985600000002 -2.14124568 -2.00007752 -0.49982064 0.53120064 1.2924794400000001 1.6695415200000001 3.62861584 4.68290016 3.7779428000000004 1.9248492000000001 -0.38480248 -0.80964584 2.22396336 9.3621184 18.710178560000003
+11.98678344 4.48286312 -1.3270392800000002 -2.92967864 -2.6993076 -1.39716312 0.46890088 -0.6240436 -1.2878352000000002 -1.37038552 -0.43823216000000004 1.09821632 2.77708816 3.10323096 3.45878728 4.1135414400000005 4.46859568 3.5600400800000003 1.93204568 1.16373776 2.83336296 8.155913040000002 15.9100784 19.56840064
+9.35345752 1.91330136 -2.5795615200000004 -3.65501688 -2.63018792 -0.38174816 1.19444832 -0.025773439999999998 -0.7657556799999999 0.46509344 -0.14623080000000002 2.04405136 4.04295736 3.8904924 3.5231372 3.38845424 3.3239788 4.15550696 1.8117138400000001 2.83018312 6.17972616 12.059208479999999 18.46369912 16.904782559999997
+8.61728272 2.9938612 0.79738672 1.2100128 2.4209460800000002 5.43434656 4.2391869600000005 2.8224427199999997 2.03610176 1.5072441600000002 2.25241456 4.70181184 6.18156712 5.5832551200000005 4.51102144 4.12818544 4.3501048 5.3807076799999995 3.01055536 5.23058576 9.37877072 14.91085552 21.0568168 16.25580232
+10.90555416 8.928028399999999 9.212122 10.608950400000001 10.335651519999999 9.95026328 8.412643280000001 9.32199384 6.13190304 5.46104048 5.8819927199999995 10.70890616 8.93606168 7.89173528 8.94388576 6.6925172 6.47482368 7.8066327200000005 5.89056992 7.9734488 12.021468800000001 16.70215144 20.99234136 15.854054640000001
+14.935624800000001 16.3933304 19.52915472 19.78764224 18.19814064 17.00130744 12.4413332 10.90978 10.3798764 9.65943344 9.737172160000002 11.38416192 13.84222008 11.18169816 10.19532016 10.08674536 9.828843599999999 9.67625312 9.4345016 10.44334768 13.234745120000001 16.27663864 22.90484776 15.25536608
+19.94755472 23.1002824 26.222299520000004 22.6519668 20.172068160000002 17.36355816 14.08192144 13.42725096 13.89113104 13.14248792 13.09688232 13.8956916 14.180119920000001 14.3927508 16.52441512 13.41921768 13.029394400000001 12.873038320000001 12.980399760000001 12.63538712 13.29671016 14.22083024 14.437394079999999 15.54975232
+22.1641124 27.47833632 22.307790960000002 19.43057968 18.05504784 15.53757688 11.3771328 11.79210192 13.565364800000001 13.39013888 12.8630804 14.412080880000001 15.82920168 15.73782312 15.636193760000001 15.2688804 15.193233680000002 14.85106616 14.857969760000001 13.3862896 11.97276704 11.35248904 12.38070704 16.31852048
+24.22602944 19.4704532 15.85648136 14.4770584 13.5369136 10.88128696 6.5290064800000005 6.5220610400000005 8.2663288 9.6616928 10.98638904 13.356164800000002 15.132565679999999 15.852632080000001 15.86325944 15.19411232 14.998928720000002 14.335806560000002 13.432983040000002 11.350020480000001 9.128232800000001 8.81384704 12.18887064 18.080653920000003
+19.002682000000004 11.057475199999999 9.176767199999999 15.271474480000002 8.55778624 5.8251740000000005 1.20967808 -0.13987112000000002 3.9428342400000003 3.65476584 6.21231952 10.153982240000001 12.70860712 15.920078160000001 11.74666368 10.3484964 9.74407576 9.51730296 8.84238192 6.44549384 4.8962841599999996 6.368215360000001 12.487942960000002 18.84272768
+7.173300640000001 7.63341512 5.25338856 5.922452 4.982098 2.29605368 -3.55468456 -2.9839451200000005 -3.69388624 -0.9388896 4.66716832 7.080541360000001 10.97082456 6.368926640000001 3.98927664 3.5712532 3.6447242400000004 3.9452191200000004 2.9055788000000002 1.63477248 2.34237056 6.2944514400000005 12.650826080000002 12.965002640000002</Map>
+    <Map>7.94943264 4.03914992 5.48309016 9.55726016 4.488678880000001 -0.09405632 -6.727997520000001 -8.21963536 -7.00522936 -0.4441316 -4.638424240000001 4.13563296 -1.6392493600000002 -4.15646928 -4.58926224 -3.5500403200000004 -1.13269248 0.46191360000000004 0.39605744 2.21593008 4.928417280000001 10.05318968 13.167257200000002 12.033016640000001
+6.245414960000001 7.41873408 7.14530968 8.16482496 2.1353880800000002 -1.6635584 -5.2955632800000005 -6.6219331200000005 -6.05495928 -1.6294588 -5.19744848 -1.4144012000000001 -3.90425776 -5.279413040000001 -5.43191984 -4.12425248 -2.48533784 -0.7481828800000001 0.82336936 3.8177326400000005 7.56475568 10.00486448 11.14964872 12.08606976
+11.94084312 11.254625279999999 9.808927760000001 3.4051484 0.08815687999999999 -1.5388752 -1.28800256 -3.20109472 -2.9867484 3.5607513600000003 -5.410706960000001 -1.65975096 -2.68491464 -3.4543104000000002 -3.8211635200000003 0.15418040000000002 -1.4018910400000002 0.83194656 3.6128003200000003 6.0969248 7.92566752 10.07657824 11.074002 12.501875680000001
+17.82116224 9.6991396 3.13825104 0.75763872 0.18401232 2.1827928 3.63719304 1.4318484800000002 5.225816000000001 8.14536936 -5.0659872 0.984286 0.47923536000000005 -0.01313776 -0.1301224 -0.027488880000000004 1.4350701600000002 3.9753439200000003 4.21730464 7.14740168 9.462241520000001 11.868208880000001 14.24618528 18.270105440000002
+15.402517360000001 6.15060552 1.85418144 1.76778184 3.26904288 6.38909352 7.648770400000001 7.05635784 8.731924320000001 7.25982576 -5.1509642399999995 3.47933072 3.73083096 3.7332576800000004 3.47318024 3.15649328 3.96090912 4.927538640000001 5.55769088 8.23101584 11.60152072 14.777009360000001 19.44840352 24.987350080000002
+13.229724319999999 9.10392376 4.9974114400000005 5.7148419200000005 7.581115120000001 9.72558248 8.330762400000001 5.75935968 8.99551632 8.08863432 -5.27652608 3.57844968 5.00100968 5.580200800000001 5.548109520000001 5.284350160000001 5.80036288 6.3550775999999995 8.395321520000001 8.60594408 12.73659808 17.365566480000002 22.842045920000004 22.47377024
+13.29307008 10.19670088 10.029006160000002 10.58246568 11.09693032 10.2729752 6.30373992 4.59846704 7.69240952 7.737429360000001 -5.3543484800000005 2.44642664 4.4764616 6.04843224 6.12834664 6.139308720000001 6.9546448 7.69404128 7.7771773600000005 9.42035968 13.30779776 18.089356640000002 22.752843040000002 19.45781752
+13.311270480000001 14.469359840000001 14.39011488 13.7879536 12.761367360000001 9.74867816 6.54239528 1.1855364 2.47203272 6.122321680000001 -5.39434752 0.46513528000000004 2.9378792799999998 5.1582444 5.371712080000001 5.67249984 7.1261888 8.47444096 8.862841679999999 11.267512 12.66446592 14.951775040000001 15.77669248 14.289447840000001
+12.804086 16.52546112 19.14811784 14.88336664 13.78791176 5.9827016 -0.51601272 -1.46469288 0.36237624 4.64147856 -5.2260252000000005 -0.9242874400000001 1.90305056 3.4605027200000005 2.8409778400000003 3.40460448 5.640575920000001 10.55639936 8.21708312 7.8615268 11.490226320000001 8.50749456 7.890731120000001 8.87225568
+13.05152776 17.837228800000002 16.7274228 13.89322304 9.48968856 2.1860563200000005 -3.42636128 1.52732736 -1.3086296800000001 2.38630256 -5.19037752 -1.3291312800000001 0.54693248 1.10072672 0.9768384800000001 4.16333104 6.90518992 6.47720856 6.92552416 5.45748408 3.2913854400000004 1.61406168 2.48872688 7.1433432
+15.04779784 18.49645984 16.36086256 10.683341920000002 5.382339440000001 1.3800505600000001 -5.68789696 -4.9442328 -1.4858639200000001 2.1033804799999998 -5.14740784 -1.26490688 -0.9321533599999999 -0.8648328 -1.1689677600000001 -0.30334 2.6294348 5.38200472 5.13368432 2.8339068800000002 0.0 -1.0800577599999999 1.3451978400000002 8.03030936
+17.02235296 16.4259656 9.98666408 7.34112088 3.44351568 -0.9455840000000001 -6.028474559999999 -4.58516192 -1.71820144 1.7554808800000001 -5.2818816 -2.25839768 -2.68370128 -3.2415540000000003 -2.91599696 -2.0227548 1.0009801600000001 3.9414953600000002 3.7503702400000005 0.68504632 -1.6415924 -2.0087384000000004 1.9633420000000001 9.29994416
+21.277188080000002 12.379410000000002 6.341144880000001 4.37424648 2.53583872 0.9281785600000001 -3.55623264 -2.99411224 -2.01011912 -2.88712736 -5.244392960000001 -3.38895632 -0.17920072 -3.7254754400000003 -3.26063304 -2.12488624 0.44421528000000005 3.0496757600000004 1.88221424 -0.6732892800000001 -2.4893544800000003 -1.50272544 3.77526504 11.90862632
+16.07384016 7.76395592 2.85541264 1.28658 1.69979184 -0.35902904 -1.48226568 -2.03660384 -1.6273249600000002 -2.14195696 -5.024440080000001 -0.12338616 0.75985624 -0.97943256 -0.91098232 -0.42664248000000005 3.7510815200000005 2.9407662400000003 3.52008288 -0.32639384 -0.65713904 1.6449396 8.746944880000001 21.997380000000003
+10.808318 3.1630621600000004 -1.6413832 -2.8411452 -2.87164656 -2.15551312 -2.3464290400000003 -3.8018334400000002 -3.7340526400000003 -1.3788372 -4.7118116 2.76738128 4.41156776 2.47517072 1.2062472 0.29216872000000005 4.24558848 2.09517984 4.2988508 1.53728528 3.66317568 8.0765844 15.69276144 20.476621520000002
+8.59883128 0.49940224 -3.52614968 -3.9823312 -2.77516352 -1.30616112 -2.73211016 -4.40374368 -4.2006523200000006 -2.903696 -4.39002016 2.46098696 4.33403824 2.33262184 0.36559792 -0.73793208 2.15325376 3.5058572800000003 1.87493408 2.97394536 6.32323736 11.78473808 18.4886776 17.4152724
+8.78275992 2.61684096 0.19074856 1.2957847999999998 2.749934 3.39912344 -1.50004768 -3.20113656 -3.0533576800000004 -0.31229376000000003 -3.99086656 3.76961664 5.5620004000000005 3.4870292800000002 3.7119611200000002 0.28296392 1.2383384800000001 2.44015064 3.5708766400000003 5.75463176 9.365925840000001 15.306201680000001 21.81240536 17.49154672
+11.5846592 9.06049384 9.18182984 10.963251520000002 11.63097608 10.4018424 1.3214745600000002 -1.07076928 5.15485536 3.8857226400000004 -3.8762668000000002 7.675464320000001 7.543710160000001 5.9431628000000005 3.98576208 3.33577768 4.0884792800000005 5.7622048 6.94958216 8.69514696 12.53856936 17.475438320000002 22.939323920000003 17.819865200000002
+17.0498 17.94751904 19.78705648 20.670047840000002 19.35321752 16.91344344 5.13862144 8.05411632 9.05488728 8.44645 -2.92536912 9.850307520000001 10.02582632 9.27735056 7.836506480000001 9.5759208 7.78721896 9.888549280000001 12.88328912 11.669176 15.488456720000002 17.5504156 20.12826168 18.404621040000002
+21.399570080000004 25.638506 29.1114352 23.571400800000003 22.2116008 18.63946896 8.528247200000001 5.82617816 12.700239119999999 11.95833224 -3.3506727200000004 11.243286639999999 12.27288536 13.3128604 13.024833840000001 10.2713016 11.285168480000001 13.22533112 13.79556848 13.6358652 18.17496128 18.38416128 18.561646560000003 17.993835920000002
+25.2864224 28.617137440000004 22.5944368 20.53913048 19.69710048 16.76595744 8.78146288 6.143994800000001 14.13233864 11.59503552 -3.71488992 11.023919520000002 14.0410856 14.489986960000001 13.102781760000001 12.29685968 13.634107920000002 15.25139128 15.3906348 14.44655704 13.033620240000001 12.35551936 13.90021032 17.87388064
+28.46567664 19.62183032 16.01547336 15.244989760000001 14.978427120000001 11.92908608 5.772748480000001 3.071056 3.45895464 7.909015200000001 -4.6926070399999995 10.7599928 14.96938968 14.611574 14.155936400000002 13.85146672 12.96864272 14.48864808 14.31404976 12.05150992 10.138961680000001 9.35124 13.13361784 27.280935200000002
+17.952205120000002 11.96318568 9.12409064 9.7629456 9.564958720000002 6.58231064 0.65801768 -2.25542704 -1.2762455200000002 2.7715652800000004 -5.261547360000001 9.69985088 14.68224176 11.481983840000002 7.3389452 6.99539696 8.2993824 10.114150559999999 9.66914032 7.1301636 6.0686828 7.72918688 13.443233840000001 21.321873200000002
+9.390527760000001 6.422983920000001 5.65358816 6.691554880000001 6.2841588 2.9357036 -4.07517416 -6.3712278399999995 -5.27489432 -0.32672856000000006 -5.325437040000001 8.00604216 7.031337520000001 2.2078131200000004 0.3020848 0.45919400000000005 2.5765908800000004 4.66386296 4.11207704 2.7942425600000003 3.70037144 7.6989784000000006 14.5954656 17.50150464</Map>
+    <Torsion class1="protein-C" class5="protein-N" map="1" type2="cmap-S1P-N" type3="cmap-S1P-CA" type4="cmap-S1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="1" type2="cmap-SEP-N" type3="cmap-SEP-CA" type4="cmap-SEP-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="2" type2="cmap-T1P-N" type3="cmap-T1P-CA" type4="cmap-T1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="2" type2="cmap-TPO-N" type3="cmap-TPO-CA" type4="cmap-TPO-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-Y1P-N" type3="cmap-Y1P-CA" type4="cmap-Y1P-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-PTR-N" type3="cmap-PTR-CA" type4="cmap-PTR-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H1D-N" type3="cmap-H1D-CA" type4="cmap-H1D-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H2D-N" type3="cmap-H2D-CA" type4="cmap-H2D-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H1E-N" type3="cmap-H1E-CA" type4="cmap-H1E-C" />
+    <Torsion class1="protein-C" class5="protein-N" map="0" type2="cmap-H2E-N" type3="cmap-H2E-CA" type4="cmap-H2E-C" />
+  </CMAPTorsionForce>
+</ForceField>

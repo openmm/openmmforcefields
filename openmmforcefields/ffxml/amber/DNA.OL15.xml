@@ -1,39 +1,39 @@
 <ForceField>
   <Info>
-    <DateGenerated>2021-01-26</DateGenerated>
-    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="20.15">leaprc.DNA.OL15</Source>
+    <DateGenerated>2025-04-30</DateGenerated>
+    <Source Source="leaprc.DNA.OL15" md5hash="6533cbdef9b6113f090d5cb24752db33" sourcePackage="AmberTools" sourcePackageVersion="24.8">leaprc.DNA.OL15</Source>
     <Reference>Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P. Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA. J. Chem. Theor. and Comp., 2015, 12, 5723-5736.</Reference>
   </Info>
   <AtomTypes>
-    <Type element="C" name="DNA-C" class="C" mass="12.01"/>
-    <Type element="C" name="DNA-CA" class="CA" mass="12.01"/>
-    <Type element="C" name="DNA-CB" class="CB" mass="12.01"/>
-    <Type element="C" name="DNA-CK" class="CK" mass="12.01"/>
-    <Type element="C" name="DNA-CM" class="CM" mass="12.01"/>
-    <Type element="C" name="DNA-CQ" class="CQ" mass="12.01"/>
-    <Type element="C" name="DNA-CT" class="CT" mass="12.01"/>
-    <Type element="H" name="DNA-H" class="H" mass="1.008"/>
-    <Type element="H" name="DNA-HC" class="HC" mass="1.008"/>
-    <Type element="H" name="DNA-H1" class="H1" mass="1.008"/>
-    <Type element="H" name="DNA-H2" class="H2" mass="1.008"/>
-    <Type element="H" name="DNA-HA" class="HA" mass="1.008"/>
-    <Type element="H" name="DNA-H4" class="H4" mass="1.008"/>
-    <Type element="H" name="DNA-H5" class="H5" mass="1.008"/>
-    <Type element="H" name="DNA-HO" class="HO" mass="1.008"/>
-    <Type element="N" name="DNA-NA" class="NA" mass="14.01"/>
-    <Type element="N" name="DNA-NB" class="NB" mass="14.01"/>
-    <Type element="N" name="DNA-NC" class="NC" mass="14.01"/>
-    <Type element="N" name="DNA-N2" class="N2" mass="14.01"/>
-    <Type element="N" name="DNA-N*" class="N*" mass="14.01"/>
-    <Type element="O" name="DNA-O" class="O" mass="16.0"/>
-    <Type element="O" name="DNA-O2" class="O2" mass="16.0"/>
-    <Type element="O" name="DNA-OH" class="OH" mass="16.0"/>
-    <Type element="O" name="DNA-OS" class="OS" mass="16.0"/>
-    <Type element="P" name="DNA-P" class="P" mass="30.97"/>
-    <Type element="C" name="DNA-C7" class="C7" mass="12.01"/>
-    <Type element="C" name="DNA-C2" class="C2" mass="12.01"/>
-    <Type element="C" name="DNA-C1" class="C1" mass="12.01"/>
-    <Type element="C" name="DNA-CJ" class="CJ" mass="12.01"/>
+    <Type element="C" name="DNA-C" class="DNA-C" mass="12.01"/>
+    <Type element="C" name="DNA-CA" class="DNA-CA" mass="12.01"/>
+    <Type element="C" name="DNA-CB" class="DNA-CB" mass="12.01"/>
+    <Type element="C" name="DNA-CK" class="DNA-CK" mass="12.01"/>
+    <Type element="C" name="DNA-CM" class="DNA-CM" mass="12.01"/>
+    <Type element="C" name="DNA-CQ" class="DNA-CQ" mass="12.01"/>
+    <Type element="C" name="DNA-CT" class="DNA-CT" mass="12.01"/>
+    <Type element="H" name="DNA-H" class="DNA-H" mass="1.008"/>
+    <Type element="H" name="DNA-HC" class="DNA-HC" mass="1.008"/>
+    <Type element="H" name="DNA-H1" class="DNA-H1" mass="1.008"/>
+    <Type element="H" name="DNA-H2" class="DNA-H2" mass="1.008"/>
+    <Type element="H" name="DNA-HA" class="DNA-HA" mass="1.008"/>
+    <Type element="H" name="DNA-H4" class="DNA-H4" mass="1.008"/>
+    <Type element="H" name="DNA-H5" class="DNA-H5" mass="1.008"/>
+    <Type element="H" name="DNA-HO" class="DNA-HO" mass="1.008"/>
+    <Type element="N" name="DNA-NA" class="DNA-NA" mass="14.01"/>
+    <Type element="N" name="DNA-NB" class="DNA-NB" mass="14.01"/>
+    <Type element="N" name="DNA-NC" class="DNA-NC" mass="14.01"/>
+    <Type element="N" name="DNA-N2" class="DNA-N2" mass="14.01"/>
+    <Type element="N" name="DNA-N*" class="DNA-N*" mass="14.01"/>
+    <Type element="O" name="DNA-O" class="DNA-O" mass="16.0"/>
+    <Type element="O" name="DNA-O2" class="DNA-O2" mass="16.0"/>
+    <Type element="O" name="DNA-OH" class="DNA-OH" mass="16.0"/>
+    <Type element="O" name="DNA-OS" class="DNA-OS" mass="16.0"/>
+    <Type element="P" name="DNA-P" class="DNA-P" mass="30.97"/>
+    <Type element="C" name="DNA-C7" class="DNA-C7" mass="12.01"/>
+    <Type element="C" name="DNA-C2" class="DNA-C2" mass="12.01"/>
+    <Type element="C" name="DNA-C1" class="DNA-C1" mass="12.01"/>
+    <Type element="C" name="DNA-CJ" class="DNA-CJ" mass="12.01"/>
   </AtomTypes>
   <Residues>
     <Residue name="DA">
@@ -1110,497 +1110,497 @@
     </Residue>
   </Residues>
   <HarmonicBondForce>
-    <Bond type1="DNA-C" type2="DNA-C" length="0.1525" k="259407.99999999994"/>
-    <Bond type1="DNA-C" type2="DNA-CA" length="0.1409" k="392459.19999999995"/>
-    <Bond type1="DNA-C" type2="DNA-CB" length="0.1419" k="374049.5999999999"/>
-    <Bond type1="DNA-C" type2="DNA-CM" length="0.1444" k="343087.99999999994"/>
-    <Bond type1="DNA-C" type2="DNA-CT" length="0.1522" k="265265.6"/>
-    <Bond type1="DNA-C" type2="DNA-N*" length="0.1383" k="354803.19999999995"/>
-    <Bond type1="DNA-C" type2="DNA-NA" length="0.1388" k="349782.3999999999"/>
-    <Bond type1="DNA-C" type2="DNA-NC" length="0.1358" k="382417.5999999999"/>
-    <Bond type1="DNA-C" type2="DNA-O" length="0.12290000000000001" k="476975.9999999999"/>
-    <Bond type1="DNA-C" type2="DNA-O2" length="0.125" k="548940.7999999999"/>
-    <Bond type1="DNA-C" type2="DNA-OH" length="0.13640000000000002" k="376559.99999999994"/>
-    <Bond type1="DNA-C" type2="DNA-OS" length="0.1323" k="376559.99999999994"/>
-    <Bond type1="DNA-C" type2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-C" type2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-CA" length="0.13999999999999999" k="392459.19999999995"/>
-    <Bond type1="DNA-CA" type2="DNA-CB" length="0.1404" k="392459.19999999995"/>
-    <Bond type1="DNA-CA" type2="DNA-CM" length="0.1433" k="357313.5999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
-    <Bond type1="DNA-CA" type2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-N2" length="0.134" k="402500.79999999993"/>
-    <Bond type1="DNA-CA" type2="DNA-NA" length="0.1381" k="357313.5999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-NC" length="0.1339" k="404174.3999999999"/>
-    <Bond type1="DNA-CA" type2="DNA-OH" length="0.13640000000000002" k="376559.99999999994"/>
-    <Bond type1="DNA-CB" type2="DNA-CB" length="0.137" k="435135.99999999994"/>
-    <Bond type1="DNA-CB" type2="DNA-N*" length="0.13740000000000002" k="364844.79999999993"/>
-    <Bond type1="DNA-CB" type2="DNA-NB" length="0.1391" k="346435.19999999995"/>
-    <Bond type1="DNA-CB" type2="DNA-NC" length="0.13540000000000002" k="385764.79999999993"/>
-    <Bond type1="DNA-CK" type2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CK" type2="DNA-N*" length="0.1371" k="368191.99999999994"/>
-    <Bond type1="DNA-CK" type2="DNA-NB" length="0.13040000000000002" k="442667.1999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-CM" length="0.135" k="459403.1999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
-    <Bond type1="DNA-CM" type2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-N*" length="0.1365" k="374886.3999999999"/>
-    <Bond type1="DNA-CM" type2="DNA-OS" length="0.124" k="401663.99999999994"/>
-    <Bond type1="DNA-CQ" type2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-CQ" type2="DNA-NC" length="0.13240000000000002" k="420073.5999999999"/>
-    <Bond type1="DNA-CT" type2="DNA-CT" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="DNA-CT" type2="DNA-HC" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="DNA-CT" type2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="DNA-CT" type2="DNA-H2" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="DNA-CT" type2="DNA-N*" length="0.14750000000000002" k="282001.5999999999"/>
-    <Bond type1="DNA-CT" type2="DNA-N2" length="0.1463" k="282001.5999999999"/>
-    <Bond type1="DNA-CT" type2="DNA-OH" length="0.141" k="267775.99999999994"/>
-    <Bond type1="DNA-CT" type2="DNA-OS" length="0.141" k="267775.99999999994"/>
-    <Bond type1="DNA-O2" type2="DNA-P" length="0.148" k="439319.99999999994"/>
-    <Bond type1="DNA-OH" type2="DNA-P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="DNA-OS" type2="DNA-P" length="0.16100000000000003" k="192463.99999999997"/>
-    <Bond type1="DNA-NA" type2="DNA-P" length="0.18400000000000002" k="209199.99999999997"/>
-    <Bond type1="DNA-H" type2="DNA-N2" length="0.101" k="363171.19999999995"/>
-    <Bond type1="DNA-H" type2="DNA-N*" length="0.101" k="363171.19999999995"/>
-    <Bond type1="DNA-H" type2="DNA-NA" length="0.101" k="363171.19999999995"/>
-    <Bond type1="DNA-HO" type2="DNA-OH" length="0.096" k="462750.3999999999"/>
-    <Bond type1="DNA-HO" type2="DNA-OS" length="0.096" k="462750.3999999999"/>
-    <Bond type1="EP" type2="DNA-O" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="DNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="DNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="DNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="EP" type2="DNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond type1="DNA-C7" type2="DNA-CT" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="DNA-C7" type2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="DNA-C7" type2="DNA-OH" length="0.141" k="267775.99999999994"/>
-    <Bond type1="DNA-C7" type2="DNA-OS" length="0.141" k="267775.99999999994"/>
-    <Bond type1="DNA-C2" type2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-C2" type2="DNA-N*" length="0.1371" k="368191.99999999994"/>
-    <Bond type1="DNA-C2" type2="DNA-NB" length="0.13040000000000002" k="442667.1999999999"/>
-    <Bond type1="DNA-C" type2="DNA-C1" length="0.1444" k="343087.99999999994"/>
-    <Bond type1="DNA-CA" type2="DNA-C1" length="0.1433" k="357313.5999999999"/>
-    <Bond type1="DNA-C1" type2="DNA-C1" length="0.135" k="459403.1999999999"/>
-    <Bond type1="DNA-C1" type2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
-    <Bond type1="DNA-C1" type2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-C1" type2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
-    <Bond type1="DNA-C1" type2="DNA-N*" length="0.1365" k="374886.3999999999"/>
-    <Bond type1="DNA-CJ" type2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
-    <Bond type1="DNA-CJ" type2="DNA-CT" length="0.1526" k="259407.99999999994"/>
-    <Bond type1="DNA-OS" type2="DNA-CJ" length="0.141" k="267775.99999999994"/>
-    <Bond type1="DNA-OH" type2="DNA-CJ" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-C" class2="DNA-C" length="0.1525" k="259407.99999999994"/>
+    <Bond class1="DNA-C" class2="DNA-CA" length="0.1409" k="392459.19999999995"/>
+    <Bond class1="DNA-C" class2="DNA-CB" length="0.1419" k="374049.5999999999"/>
+    <Bond class1="DNA-C" class2="DNA-CM" length="0.1444" k="343087.99999999994"/>
+    <Bond class1="DNA-C" class2="DNA-CT" length="0.1522" k="265265.6"/>
+    <Bond class1="DNA-C" class2="DNA-N*" length="0.1383" k="354803.19999999995"/>
+    <Bond class1="DNA-C" class2="DNA-NA" length="0.1388" k="349782.3999999999"/>
+    <Bond class1="DNA-C" class2="DNA-NC" length="0.1358" k="382417.5999999999"/>
+    <Bond class1="DNA-C" class2="DNA-O" length="0.12290000000000001" k="476975.9999999999"/>
+    <Bond class1="DNA-C" class2="DNA-O2" length="0.125" k="548940.7999999999"/>
+    <Bond class1="DNA-C" class2="DNA-OH" length="0.13640000000000002" k="376559.99999999994"/>
+    <Bond class1="DNA-C" class2="DNA-OS" length="0.1323" k="376559.99999999994"/>
+    <Bond class1="DNA-C" class2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-C" class2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-CA" length="0.13999999999999999" k="392459.19999999995"/>
+    <Bond class1="DNA-CA" class2="DNA-CB" length="0.1404" k="392459.19999999995"/>
+    <Bond class1="DNA-CA" class2="DNA-CM" length="0.1433" k="357313.5999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
+    <Bond class1="DNA-CA" class2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-N2" length="0.134" k="402500.79999999993"/>
+    <Bond class1="DNA-CA" class2="DNA-NA" length="0.1381" k="357313.5999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-NC" length="0.1339" k="404174.3999999999"/>
+    <Bond class1="DNA-CA" class2="DNA-OH" length="0.13640000000000002" k="376559.99999999994"/>
+    <Bond class1="DNA-CB" class2="DNA-CB" length="0.137" k="435135.99999999994"/>
+    <Bond class1="DNA-CB" class2="DNA-N*" length="0.13740000000000002" k="364844.79999999993"/>
+    <Bond class1="DNA-CB" class2="DNA-NB" length="0.1391" k="346435.19999999995"/>
+    <Bond class1="DNA-CB" class2="DNA-NC" length="0.13540000000000002" k="385764.79999999993"/>
+    <Bond class1="DNA-CK" class2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CK" class2="DNA-N*" length="0.1371" k="368191.99999999994"/>
+    <Bond class1="DNA-CK" class2="DNA-NB" length="0.13040000000000002" k="442667.1999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-CM" length="0.135" k="459403.1999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
+    <Bond class1="DNA-CM" class2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-N*" length="0.1365" k="374886.3999999999"/>
+    <Bond class1="DNA-CM" class2="DNA-OS" length="0.124" k="401663.99999999994"/>
+    <Bond class1="DNA-CQ" class2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-CQ" class2="DNA-NC" length="0.13240000000000002" k="420073.5999999999"/>
+    <Bond class1="DNA-CT" class2="DNA-CT" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="DNA-CT" class2="DNA-HC" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="DNA-CT" class2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="DNA-CT" class2="DNA-H2" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="DNA-CT" class2="DNA-N*" length="0.14750000000000002" k="282001.5999999999"/>
+    <Bond class1="DNA-CT" class2="DNA-N2" length="0.1463" k="282001.5999999999"/>
+    <Bond class1="DNA-CT" class2="DNA-OH" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-CT" class2="DNA-OS" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-O2" class2="DNA-P" length="0.148" k="439319.99999999994"/>
+    <Bond class1="DNA-OH" class2="DNA-P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="DNA-OS" class2="DNA-P" length="0.16100000000000003" k="192463.99999999997"/>
+    <Bond class1="DNA-NA" class2="DNA-P" length="0.18400000000000002" k="209199.99999999997"/>
+    <Bond class1="DNA-H" class2="DNA-N2" length="0.101" k="363171.19999999995"/>
+    <Bond class1="DNA-H" class2="DNA-N*" length="0.101" k="363171.19999999995"/>
+    <Bond class1="DNA-H" class2="DNA-NA" length="0.101" k="363171.19999999995"/>
+    <Bond class1="DNA-HO" class2="DNA-OH" length="0.096" k="462750.3999999999"/>
+    <Bond class1="DNA-HO" class2="DNA-OS" length="0.096" k="462750.3999999999"/>
+    <Bond class1="EP" class2="DNA-O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="DNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="DNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="DNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="DNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="DNA-C7" class2="DNA-CT" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="DNA-C7" class2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="DNA-C7" class2="DNA-OH" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-C7" class2="DNA-OS" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-C2" class2="DNA-H5" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-C2" class2="DNA-N*" length="0.1371" k="368191.99999999994"/>
+    <Bond class1="DNA-C2" class2="DNA-NB" length="0.13040000000000002" k="442667.1999999999"/>
+    <Bond class1="DNA-C" class2="DNA-C1" length="0.1444" k="343087.99999999994"/>
+    <Bond class1="DNA-CA" class2="DNA-C1" length="0.1433" k="357313.5999999999"/>
+    <Bond class1="DNA-C1" class2="DNA-C1" length="0.135" k="459403.1999999999"/>
+    <Bond class1="DNA-C1" class2="DNA-CT" length="0.15100000000000002" k="265265.6"/>
+    <Bond class1="DNA-C1" class2="DNA-HA" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-C1" class2="DNA-H4" length="0.10800000000000001" k="307105.5999999999"/>
+    <Bond class1="DNA-C1" class2="DNA-N*" length="0.1365" k="374886.3999999999"/>
+    <Bond class1="DNA-CJ" class2="DNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
+    <Bond class1="DNA-CJ" class2="DNA-CT" length="0.1526" k="259407.99999999994"/>
+    <Bond class1="DNA-OS" class2="DNA-CJ" length="0.141" k="267775.99999999994"/>
+    <Bond class1="DNA-OH" class2="DNA-CJ" length="0.141" k="267775.99999999994"/>
   </HarmonicBondForce>
   <HarmonicAngleForce>
-    <Angle type1="DNA-C" type2="DNA-C" type3="DNA-O" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="DNA-C" type2="DNA-C" type3="DNA-OH" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="DNA-CA" type2="DNA-C" type3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-C" type3="DNA-OH" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="DNA-CA" type2="DNA-C" type3="DNA-OS" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-C" type3="DNA-NA" angle="1.9425514574696887" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-C" type3="DNA-O" angle="2.2479840765686965" k="669.44"/>
-    <Angle type1="DNA-CM" type2="DNA-C" type3="DNA-NA" angle="1.99142067652553" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-C" type3="DNA-O" angle="2.1868975527488947" k="669.44"/>
-    <Angle type1="DNA-CT" type2="DNA-C" type3="DNA-O" angle="2.101376419401173" k="669.44"/>
-    <Angle type1="DNA-CT" type2="DNA-C" type3="DNA-O2" angle="2.0420352248333655" k="585.76"/>
-    <Angle type1="DNA-CT" type2="DNA-C" type3="DNA-CT" angle="2.0420352248333655" k="527.184"/>
-    <Angle type1="DNA-CT" type2="DNA-C" type3="DNA-OS" angle="2.007128639793479" k="669.44"/>
-    <Angle type1="DNA-CT" type2="DNA-C" type3="DNA-OH" angle="1.9198621771937625" k="669.44"/>
-    <Angle type1="DNA-N*" type2="DNA-C" type3="DNA-NA" angle="2.014109956801456" k="585.76"/>
-    <Angle type1="DNA-N*" type2="DNA-C" type3="DNA-NC" angle="2.069960492865275" k="585.76"/>
-    <Angle type1="DNA-N*" type2="DNA-C" type3="DNA-O" angle="2.1101030656611446" k="669.44"/>
-    <Angle type1="DNA-NA" type2="DNA-C" type3="DNA-O" angle="2.1048670779051615" k="669.44"/>
-    <Angle type1="DNA-NC" type2="DNA-C" type3="DNA-O" angle="2.138028333693054" k="669.44"/>
-    <Angle type1="DNA-O" type2="DNA-C" type3="DNA-O" angle="2.199114857512855" k="669.44"/>
-    <Angle type1="DNA-O" type2="DNA-C" type3="DNA-OH" angle="2.0943951023931953" k="669.44"/>
-    <Angle type1="DNA-O" type2="DNA-C" type3="DNA-OS" angle="2.181661564992912" k="669.44"/>
-    <Angle type1="DNA-O2" type2="DNA-C" type3="DNA-O2" angle="2.199114857512855" k="669.44"/>
-    <Angle type1="DNA-H4" type2="DNA-C" type3="DNA-C" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-H4" type2="DNA-C" type3="DNA-CM" angle="2.007128639793479" k="418.40000000000003"/>
-    <Angle type1="DNA-H4" type2="DNA-C" type3="DNA-CT" angle="2.007128639793479" k="418.40000000000003"/>
-    <Angle type1="DNA-H4" type2="DNA-C" type3="DNA-O" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-H4" type2="DNA-C" type3="DNA-OH" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-H5" type2="DNA-C" type3="DNA-O" angle="2.076941809873252" k="418.40000000000003"/>
-    <Angle type1="DNA-H5" type2="DNA-C" type3="DNA-OH" angle="1.8675022996339325" k="418.40000000000003"/>
-    <Angle type1="DNA-H5" type2="DNA-C" type3="DNA-OS" angle="1.8675022996339325" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-CA" type3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="DNA-C" type2="DNA-CA" type3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-CB" angle="2.0943951023931953" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-CT" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-CA" type3="DNA-OH" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-CA" type3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CB" type2="DNA-CA" type3="DNA-H4" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CB" type2="DNA-CA" type3="DNA-N2" angle="2.155481626212997" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-CA" type3="DNA-NC" angle="2.0472712125893486" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-CA" type3="DNA-N2" angle="2.0961404316451895" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-CA" type3="DNA-NC" angle="2.1205750411731104" k="585.76"/>
-    <Angle type1="DNA-NA" type2="DNA-CA" type3="DNA-NC" angle="2.151990967709008" k="585.76"/>
-    <Angle type1="DNA-N2" type2="DNA-CA" type3="DNA-NA" angle="2.0245819323134224" k="585.76"/>
-    <Angle type1="DNA-N2" type2="DNA-CA" type3="DNA-NC" angle="2.0821777976292353" k="585.76"/>
-    <Angle type1="DNA-N2" type2="DNA-CA" type3="DNA-N2" angle="2.0943951023931953" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-CB" type3="DNA-CB" angle="2.080432468377241" k="527.184"/>
-    <Angle type1="DNA-C" type2="DNA-CB" type3="DNA-NB" angle="2.2689280275926285" k="585.76"/>
-    <Angle type1="DNA-CA" type2="DNA-CB" type3="DNA-CB" angle="2.0472712125893486" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-CB" type3="DNA-NB" angle="2.3108159296404924" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-CB" type3="DNA-N*" angle="1.8535396656179781" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-CB" type3="DNA-NB" angle="1.9268434942017398" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-CB" type3="DNA-NC" angle="2.2287854547967587" k="585.76"/>
-    <Angle type1="DNA-N*" type2="DNA-CB" type3="DNA-NC" angle="2.202605516016844" k="585.76"/>
-    <Angle type1="DNA-H5" type2="DNA-CK" type3="DNA-N*" angle="2.1476276445790226" k="418.40000000000003"/>
-    <Angle type1="DNA-H5" type2="DNA-CK" type3="DNA-NB" angle="2.1476276445790226" k="418.40000000000003"/>
-    <Angle type1="DNA-N*" type2="DNA-CK" type3="DNA-NB" angle="1.9879300180215413" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-CM" type3="DNA-CM" angle="2.1066124071571557" k="527.184"/>
-    <Angle type1="DNA-C" type2="DNA-CM" type3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-CM" type3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-CM" type3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-CM" type3="DNA-CM" angle="2.0420352248333655" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-CM" type3="DNA-HA" angle="2.151990967709008" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-CM" type3="DNA-H4" angle="2.151990967709008" k="418.40000000000003"/>
-    <Angle type1="DNA-CM" type2="DNA-CM" type3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-CM" type3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-CM" type2="DNA-CM" type3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-CM" type2="DNA-CM" type3="DNA-N*" angle="2.1153390534171272" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-CM" type3="DNA-OS" angle="2.181661564992912" k="669.44"/>
-    <Angle type1="DNA-H4" type2="DNA-CM" type3="DNA-N*" angle="2.0786871391252464" k="418.40000000000003"/>
-    <Angle type1="DNA-H4" type2="DNA-CM" type3="DNA-OS" angle="1.9722220547535925" k="418.40000000000003"/>
-    <Angle type1="DNA-HA" type2="DNA-CM" type3="DNA-HA" angle="2.0943951023931953" k="292.88"/>
-    <Angle type1="DNA-HA" type2="DNA-CM" type3="DNA-CT" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-NC" type2="DNA-CQ" type3="DNA-NC" angle="2.253220064324679" k="585.76"/>
-    <Angle type1="DNA-H5" type2="DNA-CQ" type3="DNA-NC" angle="2.0149826214274533" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-CM" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-N2" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H2" type2="DNA-CT" type3="DNA-H2" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="DNA-H2" type2="DNA-CT" type3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H2" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-HC" type2="DNA-CT" type3="DNA-HC" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="DNA-HC" type2="DNA-CT" type3="DNA-CM" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-CT" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-CT" type3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-CT" type3="DNA-CT" angle="1.9390607989657" k="527.184"/>
-    <Angle type1="DNA-C" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="502.08000000000004"/>
-    <Angle type1="DNA-CA" type2="DNA-CT" type3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CM" type2="DNA-CT" type3="DNA-CT" angle="1.9373154697137058" k="527.184"/>
-    <Angle type1="DNA-CM" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-H2" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-CA" angle="1.9896753472735358" k="527.184"/>
-    <Angle type1="DNA-CT" type2="DNA-CT" type3="DNA-N2" angle="1.9408061282176945" k="669.44"/>
-    <Angle type1="DNA-OS" type2="DNA-CT" type3="DNA-OS" angle="1.7627825445142729" k="1338.88"/>
-    <Angle type1="DNA-OS" type2="DNA-CT" type3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-N*" type3="DNA-CM" angle="2.1223203704251046" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-N*" type3="DNA-CT" angle="2.0525072003453313" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-N*" type3="DNA-H" angle="2.080432468377241" k="418.40000000000003"/>
-    <Angle type1="DNA-CB" type2="DNA-N*" type3="DNA-CK" angle="1.8395770316020235" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-N*" type3="DNA-CT" angle="2.1956241990088667" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-N*" type3="DNA-H" angle="2.1956241990088667" k="418.40000000000003"/>
-    <Angle type1="DNA-CK" type2="DNA-N*" type3="DNA-CT" angle="2.2479840765686965" k="585.76"/>
-    <Angle type1="DNA-CK" type2="DNA-N*" type3="DNA-H" angle="2.2479840765686965" k="418.40000000000003"/>
-    <Angle type1="DNA-CM" type2="DNA-N*" type3="DNA-CT" angle="2.1153390534171272" k="585.76"/>
-    <Angle type1="DNA-CM" type2="DNA-N*" type3="DNA-H" angle="2.1153390534171272" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-N2" type3="DNA-H" angle="2.0943951023931953" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-N2" type3="DNA-CT" angle="2.150245638457014" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-N2" type3="DNA-H" angle="2.0664698343612864" k="418.40000000000003"/>
-    <Angle type1="DNA-H" type2="DNA-N2" type3="DNA-H" angle="2.0943951023931953" k="292.88"/>
-    <Angle type1="DNA-C" type2="DNA-NA" type3="DNA-C" angle="2.2060961745208325" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-NA" type3="DNA-CA" angle="2.1851522234969005" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-NA" type3="DNA-H" angle="2.038544566329377" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-NA" type3="DNA-H" angle="2.059488517353309" k="418.40000000000003"/>
-    <Angle type1="DNA-CB" type2="DNA-NB" type3="DNA-CK" angle="1.811651763570114" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-NC" type3="DNA-CA" angle="2.1031217486531673" k="585.76"/>
-    <Angle type1="DNA-CA" type2="DNA-NC" type3="DNA-CB" angle="1.9582594207376378" k="585.76"/>
-    <Angle type1="DNA-CA" type2="DNA-NC" type3="DNA-CQ" angle="2.069960492865275" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-NC" type3="DNA-CQ" angle="1.9373154697137058" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-OH" type3="DNA-HO" angle="1.9722220547535925" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-OH" type3="DNA-HO" angle="1.9722220547535925" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-OH" type3="DNA-HO" angle="1.8936822384138476" k="460.24"/>
-    <Angle type1="DNA-HO" type2="DNA-OH" type3="DNA-P" angle="1.8936822384138476" k="376.56"/>
-    <Angle type1="DNA-C" type2="DNA-OS" type3="DNA-CT" angle="2.0420352248333655" k="502.08000000000004"/>
-    <Angle type1="DNA-CM" type2="DNA-OS" type3="DNA-CT" angle="2.0420352248333655" k="502.08000000000004"/>
-    <Angle type1="DNA-CT" type2="DNA-OS" type3="DNA-CT" angle="1.911135530933791" k="502.08000000000004"/>
-    <Angle type1="DNA-CT" type2="DNA-OS" type3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="DNA-C" type2="DNA-OS" type3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="DNA-P" type2="DNA-OS" type3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="DNA-O2" type2="DNA-P" type3="DNA-OH" angle="1.888969849433463" k="376.56"/>
-    <Angle type1="DNA-O2" type2="DNA-P" type3="DNA-O2" angle="2.092649773141201" k="1171.52"/>
-    <Angle type1="DNA-O2" type2="DNA-P" type3="DNA-OS" angle="1.888969849433463" k="836.8000000000001"/>
-    <Angle type1="DNA-OH" type2="DNA-P" type3="DNA-OS" angle="1.790707812546182" k="376.56"/>
-    <Angle type1="DNA-OS" type2="DNA-P" type3="DNA-OS" angle="1.790707812546182" k="376.56"/>
-    <Angle type1="DNA-CB" type2="DNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="DNA-CK" type2="DNA-NB" type3="EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle type1="DNA-C" type2="DNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-CA" type2="DNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-CB" type2="DNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-CQ" type2="DNA-NC" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-C" type2="DNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="EP" type2="DNA-O" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-C" type2="DNA-OH" type3="EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle type1="DNA-CT" type2="DNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-HO" type2="DNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="EP" type2="DNA-OH" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-C" type2="DNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-CM" type2="DNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-CT" type2="DNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="EP" type2="DNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-P" type2="DNA-OS" type3="EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle type1="DNA-H1" type2="DNA-C7" type3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-C7" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C7" type2="DNA-CT" type3="DNA-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="DNA-CT" type2="DNA-C7" type3="DNA-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="DNA-C7" type2="DNA-CT" type3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C7" type2="DNA-CT" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-C7" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-C7" type3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CT" type2="DNA-C7" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C7" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C7" type2="DNA-CT" type3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C7" type2="DNA-OS" type3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="DNA-C7" type2="DNA-OH" type3="DNA-HO" angle="1.8936822384138476" k="460.24"/>
-    <Angle type1="DNA-CJ" type2="DNA-CT" type3="DNA-C7" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="DNA-H5" type2="DNA-C2" type3="DNA-N*" angle="2.1476276445790226" k="418.40000000000003"/>
-    <Angle type1="DNA-H5" type2="DNA-C2" type3="DNA-NB" angle="2.1476276445790226" k="418.40000000000003"/>
-    <Angle type1="DNA-N*" type2="DNA-C2" type3="DNA-NB" angle="1.9879300180215413" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-N*" type3="DNA-C2" angle="1.8395770316020235" k="585.76"/>
-    <Angle type1="DNA-C2" type2="DNA-N*" type3="DNA-CT" angle="2.2479840765686965" k="585.76"/>
-    <Angle type1="DNA-CB" type2="DNA-NB" type3="DNA-C2" angle="1.811651763570114" k="585.76"/>
-    <Angle type1="DNA-C1" type2="DNA-C" type3="DNA-NA" angle="1.99142067652553" k="585.76"/>
-    <Angle type1="DNA-C1" type2="DNA-C" type3="DNA-O" angle="2.1868975527488947" k="669.44"/>
-    <Angle type1="DNA-C1" type2="DNA-CA" type3="DNA-N2" angle="2.0961404316451895" k="585.76"/>
-    <Angle type1="DNA-C1" type2="DNA-CA" type3="DNA-NC" angle="2.1205750411731104" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-C1" type3="DNA-C1" angle="2.1066124071571557" k="527.184"/>
-    <Angle type1="DNA-C" type2="DNA-C1" type3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
-    <Angle type1="DNA-C" type2="DNA-C1" type3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-C1" type3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-C1" type3="DNA-C1" angle="2.0420352248333655" k="527.184"/>
-    <Angle type1="DNA-CA" type2="DNA-C1" type3="DNA-HA" angle="2.151990967709008" k="418.40000000000003"/>
-    <Angle type1="DNA-CA" type2="DNA-C1" type3="DNA-H4" angle="2.151990967709008" k="418.40000000000003"/>
-    <Angle type1="DNA-C1" type2="DNA-C1" type3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
-    <Angle type1="DNA-C1" type2="DNA-C1" type3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-C1" type2="DNA-C1" type3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
-    <Angle type1="DNA-C1" type2="DNA-C1" type3="DNA-N*" angle="2.1153390534171272" k="585.76"/>
-    <Angle type1="DNA-H4" type2="DNA-C1" type3="DNA-N*" angle="2.0786871391252464" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CT" type3="DNA-C1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-HC" type2="DNA-CT" type3="DNA-C1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-C" type2="DNA-N*" type3="DNA-C1" angle="2.1223203704251046" k="585.76"/>
-    <Angle type1="DNA-C1" type2="DNA-N*" type3="DNA-CT" angle="2.1153390534171272" k="585.76"/>
-    <Angle type1="DNA-H1" type2="DNA-CJ" type3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-H1" type2="DNA-CJ" type3="DNA-H1" angle="1.911135530933791" k="292.88"/>
-    <Angle type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CJ" type2="DNA-CT" type3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-CJ" type2="DNA-CT" type3="DNA-CT" angle="1.911135530933791" k="334.72"/>
-    <Angle type1="DNA-OS" type2="DNA-CJ" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-OS" type2="DNA-CJ" type3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-P" type2="DNA-OS" type3="DNA-CJ" angle="2.1031217486531673" k="836.8000000000001"/>
-    <Angle type1="DNA-OH" type2="DNA-CJ" type3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-OH" type2="DNA-CJ" type3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
-    <Angle type1="DNA-HO" type2="DNA-OH" type3="DNA-CJ" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="DNA-C" class2="DNA-C" class3="DNA-O" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="DNA-C" class2="DNA-C" class3="DNA-OH" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="DNA-CA" class2="DNA-C" class3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-C" class3="DNA-OH" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="DNA-CA" class2="DNA-C" class3="DNA-OS" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-C" class3="DNA-NA" angle="1.9425514574696887" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-C" class3="DNA-O" angle="2.2479840765686965" k="669.44"/>
+    <Angle class1="DNA-CM" class2="DNA-C" class3="DNA-NA" angle="1.99142067652553" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-C" class3="DNA-O" angle="2.1868975527488947" k="669.44"/>
+    <Angle class1="DNA-CT" class2="DNA-C" class3="DNA-O" angle="2.101376419401173" k="669.44"/>
+    <Angle class1="DNA-CT" class2="DNA-C" class3="DNA-O2" angle="2.0420352248333655" k="585.76"/>
+    <Angle class1="DNA-CT" class2="DNA-C" class3="DNA-CT" angle="2.0420352248333655" k="527.184"/>
+    <Angle class1="DNA-CT" class2="DNA-C" class3="DNA-OS" angle="2.007128639793479" k="669.44"/>
+    <Angle class1="DNA-CT" class2="DNA-C" class3="DNA-OH" angle="1.9198621771937625" k="669.44"/>
+    <Angle class1="DNA-N*" class2="DNA-C" class3="DNA-NA" angle="2.014109956801456" k="585.76"/>
+    <Angle class1="DNA-N*" class2="DNA-C" class3="DNA-NC" angle="2.069960492865275" k="585.76"/>
+    <Angle class1="DNA-N*" class2="DNA-C" class3="DNA-O" angle="2.1101030656611446" k="669.44"/>
+    <Angle class1="DNA-NA" class2="DNA-C" class3="DNA-O" angle="2.1048670779051615" k="669.44"/>
+    <Angle class1="DNA-NC" class2="DNA-C" class3="DNA-O" angle="2.138028333693054" k="669.44"/>
+    <Angle class1="DNA-O" class2="DNA-C" class3="DNA-O" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="DNA-O" class2="DNA-C" class3="DNA-OH" angle="2.0943951023931953" k="669.44"/>
+    <Angle class1="DNA-O" class2="DNA-C" class3="DNA-OS" angle="2.181661564992912" k="669.44"/>
+    <Angle class1="DNA-O2" class2="DNA-C" class3="DNA-O2" angle="2.199114857512855" k="669.44"/>
+    <Angle class1="DNA-H4" class2="DNA-C" class3="DNA-C" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-H4" class2="DNA-C" class3="DNA-CM" angle="2.007128639793479" k="418.40000000000003"/>
+    <Angle class1="DNA-H4" class2="DNA-C" class3="DNA-CT" angle="2.007128639793479" k="418.40000000000003"/>
+    <Angle class1="DNA-H4" class2="DNA-C" class3="DNA-O" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-H4" class2="DNA-C" class3="DNA-OH" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-H5" class2="DNA-C" class3="DNA-O" angle="2.076941809873252" k="418.40000000000003"/>
+    <Angle class1="DNA-H5" class2="DNA-C" class3="DNA-OH" angle="1.8675022996339325" k="418.40000000000003"/>
+    <Angle class1="DNA-H5" class2="DNA-C" class3="DNA-OS" angle="1.8675022996339325" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-CA" class3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="DNA-C" class2="DNA-CA" class3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-CA" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-CB" angle="2.0943951023931953" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-CT" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-CA" class3="DNA-OH" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-CA" class3="DNA-HA" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CB" class2="DNA-CA" class3="DNA-H4" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CB" class2="DNA-CA" class3="DNA-N2" angle="2.155481626212997" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-CA" class3="DNA-NC" angle="2.0472712125893486" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-CA" class3="DNA-N2" angle="2.0961404316451895" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-CA" class3="DNA-NC" angle="2.1205750411731104" k="585.76"/>
+    <Angle class1="DNA-NA" class2="DNA-CA" class3="DNA-NC" angle="2.151990967709008" k="585.76"/>
+    <Angle class1="DNA-N2" class2="DNA-CA" class3="DNA-NA" angle="2.0245819323134224" k="585.76"/>
+    <Angle class1="DNA-N2" class2="DNA-CA" class3="DNA-NC" angle="2.0821777976292353" k="585.76"/>
+    <Angle class1="DNA-N2" class2="DNA-CA" class3="DNA-N2" angle="2.0943951023931953" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-CB" class3="DNA-CB" angle="2.080432468377241" k="527.184"/>
+    <Angle class1="DNA-C" class2="DNA-CB" class3="DNA-NB" angle="2.2689280275926285" k="585.76"/>
+    <Angle class1="DNA-CA" class2="DNA-CB" class3="DNA-CB" angle="2.0472712125893486" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-CB" class3="DNA-NB" angle="2.3108159296404924" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-CB" class3="DNA-N*" angle="1.8535396656179781" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-CB" class3="DNA-NB" angle="1.9268434942017398" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-CB" class3="DNA-NC" angle="2.2287854547967587" k="585.76"/>
+    <Angle class1="DNA-N*" class2="DNA-CB" class3="DNA-NC" angle="2.202605516016844" k="585.76"/>
+    <Angle class1="DNA-H5" class2="DNA-CK" class3="DNA-N*" angle="2.1476276445790226" k="418.40000000000003"/>
+    <Angle class1="DNA-H5" class2="DNA-CK" class3="DNA-NB" angle="2.1476276445790226" k="418.40000000000003"/>
+    <Angle class1="DNA-N*" class2="DNA-CK" class3="DNA-NB" angle="1.9879300180215413" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-CM" class3="DNA-CM" angle="2.1066124071571557" k="527.184"/>
+    <Angle class1="DNA-C" class2="DNA-CM" class3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-CM" class3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-CM" class3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-CM" class3="DNA-CM" angle="2.0420352248333655" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-CM" class3="DNA-HA" angle="2.151990967709008" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-CM" class3="DNA-H4" angle="2.151990967709008" k="418.40000000000003"/>
+    <Angle class1="DNA-CM" class2="DNA-CM" class3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-CM" class3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-CM" class2="DNA-CM" class3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-CM" class2="DNA-CM" class3="DNA-N*" angle="2.1153390534171272" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-CM" class3="DNA-OS" angle="2.181661564992912" k="669.44"/>
+    <Angle class1="DNA-H4" class2="DNA-CM" class3="DNA-N*" angle="2.0786871391252464" k="418.40000000000003"/>
+    <Angle class1="DNA-H4" class2="DNA-CM" class3="DNA-OS" angle="1.9722220547535925" k="418.40000000000003"/>
+    <Angle class1="DNA-HA" class2="DNA-CM" class3="DNA-HA" angle="2.0943951023931953" k="292.88"/>
+    <Angle class1="DNA-HA" class2="DNA-CM" class3="DNA-CT" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-NC" class2="DNA-CQ" class3="DNA-NC" angle="2.253220064324679" k="585.76"/>
+    <Angle class1="DNA-H5" class2="DNA-CQ" class3="DNA-NC" angle="2.0149826214274533" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-CM" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-N2" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H2" class2="DNA-CT" class3="DNA-H2" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="DNA-H2" class2="DNA-CT" class3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H2" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-HC" class2="DNA-CT" class3="DNA-HC" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="DNA-HC" class2="DNA-CT" class3="DNA-CM" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-CT" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-CT" class3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-CT" class3="DNA-CT" angle="1.9390607989657" k="527.184"/>
+    <Angle class1="DNA-C" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="502.08000000000004"/>
+    <Angle class1="DNA-CA" class2="DNA-CT" class3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CM" class2="DNA-CT" class3="DNA-CT" angle="1.9373154697137058" k="527.184"/>
+    <Angle class1="DNA-CM" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-H2" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-CA" angle="1.9896753472735358" k="527.184"/>
+    <Angle class1="DNA-CT" class2="DNA-CT" class3="DNA-N2" angle="1.9408061282176945" k="669.44"/>
+    <Angle class1="DNA-OS" class2="DNA-CT" class3="DNA-OS" angle="1.7627825445142729" k="1338.88"/>
+    <Angle class1="DNA-OS" class2="DNA-CT" class3="DNA-N*" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-N*" class3="DNA-CM" angle="2.1223203704251046" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-N*" class3="DNA-CT" angle="2.0525072003453313" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-N*" class3="DNA-H" angle="2.080432468377241" k="418.40000000000003"/>
+    <Angle class1="DNA-CB" class2="DNA-N*" class3="DNA-CK" angle="1.8395770316020235" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-N*" class3="DNA-CT" angle="2.1956241990088667" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-N*" class3="DNA-H" angle="2.1956241990088667" k="418.40000000000003"/>
+    <Angle class1="DNA-CK" class2="DNA-N*" class3="DNA-CT" angle="2.2479840765686965" k="585.76"/>
+    <Angle class1="DNA-CK" class2="DNA-N*" class3="DNA-H" angle="2.2479840765686965" k="418.40000000000003"/>
+    <Angle class1="DNA-CM" class2="DNA-N*" class3="DNA-CT" angle="2.1153390534171272" k="585.76"/>
+    <Angle class1="DNA-CM" class2="DNA-N*" class3="DNA-H" angle="2.1153390534171272" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-N2" class3="DNA-H" angle="2.0943951023931953" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-N2" class3="DNA-CT" angle="2.150245638457014" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-N2" class3="DNA-H" angle="2.0664698343612864" k="418.40000000000003"/>
+    <Angle class1="DNA-H" class2="DNA-N2" class3="DNA-H" angle="2.0943951023931953" k="292.88"/>
+    <Angle class1="DNA-C" class2="DNA-NA" class3="DNA-C" angle="2.2060961745208325" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-NA" class3="DNA-CA" angle="2.1851522234969005" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-NA" class3="DNA-H" angle="2.038544566329377" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-NA" class3="DNA-H" angle="2.059488517353309" k="418.40000000000003"/>
+    <Angle class1="DNA-CB" class2="DNA-NB" class3="DNA-CK" angle="1.811651763570114" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-NC" class3="DNA-CA" angle="2.1031217486531673" k="585.76"/>
+    <Angle class1="DNA-CA" class2="DNA-NC" class3="DNA-CB" angle="1.9582594207376378" k="585.76"/>
+    <Angle class1="DNA-CA" class2="DNA-NC" class3="DNA-CQ" angle="2.069960492865275" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-NC" class3="DNA-CQ" angle="1.9373154697137058" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-OH" class3="DNA-HO" angle="1.9722220547535925" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-OH" class3="DNA-HO" angle="1.9722220547535925" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-OH" class3="DNA-HO" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="DNA-HO" class2="DNA-OH" class3="DNA-P" angle="1.8936822384138476" k="376.56"/>
+    <Angle class1="DNA-C" class2="DNA-OS" class3="DNA-CT" angle="2.0420352248333655" k="502.08000000000004"/>
+    <Angle class1="DNA-CM" class2="DNA-OS" class3="DNA-CT" angle="2.0420352248333655" k="502.08000000000004"/>
+    <Angle class1="DNA-CT" class2="DNA-OS" class3="DNA-CT" angle="1.911135530933791" k="502.08000000000004"/>
+    <Angle class1="DNA-CT" class2="DNA-OS" class3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="DNA-C" class2="DNA-OS" class3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="DNA-P" class2="DNA-OS" class3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="DNA-O2" class2="DNA-P" class3="DNA-OH" angle="1.888969849433463" k="376.56"/>
+    <Angle class1="DNA-O2" class2="DNA-P" class3="DNA-O2" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="DNA-O2" class2="DNA-P" class3="DNA-OS" angle="1.888969849433463" k="836.8000000000001"/>
+    <Angle class1="DNA-OH" class2="DNA-P" class3="DNA-OS" angle="1.790707812546182" k="376.56"/>
+    <Angle class1="DNA-OS" class2="DNA-P" class3="DNA-OS" angle="1.790707812546182" k="376.56"/>
+    <Angle class1="DNA-CB" class2="DNA-NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="DNA-CK" class2="DNA-NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="DNA-C" class2="DNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-CA" class2="DNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-CB" class2="DNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-CQ" class2="DNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-C" class2="DNA-O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="EP" class2="DNA-O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-C" class2="DNA-OH" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="DNA-CT" class2="DNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-HO" class2="DNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="EP" class2="DNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-C" class2="DNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-CM" class2="DNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-CT" class2="DNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="EP" class2="DNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-P" class2="DNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="DNA-H1" class2="DNA-C7" class3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-C7" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C7" class2="DNA-CT" class3="DNA-CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="DNA-CT" class2="DNA-C7" class3="DNA-CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="DNA-C7" class2="DNA-CT" class3="DNA-HC" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C7" class2="DNA-CT" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-C7" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-C7" class3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CT" class2="DNA-C7" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C7" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C7" class2="DNA-CT" class3="DNA-OH" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C7" class2="DNA-OS" class3="DNA-P" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="DNA-C7" class2="DNA-OH" class3="DNA-HO" angle="1.8936822384138476" k="460.24"/>
+    <Angle class1="DNA-CJ" class2="DNA-CT" class3="DNA-C7" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="DNA-H5" class2="DNA-C2" class3="DNA-N*" angle="2.1476276445790226" k="418.40000000000003"/>
+    <Angle class1="DNA-H5" class2="DNA-C2" class3="DNA-NB" angle="2.1476276445790226" k="418.40000000000003"/>
+    <Angle class1="DNA-N*" class2="DNA-C2" class3="DNA-NB" angle="1.9879300180215413" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-N*" class3="DNA-C2" angle="1.8395770316020235" k="585.76"/>
+    <Angle class1="DNA-C2" class2="DNA-N*" class3="DNA-CT" angle="2.2479840765686965" k="585.76"/>
+    <Angle class1="DNA-CB" class2="DNA-NB" class3="DNA-C2" angle="1.811651763570114" k="585.76"/>
+    <Angle class1="DNA-C1" class2="DNA-C" class3="DNA-NA" angle="1.99142067652553" k="585.76"/>
+    <Angle class1="DNA-C1" class2="DNA-C" class3="DNA-O" angle="2.1868975527488947" k="669.44"/>
+    <Angle class1="DNA-C1" class2="DNA-CA" class3="DNA-N2" angle="2.0961404316451895" k="585.76"/>
+    <Angle class1="DNA-C1" class2="DNA-CA" class3="DNA-NC" angle="2.1205750411731104" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-C1" class3="DNA-C1" angle="2.1066124071571557" k="527.184"/>
+    <Angle class1="DNA-C" class2="DNA-C1" class3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
+    <Angle class1="DNA-C" class2="DNA-C1" class3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-C1" class3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-C1" class3="DNA-C1" angle="2.0420352248333655" k="527.184"/>
+    <Angle class1="DNA-CA" class2="DNA-C1" class3="DNA-HA" angle="2.151990967709008" k="418.40000000000003"/>
+    <Angle class1="DNA-CA" class2="DNA-C1" class3="DNA-H4" angle="2.151990967709008" k="418.40000000000003"/>
+    <Angle class1="DNA-C1" class2="DNA-C1" class3="DNA-CT" angle="2.0891591146372126" k="585.76"/>
+    <Angle class1="DNA-C1" class2="DNA-C1" class3="DNA-HA" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-C1" class2="DNA-C1" class3="DNA-H4" angle="2.0891591146372126" k="418.40000000000003"/>
+    <Angle class1="DNA-C1" class2="DNA-C1" class3="DNA-N*" angle="2.1153390534171272" k="585.76"/>
+    <Angle class1="DNA-H4" class2="DNA-C1" class3="DNA-N*" angle="2.0786871391252464" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CT" class3="DNA-C1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-HC" class2="DNA-CT" class3="DNA-C1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-C" class2="DNA-N*" class3="DNA-C1" angle="2.1223203704251046" k="585.76"/>
+    <Angle class1="DNA-C1" class2="DNA-N*" class3="DNA-CT" angle="2.1153390534171272" k="585.76"/>
+    <Angle class1="DNA-H1" class2="DNA-CJ" class3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-H1" class2="DNA-CJ" class3="DNA-H1" angle="1.911135530933791" k="292.88"/>
+    <Angle class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CJ" class2="DNA-CT" class3="DNA-OS" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-CJ" class2="DNA-CT" class3="DNA-CT" angle="1.911135530933791" k="334.72"/>
+    <Angle class1="DNA-OS" class2="DNA-CJ" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-OS" class2="DNA-CJ" class3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-P" class2="DNA-OS" class3="DNA-CJ" angle="2.1031217486531673" k="836.8000000000001"/>
+    <Angle class1="DNA-OH" class2="DNA-CJ" class3="DNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-OH" class2="DNA-CJ" class3="DNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
+    <Angle class1="DNA-HO" class2="DNA-OH" class3="DNA-CJ" angle="1.8936822384138476" k="460.24"/>
   </HarmonicAngleForce>
   <PeriodicTorsionForce ordering="amber">
-    <Proper type1="" type2="DNA-C" type3="DNA-C" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-CA" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-CM" type4="" periodicity1="2" phase1="3.141592653589793" k1="9.1002"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.0668"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="5.6484000000000005"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-NC" type4="" periodicity1="2" phase1="3.141592653589793" k1="16.736"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-O" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.7152"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-OH" type4="" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-OS" type4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-CA" type4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="14.644"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-CM" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-CT" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-N2" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-NA" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-NC" type4="" periodicity1="2" phase1="3.141592653589793" k1="20.0832"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-OH" type4="" periodicity1="2" phase1="3.141592653589793" k1="3.7656"/>
-    <Proper type1="" type2="DNA-CB" type3="DNA-CB" type4="" periodicity1="2" phase1="3.141592653589793" k1="22.8028"/>
-    <Proper type1="" type2="DNA-CB" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="6.9036"/>
-    <Proper type1="" type2="DNA-CB" type3="DNA-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
-    <Proper type1="" type2="DNA-CB" type3="DNA-NC" type4="" periodicity1="2" phase1="3.141592653589793" k1="17.3636"/>
-    <Proper type1="" type2="DNA-CK" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="7.1128"/>
-    <Proper type1="" type2="DNA-CK" type3="DNA-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="41.84"/>
-    <Proper type1="" type2="DNA-CM" type3="DNA-CM" type4="" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003"/>
-    <Proper type1="" type2="DNA-CM" type3="DNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-CM" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="7.740400000000001"/>
-    <Proper type1="" type2="DNA-CM" type3="DNA-OS" type4="" periodicity1="2" phase1="3.141592653589793" k1="4.3932"/>
-    <Proper type1="" type2="DNA-CQ" type3="DNA-NC" type4="" periodicity1="2" phase1="3.141592653589793" k1="28.4512"/>
-    <Proper type1="" type2="DNA-CT" type3="DNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="" type2="DNA-CT" type3="DNA-N*" type4="" periodicity1="2" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-CT" type3="DNA-N2" type4="" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-CT" type3="DNA-OH" type4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="" type2="DNA-CT" type3="DNA-OS" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
-    <Proper type1="" type2="DNA-OH" type3="DNA-P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="" type2="DNA-OS" type3="DNA-P" type4="" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-OH" type2="DNA-P" type3="DNA-OS" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.046" periodicity2="2" phase2="0.0" k2="5.0208"/>
-    <Proper type1="DNA-OS" type2="DNA-P" type3="DNA-OS" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.046" periodicity2="2" phase2="0.0" k2="5.0208"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-C" type4="DNA-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-C" type4="DNA-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-CT" type4="DNA-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-CT" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-CM" type4="DNA-CM" periodicity1="3" phase1="3.141592653589793" k1="1.58992" periodicity2="1" phase2="0.0" k2="4.811599999999999"/>
-    <Proper type1="DNA-HO" type2="DNA-OH" type3="DNA-CT" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-HO" type2="DNA-OH" type3="DNA-C" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999" periodicity2="1" phase2="0.0" k2="7.9496"/>
-    <Proper type1="DNA-CM" type2="DNA-CM" type3="DNA-C" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.1002" periodicity2="3" phase2="0.0" k2="1.2552"/>
-    <Proper type1="DNA-CT" type2="DNA-CM" type3="DNA-CM" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003" periodicity2="1" phase2="3.141592653589793" k2="7.9496"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-CT" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-OS" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-OS" type4="DNA-C" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="1" phase2="3.141592653589793" k2="3.3472000000000004"/>
-    <Proper type1="DNA-CT" type2="DNA-OS" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="3.141592653589793" k2="3.5564" periodicity3="1" phase3="3.141592653589793" k3="5.6484000000000005"/>
-    <Proper type1="DNA-CT" type2="DNA-OS" type3="DNA-CT" type4="DNA-N*" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="0.0" k2="2.7196000000000002"/>
-    <Proper type1="DNA-O" type2="DNA-C" type3="DNA-OS" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001" periodicity2="1" phase2="3.141592653589793" k2="5.8576"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-N*" type4="DNA-CK" periodicity1="1" phase1="0.7666393645970132" k1="4.96444152" periodicity2="2" phase2="6.124084583226288" k2="7.6529544000000005" periodicity3="3" phase3="3.061612940617153" k3="2.7849959200000005"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-N*" type4="DNA-CM" periodicity1="1" phase1="1.6529350120522537" k1="2.3565543200000003" periodicity2="2" phase2="6.245695634846748" k2="9.113254079999999" periodicity3="3" phase3="3.115163132726843" k3="2.8349528800000003" periodicity4="4" phase4="1.4898898439894475" k4="0.57617864"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-OH" type2="DNA-CT" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-OH" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="DNA-H2" type2="DNA-CT" type3="DNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-OS" type4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="DNA-CM" type2="DNA-CM" type3="DNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper type1="DNA-HA" type2="DNA-CM" type3="DNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper type1="DNA-H4" type2="DNA-CM" type3="DNA-OS" type4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper type1="DNA-CJ" type2="DNA-OS" type3="DNA-P" type4="DNA-O2" periodicity1="3" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-C7" type2="DNA-OS" type3="DNA-P" type4="DNA-O2" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888"/>
-    <Proper type1="" type2="DNA-C7" type3="DNA-OH" type4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="" type2="DNA-C7" type3="DNA-OS" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
-    <Proper type1="" type2="DNA-C7" type3="DNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="DNA-CT" type2="DNA-C7" type3="DNA-OS" type4="DNA-P" periodicity1="3" phase1="2.8361024386254696" k1="0.63843656" periodicity2="2" phase2="2.440567196892255" k2="2.70625304" periodicity3="1" phase3="3.593968033072707" k3="7.42609792"/>
-    <Proper type1="DNA-OH" type2="DNA-P" type3="DNA-OS" type4="DNA-C7" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888" periodicity2="2" phase2="6.124046185982744" k2="4.076262" periodicity3="1" phase3="0.03060085777521658" k3="3.8863920800000002"/>
-    <Proper type1="DNA-OS" type2="DNA-P" type3="DNA-OS" type4="DNA-C7" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888" periodicity2="2" phase2="6.124046185982744" k2="4.076262" periodicity3="1" phase3="0.03060085777521658" k3="3.8863920800000002"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-C7" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
-    <Proper type1="DNA-HO" type2="DNA-OH" type3="DNA-C7" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-C7" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="DNA-C7" type2="DNA-CT" type3="DNA-OS" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
-    <Proper type1="DNA-OS" type2="DNA-C7" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-OS" type2="DNA-C7" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-C7" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-OH" type2="DNA-CT" type3="DNA-C7" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
-    <Proper type1="DNA-H1" type2="DNA-C7" type3="DNA-CT" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-C7" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-C7" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-C7" type3="DNA-CT" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-C7" type4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-C7" type4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper type1="DNA-CJ" type2="DNA-CT" type3="DNA-C7" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="DNA-C7" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OS" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
-    <Proper type1="DNA-C7" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OH" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
-    <Proper type1="" type2="DNA-C2" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="7.1128"/>
-    <Proper type1="" type2="DNA-C2" type3="DNA-NB" type4="" periodicity1="2" phase1="3.141592653589793" k1="41.84"/>
-    <Proper type1="" type2="DNA-C" type3="DNA-C1" type4="" periodicity1="2" phase1="3.141592653589793" k1="9.1002"/>
-    <Proper type1="" type2="DNA-CA" type3="DNA-C1" type4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
-    <Proper type1="" type2="DNA-C1" type3="DNA-C1" type4="" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003"/>
-    <Proper type1="" type2="DNA-C1" type3="DNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper type1="" type2="DNA-C1" type3="DNA-N*" type4="" periodicity1="2" phase1="3.141592653589793" k1="7.740400000000001"/>
-    <Proper type1="DNA-HC" type2="DNA-CT" type3="DNA-C1" type4="DNA-C1" periodicity1="3" phase1="3.141592653589793" k1="1.58992" periodicity2="1" phase2="0.0" k2="4.811599999999999"/>
-    <Proper type1="DNA-C1" type2="DNA-C1" type3="DNA-C" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.1002" periodicity2="3" phase2="0.0" k2="1.2552"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-N*" type4="DNA-C2" periodicity1="1" phase1="0.7084692859572943" k1="6.464238160000001" periodicity2="2" phase2="6.2225054450755" k2="7.65102976" periodicity3="3" phase3="3.1242318635202055" k3="2.40094656"/>
-    <Proper type1="DNA-OS" type2="DNA-CT" type3="DNA-N*" type4="DNA-C1" periodicity1="1" phase1="1.9428568900887877" k1="2.87662552" periodicity2="2" phase2="6.2880757197436745" k2="8.955726480000001" periodicity3="3" phase3="2.978233326261628" k3="5.04665712" periodicity4="4" phase4="1.643880243892907" k4="1.08775632"/>
-    <Proper type1="" type2="DNA-CJ" type3="DNA-OS" type4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
-    <Proper type1="" type2="DNA-CJ" type3="DNA-OH" type4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
-    <Proper type1="" type2="DNA-CJ" type3="DNA-CT" type4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
-    <Proper type1="DNA-CT" type2="DNA-OS" type3="DNA-CT" type4="DNA-CJ" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
-    <Proper type1="DNA-H1" type2="DNA-CJ" type3="DNA-CT" type4="DNA-OS" periodicity1="1" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CJ" type3="DNA-CT" type4="DNA-OH" periodicity1="1" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OS" periodicity1="1" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-H1" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OH" periodicity1="1" phase1="0.0" k1="1.046"/>
-    <Proper type1="DNA-CJ" type2="DNA-CT" type3="DNA-CT" type4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
-    <Proper type1="DNA-OS" type2="DNA-P" type3="DNA-OS" type4="DNA-CJ" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
-    <Proper type1="DNA-OH" type2="DNA-P" type3="DNA-OS" type4="DNA-CJ" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OS" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
-    <Proper type1="DNA-CT" type2="DNA-CT" type3="DNA-CJ" type4="DNA-OH" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
-    <Proper type1="DNA-CT" type2="DNA-CJ" type3="DNA-OS" type4="DNA-P" periodicity1="1" phase1="0.4115165235620262" k1="2.2089428000000004" periodicity2="2" phase2="3.9033934419015024" k2="0.381890416" periodicity3="3" phase3="3.1696404437351924" k3="2.24067844" periodicity4="4" phase4="3.755617461332694" k4="0.33371584"/>
-    <Improper type1="DNA-C" type2="" type3="" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="DNA-C" type2="" type3="DNA-O2" type4="DNA-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="DNA-N2" type2="" type3="" type4="DNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-NA" type2="" type3="" type4="DNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-CA" type2="" type3="DNA-N2" type4="DNA-N2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="DNA-CA" type2="" type3="" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CQ" type2="" type3="" type4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CK" type2="" type3="" type4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CM" type2="" type3="" type4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CM" type2="" type3="" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="" type3="" type4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="" type3="" type4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-N*" type2="DNA-CB" type3="DNA-CK" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-N*" type2="DNA-C" type3="DNA-CM" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-C" type2="DNA-CT" type3="DNA-O" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper type1="DNA-CA" type2="DNA-CA" type3="DNA-CA" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CM" type2="DNA-C" type3="DNA-CM" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="DNA-CM" type3="DNA-N2" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="DNA-CB" type3="DNA-N2" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="DNA-N2" type3="DNA-NA" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C" type2="DNA-CA" type3="DNA-CA" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="DNA-CA" type3="DNA-CA" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C" type2="DNA-H5" type3="DNA-O" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C" type2="DNA-H5" type3="DNA-O" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CM" type2="DNA-CM" type3="DNA-CT" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C" type2="DNA-CM" type3="DNA-H4" type4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C" type2="DNA-CA" type3="DNA-CA" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CB" type2="DNA-CB" type3="DNA-N*" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CB" type2="DNA-C" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CB" type2="DNA-CA" type3="DNA-CB" type4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CJ" type2="DNA-H1" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-CJ" type2="DNA-CT" type3="DNA-H1" type4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper type1="DNA-C2" type2="" type3="" type4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-N*" type2="DNA-C2" type3="DNA-CB" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-C1" type2="" type3="" type4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-C1" type2="" type3="" type4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-N*" type2="DNA-C" type3="DNA-C1" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper type1="DNA-C1" type2="DNA-C" type3="DNA-C1" type4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper type1="DNA-CA" type2="DNA-C1" type3="DNA-N2" type4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-C" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-CA" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="12.552"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-CM" class4="" periodicity1="2" phase1="3.141592653589793" k1="9.1002"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.0668"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="5.6484000000000005"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-NC" class4="" periodicity1="2" phase1="3.141592653589793" k1="16.736"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-O" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.7152"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-OH" class4="" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-OS" class4="" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-CA" class4="" periodicity1="2" phase1="3.141592653589793" k1="15.167"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="14.644"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-CM" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-CT" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-N2" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.0416"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-NA" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.276"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-NC" class4="" periodicity1="2" phase1="3.141592653589793" k1="20.0832"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-OH" class4="" periodicity1="2" phase1="3.141592653589793" k1="3.7656"/>
+    <Proper class1="" class2="DNA-CB" class3="DNA-CB" class4="" periodicity1="2" phase1="3.141592653589793" k1="22.8028"/>
+    <Proper class1="" class2="DNA-CB" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="6.9036"/>
+    <Proper class1="" class2="DNA-CB" class3="DNA-NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
+    <Proper class1="" class2="DNA-CB" class3="DNA-NC" class4="" periodicity1="2" phase1="3.141592653589793" k1="17.3636"/>
+    <Proper class1="" class2="DNA-CK" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="7.1128"/>
+    <Proper class1="" class2="DNA-CK" class3="DNA-NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="41.84"/>
+    <Proper class1="" class2="DNA-CM" class3="DNA-CM" class4="" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003"/>
+    <Proper class1="" class2="DNA-CM" class3="DNA-CT" class4="" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-CM" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="7.740400000000001"/>
+    <Proper class1="" class2="DNA-CM" class3="DNA-OS" class4="" periodicity1="2" phase1="3.141592653589793" k1="4.3932"/>
+    <Proper class1="" class2="DNA-CQ" class3="DNA-NC" class4="" periodicity1="2" phase1="3.141592653589793" k1="28.4512"/>
+    <Proper class1="" class2="DNA-CT" class3="DNA-CT" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="" class2="DNA-CT" class3="DNA-N*" class4="" periodicity1="2" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-CT" class3="DNA-N2" class4="" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-CT" class3="DNA-OH" class4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="" class2="DNA-CT" class3="DNA-OS" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="DNA-OH" class3="DNA-P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="" class2="DNA-OS" class3="DNA-P" class4="" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-OH" class2="DNA-P" class3="DNA-OS" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.046" periodicity2="2" phase2="0.0" k2="5.0208"/>
+    <Proper class1="DNA-OS" class2="DNA-P" class3="DNA-OS" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.046" periodicity2="2" phase2="0.0" k2="5.0208"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-C" class4="DNA-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-C" class4="DNA-O" periodicity1="1" phase1="0.0" k1="3.3472000000000004" periodicity2="2" phase2="0.0" k2="0.0" periodicity3="3" phase3="3.141592653589793" k3="0.33472"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-CT" class4="DNA-HC" periodicity1="3" phase1="0.0" k1="0.6276"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-CT" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-CM" class4="DNA-CM" periodicity1="3" phase1="3.141592653589793" k1="1.58992" periodicity2="1" phase2="0.0" k2="4.811599999999999"/>
+    <Proper class1="DNA-HO" class2="DNA-OH" class3="DNA-CT" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-HO" class2="DNA-OH" class3="DNA-C" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.623199999999999" periodicity2="1" phase2="0.0" k2="7.9496"/>
+    <Proper class1="DNA-CM" class2="DNA-CM" class3="DNA-C" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.1002" periodicity2="3" phase2="0.0" k2="1.2552"/>
+    <Proper class1="DNA-CT" class2="DNA-CM" class3="DNA-CM" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003" periodicity2="1" phase2="3.141592653589793" k2="7.9496"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-CT" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-OS" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-OS" class4="DNA-C" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="1" phase2="3.141592653589793" k2="3.3472000000000004"/>
+    <Proper class1="DNA-CT" class2="DNA-OS" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.41840000000000005" periodicity2="2" phase2="3.141592653589793" k2="3.5564" periodicity3="1" phase3="3.141592653589793" k3="5.6484000000000005"/>
+    <Proper class1="DNA-CT" class2="DNA-OS" class3="DNA-CT" class4="DNA-N*" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="0.0" k2="2.7196000000000002"/>
+    <Proper class1="DNA-O" class2="DNA-C" class3="DNA-OS" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="11.296800000000001" periodicity2="1" phase2="3.141592653589793" k2="5.8576"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-N*" class4="DNA-CK" periodicity1="1" phase1="0.7666393645970132" k1="4.96444152" periodicity2="2" phase2="6.124084583226288" k2="7.6529544000000005" periodicity3="3" phase3="3.061612940617153" k3="2.7849959200000005"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-N*" class4="DNA-CM" periodicity1="1" phase1="1.6529350120522537" k1="2.3565543200000003" periodicity2="2" phase2="6.245695634846748" k2="9.113254079999999" periodicity3="3" phase3="3.115163132726843" k3="2.8349528800000003" periodicity4="4" phase4="1.4898898439894475" k4="0.57617864"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-OH" class2="DNA-CT" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="DNA-H2" class2="DNA-CT" class3="DNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="DNA-CM" class2="DNA-CM" class3="DNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="DNA-HA" class2="DNA-CM" class3="DNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="DNA-H4" class2="DNA-CM" class3="DNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="DNA-CJ" class2="DNA-OS" class3="DNA-P" class4="DNA-O2" periodicity1="3" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-C7" class2="DNA-OS" class3="DNA-P" class4="DNA-O2" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888"/>
+    <Proper class1="" class2="DNA-C7" class3="DNA-OH" class4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="" class2="DNA-C7" class3="DNA-OS" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="DNA-C7" class3="DNA-CT" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="DNA-CT" class2="DNA-C7" class3="DNA-OS" class4="DNA-P" periodicity1="3" phase1="2.8361024386254696" k1="0.63843656" periodicity2="2" phase2="2.440567196892255" k2="2.70625304" periodicity3="1" phase3="3.593968033072707" k3="7.42609792"/>
+    <Proper class1="DNA-OH" class2="DNA-P" class3="DNA-OS" class4="DNA-C7" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888" periodicity2="2" phase2="6.124046185982744" k2="4.076262" periodicity3="1" phase3="0.03060085777521658" k3="3.8863920800000002"/>
+    <Proper class1="DNA-OS" class2="DNA-P" class3="DNA-OS" class4="DNA-C7" periodicity1="3" phase1="6.2532354572153634" k1="1.23038888" periodicity2="2" phase2="6.124046185982744" k2="4.076262" periodicity3="1" phase3="0.03060085777521658" k3="3.8863920800000002"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-C7" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944"/>
+    <Proper class1="DNA-HO" class2="DNA-OH" class3="DNA-C7" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.66944" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-C7" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="DNA-C7" class2="DNA-CT" class3="DNA-OS" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
+    <Proper class1="DNA-OS" class2="DNA-C7" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-OS" class2="DNA-C7" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-C7" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-OH" class2="DNA-CT" class3="DNA-C7" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
+    <Proper class1="DNA-H1" class2="DNA-C7" class3="DNA-CT" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-C7" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-C7" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-C7" class3="DNA-CT" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-C7" class4="DNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-C7" class4="DNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
+    <Proper class1="DNA-CJ" class2="DNA-CT" class3="DNA-C7" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="DNA-C7" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OS" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
+    <Proper class1="DNA-C7" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OH" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
+    <Proper class1="" class2="DNA-C2" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="7.1128"/>
+    <Proper class1="" class2="DNA-C2" class3="DNA-NB" class4="" periodicity1="2" phase1="3.141592653589793" k1="41.84"/>
+    <Proper class1="" class2="DNA-C" class3="DNA-C1" class4="" periodicity1="2" phase1="3.141592653589793" k1="9.1002"/>
+    <Proper class1="" class2="DNA-CA" class3="DNA-C1" class4="" periodicity1="2" phase1="3.141592653589793" k1="10.6692"/>
+    <Proper class1="" class2="DNA-C1" class3="DNA-C1" class4="" periodicity1="2" phase1="3.141592653589793" k1="27.823600000000003"/>
+    <Proper class1="" class2="DNA-C1" class3="DNA-CT" class4="" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="" class2="DNA-C1" class3="DNA-N*" class4="" periodicity1="2" phase1="3.141592653589793" k1="7.740400000000001"/>
+    <Proper class1="DNA-HC" class2="DNA-CT" class3="DNA-C1" class4="DNA-C1" periodicity1="3" phase1="3.141592653589793" k1="1.58992" periodicity2="1" phase2="0.0" k2="4.811599999999999"/>
+    <Proper class1="DNA-C1" class2="DNA-C1" class3="DNA-C" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="9.1002" periodicity2="3" phase2="0.0" k2="1.2552"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-N*" class4="DNA-C2" periodicity1="1" phase1="0.7084692859572943" k1="6.464238160000001" periodicity2="2" phase2="6.2225054450755" k2="7.65102976" periodicity3="3" phase3="3.1242318635202055" k3="2.40094656"/>
+    <Proper class1="DNA-OS" class2="DNA-CT" class3="DNA-N*" class4="DNA-C1" periodicity1="1" phase1="1.9428568900887877" k1="2.87662552" periodicity2="2" phase2="6.2880757197436745" k2="8.955726480000001" periodicity3="3" phase3="2.978233326261628" k3="5.04665712" periodicity4="4" phase4="1.643880243892907" k4="1.08775632"/>
+    <Proper class1="" class2="DNA-CJ" class3="DNA-OS" class4="" periodicity1="3" phase1="0.0" k1="1.6038666666666666"/>
+    <Proper class1="" class2="DNA-CJ" class3="DNA-OH" class4="" periodicity1="3" phase1="0.0" k1="0.6973333333333334"/>
+    <Proper class1="" class2="DNA-CJ" class3="DNA-CT" class4="" periodicity1="3" phase1="0.0" k1="0.6508444444444444"/>
+    <Proper class1="DNA-CT" class2="DNA-OS" class3="DNA-CT" class4="DNA-CJ" periodicity1="3" phase1="0.0" k1="1.6024720000000001" periodicity2="2" phase2="3.141592653589793" k2="0.41840000000000005"/>
+    <Proper class1="DNA-H1" class2="DNA-CJ" class3="DNA-CT" class4="DNA-OS" periodicity1="1" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CJ" class3="DNA-CT" class4="DNA-OH" periodicity1="1" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OS" periodicity1="1" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-H1" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OH" periodicity1="1" phase1="0.0" k1="1.046"/>
+    <Proper class1="DNA-CJ" class2="DNA-CT" class3="DNA-CT" class4="DNA-CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="DNA-OS" class2="DNA-P" class3="DNA-OS" class4="DNA-CJ" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
+    <Proper class1="DNA-OH" class2="DNA-P" class3="DNA-OS" class4="DNA-CJ" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OS" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
+    <Proper class1="DNA-CT" class2="DNA-CT" class3="DNA-CJ" class4="DNA-OH" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
+    <Proper class1="DNA-CT" class2="DNA-CJ" class3="DNA-OS" class4="DNA-P" periodicity1="1" phase1="0.4115165235620262" k1="2.2089428000000004" periodicity2="2" phase2="3.9033934419015024" k2="0.381890416" periodicity3="3" phase3="3.1696404437351924" k3="2.24067844" periodicity4="4" phase4="3.755617461332694" k4="0.33371584"/>
+    <Improper class1="DNA-C" class2="" class3="" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="DNA-C" class2="" class3="DNA-O2" class4="DNA-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="DNA-N2" class2="" class3="" class4="DNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-NA" class2="" class3="" class4="DNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-CA" class2="" class3="DNA-N2" class4="DNA-N2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="DNA-CA" class2="" class3="" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CQ" class2="" class3="" class4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CK" class2="" class3="" class4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CM" class2="" class3="" class4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CM" class2="" class3="" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="" class3="" class4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="" class3="" class4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-N*" class2="DNA-CB" class3="DNA-CK" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-N*" class2="DNA-C" class3="DNA-CM" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-C" class2="DNA-CT" class3="DNA-O" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
+    <Improper class1="DNA-CA" class2="DNA-CA" class3="DNA-CA" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CM" class2="DNA-C" class3="DNA-CM" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="DNA-CM" class3="DNA-N2" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="DNA-CB" class3="DNA-N2" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="DNA-N2" class3="DNA-NA" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C" class2="DNA-CA" class3="DNA-CA" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="DNA-CA" class3="DNA-CA" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C" class2="DNA-H5" class3="DNA-O" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C" class2="DNA-H5" class3="DNA-O" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CM" class2="DNA-CM" class3="DNA-CT" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C" class2="DNA-CM" class3="DNA-H4" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C" class2="DNA-CA" class3="DNA-CA" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CB" class2="DNA-CB" class3="DNA-N*" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CB" class2="DNA-C" class3="DNA-CB" class4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CB" class2="DNA-CA" class3="DNA-CB" class4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-H1" class3="DNA-H1" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-H1" class3="DNA-H1" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-C2" class2="" class3="" class4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-N*" class2="DNA-C2" class3="DNA-CB" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-C1" class2="" class3="" class4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-C1" class2="" class3="" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-N*" class2="DNA-C" class3="DNA-C1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-C1" class2="DNA-C" class3="DNA-C1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="DNA-CA" class2="DNA-C1" class3="DNA-N2" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
-    <Atom type="DNA-C" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CA" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CB" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CK" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CM" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CQ" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CT" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="DNA-H" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
-    <Atom type="DNA-HC" sigma="0.2649532787749369" epsilon="0.06568879999999999"/>
-    <Atom type="DNA-H1" sigma="0.2471353044121301" epsilon="0.06568879999999999"/>
-    <Atom type="DNA-H2" sigma="0.22931733004932334" epsilon="0.06568879999999999"/>
-    <Atom type="DNA-HA" sigma="0.25996424595335105" epsilon="0.06276"/>
-    <Atom type="DNA-H4" sigma="0.2510552587719476" epsilon="0.06276"/>
-    <Atom type="DNA-H5" sigma="0.24214627159054422" epsilon="0.06276"/>
-    <Atom type="DNA-HO" sigma="1.0" epsilon="0.0"/>
-    <Atom type="DNA-NA" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-NB" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-NC" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-N2" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-N*" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-O" sigma="0.2959921901149463" epsilon="0.87864"/>
-    <Atom type="DNA-O2" sigma="0.2959921901149463" epsilon="0.87864"/>
-    <Atom type="DNA-OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
-    <Atom type="DNA-OS" sigma="0.3000012343465779" epsilon="0.7112800000000001"/>
-    <Atom type="DNA-P" sigma="0.37417746161894255" epsilon="0.8368000000000001"/>
-    <Atom type="DNA-C7" sigma="0.3399669508423535" epsilon="0.4577296"/>
-    <Atom type="DNA-C2" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-C1" sigma="0.3399669508423535" epsilon="0.359824"/>
-    <Atom type="DNA-CJ" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="DNA-C" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CA" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CB" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CK" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CM" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CQ" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CT" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="DNA-H" sigma="0.10690784617684071" epsilon="0.06568879999999999"/>
+    <Atom class="DNA-HC" sigma="0.2649532787749369" epsilon="0.06568879999999999"/>
+    <Atom class="DNA-H1" sigma="0.2471353044121301" epsilon="0.06568879999999999"/>
+    <Atom class="DNA-H2" sigma="0.22931733004932334" epsilon="0.06568879999999999"/>
+    <Atom class="DNA-HA" sigma="0.25996424595335105" epsilon="0.06276"/>
+    <Atom class="DNA-H4" sigma="0.2510552587719476" epsilon="0.06276"/>
+    <Atom class="DNA-H5" sigma="0.24214627159054422" epsilon="0.06276"/>
+    <Atom class="DNA-HO" sigma="1.0" epsilon="0.0"/>
+    <Atom class="DNA-NA" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-NB" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-NC" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-N2" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-N*" sigma="0.3249998523775958" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-O" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="DNA-O2" sigma="0.2959921901149463" epsilon="0.87864"/>
+    <Atom class="DNA-OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
+    <Atom class="DNA-OS" sigma="0.3000012343465779" epsilon="0.7112800000000001"/>
+    <Atom class="DNA-P" sigma="0.37417746161894255" epsilon="0.8368000000000001"/>
+    <Atom class="DNA-C7" sigma="0.3399669508423535" epsilon="0.4577296"/>
+    <Atom class="DNA-C2" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-C1" sigma="0.3399669508423535" epsilon="0.359824"/>
+    <Atom class="DNA-CJ" sigma="0.3399669508423535" epsilon="0.4577296"/>
   </NonbondedForce>
 </ForceField>

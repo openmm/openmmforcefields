@@ -2,14 +2,14 @@
 
 ## Manifest
 
-* `convert_amber.py` - Amber forcefield conversion drive
-* `biopolymer.yaml` - YAML file directing the conversion of AMBER biopolymer force fields
+* `convert.sh` - Driver script to regenerate all force fields
+* `convert_amber.py` - Main script for converting Amber force fields
+* `convert_amber_ions.py` - Script for converting Amber ions
+* `biopolymer.yaml` - YAML file directing the conversion of Amber biopolymer force fields
 * `gaff.yaml` - YAML file directing conversion of GAFF small molecule force fields
-* `merge_lipids.py` - Merge Amber split-residue lipids into single-residue OpenMM `ffxml` residue definitions
+* `glycam/glycan.yaml` - YAML file directing conversion of Amber GLYCAM force fields
+* `solvents.yaml` - YAML file directing conversion of solvents
 * `files/` - miscellaneous files used for testing and validation
-* `ffxml/` - converted AMBER biopolymer force fields as OpenMM `ffxml`
-* `gaff/dat` - historical versions of GAFF `.dat` force field parameter files
-* `gaff/ffxml` - converted GAFF small molecule force fields as OpenMM `ffxml`
 * `test/` - input files for testing conversion produces correct energies
 
 ## Amber forcefield conversion: `convert_amber.py`
@@ -17,20 +17,24 @@
 Run `python convert_amber.py -h` to see all help options:
 ```
 usage: convert_amber.py [-h] [--input INPUT] [--input-format INPUT_FORMAT]
-                        [--verbose] [--log LOGFILE] [--protein-test] [--nucleic-test]
-                        [--protein-ua-test] [--phospho-protein-test] [--gaff-test]
+                        [--output-dir OUTPUT_DIR] [--verbose]
+                        [--log LOG_FILENAME] [--protein-test] [--nucleic-test]
+                        [--protein-ua-test] [--phospho-protein-test]
+                        [--gaff-test] [--lipids-test] [--combination-tests]
 
 AMBER --> OpenMM forcefield conversion script
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  --input INPUT, -i INPUT
-                        path of the input file. Default: "master.yaml"
-  --input-format INPUT_FORMAT, -if INPUT_FORMAT
+  --input, -i INPUT     path of the input file. Default: "master.yaml"
+  --input-format, -if INPUT_FORMAT
                         format of the input file: "yaml" or "leaprc". Default:
                         "yaml"
+  --output-dir, -od OUTPUT_DIR
+                        path of the output directory. Default: "ffxml/" for
+                        yaml, "./" for leaprc
   --verbose, -v         turns verbosity on
-  --log LOGFILE         log tests to specified CSV file
+  --log LOG_FILENAME    log energies for tests to specified CSV file
   --protein-test        validate resulting XML through protein tests
   --nucleic-test        validate resulting XML through nucleic acid tests
   --protein-ua-test     validate resulting XML through united-atom protein
@@ -40,42 +44,35 @@ optional arguments:
                         tests
   --gaff-test           validate resulting XML through small-molecule (GAFF)
                         test
+  --lipids-test         validate resulting XML through lipids tests
+  --combination-tests   validate combinations of force fields
 ```
 
-### Converting the AMBER force fields
+## Converting the AMBER force fields
 
-* Install the appropriate `AmberTools` from `conda-forge`
+Install the appropriate `AmberTools` from `conda-forge`, and run the main
+conversion script.  This calls `convert_amber.py` and `convert_amber_ions.py`.
 ```bash
-conda install -c conda-forge --yes ambertools==20.15
+conda install -c conda-forge --yes ambertools
+./convert.sh
 ```
-* Convert solvent force fields
+The outputs will be placed in `openmmforcefields/ffxml/amber`.
+
+For more control, you can run `convert_amber.py` directly given a YAML file
+specifying a conversion to perform (the syntax is described below):
 ```bash
-python convert_amber.py --input solvents.yaml --log solvents-tests.csv
+python convert_amber.py --input name_of_your_yaml.yaml
 ```
-* Convert biopolymer force fields
+You can also provide a `leaprc` of your choosing via:
 ```bash
-python convert_amber.py --input biopolymer.yaml --log biopolymer-tests.csv
-```
-* Convert GAFF small molecule force fields:
-```bash
-python convert_amber.py --input gaff.yaml --log gaff-tests.csv
+python convert_amber.py --input name_of_your_leaprc --input-format leaprc
 ```
 
-With the defaults as set, all you need to do is have the script and the `files/` directory and call `python convert_amber.py`. `-v` or `--no-log` as wanted.
+## YAML input format
 
-Output:
-* `ffxml/` - converted AMBER biopolymer force fields as OpenMM `ffxml`
-* `gaff/ffxml` - converted GAFF small molecule force fields as OpenMM `ffxml`
-* `biopolymer-log.csv` - CSV log for biopolymer energy discrepancy tests
-* `gaff-tests.csv` - CSV log for GAFF energy discrepancy tests
-* (LeAP is called extensively by the script, and outputs its own `leap.log` too)
-
-`-v` will turn on printing of the progress-tracking comments from the script. Warnings issued by ParmEd (warnings are by default filtered to error, but in some cases this had to be relaxed to 'always' because of the nature of the files converted) are printed always. The output of LeAP is always redirected to `dev/null`.
-
-### YAML input format
-
-By default the script takes a YAML file input, `files/master.yaml` has everything that is going on here.
-There's only a few rules to the required structure of the YAML and it will be very easily extendable to future forcefields.
+By default the script takes a YAML file input.  There's only a few rules to the
+required structure of the YAML and it will be very easily extendable to future
+forcefields.
 
 First entry in the YAML must be:
 ```yaml
@@ -119,14 +116,20 @@ For converting water and ion force fields, the `MODE` is changed to `RECIPE`:
 - MODE: RECIPE
 ```
 and an extra source package is declared.
-Water models are converted manually---we supply them as an ffxml in `files/`.
-`tip3p.xml`, `tip4pew.xml`, and `spce.xml` are provided from the OpenMM 7.0, with some changes to make them the 'newest' format (e.g. no classes used, only types).
-These `ffxml`s are integrated together with the converted ion parameters to make all the output.
-OpenMM 7.0 is therefore listed as the source of these files - hence the extra input.
+
+### Notes on conversion for water and ions
+
+Water models are converted manually: we supply them as an ffxml in `files/`.
+`tip3p.xml`, `tip4pew.xml`, and `spce.xml` are provided from OpenMM 7.5.0, with
+some changes to make them the 'newest' format (e.g. no classes used, only
+types).  These FFXMLs are integrated together with the converted ion parameters
+to make all the output.  OpenMM 7.5.0 is therefore listed as the source of these
+files: hence the extra input.
 ```yaml
 - sourcePackage2: OpenMM
-  sourcePackageVersion2: 7.0
+  sourcePackageVersion2: 7.5.0
 ```
+
 Here are two examples:
 1. A 'standard' file - water model + JC monovalent ions + compromise set +2 ions
 ```yaml
@@ -173,29 +176,13 @@ Here are two examples:
   - water_ion
 ```
 
+Notes on syntax:
 * `Source`: AMBER input files
-
 * `Solvent_source`: the water file in `files/` for the standard (i.e. water model containing) XMLs **or** Standard - this is the same as the `Name` field for the appropriate standard (water model containing) XML - we need to know that, because for the 'overloading' sets both that XML and the standard XML need to be loaded for energy testing
-
 * `Solvent`: this is the name of the solvent, this is necessary to avoid hardcoding of recognition of what solvent you're using from the names of the files etc. - and knowing which solvent you're using is necessary for energy validations.
-
 * `Name`: the desired name of the ffxml. (For proteins and nucleic this is done by the script, which a product of `leaprc.ff14SB` will call `ff14SB.xml` etc.)
 
-Should you want to provide a different YAML (shorter version, different completely, whatever you want), script will take it with:
-```bash
-python convert_amber.py --input name_of_your_yaml.yaml
-```
-The outputs of any YAML will be written to `ffxml/`.
-
-You can also provide a `leaprc` of your choosing via:
-```bash
-python convert_amber.py --input name_of_your_leaprc --input-format leaprc
-```
-The output of any leaprc will be written to the `./`.
-
-**A few remarks on the water models and ions**
-
-For this conversion:
+Notes on conversion in general:
 * water models converted manually using `ffxml` files placed in `files/`, and merged with the appropriate converted ions
 * we create *standard* recommended combinations of water and ion models: `tip3p_standard.xml`, `tip4pew_standard.xml`, `spce_standard.xml`: water model + JC monovalent ions + compromise set +2 ions
 * for each water model, we have an HFE and IOD set for multivalent ions; all have templates set to `overload = "1"`. (`tip3p_HFE_multivalent.xml`, `tip3p_IOD_multivalent.xml` etc.)
@@ -203,17 +190,7 @@ For this conversion:
 * naming of the water atom types remains as before (`tip3p-O`)
 * naming of the ion atom types is `name_of_set (dash) amber_atom_type_name`, e.g. `tip3p_standard-Na+`, `tip3p_HFE_multivalent-Zn2+`.
 
-**Tests**
-
-Run `test/test.py` with `nosetests`.
-
-## Merging Amber split-residue lipids into single residues for OpenMM: `merge_lipids.py`
-
-```bash
-python merge_lipids.py
-```
-
-**Acknowledgments**
+## Acknowledgments
 
 * Rafal Wiewiora (MSKCC) for creating these tools
 * Junmei Wang (University of Pittsburgh) for assistance in compiling historical GAFF releases

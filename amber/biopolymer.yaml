@@ -4,30 +4,18 @@
 
 - MODE: LEAPRC
 - sourcePackage: AmberTools
-  sourcePackageVersion: 20.15
-- Source: leaprc.phosaa10
+  sourcePackageVersion: "24.8"
+- Source: oldff/leaprc.ff14ipq
   Reference:
   - >-
-    Homeyer N., Horn A. H. C., Lanig H., Sticht H. (2006). AMBER force-field parameters for phosphorylated amino acids in different protonation states: phosphoserine, phosphothreonine, phosphotyrosine, and phosphohistidine.
-    J. Mol. Model. 12, 281.
-    Steinbrecher, T., Latzer, J., and Case, D.A. (2012). Revised AMBER parameters for bioorganic phosphates.
-    J. Chem. Theory Comput. 8, 4405-4412.
+    Cerutti, D.S.; Swope, W.C.; Rice, J.E.; Case, D.A.
+    ff14ipq: A Self-Consistent Force Field for Condensed-Phase Simulations of Proteins.
+    J. Chem. Theory Comput., 2014, 10, 4515-4534.
   Options:
     filter_warnings: always
-    write_unused: True
   Test:
-  - protein_phospho
-- Source: leaprc.phosaa14SB
-  Reference:
-  - >-
-    L. Raguette; A. Cuomo; K. Belfon; C. Tian; Q. Wu; C. Simmerling.
-    Updated Amber force field parameters for phosphorylated amino acids for ff14SB and ff19SB.
-    In Prep, 2020.
-  Options:
-    filter_warnings: always
-    write_unused: True
-  Test:
-  - protein_phospho
+  - protein
+  - nucleic
 - Source: leaprc.protein.ff15ipq
   Prefix: protein
   Reference:
@@ -46,8 +34,17 @@
     J. Chem. Theory Comput., 2016, 12, 3926-3947.
   Test:
   - protein
-- Source: leaprc.lipid17
-  CharmmFFXMLFilename: ../charmm/ffxml/charmm36_nowaters.xml
+- Source: files/ff19ipq/leaprc.protein.ff19ipq
+  Prefix: protein
+  Reference:
+  - >-
+    Debiec, K.T.; Cerutti, D.S.; Baker, L.R.; Gronenborn, A.M.; Case, D.A.; Chong, L.T.
+    Further along the Road Less Traveled: AMBER ff15ipq, an Original Protein Force Field Built on a Self-Consistent Physical Model.
+    J. Chem. Theory Comput., 2016, 12, 3926-3947.
+  Test:
+  - protein
+- Source: oldff/leaprc.lipid17
+  CharmmFFXMLFilename: ../openmmforcefields/ffxml/charmm/charmm36_nowaters.xml
   CharmmLipid2AmberFilename: files/charmmlipid2amber.csv
   Reference:
   - >-
@@ -72,6 +69,10 @@
   - lipids
 - Source: leaprc.protein.ff14SB
   Prefix: protein
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -79,6 +80,10 @@
   Test:
   - protein
 - Source: oldff/leaprc.ff14SB.redq
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -88,6 +93,10 @@
   - nucleic
 - Source: leaprc.protein.ff14SBonlysc
   Prefix: protein
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -95,6 +104,22 @@
   - >-
     Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006).
     Comparison of multiple Amber force fields and development of improved protein backbone parameters. Proteins 65, 712-725.
+  Test:
+  - protein
+- Source: files/ff19SB/leaprc.protein.ff19SB
+  SourceWithCMAP: leaprc.protein.ff19SB
+  CMAPFRCMOD: files/ff19SB/frcmod.ff19SB_only_cmap
+  Prefix: protein
+  Options:
+    keep_types: ["P"]
+    override_level:
+      HYP: 2
+      CHYP: 2
+  Reference:
+  - >-
+    Tian, C.; Kasavajhala, K.; Belfon, K.A.A.; Raguette, L.; Huang, H.; Migues, A.N.; Bickel, J.; Wang, Y.; Pincay, J.; Wu, Q.; Simmerling, C.
+    ff19SB: Amino-Acid-Specific Protein Backbone Parameters Trained against Quantum Mechanics Energy Surfaces in Solution.
+    J. Chem. Theory Comput., 2020, 16, 528-552.
   Test:
   - protein
 - Source: leaprc.protein.ff03.r1
@@ -132,6 +157,15 @@
     Zgarbova, M.; Sponer, J.; Otyepka, M.; Cheatham, T.E. III; Galindo-Murillo, R.; Jurecka, P.
     Refinement of the Sugar-Phosphate Backbone Torsion Beta for AMBER Force Fields Improves the Description of Z- and B-DNA.
     J. Chem. Theor. and Comp., 2015, 12, 5723-5736.
+  Test:
+  - dna
+- Source: ./files/DNA.OL21/leaprc.DNA.OL21
+  Prefix: DNA
+  Reference:
+  - >-
+    Zgarbova, M.; Sponer, J.; Jurecka, P.
+    Z-DNA as a Touchstone for Additive Empirical Force Fields and a Refinement of the Alpha/Gamma DNA Torsions for AMBER.
+    J. Chem. Theory Comput., 2021, 17, 6292-6301.
   Test:
   - dna
 - Source: leaprc.DNA.bsc1
@@ -176,9 +210,14 @@
   - >-
     Wang, L.-P., McKiernan, K.A., Gomes, J., Beauchamp, K.A., Head-Gordon, T., Rice, J.E., Swope, W.C., Martinez, T.J., and Pande, V.S. (2017).
     Building a More Predictive Protein Force Field: A Systematic and Reproducible Route to AMBER-FB15. J. Phys. Chem. B 121, 4023-4039.
+  Options:
+    keep_types: ["P"]
   Test:
   - protein
 - Source: oldff/leaprc.ff10
+  Options:
+    override_level:
+      HYP: 2
   Reference:
   - >-
     Hornak, V., Abel, R., Okur, A., Strockbine, B., Roitberg, A., and Simmerling, C. (2006).
@@ -284,6 +323,10 @@
   Test:
   - dna
 - Source: oldff/leaprc.ff14SB
+  Options:
+    override_level:
+      HYP: 2
+      CHYP: 2
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).
@@ -314,22 +357,39 @@
 - Source: leaprc.phosaa14SB
   Reference:
   - >-
-    L. Raguette; A. Cuomo; K. Belfon; C. Tian; Q. Wu; C. Simmerling.
-    Updated Amber force field parameters for phosphorylated amino acids for ff14SB and ff19SB.
-    In Prep, 2020.
+    Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C.
+    phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids.
+    J. Chem. Theory Comput., 2024, 20, 7199-7209.
   Options:
     filter_warnings: always
     write_unused: True
   Test:
   - protein_phospho
-# FFs that couldn't be converted yet due to problems
-# Torsion problem
-#- Source: oldff/leaprc.ff14ipq
-  # Reference:
-  # - >-
-  #   Placeholder
-  #   Placeholder
-  # Test:
-  # - protein
-  # - nucleic
-  #
+- Source: leaprc.phosfb18
+  Prefix: protein
+  Reference:
+  - >-
+    Stoppelman, J.P.; Ng, T.T.; Nerenberg, P.S.; Wang, L.-P.
+    Development and Validation of AMBER-FB15-Compatible Force Field Parameters for Phosphorylated Amino Acids.
+    J. Phys. Chem. B., 2021, 125, 11927-11942.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein_phospho
+- Source: files/ff19SB/leaprc.phosaa19SB
+  SourceWithCMAP: leaprc.phosaa19SB
+  CMAPFRCMOD: files/ff19SB/frcmod.phosaa19SB_only_cmap
+  CMAPExtraFFXML:
+    - ../openmmforcefields/ffxml/amber/protein.ff19SB.xml
+  Prefix: protein
+  Reference:
+  - >-
+    Raguette, L.E.; Cuomo, A.E.; Belfon, K.A.A.; Tian, C.; Hazoglou, V.; Witek, G.; Telehany, S.M.; Wu, Q.; Simmerling, C.
+    phosaa14SB and phosaa19SB: Updated Amber Force Field Parameters for Phosphorylated Amino Acids.
+    J. Chem. Theory Comput., 2024, 20, 7199-7209.
+  Options:
+    filter_warnings: always
+    write_unused: True
+  Test:
+  - protein_phospho

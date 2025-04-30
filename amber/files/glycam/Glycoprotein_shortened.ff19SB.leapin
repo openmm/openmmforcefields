@@ -1,0 +1,105 @@
+# Load the protein force field second, as documented in the Amber manual.  This
+# way its HYP parameters will get used instead of GLYCAM's.  This turns out to
+# be critical for simulation with ff19SB as otherwise the resulting combination
+# of torsions and CMAPs that are applied will be nonsensical.
+source leaprc.GLYCAM_06j-1
+source leaprc.protein.ff19SB
+
+## Testing residues made for linking to proteins.
+##
+##   Testing RES-ALA-RES-ALA-RES to ensure that we have tried a decent
+##       set of linkage environments.
+##   See definitions in the script that created this file for details.
+##
+
+# set 0 -- HYP (not for linking -- prerequisite for OLP)
+m2 = sequence { NHYP ALA HYP ALA CHYP }
+impose m2 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
+
+# set 1 -- OLT
+m3 = sequence { NOLT ALA OLT ALA COLT }
+set m3 tail m3.1.OG1
+m3 = sequence { m3 0GB }
+set m3 tail m3.3.OG1
+m3 = sequence { m3 0GB }
+set m3 tail m3.5.OG1
+m3 = sequence { m3 0GB }
+impose m3 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
+
+# set 2 -- OLS
+m4 = sequence { NOLS ALA OLS ALA COLS }
+set m4 tail m4.1.OG
+m4 = sequence { m4 0GB }
+set m4 tail m4.3.OG
+m4 = sequence { m4 0GB }
+set m4 tail m4.5.OG
+m4 = sequence { m4 0GB }
+impose m4 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
+
+# set 3 -- OLP
+m5 = sequence { NOLP ALA OLP ALA COLP }
+set m5 tail m5.1.OD1
+m5 = sequence { m5 0GB }
+set m5 tail m5.3.OD1
+m5 = sequence { m5 0GB }
+set m5 tail m5.5.OD1
+m5 = sequence { m5 0GB }
+impose m5 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
+
+# set 4 -- NLN
+m6 = sequence { NNLN ALA NLN ALA CNLN }
+set m6 tail m6.1.ND2
+m6 = sequence { m6 0GB }
+set m6 tail m6.3.ND2
+m6 = sequence { m6 0GB }
+set m6 tail m6.5.ND2
+m6 = sequence { m6 0GB }
+impose m6 { 1 2 3 4 5 } { { "N" "CA" "C" "N" 90.0 } }
+
+# Amber manual GLYCAM examples
+m7 = sequence { NALA ALA OLS ALA OLS ALA OLS ALA OLS ALA OLS ALA CALA }
+set m7 tail m7.3.OG
+m7 = sequence { m7 3GB 0GB }
+set m7 tail m7.5.OG
+m7 = sequence { m7 4GB 0GA }
+set m7 tail m7.7.OG
+m7 = sequence { m7 4YB 4YB 3MB 0MA }
+set m7 tail m7.9.OG
+m7 = sequence { m7 4YB 4YB VMB }
+set m7 tail m7.24.O3
+m7 = sequence { m7 0MA }
+set m7 tail m7.24.O6
+m7 = sequence { m7 0MA }
+set m7 tail m7.11.OG
+m7 = sequence { m7 4YB 4YB VMB }
+set m7 tail m7.29.O6
+m7 = sequence { m7 VMA }
+set m7 tail m7.30.O6
+m7 = sequence { m7 2MA 0MA }
+set m7 tail m7.30.O3
+m7 = sequence { m7 2MA 0MA }
+set m7 tail m7.29.O3
+m7 = sequence { m7 2MA 2MA 0MA }
+
+##
+## Built 5 molecules
+##	Now, translate them away from each other
+##
+translate m2  {  0.0  60.0   0.0 } 
+translate m3  { 30.0   0.0   0.0 }
+translate m4  { 30.0  30.0   0.0 }
+translate m5  { 30.0  60.0   0.0 } 
+translate m6  { 60.0   0.0   0.0 }
+translate m7  { 60.0  60.0  60.0 }
+ 
+Glycoprotein = combine { m2 m3 m4 m5 m6 m7 }
+
+# LEaP in AmberTools 24 has a bug that causes CMAPs to be missing when
+# concatenating or making branched sequences like above.  Saving and loading is
+# a workaround.  If this is eventually fixed in LEaP, this will be unnecessary.
+saveOff Glycoprotein Glycoprotein_shortened.ff19SB.lib
+loadOff Glycoprotein_shortened.ff19SB.lib
+
+saveamberparm Glycoprotein Glycoprotein_shortened.ff19SB.parm7 Glycoprotein_shortened.ff19SB.rst7
+
+quit

@@ -5,6 +5,11 @@ import glob
 import datetime
 import subprocess
 
+# Can't reliably get AmberTools version from installation path, and failing to
+# do so silently inserts filesystem paths into the generated force field file,
+# so specify it here.  This should be updated as necessary.
+AMBERTOOLS_VERSION = "24.8"
+
 # from openmm import unit
 
 kilocalorie_to_kilojoule = 4.184  # 1.0*unit.kilocalorie/unit.kilojoule
@@ -41,6 +46,7 @@ def amber_frcmod_ions_to_openmm_xml(
     ionname_to_residuename["Cl-"] = "CL"  # this is a duplicate in atomic_ions.lib
     ionname_to_residuename["Cu2+"] = "CU"  # consistent with previous residue names
     ionname_to_residuename["Cu+"] = "CU1"
+    ionname_to_residuename["U4+"] = "U4+"  # to avoid collision with uracil, don't use U
 
     with open(frcmod_file) as fh:
         lines = fh.readlines()
@@ -84,8 +90,7 @@ def amber_frcmod_ions_to_openmm_xml(
         setname = os.path.basename(frcmod_file)
         setname = setname.replace("frcmod.", "")
 
-    date_generated = datetime.datetime.utcnow().isoformat()
-    ambertools_version = re.sub(r".*/ambertools-([^/]*)/.*", r"\1", frcmod_file)
+    date_generated = datetime.datetime.now().strftime("%Y-%m-%d")
     frcmod_file_short = re.sub(r".*/dat/leap/", "", frcmod_file)
     atomic_ions_file_short = re.sub(r".*/dat/leap/", "", atomic_ions_file)
 
@@ -99,11 +104,11 @@ def amber_frcmod_ions_to_openmm_xml(
     output_lines.append(f"    <DateGenerated>{date_generated}</DateGenerated>")
     output_lines.append(
         f'    <Source Source="{frcmod_file_short}" md5hash="{md5sum(frcmod_file)}" '
-        f'sourcePackage="AmberTools" sourcePackageVersion="{ambertools_version}">{frcmod_file_short}</Source>'
+        f'sourcePackage="AmberTools" sourcePackageVersion="{AMBERTOOLS_VERSION}">{frcmod_file_short}</Source>'
     )
     output_lines.append(
         f'    <Source Source="{atomic_ions_file_short}" md5hash="{md5sum(atomic_ions_file)}" '
-        f'sourcePackage="AmberTools" sourcePackageVersion="{ambertools_version}">{atomic_ions_file_short}</Source>'
+        f'sourcePackage="AmberTools" sourcePackageVersion="{AMBERTOOLS_VERSION}">{atomic_ions_file_short}</Source>'
     )
     output_lines.append("  </Info>")
 
@@ -154,7 +159,7 @@ if len(sys.argv) < 2:
         "convert_amber_ions.py script to convert all Amber/AmberTools "
         "frcmod.ions* files to equivalent openmm xml files"
     )
-    print("Usage: python ./amber/convert_amber_ions.py /path/to/ambertools")
+    print("Usage: python convert_amber_ions.py /path/to/ambertools")
     sys.exit()
 
 ambertools_path = sys.argv[1]
@@ -162,7 +167,7 @@ ambertools_dat_leap_path = os.path.join(ambertools_path, "dat/leap/")
 frcmod_files = glob.glob(ambertools_dat_leap_path + "parm/frcmod.ions*")
 atomic_ions_file = ambertools_dat_leap_path + "lib/atomic_ions.lib"
 
-output_path = "amber/ffxml/ions"
+output_path = "../openmmforcefields/ffxml/amber/ions"
 os.makedirs(output_path, exist_ok=True)
 
 for frcmod_file in frcmod_files:
