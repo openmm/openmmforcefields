@@ -1178,11 +1178,11 @@
     <Bond class1="RNA-H" class2="RNA-NA" length="0.101" k="363171.19999999995"/>
     <Bond class1="RNA-HO" class2="RNA-OH" length="0.096" k="462750.3999999999"/>
     <Bond class1="RNA-HO" class2="RNA-OS" length="0.096" k="462750.3999999999"/>
-    <Bond class1="RNA-EP" class2="RNA-O" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond class1="RNA-EP" class2="RNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond class1="RNA-EP" class2="RNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond class1="RNA-EP" class2="RNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
-    <Bond class1="RNA-EP" class2="RNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="RNA-O" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="RNA-OH" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="RNA-OS" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="RNA-NB" length="0.020000000000000004" k="502079.9999999999"/>
+    <Bond class1="EP" class2="RNA-NC" length="0.020000000000000004" k="502079.9999999999"/>
     <Bond class1="RNA-CI" class2="RNA-H1" length="0.10900000000000001" k="284511.99999999994"/>
     <Bond class1="RNA-CI" class2="RNA-CT" length="0.1526" k="259407.99999999994"/>
     <Bond class1="RNA-OS" class2="RNA-CI" length="0.141" k="267775.99999999994"/>
@@ -1338,23 +1338,23 @@
     <Angle class1="RNA-O2" class2="RNA-P" class3="RNA-OS" angle="1.888969849433463" k="836.8000000000001"/>
     <Angle class1="RNA-OH" class2="RNA-P" class3="RNA-OS" angle="1.790707812546182" k="376.56"/>
     <Angle class1="RNA-OS" class2="RNA-P" class3="RNA-OS" angle="1.790707812546182" k="376.56"/>
-    <Angle class1="RNA-CB" class2="RNA-NB" class3="RNA-EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle class1="RNA-CP" class2="RNA-NB" class3="RNA-EP" angle="2.199114857512855" k="1255.2"/>
-    <Angle class1="RNA-C" class2="RNA-NC" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-CA" class2="RNA-NC" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-CB" class2="RNA-NC" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-CQ" class2="RNA-NC" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-C" class2="RNA-O" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-EP" class2="RNA-O" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-C" class2="RNA-OH" class3="RNA-EP" angle="2.0943951023931953" k="1255.2"/>
-    <Angle class1="RNA-CT" class2="RNA-OH" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-HO" class2="RNA-OH" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-EP" class2="RNA-OH" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-C" class2="RNA-OS" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-CS" class2="RNA-OS" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-CT" class2="RNA-OS" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-EP" class2="RNA-OS" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
-    <Angle class1="RNA-P" class2="RNA-OS" class3="RNA-EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-CB" class2="RNA-NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="RNA-CP" class2="RNA-NB" class3="EP" angle="2.199114857512855" k="1255.2"/>
+    <Angle class1="RNA-C" class2="RNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-CA" class2="RNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-CB" class2="RNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-CQ" class2="RNA-NC" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-C" class2="RNA-O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="EP" class2="RNA-O" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-C" class2="RNA-OH" class3="EP" angle="2.0943951023931953" k="1255.2"/>
+    <Angle class1="RNA-CT" class2="RNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-HO" class2="RNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="EP" class2="RNA-OH" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-C" class2="RNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-CS" class2="RNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-CT" class2="RNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="EP" class2="RNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
+    <Angle class1="RNA-P" class2="RNA-OS" class3="EP" angle="1.911135530933791" k="1255.2"/>
     <Angle class1="RNA-H1" class2="RNA-CI" class3="RNA-CT" angle="1.911135530933791" k="418.40000000000003"/>
     <Angle class1="RNA-H1" class2="RNA-CI" class3="RNA-H1" angle="1.911135530933791" k="292.88"/>
     <Angle class1="RNA-CI" class2="RNA-CT" class3="RNA-H1" angle="1.911135530933791" k="418.40000000000003"/>
@@ -1473,14 +1473,14 @@
     <Proper class1="RNA-OH" class2="RNA-CT" class3="RNA-CT" class4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.602496" periodicity2="2" phase2="0.0" k2="4.916200000000001"/>
     <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-CT" class4="RNA-OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-CT" class4="RNA-OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
-    <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-OH" class4="RNA-EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper class1="RNA-CT" class2="RNA-CT" class3="RNA-OH" class4="RNA-EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-OS" class4="RNA-EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper class1="RNA-H2" class2="RNA-CT" class3="RNA-OS" class4="RNA-EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper class1="RNA-CT" class2="RNA-CT" class3="RNA-OS" class4="RNA-EP" periodicity1="3" phase1="0.0" k1="0.0"/>
-    <Proper class1="RNA-CS" class2="RNA-CS" class3="RNA-OS" class4="RNA-EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper class1="RNA-HA" class2="RNA-CS" class3="RNA-OS" class4="RNA-EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Proper class1="RNA-H4" class2="RNA-CS" class3="RNA-OS" class4="RNA-EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="RNA-CT" class2="RNA-CT" class3="RNA-OH" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="RNA-H1" class2="RNA-CT" class3="RNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="RNA-H2" class2="RNA-CT" class3="RNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="RNA-CT" class2="RNA-CT" class3="RNA-OS" class4="EP" periodicity1="3" phase1="0.0" k1="0.0"/>
+    <Proper class1="RNA-CS" class2="RNA-CS" class3="RNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="RNA-HA" class2="RNA-CS" class3="RNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Proper class1="RNA-H4" class2="RNA-CS" class3="RNA-OS" class4="EP" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper class1="RNA-C" class2="" class3="" class4="RNA-O" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper class1="RNA-C" class2="" class3="RNA-O2" class4="RNA-O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper class1="RNA-N2" class2="" class3="" class4="RNA-H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>

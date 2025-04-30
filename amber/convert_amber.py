@@ -786,6 +786,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     """
 
     tree = _read_ffxml(ffxml_filename)
+    skip_types = {"", "EP"}
     for type_element in tree.findall("./AtomTypes/Type"):
         type_name = type_element.attrib["name"]
         type_element.attrib["name"] = f"{prefix}-{type_name}"
@@ -795,7 +796,7 @@ def add_prefix_to_ffxml(ffxml_filename, prefix):
     for attrib_name in ("class", "class1", "class2", "class3", "class4", "class5"):
         for element in tree.findall(f".//*[@{attrib_name}]"):
             attrib_value = element.attrib[attrib_name]
-            if attrib_value:
+            if attrib_value not in skip_types:
                 element.attrib[attrib_name] = f"{prefix}-{attrib_value}"
 
     # Workaround to replicate the formatting of the old implementation of this
@@ -1055,6 +1056,7 @@ def validate_combinations():
             for rna_ffxml, rna_leaprc in rna_ffs:
                 validate_combination([protein_ffxml, dna_ffxml, rna_ffxml], [protein_leaprc, dna_leaprc, rna_leaprc])
 
+
 def validate_combination(ffxmls, leaprcs):
     """
     Tests a particular combination of protein-DNA-RNA force fields.
@@ -1068,7 +1070,8 @@ def validate_combination(ffxmls, leaprcs):
         if verbose:
             print(f"Making LEaP input for {', '.join(leaprcs)}...")
         with open(leap_path, "w") as leap_file:
-            print("""addPdbAtomMap {
+            print(
+                """addPdbAtomMap {
     { "H1'" "H1*" }
     { "H2'" "H2'1" }
     { "H2''" "H2'2" }
@@ -1081,12 +1084,15 @@ def validate_combination(ffxmls, leaprcs):
     { "HO3'" "H3T" }
     { "OP1" "O1P" }
     { "OP2" "O2P" }
-}""", file=leap_file)
+}""",
+                file=leap_file,
+            )
 
             for leaprc in leaprcs:
                 print(f"source {leaprc}", file=leap_file)
 
-            print("""addPdbResMap {
+            print(
+                """addPdbResMap {
     { 0 "DG" "DG5" } { 1 "DG" "DG3" }
     { 0 "DA" "DA5" } { 1 "DA" "DA3" }
     { 0 "DC" "DC5" } { 1 "DC" "DC3" }
@@ -1095,11 +1101,16 @@ def validate_combination(ffxmls, leaprcs):
     { 0 "A" "A5" } { 1 "A" "A3" }
     { 0 "C" "C5" } { 1 "C" "C3" }
     { 0 "U" "U5" } { 1 "U" "U3" }
-}""", file=leap_file)
+}""",
+                file=leap_file,
+            )
 
-            print(f"""system = loadPdb files/combined_test_system.pdb
+            print(
+                f"""system = loadPdb files/combined_test_system.pdb
 saveAmberParm system {top_path} {crd_path}
-quit""", file=leap_file)
+quit""",
+                file=leap_file,
+            )
 
         try:
             subprocess.run(["tleap", "-f", leap_path], check=True, capture_output=True)
@@ -1119,6 +1130,7 @@ quit""", file=leap_file)
             [os.path.join("..", "openmmforcefields", "ffxml", "amber", ffxml) for ffxml in ffxmls],
             minimize=False,
         )
+
 
 def validate_protein(ffxml_name, leaprc_name, united_atom=False):
     if verbose:
@@ -1741,7 +1753,6 @@ def validate_lipids(ffxml_name, leaprc_name):
 def validate_merged_lipids(ffxml_name, leaprc_name):
     if verbose:
         print(f"Lipids (merged) energy validation for {ffxml_name}")
-
 
     for test_system_name in ("POPC", "POPE"):
         if verbose:
