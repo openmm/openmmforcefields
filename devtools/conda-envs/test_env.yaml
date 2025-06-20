@@ -2,17 +2,18 @@ name: openmmforcefields-test
 channels:
   - conda-forge
 dependencies:
-  - python
-  - pip
-  - pytest
-  - pytest-cov
-  - pytest-xdist
-  - pytest-randomly
-  - openmm
-  - openff-toolkit >=0.11
-  - pyyaml
   - ambertools >=24
   - lxml
   - networkx
+  - numpy <2.3
+  - openff-toolkit >=0.11
+  - openmm
+  - pip
+  - pytest
+  - pytest-cov
+  - pytest-randomly
+  - pytest-xdist
+  - python
+  - pyyaml
   - tinydb
   - validators
