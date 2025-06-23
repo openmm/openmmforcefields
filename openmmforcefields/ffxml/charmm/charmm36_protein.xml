@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-05-02</DateGenerated>
+    <DateGenerated>2025-06-23</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_aldehydes.str" md5hash="dda2e0968eb30c1b8689e6f06b8502f7" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_aldehydes.str</Source>
@@ -8387,6 +8387,20 @@ patch_order = {'ACE': 0, 'ACED': 1, 'ACP': 2, 'ACPD': 3, 'CTER': 4, 'CNEU': 5, '
 periodic_improper_types = {('CRN1', 'NRN2', 'NRN2', 'NRC4'): (1, 3.141592653589793, 711.28), ('NRC4', 'NRN2', 'NRN2', 'CRN1'): (1, 3.141592653589793, 711.28), ('NRN2', 'HRM2', 'HRM2', 'CRN1'): (1, 3.141592653589793, 167.36), ('CRN1', 'HRM2', 'HRM2', 'NRN2'): (1, 3.141592653589793, 167.36), ('CRN1', 'NRN2', 'NRC4', 'NRN1'): (1, 3.141592653589793, 711.28), ('NRN1', 'NRC4', 'NRN2', 'CRN1'): (1, 3.141592653589793, 711.28), ('NRN1', 'CR33', 'CRN1', 'HRM1'): (1, 3.141592653589793, 251.04000000000002), ('HRM1', 'CRN1', 'CR33', 'NRN1'): (1, 3.141592653589793, 251.04000000000002), ('CRN1', 'NRC4', 'NRN2', 'NRN1'): (1, 3.141592653589793, 711.28), ('NRN1', 'NRN2', 'NRC4', 'CRN1'): (1, 3.141592653589793, 711.28), ('NRN1', 'CT2', 'CRN1', 'HRM1'): (1, 3.141592653589793, 251.04000000000002), ('HRM1', 'CRN1', 'CT2', 'NRN1'): (1, 3.141592653589793, 251.04000000000002)}
 harmonic_improper_types = {('HE2', 'HE2', 'CE2', 'CE2'): ((12.552, 0.0),), ('CE2', 'CE2', 'HE2', 'HE2'): ((12.552, 0.0),), ('HR1', 'NR1', 'NR2', 'CPH2'): ((2.092, 0.0),), ('CPH2', 'NR2', 'NR1', 'HR1'): ((2.092, 0.0),), ('HR1', 'NR2', 'NR1', 'CPH2'): ((2.092, 0.0),), ('CPH2', 'NR1', 'NR2', 'HR1'): ((2.092, 0.0),), ('HR3', 'CPH1', 'NR1', 'CPH1'): ((2.092, 0.0),), ('CPH1', 'NR1', 'CPH1', 'HR3'): ((2.092, 0.0),), ('HR3', 'CPH1', 'NR2', 'CPH1'): ((2.092, 0.0),), ('CPH1', 'NR2', 'CPH1', 'HR3'): ((2.092, 0.0),), ('HR3', 'CPH1', 'NR3', 'CPH1'): ((4.184, 0.0),), ('CPH1', 'NR3', 'CPH1', 'HR3'): ((4.184, 0.0),), ('HR3', 'NR1', 'CPH1', 'CPH1'): ((2.092, 0.0),), ('CPH1', 'CPH1', 'NR1', 'HR3'): ((2.092, 0.0),), ('HR3', 'NR2', 'CPH1', 'CPH1'): ((2.092, 0.0),), ('CPH1', 'CPH1', 'NR2', 'HR3'): ((2.092, 0.0),), ('N', 'C', 'CP1', 'CP3'): ((0.0, 0.0),), ('CP3', 'CP1', 'C', 'N'): ((0.0, 0.0),), ('NC2', None, None, 'C'): ((188.28, 0.0),), ('C', None, None, 'NC2'): ((188.28, 0.0),), ('C', 'HC', 'HC', 'NC2'): ((0.0, 0.0),), ('NC2', 'HC', 'HC', 'C'): ((0.0, 0.0),), ('NC2', None, None, 'HC'): ((-8.368, 0.0),), ('HC', None, None, 'NC2'): ((-8.368, 0.0),), ('NH1', None, None, 'H'): ((83.68, 0.0),), ('H', None, None, 'NH1'): ((83.68, 0.0),), ('NH2', None, None, 'H'): ((16.736, 0.0),), ('H', None, None, 'NH2'): ((16.736, 0.0),), ('NR1', 'CPH1', 'CPH2', 'H'): ((1.8828, 0.0),), ('H', 'CPH2', 'CPH1', 'NR1'): ((1.8828, 0.0),), ('NR1', 'CPH2', 'CPH1', 'H'): ((1.8828, 0.0),), ('H', 'CPH1', 'CPH2', 'NR1'): ((1.8828, 0.0),), ('NR3', 'CPH1', 'CPH2', 'H'): ((5.0208, 0.0),), ('H', 'CPH2', 'CPH1', 'NR3'): ((5.0208, 0.0),), ('NR3', 'CPH2', 'CPH1', 'H'): ((5.0208, 0.0),), ('H', 'CPH1', 'CPH2', 'NR3'): ((5.0208, 0.0),), ('O', 'CP1', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CP1', 'O'): ((188.28, 0.0),), ('O', 'CT1', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CT1', 'O'): ((188.28, 0.0),), ('O', 'CT2', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CT2', 'O'): ((188.28, 0.0),), ('O', 'CT3', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CT3', 'O'): ((188.28, 0.0),), ('O', 'HA1', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'HA1', 'O'): ((188.28, 0.0),), ('O', 'N', 'CT2', 'CC'): ((502.08000000000004, 0.0),), ('CC', 'CT2', 'N', 'O'): ((502.08000000000004, 0.0),), ('O', 'NH2', 'CP1', 'CC'): ((188.28, 0.0),), ('CC', 'CP1', 'NH2', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'CT1', 'CC'): ((188.28, 0.0),), ('CC', 'CT1', 'NH2', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'CT2', 'CC'): ((188.28, 0.0),), ('CC', 'CT2', 'NH2', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'CT3', 'CC'): ((188.28, 0.0),), ('CC', 'CT3', 'NH2', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'HA1', 'CC'): ((188.28, 0.0),), ('CC', 'HA1', 'NH2', 'O'): ((188.28, 0.0),), ('O', None, None, 'C'): ((502.08000000000004, 0.0),), ('C', None, None, 'O'): ((502.08000000000004, 0.0),), ('OB', None, None, 'CD'): ((418.40000000000003, 0.0),), ('CD', None, None, 'OB'): ((418.40000000000003, 0.0),), ('OC', None, None, 'CC'): ((401.664, 0.0),), ('CC', None, None, 'OC'): ((401.664, 0.0),), ('CC', None, None, 'CT1'): ((401.664, 0.0),), ('CT1', None, None, 'CC'): ((401.664, 0.0),), ('CC', None, None, 'CT2'): ((401.664, 0.0),), ('CT2', None, None, 'CC'): ((401.664, 0.0),), ('CC', None, None, 'CT3'): ((401.664, 0.0),), ('CT3', None, None, 'CC'): ((401.664, 0.0),), ('CT3', 'CD', 'O', 'HR1'): ((117.152, 3.141592653589793),), ('HR1', 'O', 'CD', 'CT3'): ((117.152, 3.141592653589793),), ('CT2', 'CD', 'O', 'HR1'): ((117.152, 3.141592653589793),), ('HR1', 'O', 'CD', 'CT2'): ((117.152, 3.141592653589793),), ('CA', 'CD', 'O', 'HR1'): ((58.576, 3.141592653589793),), ('HR1', 'O', 'CD', 'CA'): ((58.576, 3.141592653589793),), ('CC', None, None, 'CTD1'): ((401.664, 0.0),), ('CTD1', None, None, 'CC'): ((401.664, 0.0),), ('O', 'CTD1', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CTD1', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'CTD1', 'CC'): ((188.28, 0.0),), ('CC', 'CTD1', 'NH2', 'O'): ((188.28, 0.0),), ('N', 'C', 'CPD1', 'CP3'): ((0.0, 0.0),), ('CP3', 'CPD1', 'C', 'N'): ((0.0, 0.0),), ('O', 'CPD1', 'NH2', 'CC'): ((188.28, 0.0),), ('CC', 'NH2', 'CPD1', 'O'): ((188.28, 0.0),), ('O', 'NH2', 'CPD1', 'CC'): ((188.28, 0.0),), ('CC', 'CPD1', 'NH2', 'O'): ((188.28, 0.0),), ('CPB', 'CPA', 'NPH', 'CPA'): ((87.02720000000001, 0.0),), ('CPA', 'NPH', 'CPA', 'CPB'): ((87.02720000000001, 0.0),), ('CPB', None, None, 'CE1'): ((376.56, 0.0),), ('CE1', None, None, 'CPB'): ((376.56, 0.0),), ('CT2', None, None, 'CPB'): ((376.56, 0.0),), ('CPB', None, None, 'CT2'): ((376.56, 0.0),), ('CT3', None, None, 'CPB'): ((376.56, 0.0),), ('CPB', None, None, 'CT3'): ((376.56, 0.0),), ('HA', 'CPA', 'CPA', 'CPM'): ((123.00959999999999, 0.0),), ('CPM', 'CPA', 'CPA', 'HA'): ((123.00959999999999, 0.0),), ('NPH', 'CPA', 'CPA', 'FE'): ((574.8816, 0.0),), ('FE', 'CPA', 'CPA', 'NPH'): ((574.8816, 0.0),), ('NPH', 'CPA', 'CPB', 'CPB'): ((169.87040000000002, 0.0),), ('CPB', 'CPB', 'CPA', 'NPH'): ((169.87040000000002, 0.0),), ('NPH', 'CPA', 'CPM', 'CPA'): ((76.5672, 0.0),), ('CPA', 'CPM', 'CPA', 'NPH'): ((76.5672, 0.0),), ('NPH', 'CPM', 'CPB', 'CPA'): ((136.81680000000003, 0.0),), ('CPA', 'CPB', 'CPM', 'NPH'): ((136.81680000000003, 0.0),), ('CAP', None, None, 'NH2'): ((41.84, 0.0),), ('NH2', None, None, 'CAP'): ((41.84, 0.0),), ('H', 'H', 'NH2', 'CAP'): ((7.9496, 3.141592653589793),), ('CAP', 'NH2', 'H', 'H'): ((7.9496, 3.141592653589793),), ('HP', None, None, 'CAP'): ((62.760000000000005, 0.0),), ('CAP', None, None, 'HP'): ((62.760000000000005, 0.0),), ('FA', 'CAP', 'CAP', 'CAP'): ((7.9496, 0.0),), ('CAP', 'CAP', 'CAP', 'FA'): ((7.9496, 0.0),), ('CT3', 'CAP', 'CAP', 'CAP'): ((7.9496, 0.0),), ('CAP', 'CAP', 'CAP', 'CT3'): ((7.9496, 0.0),), ('CT2', 'CAP', 'CAP', 'CAP'): ((7.9496, 0.0),), ('CAP', 'CAP', 'CAP', 'CT2'): ((7.9496, 0.0),), ('CAP', 'CD', 'O', 'HR1'): ((58.576, 3.141592653589793),), ('HR1', 'O', 'CD', 'CAP'): ((58.576, 3.141592653589793),), ('COA', 'CAP', 'CT3', 'OCA'): ((125.52000000000001, 0.0),), ('OCA', 'CT3', 'CAP', 'COA'): ((125.52000000000001, 0.0),), ('COA', 'CAP', 'NH2', 'OCA'): ((125.52000000000001, 0.0),), ('OCA', 'NH2', 'CAP', 'COA'): ((125.52000000000001, 0.0),), ('CAP', 'CAP', 'CAP', 'COA'): ((125.52000000000001, 0.0),), ('COA', 'CAP', 'CAP', 'CAP'): ((125.52000000000001, 0.0),), ('CAP', 'CAP', 'CAP', 'CA'): ((125.52000000000001, 0.0),), ('CA', 'CAP', 'CAP', 'CAP'): ((125.52000000000001, 0.0),), ('CAP', 'CAP', 'CAP', 'CN'): ((125.52000000000001, 0.0),), ('CN', 'CAP', 'CAP', 'CAP'): ((125.52000000000001, 0.0),), ('CD', 'CC1A', 'O', 'HR1'): ((58.576, 0.0),), ('HR1', 'O', 'CC1A', 'CD'): ((58.576, 0.0),)}
 
+def extract_atom_name(raw_atom_name, templates):
+    # Process Drude particles.
+    atom_name_prefix = ""
+    if raw_atom_name.startswith("Drude-"):
+        raw_atom_name = raw_atom_name[len("Drude-"):]
+        atom_name_prefix = "D"
+
+    # Return None to indicate an atom without template name information.
+    atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
+    if len(atom_name_parts) &lt; 2:
+        return None
+    templates.append(atom_name_parts[0])
+    return f"{atom_name_prefix}{atom_name_parts[1]}"
+
 def is_valid_improper(atom_indices):
     index_1, index_2, index_3, index_4 = atom_indices
     bonded_to_1 = data.bondedToAtom[index_1]
@@ -8413,16 +8427,18 @@ for residue in topology.residues():
     # Extract the residue or patch names and atom names from the atom type names.
     templates = []
     atom_names = []
+    skip_residue = False
     for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{atom_name_parts[1]}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
+        atom_name = extract_atom_name(data.atomType[atom], templates)
+        if atom_name is None:
+            # Skip residues containing atoms without template name information
+            # (these could be from, e.g., some other solvent force field file).
+            skip_residue = True
+            break
+        atom_names.append(atom_name)
+    if skip_residue:
+        residue_data.append(([], [], []))
+        continue
 
     # Get all unique residue or patch names that have impropers.
     templates = set(templates)
@@ -8447,6 +8463,9 @@ periodic_impropers = []
 harmonic_impropers = []
 
 for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
+    if not atom_data:
+        continue
+
     # Determine all impropers to try to add to this residue.  Use a list to
     # try to maintain a consistent order.  There should not be many impropers
     # per residue so this should not be a significant performance issue.

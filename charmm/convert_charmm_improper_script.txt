@@ -12,6 +12,20 @@ patch_order = {patch_order}
 periodic_improper_types = {periodic_improper_types}
 harmonic_improper_types = {harmonic_improper_types}
 
+def extract_atom_name(raw_atom_name, templates):
+    # Process Drude particles.
+    atom_name_prefix = ""
+    if raw_atom_name.startswith("Drude-"):
+        raw_atom_name = raw_atom_name[len("Drude-"):]
+        atom_name_prefix = "D"
+
+    # Return None to indicate an atom without template name information.
+    atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
+    if len(atom_name_parts) < 2:
+        return None
+    templates.append(atom_name_parts[0])
+    return f"{{atom_name_prefix}}{{atom_name_parts[1]}}"
+
 def is_valid_improper(atom_indices):
     index_1, index_2, index_3, index_4 = atom_indices
     bonded_to_1 = data.bondedToAtom[index_1]
@@ -38,16 +52,18 @@ for residue in topology.residues():
     # Extract the residue or patch names and atom names from the atom type names.
     templates = []
     atom_names = []
+    skip_residue = False
     for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{{atom_name_parts[1]}}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
+        atom_name = extract_atom_name(data.atomType[atom], templates)
+        if atom_name is None:
+            # Skip residues containing atoms without template name information
+            # (these could be from, e.g., some other solvent force field file).
+            skip_residue = True
+            break
+        atom_names.append(atom_name)
+    if skip_residue:
+        residue_data.append(([], [], []))
+        continue
 
     # Get all unique residue or patch names that have impropers.
     templates = set(templates)
@@ -72,6 +88,9 @@ periodic_impropers = []
 harmonic_impropers = []
 
 for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
+    if not atom_data:
+        continue
+
     # Determine all impropers to try to add to this residue.  Use a list to
     # try to maintain a consistent order.  There should not be many impropers
     # per residue so this should not be a significant performance issue.

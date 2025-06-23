@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
+    <DateGenerated>2025-06-23</DateGenerated>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str" md5hash="f3c4caab3ff08e7b822f7b944db3f197" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str</Source>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str" md5hash="192af93e684f3891df130182b8302c58" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str</Source>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str" md5hash="6d8a686b8b5ecf19de7e598d928a7c1a" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str</Source>
@@ -30520,6 +30520,20 @@ patch_order = {'ACE': 0, 'ACP': 1, 'CTER': 2, 'CTEG': 3, 'CTEP': 4, 'CNEU': 5, '
 periodic_improper_types = {}
 harmonic_improper_types = {('OD2C3A', 'CD32C', 'OD31F', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD31F', 'CD32C', 'OD2C3A'): ((355.64, 0.0),), ('CD2O1A', 'CD32A', 'ND2A2', 'OD2C1A'): ((418.40000000000003, 0.0),), ('OD2C1A', 'ND2A2', 'CD32A', 'CD2O1A'): ((418.40000000000003, 0.0),), ('CD2O1A', 'CD31C', 'ND3A3', 'OD2C1A'): ((0.0, 0.0),), ('OD2C1A', 'ND3A3', 'CD31C', 'CD2O1A'): ((0.0, 0.0),), ('CD2O1A', 'CD32C', 'ND3A3', 'OD2C1A'): ((0.0, 0.0),), ('OD2C1A', 'ND3A3', 'CD32C', 'CD2O1A'): ((0.0, 0.0),), ('ND3A3', 'CD2O1A', 'CD31C', 'CD32A'): ((0.0, 0.0),), ('CD32A', 'CD31C', 'CD2O1A', 'ND3A3'): ((0.0, 0.0),), ('CD2O1A', 'CD31C', 'ND2A1', 'OD2C1A'): ((502.08000000000004, 0.0),), ('OD2C1A', 'ND2A1', 'CD31C', 'CD2O1A'): ((502.08000000000004, 0.0),), ('CD2O1A', 'CD31A', 'ND2A2', 'OD2C1A'): ((502.08000000000004, 0.0),), ('OD2C1A', 'ND2A2', 'CD31A', 'CD2O1A'): ((502.08000000000004, 0.0),), ('CD2O1A', 'CD32A', 'ND3A3', 'OD2C1A'): ((502.08000000000004, 0.0),), ('OD2C1A', 'ND3A3', 'CD32A', 'CD2O1A'): ((502.08000000000004, 0.0),), ('CD2O1A', 'CD33C', 'ND3A3', 'OD2C1A'): ((502.08000000000004, 0.0),), ('OD2C1A', 'ND3A3', 'CD33C', 'CD2O1A'): ((502.08000000000004, 0.0),), ('OD2C2A', 'CD31A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD31A', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'CD32A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD32A', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'CD33A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD33A', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'CD31C', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD31C', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'CD32C', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD32C', 'OD2C2A'): ((297.064, 0.0),), ('OD2C3A', 'CD31C', 'OD31F', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD31F', 'CD31C', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD31A', 'OD31F', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD31F', 'CD31A', 'OD2C3A'): ((355.64, 0.0),), ('CD2O1A', 'CD32C', 'ND2A1', 'OD2C1A'): ((376.56, 0.0),), ('OD2C1A', 'ND2A1', 'CD32C', 'CD2O1A'): ((376.56, 0.0),), ('CD2O1A', 'CD31C', 'ND2A2', 'OD2C1A'): ((155.64480000000003, 0.0),), ('OD2C1A', 'ND2A2', 'CD31C', 'CD2O1A'): ((155.64480000000003, 0.0),), ('CD2O1A', 'CD32C', 'ND2A2', 'OD2C1A'): ((418.40000000000003, 0.0),), ('OD2C1A', 'ND2A2', 'CD32C', 'CD2O1A'): ((418.40000000000003, 0.0),), ('CD2O1A', 'CD33C', 'ND2A2', 'OD2C1A'): ((374.04960000000005, 0.0),), ('OD2C1A', 'ND2A2', 'CD33C', 'CD2O1A'): ((374.04960000000005, 0.0),), ('OD2C1A', 'ND2A1', 'CD33C', 'CD2O1A'): ((376.56, 0.0),), ('CD2O1A', 'CD33C', 'ND2A1', 'OD2C1A'): ((376.56, 0.0),), ('ND2A1', 'HDP1A', 'HDP1A', 'CD2O1A'): ((16.736, 0.0),), ('CD2O1A', 'HDP1A', 'HDP1A', 'ND2A1'): ((16.736, 0.0),), ('OD2C1A', 'ND2A3', 'CD33C', 'CD2O1A'): ((251.04000000000002, 0.0),), ('CD2O1A', 'CD33C', 'ND2A3', 'OD2C1A'): ((251.04000000000002, 0.0),), ('ND2A2', 'CD2O1A', 'CD31C', 'HDP1A'): ((128.4488, 0.0),), ('HDP1A', 'CD31C', 'CD2O1A', 'ND2A2'): ((128.4488, 0.0),), ('ND2A2', 'CD2O1A', 'CD32C', 'HDP1A'): ((167.36, 0.0),), ('HDP1A', 'CD32C', 'CD2O1A', 'ND2A2'): ((167.36, 0.0),), ('ND2A2', 'CD2O1A', 'CD33C', 'HDP1A'): ((148.9504, 0.0),), ('HDP1A', 'CD33C', 'CD2O1A', 'ND2A2'): ((148.9504, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD33A'): ((297.064, 0.0),), ('CD33A', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD32A'): ((297.064, 0.0),), ('CD32A', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD32C'): ((297.064, 0.0),), ('CD32C', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD31A'): ((297.064, 0.0),), ('CD31A', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD31C'): ((297.064, 0.0),), ('CD31C', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('ND2R5A', 'CD2R5A', 'CD2R5B', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5B', 'CD2R5A', 'ND2R5A'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R5B', 'CD2R5A', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5A', 'CD2R5B', 'ND2R5A'): ((1.8828, 0.0),), ('CD2R5A', 'CD2R5A', 'ND2R5B', 'HDR5A'): ((2.092, 0.0),), ('HDR5A', 'ND2R5B', 'CD2R5A', 'CD2R5A'): ((2.092, 0.0),), ('CD2R5A', 'ND2R5B', 'CD2R5A', 'HDR5A'): ((2.092, 0.0),), ('HDR5A', 'CD2R5A', 'ND2R5B', 'CD2R5A'): ((2.092, 0.0),), ('CD2R5B', 'ND2R5A', 'ND2R5B', 'HDR5B'): ((2.092, 0.0),), ('HDR5B', 'ND2R5B', 'ND2R5A', 'CD2R5B'): ((2.092, 0.0),), ('CD2R5B', 'ND2R5B', 'ND2R5A', 'HDR5B'): ((2.092, 0.0),), ('HDR5B', 'ND2R5A', 'ND2R5B', 'CD2R5B'): ((2.092, 0.0),), ('CD2R5A', 'CD2R5A', 'ND2R5A', 'HDR5A'): ((2.092, 0.0),), ('HDR5A', 'ND2R5A', 'CD2R5A', 'CD2R5A'): ((2.092, 0.0),), ('CD2R5A', 'ND2R5A', 'CD2R5A', 'HDR5A'): ((2.092, 0.0),), ('HDR5A', 'CD2R5A', 'ND2R5A', 'CD2R5A'): ((2.092, 0.0),), ('ND2R5C', 'CD2R5E', 'CD2R5D', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5D', 'CD2R5E', 'ND2R5C'): ((1.8828, 0.0),), ('CD2R5D', 'CD2R5D', 'ND2R5C', 'HDR5D'): ((2.092, 0.0),), ('HDR5D', 'ND2R5C', 'CD2R5D', 'CD2R5D'): ((2.092, 0.0),), ('CD2R5E', 'ND2R5C', 'ND2R5C', 'HDR5E'): ((2.092, 0.0),), ('HDR5E', 'ND2R5C', 'ND2R5C', 'CD2R5E'): ((2.092, 0.0),), ('CD2N1A', 'ND2P1A', 'ND2P1A', 'ND2P1A'): ((167.36, 0.0),), ('ND2P1A', 'ND2P1A', 'ND2P1A', 'CD2N1A'): ((167.36, 0.0),), ('HDR5A', 'ND2R5A', 'CD2R5C', 'CD2R5A'): ((1.8828, 0.0),), ('CD2R5A', 'CD2R5C', 'ND2R5A', 'HDR5A'): ((1.8828, 0.0),), ('HDR5A', 'CD2R5C', 'ND2R5A', 'CD2R5A'): ((1.8828, 0.0),), ('CD2R5A', 'ND2R5A', 'CD2R5C', 'HDR5A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5A', 'CD2R5A', 'ND2R5A'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R5A', 'CD2R5A', 'HDP1A'): ((1.8828, 0.0),), ('HDR5C', 'CD2R5A', 'CD2R5C', 'CD2R5C'): ((1.8828, 0.0),), ('CD2R5C', 'CD2R5C', 'CD2R5A', 'HDR5C'): ((1.8828, 0.0),), ('HDR5C', 'CD2R5C', 'CD2R5A', 'CD2R5C'): ((1.8828, 0.0),), ('CD2R5C', 'CD2R5A', 'CD2R5C', 'HDR5C'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5A', 'CD2R6D', 'ND2R5A'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R6D', 'CD2R5A', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R6D', 'CD2R5A', 'ND2R5A'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R5A', 'CD2R6D', 'HDP1A'): ((1.8828, 0.0),), ('CD2R6A', 'CD2R6A', 'CD2R6D', 'HDR6A'): ((1.8828, 0.0),), ('HDR6A', 'CD2R6D', 'CD2R6A', 'CD2R6A'): ((1.8828, 0.0),), ('HDR6A', 'CD2R6A', 'CD2R6D', 'CD2R6A'): ((1.8828, 0.0),), ('CD2R6A', 'CD2R6D', 'CD2R6A', 'HDR6A'): ((1.8828, 0.0),), ('HDR5C', 'CD2R6D', 'CD2R5A', 'CD2R5C'): ((1.8828, 0.0),), ('CD2R5C', 'CD2R5A', 'CD2R6D', 'HDR5C'): ((1.8828, 0.0),), ('HDR5C', 'CD2R5A', 'CD2R6D', 'CD2R5C'): ((1.8828, 0.0),), ('CD2R5C', 'CD2R6D', 'CD2R5A', 'HDR5C'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R6F', 'CD2R5B', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R5B', 'CD2R6F', 'ND2R5A'): ((1.8828, 0.0),), ('ND2R5A', 'CD2R5B', 'CD2R6F', 'HDP1A'): ((1.8828, 0.0),), ('HDP1A', 'CD2R6F', 'CD2R5B', 'ND2R5A'): ((1.8828, 0.0),), ('CD2R6F', 'CD2R6F', 'CD2R6B', 'ND2R5A'): ((83.68, 0.0),), ('ND2R5A', 'CD2R6B', 'CD2R6F', 'CD2R6F'): ((83.68, 0.0),), ('CD2R6F', 'CD2R6B', 'CD2R6F', 'ND2R5A'): ((83.68, 0.0),), ('ND2R5A', 'CD2R6F', 'CD2R6B', 'CD2R6F'): ((83.68, 0.0),), ('CD2R6F', 'CD2R6F', 'ND2R6B', 'ND2R5B'): ((41.84, 0.0),), ('ND2R5B', 'ND2R6B', 'CD2R6F', 'CD2R6F'): ((41.84, 0.0),), ('CD2R6F', 'ND2R6B', 'CD2R6F', 'ND2R5B'): ((41.84, 0.0),), ('ND2R5B', 'CD2R6F', 'ND2R6B', 'CD2R6F'): ((41.84, 0.0),), ('CD2R6F', 'CD2R6F', 'CD2R6B', 'ND2R5B'): ((83.68, 0.0),), ('ND2R5B', 'CD2R6B', 'CD2R6F', 'CD2R6F'): ((83.68, 0.0),), ('CD2R6F', 'CD2R6B', 'CD2R6F', 'ND2R5B'): ((83.68, 0.0),), ('ND2R5B', 'CD2R6F', 'CD2R6B', 'CD2R6F'): ((83.68, 0.0),), ('CD2R6F', 'CD2R6F', 'ND2R6B', 'ND2R5A'): ((41.84, 0.0),), ('ND2R5A', 'ND2R6B', 'CD2R6F', 'CD2R6F'): ((41.84, 0.0),), ('CD2R6F', 'ND2R6B', 'CD2R6F', 'ND2R5A'): ((41.84, 0.0),), ('ND2R5A', 'CD2R6F', 'ND2R6B', 'CD2R6F'): ((41.84, 0.0),), ('CD2O4A', 'ND2R6B', 'ND2R6B', 'OD2C1B'): ((334.72, 0.0),), ('OD2C1B', 'ND2R6B', 'ND2R6B', 'CD2O4A'): ((334.72, 0.0),), ('CD2O4A', 'ND2R6C', 'ND2R6C', 'OD2C1B'): ((334.72, 0.0),), ('OD2C1B', 'ND2R6C', 'ND2R6C', 'CD2O4A'): ((334.72, 0.0),), ('CD2O4A', 'ND2R6C', 'ND2R6B', 'OD2C1B'): ((334.72, 0.0),), ('OD2C1B', 'ND2R6B', 'ND2R6C', 'CD2O4A'): ((334.72, 0.0),), ('CD2R6B', 'ND2R6B', 'CD2R6J', 'ND2B1'): ((251.04000000000002, 0.0),), ('ND2B1', 'CD2R6J', 'ND2R6B', 'CD2R6B'): ((251.04000000000002, 0.0),), ('ND2R6B', 'CD2R6H', 'CD2O4A', 'HDP1A'): ((4.184, 0.0),), ('HDP1A', 'CD2O4A', 'CD2R6H', 'ND2R6B'): ((4.184, 0.0),), ('ND2R6C', 'CD2R6H', 'CD2O4A', 'HDP1A'): ((4.184, 0.0),), ('HDP1A', 'CD2O4A', 'CD2R6H', 'ND2R6C'): ((4.184, 0.0),), ('ND2R6C', 'CD2R6H', 'CD2O4A', 'CD33A'): ((58.576, 0.0),), ('CD33A', 'CD2O4A', 'CD2R6H', 'ND2R6C'): ((58.576, 0.0),), ('CD2O4A', 'ND2R6B', 'ND2R6C', 'OD2C1B'): ((460.24, 0.0),), ('OD2C1B', 'ND2R6C', 'ND2R6B', 'CD2O4A'): ((460.24, 0.0),), ('CD2O4A', 'ND2R6C', 'CD2R6J', 'OD2C1B'): ((376.56, 0.0),), ('OD2C1B', 'CD2R6J', 'ND2R6C', 'CD2O4A'): ((376.56, 0.0),), ('CD2R6J', 'CD2O4A', 'CD2R6H', 'CD33A'): ((58.576, 0.0),), ('CD33A', 'CD2R6H', 'CD2O4A', 'CD2R6J'): ((58.576, 0.0),), ('CD2R6C', 'ND2R6B', 'ND2R6C', 'ND2B1'): ((167.36, 0.0),), ('ND2B1', 'ND2R6C', 'ND2R6B', 'CD2R6C'): ((167.36, 0.0),), ('CD2O4A', 'ND2R6C', 'CD2R6F', 'OD2C1B'): ((376.56, 0.0),), ('OD2C1B', 'CD2R6F', 'ND2R6C', 'CD2O4A'): ((376.56, 0.0),), ('ND2B1', 'HDP1A', 'CD2R6C', 'HDP1A'): ((25.104, 0.0),), ('HDP1A', 'CD2R6C', 'HDP1A', 'ND2B1'): ((25.104, 0.0),), ('OD2C3A', 'CD33A', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD33A', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD32A', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD32A', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD33C', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD33C', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD32C', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD32C', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD31C', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD31C', 'OD2C3A'): ((355.64, 0.0),), ('CD2O3A', 'OD31F', 'CD33C', 'OD2C3A'): ((355.64, 0.0),), ('OD2C3A', 'CD33C', 'OD31F', 'CD2O3A'): ((355.64, 0.0),), ('CD2C1A', 'CD2C1A', 'CD32A', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD32A', 'CD2C1A', 'CD2C1A'): ((8.368, 0.0),), ('CD2C1A', 'CD2C1B', 'CD32A', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD32A', 'CD2C1B', 'CD2C1A'): ((8.368, 0.0),), ('CD2C1A', 'CD32A', 'CD2C1A', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD2C1A', 'CD32A', 'CD2C1A'): ((8.368, 0.0),), ('CD2C1A', 'CD32A', 'CD2C1B', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD2C1B', 'CD32A', 'CD2C1A'): ((8.368, 0.0),), ('CD2C1A', 'CD2C1A', 'CD33A', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD33A', 'CD2C1A', 'CD2C1A'): ((8.368, 0.0),), ('CD2C1A', 'CD2C1B', 'CD33A', 'HD2C1A'): ((8.368, 0.0),), ('HD2C1A', 'CD33A', 'CD2C1B', 'CD2C1A'): ((8.368, 0.0),), ('CD2O1D', 'CD33C', 'CD33C', 'OD2C1D'): ((410.03200000000004, 0.0),), ('OD2C1D', 'CD33C', 'CD33C', 'CD2O1D'): ((410.03200000000004, 0.0),), ('CD2O1D', 'CD33C', 'CD32C', 'OD2C1D'): ((389.112, 0.0),), ('OD2C1D', 'CD32C', 'CD33C', 'CD2O1D'): ((389.112, 0.0),), ('CD2O1D', 'CD32C', 'CD32C', 'OD2C1D'): ((397.48, 0.0),), ('OD2C1D', 'CD32C', 'CD32C', 'CD2O1D'): ((397.48, 0.0),), ('CD2O1C', 'HDP1C', 'CD33C', 'OD2C1D'): ((313.8, 0.0),), ('OD2C1D', 'CD33C', 'HDP1C', 'CD2O1C'): ((313.8, 0.0),), ('CD2O1C', 'HDP1C', 'CD32C', 'OD2C1D'): ((298.3192, 0.0),), ('OD2C1D', 'CD32C', 'HDP1C', 'CD2O1C'): ((298.3192, 0.0),), ('CD2O1C', 'HDP1C', 'CD33C', 'OD2C1C'): ((313.8, 0.0),), ('OD2C1C', 'CD33C', 'HDP1C', 'CD2O1C'): ((313.8, 0.0),), ('CD2O1C', 'HDP1C', 'CD32C', 'OD2C1C'): ((298.3192, 0.0),), ('OD2C1C', 'CD32C', 'HDP1C', 'CD2O1C'): ((298.3192, 0.0),), ('CD2O1C', 'HDP1C', 'CD31C', 'OD2C1C'): ((298.3192, 0.0),), ('OD2C1C', 'CD31C', 'HDP1C', 'CD2O1C'): ((298.3192, 0.0),), ('CD2O1C', 'HDP1C', 'CD31G', 'OD2C1C'): ((298.3192, 0.0),), ('OD2C1C', 'CD31G', 'HDP1C', 'CD2O1C'): ((298.3192, 0.0),), ('CD2O1D', 'CD32F', 'CD31G', 'OD2C1D'): ((389.112, 0.0),), ('OD2C1D', 'CD31G', 'CD32F', 'CD2O1D'): ((389.112, 0.0),), ('CD2O1C', 'ND2A1', 'OD2C1D', 'HDP1C'): ((292.88, 0.0),), ('HDP1C', 'OD2C1D', 'ND2A1', 'CD2O1C'): ((292.88, 0.0),), ('CD2O1A', 'CD31DC', 'ND3A3', 'OD2C1A'): ((0.0, 0.0),), ('OD2C1A', 'ND3A3', 'CD31DC', 'CD2O1A'): ((0.0, 0.0),), ('ND3A3', 'CD2O1A', 'CD31DC', 'CD32A'): ((0.0, 0.0),), ('CD32A', 'CD31DC', 'CD2O1A', 'ND3A3'): ((0.0, 0.0),), ('CD2O1A', 'CD31DC', 'ND2A1', 'OD2C1A'): ((502.08000000000004, 0.0),), ('OD2C1A', 'ND2A1', 'CD31DC', 'CD2O1A'): ((502.08000000000004, 0.0),), ('OD2C2A', 'CD31DC', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'OD2C2A', 'CD31DC', 'OD2C2A'): ((297.064, 0.0),), ('OD2C3A', 'CD31DC', 'OD31F', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD31F', 'CD31DC', 'OD2C3A'): ((355.64, 0.0),), ('CD2O1A', 'CD31DC', 'ND2A2', 'OD2C1A'): ((155.64480000000003, 0.0),), ('OD2C1A', 'ND2A2', 'CD31DC', 'CD2O1A'): ((155.64480000000003, 0.0),), ('ND2A2', 'CD2O1A', 'CD31DC', 'HDP1A'): ((128.4488, 0.0),), ('HDP1A', 'CD31DC', 'CD2O1A', 'ND2A2'): ((128.4488, 0.0),), ('CD2O2A', 'OD2C2A', 'OD2C2A', 'CD31DC'): ((297.064, 0.0),), ('CD31DC', 'OD2C2A', 'OD2C2A', 'CD2O2A'): ((297.064, 0.0),), ('OD2C3A', 'CD31DC', 'OD30C', 'CD2O3A'): ((355.64, 0.0),), ('CD2O3A', 'OD30C', 'CD31DC', 'OD2C3A'): ((355.64, 0.0),), ('CD2O1C', 'HDP1C', 'CD31DC', 'OD2C1C'): ((298.3192, 0.0),), ('OD2C1C', 'CD31DC', 'HDP1C', 'CD2O1C'): ((298.3192, 0.0),), ('ND2A2', 'CD2O1A', 'CD31HB', 'HDP1A'): ((128.4488, 0.0),), ('HDP1A', 'CD31HB', 'CD2O1A', 'ND2A2'): ((128.4488, 0.0),), ('CD2O2A', 'CD31HC', 'OD2C2A', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'OD2C2A', 'CD31HC', 'CD2O2A'): ((297.064, 0.0),), ('CD2O2A', 'CD30HA', 'OD2C2A', 'OD2C2A'): ((297.064, 0.0),), ('OD2C2A', 'OD2C2A', 'CD30HA', 'CD2O2A'): ((297.064, 0.0),), ('ND2A2', 'CD2O1A', 'CD31HA', 'HDP1A'): ((128.4488, 0.0),), ('HDP1A', 'CD31HA', 'CD2O1A', 'ND2A2'): ((128.4488, 0.0),)}
 
+def extract_atom_name(raw_atom_name, templates):
+    # Process Drude particles.
+    atom_name_prefix = ""
+    if raw_atom_name.startswith("Drude-"):
+        raw_atom_name = raw_atom_name[len("Drude-"):]
+        atom_name_prefix = "D"
+    
+    # Return None to indicate an atom without template name information.
+    atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
+    if len(atom_name_parts) &lt; 2:
+        return None
+    templates.append(atom_name_parts[0])
+    return f"{atom_name_prefix}{atom_name_parts[1]}"
+
 def is_valid_improper(atom_indices):
     index_1, index_2, index_3, index_4 = atom_indices
     bonded_to_1 = data.bondedToAtom[index_1]
@@ -30546,16 +30560,18 @@ for residue in topology.residues():
     # Extract the residue or patch names and atom names from the atom type names.
     templates = []
     atom_names = []
+    skip_residue = False
     for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{atom_name_parts[1]}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
+        atom_name = extract_atom_name(data.atomType[atom], templates)
+        if atom_name is None:
+            # Skip residues containing atoms without template name information
+            # (these could be from, e.g., some other solvent force field file).
+            skip_residue = True
+            break
+        atom_names.append(atom_name)
+    if skip_residue:
+        residue_data.append(([], [], []))
+        continue
 
     # Get all unique residue or patch names that have impropers.
     templates = set(templates)
@@ -30580,6 +30596,9 @@ periodic_impropers = []
 harmonic_impropers = []
 
 for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
+    if not atom_data:
+        continue
+
     # Determine all impropers to try to add to this residue.  Use a list to
     # try to maintain a consistent order.  There should not be many impropers
     # per residue so this should not be a significant performance issue.
@@ -30668,22 +30687,38 @@ delete_anisotropies = {'OMEA': ['O5'], 'OMEB': ['O5'], '1AOME': ['O5'], '1BOME':
 residue_order = {'ALAD': 0, 'ALA': 1, 'ARG': 2, 'ASN': 3, 'ASP': 4, 'CYS': 5, 'GLN': 6, 'GLU': 7, 'GLY': 8, 'HSD': 9, 'HSE': 10, 'HSP': 11, 'ILE': 12, 'LEU': 13, 'LYS': 14, 'MET': 15, 'PHE': 16, 'PRO': 17, 'SER': 18, 'THR': 19, 'TRP': 20, 'TYR': 21, 'VAL': 22, 'ALDD': 23, 'DALA': 24, 'DARG': 25, 'DASN': 26, 'DASP': 27, 'DCYS': 28, 'DGLN': 29, 'DGLU': 30, 'DGLY': 31, 'DHSD': 32, 'DHSE': 33, 'DHSP': 34, 'DILE': 35, 'DLEU': 36, 'DLYS': 37, 'DMET': 38, 'DPHE': 39, 'DPRO': 40, 'DSER': 41, 'DTHR': 42, 'DTRP': 43, 'DTYR': 44, 'DVAL': 45, 'ALLO': 46, 'PSIC': 47, 'EGLY': 48, 'MGLYOL': 49, 'MERYOL': 50, 'DTHROL': 51, 'LTHROL': 52, 'MRIBOL': 53, 'DARAOL': 54, 'LARAOL': 55, 'MXYLOL': 56, 'MALLOL': 57, 'DALTOL': 58, 'LALTOL': 59, 'DGLUOL': 60, 'LGLUOL': 61, 'DMANOL': 62, 'LMANOL': 63, 'DGULOL': 64, 'LGULOL': 65, 'DIDIOL': 66, 'LIDIOL': 67, 'MGALOL': 68, 'AGLC': 69, 'BGLC': 70, 'AALT': 71, 'BALT': 72, 'AALL': 73, 'BALL': 74, 'AGAL': 75, 'BGAL': 76, 'AGUL': 77, 'BGUL': 78, 'AIDO': 79, 'BIDO': 80, 'AMAN': 81, 'BMAN': 82, 'ATAL': 83, 'BTAL': 84, 'ARIB': 85, 'BRIB': 86, 'AARB': 87, 'BARB': 88, 'AXYF': 89, 'BXYF': 90, 'ALYF': 91, 'BLYF': 92, 'ADEO': 93, 'BDEO': 94, 'AFRU': 95, 'BFRU': 96, 'AGALA': 97, 'BGALA': 98, 'AGLCA': 99, 'BGLCA': 100, 'AIDOA': 101, 'BIDOA': 102, 'AGLCNA': 103, 'BGLCNA': 104, 'AGALNA': 105, 'BGALNA': 106, 'AMANNA': 107, 'BMANNA': 108, 'AXYL': 109, 'BXYL': 110, 'AFUC': 111, 'BFUC': 112, 'ARHM': 113, 'BRHM': 114, 'AQUI': 115, 'BQUI': 116, 'ARHMNA': 117, 'BRHMNA': 118, 'ANE5AC': 119, 'BNE5AC': 120, 'AALD': 121, 'PALD': 122, 'BALD': 123, 'IBLD': 124, 'ACO': 125, 'BTON': 126, 'FORM': 127, 'ACEM': 128, 'NMA': 129, 'NEA': 130, 'NPA': 131, 'DMA': 132, 'THF': 133, 'TF2M': 134, 'THP': 135, 'DIOX': 136, 'DMEE': 137, 'MEET': 138, 'DEET': 139, 'DME': 140, 'MPET': 141, 'MBET': 142, 'EPET': 143, 'MESH': 144, 'ETSH': 145, 'PRSH': 146, 'BUSH': 147, 'DMS': 148, 'EMS': 149, 'DMDS': 150, 'PHEN': 151, 'CRES': 152, 'PYR': 153, 'PYRM': 154, 'IMID': 155, '4MIM': 156, '4MIE': 157, 'PUR0': 158, 'PUR1': 159, 'MEOH': 160, 'ETOH': 161, 'PRO1': 162, 'BUO1': 163, 'PRO2': 164, 'BUO2': 165, 'PEO1': 166, 'HXO1': 167, 'PEO2': 168, 'B3MO1': 169, 'CPO1': 170, 'ACET': 171, 'DMP': 172, 'MP_0': 173, 'MP_1': 174, 'HP_1': 175, 'HP_2': 176, 'ETAM': 177, 'CHOL': 178, 'ACEH': 179, 'MAS': 180, 'EAS': 181, 'MPRO': 182, 'MBU': 183, 'FLUB': 184, 'MAM1': 185, 'EAM1': 186, 'PAM1': 187, 'PE': 188, 'PC': 189, 'GLYC': 190, 'GLYP': 191, 'PRPC': 192, 'DMPC': 193, 'DPPC': 194, 'DSPC': 195, 'DOPC': 196, 'DLPE': 197, 'DPPE': 198, 'POPC': 199, 'DOPE': 200, 'POPE': 201, 'DLPC': 202}
 patch_order = {'ACE': 0, 'ACP': 1, 'NNEU': 2, 'GNNU': 3, 'CTER': 4, 'CTEG': 5, 'CTEP': 6, 'CNEU': 7, 'CNEG': 8, 'CNES': 9, 'CT1': 10, 'CT1G': 11, 'ASPP': 12, 'GLUP': 13, 'LSN': 14, 'HS2': 15, 'KAC': 16, 'DACE': 17, 'DACP': 18, 'DNNEU': 19, 'DGNNU': 20, 'DCTER': 21, 'DCTEG': 22, 'DCTEP': 23, 'DCTES': 24, 'DCNEU': 25, 'DCNEG': 26, 'DCNES': 27, 'DCT1': 28, 'DCT1G': 29, 'OMEA': 30, 'OMEB': 31, '1AOME': 32, '1BOME': 33, 'FOMEA': 34, 'FOMEB': 35}
 
+def extract_atom_name(raw_atom_name, templates):
+    # Process Drude particles.
+    atom_name_prefix = ""
+    if raw_atom_name.startswith("Drude-"):
+        raw_atom_name = raw_atom_name[len("Drude-"):]
+        atom_name_prefix = "D"
+
+    # Return None to indicate an atom without template name information.
+    atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
+    if len(atom_name_parts) &lt; 2:
+        return None
+    templates.append(atom_name_parts[0])
+    return f"{atom_name_prefix}{atom_name_parts[1]}"
+
 residue_data = []
 
 for residue in topology.residues():
     # Extract the residue or patch names and atom names from the atom type names.
     templates = []
     atom_names = []
+    skip_residue = False
     for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{atom_name_parts[1]}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
+        atom_name = extract_atom_name(data.atomType[atom], templates)
+        if atom_name is None:
+            # Skip residues containing atoms without template name information
+            # (these could be from, e.g., some other solvent force field file).
+            skip_residue = True
+            break
+        atom_names.append(atom_name)
+    if skip_residue:
+        residue_data.append(([], [], []))
+        continue
 
     # Get all unique residue or patch names that have anisotropies.
     templates = set(templates)
@@ -30707,6 +30742,9 @@ for residue in topology.residues():
 anisotropy_table = {}
 
 for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
+    if not atom_data:
+        continue
+
     # Determine all anisotropies to try to add to this residue.
     anisotropies = {}
     for residue in residue_templates:
