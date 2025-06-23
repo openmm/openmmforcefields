@@ -29,6 +29,14 @@
         output: charmm36_protein_d.xml
 
     fixes:
+      # Remove proline-specific patch from non-proline residues
+      - action: remove
+        target:
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_0']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_1']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_2']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_3']
+
       # Here we manually add in the DISU (cysteine disulfide) patch to the force
       # field since ParmEd doesn't convert it automatically
       - action: append

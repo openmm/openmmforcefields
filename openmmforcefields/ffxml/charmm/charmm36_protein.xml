@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
+    <DateGenerated>2025-05-02</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_aldehydes.str" md5hash="dda2e0968eb30c1b8689e6f06b8502f7" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/prot/toppar_all36_prot_aldehydes.str</Source>
@@ -2073,7 +2073,6 @@
       <ExternalBond atomName="N" />
       <ExternalBond atomName="C" />
       <AllowPatch name="NTER_0" />
-      <AllowPatch name="PROP_0" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="NNEU_0" />
       <AllowPatch name="CTER_2" />
@@ -2498,7 +2497,6 @@
       <ExternalBond atomName="N" />
       <ExternalBond atomName="C" />
       <AllowPatch name="NTER_0" />
-      <AllowPatch name="PROP_0" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="NNEU_0" />
       <AllowPatch name="CTER_2" />
@@ -2605,7 +2603,6 @@
       <ExternalBond atomName="N" />
       <ExternalBond atomName="C" />
       <AllowPatch name="NTER_0" />
-      <AllowPatch name="PROP_0" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="NNEU_0" />
       <AllowPatch name="CTER_2" />
