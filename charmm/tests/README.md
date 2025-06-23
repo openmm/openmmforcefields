@@ -19,3 +19,4 @@
 * `16_POPC`: POPC lipid bilayer
 * `17_1EFS`: PDB 1EFS (DNA-RNA hybrid helix)
 * `18_1MJI`: PDB 1MJI (Ribosomal RNA-protein complex)
+* `19_aa_3_20_vac`: Standard proteinogenic amino acids (with N- and C-terminals)
