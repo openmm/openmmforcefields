@@ -119,12 +119,12 @@ def convert_yaml(yaml_filename, ffxml_dir):
         if name_collisions:
             raise ValueError(f"Collision between residue/patch names {sorted(name_collisions)}")
 
-        # Ensure that no atom names contain hyphens, as this will confuse the
-        # improper handling script (by the time these names reach the script,
-        # they will have been prepended with residue or patch names joined with
-        # a hyphen).
+        # Ensure that no names contain hyphens, as this will confuse the
+        # improper/anisotropy handling scripts.
         for templates in (params.residues.values(), params.patches.values()):
             for template in templates:
+                if "-" in template.name:
+                    raise ValueError(f"Forbidden character in template {template.name}")
                 for atom in template.atoms:
                     if "-" in atom.name:
                         raise ValueError(f"Forbidden character in template {template.name} atom {atom.name}")
@@ -485,13 +485,13 @@ def write_improper_script(
 
     script = etree.SubElement(ffxml_tree.getroot(), "Script")
     script.text = script_template.format(
-        residue_impropers=repr(residue_impropers),
-        patch_impropers=repr(patch_impropers),
-        delete_impropers=repr(delete_impropers),
-        residue_order=repr(residue_order),
-        patch_order=repr(patch_order),
-        periodic_improper_types=repr(periodic_improper_types),
-        harmonic_improper_types=repr(harmonic_improper_types),
+        residue_impropers=format_dict(residue_impropers),
+        patch_impropers=format_dict(patch_impropers),
+        delete_impropers=format_dict(delete_impropers),
+        residue_order=format_dict(residue_order),
+        patch_order=format_dict(patch_order),
+        periodic_improper_types=format_dict(periodic_improper_types),
+        harmonic_improper_types=format_dict(harmonic_improper_types),
     )
 
 
@@ -533,12 +533,16 @@ def write_anisotropy_script(ffxml_tree, residue_anisotropies, patch_anisotropies
 
     script = etree.SubElement(ffxml_tree.getroot(), "Script")
     script.text = script_template.format(
-        residue_anisotropies=repr(residue_anisotropies),
-        patch_anisotropies=repr(patch_anisotropies),
-        delete_anisotropies=repr(delete_anisotropies),
-        residue_order=repr(residue_order),
-        patch_order=repr(patch_order),
+        residue_anisotropies=format_dict(residue_anisotropies),
+        patch_anisotropies=format_dict(patch_anisotropies),
+        delete_anisotropies=format_dict(delete_anisotropies),
+        residue_order=format_dict(residue_order),
+        patch_order=format_dict(patch_order),
     )
+
+
+def format_dict(d):
+    return "\n".join(["{"] + [f"    {k!r}: {v!r}," for k, v in d.items()] + ["}"])
 
 
 if __name__ == "__main__":

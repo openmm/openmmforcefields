@@ -77,6 +77,11 @@
       # that causes conflicting atom type names to be generated
       - DMPR
 
+      # Names are incompatible with improper lookup logic
+      - SB3-10
+      - SB3-12
+      - SB3-14
+
     exclude_patches:
       # Exclude CNH3 (CYTP to protonated cytosine) as it is incorrectly marked
       # as applying elsewhere
@@ -133,6 +138,14 @@
               - ./Residues/Residue/AllowPatch[@name='DEO5_0']
 
     fixes:
+      # Remove proline-specific patch from non-proline residues
+      - action: remove
+        target:
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_0']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_1']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_2']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_3']
+
       # Here we manually set nucleic acid external bonds because CHARMM doesn't
       # provide a reliable way to get at this information and ParmEd fails to
       # guess it correctly for nucleic acids; we also fix RNA-to-DNA patches

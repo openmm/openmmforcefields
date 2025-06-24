@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
+    <DateGenerated>2025-06-23</DateGenerated>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str" md5hash="f3c4caab3ff08e7b822f7b944db3f197" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_main_protein_2023a.str</Source>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str" md5hash="192af93e684f3891df130182b8302c58" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_d_aminoacids_2023a.str</Source>
     <Source Source="toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str" md5hash="6d8a686b8b5ecf19de7e598d928a7c1a" sourcePackage="drude" sourcePackageVersion="drude_toppar_2023.tgz">toppar/drude/drude_toppar_2023/toppar_drude_carbohydrate_2023a.str</Source>
@@ -97,18 +97,18 @@
       <AllowPatch name="ACE_3" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="CNES_1" />
       <AllowPatch name="CT1_1" />
       <AllowPatch name="CT2_1" />
-      <AllowPatch name="CT2S_2" />
       <AllowPatch name="CT3_2" />
       <AllowPatch name="DNTER_0" />
       <AllowPatch name="DNTES_0" />
       <AllowPatch name="DCTER_1" />
       <AllowPatch name="DCTES_1" />
       <AllowPatch name="DCNEU_1" />
+      <AllowPatch name="DCNES_1" />
       <AllowPatch name="DCT1_1" />
       <AllowPatch name="DCT2_1" />
+      <AllowPatch name="DCT2S_2" />
     </Residue>
     <Residue name="DALA">
       <Atom charge="1.9594411482736152" name="N" type="DALA-N" />
@@ -145,18 +145,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DARG">
       <Atom charge="1.9594411482736152" name="N" type="DARG-N" />
@@ -229,10 +229,8 @@
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CTEP_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
@@ -241,8 +239,10 @@
       <AllowPatch name="DCTEP_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DASN">
       <Atom charge="1.9594411482736152" name="N" type="DASN-N" />
@@ -294,18 +294,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DASP">
       <Atom charge="1.9594411482736152" name="N" type="DASP-N" />
@@ -357,10 +357,8 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="ASPP_0" />
       <AllowPatch name="DNTER_1" />
@@ -368,8 +366,10 @@
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DCYS">
       <Atom charge="1.9594411482736152" name="N" type="DCYS-N" />
@@ -413,18 +413,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DGLN">
       <Atom charge="1.9594411482736152" name="N" type="DGLN-N" />
@@ -483,18 +483,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DGLU">
       <Atom charge="1.9594411482736152" name="N" type="DGLU-N" />
@@ -553,10 +553,8 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="GLUP_0" />
       <AllowPatch name="DNTER_1" />
@@ -564,8 +562,10 @@
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DHSD">
       <Atom charge="1.9594411482736152" name="N" type="DHSD-N" />
@@ -626,10 +626,8 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="HS2_0" />
       <AllowPatch name="DNTER_1" />
@@ -637,8 +635,10 @@
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DHSE">
       <Atom charge="1.9594411482736152" name="N" type="DHSE-N" />
@@ -700,10 +700,8 @@
       <AllowPatch name="NNEU_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
@@ -711,8 +709,10 @@
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DHSP">
       <Atom charge="1.9594411482736152" name="N" type="DHSP-N" />
@@ -771,18 +771,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DILE">
       <Atom charge="1.9594411482736152" name="N" type="DILE-N" />
@@ -840,18 +840,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DLEU">
       <Atom charge="1.9594411482736152" name="N" type="DLEU-N" />
@@ -909,18 +909,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DLYS">
       <Atom charge="1.9594411482736152" name="N" type="DLYS-N" />
@@ -987,10 +987,8 @@
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CTEP_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="LSN_0" />
       <AllowPatch name="KAC_0" />
@@ -1001,8 +999,10 @@
       <AllowPatch name="DCTEP_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DMET">
       <Atom charge="1.9594411482736152" name="N" type="DMET-N" />
@@ -1060,18 +1060,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DPHE">
       <Atom charge="1.9594411482736152" name="N" type="DPHE-N" />
@@ -1137,18 +1137,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DPRO">
       <Atom charge="1.6277830152749726" name="N" type="DPRO-N" />
@@ -1195,12 +1195,12 @@
       <AllowPatch name="PROP_0" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTEP_0" />
-      <AllowPatch name="CNES_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DPROP_0" />
       <AllowPatch name="DCTEP_0" />
       <AllowPatch name="DCTES_0" />
+      <AllowPatch name="DCNES_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DSER">
       <Atom charge="1.9594411482736152" name="N" type="DSER-N" />
@@ -1244,18 +1244,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DTHR">
       <Atom charge="1.9594411482736152" name="N" type="DTHR-N" />
@@ -1306,18 +1306,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DTRP">
       <Atom charge="1.9594411482736152" name="N" type="DTRP-N" />
@@ -1395,18 +1395,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DTYR">
       <Atom charge="1.9594411482736152" name="N" type="DTYR-N" />
@@ -1479,18 +1479,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
     <Residue name="DVAL">
       <Atom charge="1.9594411482736152" name="N" type="DVAL-N" />
@@ -1541,18 +1541,18 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_0" />
       <AllowPatch name="CNEU_0" />
-      <AllowPatch name="CNES_0" />
       <AllowPatch name="CT1_0" />
       <AllowPatch name="CT2_0" />
-      <AllowPatch name="CT2S_1" />
       <AllowPatch name="CT3_1" />
       <AllowPatch name="DNTER_1" />
       <AllowPatch name="DNTES_1" />
       <AllowPatch name="DCTER_0" />
       <AllowPatch name="DCTES_0" />
       <AllowPatch name="DCNEU_0" />
+      <AllowPatch name="DCNES_0" />
       <AllowPatch name="DCT1_0" />
       <AllowPatch name="DCT2_0" />
+      <AllowPatch name="DCT2S_1" />
     </Residue>
   </Residues>
   <Patches>
@@ -1671,6 +1671,41 @@
       <ApplyToResidue name="TRP" />
       <ApplyToResidue name="TYR" />
       <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DGNTS_0">
+      <AddAtom charge="0.34" name="HT1" type="DGNTS-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DGNTS-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DGNTS-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="2.276158038387988" name="CA" type="DGNTS-CA" />
+      <ChangeAtom charge="-2.233158038387988" name="DCA" type="Drude-DGNTS-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DGNTS-N" />
+      <ChangeAtom charge="0.143" name="HA1" type="DGNTS-HA1" />
+      <ChangeAtom charge="0.143" name="HA2" type="DGNTS-HA2" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DGNTS-N" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <ApplyToResidue name="PRLD" />
+    </Patch>
+    <Patch name="DGNTS_1">
+      <AddAtom charge="0.34" name="HT1" type="DGNTS-HT1" />
+      <AddAtom charge="0.34" name="HT2" type="DGNTS-HT2" />
+      <AddAtom charge="0.34" name="HT3" type="DGNTS-HT3" />
+      <AddBond atomName1="HT1" atomName2="N" />
+      <AddBond atomName1="HT2" atomName2="N" />
+      <AddBond atomName1="HT3" atomName2="N" />
+      <ChangeAtom charge="2.276158038387988" name="CA" type="DGNTS-CA" />
+      <ChangeAtom charge="-2.233158038387988" name="DCA" type="Drude-DGNTS-CA" />
+      <ChangeAtom charge="-1.9770909072094385" name="DN" type="Drude-DGNTS-N" />
+      <ChangeAtom charge="0.143" name="HA1" type="DGNTS-HA1" />
+      <ChangeAtom charge="0.143" name="HA2" type="DGNTS-HA2" />
+      <ChangeAtom charge="1.6280909072094385" name="N" type="DGNTS-N" />
+      <RemoveAtom name="HN" />
+      <RemoveBond atomName1="HN" atomName2="N" />
+      <RemoveExternalBond atomName="N" />
+      <ApplyToResidue name="GLY" />
     </Patch>
     <Patch name="DPROP_0">
       <AddAtom charge="0.266" name="HT1" type="DPROP-HT1" />
@@ -2008,6 +2043,80 @@
       <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
       <ApplyToResidue name="ALAD" />
     </Patch>
+    <Patch name="DCNES_0">
+      <AddAtom charge="-1.6663059805572336" name="DOT1" type="Drude-DCNES-OT1" />
+      <AddAtom charge="-1.963334406026505" name="DOT2" type="Drude-DCNES-OT2" />
+      <AddAtom charge="0.374" name="HT" type="DCNES-HT" />
+      <AddAtom charge="-0.319" name="LPT1" type="DCNES-LPT1" />
+      <AddAtom charge="-0.319" name="LPT2" type="DCNES-LPT2" />
+      <AddAtom charge="-0.285" name="LPT3" type="DCNES-LPT3" />
+      <AddAtom charge="-0.285" name="LPT4" type="DCNES-LPT4" />
+      <AddAtom charge="1.6663059805572336" name="OT1" type="DCNES-OT1" />
+      <AddAtom charge="1.963334406026505" name="OT2" type="DCNES-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="HT" atomName2="OT2" />
+      <ChangeAtom charge="2.7405268573119237" name="C" type="DCNES-C" />
+      <ChangeAtom charge="-1.9065268573119238" name="DC" type="Drude-DCNES-C" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <RemoveExternalBond atomName="C" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="GLY" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="PRO" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCNES_1">
+      <AddAtom charge="-1.6663059805572336" name="DOT1" type="Drude-DCNES-OT1" />
+      <AddAtom charge="-1.963334406026505" name="DOT2" type="Drude-DCNES-OT2" />
+      <AddAtom charge="0.374" name="HT" type="DCNES-HT" />
+      <AddAtom charge="-0.319" name="LPT1" type="DCNES-LPT1" />
+      <AddAtom charge="-0.319" name="LPT2" type="DCNES-LPT2" />
+      <AddAtom charge="-0.285" name="LPT3" type="DCNES-LPT3" />
+      <AddAtom charge="-0.285" name="LPT4" type="DCNES-LPT4" />
+      <AddAtom charge="1.6663059805572336" name="OT1" type="DCNES-OT1" />
+      <AddAtom charge="1.963334406026505" name="OT2" type="DCNES-OT2" />
+      <AddBond atomName1="C" atomName2="OT1" />
+      <AddBond atomName1="C" atomName2="OT2" />
+      <AddBond atomName1="HT" atomName2="OT2" />
+      <ChangeAtom charge="2.7405268573119237" name="C" type="DCNES-C" />
+      <ChangeAtom charge="-1.9065268573119238" name="DC" type="Drude-DCNES-C" />
+      <RemoveAtom name="DO" />
+      <RemoveAtom name="LPOA" />
+      <RemoveAtom name="LPOB" />
+      <RemoveAtom name="O" />
+      <RemoveBond atomName1="C" atomName2="O" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="-0.029995430854691738" p3="0" siteName="LPT1" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT1" atomName2="OT2" atomName3="C" p1="-0.0005235721931185043" p2="0.029995430854691738" p3="0" siteName="LPT2" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="0.03269217666591343" siteName="LPT3" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <VirtualSite atomName1="OT2" atomName2="HT" atomName3="C" p1="-0.012485829976186883" p2="0.0005706440663482743" p3="-0.03269217666591343" siteName="LPT4" type="localCoords" wo1="1" wo2="0" wo3="0" wx1="-1.0" wx2="0.0" wx3="1.0" wy1="0" wy2="-1" wy3="1" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
     <Patch name="DCT1_0">
       <AddAtom charge="2.2962872001035097" name="CT" type="DCT1-CT" />
       <AddAtom charge="-2.3262872001035095" name="DCT" type="Drude-DCT1-CT" />
@@ -2167,6 +2276,91 @@
       <ChangeAtom charge="2.0363207668819214" name="N" type="DCT2-N" />
       <ChangeAtom charge="1.4919161182852507" name="NT" type="DCT2-NT" />
       <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2-O" />
+      <ApplyToResidue name="ALAD" />
+    </Patch>
+    <Patch name="DCT2S_0">
+      <AddAtom charge="-2.2739161182852508" name="DNT" type="Drude-DCT2S-NT" />
+      <AddAtom charge="0.303" name="HTC1" type="DCT2S-HTC1" />
+      <AddAtom charge="0.351" name="HTC2" type="DCT2S-HTC2" />
+      <AddAtom charge="-0.411" name="LPOA" type="DCT2S-LPOA" />
+      <AddAtom charge="-0.264" name="LPOB" type="DCT2S-LPOB" />
+      <AddAtom charge="1.4919161182852507" name="NT" type="DCT2S-NT" />
+      <AddBond atomName1="C" atomName2="NT" />
+      <AddBond atomName1="HTC1" atomName2="NT" />
+      <AddBond atomName1="HTC2" atomName2="NT" />
+      <ChangeAtom charge="2.951382122346228" name="C" type="DCT2S-C" />
+      <ChangeAtom charge="-2.1833821223462277" name="DC" type="Drude-DCT2S-C" />
+      <ChangeAtom charge="-1.6325290868987967" name="DO" type="Drude-DCT2S-O" />
+      <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2S-O" />
+      <ApplyToResidue name="AGLCNA" />
+      <ApplyToResidue name="ARHMNA" />
+      <ApplyToResidue name="ANE5AC" />
+      <ApplyToResidue name="PALD" />
+      <ApplyToResidue name="BALD" />
+      <ApplyToResidue name="IBLD" />
+      <ApplyToResidue name="FORM" />
+      <ApplyToResidue name="ACEM" />
+      <ApplyToResidue name="NMA" />
+      <ApplyToResidue name="NEA" />
+      <ApplyToResidue name="NPA" />
+      <ApplyToResidue name="DMA" />
+      <ApplyToResidue name="MAS" />
+      <ApplyToResidue name="EAS" />
+      <ApplyToResidue name="MPRO" />
+      <ApplyToResidue name="MBU" />
+      <ApplyToResidue name="MEO" />
+    </Patch>
+    <Patch name="DCT2S_1">
+      <AddAtom charge="-2.2739161182852508" name="DNT" type="Drude-DCT2S-NT" />
+      <AddAtom charge="0.303" name="HTC1" type="DCT2S-HTC1" />
+      <AddAtom charge="0.351" name="HTC2" type="DCT2S-HTC2" />
+      <AddAtom charge="1.4919161182852507" name="NT" type="DCT2S-NT" />
+      <AddBond atomName1="C" atomName2="NT" />
+      <AddBond atomName1="HTC1" atomName2="NT" />
+      <AddBond atomName1="HTC2" atomName2="NT" />
+      <ChangeAtom charge="2.951382122346228" name="C" type="DCT2S-C" />
+      <ChangeAtom charge="-2.1833821223462277" name="DC" type="Drude-DCT2S-C" />
+      <ChangeAtom charge="-1.6325290868987967" name="DO" type="Drude-DCT2S-O" />
+      <ChangeAtom charge="-0.411" name="LPOA" type="DCT2S-LPOA" />
+      <ChangeAtom charge="-0.264" name="LPOB" type="DCT2S-LPOB" />
+      <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2S-O" />
+      <RemoveExternalBond atomName="C" />
+      <ApplyToResidue name="ALA" />
+      <ApplyToResidue name="ARG" />
+      <ApplyToResidue name="ASN" />
+      <ApplyToResidue name="ASP" />
+      <ApplyToResidue name="CYS" />
+      <ApplyToResidue name="GLN" />
+      <ApplyToResidue name="GLU" />
+      <ApplyToResidue name="GLY" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="ILE" />
+      <ApplyToResidue name="LEU" />
+      <ApplyToResidue name="LYS" />
+      <ApplyToResidue name="MET" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="PRO" />
+      <ApplyToResidue name="SER" />
+      <ApplyToResidue name="THR" />
+      <ApplyToResidue name="TRP" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="VAL" />
+    </Patch>
+    <Patch name="DCT2S_2">
+      <AddBond atomName1="HTC1" atomName2="NT" />
+      <AddBond atomName1="HTC2" atomName2="NT" />
+      <ChangeAtom charge="2.951382122346228" name="C" type="DCT2S-C" />
+      <ChangeAtom charge="-2.1833821223462277" name="DC" type="Drude-DCT2S-C" />
+      <ChangeAtom charge="-2.2739161182852508" name="DNT" type="Drude-DCT2S-NT" />
+      <ChangeAtom charge="-1.6325290868987967" name="DO" type="Drude-DCT2S-O" />
+      <ChangeAtom charge="0.303" name="HTC1" type="DCT2S-HTC1" />
+      <ChangeAtom charge="0.351" name="HTC2" type="DCT2S-HTC2" />
+      <ChangeAtom charge="-0.411" name="LPOA" type="DCT2S-LPOA" />
+      <ChangeAtom charge="-0.264" name="LPOB" type="DCT2S-LPOB" />
+      <ChangeAtom charge="1.4919161182852507" name="NT" type="DCT2S-NT" />
+      <ChangeAtom charge="1.6675290868987966" name="O" type="DCT2S-O" />
       <ApplyToResidue name="ALAD" />
     </Patch>
   </Patches>

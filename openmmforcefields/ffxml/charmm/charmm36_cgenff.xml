@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
+    <DateGenerated>2025-06-23</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/top_all36_na.rtf" md5hash="ffd9d681ff73591157e2458e336ab4a3" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/top_all36_na.rtf</Source>
@@ -41507,9 +41507,6 @@
       <ApplyToResidue name="LPPG" />
       <ApplyToResidue name="LPC12" />
       <ApplyToResidue name="LPC14" />
-      <ApplyToResidue name="SB3-10" />
-      <ApplyToResidue name="SB3-12" />
-      <ApplyToResidue name="SB3-14" />
       <ApplyToResidue name="LAPAO" />
       <ApplyToResidue name="LAPAOP" />
       <ApplyToResidue name="DDMG" />
@@ -42152,9 +42149,6 @@
       <ApplyToResidue name="LPPG" />
       <ApplyToResidue name="LPC12" />
       <ApplyToResidue name="LPC14" />
-      <ApplyToResidue name="SB3-10" />
-      <ApplyToResidue name="SB3-12" />
-      <ApplyToResidue name="SB3-14" />
       <ApplyToResidue name="LAPAO" />
       <ApplyToResidue name="LAPAOP" />
       <ApplyToResidue name="TRIPAO" />

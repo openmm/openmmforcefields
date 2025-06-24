@@ -21,7 +21,10 @@
       # Won't support single amino acids since the terminal patches are
       # different and cause ambiguity for assigning templates to polypeptides,
       # but this shouldn't be a significant use case
+      - CNES
+      - CT2S
       - CTES
+      - GNTS
       - NTES
     split:
       - input:
@@ -29,7 +32,9 @@
         output: charmm_polar_2023_d.xml
     fixes:
       - action: remove
-        target: ./Residues/Residue[@name!='PRO']/AllowPatch[@name='CTEP_0']
+        target:
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='CTEP_0']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_0']
   References:
    protein:
      - >-
