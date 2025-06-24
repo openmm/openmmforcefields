@@ -32,8 +32,9 @@
         output: charmm_polar_2023_d.xml
     fixes:
       - action: remove
-        target: ./Residues/Residue[@name!='PRO']/AllowPatch[@name='CTEP_0']
-        target: ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_0']
+        target:
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='CTEP_0']
+          - ./Residues/Residue[@name!='PRO']/AllowPatch[@name='PROP_0']
   References:
    protein:
      - >-

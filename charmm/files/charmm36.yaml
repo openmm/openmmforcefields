@@ -77,6 +77,11 @@
       # that causes conflicting atom type names to be generated
       - DMPR
 
+      # Names are incompatible with improper lookup logic
+      - SB3-10
+      - SB3-12
+      - SB3-14
+
     exclude_patches:
       # Exclude CNH3 (CYTP to protonated cytosine) as it is incorrectly marked
       # as applying elsewhere

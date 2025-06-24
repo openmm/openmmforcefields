@@ -18,30 +18,43 @@ def extract_atom_name(raw_atom_name, templates):
     atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
     if len(atom_name_parts) < 2:
         return None
-    templates.append(atom_name_parts[0])
+    templates.add(atom_name_parts[0])
     return f"{{atom_name_prefix}}{{atom_name_parts[1]}}"
 
 residue_data = []
 
-for residue in topology.residues():
-    # Extract the residue or patch names and atom names from the atom type names.
-    templates = []
-    atom_names = []
-    skip_residue = False
-    for atom in residue.atoms():
-        atom_name = extract_atom_name(data.atomType[atom], templates)
-        if atom_name is None:
-            # Skip residues containing atoms without template name information
-            # (these could be from, e.g., some other solvent force field file).
-            skip_residue = True
-            break
-        atom_names.append(atom_name)
-    if skip_residue:
-        residue_data.append(([], [], []))
-        continue
+for residue_index, residue in enumerate(topology.residues()):
+    # Extract the residue or patch names and atom names.
+    template_data = templateForResidue[residue_index]
+    templates = set()
+    if template_data is None:
+        # Multi-residue patch; fall back to parsing atom names because OpenMM
+        # leaves None in templateForResidue in this case.
+        atom_names = []
+        skip_residue = False
+        for atom in residue.atoms():
+            atom_name = extract_atom_name(data.atomType[atom], templates)
+            if atom_name is None:
+                # Skip residues containing atoms without template name data
+                # (they might be from, e.g., another solvent force field file).
+                skip_residue = True
+                break
+            atom_names.append(atom_name)
+        if skip_residue:
+            residue_data.append(([], [], []))
+            continue
+    else:
+        # Extract names from template name.
+        for template_index, template_name in enumerate(template_data.name.split("-")):
+            if template_index:
+                # Patch name.
+                templates.add(template_name.rsplit("_", maxsplit=1)[0])
+            else:
+                # Residue name.
+                templates.add(template_name)
+        atom_names = [template_data.atoms[data.atomTemplateIndexes[atom]].name for atom in residue.atoms()]
 
     # Get all unique residue or patch names that have anisotropies.
-    templates = set(templates)
     residue_templates = sorted(
         (template for template in templates if template in residue_anisotropies), key=residue_order.get
     )
@@ -62,9 +75,6 @@ for residue in topology.residues():
 anisotropy_table = {{}}
 
 for residue_index, (atom_data, residue_templates, patch_templates) in enumerate(residue_data):
-    if not atom_data:
-        continue
-
     # Determine all anisotropies to try to add to this residue.
     anisotropies = {{}}
     for residue in residue_templates:
