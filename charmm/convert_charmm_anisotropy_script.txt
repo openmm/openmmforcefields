@@ -7,25 +7,54 @@ delete_anisotropies = {delete_anisotropies}
 residue_order = {residue_order}
 patch_order = {patch_order}
 
+def extract_atom_name(raw_atom_name, templates):
+    # Process Drude particles.
+    atom_name_prefix = ""
+    if raw_atom_name.startswith("Drude-"):
+        raw_atom_name = raw_atom_name[len("Drude-"):]
+        atom_name_prefix = "D"
+
+    # Return None to indicate an atom without template name information.
+    atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
+    if len(atom_name_parts) < 2:
+        return None
+    templates.add(atom_name_parts[0])
+    return f"{{atom_name_prefix}}{{atom_name_parts[1]}}"
+
 residue_data = []
 
-for residue in topology.residues():
-    # Extract the residue or patch names and atom names from the atom type names.
-    templates = []
-    atom_names = []
-    for atom in residue.atoms():
-        raw_atom_name = data.atomType[atom]
-        atom_is_drude = raw_atom_name.startswith("Drude-")
-        if atom_is_drude:
-            atom_name_parts = raw_atom_name[len("Drude-"):].rsplit("-", maxsplit=1)
-            atom_names.append(f"D{{atom_name_parts[1]}}")
-        else:
-            atom_name_parts = raw_atom_name.rsplit("-", maxsplit=1)
-            atom_names.append(atom_name_parts[1])
-        templates.append(atom_name_parts[0])
+for residue_index, residue in enumerate(topology.residues()):
+    # Extract the residue or patch names and atom names.
+    template_data = templateForResidue[residue_index]
+    templates = set()
+    if template_data is None:
+        # Multi-residue patch; fall back to parsing atom names because OpenMM
+        # leaves None in templateForResidue in this case.
+        atom_names = []
+        skip_residue = False
+        for atom in residue.atoms():
+            atom_name = extract_atom_name(data.atomType[atom], templates)
+            if atom_name is None:
+                # Skip residues containing atoms without template name data
+                # (they might be from, e.g., another solvent force field file).
+                skip_residue = True
+                break
+            atom_names.append(atom_name)
+        if skip_residue:
+            residue_data.append(([], [], []))
+            continue
+    else:
+        # Extract names from template name.
+        for template_index, template_name in enumerate(template_data.name.split("-")):
+            if template_index:
+                # Patch name.
+                templates.add(template_name.rsplit("_", maxsplit=1)[0])
+            else:
+                # Residue name.
+                templates.add(template_name)
+        atom_names = [template_data.atoms[data.atomTemplateIndexes[atom]].name for atom in residue.atoms()]
 
     # Get all unique residue or patch names that have anisotropies.
-    templates = set(templates)
     residue_templates = sorted(
         (template for template in templates if template in residue_anisotropies), key=residue_order.get
     )

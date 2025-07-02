@@ -86,6 +86,22 @@ generated, the TOPPAR files should be reviewed to locate the inconsistency.  You
 may wish to exclude one or another set of parameters at this point to ensure
 that the resulting force field is correct.
 
+### Notice
+
+Due to various outstanding issues in ParmEd, including:
+
+* [ParmEd/ParmEd#1383](https://github.com/ParmEd/ParmEd/issues/1383)
+* [ParmEd/ParmEd#1384](https://github.com/ParmEd/ParmEd/issues/1384)
+* [ParmEd/ParmEd#1395](https://github.com/ParmEd/ParmEd/issues/1395)
+* [ParmEd/ParmEd#1396](https://github.com/ParmEd/ParmEd/issues/1396)
+* [ParmEd/ParmEd#1397](https://github.com/ParmEd/ParmEd/issues/1397)
+
+it is not currently possible to use a prepackaged version of ParmEd or a version
+from its GitHub repository to perform the CHARMM conversion.  Until these issues
+are fixed, a custom patched version of ParmEd containing workarounds for these
+problems specific to this conversion workflow can be found at
+[`patched-for-charmm-conversion` branch of the epretti/ParmEd repository](https://github.com/epretti/ParmEd/tree/patched-for-charmm-conversion).
+
 CHARMM docker image
 ===================
 
