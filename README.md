@@ -13,7 +13,7 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 **CHARMM:** Non-polarizable protein, nucleic acid, and pre-parameterized small molecule force fields available in in the [July 2024 CHARMM36 force field release from the Mackerell website](http://mackerell.umaryland.edu/charmm_ff.shtml). *Note that this conversion has not yet been fully validated.*
 
-**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
+**Open Force Field Initiative force fields:** All distributed [Open Force Field Initiative](http://openforcefield.org) [force fields](https://openforcefield.org/force-fields/force-fields/), including the [`openff-2.x.y` ("Sage")](https://openforcefield.org/force-fields/force-fields/) and [`smirnoff99Frosst`](https://github.com/openforcefield/smirnoff99Frosst/) series of force fields available through the [`openff-forcefields`](http://github.com/openforcefield/openff-forcefields) package. This is now supported in OpenMM 7.5.0 and later.
 
 **Espaloma:** Currently [`espaloma-0.3.2`](https://github.com/choderalab/espaloma/releases/tag/0.3.2) is supported. See our [first espaloma paper](https://arxiv.org/abs/2010.01196) and our second paper which focuses on [protein-ligand systems and beyond](https://arxiv.org/abs/2307.07085).
 
@@ -215,7 +215,7 @@ system = forcefield.createSystem(
 )
 ```
 
-The latest official Open Force Field Initiative release ([`openff-1.2.0`](https://github.com/openforcefield/openff-forcefields) of the ["Parsley" small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/)) is used if none is specified.
+The latest official Open Force Field Initiative release ([`openff-2.1.0`](https://github.com/openforcefield/openff-forcefields) of the ["Sage" small molecule force field](https://openforcefield.org/community/news/general/sage2.1.0-release/)) is used if none is specified.
 You can check which SMIRNOFF force field is in use with
 
 ```pycon
@@ -227,12 +227,11 @@ Create a template generator for a specific SMIRNOFF force field for multiple mol
 
 ```python
 molecules = Molecule.from_file("molecules.sdf")
-# Create a SMIRNOFF residue template generator from the official openff-1.0.0 release,
+# Create a SMIRNOFF residue template generator from the official openff-2.2.1 release,
 # which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-1.2.0")
-# Create a SMIRNOFF residue template generator from the official smirnoff99Frosst-1.1.0 release,
-# which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="smirnoff99Frosst-1.2.0")
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-2.2.1")
+# Create a SMIRNOFF residue template generator from an older Sage or Parsley version
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-1.3.0")
 # Use a local .offxml file instead
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="local-file.offxml")
 ```
@@ -256,7 +255,7 @@ You can optionally specify a file that contains a cache of pre-parameterized mol
 ```python
 smirnoff = SMIRNOFFTemplateGenerator(
     cache="smirnoff-molecules.json",
-    forcefield="openff-1.2.0",
+    forcefield="openff-2.1.0",
 )
 ```
 
@@ -382,7 +381,7 @@ system_generator = SystemGenerator(
 )
 ```
 
-To use the [Open Force Field `openff-1.2.0`](https://github.com/openforcefield/openff-forcefields), an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-1.2.0'`.
+To use the [OpenFF's Sage `openff-2.1.0`](https://github.com/openforcefield/openff-forcefields) or a newer version, an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.1.0'`.
 
 To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
 
