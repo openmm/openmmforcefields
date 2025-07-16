@@ -1563,7 +1563,7 @@ import openmm.unit
 scee_table = {
 }
 scnb_table = {
-    ('cD', 'cD', 'cD', 'cD'): 6.0
+    ('cD', 'cD', 'cD', 'cD'): 6.0,
 }
 
 atom_types = [data.atomType[atom] for atom in data.atoms]
