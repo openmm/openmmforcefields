@@ -506,3 +506,43 @@ class TestSystemGenerator:
 
             with open("test.pdb", "w") as outfile:
                 PDBFile.writeFile(modeller.topology, modeller.positions, outfile)
+
+    @pytest.mark.parametrize(
+        "small_molecule_forcefield",
+        [
+            pytest.param("gaff-2.2.20", marks=pytest.mark.gaff),
+            "openff-2.0.0",
+            pytest.param("espaloma-0.3.2", marks=pytest.mark.espaloma),
+        ],
+    )
+    def test_dummy_generator(self, small_molecule_forcefield, test_systems):
+        """Test that the dummy SystemGenerator works"""
+
+        from openmm import unit
+        from openmmforcefields.generators import DummySystemGenerator
+
+        for name, testsystem in test_systems.items():
+            molecules = testsystem["molecules"]
+
+            # Create a SystemGenerator for this force field
+            generator = DummySystemGenerator(
+                forcefields=self.amber_forcefields,
+                small_molecule_forcefield=small_molecule_forcefield,
+                molecules=molecules,
+            )
+
+            for molecule in molecules:
+                # DummySystemGenerator is supposed to explicitly ignore all
+                # keyword arguments passed to create_system()
+                openmm_topology = molecule.to_topology().to_openmm()
+                system = generator.create_system(openmm_topology, dummy_argument="dummy_value")
+
+                # There should be some forces added, and some non-zero
+                # parameters to make the energy non-zero
+                assert system.getNumForces() != 0
+                positions = molecule.conformers[0].to_openmm()
+                integrator = openmm.VerletIntegrator(0.001)
+                context = openmm.Context(system, integrator)
+                context.setPositions(positions)
+                energy = context.getState(energy=True).getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole)
+                assert energy != 0

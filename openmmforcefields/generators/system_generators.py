@@ -366,7 +366,7 @@ class SystemGenerator:
 
         Parameters
         ----------
-        topology : openmmtools.topology.Topology object
+        topology : openmm.app.Topology object
             The topology describing the system to be created
         molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
@@ -435,8 +435,8 @@ class DummySystemGenerator(SystemGenerator):
 
         Parameters
         ----------
-        topology : openff.toolkit.topology.Topology
-            The Topology to be parameterized
+        topology : openmm.app.Topology object
+            The topology describing the system to be created
 
         Returns
         -------
@@ -448,16 +448,16 @@ class DummySystemGenerator(SystemGenerator):
 
         import openmm
         from openmm import unit
-        from openmmtools.constants import kB
 
-        kT = kB * 300 * unit.kelvin  # hard-coded temperature for setting energy scales
+        # hard-coded temperature for setting energy scales
+        kT = unit.BOLTZMANN_CONSTANT_kB * unit.AVOGADRO_CONSTANT_NA * 300 * unit.kelvin
 
         # Create a System
         system = openmm.System()
 
         # Add particles
         mass = 12.0 * unit.amu
-        for atom in topology.atoms:
+        for atom in topology.atoms():
             system.addParticle(mass)
 
         # Add simple repulsive interactions
@@ -466,48 +466,48 @@ class DummySystemGenerator(SystemGenerator):
         nonbonded.setNonbondedMethod(openmm.CustomNonbondedForce.CutoffNonPeriodic)
         nonbonded.setCutoffDistance(1 * unit.nanometer)
         system.addForce(nonbonded)
-        for atom in topology.atoms:
+        for atom in topology.atoms():
             nonbonded.addParticle([])
 
         # Build a list of which atom indices are bonded to each atom
         bondedToAtom = []
         for atom in topology.atoms():
             bondedToAtom.append(set())
-        for atom1, atom2 in topology.bonds():
-            bondedToAtom[atom1.index].add(atom2.index)
-            bondedToAtom[atom2.index].add(atom1.index)
+        for bond in topology.bonds():
+            bondedToAtom[bond.atom1.index].add(bond.atom2.index)
+            bondedToAtom[bond.atom2.index].add(bond.atom1.index)
 
         # Add bonds
         bond_force = openmm.HarmonicBondForce()
         r0 = 1.0 * unit.angstroms
         sigma_r = 0.1 * unit.angstroms
         Kr = kT / sigma_r**2
-        for atom1, atom2 in topology.bonds():
-            bond_force.addBond(atom1.index, atom2.index, r0, Kr)
+        for bond in topology.bonds():
+            bond_force.addBond(bond.atom1.index, bond.atom2.index, r0, Kr)
         system.addForce(bond_force)
 
         # Add angles
         uniqueAngles = set()
         for bond in topology.bonds():
-            for atom in bondedToAtom[bond.atom1]:
-                if atom != bond.atom2:
-                    if atom < bond.atom2:
-                        uniqueAngles.add((atom, bond.atom1, bond.atom2))
+            for atom in bondedToAtom[bond.atom1.index]:
+                if atom != bond.atom2.index:
+                    if atom < bond.atom2.index:
+                        uniqueAngles.add((atom, bond.atom1.index, bond.atom2.index))
                     else:
-                        uniqueAngles.add((bond.atom2, bond.atom1, atom))
-            for atom in bondedToAtom[bond.atom2]:
-                if atom != bond.atom1:
-                    if atom > bond.atom1:
-                        uniqueAngles.add((bond.atom1, bond.atom2, atom))
+                        uniqueAngles.add((bond.atom2.index, bond.atom1.index, atom))
+            for atom in bondedToAtom[bond.atom2.index]:
+                if atom != bond.atom1.index:
+                    if atom > bond.atom1.index:
+                        uniqueAngles.add((bond.atom1.index, bond.atom2.index, atom))
                     else:
-                        uniqueAngles.add((atom, bond.atom2, bond.atom1))
+                        uniqueAngles.add((atom, bond.atom2.index, bond.atom1.index))
         angles = sorted(list(uniqueAngles))
         theta0 = 109.5 * unit.degrees  # TODO: Adapt based on number of bonds to each atom?
         sigma_theta = 10 * unit.degrees
         Ktheta = kT / sigma_theta**2
         angle_force = openmm.HarmonicAngleForce()
         for atom1, atom2, atom3 in angles:
-            angles.addAngle(atom1.index, atom2.index, atom3.index, theta0, Ktheta)
+            angle_force.addAngle(atom1, atom2, atom3, theta0, Ktheta)
         system.addForce(angle_force)
 
         # Make a list of all unique proper torsions
@@ -531,15 +531,7 @@ class DummySystemGenerator(SystemGenerator):
         phase = 0.0 * unit.degrees
         Kphi = 0.0 * kT
         for atom1, atom2, atom3, atom4 in propers:
-            torsion_force.add_torsion(
-                atom1.index,
-                atom2.index,
-                atom3.index,
-                atom4.index,
-                periodicity,
-                phase,
-                Kphi,
-            )
+            torsion_force.addTorsion(atom1, atom2, atom3, atom4, periodicity, phase, Kphi)
         system.addForce(torsion_force)
 
         return system
