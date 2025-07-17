@@ -1,20 +1,21 @@
 """
-Residue template generator for the AMBER GAFF1/2 small molecule force fields.
-
+Residue template generators for GAFF, SMIRNOFF, and espaloma small molecule force fields.
 """
 
 ################################################################################
 # IMPORTS
 ################################################################################
 
-################################################################################
-# LOGGER
-################################################################################
-
 import contextlib
 import logging
 import os
 import warnings
+
+from ..utils import classproperty
+
+################################################################################
+# LOGGER
+################################################################################
 
 _logger = logging.getLogger("openmmforcefields.generators.template_generators")
 
@@ -59,6 +60,7 @@ class SmallMoleculeTemplateGenerator:
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
         """
+
         # Store specified molecules
         self._molecules = dict()
         self.add_molecules(molecules)
@@ -105,7 +107,7 @@ class SmallMoleculeTemplateGenerator:
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
             to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
 
         Examples
@@ -118,8 +120,8 @@ class SmallMoleculeTemplateGenerator:
         >>> mol1, mol2, mol3 = [Molecule.from_smiles(s, allow_undefined_stereo=True) for s in smiles]
         >>> generator.add_molecules(mol1)  # doctest: +SKIP
         >>> generator.add_molecules([mol2, mol3])  # doctest: +SKIP
-
         """
+
         # Return if empty
         if not molecules:
             return
@@ -141,7 +143,8 @@ class SmallMoleculeTemplateGenerator:
 
     @staticmethod
     def _match_residue(residue, molecule_template):
-        """Determine whether a residue matches a Molecule template and return a list of corresponding atoms.
+        """
+        Determine whether a residue matches a Molecule template and return a list of corresponding atoms.
 
         This implementation uses NetworkX for graph isomorphism determination.
 
@@ -159,8 +162,8 @@ class SmallMoleculeTemplateGenerator:
             or None if it does not match the template
 
         .. todo :: Can this be replaced by an isomorphism matching call to the OpenFF toolkit?
-
         """
+
         # TODO: Speed this up by rejecting molecules that do not have the same chemical formula
 
         # TODO: Can this NetworkX implementation be replaced by an isomorphism
@@ -204,7 +207,7 @@ class SmallMoleculeTemplateGenerator:
         from networkx.algorithms import isomorphism
 
         def node_match(n1, n2):
-            """Return True of nodes match, and False if not"""
+            """Return True if nodes match, and False if not"""
             return (n1["element"] == n2["element"]) and (
                 n1["number_of_external_bonds"] == n2["number_of_external_bonds"]
             )
@@ -214,11 +217,9 @@ class SmallMoleculeTemplateGenerator:
             return None
 
         # Translate to local residue atom indices
-        # TODO: This can be simplified because molecule_template uses atom index as key
         atom_index_within_residue = {atom: index for (index, atom) in enumerate(residue.atoms())}
-        atom_index_within_template = {index: index for (index, atom) in enumerate(molecule_template.atoms)}
         matches = {
-            atom_index_within_residue[residue_atom]: atom_index_within_template[template_atom]
+            atom_index_within_residue[residue_atom]: template_atom
             for (residue_atom, template_atom) in graph_matcher.mapping.items()
         }
 
@@ -244,8 +245,8 @@ class SmallMoleculeTemplateGenerator:
 
            Replace this with an API call to Molecule once added:
            https://github.com/openforcefield/openff-toolkit/issues/488
-
         """
+
         import numpy as np
 
         if molecule.partial_charges is None:
@@ -268,6 +269,7 @@ class SmallMoleculeTemplateGenerator:
         molecule : openff.toolkit.Molecule
             The molecule whose atom names are to be modified in-place
         """
+
         from collections import defaultdict
 
         element_counts = defaultdict(int)
@@ -292,8 +294,8 @@ class SmallMoleculeTemplateGenerator:
         success : bool
             If the generator is able to successfully parameterize the residue, `True` is returned.
             If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
-
         """
+
         if self._database_table_name is None:
             raise NotImplementedError(
                 "SmallMoleculeTemplateGenerator is an abstract base class and cannot be used directly."
@@ -423,7 +425,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     >>> template_generator.INSTALLED_FORCEFIELDS
     ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
-
     """
 
     INSTALLED_FORCEFIELDS = [
@@ -449,14 +450,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
-        cache : str, optional, default=None
-            Filename for global caching of parameters.
-            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
         forcefield : str, optional, default=None
             GAFF force field to use, one of
             ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
             If not specified, the latest GAFF supported version is used.
             GAFFTemplateGenerator.INSTALLED_FORCEFIELDS contains a complete up-to-date list of supported force fields.
+        cache : str, optional, default=None
+            Filename for global caching of parameters.
+            If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
+
         Examples
         --------
 
@@ -598,25 +600,20 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         success : bool
             If the generator is able to successfully parameterize the residue, `True` is returned.
             If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
-
         """
 
         return super().generator(forcefield, residue)
 
-    def generate_residue_template(self, molecule, residue_atoms=None):
+    def generate_residue_template(self, molecule):
         """
         Generate a residue template and additional parameters for the specified Molecule.
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be
-            used to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
-            The parameters will be cached in case they are encountered again the future.
-        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
-            If specified, the subset of atoms to use in constructing a residue template
+        molecule : openff.toolkit.Molecule
+            A molecule to generate a residue template for. The molecule will be
+            parameterized with antechamber as needed. The parameters will be
+            cached in case it is encountered again the future.
 
         Returns
         -------
@@ -629,10 +626,10 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         * The residue template will be named after the SMILES of the molecule.
         * This method preserves stereochemistry during AM1-BCC charge parameterization.
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
-
         """
+
         import numpy as np
-        from openff.units import unit, Quantity
+        from openff.units import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
@@ -683,10 +680,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         _logger.debug("Reading GAFF atom types...")
         self._read_gaff_atom_types_from_mol2(gaff_mol2_filename, molecule)
 
-        # If residue_atoms == None, add all atoms to the residues
-        if not residue_atoms:
-            residue_atoms = [atom for atom in molecule.atoms]
-
         # Modify partial charges so that charge on residue atoms is integral
         # TODO: This may require some modification to correctly handle API changes
         #       when OpenFF toolkit makes charge quantities consistently unit-bearing
@@ -694,8 +687,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         _logger.debug("Fixing partial charges...")
         _logger.debug(f"{molecule.partial_charges}")
-        # is this used?
-        residue_charge = Quantity(0.0, unit.elementary_charge)  # noqa
         total_charge = molecule.partial_charges.sum()
 
         sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
@@ -754,17 +745,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             )
 
         for bond in molecule.bonds:
-            if (bond.atom1 in residue_atoms) and (bond.atom2 in residue_atoms):
-                bond = etree.SubElement(
-                    residue,
-                    "Bond",
-                    atomName1=bond.atom1.name,
-                    atomName2=bond.atom2.name,
-                )
-            elif (bond.atom1 in residue_atoms) and (bond.atom2 not in residue_atoms):
-                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom1.name)
-            elif (bond.atom1 not in residue_atoms) and (bond.atom2 in residue_atoms):
-                bond = etree.SubElement(residue, "ExternalBond", atomName=bond.atom2.name)
+            bond = etree.SubElement(
+                residue,
+                "Bond",
+                atomName1=bond.atom1.name,
+                atomName2=bond.atom2.name,
+            )
         # Render XML into string and append to parameters
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
         _logger.debug("ffxml creation complete.")
@@ -779,22 +765,21 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         frcmod_filename=None,
         verbosity=0,
     ):
-        """Run AmberTools antechamber and parmchk2 to create GAFF mol2 and frcmod files.
+        """
+        Run AmberTools antechamber and parmchk2 to create GAFF mol2 and frcmod files.
 
         Parameters
         ----------
         molecule_filename : str
             The molecule to be parameterized.
-        input_format : str
-            antechamber input format for molecule_filename
+        input_format : str, optional, default='sdf'
+            Format specifier for input file to pass to antechamber.
         gaff_mol2_filename : str, optional, default=None
             Name of GAFF mol2 filename to output.  If None, uses local directory
             and molecule_name
         frcmod_filename : str, optional, default=None
             Name of GAFF frcmod filename to output.  If None, uses local directory
             and molecule_name
-        input_format : str, optional, default='mol2'
-            Format specifier for input file to pass to antechamber.
         verbosity : int, default=0
             Verbosity for antechamber
 
@@ -805,6 +790,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         frcmod_filename : str
             Amber frcmod file containing additional parameters for the molecule not found in corresponding gaff.dat
         """
+
         if gaff_mol2_filename is None:
             gaff_mol2_filename = "molecule.gaff.mol2"
         if frcmod_filename is None:
@@ -921,6 +907,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             The Atom objects within the molecule will have a ``gaff_type`` field added containing the GAFF
             atom type as a string
         """
+
         # Read the resulting GAFF mol2 file atom types
         #       1 C1           1.8850    -1.0360    -0.1120 ca         1 MOL       0.000000
         # 012345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -937,8 +924,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 line = infile.readline()
                 atom.gaff_type = line[50:58].strip()
 
-        return
-
     def _check_for_errors(self, outputtext, other_errors=None, ignore_errors=None):
         """
         Check AMBER package output for the string 'ERROR' (upper or lowercase) and (optionally) specified other
@@ -950,7 +935,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         outputtext : str
             String listing output text from an (AMBER) command which should be checked for errors.
         other_errors : list(str), default None
-            If specified, provide strings for other errors which will be chcked for, such as
+            If specified, provide strings for other errors which will be checked for, such as
             "improper number of arguments", etc.
         ignore_errors: list(str), default None
             If specified, AMBER output lines containing errors but also containing any of the specified strings
@@ -960,7 +945,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         Notes
         -----
         If error(s) are found, raise a RuntimeError and attept to print the appropriate errors from the processed text.
-
         """
 
         lines = outputtext.split("\n")
@@ -990,23 +974,22 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 _logger.warning(line)
             raise (RuntimeError("Error encountered running AMBER tool. Exiting."))
 
-        return
-
 
 ################################################################################
-# MixIn for force field template generators that produce OpenMM System objects
+# Mixin for OpenMM System-generating template generators (used by SMIRNOFF and espaloma)
 ################################################################################
 
 
 class OpenMMSystemMixin:
-    """ """
+    """Mixin for force field template generators that produce OpenMM System objects"""
 
     def clear_system_cache(self):
         """Initialize the OpenMM System cache"""
         self._system_cache = dict()
 
     def cache_system(self, smiles, system):
-        """Transiently cache a copy of the OpenMM System object
+        """
+        Transiently cache a copy of the OpenMM System object
 
         Parameters
         ----------
@@ -1015,10 +998,12 @@ class OpenMMSystemMixin:
         system : openmm.System
             The OpenMM System to cache
         """
+
         self._system_cache[smiles] = system
 
     def get_openmm_system(self, molecule):
-        """Retrieve the OpenMM System object generated for a particular molecule for testing/validation.
+        """
+        Retrieve the OpenMM System object generated for a particular molecule for testing/validation.
 
         Parameters
         ----------
@@ -1031,6 +1016,7 @@ class OpenMMSystemMixin:
             If the Molecule object has already been parameterized by this instance, this molecule is returned.
             Otherwise, None is returned.
         """
+
         smiles = molecule.to_smiles()
         if smiles in self._system_cache:
             return self._system_cache[smiles]
@@ -1038,7 +1024,8 @@ class OpenMMSystemMixin:
             return None
 
     def convert_system_to_ffxml(self, molecule, system, improper_atom_ordering="smirnoff"):
-        """Convert OpenMM System object to molecule-specific OpenMM ffxml
+        """
+        Convert OpenMM System object to molecule-specific OpenMM ffxml
 
         Parameters
         ----------
@@ -1054,6 +1041,7 @@ class OpenMMSystemMixin:
         ffxml_contents : str
             The OpenMM ffxml contents for the given molecule.
         """
+
         # Generate OpenMM ffxml definition for this molecule
         from lxml import etree
 
@@ -1159,8 +1147,7 @@ class OpenMMSystemMixin:
         for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
             atom_indices[0], atom_indices[1], length, k = forces["HarmonicBondForce"].getBondParameters(bond_index)
 
-            # This variable is not used - is it needed?
-            bond_type = etree.SubElement(  # noqa
+            etree.SubElement(
                 bond_types,
                 "Bond",
                 **classes(atom_indices),
@@ -1176,8 +1163,7 @@ class OpenMMSystemMixin:
                 "HarmonicAngleForce"
             ].getAngleParameters(angle_index)
 
-            # This variable is not used - is it needed?
-            angle_type = etree.SubElement(  # noqa
+            etree.SubElement(
                 angle_types,
                 "Angle",
                 **classes(atom_indices),
@@ -1215,7 +1201,7 @@ class OpenMMSystemMixin:
                 torsions[atom_indices] = [(periodicity, phase, k)]
 
         # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering="smirnoff")
+        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
         for atom_indices in torsions.keys():
             params = dict()  # build parameter dictionary
             nterms = len(torsions[atom_indices])
@@ -1225,8 +1211,7 @@ class OpenMMSystemMixin:
                 params[f"phase{term + 1}"] = as_attrib(phase)
                 params[f"k{term + 1}"] = as_attrib(k)
 
-            # This variable is not used - is it needed?
-            torsion_type = etree.SubElement(  # noqa
+            etree.SubElement(
                 torsion_types,
                 torsion_tag(atom_indices),
                 **classes(atom_indices),
@@ -1267,11 +1252,6 @@ class OpenMMSystemMixin:
 ################################################################################
 # Open Force Field Initiative SMIRNOFF specific OpenMM ForceField template generation utilities
 ################################################################################
-
-
-class ClassProperty(property):
-    def __get__(self, cls, owner):
-        return self.fget.__get__(None, owner)()
 
 
 class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixin):
@@ -1322,7 +1302,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> template_generator = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json')
 
     Newly parameterized molecules will be written to the cache, saving time next time!
-
     """  # noqa
 
     def __init__(self, molecules=None, cache=None, forcefield=None, **kwargs):
@@ -1344,6 +1323,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         forcefield : str, optional, default=None
             Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
             If not specified, the latest Open Force Field Initiative release is used.
+
         Examples
         --------
 
@@ -1444,10 +1424,10 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
 
-    @ClassProperty
-    @classmethod
+    @classproperty
     def INSTALLED_FORCEFIELDS(cls):
-        """Return a list of the offxml files shipped with the openff-forcefields package.
+        """
+        Return a list of the offxml files shipped with the openff-forcefields package.
 
         Returns
         -------
@@ -1458,8 +1438,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
            Replace this with an API call once this issue is addressed:
            https://github.com/openforcefield/openff-toolkit/issues/477
-
         """
+
         from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
 
         file_names = list()
@@ -1479,7 +1459,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         return file_names
 
     def _search_paths(self, filename):
-        """Search registered OpenFF plugin directories
+        """
+        Search registered OpenFF plugin directories
 
         Parameters
         ----------
@@ -1495,8 +1476,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
            Replace this with an API call once this issue is addressed:
            https://github.com/openforcefield/openff-toolkit/issues/477
-
         """
+
         # TODO: Replace this method once there is a public API in the OpenFF toolkit for doing this
 
         from openff.toolkit.typing.engines.smirnoff.forcefield import (
@@ -1524,20 +1505,16 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         """Full path to the SMIRNOFF force field file"""
         return self._smirnoff_filename
 
-    def generate_residue_template(self, molecule, residue_atoms=None):
+    def generate_residue_template(self, molecule):
         """
         Generate a residue template and additional parameters for the specified Molecule.
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
-            The parameters will be cached in case they are encountered again the future.
-        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
-            If specified, the subset of atoms to use in constructing a residue template
+        molecule : openff.toolkit.Molecule
+            A molecule to generate a residue template for. The molecule will be
+            parameterized with SMIRNOFF as needed. The parameters will be
+            cached in case it is encountered again the future.
 
         Returns
         -------
@@ -1550,8 +1527,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         * The residue template will be named after the SMILES of the molecule.
         * This method preserves stereochemistry during AM1-BCC charge parameterization.
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
-
         """
+
         from openmm import CMMotionRemover
 
         # Use the canonical isomeric SMILES to uniquely name the template
@@ -1652,7 +1629,6 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> template_generator = EspalomaTemplateGenerator(cache='espaloma-molecules.json')
 
     Newly parameterized molecules will be written to the cache, saving time next time!
-
     """
 
     CHARGE_METHODS = ("nn", "am1-bcc", "gasteiger", "from-molecule")
@@ -1664,7 +1640,6 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         forcefield=None,
         model_cache_path=None,
         template_generator_kwargs=None,
-        **kwargs,
     ):
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
@@ -1691,7 +1666,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             If specified, use this directory to cache espaloma models
             default: ~/.espaloma/
         template_generator_kwargs : dict, optional, default=None
-            Optional keyword arguments:
+            An optional dictionary containing additional optional arguments:
             {"reference_forcefield": str, Openff force field supported by https://github.com/openforcefield/openff-forcefields
             without .offxml extension}
             {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
@@ -1744,6 +1719,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.0.0", "charge_method": "nn"}
         >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.3.2', template_generator_kwargs=template_generator_kwargs)
         """  # noqa
+
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
@@ -1802,8 +1778,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
 
-    @ClassProperty
-    @classmethod
+    @classproperty
     def INSTALLED_FORCEFIELDS(self):
         """Return list of available force field versions."""
         # TODO: Does this belong here? Is there a better way to do this?
@@ -1813,7 +1788,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         return ["espaloma-0.3.2"]
 
     def _get_model_filepath(self, forcefield):
-        """Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
+        """
+        Retrieve local file path to cached espaloma model parameters, or retrieve remote model if needed.
 
         Parameters
         ----------
@@ -1825,6 +1801,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         cached_filename : str
             Path to local cache of espaloma .pt model parameters
         """
+
         import os
 
         if os.path.exists(forcefield):
@@ -1887,20 +1864,16 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         """Full path to the SMIRNOFF force field file"""
         return self.espaloma_model_filepath
 
-    def generate_residue_template(self, molecule, residue_atoms=None):
+    def generate_residue_template(self, molecule):
         """
         Generate a residue template and additional parameters for the specified Molecule.
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-                to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with espaloma as needed.
-            The parameters will be cached in case they are encountered again the future.
-        residue_atoms : list of openff.toolkit.topology.Atom, optional, default=None
-            If specified, the subset of atoms to use in constructing a residue template
+        molecule : openff.toolkit.Molecule
+            A molecule to generate a residue template for. The molecule will be
+            parameterized with espaloma as needed. The parameters will be
+            cached in case it is encountered again the future.
 
         Returns
         -------
@@ -1911,8 +1884,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         -----
 
         * The residue template will be named after the SMILES of the molecule.
-
         """
+
         from openmm import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template

@@ -1,7 +1,8 @@
 """
 System generators that build an OpenMM System object from a Topology object.
-
 """
+
+from ..utils import classproperty
 
 ################################################################################
 # LOGGER
@@ -9,22 +10,11 @@ System generators that build an OpenMM System object from a Topology object.
 
 import logging
 
-_logger = logging.getLogger("openmmforcefields.system_generators")
+_logger = logging.getLogger("openmmforcefields.generators.system_generators")
 
 ################################################################################
 # System generator base class
 ################################################################################
-
-
-class classproperty(property):
-    def __get__(self, obj, objtype=None):
-        return super().__get__(objtype)
-
-    def __set__(self, obj, value):
-        super().__set__(type(obj), value)
-
-    def __delete__(self, obj):
-        super().__delete__(type(obj))
 
 
 class SystemGenerator:
@@ -97,7 +87,7 @@ class SystemGenerator:
         ----------
         forcefields : list of str, optional, default=None
             List of the names of ffxml files that will be used in System creation for the biopolymer.
-        small_molecule_forcefield : str, optional, default='openff-1.0.0'
+        small_molecule_forcefield : str, optional, default='openff-2.2.0'
             Small molecule force field to use.
             Must be supported by one of the registered template generators:
                 [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
@@ -113,7 +103,7 @@ class SystemGenerator:
         periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
             Keyword arguments added to forcefield_kwargs when the Topology is periodic.
         template_generator_kwargs : dict, optional, default=None
-            Keyword arguments to be passed to subclasses of
+            The value of an extra keyword argument called `template_generator_kwargs` to be passed to subclasses of
             ``openmmforcefields.generators.template_generators.SmallMoleculeTemplateGenerator``.
             Currently only used for ``openmmforcefields.generators.template_generators.EspalomaTemplateGenerator``.
         barostat : openmm.MonteCarloBarostat, optional, default=None
@@ -202,7 +192,6 @@ class SystemGenerator:
         >>> system_generator.particle_epsilons = False # will zero out Lennard-Jones particle-particle interactions
         >>> system_generator.particle_exceptions = False # will zero out all 1-4 Lennard-Jones interactions
         >>> system_generator.torsions = False # will zero out all torsion terms
-
         """  # noqa
 
         # Initialize
@@ -254,10 +243,18 @@ class SystemGenerator:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
                     _logger.debug(f"Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}")
+                    extra_kwargs = {}
+                    if self.template_generator_kwargs is not None:
+                        # template_generator_kwargs' keys and values never actually get expanded into kwargs!  This
+                        # argument is poorly named, and really just contains extra parameters that are currently only
+                        # used by espaloma.  To prevent having to add **kwargs to other template generators that will
+                        # silently swallow any misspelled arguments just to support this special case, we only pass
+                        # template_generator_kwargs as a kwarg to the template generator here if it is not None.
+                        extra_kwargs["template_generator_kwargs"] = self.template_generator_kwargs
                     self.template_generator = template_generator_cls(
                         forcefield=small_molecule_forcefield,
                         cache=cache,
-                        template_generator_kwargs=self.template_generator_kwargs,
+                        **extra_kwargs,
                     )
                     break
                 except (ValueError,) as e:
@@ -301,8 +298,8 @@ class SystemGenerator:
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
-
         """
+
         if self.template_generator is None:
             raise ValueError(
                 "You must have a small molecule residue template generator registered to add small molecules"
@@ -314,6 +311,7 @@ class SystemGenerator:
         """
         Add barostat and modify forces if requested.
         """
+
         # Add barostat if requested and the system uses periodic boundary conditions
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
@@ -374,15 +372,15 @@ class SystemGenerator:
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
             to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
 
         Returns
         -------
         system : openmm.System
             A system object generated from the topology
-
         """
+
         # Inform the template generator about any specified molecules
         if (self.template_generator is not None) and (molecules is not None):
             self.template_generator.add_molecules(molecules)
@@ -478,7 +476,6 @@ class DummySystemGenerator(SystemGenerator):
         for atom1, atom2 in topology.bonds():
             bondedToAtom[atom1.index].add(atom2.index)
             bondedToAtom[atom2.index].add(atom1.index)
-        return bondedToAtom
 
         # Add bonds
         bond_force = openmm.HarmonicBondForce()
