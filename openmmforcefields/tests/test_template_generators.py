@@ -10,7 +10,8 @@ from typing import TYPE_CHECKING
 import numpy as np
 import openmm
 import pytest
-from openff.toolkit import Molecule, ForceField as OFFForceField, unit as OFFUnit
+from openff.toolkit import Molecule, ForceField as OFFForceField
+from openff.units import unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
 
 from openmmforcefields.generators import (
