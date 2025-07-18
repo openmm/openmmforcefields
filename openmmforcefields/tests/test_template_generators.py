@@ -64,8 +64,8 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         -------
         molecules
             The filtered list of molecules to be filtered
-
         """
+
         molecules = [molecule for molecule in molecules if len(molecule.atoms) <= max_atoms]
 
         return random.sample(molecules, min(len(molecules), max_molecules))
@@ -76,6 +76,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         Skips over (returns False) smirnoff99Frosst, ff14SB, water models, and 2.0.0rc1.
         """
+
         if "ff14sb" in force_field:
             return False
         if "tip" in force_field:
@@ -137,8 +138,8 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         -------
         charges : np.array of shape [n_atoms]
             The dimensionless partial charges (implicitly in units of elementary_charge)
-
         """
+
         from openmm import unit
 
         system_charges = list()
@@ -151,7 +152,8 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         return system_charges
 
     def charges_are_equal(self, system, molecule):
-        """Return True if partial charges are equal
+        """
+        Return True if partial charges are equal
 
         Parameters
         ----------
@@ -165,6 +167,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         result : bool
             True if the partial charges are equal, False if not
         """
+
         from openff.units import unit
 
         assert system.getNumParticles() == molecule.n_atoms
@@ -210,6 +213,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         extra_info : str
             Extra information to include in the error message
         """
+
         # Compute energies
         reference_energy, reference_forces = cls.compute_energy(
             template_generated_system,
@@ -307,7 +311,8 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
     @staticmethod
     def compute_energy(system, positions):
-        """Compute potential energy and Force components for an OpenMM system.
+        """
+        Compute potential energy and Force components for an OpenMM system.
 
         Parameters
         ----------
@@ -325,6 +330,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
             openmm_forces['total'] is the total force
             openmm_forces['components'][forcename] is the force for the specified component force
         """
+
         system = copy.deepcopy(system)
         for index, force in enumerate(system.getForces()):
             force.setForceGroup(index)
@@ -354,6 +360,50 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         del context, integrator
         return openmm_energy, openmm_forces
+
+    def propagate_dynamics(self, molecule, system):
+        """Run a few steps of dynamics to generate a perturbed configuration.
+
+        Parameters
+        ----------
+        molecule : openff.toolkit.topology.Molecule
+            molecule.conformers[0] is used as initial positions
+        system : openmm.System
+            System object for dynamics
+
+        Returns
+        -------
+        new_molecule : openff.toolkit.topology.Molecule
+            new_molecule.conformers[0] has updated positions
+
+        """
+        # Run some dynamics
+        from openff.units.openmm import from_openmm
+        import openmm.unit
+
+        temperature = 300 * openmm.unit.kelvin
+        collision_rate = 1.0 / openmm.unit.picoseconds
+        timestep = 1.0 * openmm.unit.femtoseconds
+        nsteps = 100
+        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        platform = openmm.Platform.getPlatformByName("Reference")
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(molecule.conformers[0].to_openmm())
+
+        # RDKit-generated conformer is occassionally a bad starting point for dynamics,
+        # so minimize with MM first, see https://github.com/openmm/openmmforcefields/pull/370#issuecomment-2749237209
+        openmm.LocalEnergyMinimizer.minimize(context)
+        integrator.step(nsteps)
+
+        # Copy the molecule, storing new conformer
+        new_molecule = copy.deepcopy(molecule)
+        new_positions = context.getState(getPositions=True).getPositions()
+
+        new_molecule.conformers[0] = from_openmm(new_positions)
+
+        del context, integrator
+
+        return new_molecule
 
 
 @pytest.mark.gaff
@@ -442,66 +492,6 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             openmm_topology = molecule.to_topology().to_openmm()
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
-
-    def charges_from_system(self, system):
-        """Extract dimensionless partial charges from a System
-
-        Parameters
-        ----------
-        system : openmm.System
-            The System from which partial charges are to be extracted
-
-        Returns
-        -------
-        charges : np.array of shape [n_atoms]
-            The dimensionless partial charges (implicitly in units of elementary_charge)
-
-        """
-        from openmm import unit
-
-        system_charges = list()
-        forces = {force.__class__.__name__: force for force in system.getForces()}
-        for particle_index in range(system.getNumParticles()):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(particle_index)
-            system_charges.append(charge / unit.elementary_charge)
-        system_charges = np.array(system_charges)
-
-        return system_charges
-
-    def charges_are_equal(self, system, molecule):
-        """Return True if partial charges are equal
-
-        Parameters
-        ----------
-        system : openmm.System
-            The System from which partial charges are to be extracted
-        molecule : openmmforcefield.topology.Molecule
-            The Molecule from which partial charges are to be extracted
-
-        Returns
-        -------
-        result : bool
-            True if the partial charges are equal, False if not
-        """
-        from openff.units import unit
-
-        assert system.getNumParticles() == molecule.n_atoms
-
-        # charges_from_system returns a NumPy array that we trust to be implicitly e
-        system_charges: np.ndarray = self.charges_from_system(system)
-
-        # type(molecule.partial_charges) depends on the toolkit version
-
-        molecule_charges: np.ndarray = molecule.partial_charges.m_as(unit.elementary_charge)
-
-        result = np.allclose(system_charges, molecule_charges)
-
-        if not result:
-            _logger.info("Charges are not equal")
-            _logger.info(f"system charges  : {system_charges}")
-            _logger.info(f"molecule charges: {molecule_charges}")
-
-        return result
 
     def test_charge(self):
         """Test that charges are nonzero after charging if the molecule does not contain user charges"""
@@ -887,207 +877,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
 
-    @staticmethod
-    def compute_energy(system, positions):
-        """Compute potential energy and Force components for an OpenMM system.
-
-        Parameters
-        ----------
-        system : openmm.System
-            The System object
-        positions : openmm.unit.Quantity of shape (nparticles,3) with units compatible with nanometers
-            The positions for which energy is to be computed
-
-        Returns
-        -------
-        openmm_energy : dict of str : openmm.unit.Quantity
-            openmm_energy['total'] is the total potential energy
-            openmm_energy['components'][forcename] is the potential energy for the specified component force
-        openmm_forces : dict of str : openmm.unit.Quantity
-            openmm_forces['total'] is the total force
-            openmm_forces['components'][forcename] is the force for the specified component force
-        """
-        system = copy.deepcopy(system)
-        for index, force in enumerate(system.getForces()):
-            force.setForceGroup(index)
-        platform = openmm.Platform.getPlatformByName("Reference")
-        integrator = openmm.VerletIntegrator(0.001)
-        context = openmm.Context(system, integrator, platform)
-        context.setPositions(positions)
-        openmm_energy = {
-            "total": context.getState(getEnergy=True).getPotentialEnergy(),
-            "components": {
-                system.getForce(index).__class__.__name__: context.getState(
-                    getEnergy=True, groups=(1 << index)
-                ).getPotentialEnergy()
-                for index in range(system.getNumForces())
-            },
-        }
-
-        openmm_forces = {
-            "total": context.getState(getForces=True).getForces(asNumpy=True),
-            "components": {
-                system.getForce(index).__class__.__name__: context.getState(
-                    getForces=True, groups=(1 << index)
-                ).getForces(asNumpy=True)
-                for index in range(system.getNumForces())
-            },
-        }
-
-        del context, integrator
-        return openmm_energy, openmm_forces
-
-    @classmethod
-    def compare_energies(cls, molecule, template_generated_system, reference_system):
-        """Compare energies between OpenMM System generated by reference method and OpenMM System generated by ForceField template.
-
-        The OpenMM System object created internally by the reference method is used to
-        avoid any issues with stochasticity of partial charges due to conformer generation.
-
-        Parameters
-        ----------
-        molecule : openff.toolkit.topology.Molecule
-            The Molecule object to compare energy components (including positions)
-        template_generated_system : openmm.System
-            System generated by OpenMM ForceField template
-        reference_system : openmm.System
-            System generated by reference parmaeterization engine
-
-        """
-        # Compute energies
-        reference_energy, reference_forces = cls.compute_energy(
-            template_generated_system,
-            molecule.conformers[0].to_openmm(),
-        )
-        template_energy, template_forces = cls.compute_energy(
-            reference_system,
-            molecule.conformers[0].to_openmm(),
-        )
-
-        from openmm import unit
-
-        def write_xml(filename, system):
-            with open(filename, "w") as outfile:
-                print(f"Writing {filename}...")
-                outfile.write(openmm.XmlSerializer.serialize(system))
-                # DEBUG
-                print(openmm.XmlSerializer.serialize(system))
-
-        # Make sure both systems contain the same energy components
-        reference_components = set(reference_energy["components"])
-        template_components = set(template_energy["components"])
-        if len(reference_components.difference(template_components)) > 0:
-            raise Exception(
-                f"Reference system contains components {reference_components.difference(template_components)} that do not appear in template-generated system."
-            )
-        if len(template_components.difference(reference_components)) > 0:
-            raise Exception(
-                f"Template-generated system contains components {template_components.difference(reference_components)} that do not appear in reference system."
-            )
-        components = reference_components
-
-        # Compare energies
-        ENERGY_DEVIATION_TOLERANCE = 1.0e-2 * unit.kilocalories_per_mole
-        delta = template_energy["total"] - reference_energy["total"]
-        if abs(delta) > ENERGY_DEVIATION_TOLERANCE:
-            # Show breakdown by components
-            print("Energy components:")
-            print(f"{'component':24} {'Template (kcal/mol)':>20} {'Reference (kcal/mol)':>20}")
-            for key in components:
-                reference_component_energy = reference_energy["components"][key]
-                template_component_energy = template_energy["components"][key]
-                print(
-                    f"{key:24} {(template_component_energy / unit.kilocalories_per_mole):20.3f} {(reference_component_energy / unit.kilocalories_per_mole):20.3f} kcal/mol"
-                )
-            print(
-                f"{'TOTAL':24} {(template_energy['total'] / unit.kilocalories_per_mole):20.3f} {(reference_energy['total'] / unit.kilocalories_per_mole):20.3f} kcal/mol"
-            )
-            write_xml("reference_system.xml", reference_system)
-            raise EnergyError(
-                f"Energy deviation for {molecule.to_smiles()} ({delta / unit.kilocalories_per_mole} kcal/mol) exceeds threshold ({ENERGY_DEVIATION_TOLERANCE})"
-            )
-
-        # Compare forces
-        def norm(x):
-            N = x.shape[0]
-            return np.sqrt((1.0 / N) * (x**2).sum())
-
-        def relative_deviation(x, y):
-            FORCE_UNIT = unit.kilocalories_per_mole / unit.angstroms
-            if hasattr(x, "value_in_unit"):
-                x = x / FORCE_UNIT
-            if hasattr(y, "value_in_unit"):
-                y = y / FORCE_UNIT
-
-            if norm(y) > 0:
-                return norm(x - y) / np.sqrt(norm(x) ** 2 + norm(y) ** 2)
-            else:
-                return 0
-
-        RELATIVE_FORCE_DEVIATION_TOLERANCE = 1.0e-5
-        relative_force_deviation = relative_deviation(template_forces["total"], reference_forces["total"])
-        if relative_force_deviation > RELATIVE_FORCE_DEVIATION_TOLERANCE:
-            # Show breakdown by components
-            print("Force components:")
-            print(f"{'component':24} {'relative deviation':>24}")
-            for key in components:
-                print(
-                    f"{key:24} {relative_deviation(template_forces['components'][key], reference_forces['components'][key]):24.10f}"
-                )
-            print(f"{'TOTAL':24} {relative_force_deviation:24.10f}")
-            write_xml("system-smirnoff.xml", reference_system)
-            write_xml("openmm-smirnoff.xml", template_generated_system)
-            raise ForceError(
-                f"Relative force deviation for {molecule.to_smiles()} ({relative_force_deviation}) exceeds threshold ({RELATIVE_FORCE_DEVIATION_TOLERANCE})"
-            )
-
 
 class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
-
-    def propagate_dynamics(self, molecule, system):
-        """Run a few steps of dynamics to generate a perturbed configuration.
-
-        Parameters
-        ----------
-        molecule : openff.toolkit.topology.Molecule
-            molecule.conformers[0] is used as initial positions
-        system : openmm.System
-            System object for dynamics
-
-        Returns
-        -------
-        new_molecule : openff.toolkit.topology.Molecule
-            new_molecule.conformers[0] has updated positions
-
-        """
-        # Run some dynamics
-        from openff.units.openmm import from_openmm
-        import openmm.unit
-
-        temperature = 300 * openmm.unit.kelvin
-        collision_rate = 1.0 / openmm.unit.picoseconds
-        timestep = 1.0 * openmm.unit.femtoseconds
-        nsteps = 100
-        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
-        platform = openmm.Platform.getPlatformByName("Reference")
-        context = openmm.Context(system, integrator, platform)
-        context.setPositions(molecule.conformers[0].to_openmm())
-
-        # RDKit-generated conformer is occassionally a bad starting point for dynamics,
-        # so minimize with MM first, see https://github.com/openmm/openmmforcefields/pull/370#issuecomment-2749237209
-        openmm.LocalEnergyMinimizer.minimize(context)
-        integrator.step(nsteps)
-
-        # Copy the molecule, storing new conformer
-        new_molecule = copy.deepcopy(molecule)
-        new_positions = context.getState(getPositions=True).getPositions()
-
-        new_molecule.conformers[0] = from_openmm(new_positions)
-
-        del context, integrator
-
-        return new_molecule
 
     def test_INSTALLED_FORCEFIELDS(self):
         """Test INSTALLED_FORCEFIELDS contains expected force fields"""
@@ -1260,46 +1052,6 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 @pytest.mark.espaloma
 class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
-
-    def propagate_dynamics(self, molecule, system):
-        """Run a few steps of dynamics to generate a perturbed configuration.
-
-        Parameters
-        ----------
-        molecule : openff.toolkit.topology.Molecule
-            molecule.conformers[0] is used as initial positions
-        system : openmm.System
-            System object for dynamics
-
-        Returns
-        -------
-        new_molecule : openff.toolkit.topology.Molecule
-            new_molecule.conformers[0] has updated positions
-
-        """
-        # Run some dynamics
-        from openff.units.openmm import from_openmm
-        import openmm.unit
-
-        temperature = 300 * openmm.unit.kelvin
-        collision_rate = 1.0 / openmm.unit.picoseconds
-        timestep = 1.0 * openmm.unit.femtoseconds
-        nsteps = 100
-        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
-        platform = openmm.Platform.getPlatformByName("Reference")
-        context = openmm.Context(system, integrator, platform)
-        context.setPositions(molecule.conformers[0].to_openmm())
-        integrator.step(nsteps)
-        # Copy the molecule, storing new conformer
-        new_molecule = copy.deepcopy(molecule)
-        new_positions = context.getState(getPositions=True).getPositions()
-
-        new_molecule.conformers[0] = from_openmm(new_positions)
-
-        # Clean up
-        del context, integrator
-
-        return new_molecule
 
     def test_retrieve_forcefields(self):
         """Test a force field can be retrieved"""
