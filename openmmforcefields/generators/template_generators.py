@@ -227,36 +227,35 @@ class SmallMoleculeTemplateGenerator:
 
     def _molecule_has_user_charges(self, molecule):
         """
-        Return True if molecule has user charges, False if otherwise.
-
-        This method checks to see if all charges are approximately zero.
-
-        Parameters
-        ----------
-        molecule : openff.toolkit.Molecule
-            The Molecule object to check for user charges
+        Checks whether or not a molecule has user charges (assigned and not all
+        approximately equal to zero).  If so, checks to ensure that their sum
+        matches the formal charge of the molecule, and issues a warning if not.
 
         Returns
         -------
         result : bool
-            True if molecule charges are all (close to) zero, False otherwise
-
-        .. todo ::
-
-           Replace this with an API call to Molecule once added:
-           https://github.com/openforcefield/openff-toolkit/issues/488
+            True if user charges are assigned and are not all approximately
+            equal to zero; False otherwise.
         """
 
         import numpy as np
+        from openff.units import unit
 
         if molecule.partial_charges is None:
             return False
 
-        if np.allclose(
-            molecule.partial_charges.m,
-            np.zeros([molecule.n_atoms]),
-        ):
+        # We should be able to trust that charges from an OpenFF molecule will
+        # be in OpenFF units, not OpenMM units or dimensionless values: see
+        # https://github.com/openforcefield/openff-toolkit/pull/1619.
+
+        partial_charges = molecule.partial_charges.m_as(unit.elementary_charge)
+        if np.allclose(partial_charges, 0):
             return False
+
+        actual_sum = partial_charges.sum()
+        expected_sum = molecule.total_charge.m_as(unit.elementary_charge)
+        if not np.isclose(actual_sum, expected_sum):
+            warnings.warn("Sum of user-provided partial charges {actual_total} does not match formal charge {expected_sum}")
 
         return True
 
@@ -436,7 +435,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         "gaff-2.2.20",
     ]
 
-    def __init__(self, molecules=None, forcefield=None, cache=None, **kwargs):
+    def __init__(self, molecules=None, forcefield=None, cache=None):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -638,17 +637,12 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
 
-        # Compute net formal charge
-        net_charge = molecule.total_charge
-
-        _logger.debug(f"Total charge is {net_charge}")
-
         # Compute partial charges if required
         if self._molecule_has_user_charges(molecule):
             _logger.debug("Using user-provided charges because partial charges are nonzero...")
         else:
             _logger.debug("Computing AM1-BCC charges...")
-            molecule.assign_partial_charges(partial_charge_method="am1bcc")
+            molecule.assign_partial_charges(partial_charge_method="am1bcc", normalize_partial_charges=True)
 
         # Geneate a single conformation
         _logger.debug("Generating a conformer...")
@@ -679,28 +673,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Read the resulting GAFF mol2 file atom types
         _logger.debug("Reading GAFF atom types...")
         self._read_gaff_atom_types_from_mol2(gaff_mol2_filename, molecule)
-
-        # Modify partial charges so that charge on residue atoms is integral
-        # TODO: This may require some modification to correctly handle API changes
-        #       when OpenFF toolkit makes charge quantities consistently unit-bearing
-        #       or pure numbers.
-
-        _logger.debug("Fixing partial charges...")
-        _logger.debug(f"{molecule.partial_charges}")
-        total_charge = molecule.partial_charges.sum()
-
-        sum_of_absolute_charge = np.sum(np.abs(molecule.partial_charges))
-
-        redistribute = sum_of_absolute_charge.m > 0.0
-
-        charge_deficit = net_charge - total_charge
-
-        if redistribute:
-            # Redistribute excess charge proportionally to absolute charge
-            molecule.partial_charges = (
-                molecule.partial_charges + charge_deficit * abs(molecule.partial_charges) / sum_of_absolute_charge
-            )
-        _logger.debug(f"{molecule.partial_charges}")
 
         # Generate additional parameters if needed
         _logger.debug("Creating ffxml contents for additional parameters...")
@@ -1304,7 +1276,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     Newly parameterized molecules will be written to the cache, saving time next time!
     """  # noqa
 
-    def __init__(self, molecules=None, cache=None, forcefield=None, **kwargs):
+    def __init__(self, molecules=None, cache=None, forcefield=None):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1886,7 +1858,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         * The residue template will be named after the SMILES of the molecule.
         """
 
-        from openmm import unit
+        from openff.units import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
@@ -1911,14 +1883,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Book keep partial charges if molecule has user charges
         # NOTE: Charges will be overwritten when the Espaloma Graph object is loaded into an espaloma model
         if self._molecule_has_user_charges(molecule):
-            # TODO: Change this to use openff.units exclusively?
-            # Make sure charges are in the right openmm units
-            _partial_charges = molecule.partial_charges
-            if all([isinstance(_charge, unit.Quantity) for _charge in _partial_charges]):
-                _charges = _partial_charges.value_in_unit(esp.units.CHARGE_UNIT)
-            else:
-                # Assuming charges are in openff units
-                _charges = _partial_charges.magnitude
+            user_charges = molecule.partial_charges.m_as(unit.elementary_charge)
+        else:
+            user_charges = None
 
         # Assign parameters
         self.espaloma_model(molecule_graph.heterograph)
@@ -1926,15 +1893,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Create an OpenMM System
         # Update partial charges if charge_method is "from_molecule"
         if self._charge_method == "from-molecule":
-            if self._molecule_has_user_charges(molecule):
+            if user_charges is not None:
                 import numpy as np
                 import torch
 
                 # Handle ValueError:
                 # "ValueError: given numpy array has byte order different from the native byte order.
                 # Conversion between byte orders is currently not supported."
-                _charges = _charges.astype(np.float32)
-                molecule_graph.nodes["n1"].data["q"] = torch.from_numpy(_charges).unsqueeze(-1).float()
+                molecule_graph.nodes["n1"].data["q"] = torch.from_numpy(user_charges.astype(np.float32)).unsqueeze(-1).float()
             else:
                 # No charges were found in molecule -- defaulting to nn charge method
                 warnings.warn("No charges found in molecule. Defaulting to 'nn' charge method.")
@@ -1952,5 +1918,5 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         self.cache_system(smiles, system)
 
         # Convert to ffxml
-        ffxml_contents = self.convert_system_to_ffxml(molecule, system, improper_atom_ordering="smirnoff")
+        ffxml_contents = self.convert_system_to_ffxml(molecule, system)
         return ffxml_contents
