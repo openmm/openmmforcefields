@@ -255,7 +255,7 @@ class SmallMoleculeTemplateGenerator:
         actual_sum = partial_charges.sum()
         expected_sum = molecule.total_charge.m_as(unit.elementary_charge)
         if not np.isclose(actual_sum, expected_sum):
-            warnings.warn("Sum of user-provided partial charges {actual_total} does not match formal charge {expected_sum}")
+            warnings.warn(f"Sum of user-provided partial charges {actual_sum} does not match formal charge {expected_sum}")
 
         return True
 
@@ -1510,17 +1510,24 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Generate unique atom names
         self._generate_unique_atom_names(molecule)
 
+        has_user_charges = self._molecule_has_user_charges(molecule)
+
         # Determine which molecules (if any) contain user-specified partial charges that should be used
         charge_from_molecules = list()
-
-        if self._molecule_has_user_charges(molecule):
+        if has_user_charges:
             charge_from_molecules = [molecule]
             _logger.debug("Using user-provided charges because partial charges are nonzero...")
 
         # Parameterize molecule
         _logger.debug("Generating parameters...")
         system = self._smirnoff_forcefield.create_openmm_system(
-            molecule.to_topology(), charge_from_molecules=charge_from_molecules
+            molecule.to_topology(), charge_from_molecules=charge_from_molecules,
+
+            # "allow_nonintegral_charges" is a misnomer since the actual check
+            # that OpenFF does will raise an error even if the user charges sum
+            # to an integer but do not match the formal charge.  Since we have
+            # already warned about this if it is the case, allow it.
+            allow_nonintegral_charges=has_user_charges
         )
 
         # Remove CMMotionRemover if present

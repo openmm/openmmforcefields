@@ -5,6 +5,7 @@ import logging
 import os
 import tempfile
 import unittest
+import warnings
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -27,6 +28,8 @@ if TYPE_CHECKING:
 _logger = logging.getLogger("openmmforcefields.tests.test_template_generators")
 
 CI = "CI" in os.environ
+
+CHARGE_WARNING_PATTERN = "Sum of user-provided partial charges.*does not match formal charge"
 
 ################################################################################
 # Tests
@@ -120,6 +123,14 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # Filter molecules as appropriate
         self.molecules = self.filter_molecules(molecules, max_atoms=25 if CI else 40)
 
+        # Get molecules for formal charge test: pick one with the lowest
+        # magnitude (probably zero) and the highest magnitude (probably
+        # non-zero).  Try to get different molecules if all are neutral.
+        self.charge_test_molecules = (
+            min(self.molecules, key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))),
+            max(reversed(self.molecules), key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))),
+        )
+
         # Suppress DEBUG logging from various packages
         import logging
 
@@ -186,6 +197,35 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
             _logger.info(f"molecule charges: {molecule_charges}")
 
         return result
+
+    def parameterize_with_charges(self, molecule, partial_charges):
+        """
+        Parameterizes a molecule with given initial partial charges.
+
+        Parameters
+        ----------
+        molecule : openff.toolkit.topology.Molecule
+            The molecule to parameterize.  Its partial_charges will be
+            overwritten.
+        partial_charges
+            The value to assign to the partial_charges attribute of the molecule
+            before parameterization.
+
+        Returns
+        -------
+        openmm.System
+            The system resulting from parameterizing the molecule.
+        """
+
+        # Set up the generator.
+        generator = self.TEMPLATE_GENERATOR()
+        forcefield = ForceField()
+        forcefield.registerTemplateGenerator(generator.generator)
+
+        # Set the partial charges and parameterize the system.
+        molecule.partial_charges = partial_charges
+        generator.add_molecules(molecule)
+        return forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
 
     @classmethod
     def compare_energies(
@@ -493,64 +533,69 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             assert system.getNumParticles() == molecule.n_atoms
 
-    def test_charge(self):
-        """Test that charges are nonzero after charging if the molecule does not contain user charges"""
-        # Create a generator that does not know about any molecules
-        generator = self.TEMPLATE_GENERATOR()
-        # Create a ForceField
-        forcefield = ForceField()
-        # Register the template generator
-        forcefield.registerTemplateGenerator(generator.generator)
+    def test_charge_none(self):
+        """Test that charges are nonzero after charging if the molecule has None for user charges"""
+        from openff.units import unit
 
-        # Check that parameterizing a molecule using user-provided charges produces expected charges
-        from openmm import unit
+        for molecule in self.charge_test_molecules:
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, None)
 
-        molecule = self.molecules[0]
-        # Ensure partial charges are initially zero
-        assert (molecule.partial_charges is None) or np.all(molecule.partial_charges / unit.elementary_charge == 0)
-        # Add the molecule
-        generator.add_molecules(molecule)
-        # Create the System
-        openmm_topology = molecule.to_topology().to_openmm()
-        system = forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-        # Ensure charges are no longer zero
-        assert not np.all(self.charges_from_system(system) == 0), (
-            "System has zero charges despite molecule not being charged"
-        )
+            # Molecule should have partial_charges set to None but system should
+            # have non-zero charges assigned
+            assert molecule.partial_charges is None
+            assert not np.allclose(self.charges_from_system(system), 0)
 
-    def test_charge_from_molecules(self):
+    def test_charge_zero(self):
+        """Test that charges are nonzero after charging if the molecule has zero for user charges"""
+        from openff.units import unit
+
+        for molecule in self.charge_test_molecules:
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge))
+
+            # Molecule should have partial_charges set to zero but system should
+            # have non-zero charges assigned
+            assert molecule.partial_charges is not None
+            assert np.all(molecule.partial_charges.m_as(unit.elementary_charge) == 0)
+            assert not np.allclose(self.charges_from_system(system), 0)
+
+    def test_charge_valid(self):
         """Test that user-specified partial charges are used if requested"""
         from openff.units import unit
 
-        # Create a generator that does not know about any molecules
-        generator = self.TEMPLATE_GENERATOR()
-        # Create a ForceField
-        forcefield = ForceField()
-        # Register the template generator
-        forcefield.registerTemplateGenerator(generator.generator)
+        for molecule in self.charge_test_molecules:
+            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
 
-        # Check that parameterizing a molecule using user-provided charges produces expected charges
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, unit.Quantity(user_charges, unit.elementary_charge))
 
-        molecule = self.molecules[0]
+            # User, molecule, and system charges should be equal
+            assert molecule.partial_charges is not None
+            assert self.charges_are_equal(system, molecule)
+            assert np.allclose(self.charges_from_system(system), user_charges)
 
-        # Populate the molecule with arbitrary partial charges that still sum to the total formal charge
-        molecule.partial_charges = (
-            unit.Quantity(
-                np.linspace(-0.5, 0.5, molecule.n_atoms),
-                unit.elementary_charge,
-            )
-            + molecule.total_charge / molecule.n_atoms
-        )
+    def test_charge_warning(self):
+        """Test that a warning is raised with user-specified partial charges that do not sum to the total charge"""
+        from openff.units import unit
 
-        assert molecule.partial_charges is not None
+        for molecule in self.charge_test_molecules:
+            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms + 1
 
-        assert not np.all(molecule.partial_charges.m == 0)
+            # Charge mismatch warning should be raised
+            with pytest.warns(match=CHARGE_WARNING_PATTERN):
+                system = self.parameterize_with_charges(molecule, unit.Quantity(user_charges, unit.elementary_charge))
 
-        generator.add_molecules(molecule)
-
-        system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
-
-        assert self.charges_are_equal(system, molecule)
+            # User, molecule, and system charges should be equal
+            assert molecule.partial_charges is not None
+            assert self.charges_are_equal(system, molecule)
+            assert np.allclose(self.charges_from_system(system), user_charges)
 
     def test_debug_ffxml(self):
         """Test that debug ffxml file is created when requested"""
@@ -1047,6 +1092,70 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         for exception in exceptions:
             assert exception[2]._value == 0.0
             assert exception[4]._value == 0.0
+
+    def test_charge_none(self):
+        """Test that charges are nonzero after charging if the molecule has None for user charges"""
+        from openff.units import unit
+
+        for molecule in self.charge_test_molecules:
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, None)
+
+            # Molecule should have partial_charges set to None but system should
+            # have non-zero charges assigned
+            assert molecule.partial_charges is None
+            assert not np.allclose(self.charges_from_system(system), 0)
+
+    def test_charge_zero(self):
+        """Test that charges are nonzero after charging if the molecule has zero for user charges"""
+        from openff.units import unit
+
+        for molecule in self.charge_test_molecules:
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge))
+
+            # Molecule should have partial_charges set to zero but system should
+            # have non-zero charges assigned
+            assert molecule.partial_charges is not None
+            assert np.all(molecule.partial_charges.m_as(unit.elementary_charge) == 0)
+            assert not np.allclose(self.charges_from_system(system), 0)
+
+    def test_charge_valid(self):
+        """Test that user-specified partial charges are used if requested"""
+        from openff.units import unit
+
+        for molecule in self.charge_test_molecules:
+            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+
+            # Charge mismatch warning should not be raised
+            with warnings.catch_warnings():
+                warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
+                system = self.parameterize_with_charges(molecule, unit.Quantity(user_charges, unit.elementary_charge))
+
+            # User, molecule, and system charges should be equal
+            assert molecule.partial_charges is not None
+            assert self.charges_are_equal(system, molecule)
+            assert np.allclose(self.charges_from_system(system), user_charges)
+
+    def test_charge_warning(self):
+        """Test that a warning is raised with user-specified partial charges that do not sum to the total charge"""
+        from openff.units import unit
+
+        for molecule in self.charge_test_molecules:
+            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms + 1
+
+            # Charge mismatch warning should be raised
+            with pytest.warns(match=CHARGE_WARNING_PATTERN):
+                system = self.parameterize_with_charges(molecule, unit.Quantity(user_charges, unit.elementary_charge))
+
+            # User, molecule, and system charges should be equal
+            assert molecule.partial_charges is not None
+            assert self.charges_are_equal(system, molecule)
+            assert np.allclose(self.charges_from_system(system), user_charges)
 
 
 @pytest.mark.espaloma
