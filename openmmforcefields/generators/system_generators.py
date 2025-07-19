@@ -246,7 +246,7 @@ class SystemGenerator:
                     self.template_generator = template_generator_cls(
                         forcefield=small_molecule_forcefield,
                         cache=cache,
-                        template_generator_kwargs=self.template_generator_kwargs
+                        template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
                 except (ValueError,) as e:

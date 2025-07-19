@@ -255,7 +255,9 @@ class SmallMoleculeTemplateGenerator:
         actual_sum = partial_charges.sum()
         expected_sum = molecule.total_charge.m_as(unit.elementary_charge)
         if not np.isclose(actual_sum, expected_sum):
-            warnings.warn(f"Sum of user-provided partial charges {actual_sum} does not match formal charge {expected_sum}")
+            warnings.warn(
+                f"Sum of user-provided partial charges {actual_sum} does not match formal charge {expected_sum}"
+            )
 
         return True
 
@@ -1525,13 +1527,13 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Parameterize molecule
         _logger.debug("Generating parameters...")
         system = self._smirnoff_forcefield.create_openmm_system(
-            molecule.to_topology(), charge_from_molecules=charge_from_molecules,
-
+            molecule.to_topology(),
+            charge_from_molecules=charge_from_molecules,
             # "allow_nonintegral_charges" is a misnomer since the actual check
             # that OpenFF does will raise an error even if the user charges sum
             # to an integer but do not match the formal charge.  Since we have
             # already warned about this if it is the case, allow it.
-            allow_nonintegral_charges=has_user_charges
+            allow_nonintegral_charges=has_user_charges,
         )
 
         # Remove CMMotionRemover if present
@@ -1911,7 +1913,9 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
                 # Handle ValueError:
                 # "ValueError: given numpy array has byte order different from the native byte order.
                 # Conversion between byte orders is currently not supported."
-                molecule_graph.nodes["n1"].data["q"] = torch.from_numpy(user_charges.astype(np.float32)).unsqueeze(-1).float()
+                molecule_graph.nodes["n1"].data["q"] = (
+                    torch.from_numpy(user_charges.astype(np.float32)).unsqueeze(-1).float()
+                )
             else:
                 # No charges were found in molecule -- defaulting to nn charge method
                 warnings.warn("No charges found in molecule. Defaulting to 'nn' charge method.")

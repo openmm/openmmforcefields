@@ -128,7 +128,9 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # non-zero).  Try to get different molecules if all are neutral.
         self.charge_test_molecules = (
             min(self.molecules, key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))),
-            max(reversed(self.molecules), key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))),
+            max(
+                reversed(self.molecules), key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))
+            ),
         )
 
         # Suppress DEBUG logging from various packages
@@ -556,7 +558,9 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():
                 warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
-                system = self.parameterize_with_charges(molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge))
+                system = self.parameterize_with_charges(
+                    molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge)
+                )
 
             # Molecule should have partial_charges set to zero but system should
             # have non-zero charges assigned
@@ -569,7 +573,10 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         from openff.units import unit
 
         for molecule in self.charge_test_molecules:
-            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+            user_charges = (
+                np.linspace(-1, 1, molecule.n_atoms)
+                + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+            )
 
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():
@@ -586,7 +593,11 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         from openff.units import unit
 
         for molecule in self.charge_test_molecules:
-            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms + 1
+            user_charges = (
+                np.linspace(-1, 1, molecule.n_atoms)
+                + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+                + 1
+            )
 
             # Charge mismatch warning should be raised
             with pytest.warns(match=CHARGE_WARNING_PATTERN):
@@ -1116,7 +1127,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():
                 warnings.filterwarnings("error", message=CHARGE_WARNING_PATTERN)
-                system = self.parameterize_with_charges(molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge))
+                system = self.parameterize_with_charges(
+                    molecule, unit.Quantity(np.zeros(molecule.n_atoms), unit.elementary_charge)
+                )
 
             # Molecule should have partial_charges set to zero but system should
             # have non-zero charges assigned
@@ -1129,7 +1142,10 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         from openff.units import unit
 
         for molecule in self.charge_test_molecules:
-            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+            user_charges = (
+                np.linspace(-1, 1, molecule.n_atoms)
+                + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+            )
 
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():
@@ -1146,7 +1162,11 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         from openff.units import unit
 
         for molecule in self.charge_test_molecules:
-            user_charges = np.linspace(-1, 1, molecule.n_atoms) + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms + 1
+            user_charges = (
+                np.linspace(-1, 1, molecule.n_atoms)
+                + molecule.total_charge.m_as(unit.elementary_charge) / molecule.n_atoms
+                + 1
+            )
 
             # Charge mismatch warning should be raised
             with pytest.warns(match=CHARGE_WARNING_PATTERN):
