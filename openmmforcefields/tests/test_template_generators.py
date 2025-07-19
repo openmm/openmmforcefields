@@ -537,8 +537,6 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
     def test_charge_none(self):
         """Test that charges are nonzero after charging if the molecule has None for user charges"""
-        from openff.units import unit
-
         for molecule in self.charge_test_molecules:
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():
@@ -1106,8 +1104,6 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
     def test_charge_none(self):
         """Test that charges are nonzero after charging if the molecule has None for user charges"""
-        from openff.units import unit
-
         for molecule in self.charge_test_molecules:
             # Charge mismatch warning should not be raised
             with warnings.catch_warnings():

@@ -631,7 +631,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
         """
 
-        import numpy as np
         from openff.units import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template
