@@ -243,18 +243,10 @@ class SystemGenerator:
             for template_generator_cls in SmallMoleculeTemplateGenerator.__subclasses__():
                 try:
                     _logger.debug(f"Trying {template_generator_cls.__name__} to load {small_molecule_forcefield}")
-                    extra_kwargs = {}
-                    if self.template_generator_kwargs is not None:
-                        # template_generator_kwargs' keys and values never actually get expanded into kwargs!  This
-                        # argument is poorly named, and really just contains extra parameters that are currently only
-                        # used by espaloma.  To prevent having to add **kwargs to other template generators that will
-                        # silently swallow any misspelled arguments just to support this special case, we only pass
-                        # template_generator_kwargs as a kwarg to the template generator here if it is not None.
-                        extra_kwargs["template_generator_kwargs"] = self.template_generator_kwargs
                     self.template_generator = template_generator_cls(
                         forcefield=small_molecule_forcefield,
                         cache=cache,
-                        **extra_kwargs,
+                        template_generator_kwargs=self.template_generator_kwargs
                     )
                     break
                 except (ValueError,) as e:

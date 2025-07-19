@@ -435,7 +435,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         "gaff-2.2.20",
     ]
 
-    def __init__(self, molecules=None, forcefield=None, cache=None):
+    def __init__(self, molecules=None, forcefield=None, cache=None, template_generator_kwargs=None):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -457,6 +457,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         cache : str, optional, default=None
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
+        template_generator_kwargs : dict, optional, default=None
+            Additional parameters for the template generator (ignored by GAFFTemplateGenerator).
 
         Examples
         --------
@@ -1276,7 +1278,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     Newly parameterized molecules will be written to the cache, saving time next time!
     """  # noqa
 
-    def __init__(self, molecules=None, cache=None, forcefield=None):
+    def __init__(self, molecules=None, cache=None, forcefield=None, template_generator_kwargs=None):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
@@ -1295,6 +1297,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         forcefield : str, optional, default=None
             Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
             If not specified, the latest Open Force Field Initiative release is used.
+        template_generator_kwargs : dict, optional, default=None
+            Additional parameters for the template generator (ignored by SMIRNOFFTemplateGenerator).
 
         Examples
         --------
