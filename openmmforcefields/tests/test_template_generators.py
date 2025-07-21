@@ -126,11 +126,12 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # Get molecules for formal charge test: pick one with the lowest
         # magnitude (probably zero) and the highest magnitude (probably
         # non-zero).  Try to get different molecules if all are neutral.
+        def molecule_abs_charge(molecule):
+            return abs(molecule.total_charge.m_as(unit.elementary_charge))
+
         self.charge_test_molecules = (
-            min(self.molecules, key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))),
-            max(
-                reversed(self.molecules), key=lambda molecule: abs(molecule.total_charge.m_as(unit.elementary_charge))
-            ),
+            min(self.molecules, key=molecule_abs_charge),
+            max(reversed(self.molecules), key=molecule_abs_charge),
         )
 
         # Suppress DEBUG logging from various packages

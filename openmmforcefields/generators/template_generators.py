@@ -711,7 +711,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         for atom in molecule.atoms:
             charge_string = str(atom.partial_charge.m_as(unit.elementary_charge))
 
-            atom = etree.SubElement(
+            etree.SubElement(
                 residue,
                 "Atom",
                 name=atom.name,
@@ -720,7 +720,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             )
 
         for bond in molecule.bonds:
-            bond = etree.SubElement(
+            etree.SubElement(
                 residue,
                 "Bond",
                 atomName1=bond.atom1.name,
@@ -1206,7 +1206,7 @@ class OpenMMSystemMixin:
         residue = etree.SubElement(residues, "Residue", name=smiles)
         for atom_index, atom in enumerate(molecule.atoms):
             charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
-            atom = etree.SubElement(
+            etree.SubElement(
                 residue,
                 "Atom",
                 name=atom.name,
@@ -1214,7 +1214,7 @@ class OpenMMSystemMixin:
                 charge=as_attrib(charge),
             )
         for bond in molecule.bonds:
-            bond = etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+            etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
