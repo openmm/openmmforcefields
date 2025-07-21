@@ -30,7 +30,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         python-version: ["3.10", "3.11", "3.12"]
         amber-conversion: [false]
-        openmm-version: ["8.1.2", "8.2.0"]
+        openmm-version: ["8.2.0", "8.3.1"]
 
     steps:
     - uses: actions/checkout@v4
