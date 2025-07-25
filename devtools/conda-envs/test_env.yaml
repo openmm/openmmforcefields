@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - ambertools >=24
+  - espaloma==0.4.0
   - lxml
   - networkx
   - numpy <2.3
