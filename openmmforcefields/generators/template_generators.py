@@ -1056,6 +1056,7 @@ class OpenMMSystemMixin:
         """
 
         from openmm import CMMotionRemover
+
         # Remove CMMotionRemover if present
         # See https://github.com/openmm/openmmforcefields/issues/365
         # and https://github.com/openmm/openmmforcefields/pull/367
@@ -1582,7 +1583,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         system = self._smirnoff_forcefield.create_openmm_system(
             molecule.to_topology(), charge_from_molecules=charge_from_molecules
         )
-
 
         self.cache_system(smiles, system)
 
