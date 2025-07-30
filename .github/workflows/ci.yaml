@@ -69,6 +69,10 @@ jobs:
 
     - name: Test Installed Package (With Espaloma)
       if: matrix.python-version != '3.13'
+      env:
+        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
       run: |
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
@@ -78,20 +82,17 @@ jobs:
 
     - name: Test Installed Package
       if: matrix.python-version == '3.13'
+      env:
+        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        LOGLEVEL: "INFO"
+        KMP_DUPLICATE_LIB_OK: "True"
       run: |
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
 
         pytest -n logical --rungaff  --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/
-
-        # add --rungaff / --runespaloma to run those tests
-
-      env:
-        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
-        LOGLEVEL: "INFO"
-        KMP_DUPLICATE_LIB_OK: "True"
-
+      
     - name: Test AMBER conversion
       if: ${{ matrix.amber-conversion }}
       run: |
