@@ -35,7 +35,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup Conda Environment with espaloma
+      if: matrix.python-version != '3.13'
+      uses: mamba-org/setup-micromamba@v2
+      with:
+        environment-file: devtools/conda-envs/test_env.yaml
+        create-args: >-
+          python=${{ matrix.python-version }}
+          openmm=${{ matrix.openmm-version }}
+          espaloma==0.4.0
+
     - name: Setup Conda Environment
+      if: matrix.python-version == '3.13'
       uses: mamba-org/setup-micromamba@v2
       with:
         environment-file: devtools/conda-envs/test_env.yaml
