@@ -25,7 +25,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         python-version: ["3.12"]
-        openmm-version: ["8.2.0dev1"]
+        openmm-version: ["8.3.1"]
 
     steps:
     - uses: actions/checkout@v4
