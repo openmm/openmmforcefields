@@ -1017,9 +1017,18 @@ class OpenMMSystemMixin:
             The OpenMM ffxml contents for the given molecule.
         """
 
-        # Generate OpenMM ffxml definition for this molecule
+        from openmm import CMMotionRemover
         from lxml import etree
 
+        # Remove CMMotionRemover if present
+        # See https://github.com/openmm/openmmforcefields/issues/365
+        # and https://github.com/openmm/openmmforcefields/pull/367
+        for f_idx in reversed(range(system.getNumForces())):
+            force = system.getForce(f_idx)
+            if isinstance(force, CMMotionRemover):
+                system.removeForce(f_idx)
+
+        # Generate OpenMM ffxml definition for this molecule
         root = etree.Element("ForceField")
 
         def as_attrib(quantity):
@@ -1506,8 +1515,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
         """
 
-        from openmm import CMMotionRemover
-
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f"Generating a residue template for {smiles} using {self._forcefield}")
@@ -1534,14 +1541,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             # already warned about this if it is the case, allow it.
             allow_nonintegral_charges=has_user_charges,
         )
-
-        # Remove CMMotionRemover if present
-        # See https://github.com/openmm/openmmforcefields/issues/365
-        # and https://github.com/openmm/openmmforcefields/pull/367
-        for f_idx in reversed(range(system.getNumForces())):
-            force = system.getForce(f_idx)
-            if isinstance(force, CMMotionRemover):
-                system.removeForce(f_idx)
 
         self.cache_system(smiles, system)
 
