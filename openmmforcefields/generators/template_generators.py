@@ -11,7 +11,7 @@ import logging
 import os
 import warnings
 
-from ..utils import classproperty
+from openmmforcefields.utils import classproperty
 
 ################################################################################
 # LOGGER

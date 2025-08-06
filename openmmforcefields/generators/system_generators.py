@@ -2,7 +2,7 @@
 System generators that build an OpenMM System object from a Topology object.
 """
 
-from ..utils import classproperty
+from openmmforcefields.utils import classproperty
 
 ################################################################################
 # LOGGER
