@@ -76,6 +76,8 @@ jobs:
       run: |
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
+        # https://github.com/openmm/openmmforcefields/issues/399
+        python -c "import dgl"
 
         pytest -n logical --rungaff --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/
