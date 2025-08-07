@@ -410,7 +410,8 @@ See the corresponding directories for information on how to use the provided con
 
 ## 0.15.0 Force Field Updates and More!
 
-This release doesn't change any API but mostly consists of force field updates and bug fixes.
+All template generators now take `template_generator_kwargs` as an optional init parameter.
+This removes the `residue_atoms` argument from the `generate_residue_template` method, see [PR #391](https://github.com/openmm/openmmforcefields/pull/391) for details.
 This release updates the CHARMM force field to the July 2024 release.
 We also updated Amber force fields with latest versions from AmberTools 24.
 Compatibility with esploma force fields has also been improved.
