@@ -408,6 +408,15 @@ See the corresponding directories for information on how to use the provided con
 
 # [Changelog](https://github.com/openmm/openmmforcefields/releases)
 
+## 0.15.0 Force Field Updates and More!
+
+This release doesn't change any API but mostly consists of force field updates and bug fixes.
+This release updates the CHARMM force field to the July 2024 release.
+We also updated Amber force fields with latest versions from AmberTools 24.
+Compatibility with esploma force fields has also been improved.
+
+For more details, see our [0.15.0 release page](https://github.com/openmm/openmmforcefields/releases/tag/0.15.0) for more details.
+
 ## 0.14.1 Bring back GAFFTemplateGenerator for OpenMM >=7.6.0
 
 This release brings back GAFF force feild support for all versions of OpenMM previously supported.
