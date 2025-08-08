@@ -1997,18 +1997,13 @@ def modify_glycan_ffxml(input_ffxml_path):
     script = root.find("Script")
     text = script.text
 
-    # Bad NH torsion
-    text_split = text.split("\n")
-    text_NH_removed = [line for line in text_split if "NH" not in line]
-    text = "\n".join(text_NH_removed)
-
-    # Unscaled types
-    pattern = re.compile("unscaled_types = set\\((\\[(.*\n)*?.*?\\])\\)")
-    match = pattern.search(text)
-    types = eval(match.group(1))
-    types = [(replacements[t[0]], replacements[t[1]], replacements[t[2]], replacements[t[3]]) for t in types]
-    types = ",\n    ".join(str(t) for t in types)
-    script.text = pattern.sub(f"unscaled_types = set([{types}])", text)
+    text_lines = []
+    pattern = re.compile(r"(\(\s*')([^']*)('\s*,\s*')([^']*)('\s*,\s*')([^']*)('\s*,\s*')([^']*)('\s*(?:,\s*)?\)\s*:)")
+    for line in text.split("\n"):
+        if "NH" in line:
+            continue
+        text_lines.append(pattern.sub(lambda m: f"{m[1]}{replacements[m[2]]}{m[3]}{replacements[m[4]]}{m[5]}{replacements[m[6]]}{m[7]}{replacements[m[8]]}{m[9]}", line))
+    script.text = "\n".join(text_lines)
 
     # Add initialization script for setting up GlycamTemplateMatcher
     initialization_script = etree.SubElement(root, "InitializationScript")
