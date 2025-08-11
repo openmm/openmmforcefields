@@ -28,7 +28,7 @@ jobs:
         openmm-version: ["8.3.1"]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - name: Setup Conda Environment
       uses: mamba-org/setup-micromamba@v2
