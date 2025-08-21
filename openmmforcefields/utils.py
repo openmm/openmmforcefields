@@ -2,7 +2,7 @@ import contextlib
 import functools
 import logging
 import time
-import importlib_resources
+import importlib.resources
 
 _logger = logging.getLogger("openmmforcefields.utils")
 
@@ -22,7 +22,7 @@ def get_ffxml_path():
         The absolute path where OpenMM ffxml forcefield files are stored in this package
     """
 
-    filename = importlib_resources.files("openmmforcefields") / "ffxml"
+    filename = importlib.resources.files("openmmforcefields") / "ffxml"
     return str(filename.absolute())
 
 
@@ -44,7 +44,7 @@ def get_data_filename(relative_path):
     Absolute path to file
     """
 
-    fn = importlib_resources.files("openmmforcefields") / "data" / relative_path
+    fn = importlib.resources.files("openmmforcefields") / "data" / relative_path
 
     import os
 
