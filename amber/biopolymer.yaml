@@ -67,6 +67,15 @@
     A Parameterization of Cholesterol for Mixed Lipid Bilayer Simulation within the Amber Lipid14 Force Field. J Phys Chem B, 2015, 119, 12424-12435.
   Test:
   - lipids
+- Source: leaprc.lipid21
+  CharmmFFXMLFilename: ../openmmforcefields/ffxml/charmm/charmm36_nowaters.xml
+  CharmmLipid2AmberFilename: files/charmmlipid2amber.csv
+  Reference:
+  - >-
+    Dickson, C.J.; Walker, R.C.; Gould, I.R.
+    Lipid21: Complex Lipid Membrane Simulations with AMBER. J. Chem. Theory Comput., 2022, 18, 1726-1736.
+  Test:
+  - lipids
 - Source: leaprc.protein.ff14SB
   Prefix: protein
   Options:
