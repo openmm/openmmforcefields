@@ -1,7 +1,8 @@
 """
 System generators that build an OpenMM System object from a Topology object.
-
 """
+
+from openmmforcefields.utils import classproperty
 
 ################################################################################
 # LOGGER
@@ -9,22 +10,11 @@ System generators that build an OpenMM System object from a Topology object.
 
 import logging
 
-_logger = logging.getLogger("openmmforcefields.system_generators")
+_logger = logging.getLogger("openmmforcefields.generators.system_generators")
 
 ################################################################################
 # System generator base class
 ################################################################################
-
-
-class classproperty(property):
-    def __get__(self, obj, objtype=None):
-        return super().__get__(objtype)
-
-    def __set__(self, obj, value):
-        super().__set__(type(obj), value)
-
-    def __delete__(self, obj):
-        super().__delete__(type(obj))
 
 
 class SystemGenerator:
@@ -97,7 +87,7 @@ class SystemGenerator:
         ----------
         forcefields : list of str, optional, default=None
             List of the names of ffxml files that will be used in System creation for the biopolymer.
-        small_molecule_forcefield : str, optional, default='openff-1.0.0'
+        small_molecule_forcefield : str, optional, default='openff-2.2.0'
             Small molecule force field to use.
             Must be supported by one of the registered template generators:
                 [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
@@ -113,7 +103,7 @@ class SystemGenerator:
         periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}
             Keyword arguments added to forcefield_kwargs when the Topology is periodic.
         template_generator_kwargs : dict, optional, default=None
-            Keyword arguments to be passed to subclasses of
+            The value of an extra keyword argument called `template_generator_kwargs` to be passed to subclasses of
             ``openmmforcefields.generators.template_generators.SmallMoleculeTemplateGenerator``.
             Currently only used for ``openmmforcefields.generators.template_generators.EspalomaTemplateGenerator``.
         barostat : openmm.MonteCarloBarostat, optional, default=None
@@ -202,7 +192,6 @@ class SystemGenerator:
         >>> system_generator.particle_epsilons = False # will zero out Lennard-Jones particle-particle interactions
         >>> system_generator.particle_exceptions = False # will zero out all 1-4 Lennard-Jones interactions
         >>> system_generator.torsions = False # will zero out all torsion terms
-
         """  # noqa
 
         # Initialize
@@ -301,8 +290,8 @@ class SystemGenerator:
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
-
         """
+
         if self.template_generator is None:
             raise ValueError(
                 "You must have a small molecule residue template generator registered to add small molecules"
@@ -314,6 +303,7 @@ class SystemGenerator:
         """
         Add barostat and modify forces if requested.
         """
+
         # Add barostat if requested and the system uses periodic boundary conditions
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
@@ -368,21 +358,21 @@ class SystemGenerator:
 
         Parameters
         ----------
-        topology : openmmtools.topology.Topology object
+        topology : openmm.app.Topology object
             The topology describing the system to be created
         molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
             to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-            If specified, these molecules will be recognized and parameterized with antechamber as needed.
+            If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
 
         Returns
         -------
         system : openmm.System
             A system object generated from the topology
-
         """
+
         # Inform the template generator about any specified molecules
         if (self.template_generator is not None) and (molecules is not None):
             self.template_generator.add_molecules(molecules)
@@ -405,144 +395,5 @@ class SystemGenerator:
         # Post-process the System if requested
         if self.postprocess_system is not None:
             system = self.postprocess_system(system)
-
-        return system
-
-
-################################################################################
-# Dummy system generator
-################################################################################
-
-
-class DummySystemGenerator(SystemGenerator):
-    """
-    Dummy force field that can add basic parameters to any system for testing purposes.
-
-    * All particles are assigned carbon mass
-    * All particles interact with a repulsive potential
-    * All bonds have equilibrium length 1 A
-    * All angles have equilibrium angle dependent on number of substituents of central atom
-        * 2, 3 bonds: 120 degrees
-        * 4 bonds: 109.8 degrees
-        * 5 or more bonds: 90 degrees
-    * Torsions are added with periodicity 3, but no barrier height
-
-    """
-
-    def create_system(self, topology, **kwargs):
-        """
-        Create a System object with simple parameters from the provided Topology
-
-        Any kwargs are ignored.
-
-        Parameters
-        ----------
-        topology : openff.toolkit.topology.Topology
-            The Topology to be parameterized
-
-        Returns
-        -------
-        system : openmm.System
-            The System object
-
-        """
-        # TODO: Allow periodicity to be determined from topology
-
-        import openmm
-        from openmm import unit
-        from openmmtools.constants import kB
-
-        kT = kB * 300 * unit.kelvin  # hard-coded temperature for setting energy scales
-
-        # Create a System
-        system = openmm.System()
-
-        # Add particles
-        mass = 12.0 * unit.amu
-        for atom in topology.atoms:
-            system.addParticle(mass)
-
-        # Add simple repulsive interactions
-        # TODO: Use softcore repulsive interaction; Gaussian times switch?
-        nonbonded = openmm.CustomNonbondedForce("100/(r/0.1)^4")
-        nonbonded.setNonbondedMethod(openmm.CustomNonbondedForce.CutoffNonPeriodic)
-        nonbonded.setCutoffDistance(1 * unit.nanometer)
-        system.addForce(nonbonded)
-        for atom in topology.atoms:
-            nonbonded.addParticle([])
-
-        # Build a list of which atom indices are bonded to each atom
-        bondedToAtom = []
-        for atom in topology.atoms():
-            bondedToAtom.append(set())
-        for atom1, atom2 in topology.bonds():
-            bondedToAtom[atom1.index].add(atom2.index)
-            bondedToAtom[atom2.index].add(atom1.index)
-        return bondedToAtom
-
-        # Add bonds
-        bond_force = openmm.HarmonicBondForce()
-        r0 = 1.0 * unit.angstroms
-        sigma_r = 0.1 * unit.angstroms
-        Kr = kT / sigma_r**2
-        for atom1, atom2 in topology.bonds():
-            bond_force.addBond(atom1.index, atom2.index, r0, Kr)
-        system.addForce(bond_force)
-
-        # Add angles
-        uniqueAngles = set()
-        for bond in topology.bonds():
-            for atom in bondedToAtom[bond.atom1]:
-                if atom != bond.atom2:
-                    if atom < bond.atom2:
-                        uniqueAngles.add((atom, bond.atom1, bond.atom2))
-                    else:
-                        uniqueAngles.add((bond.atom2, bond.atom1, atom))
-            for atom in bondedToAtom[bond.atom2]:
-                if atom != bond.atom1:
-                    if atom > bond.atom1:
-                        uniqueAngles.add((bond.atom1, bond.atom2, atom))
-                    else:
-                        uniqueAngles.add((atom, bond.atom2, bond.atom1))
-        angles = sorted(list(uniqueAngles))
-        theta0 = 109.5 * unit.degrees  # TODO: Adapt based on number of bonds to each atom?
-        sigma_theta = 10 * unit.degrees
-        Ktheta = kT / sigma_theta**2
-        angle_force = openmm.HarmonicAngleForce()
-        for atom1, atom2, atom3 in angles:
-            angles.addAngle(atom1.index, atom2.index, atom3.index, theta0, Ktheta)
-        system.addForce(angle_force)
-
-        # Make a list of all unique proper torsions
-        uniquePropers = set()
-        for angle in angles:
-            for atom in bondedToAtom[angle[0]]:
-                if atom not in angle:
-                    if atom < angle[2]:
-                        uniquePropers.add((atom, angle[0], angle[1], angle[2]))
-                    else:
-                        uniquePropers.add((angle[2], angle[1], angle[0], atom))
-            for atom in bondedToAtom[angle[2]]:
-                if atom not in angle:
-                    if atom > angle[0]:
-                        uniquePropers.add((angle[0], angle[1], angle[2], atom))
-                    else:
-                        uniquePropers.add((atom, angle[2], angle[1], angle[0]))
-        propers = sorted(list(uniquePropers))
-        torsion_force = openmm.PeriodicTorsionForce()
-        periodicity = 3
-        phase = 0.0 * unit.degrees
-        Kphi = 0.0 * kT
-        for atom1, atom2, atom3, atom4 in propers:
-            torsion_force.add_torsion(
-                atom1.index,
-                atom2.index,
-                atom3.index,
-                atom4.index,
-                periodicity,
-                phase,
-                Kphi,
-            )
-        system.addForce(torsion_force)
 
         return system

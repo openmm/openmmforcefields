@@ -122,8 +122,8 @@ class TestSystemGenerator:
         -------
         molecules : list of openff.toolkit.topology.Molecule
             The filtered list of molecules to be filtered
-
         """
+
         # TODO: Eliminate molecules without fully-specified stereochemistry
         # Select some small molecules for fast testing
         MAX_ATOMS = 45

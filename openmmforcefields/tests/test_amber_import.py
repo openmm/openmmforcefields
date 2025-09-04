@@ -87,7 +87,7 @@ def test_amber_parameterize_ff94():
     Test parameterizing explicit villin with ff94
 
     """
-    import importlib_resources
+    import importlib.resources
 
-    pdb_filename = str(importlib_resources.files("openmm.app") / "data" / "test.pdb")
+    pdb_filename = str(importlib.resources.files("openmm.app") / "data" / "test.pdb")
     check_ffxml_parameterize(pdb_filename, "amber/ff94.xml")

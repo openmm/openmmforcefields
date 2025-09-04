@@ -2,9 +2,14 @@ import contextlib
 import functools
 import logging
 import time
-import importlib_resources
+import importlib.resources
 
-_logger = logging.getLogger("openmmforcefields.generators.gaff")
+_logger = logging.getLogger("openmmforcefields.utils")
+
+
+class classproperty(property):
+    def __get__(self, obj, objtype=None):
+        return super().__get__(objtype)
 
 
 def get_ffxml_path():
@@ -17,29 +22,29 @@ def get_ffxml_path():
         The absolute path where OpenMM ffxml forcefield files are stored in this package
     """
 
-    filename = importlib_resources.files("openmmforcefields") / "ffxml"
+    filename = importlib.resources.files("openmmforcefields") / "ffxml"
     return str(filename.absolute())
 
 
 def get_data_filename(relative_path):
-    """get the full path to one of the reference files shipped for testing
+    """
+    Get the full path to one of the reference files shipped for testing.
 
-    in the source distribution, these files are in ``perses/data/*/``,
+    In the source distribution, these files are in ``openmmforcefields/data/*/``,
     but on installation, they're moved to somewhere in the user's python
     site-packages directory.
 
     Parameters
     ----------
     relative_path : str
-        name of the file to load (with respect to the openmoltools folder).
+        name of the file to load (with respect to the openmmforcefields data folder).
 
     Returns
     -------
     Absolute path to file
-
     """
 
-    fn = importlib_resources.files("openmmforcefields") / "data" / relative_path
+    fn = importlib.resources.files("openmmforcefields") / "data" / relative_path
 
     import os
 
@@ -56,14 +61,15 @@ def get_data_filename(relative_path):
 
 @contextlib.contextmanager
 def time_it(task_name):
-    """Context manager to log execution time of a block of code.
+    """
+    Context manager to log execution time of a block of code.
 
     Parameters
     ----------
     task_name : str
         The name of the task that will be reported.
-
     """
+
     timer = Timer()
     timer.start(task_name)
     yield timer  # Resume program
@@ -72,13 +78,13 @@ def time_it(task_name):
 
 
 def with_timer(task_name):
-    """Decorator that logs the execution time of a function.
+    """
+    Decorator that logs the execution time of a function.
 
     Parameters
     ----------
     task_name : str
         The name of the task that will be reported.
-
     """
 
     def _with_timer(func):
@@ -93,7 +99,8 @@ def with_timer(task_name):
 
 
 class Timer:
-    """A class with stopwatch-style timing functions.
+    """
+    A class with stopwatch-style timing functions.
 
     Examples
     --------
@@ -108,7 +115,6 @@ class Timer:
     ...         pass
     >>> elsapsed_time = timer.stop('second benchmark')
     >>> timer.report_timing()
-
     """
 
     def __init__(self):
@@ -172,7 +178,8 @@ class Timer:
             return time.time() - t0
 
     def report_timing(self, clear=True):
-        """Log all the timings at the debug level.
+        """
+        Log all the timings at the debug level.
 
         Parameters
         ----------
@@ -183,8 +190,8 @@ class Timer:
         -------
         elapsed_times : dict
             The dictionary benchmark_id : elapsed time for all benchmarks.
-
         """
+
         for benchmark_id, elapsed_time in self._completed.items():
             _logger.debug(f"{benchmark_id} took {elapsed_time:8.3f}s")
 
