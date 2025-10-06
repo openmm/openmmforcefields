@@ -941,7 +941,6 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         expected_force_fields = [
             "openff-1.1.0",
             "openff-2.0.0",
-            "smirnoff99Frosst-1.1.0",
         ]
         forbidden_force_fields = [
             "openff_unconstrained",

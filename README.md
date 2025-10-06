@@ -247,7 +247,7 @@ To check which SMIRNOFF force fields are automatically installed, examine the `I
 
 ```pycon
 >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7', 'ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'opc3-1.0.1', 'opc', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'tip4p_fb-1.0.0', 'openff-2.0.0-rc.1', 'opc-1.0.1']
+['ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'opc3-1.0.1', 'opc', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'tip4p_fb-1.0.0', 'openff-2.0.0-rc.1', 'opc-1.0.1']
 ```
 
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
