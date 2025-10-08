@@ -1346,7 +1346,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
 
         >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)  # doctest: +SKIP
-        ['openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'openff-1.2.0', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'smirnoff99Frosst-1.0.2', 'smirnoff99Frosst-1.0.0', 'smirnoff99Frosst-1.1.0', 'smirnoff99Frosst-1.0.4', 'smirnoff99Frosst-1.0.8', 'smirnoff99Frosst-1.0.6', 'smirnoff99Frosst-1.0.3', 'smirnoff99Frosst-1.0.1', 'smirnoff99Frosst-1.0.5', 'smirnoff99Frosst-1.0.9', 'smirnoff99Frosst-1.0.7']
+        ['openff-2.2.1', 'openff-2.2.0', 'openff-2.1.0', 'openff-2.0.0', 'openff-1.3.1', ..., ]
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
