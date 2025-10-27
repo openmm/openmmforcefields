@@ -91,9 +91,9 @@ class SystemGenerator:
             Small molecule force field to use.
             Must be supported by one of the registered template generators:
                 [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
-            Supported GAFF force fields include 'gaff-2.2.20', 'gaff-2.11', and others.
+            Supported GAFF force fields include: ['gaff-2.2.20', 'gaff-2.11', 'gaff-2.1', 'gaff-1.81', 'gaff-1.8', 'gaff-1.4']
             (See ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
-            Supported SMIRNOFF force fields include all installed force fields from Parsley and Sage lines, such as 'openff-1.0.0' and 'openff-2.2.1'.
+            Supported SMIRNOFF force fields include: [`openff-1.0.0`, `smirnoff99Frosst-1.1.0`]
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``openmm.app.ForceField.createSystem()`` during ``System``
@@ -303,25 +303,16 @@ class SystemGenerator:
         """
         Add barostat and modify forces if requested.
         """
-
         # Add barostat if requested and the system uses periodic boundary conditions
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
             import openmm
+            import copy
 
             MAXINT = np.iinfo(np.int32).max
 
-            # Determine pressure, temperature, and frequency
-            pressure = self.barostat.getDefaultPressure()
-            if hasattr(self.barostat, "getDefaultTemperature"):
-                temperature = self.barostat.getDefaultTemperature()
-            else:
-                temperature = self.barostat.getTemperature()
-            frequency = self.barostat.getFrequency()
-
-            # Create the barostat
-            # TODO: Make sure we can support other kinds of barostats?
-            barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)
+            # Get the barostat
+            barostat = copy.deepcopy(self.barostat)
             seed = np.random.randint(MAXINT)
             barostat.setRandomNumberSeed(seed)
             system.addForce(barostat)
