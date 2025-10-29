@@ -306,7 +306,6 @@ class SystemGenerator:
         # Add barostat if requested and the system uses periodic boundary conditions
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
-            import openmm
             import copy
 
             MAXINT = np.iinfo(np.int32).max
