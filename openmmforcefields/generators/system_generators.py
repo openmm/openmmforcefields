@@ -91,9 +91,9 @@ class SystemGenerator:
             Small molecule force field to use.
             Must be supported by one of the registered template generators:
                 [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
-            Supported GAFF force fields include: ['gaff-2.2.20', 'gaff-2.11', 'gaff-2.1', 'gaff-1.81', 'gaff-1.8', 'gaff-1.4']
+            Supported GAFF force fields include 'gaff-2.2.20', 'gaff-2.11', and others.
             (See ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
-            Supported SMIRNOFF force fields include: [`openff-1.0.0`, `smirnoff99Frosst-1.1.0`]
+            Supported SMIRNOFF force fields include all installed force fields from Parsley and Sage lines, such as 'openff-1.0.0' and 'openff-2.2.1'.
             (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``openmm.app.ForceField.createSystem()`` during ``System``
