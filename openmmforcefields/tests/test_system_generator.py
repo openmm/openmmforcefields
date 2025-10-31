@@ -7,6 +7,7 @@ import openmm
 import pytest
 from openff.toolkit.topology import Molecule
 from openmm.app import LJPME, PME, CutoffNonPeriodic, Modeller, PDBFile
+from openmm import unit, MonteCarloBarostat, MonteCarloMembraneBarostat
 
 from openmmforcefields.generators import SystemGenerator
 from openmmforcefields.utils import Timer, get_data_filename
@@ -139,21 +140,53 @@ class TestSystemGenerator:
         # Create an empty system generator
         SystemGenerator()
 
-    def test_barostat(self):
-        """Test that barostat addition works correctly"""
+
+    @pytest.mark.parametrize(
+        "barostat_class, args",
+        [
+            # MonteCarloBarostat
+            (
+                MonteCarloBarostat,
+                [0.95 * unit.atmospheres, 301.0 * unit.kelvin, 23],
+            ),
+            # MonteCarloMembraneBarostat
+            (
+                MonteCarloMembraneBarostat,
+                [
+                    1.0 * unit.atmospheres,
+                    10.0 * unit.millinewton / unit.meter,
+                    301.0 * unit.kelvin,
+                    MonteCarloMembraneBarostat.XYIsotropic,
+                    MonteCarloMembraneBarostat.ZFree,
+                    23,
+                ],
+            ),
+        ],
+    )
+    def test_barostat(self, barostat_class, args):
+        """Test that different barostats are correctly applied to the system"""
         # Create a protein SystemGenerator
         generator = SystemGenerator(forcefields=self.amber_forcefields)
 
-        # Create a template barostat
-        from openmm import MonteCarloBarostat, unit
+        # Create the barostat
+        generator.barostat = barostat_class(*args)
 
-        pressure = 0.95 * unit.atmospheres
-        temperature = 301.0 * unit.kelvin
-        frequency = 23
-        generator.barostat = MonteCarloBarostat(pressure, temperature, frequency)
+        # Derive expected values based on barostat type
+        if barostat_class is MonteCarloBarostat:
+            expected = {
+                "pressure": args[0],
+                "temperature": args[1],
+                "frequency": args[2],
+            }
+        else:  # MonteCarloMembraneBarostat
+            expected = {
+                "pressure": args[0],
+                "surface_tension": args[1],
+                "temperature": args[2],
+                "frequency": args[-1],
+            }
 
         # Load a PDB file
-
         pdb_filename = get_data_filename(os.path.join("perses_jacs_systems", "mcl1", "MCL1_protein.pdb"))
         pdbfile = PDBFile(pdb_filename)
 
@@ -176,13 +209,20 @@ class TestSystemGenerator:
 
         # Check barostat is present
         forces = {force.__class__.__name__: force for force in system.getForces()}
-        assert "MonteCarloBarostat" in forces.keys()
+        name = barostat_class.__name__
+        assert name in forces, f"{name} not found in system forces"
 
         # Check barostat parameters
-        force = forces["MonteCarloBarostat"]
-        assert force.getDefaultPressure() == pressure
-        assert force.getDefaultTemperature() == temperature
-        assert force.getFrequency() == frequency
+        force = forces[name]
+        assert force.getDefaultTemperature() == expected["temperature"]
+        assert force.getDefaultPressure() == expected["pressure"]
+        assert force.getFrequency() == expected["frequency"]
+
+        # Conditional check
+        if hasattr(force, "getDefaultSurfaceTension"):
+            assert force.getDefaultSurfaceTension() == expected["surface_tension"]
+
+        
 
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
