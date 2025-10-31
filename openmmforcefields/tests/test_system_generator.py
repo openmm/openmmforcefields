@@ -140,7 +140,6 @@ class TestSystemGenerator:
         # Create an empty system generator
         SystemGenerator()
 
-
     @pytest.mark.parametrize(
         "barostat_class, args",
         [
@@ -221,8 +220,6 @@ class TestSystemGenerator:
         # Conditional check
         if hasattr(force, "getDefaultSurfaceTension"):
             assert force.getDefaultSurfaceTension() == expected["surface_tension"]
-
-        
 
     @pytest.mark.parametrize(
         "small_molecule_forcefield",
