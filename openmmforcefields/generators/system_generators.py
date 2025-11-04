@@ -303,25 +303,15 @@ class SystemGenerator:
         """
         Add barostat and modify forces if requested.
         """
-
         # Add barostat if requested and the system uses periodic boundary conditions
         if (self.barostat is not None) and system.usesPeriodicBoundaryConditions():
             import numpy as np
-            import openmm
+            import copy
 
             MAXINT = np.iinfo(np.int32).max
 
-            # Determine pressure, temperature, and frequency
-            pressure = self.barostat.getDefaultPressure()
-            if hasattr(self.barostat, "getDefaultTemperature"):
-                temperature = self.barostat.getDefaultTemperature()
-            else:
-                temperature = self.barostat.getTemperature()
-            frequency = self.barostat.getFrequency()
-
-            # Create the barostat
-            # TODO: Make sure we can support other kinds of barostats?
-            barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)
+            # Get the barostat
+            barostat = copy.deepcopy(self.barostat)
             seed = np.random.randint(MAXINT)
             barostat.setRandomNumberSeed(seed)
             system.addForce(barostat)
