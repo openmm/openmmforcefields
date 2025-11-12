@@ -1654,7 +1654,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             without .offxml extension}
             {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
 
-            Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and
+            Default behavior is to use ``openff_unconstrained-2.2.1`` for ``reference_forcefield`` and
             `nn` for `charge_method`.
             User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule``
             if charges are assigned to openff.toolkit.Molecule.
@@ -1699,7 +1699,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         You can also pass a template_generator_kwargs to specify the reference_forcefield and/or charge_method in EspalomaTemplateGenerator:
 
-        >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.0.0", "charge_method": "nn"}
+        >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.2.1", "charge_method": "nn"}
         >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.3.2', template_generator_kwargs=template_generator_kwargs)
         """  # noqa
 
@@ -1727,12 +1727,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Check reference forcefield and charge method
         if template_generator_kwargs is not None:
             self._reference_forcefield = template_generator_kwargs.get(
-                "reference_forcefield", "openff_unconstrained-2.0.0"
+                "reference_forcefield", "openff_unconstrained-2.2.1"
             )
             self._charge_method = template_generator_kwargs.get("charge_method", "nn")
         else:
-            # Consider upgrading to 2.1.0, the recommended small moleucle force field for general use
-            self._reference_forcefield = "openff_unconstrained-2.0.0"
+            self._reference_forcefield = "openff_unconstrained-2.2.1"
             self._charge_method = "from-molecule"
 
         # Check to make sure dependencies are installed
