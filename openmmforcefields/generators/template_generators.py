@@ -1326,18 +1326,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         The latest Open Force Field Initiative release is used if none is specified.
 
         >>> smirnoff.forcefield
-        'openff-2.1.0'
+        'openff-2.2.1'
 
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename  # doctest:+ELLIPSIS
-        '/.../openff-2.1.0.offxml'
+        '/.../openff-2.2.1.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.1.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.2.1')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
@@ -1350,7 +1350,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.1.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.2.1')  # doctest: +SKIP
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """  # noqa
@@ -1363,7 +1363,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = "openff-2.1.0"
+            forcefield = "openff-2.2.1"
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield

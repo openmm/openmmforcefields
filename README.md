@@ -189,7 +189,7 @@ Create a SMIRNOFF template generator for a single molecule (benzene, created fro
 from openff.toolkit import Molecule
 
 molecule = Molecule.from_smiles("c1ccccc1")
-# Create the SMIRNOFF template generator with the default installed force field (openff-2.1.0)
+# Create the SMIRNOFF template generator with the default installed force field (openff-2.2.1)
 from openmmforcefields.generators import (
     SMIRNOFFTemplateGenerator,
 )
@@ -215,12 +215,12 @@ system = forcefield.createSystem(
 )
 ```
 
-The latest official Open Force Field Initiative release ([`openff-2.1.0`](https://github.com/openforcefield/openff-forcefields) of the ["Sage" small molecule force field](https://openforcefield.org/community/news/general/sage2.1.0-release/)) is used if none is specified.
+The latest official Open Force Field Initiative release ([`openff-2.2.1`](https://github.com/openforcefield/openff-forcefields) of the ["Sage" small molecule force field](https://openforcefield.org/force-fields/force-fields/)) is used if none is specified.
 You can check which SMIRNOFF force field is in use with
 
 ```pycon
 >>> smirnoff.smirnoff_filename
-'/Users/mattthompson/mambaforge/envs/openmmforcefields/lib/python3.11/site-packages/openforcefields/offxml/openff-2.1.0.offxml'
+'/Users/mattthompson/mambaforge/envs/openmmforcefields/lib/python3.11/site-packages/openforcefields/offxml/openff-2.2.1.offxml'
 ```
 
 Create a template generator for a specific SMIRNOFF force field for multiple molecules read from an SDF file:
@@ -247,7 +247,7 @@ To check which SMIRNOFF force fields are automatically installed, examine the `I
 
 ```pycon
 >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-1.0.1', 'openff-1.1.1', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'opc3-1.0.1', 'opc', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'tip4p_fb-1.0.0', 'openff-2.0.0-rc.1', 'opc-1.0.1']
+['ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.4', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-2.2.1-rc1', 'openff-1.0.1', 'openff-1.1.1', 'spce-1.0.0', 'openff_no_water-3.0.0-alpha0', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-2.3.0-rc2', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.2.1', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'tip4p_ew', 'opc3-1.0.1', 'opc', 'openff-2.3.0-rc1', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'openff-2.2.0-rc1', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'tip4p_ew-1.0.0', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'openff-2.2.0', 'spce', 'tip5p', 'tip4p_fb-1.0.0', 'openff-2.1.1', 'openff-2.0.0-rc.1', 'tip5p-1.0.0', 'opc-1.0.1']
 ```
 
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
@@ -255,7 +255,7 @@ You can optionally specify a file that contains a cache of pre-parameterized mol
 ```python
 smirnoff = SMIRNOFFTemplateGenerator(
     cache="smirnoff-molecules.json",
-    forcefield="openff-2.1.0",
+    forcefield="openff-2.2.1",
 )
 ```
 
@@ -381,7 +381,7 @@ system_generator = SystemGenerator(
 )
 ```
 
-To use the [OpenFF's Sage `openff-2.1.0`](https://github.com/openforcefield/openff-forcefields) or a newer version, an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.1.0'`.
+To use the [OpenFF's Sage `openff-2.2.1`](https://github.com/openforcefield/openff-forcefields) or a newer version, an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.2.1'`.
 
 To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
 
