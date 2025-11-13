@@ -1263,7 +1263,7 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
 
     def test_keyword_arguments_default(self):
         """
-        Test the default behavior for the keyword arguments, which is using "openff_unconstrained-2.0.0"
+        Test the default behavior for the keyword arguments, which is using "openff_unconstrained-2.2.1"
         as the reference forcefield and "from-molecule" as the charge method.
 
         Check charges are the same as the input, after passing through the template generator.
@@ -1280,8 +1280,8 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
         system = forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
         # Make sure passing through the EspalomaGenerator didn't change the charges
         assert self.charges_are_equal(system, molecule), "Expected equal charges."
-        # Assert the reference forcefield is the default "openff_unconstrained-2.0.0"
-        default_ref_ff = "openff_unconstrained-2.0.0"
+        # Assert the reference forcefield is the default "openff_unconstrained-2.2.1"
+        default_ref_ff = "openff_unconstrained-2.2.1"
         generator_ref_ff = generator._reference_forcefield
         assert generator_ref_ff == default_ref_ff, f"Expected {default_ref_ff}, received {generator_ref_ff}."
 

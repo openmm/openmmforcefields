@@ -1326,18 +1326,18 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         The latest Open Force Field Initiative release is used if none is specified.
 
         >>> smirnoff.forcefield
-        'openff-2.1.0'
+        'openff-2.2.1'
 
         You can check which SMIRNOFF force field filename is in use with
 
         >>> smirnoff.smirnoff_filename  # doctest:+ELLIPSIS
-        '/.../openff-2.1.0.offxml'
+        '/.../openff-2.2.1.offxml'
 
         Create a template generator for a specific SMIRNOFF force field for multiple
         molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.1.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.2.1')  # doctest: +SKIP
 
         You can also add molecules later on after the generator has been registered:
 
@@ -1350,7 +1350,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.1.0')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.2.1')  # doctest: +SKIP
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """  # noqa
@@ -1363,7 +1363,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = "openff-2.1.0"
+            forcefield = "openff-2.2.1"
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
         self._forcefield = forcefield
@@ -1654,7 +1654,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             without .offxml extension}
             {"charge_method": str, Charge method supported by espaloma ['nn', 'am1-bcc', 'gasteiger', 'from-molecule']}
 
-            Default behavior is to use ``openff_unconstrained-2.0.0`` for ``reference_forcefield`` and
+            Default behavior is to use ``openff_unconstrained-2.2.1`` for ``reference_forcefield`` and
             `nn` for `charge_method`.
             User defined charges can be assigned by setting the ``charge_method`` to ``from_molecule``
             if charges are assigned to openff.toolkit.Molecule.
@@ -1699,7 +1699,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         You can also pass a template_generator_kwargs to specify the reference_forcefield and/or charge_method in EspalomaTemplateGenerator:
 
-        >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.0.0", "charge_method": "nn"}
+        >>> template_generator_kwargs = {"reference_forcefield": "openff_unconstrained-2.2.1", "charge_method": "nn"}
         >>> espaloma_generator = EspalomaTemplateGenerator(cache='smirnoff.json', forcefield='espaloma-0.3.2', template_generator_kwargs=template_generator_kwargs)
         """  # noqa
 
@@ -1727,12 +1727,11 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Check reference forcefield and charge method
         if template_generator_kwargs is not None:
             self._reference_forcefield = template_generator_kwargs.get(
-                "reference_forcefield", "openff_unconstrained-2.0.0"
+                "reference_forcefield", "openff_unconstrained-2.2.1"
             )
             self._charge_method = template_generator_kwargs.get("charge_method", "nn")
         else:
-            # Consider upgrading to 2.1.0, the recommended small moleucle force field for general use
-            self._reference_forcefield = "openff_unconstrained-2.0.0"
+            self._reference_forcefield = "openff_unconstrained-2.2.1"
             self._charge_method = "from-molecule"
 
         # Check to make sure dependencies are installed
