@@ -1418,7 +1418,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(*forcefield)
         except Exception as e:
             _logger.error(e)
-            raise ValueError("Can't load or parse specified SMIRNOFF force fields {forcefield}") from e
+            raise ValueError(f"Can't load or parse specified SMIRNOFF force fields {forcefield}") from e
 
         # Use a hash of the OFFXML of the force field for the cache
         self._database_table_name = hashlib.sha256(self._smirnoff_forcefield.to_string().encode()).hexdigest()

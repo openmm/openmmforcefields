@@ -1029,7 +1029,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         test_cases = []
 
         # Test water models
-        water_pdb = PDBFile("testsystem-water-cluster.pdb")
+        water_pdb = PDBFile(get_data_filename("test-water-cluster.pdb"))
         for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
             if any(forcefield.startswith(prefix) for prefix in ("opc", "spc", "tip")):
                 test_cases.append(("O", forcefield, water_pdb))
@@ -1042,7 +1042,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             "O=C1c2ccc(Cl)cc2C(=O)N1[C@H]3CCC(=O)NC3=O",
         ]
         for smiles in smiles_list:
-            test_cases.append((smiles, ("openff-2.1.0", "test-virtual-sites.offxml"), None))
+            test_cases.append((smiles, ("openff-2.1.0", get_data_filename("test-virtual-sites.offxml")), None))
 
         for smiles, forcefield, pdb in test_cases:
             # Set up OpenMM ForceField with template generator
