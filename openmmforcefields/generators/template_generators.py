@@ -7,6 +7,7 @@ Residue template generators for GAFF, SMIRNOFF, and espaloma small molecule forc
 ################################################################################
 
 import contextlib
+import hashlib
 import logging
 import os
 import warnings
@@ -1017,7 +1018,7 @@ class OpenMMSystemMixin:
             The OpenMM ffxml contents for the given molecule.
         """
 
-        from openmm import CMMotionRemover
+        from openmm import CMMotionRemover, LocalCoordinatesSite
         from lxml import etree
 
         # Remove CMMotionRemover if present
@@ -1052,20 +1053,29 @@ class OpenMMSystemMixin:
                 else:
                     raise ValueError(f"Found unexpected type {type(quantity)}.")
 
-        # Append unique type names to atoms
+        # Creates unique type names for atoms
         smiles = molecule.to_smiles()
-        for index, atom in enumerate(molecule.atoms):
-            setattr(atom, "typename", f"{smiles}${atom.name}#{index}")
+        names = [f"#{index}" for index in range(system.getNumParticles())]
+        typenames = [f"{smiles}{name}" for name in names]
+
+        # Make mappings between molecule and system atoms (assumes that virtual
+        # sites can occur anywhere but that the order of real atoms matches)
+        molecule_to_system = [index for index in range(system.getNumParticles()) if not system.isVirtualSite(index)]
+        system_to_molecule = {
+            system_index: molecule_index for molecule_index, system_index in enumerate(molecule_to_system)
+        }
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
-        for atom_index, atom in enumerate(molecule.atoms):
+        for atom_index, typename in enumerate(typenames):
             # Create a new atom type for each atom in the molecule
-            element_symbol = atom.symbol
             atom_type = etree.SubElement(
-                atom_types, "Type", name=atom.typename, element=element_symbol, mass=as_attrib(atom.mass)
+                atom_types, "Type", name=typename, mass=as_attrib(system.getParticleMass(atom_index))
             )
-            atom_type.set("class", atom.typename)  # 'class' is a reserved Python keyword, so use alternative API
+            # 'class' is a reserved Python keyword, so use alternative API
+            atom_type.set("class", typename)
+            if atom_index in system_to_molecule:
+                atom_type.set("element", molecule.atoms[system_to_molecule[atom_index]].symbol)
 
         supported_forces = {
             "NonbondedForce",
@@ -1092,7 +1102,7 @@ class OpenMMSystemMixin:
             Parameters
             ----------
             atom_indices : list of int
-                Particle indices for molecule.atoms
+                Particle indices for the system
 
             Returns
             -------
@@ -1100,8 +1110,7 @@ class OpenMMSystemMixin:
                 Dict of format { 'class1' : typename1, ... }
             """
             return {
-                f"class{class_index + 1}": molecule.atoms[atom_index].typename
-                for class_index, atom_index in enumerate(atom_indices)
+                f"class{class_index + 1}": typenames[atom_index] for class_index, atom_index in enumerate(atom_indices)
             }
 
         # Lennard-Jones
@@ -1121,109 +1130,134 @@ class OpenMMSystemMixin:
                 sigma=as_attrib(sigma),
                 epsilon=as_attrib(epsilon),
             )
-            nonbonded_type.set(
-                "class", molecule.atoms[atom_index].typename
-            )  # 'class' is a reserved Python keyword, so use alternative API
+            # 'class' is a reserved Python keyword, so use alternative API
+            nonbonded_type.set("class", typenames[atom_index])
 
         # Bonds
-        bond_types = etree.SubElement(root, "HarmonicBondForce")
-        atom_indices = [-1] * 2
-        for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
-            atom_indices[0], atom_indices[1], length, k = forces["HarmonicBondForce"].getBondParameters(bond_index)
+        if "HarmonicBondForce" in forces:
+            bond_types = etree.SubElement(root, "HarmonicBondForce")
+            for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
+                *atom_indices, length, k = forces["HarmonicBondForce"].getBondParameters(bond_index)
 
-            etree.SubElement(
-                bond_types,
-                "Bond",
-                **classes(atom_indices),
-                length=as_attrib(length),
-                k=as_attrib(k),
-            )
+                etree.SubElement(
+                    bond_types,
+                    "Bond",
+                    **classes(atom_indices),
+                    length=as_attrib(length),
+                    k=as_attrib(k),
+                )
 
         # Angles
-        angle_types = etree.SubElement(root, "HarmonicAngleForce")
-        atom_indices = [-1] * 3
-        for angle_index in range(forces["HarmonicAngleForce"].getNumAngles()):
-            atom_indices[0], atom_indices[1], atom_indices[2], angle, k = forces[
-                "HarmonicAngleForce"
-            ].getAngleParameters(angle_index)
-
-            etree.SubElement(
-                angle_types,
-                "Angle",
-                **classes(atom_indices),
-                angle=as_attrib(angle),
-                k=as_attrib(k),
-            )
+        if "HarmonicAngleForce" in forces:
+            angle_types = etree.SubElement(root, "HarmonicAngleForce")
+            for angle_index in range(forces["HarmonicAngleForce"].getNumAngles()):
+                *atom_indices, angle, k = forces["HarmonicAngleForce"].getAngleParameters(angle_index)
+                etree.SubElement(
+                    angle_types,
+                    "Angle",
+                    **classes(atom_indices),
+                    angle=as_attrib(angle),
+                    k=as_attrib(k),
+                )
 
         # Torsions
         def torsion_tag(atom_indices):
             """Return 'Proper' or 'Improper' depending on torsion type"""
-            atoms = [molecule.atoms[atom_index] for atom_index in atom_indices]
-            # TODO: Check to make sure all atoms are in fact atoms and not virtual sites
+            # Torsions with virtual sites shouldn't be generated, and if any
+            # appear, they will be missing from system_to_molecule so KeyError
+            # will be raised (TODO: is this true?  Do we need to handle this?)
+            atoms = [molecule.atoms[system_to_molecule[atom_index]] for atom_index in atom_indices]
             if atoms[0].is_bonded_to(atoms[1]) and atoms[1].is_bonded_to(atoms[2]) and atoms[2].is_bonded_to(atoms[3]):
                 return "Proper"
             else:
                 return "Improper"
 
-        # Collect torsions
-        torsions = dict()
-        for torsion_index in range(forces["PeriodicTorsionForce"].getNumTorsions()):
-            atom_indices = [-1] * 4
-            (
-                atom_indices[0],
-                atom_indices[1],
-                atom_indices[2],
-                atom_indices[3],
-                periodicity,
-                phase,
-                k,
-            ) = forces["PeriodicTorsionForce"].getTorsionParameters(torsion_index)
-            atom_indices = tuple(atom_indices)
-            if atom_indices in torsions.keys():
-                torsions[atom_indices].append((periodicity, phase, k))
-            else:
-                torsions[atom_indices] = [(periodicity, phase, k)]
+        if "PeriodicTorsionForce" in forces:
+            # Collect torsions
+            torsions = dict()
+            for torsion_index in range(forces["PeriodicTorsionForce"].getNumTorsions()):
+                *atom_indices, periodicity, phase, k = forces["PeriodicTorsionForce"].getTorsionParameters(
+                    torsion_index
+                )
+                atom_indices = tuple(atom_indices)
+                if atom_indices in torsions.keys():
+                    torsions[atom_indices].append((periodicity, phase, k))
+                else:
+                    torsions[atom_indices] = [(periodicity, phase, k)]
 
-        # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
-        for atom_indices in torsions.keys():
-            params = dict()  # build parameter dictionary
-            nterms = len(torsions[atom_indices])
-            for term in range(nterms):
-                periodicity, phase, k = torsions[atom_indices][term]
-                params[f"periodicity{term + 1}"] = as_attrib(periodicity)
-                params[f"phase{term + 1}"] = as_attrib(phase)
-                params[f"k{term + 1}"] = as_attrib(k)
+            # Create torsion definitions
+            torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
+            for atom_indices in torsions.keys():
+                params = dict()  # build parameter dictionary
+                nterms = len(torsions[atom_indices])
+                for term in range(nterms):
+                    periodicity, phase, k = torsions[atom_indices][term]
+                    params[f"periodicity{term + 1}"] = as_attrib(periodicity)
+                    params[f"phase{term + 1}"] = as_attrib(phase)
+                    params[f"k{term + 1}"] = as_attrib(k)
 
-            etree.SubElement(
-                torsion_types,
-                torsion_tag(atom_indices),
-                **classes(atom_indices),
-                **params,
-            )
+                etree.SubElement(
+                    torsion_types,
+                    torsion_tag(atom_indices),
+                    **classes(atom_indices),
+                    **params,
+                )
 
-        # TODO: Handle virtual sites
-        virtual_sites = [
-            atom_index for atom_index in range(system.getNumParticles()) if system.isVirtualSite(atom_index)
-        ]
-        if len(virtual_sites) > 0:
-            raise Exception("Virtual sites are not yet supported")
-
-        # Create residue definitions
-        # TODO: Handle non-Atom atoms too (virtual sites)
+        # Create residue definition (TODO: multi-residue molecules)
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
-        for atom_index, atom in enumerate(molecule.atoms):
+
+        # Add <Atom> tags (for both regular atoms and virtual sites)
+        for atom_index, (name, typename) in enumerate(zip(names, typenames)):
             charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
             etree.SubElement(
                 residue,
                 "Atom",
-                name=atom.name,
-                type=atom.typename,
+                name=name,
+                type=typename,
                 charge=as_attrib(charge),
             )
+
+        # Add virtual site specifications
+        for atom_index, name in enumerate(names):
+            if not system.isVirtualSite(atom_index):
+                continue
+            site = system.getVirtualSite(atom_index)
+
+            if isinstance(site, LocalCoordinatesSite):
+                origin_weights = site.getOriginWeights()
+                x_weights = site.getXWeights()
+                y_weights = site.getYWeights()
+                position = site.getLocalPosition()
+                attributes = dict(
+                    type="localCoords",
+                    p1=as_attrib(position[0]),
+                    p2=as_attrib(position[1]),
+                    p3=as_attrib(position[2]),
+                )
+                for frame_index in range(site.getNumParticles()):
+                    attributes[f"atomName{frame_index + 1}"] = names[site.getParticle(frame_index)]
+                    attributes[f"wo{frame_index + 1}"] = as_attrib(origin_weights[frame_index])
+                    attributes[f"wx{frame_index + 1}"] = as_attrib(x_weights[frame_index])
+                    attributes[f"wy{frame_index + 1}"] = as_attrib(y_weights[frame_index])
+            else:
+                raise TypeError(f"Unsupported virtual site type {type(site).__name__}")
+
+            etree.SubElement(
+                residue,
+                "VirtualSite",
+                siteName=name,
+                **attributes,
+            )
+
+        # Add bond specifications
         for bond in molecule.bonds:
-            etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+            etree.SubElement(
+                residue,
+                "Bond",
+                atomName1=names[molecule_to_system[bond.atom1_index]],
+                atomName2=names[molecule_to_system[bond.atom2_index]],
+            )
 
         # Render XML into string
         ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
@@ -1304,8 +1338,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         cache : str, optional, default=None
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
-        forcefield : str, optional, default=None
-            Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
+        forcefield : str or iterable of str, optional, default=None
+            Names of installed SMIRNOFF force fields (without .offxml) or local .offxml filenames (with extension).
             If not specified, the latest Open Force Field Initiative release is used.
         template_generator_kwargs : dict, optional, default=None
             Additional parameters for the template generator (ignored by SMIRNOFFTemplateGenerator).
@@ -1366,35 +1400,28 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             forcefield = "openff-2.2.1"
             # TODO: After toolkit provides date-ranked force fields,
             # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
-        self._forcefield = forcefield
+        if isinstance(forcefield, str):
+            forcefield = [forcefield]
 
-        # Track parameters by provided SMIRNOFF name
-        # TODO: Can we instead use the force field hash, or some other unique identifier?
-        # TODO: Use file hash instead of name?
-        import os
+        self._forcefield = ", ".join(forcefield)
 
-        self._database_table_name = os.path.basename(forcefield)
-
-        # Create ForceField object
+        # Add .offxml to any known force field names
         import openff.toolkit.typing.engines.smirnoff
 
-        # check for an installed force field
         available_force_fields = openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
-        if (filename := forcefield + ".offxml") in available_force_fields or (
-            filename := forcefield
-        ) in available_force_fields:
-            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
+        forcefield = [
+            filename if (filename := name + ".offxml") in available_force_fields else name for name in forcefield
+        ]
 
-        # just try parsing the input and let openff handle the error
-        else:
-            try:
-                self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
-            except Exception as e:
-                _logger.error(e)
-                raise ValueError(
-                    f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths "
-                    "or parse the input as a string."
-                ) from e
+        # Create ForceField object
+        try:
+            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(*forcefield)
+        except Exception as e:
+            _logger.error(e)
+            raise ValueError("Can't load or parse specified SMIRNOFF force fields {forcefield}") from e
+
+        # Use a hash of the OFFXML of the force field for the cache
+        self._database_table_name = hashlib.sha256(self._smirnoff_forcefield.to_string().encode()).hexdigest()
 
         self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
         self._lj14scale = str(self._smirnoff_forcefield.get_parameter_handler("vdW").scale14)
