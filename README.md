@@ -408,6 +408,12 @@ See the corresponding directories for information on how to use the provided con
 
 # [Changelog](https://github.com/openmm/openmmforcefields/releases)
 
+## 0.15.1 More Force Field Updates!
+
+We added Lipid21 in [PR #390](https://github.com/openmm/openmmforcefields/pull/390) and updated the default SMIRNOFF force field to be `openff-2.2.1` in [PR #417](https://github.com/openmm/openmmforcefields/pull/417) 
+We removed the ff19ipq force field since it is not supported by Amber, see [PR #419](https://github.com/openmm/openmmforcefields/pull/419) for details.
+We now support any barostat in SystemGenerator, see [PR #414](https://github.com/openmm/openmmforcefields/pull/414) for details.
+
 ## 0.15.0 Force Field Updates and More!
 
 All template generators now take `template_generator_kwargs` as an optional init parameter.
