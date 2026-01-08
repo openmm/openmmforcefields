@@ -1055,8 +1055,10 @@ class OpenMMSystemMixin:
 
         # Creates unique type names for atoms
         smiles = molecule.to_smiles()
+        # Hash SMILES to prevent XML size from becoming quadratic in molecule size
+        smiles_hash = hashlib.sha256(smiles.encode()).hexdigest()
         names = [f"#{index}" for index in range(system.getNumParticles())]
-        typenames = [f"{smiles}{name}" for name in names]
+        typenames = [f"{smiles_hash}{name}" for name in names]
 
         # Make mappings between molecule and system atoms (assumes that virtual
         # sites can occur anywhere but that the order of real atoms matches)
@@ -1115,29 +1117,30 @@ class OpenMMSystemMixin:
 
         # Lennard-Jones
         # In case subclasses specifically set the 1-4 scaling factors, use those.
-        nonbonded_types = etree.SubElement(
-            root,
-            "NonbondedForce",
-            coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
-            lj14scale=getattr(self, "_lj14scale", "0.5"),
-        )
-        etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
-        for atom_index in range(forces["NonbondedForce"].getNumParticles()):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
-            nonbonded_type = etree.SubElement(
-                nonbonded_types,
-                "Atom",
-                sigma=as_attrib(sigma),
-                epsilon=as_attrib(epsilon),
+        if (nonbonded_force := forces.get("NonbondedForce")) is not None:
+            nonbonded_types = etree.SubElement(
+                root,
+                "NonbondedForce",
+                coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
+                lj14scale=getattr(self, "_lj14scale", "0.5"),
             )
-            # 'class' is a reserved Python keyword, so use alternative API
-            nonbonded_type.set("class", typenames[atom_index])
+            etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
+            for atom_index in range(nonbonded_force.getNumParticles()):
+                _, sigma, epsilon = nonbonded_force.getParticleParameters(atom_index)
+                nonbonded_type = etree.SubElement(
+                    nonbonded_types,
+                    "Atom",
+                    sigma=as_attrib(sigma),
+                    epsilon=as_attrib(epsilon),
+                )
+                # 'class' is a reserved Python keyword, so use alternative API
+                nonbonded_type.set("class", typenames[atom_index])
 
         # Bonds
-        if "HarmonicBondForce" in forces:
+        if (bond_force := forces.get("HarmonicBondForce")) is not None:
             bond_types = etree.SubElement(root, "HarmonicBondForce")
-            for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
-                *atom_indices, length, k = forces["HarmonicBondForce"].getBondParameters(bond_index)
+            for bond_index in range(bond_force.getNumBonds()):
+                *atom_indices, length, k = bond_force.getBondParameters(bond_index)
 
                 etree.SubElement(
                     bond_types,
@@ -1148,10 +1151,10 @@ class OpenMMSystemMixin:
                 )
 
         # Angles
-        if "HarmonicAngleForce" in forces:
+        if (angle_force := forces.get("HarmonicAngleForce")) is not None:
             angle_types = etree.SubElement(root, "HarmonicAngleForce")
-            for angle_index in range(forces["HarmonicAngleForce"].getNumAngles()):
-                *atom_indices, angle, k = forces["HarmonicAngleForce"].getAngleParameters(angle_index)
+            for angle_index in range(angle_force.getNumAngles()):
+                *atom_indices, angle, k = angle_force.getAngleParameters(angle_index)
                 etree.SubElement(
                     angle_types,
                     "Angle",
@@ -1172,13 +1175,11 @@ class OpenMMSystemMixin:
             else:
                 return "Improper"
 
-        if "PeriodicTorsionForce" in forces:
+        if (torsion_force := forces.get("PeriodicTorsionForce")) is not None:
             # Collect torsions
             torsions = dict()
-            for torsion_index in range(forces["PeriodicTorsionForce"].getNumTorsions()):
-                *atom_indices, periodicity, phase, k = forces["PeriodicTorsionForce"].getTorsionParameters(
-                    torsion_index
-                )
+            for torsion_index in range(torsion_force.getNumTorsions()):
+                *atom_indices, periodicity, phase, k = torsion_force.getTorsionParameters(torsion_index)
                 atom_indices = tuple(atom_indices)
                 if atom_indices in torsions.keys():
                     torsions[atom_indices].append((periodicity, phase, k))
@@ -1203,13 +1204,16 @@ class OpenMMSystemMixin:
                     **params,
                 )
 
-        # Create residue definition (TODO: multi-residue molecules)
+        # Create residue definition
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
 
         # Add <Atom> tags (for both regular atoms and virtual sites)
         for atom_index, (name, typename) in enumerate(zip(names, typenames)):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
+            if nonbonded_force is None:
+                charge = 0.0
+            else:
+                charge, _, _ = nonbonded_force.getParticleParameters(atom_index)
             etree.SubElement(
                 residue,
                 "Atom",
