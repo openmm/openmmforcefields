@@ -1,18 +1,20 @@
 REMARK   1 CREATED WITH OPENMM 8.4, 2025-12-12
+REMARK   2 Edited to include different permutations of the atoms in different
+REMARK   3 water molecules to test that such cases are parameterized correctly
 HETATM    1  O   HOH A   1       0.193  -1.132   1.359  1.00  0.00           O  
 HETATM    2  H1  HOH A   1       0.795  -1.298   2.115  1.00  0.00           H  
 HETATM    3  H2  HOH A   1       0.226  -0.143   1.173  1.00  0.00           H  
 HETATM    4  O   HOH A   2       0.371   1.492   0.846  1.00  0.00           O  
-HETATM    5  H1  HOH A   2       0.454   1.574  -0.154  1.00  0.00           H  
-HETATM    6  H2  HOH A   2       0.177   2.390   1.187  1.00  0.00           H  
-HETATM    7  O   HOH A   3      -0.958  -2.171  -0.827  1.00  0.00           O  
-HETATM    8  H1  HOH A   3      -1.669  -2.759  -0.497  1.00  0.00           H  
+HETATM    5  H2  HOH A   2       0.177   2.390   1.187  1.00  0.00           H  
+HETATM    6  H1  HOH A   2       0.454   1.574  -0.154  1.00  0.00           H  
+HETATM    7  H1  HOH A   3      -1.669  -2.759  -0.497  1.00  0.00           H  
+HETATM    8  O   HOH A   3      -0.958  -2.171  -0.827  1.00  0.00           O  
 HETATM    9  H2  HOH A   3      -0.491  -1.799  -0.016  1.00  0.00           H  
-HETATM   10  O   HOH A   4       0.508   1.753  -1.821  1.00  0.00           O  
-HETATM   11  H1  HOH A   4       0.262   0.851  -2.195  1.00  0.00           H  
-HETATM   12  H2  HOH A   4       0.730   2.324  -2.586  1.00  0.00           H  
-HETATM   13  O   HOH A   5      -0.117  -0.640  -2.863  1.00  0.00           O  
-HETATM   14  H1  HOH A   5      -0.030  -1.248  -3.627  1.00  0.00           H  
-HETATM   15  H2  HOH A   5      -0.452  -1.194  -2.092  1.00  0.00           H  
+HETATM   10  H2  HOH A   4       0.730   2.324  -2.586  1.00  0.00           H  
+HETATM   11  O   HOH A   4       0.508   1.753  -1.821  1.00  0.00           O  
+HETATM   12  H1  HOH A   4       0.262   0.851  -2.195  1.00  0.00           H  
+HETATM   13  H1  HOH A   5      -0.030  -1.248  -3.627  1.00  0.00           H  
+HETATM   14  H2  HOH A   5      -0.452  -1.194  -2.092  1.00  0.00           H  
+HETATM   15  O   HOH A   5      -0.117  -0.640  -2.863  1.00  0.00           O  
 TER      16      HOH A   5
 END

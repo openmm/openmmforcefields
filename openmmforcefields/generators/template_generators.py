@@ -1020,6 +1020,9 @@ class OpenMMSystemMixin:
 
         from openmm import CMMotionRemover, LocalCoordinatesSite
         from lxml import etree
+        import numpy as np
+        import openmm.unit
+        import openff.units
 
         # Remove CMMotionRemover if present
         # See https://github.com/openmm/openmmforcefields/issues/365
@@ -1034,24 +1037,18 @@ class OpenMMSystemMixin:
 
         def as_attrib(quantity):
             """Format openff.units.Quantity or openmm.unit.Quantity as XML attribute."""
-            import openff.units
 
             if isinstance(quantity, str):
                 return quantity
             elif isinstance(quantity, (float, int)):
                 return str(quantity)
             elif isinstance(quantity, openff.units.Quantity):
-                # TODO: Match behavior of Quantity.value_in_unit_system
-                return str(quantity.m)
+                quantity = quantity.to_openmm()
+
+            if isinstance(quantity, openmm.unit.Quantity):
+                return str(quantity.value_in_unit_system(openmm.unit.md_unit_system))
             else:
-                from openmm.unit import Quantity as OpenMMQuantity
-
-                if isinstance(quantity, OpenMMQuantity):
-                    from openmm import unit
-
-                    return str(quantity.value_in_unit_system(unit.md_unit_system))
-                else:
-                    raise ValueError(f"Found unexpected type {type(quantity)}.")
+                raise ValueError(f"Found unexpected type {type(quantity)}.")
 
         # Creates unique type names for atoms
         smiles = molecule.to_smiles()
@@ -1136,12 +1133,22 @@ class OpenMMSystemMixin:
                 # 'class' is a reserved Python keyword, so use alternative API
                 nonbonded_type.set("class", typenames[atom_index])
 
+        # Keep track of all of the constrainable bonds and their lengths.
+        constrainable = {}
+        def add_constrainable(index_1, index_2, length):
+            key = (min(index_1, index_2), max(index_1, index_2))
+            if key in constrainable and not np.isclose(length, constrainable[key]):
+                # TODO: would SMIRNOFF ever generate this case?
+                raise ValueError("Ambiguous geometry (bond lengths do not match)")
+            constrainable[key] = length
+        def get_constrainable(index_1, index_2):
+            return constrainable.get((min(index_1, index_2), max(index_1, index_2)))
+
         # Bonds
         if (bond_force := forces.get("HarmonicBondForce")) is not None:
             bond_types = etree.SubElement(root, "HarmonicBondForce")
             for bond_index in range(bond_force.getNumBonds()):
                 *atom_indices, length, k = bond_force.getBondParameters(bond_index)
-
                 etree.SubElement(
                     bond_types,
                     "Bond",
@@ -1149,6 +1156,9 @@ class OpenMMSystemMixin:
                     length=as_attrib(length),
                     k=as_attrib(k),
                 )
+
+                # Record the length of this bond to compare against constraints
+                add_constrainable(*atom_indices, length.value_in_unit(openmm.unit.nanometer))
 
         # Angles
         if (angle_force := forces.get("HarmonicAngleForce")) is not None:
@@ -1162,6 +1172,27 @@ class OpenMMSystemMixin:
                     angle=as_attrib(angle),
                     k=as_attrib(k),
                 )
+
+                # Record the length associated with this angle (based on any
+                # bonds also present) to compare against constraints
+                index_1, index_2, index_3 = atom_indices
+                length_12 = get_constrainable(index_1, index_2)
+                length_23 = get_constrainable(index_2, index_3)
+                if length_12 is not None and length_23 is not None:
+                    add_constrainable(index_1, index_3, np.sqrt(length_12 * length_12 + length_23 * length_23 - 2.0 * length_12 * length_23 * np.cos(angle.value_in_unit(openmm.unit.radian))))
+
+        # Check constraints
+        for constraint_index in range(system.getNumConstraints()):
+            index_1, index_2, length_rigid = system.getConstraintParameters(constraint_index)
+            length_flexible = get_constrainable(index_1, index_2)
+            if length_flexible is None:
+                # There is a constraint without a corresponding term in a
+                # HarmonicBondForce or HarmonicAngleForce, so the template
+                # would be missing bonded interactions if we didn't fail now
+                raise ValueError("Constraints without corresponding harmonic force terms are unsupported")
+            elif not np.isclose(length_rigid.value_in_unit(openmm.unit.nanometer), length_flexible):
+                # TODO: would SMIRNOFF ever generate this case?
+                raise ValueError("Ambiguous geometry (constraint length does not match bond length)")
 
         # Torsions
         def torsion_tag(atom_indices):
@@ -1430,10 +1461,6 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
         self._lj14scale = str(self._smirnoff_forcefield.get_parameter_handler("vdW").scale14)
 
-        # Delete constraints, if present
-        if "Constraints" in self._smirnoff_forcefield._parameter_handlers:
-            del self._smirnoff_forcefield._parameter_handlers["Constraints"]
-
         # Find SMIRNOFF filename
         smirnoff_filename = self._search_paths(filename)
         self._smirnoff_filename = smirnoff_filename
@@ -1546,6 +1573,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
         """
 
+        from openff.interchange import Interchange
+
         # Use the canonical isomeric SMILES to uniquely name the template
         smiles = molecule.to_smiles()
         _logger.info(f"Generating a residue template for {smiles} using {self._forcefield}")
@@ -1563,7 +1592,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         # Parameterize molecule
         _logger.debug("Generating parameters...")
-        system = self._smirnoff_forcefield.create_openmm_system(
+        system = Interchange.from_smirnoff(
+            self._smirnoff_forcefield,
             molecule.to_topology(),
             charge_from_molecules=charge_from_molecules,
             # "allow_nonintegral_charges" is a misnomer since the actual check
@@ -1571,7 +1601,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             # to an integer but do not match the formal charge.  Since we have
             # already warned about this if it is the case, allow it.
             allow_nonintegral_charges=has_user_charges,
-        )
+        ).to_openmm_system(add_constrained_forces=True)
 
         self.cache_system(smiles, system)
 

@@ -11,6 +11,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 import openmm
 import pytest
+from openff.interchange import Interchange
 from openff.toolkit import Molecule, Topology, ForceField as OFFForceField
 from openff.units import unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
@@ -320,6 +321,9 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
             template_generated_system, reference_system
         )
 
+        # Sanity check to ensure that constraints got added to both systems
+        assert template_generated_system.getNumConstraints() == reference_system.getNumConstraints()
+
         # Compute energies and forces
         template_energy, template_forces = cls.compute_energy(template_generated_system, positions)
         reference_energy, reference_forces = cls.compute_energy(
@@ -480,8 +484,44 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         del context, integrator
         return openmm_energy, openmm_forces
 
-    def propagate_dynamics(self, molecule, system):
-        """Run a few steps of dynamics to generate a perturbed configuration.
+    def propagate_dynamics(self, positions, system):
+        """
+        Run a few steps of dynamics to generate a perturbed configuration.
+
+        Parameters
+        ----------
+        positions : openmm.unit.Quantity
+            Initial positions to start dynamics from
+        system : openmm.System
+            System object for dynamics
+
+        Returns
+        -------
+        new_positions: openmm.unit.Quantity
+            Updated positions after dynamics
+        """
+
+        import openmm.unit
+
+        temperature = 300 * openmm.unit.kelvin
+        collision_rate = 1.0 / openmm.unit.picoseconds
+        timestep = 1.0 * openmm.unit.femtoseconds
+        nsteps = 100
+        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
+        platform = openmm.Platform.getPlatformByName("Reference")
+        context = openmm.Context(system, integrator, platform)
+        context.setPositions(positions)
+
+        # RDKit-generated conformer is occassionally a bad starting point for dynamics,
+        # so minimize with MM first, see https://github.com/openmm/openmmforcefields/pull/370#issuecomment-2749237209
+        openmm.LocalEnergyMinimizer.minimize(context)
+        integrator.step(nsteps)
+
+        return context.getState(getPositions=True).getPositions()
+
+    def propagate_dynamics_single(self, molecule, system):
+        """
+        Calls `propagate_dynamics` using a molecule containing positions.
 
         Parameters
         ----------
@@ -494,36 +534,18 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         -------
         new_molecule : openff.toolkit.topology.Molecule
             new_molecule.conformers[0] has updated positions
-
         """
-        # Run some dynamics
+
         from openff.units.openmm import from_openmm
-        import openmm.unit
 
-        temperature = 300 * openmm.unit.kelvin
-        collision_rate = 1.0 / openmm.unit.picoseconds
-        timestep = 1.0 * openmm.unit.femtoseconds
-        nsteps = 100
-        integrator = openmm.LangevinIntegrator(temperature, collision_rate, timestep)
-        platform = openmm.Platform.getPlatformByName("Reference")
-        context = openmm.Context(system, integrator, platform)
-        context.setPositions(molecule.conformers[0].to_openmm())
-
-        # RDKit-generated conformer is occassionally a bad starting point for dynamics,
-        # so minimize with MM first, see https://github.com/openmm/openmmforcefields/pull/370#issuecomment-2749237209
-        openmm.LocalEnergyMinimizer.minimize(context)
-        integrator.step(nsteps)
+        # Run some dynamics
+        new_positions = self.propagate_dynamics(molecule.conformers[0].to_openmm(), system)
 
         # Copy the molecule, storing new conformer
         new_molecule = copy.deepcopy(molecule)
-        new_positions = context.getState(getPositions=True).getPositions()
-
         new_molecule.conformers[0] = from_openmm(new_positions)
 
-        del context, integrator
-
         return new_molecule
-
 
 @pytest.mark.gaff
 class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
@@ -1064,7 +1086,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
                 )
 
                 # Run some dynamics
-                molecule = self.propagate_dynamics(molecule, smirnoff_system)
+                molecule = self.propagate_dynamics_single(molecule, smirnoff_system)
 
                 # Compare energies again
                 self.compare_energies_single(
@@ -1119,6 +1141,27 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
             self.compare_energies(smiles, modeller.positions, openmm_system, smirnoff_system, f"uses {forcefield}")
+            new_positions = self.propagate_dynamics(modeller.positions, smirnoff_system)
+            self.compare_energies(smiles, new_positions, openmm_system, smirnoff_system, f"uses {forcefield}")
+
+    def test_energies_multiple(self):
+        """Test parameterizing multiple copies of multiple molecules"""
+
+        pdb = PDBFile(get_data_filename("test-water-alkane.pdb"))
+        molecules = [Molecule.from_smiles("CC(C)C"), Molecule.from_smiles("O"), Molecule.from_smiles("CCCC")]
+        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=["openff-2.1.0", "tip5p"])
+        openmm_forcefield = openmm.app.ForceField()
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+
+        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
+        modeller.addExtraParticles(openmm_forcefield)
+
+        smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(Topology.from_openmm(pdb.topology, molecules))
+        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
+
+        self.compare_energies("test_energies_multiple", modeller.positions, openmm_system, smirnoff_system)
+        new_positions = self.propagate_dynamics(modeller.positions, smirnoff_system)
+        self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
 
     def test_partial_charges_are_none(self):
         """Test parameterizing a small molecule with `partial_charges=None` instead
@@ -1329,7 +1372,7 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
 
-        # Test all supported SMIRNOFF force fields
+        # Test all supported Espaloma force fields
         for small_molecule_forcefield in EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS:
             print(f"Testing energies for {small_molecule_forcefield}...")
             # Create a generator that knows about a few molecules
@@ -1355,7 +1398,7 @@ class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
                 self.compare_energies_single(molecule, openmm_system, espaloma_system)
 
                 # Run some dynamics
-                molecule = self.propagate_dynamics(molecule, espaloma_system)
+                molecule = self.propagate_dynamics_single(molecule, espaloma_system)
 
                 # Compare energies again
                 self.compare_energies_single(molecule, openmm_system, espaloma_system)
