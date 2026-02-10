@@ -92,7 +92,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
         # due to an equilibrium angle > \pi
         # See https://github.com/openmm/openmm/issues/3185
-        if "openff-2.0.0-rc.1" in force_field:
+        if "openff-2.0.0-rc.1" in force_field or "openff_unconstrained-2.0.0-rc.1" in force_field:
             return False
 
         # smirnoff99Frosst is older and produces some weird geometries with some molecules
@@ -941,9 +941,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         expected_force_fields = [
             "openff-1.1.0",
             "openff-2.0.0",
+            "tip3p",
         ]
         forbidden_force_fields = [
-            "openff_unconstrained",
             "ff14sb_0.0.3",
         ]
 
@@ -952,6 +952,81 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         for forbidden in forbidden_force_fields:
             assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+
+    def test_forcefield_default(self):
+        """Test that not specifying a force field gives a default OpenFF force field"""
+
+        generator = SMIRNOFFTemplateGenerator()
+        assert "openff" in generator.forcefield
+        assert not generator.forcefield.endswith(".offxml")
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith(generator.forcefield + ".offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
+
+    def test_forcefield_installed(self):
+        """Test that specifying an installed force field name loads that force field"""
+
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            assert generator.forcefield == forcefield
+            assert len(generator.smirnoff_filenames) == 1
+            assert generator.smirnoff_filenames[0].endswith(forcefield + ".offxml")
+            assert os.path.exists(generator.smirnoff_filenames[0])
+
+    def test_forcefield_path(self):
+        """Test that specifying a path to a force field loads that force field"""
+
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator_ref = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            generator_test = SMIRNOFFTemplateGenerator(forcefield=generator_ref.smirnoff_filenames[0])
+            assert generator_test.forcefield
+            assert generator_test.smirnoff_filenames == generator_ref.smirnoff_filenames
+            assert generator_test._smirnoff_forcefield.to_string() == generator_ref._smirnoff_forcefield.to_string()
+
+    def test_forcefield_file(self):
+        """Test that a force field can be loaded directly from a file object"""
+
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator_ref = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            with open(generator_ref.smirnoff_filenames[0]) as file:
+                generator_test = SMIRNOFFTemplateGenerator(forcefield=file)
+            assert generator_test.forcefield
+            assert generator_test.smirnoff_filenames == [None]
+            assert generator_ref._smirnoff_forcefield.to_string() == generator_test._smirnoff_forcefield.to_string()
+
+    def test_forcefield_str(self):
+        """Test that a force field can be parsed directly from a string"""
+
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator_ref = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            with open(generator_ref.smirnoff_filenames[0]) as file:
+                generator_test = SMIRNOFFTemplateGenerator(forcefield=file.read())
+            assert generator_test.forcefield
+            assert generator_test.smirnoff_filenames == [None]
+            assert generator_ref._smirnoff_forcefield.to_string() == generator_test._smirnoff_forcefield.to_string()
+
+    def test_forcefield_bytes(self):
+        """Test that a force field can be parsed directly from bytes"""
+
+        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
+            generator_ref = SMIRNOFFTemplateGenerator(forcefield=forcefield)
+            with open(generator_ref.smirnoff_filenames[0], "rb") as file:
+                generator_test = SMIRNOFFTemplateGenerator(forcefield=file.read())
+            assert generator_test.forcefield
+            assert generator_test.smirnoff_filenames == [None]
+            assert generator_ref._smirnoff_forcefield.to_string() == generator_test._smirnoff_forcefield.to_string()
+
+    def test_forcefield_multiple(self):
+        """Test loading multiple force field components together"""
+
+        generator = SMIRNOFFTemplateGenerator(forcefield=["openff-2.0.0", "tip3p.offxml", OFFForceField().to_string()])
+        assert generator.forcefield
+        assert len(generator.smirnoff_filenames) == 3
+        assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
+        assert generator.smirnoff_filenames[1].endswith("tip3p.offxml")
+        assert generator.smirnoff_filenames[2] is None
+        assert os.path.exists(generator.smirnoff_filenames[0])
+        assert os.path.exists(generator.smirnoff_filenames[1])
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
@@ -1021,16 +1096,6 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
                 nonbondedMethod=NoCutoff,
             )
             generator.get_openmm_system(molecule)
-
-    def test_version(self):
-        """Test version"""
-        # This test does not appear to test the version of anything in particular, but it fails sometimes
-        # because old versions of the toolkit can't bring in new versions of some water models
-        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
-            assert generator.forcefield == forcefield
-            assert generator.smirnoff_filename.endswith(forcefield + ".offxml")
-            assert os.path.exists(generator.smirnoff_filename)
 
     def test_bespoke_force_field(self):
         """
