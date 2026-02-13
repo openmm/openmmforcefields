@@ -1198,6 +1198,150 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             )
             generator.get_openmm_system(molecule)
 
+    def get_terms(self, system):
+        """
+        Helper for `test_constraints()` and `test_constraints_water()`.  Returns
+        the set of harmonic bonds, harmonic angles, and constraints from a
+        system.
+        """
+
+        bonds = set()
+        angles = set()
+        constraints = set()
+
+        for force in system.getForces():
+
+            if isinstance(force, openmm.HarmonicBondForce):
+                for i_bond in range(force.getNumBonds()):
+                    i, j = force.getBondParameters(i_bond)[:2]
+                    bonds.add(min((i, j), (j, i)))
+
+            if isinstance(force, openmm.HarmonicAngleForce):
+                for i_angle in range(force.getNumAngles()):
+                    i, j, k = force.getAngleParameters(i_angle)[:3]
+                    angles.add(min((i, j, k), (k, j, i)))
+
+        for i_constraint in range(system.getNumConstraints()):
+            i, j = system.getConstraintParameters(i_constraint)[:2]
+            constraints.add(min((i, j), (j, i)))
+
+        return bonds, angles, constraints
+
+    def test_constraints(self):
+        """
+        Tests that the expected constraints are added using the unconstrained
+        and constrained variants of a SMIRNOFF force field, and OpenMM's
+        `constraints` and `flexibleConstraints` options.
+        """
+
+        from openmm.app import HBonds, AllBonds, HAngles
+
+        # Make acetaldehyde (mapped SMILES guarantees atom order)
+        molecule = Molecule.from_mapped_smiles("[C:1]([C:2](=[O:3])[H:7])([H:4])([H:5])[H:6]")
+        topology = molecule.to_topology().to_openmm()
+
+        # Expected bonds, angles, and constraints:
+        non_h_bonds = {(0, 1), (1, 2)}
+        h_bonds = {(0, 3), (0, 4), (0, 5), (1, 6)}
+        non_h_angles = {(0, 1, 2), (0, 1, 6), (1, 0, 3), (1, 0, 4), (1, 0, 5), (2, 1, 6)}
+        h_angles = {(3, 0, 4), (3, 0, 5), (4, 0, 5)}
+        h_angles_constraints = {(3, 4), (3, 5), (4, 5)}
+
+        # Make force fields
+        unconstrained = openmm.app.ForceField()
+        unconstrained.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0").generator)
+        constrained = openmm.app.ForceField()
+        constrained.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator)
+
+        # Unconstrained force field
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=None)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, set())
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=AllBonds)) == (set(), non_h_angles | h_angles, non_h_bonds | h_bonds)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles)) == (set(), non_h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+
+        # Unconstrained force field with flexibleConstraints: should still get harmonic terms
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, h_bonds)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+
+        # Constrained force field: constraints up to HBonds should be forced on
+        assert self.get_terms(constrained.createSystem(topology, constraints=None)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
+        assert self.get_terms(constrained.createSystem(topology, constraints=HBonds)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
+        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds)) == (set(), non_h_angles | h_angles, non_h_bonds | h_bonds)
+        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles)) == (set(), non_h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+
+        # Constrained force field with flexibleConstraints: should not still have harmonic terms for rigidwater
+        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (non_h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds)
+        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (non_h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+
+    def test_constraints_water(self):
+        """
+        Tests that the expected constraints are added for SMIRNOFF water using
+        OpenMM's `rigidWater` option.
+        """
+
+        # Make water (mapped SMILES guarantees atom order)
+        molecule = Molecule.from_mapped_smiles("[O:1]([H:2])[H:3]")
+        topology = molecule.to_topology().to_openmm()
+
+        # Expected constraints
+        constraints = (set(), set(), {(0, 1), (0, 2), (1, 2)})
+
+        # Make force field
+        forcefield = openmm.app.ForceField()
+        forcefield.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="opc3").generator)
+
+        # We should always get rigid water no matter what is asked for
+        assert self.get_terms(forcefield.createSystem(topology, rigidWater=None)) == constraints
+        assert self.get_terms(forcefield.createSystem(topology, rigidWater=False)) == constraints
+        assert self.get_terms(forcefield.createSystem(topology, rigidWater=True)) == constraints
+
+    def test_constraints_distance(self):
+        """
+        Tests that constraint distances come from harmonic bonds if created
+        through OpenMM and from SMIRNOFF constraints if present.
+        """
+
+        from openmm import unit
+        from openmm.app import AllBonds
+
+        molecule = Molecule.from_smiles("[F][F]")
+        topology = molecule.to_topology().to_openmm()
+
+        offxml = """<?xml version="1.0" encoding="utf-8"?>
+<SMIRNOFF version="0.3" aromaticity_model="OEAroModel_MDL">{constraints}
+    <Bonds version="0.4" potential="harmonic" fractional_bondorder_method="AM1-Wiberg" fractional_bondorder_interpolation="linear">
+        <Bond smirks="[#9:1]-[#9:2]" length="2 * angstrom ** 1" k="1000.0 * angstrom ** -2 * kilocalorie_per_mole ** 1"></Bond>
+    </Bonds>
+    <LibraryCharges version="0.3">
+        <LibraryCharge smirks="[#9:1]" charge1="0 * elementary_charge ** 1"></LibraryCharge>
+    </LibraryCharges>
+    <vdW version="0.4" potential="Lennard-Jones-12-6" combining_rules="Lorentz-Berthelot" scale12="0.0" scale13="0.0" scale14="0.5" scale15="1.0" cutoff="9.0 * angstrom ** 1" switch_width="1.0 * angstrom ** 1" periodic_method="cutoff" nonperiodic_method="no-cutoff">
+        <Atom smirks="[#9:1]" epsilon="0 * kilocalorie_per_mole ** 1" sigma="0 * angstrom ** 1"></Atom>
+    </vdW>
+</SMIRNOFF>"""
+        constraints = """
+    <Constraints version="0.3">
+        <Constraint smirks="[#9:1]-[#9:2]" distance="3 * angstrom ** 1"></Constraint>
+    </Constraints>"""
+
+        # Make a system with a SMIRNOFF force field that has only a harmonic
+        # bond, and use OpenMM to add a constraint: should get the harmonic
+        # bond distance
+        generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=offxml.format(constraints=""))
+        forcefield = openmm.app.ForceField()
+        forcefield.registerTemplateGenerator(generator.generator)
+        system = forcefield.createSystem(topology, constraints=AllBonds)
+        assert np.isclose(system.getConstraintParameters(0)[2].value_in_unit(unit.angstrom), 2)
+
+        # Now use a SMIRNOFF force field with explicit <Constraints>: even with
+        # the harmonic bond present, should get the constraint distance.
+        generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=offxml.format(constraints=constraints))
+        forcefield = openmm.app.ForceField()
+        forcefield.registerTemplateGenerator(generator.generator)
+        system = forcefield.createSystem(topology, constraints=AllBonds)
+        assert np.isclose(system.getConstraintParameters(0)[2].value_in_unit(unit.angstrom), 3)
+
     def test_energies_virtual_sites(self):
         """Test potential energies match for systems with virtual sites"""
 
