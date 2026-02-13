@@ -1,6 +1,6 @@
 name: openmmforcefields-test
 channels:
-  - conda-forge/label/openmm_dev
+  - conda-forge/label/openmm_rc
   - conda-forge
 dependencies:
   - ambertools >=24
