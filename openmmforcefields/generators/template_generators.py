@@ -1179,11 +1179,7 @@ class OpenMMSystemMixin:
             torsions = dict()
             for torsion_index in range(torsion_force.getNumTorsions()):
                 *atom_indices, periodicity, phase, k = torsion_force.getTorsionParameters(torsion_index)
-                atom_indices = tuple(atom_indices)
-                if atom_indices in torsions.keys():
-                    torsions[atom_indices].append((periodicity, phase, k))
-                else:
-                    torsions[atom_indices] = [(periodicity, phase, k)]
+                torsions.setdefault(tuple(atom_indices), []).append((periodicity, phase, k))
 
             # Create torsion definitions
             torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)

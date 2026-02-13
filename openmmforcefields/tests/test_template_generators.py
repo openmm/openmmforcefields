@@ -1315,7 +1315,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             non_h_bonds | h_bonds | h_angles_constraints,
         )
 
-        # Constrained force field with flexibleConstraints: should not still have harmonic terms for rigidwater
+        # Constrained force field with flexibleConstraints: should not have harmonic terms for enforced constraints
         assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (
             non_h_bonds,
             non_h_angles | h_angles,
