@@ -1210,7 +1210,6 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         constraints = set()
 
         for force in system.getForces():
-
             if isinstance(force, openmm.HarmonicBondForce):
                 for i_bond in range(force.getNumBonds()):
                     i, j = force.getBondParameters(i_bond)[:2]
@@ -1249,30 +1248,84 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         # Make force fields
         unconstrained = openmm.app.ForceField()
-        unconstrained.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0").generator)
+        unconstrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0").generator
+        )
         constrained = openmm.app.ForceField()
-        constrained.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator)
+        constrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator
+        )
 
         # Unconstrained force field
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=None)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, set())
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=AllBonds)) == (set(), non_h_angles | h_angles, non_h_bonds | h_bonds)
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles)) == (set(), non_h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=None)) == (
+            non_h_bonds | h_bonds,
+            non_h_angles | h_angles,
+            set(),
+        )
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds)) == (
+            non_h_bonds,
+            non_h_angles | h_angles,
+            h_bonds,
+        )
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=AllBonds)) == (
+            set(),
+            non_h_angles | h_angles,
+            non_h_bonds | h_bonds,
+        )
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles)) == (
+            set(),
+            non_h_angles,
+            non_h_bonds | h_bonds | h_angles_constraints,
+        )
 
         # Unconstrained force field with flexibleConstraints: should still get harmonic terms
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, h_bonds)
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds)
-        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (non_h_bonds | h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HBonds, flexibleConstraints=True)) == (
+            non_h_bonds | h_bonds,
+            non_h_angles | h_angles,
+            h_bonds,
+        )
+        assert self.get_terms(
+            unconstrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)
+        ) == (non_h_bonds | h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds)
+        assert self.get_terms(unconstrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (
+            non_h_bonds | h_bonds,
+            non_h_angles | h_angles,
+            non_h_bonds | h_bonds | h_angles_constraints,
+        )
 
         # Constrained force field: constraints up to HBonds should be forced on
-        assert self.get_terms(constrained.createSystem(topology, constraints=None)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
-        assert self.get_terms(constrained.createSystem(topology, constraints=HBonds)) == (non_h_bonds, non_h_angles | h_angles, h_bonds)
-        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds)) == (set(), non_h_angles | h_angles, non_h_bonds | h_bonds)
-        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles)) == (set(), non_h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+        assert self.get_terms(constrained.createSystem(topology, constraints=None)) == (
+            non_h_bonds,
+            non_h_angles | h_angles,
+            h_bonds,
+        )
+        assert self.get_terms(constrained.createSystem(topology, constraints=HBonds)) == (
+            non_h_bonds,
+            non_h_angles | h_angles,
+            h_bonds,
+        )
+        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds)) == (
+            set(),
+            non_h_angles | h_angles,
+            non_h_bonds | h_bonds,
+        )
+        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles)) == (
+            set(),
+            non_h_angles,
+            non_h_bonds | h_bonds | h_angles_constraints,
+        )
 
         # Constrained force field with flexibleConstraints: should not still have harmonic terms for rigidwater
-        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (non_h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds)
-        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (non_h_bonds, non_h_angles | h_angles, non_h_bonds | h_bonds | h_angles_constraints)
+        assert self.get_terms(constrained.createSystem(topology, constraints=AllBonds, flexibleConstraints=True)) == (
+            non_h_bonds,
+            non_h_angles | h_angles,
+            non_h_bonds | h_bonds,
+        )
+        assert self.get_terms(constrained.createSystem(topology, constraints=HAngles, flexibleConstraints=True)) == (
+            non_h_bonds,
+            non_h_angles | h_angles,
+            non_h_bonds | h_bonds | h_angles_constraints,
+        )
 
     def test_constraints_water(self):
         """
@@ -1289,7 +1342,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         # Make force field
         forcefield = openmm.app.ForceField()
-        forcefield.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="opc3").generator)
+        forcefield.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="opc3").generator
+        )
 
         # We should always get rigid water no matter what is asked for
         assert self.get_terms(forcefield.createSystem(topology, rigidWater=None)) == constraints
