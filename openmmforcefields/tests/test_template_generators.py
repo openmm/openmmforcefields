@@ -1471,6 +1471,28 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         new_positions = self.propagate_dynamics(new_positions, openmm_system)
         self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
 
+    def test_energies_multiple_residue(self):
+        """Test parameterizing a multi-residue molecule"""
+
+        pdb = PDBFile(get_data_filename("test-ala-3.pdb"))
+        molecules = [Molecule.from_topology(Topology.from_pdb(get_data_filename("test-ala-3.pdb")))]
+        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff_unconstrained-2.3.0.offxml")
+        openmm_forcefield = openmm.app.ForceField()
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+
+        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
+        modeller.addExtraParticles(openmm_forcefield)
+
+        smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
+            Topology.from_openmm(pdb.topology, molecules)
+        )
+        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
+
+        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+        new_positions = self.propagate_dynamics(new_positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+
     def test_bespoke_force_field(self):
         """
         Make sure a molecule can be parameterised using a bespoke force field passed as a string to

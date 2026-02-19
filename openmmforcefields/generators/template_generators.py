@@ -48,7 +48,7 @@ class SmallMoleculeTemplateGenerator:
         """
         Create a template generator with some OpenFF toolkit molecules
 
-        Requies the openff-toolkit toolkit: http://openforcefield.org
+        Requires the openff-toolkit toolkit: http://openforcefield.org
 
         Parameters
         ----------
@@ -144,6 +144,50 @@ class SmallMoleculeTemplateGenerator:
         self._molecules.update({molecule.to_smiles(): molecule for molecule in molecules})
 
     @staticmethod
+    def _molecule_for_residue(residue):
+        """
+        Finds the whole molecule that a `Residue` is part of, and if the
+        `Residue` is not already a whole molecule, constructs a `MergedResidue`
+        corresponding to all of the residues in this whole molecule.
+        """
+
+        from collections import defaultdict
+        from openmm.app.topology import MergedResidue
+
+        # TODO: performance of this will be very poor since we will be
+        # generating this data every time; fix this with some kind of caching
+
+        bondedResidues = defaultdict(set)
+        for atom1, atom2 in residue.chain.topology.bonds():
+            if atom1.residue != atom2.residue:
+                bondedResidues[atom1.residue].add(atom2.residue)
+                bondedResidues[atom2.residue].add(atom1.residue)
+        bondedResidues = {x: list(y) for x, y in bondedResidues.items()}
+
+        if residue not in bondedResidues:
+            return residue
+
+        visited = set()
+        molecule = set()
+        residueStack = [residue]
+        neighborStack = [0]
+        while len(residueStack) > 0:
+            currentRes = residueStack[-1]
+            bonded = bondedResidues[currentRes]
+            molecule.add(currentRes)
+            visited.add(currentRes)
+            while neighborStack[-1] < len(bonded) and bonded[neighborStack[-1]] in visited:
+                neighborStack[-1] +=1
+            if neighborStack[-1] < len(bonded):
+                residueStack.append(bonded[neighborStack[-1]])
+                neighborStack.append(0)
+            else:
+                residueStack.pop()
+                neighborStack.pop()
+
+        return MergedResidue(list(molecule))
+
+    @staticmethod
     def _match_residue(residue, molecule_template):
         """
         Determine whether a residue matches a Molecule template and return a list of corresponding atoms.
@@ -165,6 +209,8 @@ class SmallMoleculeTemplateGenerator:
 
         .. todo :: Can this be replaced by an isomorphism matching call to the OpenFF toolkit?
         """
+
+        residue = SmallMoleculeTemplateGenerator._molecule_for_residue(residue)
 
         # TODO: Speed this up by rejecting molecules that do not have the same chemical formula
 
@@ -443,7 +489,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         Create a GAFFTemplateGenerator with some OpenFF toolkit molecules
 
-        Requies the OpenFF toolkit: http://openforcefield.org
+        Requires the OpenFF toolkit: http://openforcefield.org
 
         Parameters
         ----------
@@ -1656,7 +1702,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         """
         Create an EspalomaTemplateGenerator with some OpenFF toolkit molecules
 
-        Requies the OpenFF toolkit: http://openforcefield.org
+        Requires the OpenFF toolkit: http://openforcefield.org
         and espaloma: http://github.com/choderalab/espaloma
 
         Parameters
