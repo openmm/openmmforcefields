@@ -1057,7 +1057,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_INSTALLED_FORCEFIELDS(self):
         """Test INSTALLED_FORCEFIELDS contains expected force fields"""
 
-        assert sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS) == sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS)
+        assert sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS) == sorted(
+            SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
+        )
 
     def test_forcefield_default(self):
         """Test that not specifying a force field gives a default OpenFF force field"""
@@ -1125,7 +1127,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_forcefield_multiple(self):
         """Test loading multiple force field components together"""
 
-        generator = SMIRNOFFTemplateGenerator(forcefield=["openff-2.0.0.offxml", "tip3p.offxml", OFFForceField().to_string()])
+        generator = SMIRNOFFTemplateGenerator(
+            forcefield=["openff-2.0.0.offxml", "tip3p.offxml", OFFForceField().to_string()]
+        )
         assert generator.forcefield
         assert len(generator.smirnoff_filenames) == 3
         assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
@@ -1133,7 +1137,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert generator.smirnoff_filenames[2] is None
         assert os.path.exists(generator.smirnoff_filenames[0])
         assert os.path.exists(generator.smirnoff_filenames[1])
-    
+
     def test_forcefield_unconstrained(self):
         """Test that forcefield names resolve to unconstrained versions correctly"""
 
@@ -1380,7 +1384,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0.offxml").generator
         )
         default = openmm.app.ForceField()
-        default.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator)
+        default.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator
+        )
 
         assert unconstrained.createSystem(topology).getNumConstraints() == 0
         assert constrained.createSystem(topology).getNumConstraints() > 0
