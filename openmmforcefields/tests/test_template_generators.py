@@ -92,7 +92,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
         # due to an equilibrium angle > \pi
         # See https://github.com/openmm/openmm/issues/3185
-        if "openff-2.0.0-rc.1" in force_field or "openff_unconstrained-2.0.0-rc.1" in force_field:
+        if "openff-2.0.0-rc.1" in force_field:
             return False
 
         # smirnoff99Frosst is older and produces some weird geometries with some molecules
@@ -1033,8 +1033,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
 
-    def test_INSTALLED_FORCEFIELDS(self):
-        """Test INSTALLED_FORCEFIELDS contains expected force fields"""
+    def test_INSTALLED_FORCEFIELD_PATHS(self):
+        """Test INSTALLED_FORCEFIELD_PATHS contains expected force fields"""
         expected_force_fields = [
             "openff-1.1.0",
             "openff-2.0.0",
@@ -1042,13 +1042,22 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         ]
         forbidden_force_fields = [
             "ff14sb_0.0.3",
+            "openff_unconstrained-2.0.0",
         ]
 
         for expected in expected_force_fields:
-            assert expected in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+            assert expected in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
 
         for forbidden in forbidden_force_fields:
-            assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+            assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
+
+        for path in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS.values():
+            assert os.path.exists(path)
+
+    def test_INSTALLED_FORCEFIELDS(self):
+        """Test INSTALLED_FORCEFIELDS contains expected force fields"""
+
+        assert sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS) == sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS)
 
     def test_forcefield_default(self):
         """Test that not specifying a force field gives a default OpenFF force field"""
@@ -1057,7 +1066,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert "openff" in generator.forcefield
         assert not generator.forcefield.endswith(".offxml")
         assert len(generator.smirnoff_filenames) == 1
-        assert generator.smirnoff_filenames[0].endswith(generator.forcefield + ".offxml")
+        assert generator.smirnoff_filenames[0].endswith(".offxml")
         assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_forcefield_installed(self):
@@ -1067,7 +1076,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
             assert generator.forcefield == forcefield
             assert len(generator.smirnoff_filenames) == 1
-            assert generator.smirnoff_filenames[0].endswith(forcefield + ".offxml")
+            assert generator.smirnoff_filenames[0].endswith(".offxml")
             assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_forcefield_path(self):
@@ -1116,7 +1125,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_forcefield_multiple(self):
         """Test loading multiple force field components together"""
 
-        generator = SMIRNOFFTemplateGenerator(forcefield=["openff-2.0.0", "tip3p.offxml", OFFForceField().to_string()])
+        generator = SMIRNOFFTemplateGenerator(forcefield=["openff-2.0.0.offxml", "tip3p.offxml", OFFForceField().to_string()])
         assert generator.forcefield
         assert len(generator.smirnoff_filenames) == 3
         assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
@@ -1124,6 +1133,33 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert generator.smirnoff_filenames[2] is None
         assert os.path.exists(generator.smirnoff_filenames[0])
         assert os.path.exists(generator.smirnoff_filenames[1])
+    
+    def test_forcefield_unconstrained(self):
+        """Test that forcefield names resolve to unconstrained versions correctly"""
+
+        # Should redirect to the unconstrained version
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0")
+        assert generator.forcefield == "openff-2.0.0"
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
+
+        # Should not point to any valid force field
+        with pytest.raises(ValueError, match="Can't load or parse specified SMIRNOFF"):
+            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0")
+
+        # Specifying a name with .offxml should never get modified
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0.offxml")
+        assert generator.forcefield
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
+
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0.offxml")
+        assert generator.forcefield
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
@@ -1249,11 +1285,11 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         # Make force fields
         unconstrained = openmm.app.ForceField()
         unconstrained.registerTemplateGenerator(
-            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0").generator
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0.offxml").generator
         )
         constrained = openmm.app.ForceField()
         constrained.registerTemplateGenerator(
-            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0.offxml").generator
         )
 
         # Unconstrained force field
@@ -1326,6 +1362,29 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             non_h_angles | h_angles,
             non_h_bonds | h_bonds | h_angles_constraints,
         )
+
+    def test_unconstrained_default(self):
+        """
+        Tests that force field names by default select unconstrained variants.
+        """
+
+        molecule = Molecule.from_mapped_smiles("[C:1]([C:2](=[O:3])[H:7])([H:4])([H:5])[H:6]")
+        topology = molecule.to_topology().to_openmm()
+
+        unconstrained = openmm.app.ForceField()
+        unconstrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0.offxml").generator
+        )
+        constrained = openmm.app.ForceField()
+        constrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0.offxml").generator
+        )
+        default = openmm.app.ForceField()
+        default.registerTemplateGenerator(SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator)
+
+        assert unconstrained.createSystem(topology).getNumConstraints() == 0
+        assert constrained.createSystem(topology).getNumConstraints() > 0
+        assert default.createSystem(topology).getNumConstraints() == 0
 
     def test_constraints_water(self):
         """

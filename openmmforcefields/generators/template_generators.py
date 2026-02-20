@@ -1407,9 +1407,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         if forcefield is None:
             # Use latest supported Open Force Field Initiative release if none is specified
+            # TODO: In the future, this behavior will be removed and no default will be set
             forcefield = "openff-2.2.1"
-            # TODO: After toolkit provides date-ranked force fields,
-            # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
 
         # Make sure forcefield is iterable; check for a string, bytes, or a
         # file-like object first since they are already iterable as single items
@@ -1421,14 +1420,14 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             forcefield = [forcefield]
 
         # Set the name of the force field or make up a description for it
-        known_names = SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+        known_names = SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
         if len(forcefield) == 1 and forcefield[0] in known_names:
             self._forcefield = forcefield[0]
         else:
             self._forcefield = f"<SMIRNOFF forcefield from {len(forcefield)} sources>"
 
-        # Add .offxml to any known force field names
-        forcefield = [entry + ".offxml" if entry in known_names else entry for entry in forcefield]
+        # Resolve any known force field names to their full paths
+        forcefield = [known_names[entry] if entry in known_names else entry for entry in forcefield]
 
         # Create ForceField object
         try:
@@ -1450,30 +1449,74 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         self.clear_system_cache()
 
     @classproperty
-    def INSTALLED_FORCEFIELDS(cls):
+    def INSTALLED_FORCEFIELD_PATHS(cls):
         """
-        Return a list of the force fields shipped with the openff-forcefields package.
+        Return a list of the force fields shipped with the openff-forcefields
+        package along with full paths to the corresponding force field files.
+
+        OpenFF distributes some force fields with constrained and unconstrained
+        variants.  In the event that both variants of a given force field exist,
+        *e.g.*, `openff-2.0.0.offxml` and `openff_unconstrained-2.0.0.offxml`,
+        only the name `openff-2.0.0` will be present in the list, and it will
+        refer to the *unconstrained*, not the constrained, variant of the force
+        field.
 
         Returns
         -------
-        names : str
-            The names of available force fields
+        paths : dict[str, str]
+            The names of available force fields and paths to force field files.
         """
 
+        import re
         from openff.toolkit import get_available_force_fields
 
-        names = list()
-        for filename in get_available_force_fields(full_paths=False):
-            root, ext = os.path.splitext(filename)
+        paths = {}
+        unconstrained_names = []
+
+        for path in get_available_force_fields(full_paths=True):
+            name = os.path.splitext(os.path.basename(path))[0]
+
             # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
             # impropers and one with Amber-style impropers. The latter requires a special handler
             # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
             # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
-            if root.startswith("ff14sb") and "off_impropers" not in root:
+            if name.startswith("ff14sb") and "off_impropers" not in name:
                 continue
-            names.append(root)
 
-        return sorted(names)
+            # Keep track of what _unconstrained forcefields we have seen
+            if (match := re.fullmatch("(.*)_unconstrained(.*)", name)) is not None:
+                unconstrained_names.append(match.group(1, 2))
+
+            paths[name] = path
+
+        # Keep only the constrained forcefield names, with the unconstrained
+        # forcefield paths, when we find a constrained/unconstrained pair
+        for prefix, suffix in unconstrained_names:
+            constrained_name = prefix + suffix
+            if constrained_name in paths:
+                unconstrained_name = f"{prefix}_unconstrained{suffix}"
+                paths[constrained_name] = paths[unconstrained_name]
+                del paths[unconstrained_name]
+
+        return paths
+
+    @classproperty
+    def INSTALLED_FORCEFIELDS(cls):
+        """
+        Return a list of the force fields shipped with the openff-forcefields package.
+
+        In the event that constrained and unconstrained force field variants are
+        detected, only the name without `_unconstrained` will be returned, and
+        it will refer to the constrained variant.  For more information, see
+        `SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS`.
+
+        Returns
+        -------
+        names : str
+            The names of available force fields.
+        """
+
+        return sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS)
 
     def _search_paths(self, filename):
         """
