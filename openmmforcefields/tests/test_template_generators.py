@@ -1471,7 +1471,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         smiles_list = [
             "c1(Cl)c(Cl)c(Cl)c(Cl)c(Cl)c1Cl",
             "O=CCCCCC=O",
-            "ClCCCC(Cl)(CC=O)CC=O",
+            "ClCCCC(Cl)(C=O)C=O",
             "O=C1c2ccc(Cl)cc2C(=O)N1[C@H]3CCC(=O)NC3=O",
         ]
         for smiles in smiles_list:
