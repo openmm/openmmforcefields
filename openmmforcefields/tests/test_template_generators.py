@@ -1496,7 +1496,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             modeller.addExtraParticles(openmm_forcefield)
 
             # Make OpenFF-created and ForceField-created systems to compare
-            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(openff_topology, charge_from_molecules=[molecules[0]])
+            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
+                openff_topology, charge_from_molecules=[molecules[0]]
+            )
             openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
             new_positions = self.propagate_dynamics(modeller.positions, openmm_system)

@@ -1447,7 +1447,11 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         electrostatics_handler = self._smirnoff_forcefield.get_parameter_handler("Electrostatics")
         vdw_handler = self._smirnoff_forcefield.get_parameter_handler("vdW")
 
-        if not (electrostatics_handler.scale12 == 0.0 and electrostatics_handler.scale13 == 0.0 and electrostatics_handler.scale15 == 1.0):
+        if not (
+            electrostatics_handler.scale12 == 0.0
+            and electrostatics_handler.scale13 == 0.0
+            and electrostatics_handler.scale15 == 1.0
+        ):
             raise ValueError("Unsupported scaling for adjacent Coulomb interactions")
         if not (vdw_handler.scale12 == 0.0 and vdw_handler.scale13 == 0.0 and vdw_handler.scale15 == 1.0):
             raise ValueError("Unsupported scaling for adjacent Lennard-Jones interactions")
