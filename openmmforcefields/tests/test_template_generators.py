@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+import glob
 import random
 import copy
 import logging
@@ -92,7 +93,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
         # due to an equilibrium angle > \pi
         # See https://github.com/openmm/openmm/issues/3185
-        if "openff-2.0.0-rc.1" in force_field or "openff_unconstrained-2.0.0-rc.1" in force_field:
+        if "openff-2.0.0-rc.1" in force_field:
             return False
 
         # smirnoff99Frosst is older and produces some weird geometries with some molecules
@@ -1033,8 +1034,8 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
 
-    def test_INSTALLED_FORCEFIELDS(self):
-        """Test INSTALLED_FORCEFIELDS contains expected force fields"""
+    def test_INSTALLED_FORCEFIELD_PATHS(self):
+        """Test INSTALLED_FORCEFIELD_PATHS contains expected force fields"""
         expected_force_fields = [
             "openff-1.1.0",
             "openff-2.0.0",
@@ -1042,13 +1043,24 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         ]
         forbidden_force_fields = [
             "ff14sb_0.0.3",
+            "openff_unconstrained-2.0.0",
         ]
 
         for expected in expected_force_fields:
-            assert expected in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+            assert expected in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
 
         for forbidden in forbidden_force_fields:
-            assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+            assert forbidden not in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
+
+        for path in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS.values():
+            assert os.path.exists(path)
+
+    def test_INSTALLED_FORCEFIELDS(self):
+        """Test INSTALLED_FORCEFIELDS contains expected force fields"""
+
+        assert sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS) == sorted(
+            SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
+        )
 
     def test_forcefield_default(self):
         """Test that not specifying a force field gives a default OpenFF force field"""
@@ -1057,7 +1069,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert "openff" in generator.forcefield
         assert not generator.forcefield.endswith(".offxml")
         assert len(generator.smirnoff_filenames) == 1
-        assert generator.smirnoff_filenames[0].endswith(generator.forcefield + ".offxml")
+        assert generator.smirnoff_filenames[0].endswith(".offxml")
         assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_forcefield_installed(self):
@@ -1067,7 +1079,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             generator = SMIRNOFFTemplateGenerator(forcefield=forcefield)
             assert generator.forcefield == forcefield
             assert len(generator.smirnoff_filenames) == 1
-            assert generator.smirnoff_filenames[0].endswith(forcefield + ".offxml")
+            assert generator.smirnoff_filenames[0].endswith(".offxml")
             assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_forcefield_path(self):
@@ -1116,7 +1128,9 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_forcefield_multiple(self):
         """Test loading multiple force field components together"""
 
-        generator = SMIRNOFFTemplateGenerator(forcefield=["openff-2.0.0", "tip3p.offxml", OFFForceField().to_string()])
+        generator = SMIRNOFFTemplateGenerator(
+            forcefield=["openff-2.0.0.offxml", "tip3p.offxml", OFFForceField().to_string()]
+        )
         assert generator.forcefield
         assert len(generator.smirnoff_filenames) == 3
         assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
@@ -1124,6 +1138,33 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         assert generator.smirnoff_filenames[2] is None
         assert os.path.exists(generator.smirnoff_filenames[0])
         assert os.path.exists(generator.smirnoff_filenames[1])
+
+    def test_forcefield_unconstrained(self):
+        """Test that forcefield names resolve to unconstrained versions correctly"""
+
+        # Should redirect to the unconstrained version
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0")
+        assert generator.forcefield == "openff-2.0.0"
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
+
+        # Should not point to any valid force field
+        with pytest.raises(ValueError, match="Can't load or parse specified SMIRNOFF"):
+            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0")
+
+        # Specifying a name with .offxml should never get modified
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0.offxml")
+        assert generator.forcefield
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
+
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0.offxml")
+        assert generator.forcefield
+        assert len(generator.smirnoff_filenames) == 1
+        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.0.0.offxml")
+        assert os.path.exists(generator.smirnoff_filenames[0])
 
     def test_energies(self):
         """Test potential energies match between openff-toolkit and OpenMM ForceField"""
@@ -1249,11 +1290,11 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         # Make force fields
         unconstrained = openmm.app.ForceField()
         unconstrained.registerTemplateGenerator(
-            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0").generator
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0.offxml").generator
         )
         constrained = openmm.app.ForceField()
         constrained.registerTemplateGenerator(
-            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0.offxml").generator
         )
 
         # Unconstrained force field
@@ -1326,6 +1367,31 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             non_h_angles | h_angles,
             non_h_bonds | h_bonds | h_angles_constraints,
         )
+
+    def test_unconstrained_default(self):
+        """
+        Tests that force field names by default select unconstrained variants.
+        """
+
+        molecule = Molecule.from_mapped_smiles("[C:1]([C:2](=[O:3])[H:7])([H:4])([H:5])[H:6]")
+        topology = molecule.to_topology().to_openmm()
+
+        unconstrained = openmm.app.ForceField()
+        unconstrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff_unconstrained-2.1.0.offxml").generator
+        )
+        constrained = openmm.app.ForceField()
+        constrained.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0.offxml").generator
+        )
+        default = openmm.app.ForceField()
+        default.registerTemplateGenerator(
+            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.1.0").generator
+        )
+
+        assert unconstrained.createSystem(topology).getNumConstraints() == 0
+        assert constrained.createSystem(topology).getNumConstraints() > 0
+        assert default.createSystem(topology).getNumConstraints() == 0
 
     def test_constraints_water(self):
         """
@@ -1400,76 +1466,45 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_energies_virtual_sites(self):
         """Test potential energies match for systems with virtual sites"""
 
-        test_cases = []
+        test_dir_path = get_data_filename("test_vsites_mols")
+        for molecule_path in glob.glob(os.path.join(test_dir_path, "*.sdf")):
+            custom_ff = OFFForceField("openff-2.3.0.offxml", get_data_filename("test-virtual-sites.offxml"))
 
-        # Test water models
-        water_pdb = PDBFile(get_data_filename("test-water-cluster.pdb"))
-        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            if any(forcefield.startswith(prefix) for prefix in ("opc", "spc", "tip")):
-                test_cases.append(("O", forcefield, water_pdb))
+            # These test files have charges that we want to use instead of
+            # having these handlers generate them (this is specified also by
+            # using charge_from_molecules below, but we delete these to ensure
+            # no possibility of other charges being involved)
+            custom_ff.deregister_parameter_handler("NAGLCharges")
+            custom_ff.deregister_parameter_handler("LibraryCharges")
 
-        # Test some other molecules with different virtual site types
-        smiles_list = [
-            "c1(Cl)c(Cl)c(Cl)c(Cl)c(Cl)c1Cl",
-            "O=CCCCCC=O",
-            "ClCCCC(Cl)(CC=O)CC=O",
-            "O=C1c2ccc(Cl)cc2C(=O)N1[C@H]3CCC(=O)NC3=O",
-        ]
-        for smiles in smiles_list:
-            test_cases.append((smiles, ("openff-2.1.0", get_data_filename("test-virtual-sites.offxml")), None))
+            # Try non-default values for 1-4 interaction scaling
+            custom_ff.get_parameter_handler("vdW").scale14 = 0.7
+            custom_ff.get_parameter_handler("Electrostatics").scale14 = 0.3
 
-        for smiles, forcefield, pdb in test_cases:
             # Set up OpenMM ForceField with template generator
-            molecule = Molecule.from_smiles(smiles)
-            generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=forcefield)
+            molecules = Molecule.from_file(molecule_path)[:1]
+            generator = SMIRNOFFTemplateGenerator(molecules=molecules[0], forcefield=custom_ff.to_string())
+
             openmm_forcefield = openmm.app.ForceField()
             openmm_forcefield.registerTemplateGenerator(generator.generator)
 
             # Add virtual sites to OpenMM topology
-            if pdb is None:
-                # Use a single molecule's conformer for the system
-                molecule.generate_conformers()
-                openff_topology = molecule.to_topology()
-                openmm_topology = openff_topology.to_openmm()
-                positions = molecule.conformers[0].to_openmm()
-            else:
-                # Use a PDB that may contain multiple instances of the molecule
-                openmm_topology = pdb.topology
-                openff_topology = Topology.from_openmm(openmm_topology, [molecule])
-                positions = pdb.positions
+            openff_topology = Topology.from_molecules(molecules)
+            openmm_topology = openff_topology.to_openmm()
+            positions = openff_topology.get_positions().to_openmm()
             modeller = openmm.app.Modeller(openmm_topology, positions)
             modeller.addExtraParticles(openmm_forcefield)
 
             # Make OpenFF-created and ForceField-created systems to compare
-            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(openff_topology)
+            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
+                openff_topology, charge_from_molecules=[molecules[0]]
+            )
             openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
             new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
-            self.compare_energies(smiles, new_positions, openmm_system, smirnoff_system, f"uses {forcefield}")
+            self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
             new_positions = self.propagate_dynamics(new_positions, openmm_system)
-            self.compare_energies(smiles, new_positions, openmm_system, smirnoff_system, f"uses {forcefield}")
-
-    def test_energies_multiple(self):
-        """Test parameterizing multiple copies of multiple molecules"""
-
-        pdb = PDBFile(get_data_filename("test-water-alkane.pdb"))
-        molecules = [Molecule.from_smiles("CC(C)C"), Molecule.from_smiles("O"), Molecule.from_smiles("CCCC")]
-        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=["openff-2.1.0", "tip5p"])
-        openmm_forcefield = openmm.app.ForceField()
-        openmm_forcefield.registerTemplateGenerator(generator.generator)
-
-        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
-        modeller.addExtraParticles(openmm_forcefield)
-
-        smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
-            Topology.from_openmm(pdb.topology, molecules)
-        )
-        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
-
-        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
-        self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
-        new_positions = self.propagate_dynamics(new_positions, openmm_system)
-        self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
+            self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
 
     def test_energies_multiple_residue(self):
         """Test parameterizing a multi-residue molecule"""
