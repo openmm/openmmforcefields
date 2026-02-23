@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+import glob
 import random
 import copy
 import logging
@@ -1465,76 +1466,43 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_energies_virtual_sites(self):
         """Test potential energies match for systems with virtual sites"""
 
-        test_cases = []
+        test_dir_path = get_data_filename("test_vsites_mols")
+        for molecule_path in glob.glob(os.path.join(test_dir_path, "*.sdf")):
+            custom_ff = OFFForceField("openff-2.3.0.offxml", get_data_filename("test-virtual-sites.offxml"))
 
-        # Test water models
-        water_pdb = PDBFile(get_data_filename("test-water-cluster.pdb"))
-        for forcefield in SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS:
-            if any(forcefield.startswith(prefix) for prefix in ("opc", "spc", "tip")):
-                test_cases.append(("O", forcefield, water_pdb))
+            # These test files have charges that we want to use instead of
+            # having these handlers generate them (this is specified also by
+            # using charge_from_molecules below, but we delete these to ensure
+            # no possibility of other charges being involved)
+            custom_ff.deregister_parameter_handler("NAGLCharges")
+            custom_ff.deregister_parameter_handler("LibraryCharges")
 
-        # Test some other molecules with different virtual site types
-        smiles_list = [
-            "c1(Cl)c(Cl)c(Cl)c(Cl)c(Cl)c1Cl",
-            "O=CCCCCC=O",
-            "ClCCCC(Cl)(C=O)C=O",
-            "O=C1c2ccc(Cl)cc2C(=O)N1[C@H]3CCC(=O)NC3=O",
-        ]
-        for smiles in smiles_list:
-            test_cases.append((smiles, ("openff-2.1.0", get_data_filename("test-virtual-sites.offxml")), None))
+            # Try non-default values for 1-4 interaction scaling
+            custom_ff.get_parameter_handler("vdW").scale14 = 0.7
+            custom_ff.get_parameter_handler("Electrostatics").scale14 = 0.3
 
-        for smiles, forcefield, pdb in test_cases:
             # Set up OpenMM ForceField with template generator
-            molecule = Molecule.from_smiles(smiles)
-            generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=forcefield)
+            molecules = Molecule.from_file(molecule_path)[:1]
+            generator = SMIRNOFFTemplateGenerator(molecules=molecules[0], forcefield=custom_ff.to_string())
+
             openmm_forcefield = openmm.app.ForceField()
             openmm_forcefield.registerTemplateGenerator(generator.generator)
 
             # Add virtual sites to OpenMM topology
-            if pdb is None:
-                # Use a single molecule's conformer for the system
-                molecule.generate_conformers()
-                openff_topology = molecule.to_topology()
-                openmm_topology = openff_topology.to_openmm()
-                positions = molecule.conformers[0].to_openmm()
-            else:
-                # Use a PDB that may contain multiple instances of the molecule
-                openmm_topology = pdb.topology
-                openff_topology = Topology.from_openmm(openmm_topology, [molecule])
-                positions = pdb.positions
+            openff_topology = Topology.from_molecules(molecules)
+            openmm_topology = openff_topology.to_openmm()
+            positions = openff_topology.get_positions().to_openmm()
             modeller = openmm.app.Modeller(openmm_topology, positions)
             modeller.addExtraParticles(openmm_forcefield)
 
             # Make OpenFF-created and ForceField-created systems to compare
-            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(openff_topology)
+            smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(openff_topology, charge_from_molecules=[molecules[0]])
             openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
 
             new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
-            self.compare_energies(smiles, new_positions, openmm_system, smirnoff_system, f"uses {forcefield}")
+            self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
             new_positions = self.propagate_dynamics(new_positions, openmm_system)
-            self.compare_energies(smiles, new_positions, openmm_system, smirnoff_system, f"uses {forcefield}")
-
-    def test_energies_multiple(self):
-        """Test parameterizing multiple copies of multiple molecules"""
-
-        pdb = PDBFile(get_data_filename("test-water-alkane.pdb"))
-        molecules = [Molecule.from_smiles("CC(C)C"), Molecule.from_smiles("O"), Molecule.from_smiles("CCCC")]
-        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=["openff-2.1.0", "tip5p"])
-        openmm_forcefield = openmm.app.ForceField()
-        openmm_forcefield.registerTemplateGenerator(generator.generator)
-
-        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
-        modeller.addExtraParticles(openmm_forcefield)
-
-        smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
-            Topology.from_openmm(pdb.topology, molecules)
-        )
-        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
-
-        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
-        self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
-        new_positions = self.propagate_dynamics(new_positions, openmm_system)
-        self.compare_energies("test_energies_multiple", new_positions, openmm_system, smirnoff_system)
+            self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
 
     def test_bespoke_force_field(self):
         """

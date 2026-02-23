@@ -1442,8 +1442,23 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Use a hash of the OFFXML of the force field for identifying it in the cache
         self._database_table_name = hashlib.sha256(self._smirnoff_forcefield.to_string().encode()).hexdigest()
 
-        self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
-        self._lj14scale = str(self._smirnoff_forcefield.get_parameter_handler("vdW").scale14)
+        # Get the 1-4 scaling factors and make sure that the other scalings are
+        # set to OpenMM-supported values (1 for 1-2 and 1-3, 0 for 1-5)
+        electrostatics_handler = self._smirnoff_forcefield.get_parameter_handler("Electrostatics")
+        vdw_handler = self._smirnoff_forcefield.get_parameter_handler("vdW")
+
+        if not (electrostatics_handler.scale12 == 0.0 and electrostatics_handler.scale13 == 0.0 and electrostatics_handler.scale15 == 1.0):
+            raise ValueError("Unsupported scaling for adjacent Coulomb interactions")
+        if not (vdw_handler.scale12 == 0.0 and vdw_handler.scale13 == 0.0 and vdw_handler.scale15 == 1.0):
+            raise ValueError("Unsupported scaling for adjacent Lennard-Jones interactions")
+
+        self._coulomb14scale = str(electrostatics_handler.scale14)
+        self._lj14scale = str(vdw_handler.scale14)
+
+        # Make sure that the virtual site exclusion policy for this force field
+        # is set to the only value supported by OpenMM
+        if self._smirnoff_forcefield.get_parameter_handler("VirtualSites").exclusion_policy != "parents":
+            raise ValueError("Unsupported virtual site exclusion policy")
 
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
