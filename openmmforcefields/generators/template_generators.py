@@ -1183,14 +1183,12 @@ class OpenMMSystemMixin:
 
             # Create torsion definitions
             torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
-            for atom_indices in torsions.keys():
-                params = dict()  # build parameter dictionary
-                nterms = len(torsions[atom_indices])
-                for term in range(nterms):
-                    periodicity, phase, k = torsions[atom_indices][term]
-                    params[f"periodicity{term + 1}"] = as_attrib(periodicity)
-                    params[f"phase{term + 1}"] = as_attrib(phase)
-                    params[f"k{term + 1}"] = as_attrib(k)
+            for atom_indices, terms in torsions.items():
+                params = {}
+                for term_index, (periodicity, phase, k) in enumerate(terms, start=1):
+                    params[f"periodicity{term_index}"] = as_attrib(periodicity)
+                    params[f"phase{term_index}"] = as_attrib(phase)
+                    params[f"k{term_index}"] = as_attrib(k)
 
                 etree.SubElement(
                     torsion_types,
