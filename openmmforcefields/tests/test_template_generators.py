@@ -1514,7 +1514,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         custom_sage = OFFForceField("openff-2.0.0.offxml")
         # Create a simple molecule with one bond type
-        ethane = Molecule.from_smiles("C")
+        ethane = Molecule.from_smiles("CC")
         # Label ethane to get the bond type (not hard coded incase this changes in future)
         bond_parameter = custom_sage.label_molecules(ethane.to_topology())[0]["Bonds"][(0, 1)]
         # Edit the bond parameter
@@ -1547,11 +1547,15 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         """
         Make sure we can read lj14scale and coulomb14scale from the SMIRNOFF force field
         """
+
+        from openmm import unit
+
         custom_sage = OFFForceField("openff-2.0.0.offxml")
-        custom_sage.get_parameter_handler("vdW").scale14 = 0.0
-        custom_sage.get_parameter_handler("Electrostatics").scale14 = 0.0
+        custom_sage.get_parameter_handler("vdW").scale14 = 0.7
+        custom_sage.get_parameter_handler("Electrostatics").scale14 = 0.3
+
         # Create a simplest 1-4 bond molecule
-        ethane = Molecule.from_smiles("CC")
+        ethane = Molecule.from_smiles("[C:1]([C:2]([H:6])([H:7])[H:8])([H:3])([H:4])[H:5]")
 
         # Use the custom sage passed as string to build a template and an openmm system
         generator = SMIRNOFFTemplateGenerator(molecules=ethane, forcefield=custom_sage.to_string())
@@ -1567,14 +1571,67 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             nonbondedMethod=NoCutoff,
         )
 
-        # Find Nonbondedforce
+        # Find NonbondedForce
         nb_force = [force for force in openmm_system.getForces() if force.__class__.__name__ == "NonbondedForce"][0]
 
-        # Check all exceptions have q/eps == 0.
-        exceptions = [nb_force.getExceptionParameters(i) for i in range(nb_force.getNumExceptions())]
-        for exception in exceptions:
-            assert exception[2]._value == 0.0
-            assert exception[4]._value == 0.0
+        # Get parameters and exceptions to check
+        parameters = []
+        for particle_index in range(nb_force.getNumParticles()):
+            q, _, epsilon = nb_force.getParticleParameters(particle_index)
+            parameters.append(
+                (q.value_in_unit(unit.elementary_charge), epsilon.value_in_unit(unit.kilojoule_per_mole))
+            )
+        exceptions = {}
+        for exception_index in range(nb_force.getNumExceptions()):
+            i, j, qq, _, epsilon = nb_force.getExceptionParameters(exception_index)
+            exceptions[min(i, j), max(i, j)] = (
+                qq.value_in_unit(unit.elementary_charge**2),
+                epsilon.value_in_unit(unit.kilojoule_per_mole),
+            )
+
+        # Expected 1-2 and 1-3 exception pairs (should be zeroed)
+        expected_zeroed = {
+            (0, 1),
+            (0, 2),
+            (0, 3),
+            (0, 4),
+            (0, 5),
+            (0, 6),
+            (0, 7),
+            (1, 2),
+            (1, 3),
+            (1, 4),
+            (1, 5),
+            (1, 6),
+            (1, 7),
+            (2, 3),
+            (2, 4),
+            (3, 4),
+            (5, 6),
+            (5, 7),
+            (6, 7),
+        }
+
+        # Expected 1-4 exception pairs (should have requested scales applied)
+        expected_scaled = {
+            (2, 5),
+            (2, 6),
+            (2, 7),
+            (3, 5),
+            (3, 6),
+            (3, 7),
+            (4, 5),
+            (4, 6),
+            (4, 7),
+        }
+
+        # Check that scaling factors were applied as requested
+        assert set(exceptions) == expected_zeroed | expected_scaled
+        for i, j in expected_zeroed:
+            assert exceptions[i, j] == (0.0, 0.0)
+        for i, j in expected_scaled:
+            assert np.isclose(exceptions[i, j][0], 0.3 * parameters[i][0] * parameters[j][0])
+            assert np.isclose(exceptions[i, j][1], 0.7 * np.sqrt(parameters[i][1] * parameters[j][1]))
 
     def test_charge_none(self):
         """Test that charges are nonzero after charging if the molecule has None for user charges"""
