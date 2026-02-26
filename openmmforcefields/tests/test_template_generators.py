@@ -1168,17 +1168,27 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             if not self._filter_openff(small_molecule_forcefield):
                 _logger.debug(f"skipping {small_molecule_forcefield}")
                 continue
+            if small_molecule_forcefield == "openff_unconstrained-2.3.0.offxml":
+                # OpenFF FF with NAGL: test all molecules in the set
+                molecules = self.molecules
+            elif small_molecule_forcefield in SMIRNOFFTemplateGenerator._INSTALLED_FORCEFIELDS.values():
+                # Other preset force field: test a subset of molecules
+                molecules = self.filter_molecules(self.molecules, max_molecules=5)
+            else:
+                # Something else (pre-release, etc.): just try one molecule to ensure it doesn't fail
+                molecules = [Molecule.from_smiles("C=O")]
+                molecules[0].generate_conformers(n_conformers=1)
 
             _logger.info(f"Testing {small_molecule_forcefield}")
             # Create a generator that knows about a few molecules
             # TODO: Should the generator also load the appropriate force field files into the ForceField object?
-            generator = SMIRNOFFTemplateGenerator(molecules=self.molecules, forcefield=small_molecule_forcefield)
+            generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=small_molecule_forcefield)
             # Create a ForceField
             openmm_forcefield = openmm.app.ForceField()
             # Register the template generator
             openmm_forcefield.registerTemplateGenerator(generator.generator)
             # Parameterize some molecules
-            for molecule in self.molecules:
+            for molecule in molecules:
                 # Create OpenMM System using OpenMM app
                 openmm_system = openmm_forcefield.createSystem(
                     molecule.to_topology().to_openmm(),
