@@ -1439,12 +1439,12 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         def resolve_name(entry):
             if entry not in known_paths:
                 return entry
-            entry = self._search_paths(known_paths[entry], allow_local=False)
-            if entry is None:
+            full_path = self._search_paths(known_paths[entry], allow_local=False)
+            if full_path is None:
                 raise FileNotFoundError(
                     f"No installed OFFXML with name {known_paths[entry]} was found for the force field {entry}"
                 )
-            return entry
+            return full_path
 
         forcefield = list(map(resolve_name, forcefield))
 
