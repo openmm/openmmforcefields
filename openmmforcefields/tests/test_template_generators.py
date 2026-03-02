@@ -1504,7 +1504,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             # Make OpenFF-created and ForceField-created systems to compare
             # Note that we've loaded two copies of the same molecule with reversed atom orders.
             # Both have identical partial charges assigned (accounting for the rearrangement)
-            # so we pick the first one arbitrarily to be the charge reference. 
+            # so we pick the first one arbitrarily to be the charge reference.
             smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
                 openff_topology, charge_from_molecules=[molecules[0]]
             )
