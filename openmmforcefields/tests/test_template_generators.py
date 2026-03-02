@@ -1411,16 +1411,17 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         # Expected constraints
         constraints = (set(), set(), {(0, 1), (0, 2), (1, 2)})
 
-        # Make force field
-        forcefield = openmm.app.ForceField()
-        forcefield.registerTemplateGenerator(
-            SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="opc3.offxml").generator
-        )
+        for forcefield_path in ("opc3.offxml", "openff_unconstrained-2.3.0.offxml"):
+            # Make force field
+            forcefield = openmm.app.ForceField()
+            forcefield.registerTemplateGenerator(
+                SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=forcefield_path).generator
+            )
 
-        # We should always get rigid water no matter what is asked for
-        assert self.get_terms(forcefield.createSystem(topology, rigidWater=None)) == constraints
-        assert self.get_terms(forcefield.createSystem(topology, rigidWater=False)) == constraints
-        assert self.get_terms(forcefield.createSystem(topology, rigidWater=True)) == constraints
+            # We should always get rigid water no matter what is asked for
+            assert self.get_terms(forcefield.createSystem(topology, rigidWater=None)) == constraints
+            assert self.get_terms(forcefield.createSystem(topology, rigidWater=False)) == constraints
+            assert self.get_terms(forcefield.createSystem(topology, rigidWater=True)) == constraints
 
     def test_constraints_distance(self):
         """
