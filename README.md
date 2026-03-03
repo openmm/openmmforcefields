@@ -189,12 +189,10 @@ Create a SMIRNOFF template generator for a single molecule (benzene, created fro
 from openff.toolkit import Molecule
 
 molecule = Molecule.from_smiles("c1ccccc1")
-# Create the SMIRNOFF template generator with the default installed force field (openff-2.2.1)
-from openmmforcefields.generators import (
-    SMIRNOFFTemplateGenerator,
-)
+# Create the SMIRNOFF template generator with the openff-2.3.0 force field
+from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.3.0")
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from openmm.app import ForceField
 
@@ -208,6 +206,7 @@ forcefield.registerTemplateGenerator(smirnoff.generator)
 
 # create a System with the non-bonded settings of mainline OpenFF force fields
 # (9 Angstrom cut-off, switching distance applied at 8 Angstrom)
+import openmm.unit
 system = forcefield.createSystem(
     topology=molecule.to_topology().to_openmm(),
     nonbondedCutoff=0.9 * openmm.unit.nanometer,
@@ -215,25 +214,12 @@ system = forcefield.createSystem(
 )
 ```
 
-The latest official Open Force Field Initiative release ([`openff-2.2.1`](https://github.com/openforcefield/openff-forcefields) of the ["Sage" small molecule force field](https://openforcefield.org/force-fields/force-fields/)) is used if none is specified.
-You can check which SMIRNOFF force field is in use with
-
-```pycon
->>> smirnoff.smirnoff_filename
-'/Users/mattthompson/mambaforge/envs/openmmforcefields/lib/python3.11/site-packages/openforcefields/offxml/openff-2.2.1.offxml'
-```
-
-Create a template generator for a specific SMIRNOFF force field for multiple molecules read from an SDF file:
+You can create a template generator capable of recognizing multiple molecules,
+*e.g.*, read from an SDF file:
 
 ```python
 molecules = Molecule.from_file("molecules.sdf")
-# Create a SMIRNOFF residue template generator from the official openff-2.2.1 release,
-# which is installed automatically
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-2.2.1")
-# Create a SMIRNOFF residue template generator from an older Sage or Parsley version
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-1.3.0")
-# Use a local .offxml file instead
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="local-file.offxml")
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-2.3.0")
 ```
 
 You can also add molecules to the generator later, even after the generator has been registered:
@@ -243,19 +229,58 @@ smirnoff.add_molecules(molecule)
 smirnoff.add_molecules([molecule1, molecule2])
 ```
 
-To check which SMIRNOFF force fields are automatically installed, examine the `INSTALLED_FORCEFIELDS` attribute:
+You must specify the desired SMIRNOFF force field with the `forcefield` keyword
+argument when you create a `SMIRNOFFTemplateGenerator` by providing at least one
+force field name, path to an OFFXML force field file, file object, or XML in a
+string.  An iterable can be provided to the `forcefield` argument to load from
+multiple sources if desired.  For exapmle:
+
+```
+# Create a SMIRNOFF residue template generator from an older Sage or Parsley version
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff-1.3.0")
+# Request a specific SMIRNOFF force field installed with OpenFF by its full name
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff_unconstrained-1.3.0.offxml")
+# Use a local .offxml file instead
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="local-file.offxml")
+# Load from multiple sources at once
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=['openff-2.3.0', 'tip5p.offxml'])
+```
+
+You can check the full paths of the force field files that have been loaded:
 
 ```pycon
->>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)
-['ff14sb_off_impropers_0.0.2', 'ff14sb_off_impropers_0.0.4', 'ff14sb_off_impropers_0.0.1', 'ff14sb_off_impropers_0.0.3', 'tip3p_fb-1.1.0', 'tip3p_fb-1.0.0', 'openff-2.2.1-rc1', 'openff-1.0.1', 'openff-1.1.1', 'spce-1.0.0', 'openff_no_water-3.0.0-alpha0', 'openff-1.0.0-RC1', 'opc3', 'opc3-1.0.0', 'openff-2.1.0-rc.1', 'openff-2.3.0-rc2', 'openff-1.2.0', 'openff-1.3.0', 'tip3p-1.0.0', 'opc-1.0.2', 'openff-2.2.1', 'openff-2.0.0-rc.2', 'opc-1.0.0', 'openff-2.1.0', 'openff-2.0.0', 'tip4p_fb-1.0.1', 'tip3p', 'tip4p_ew', 'opc3-1.0.1', 'opc', 'openff-2.3.0-rc1', 'tip3p_fb-1.1.1', 'openff-1.1.0', 'openff-1.0.0', 'openff-1.0.0-RC2', 'openff-2.2.0-rc1', 'tip3p-1.0.1', 'openff-1.3.1', 'openff-1.2.1', 'tip4p_ew-1.0.0', 'openff-1.3.1-alpha.1', 'tip4p_fb', 'tip3p_fb', 'openff-2.2.0', 'spce', 'tip5p', 'tip4p_fb-1.0.0', 'openff-2.1.1', 'openff-2.0.0-rc.1', 'tip5p-1.0.0', 'opc-1.0.1']
+>>> smirnoff.smirnoff_filenames
+['/.../offxml/openff_unconstrained-2.3.0.offxml', '/.../offxml/tip5p.offxml']
 ```
+
+Any force field installed with the OpenFF Toolkit can be requested by its
+filename, *e.g.*, `openff_unconstrained-2.3.0.offxml`.  To see which force
+fields can be requested by an abbreviated name, examine `INSTALLED_FORCEFIELDS`:
+
+```pycon
+>>> SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+['openff-1.0.0', 'openff-1.0.1', 'openff-1.1.0', 'openff-1.1.1', ...]
+```
+
+The names in this list are of the form `openff-x.y.z` and will resolve to the
+"unconstrained" variants of standard OpenFF force fields, which can also be
+loaded with filenames of the form `openff_unconstrained-x.y.z.offxml`.  To
+obtain the "constrained" variants, use filenames `openff-x.y.z.offxml`.  When
+the constrained variants are used, bonds to hydrogen atoms in molecules
+parameterized by the template generator will be constrained unconditionally,
+regardless of the constraint options given in `ForceField.createSystem()`.  The
+unconstrained variants, which are the defaults selected if one of the predefined
+names in `INSTALLED_FORCEFIELDS` is used, do not force these constraints to be
+present, and the option of which degrees of freedom should be constrained are
+left up to the user by passing any desired `constraint` setting to
+[`ForceField.createSystem()`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField.createSystem).
 
 You can optionally specify a file that contains a cache of pre-parameterized molecules:
 
 ```python
 smirnoff = SMIRNOFFTemplateGenerator(
     cache="smirnoff-molecules.json",
-    forcefield="openff-2.2.1",
+    forcefield="openff-2.3.0",
 )
 ```
 

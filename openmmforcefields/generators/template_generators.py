@@ -1229,14 +1229,12 @@ class OpenMMSystemMixin:
 
             # Create torsion definitions
             torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
-            for atom_indices in torsions.keys():
-                params = dict()  # build parameter dictionary
-                nterms = len(torsions[atom_indices])
-                for term in range(nterms):
-                    periodicity, phase, k = torsions[atom_indices][term]
-                    params[f"periodicity{term + 1}"] = as_attrib(periodicity)
-                    params[f"phase{term + 1}"] = as_attrib(phase)
-                    params[f"k{term + 1}"] = as_attrib(k)
+            for atom_indices, terms in torsions.items():
+                params = {}
+                for term_index, (periodicity, phase, k) in enumerate(terms, start=1):
+                    params[f"periodicity{term_index}"] = as_attrib(periodicity)
+                    params[f"phase{term_index}"] = as_attrib(phase)
+                    params[f"k{term_index}"] = as_attrib(k)
 
                 etree.SubElement(
                     torsion_types,
@@ -1339,7 +1337,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     Examples
     --------
 
-    Create a template generator for a single Molecule using the latest Open Force Field Initiative
+    Create a template generator for a single Molecule using a selected OpenFF
     small molecule force field and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
@@ -1347,7 +1345,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the SMIRNOFF template generator
     >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff-2.3.0')
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -1355,28 +1353,35 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-2.0.0')
-    and register multiple molecules:
-
-    >>> molecule1 = Molecule.from_smiles('c1ccccc1')
-    >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-2.0.0')
-
-    Alternatively, you can specify a local .offxml file in the SMIRNOFF specification:
-
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='mysmirnoff.offxml')  # doctest: +SKIP
-
     You can also add some Molecules later on after the generator has been registered:
 
-    >>> template_generator.add_molecules(molecule)
-    >>> template_generator.add_molecules([molecule1, molecule2])
+    >>> molecule1 = Molecule.from_smiles('CCO')
+    >>> molecule2 = Molecule.from_smiles('c1ccoc1')
+    >>> molecule3 = Molecule.from_smiles('C=CC')
+    >>> template_generator.add_molecules(molecule1)
+    >>> template_generator.add_molecules([molecule2, molecule3])
 
-    You can optionally create or use a tiny database cache of pre-parameterized molecules:
-
-    >>> template_generator = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json')
-
-    Newly parameterized molecules will be written to the cache, saving time next time!
+    See `SMIRNOFFTemplateGenerator.__init__()` for more examples of customizing template generator creation.
     """  # noqa
+
+    _INSTALLED_FORCEFIELDS = {
+        "openff-1.0.0": "openff_unconstrained-1.0.0.offxml",
+        "openff-1.0.1": "openff_unconstrained-1.0.1.offxml",
+        "openff-1.1.0": "openff_unconstrained-1.1.0.offxml",
+        "openff-1.1.1": "openff_unconstrained-1.1.1.offxml",
+        "openff-1.2.0": "openff_unconstrained-1.2.0.offxml",
+        "openff-1.2.1": "openff_unconstrained-1.2.1.offxml",
+        "openff-1.3.0": "openff_unconstrained-1.3.0.offxml",
+        "openff-1.3.1": "openff_unconstrained-1.3.1.offxml",
+        "openff-2.0.0": "openff_unconstrained-2.0.0.offxml",
+        "openff-2.1.0": "openff_unconstrained-2.1.0.offxml",
+        "openff-2.1.1": "openff_unconstrained-2.1.1.offxml",
+        "openff-2.2.0": "openff_unconstrained-2.2.0.offxml",
+        "openff-2.2.1": "openff_unconstrained-2.2.1.offxml",
+        "openff-2.3.0": "openff_unconstrained-2.3.0.offxml",
+    }
+
+    INSTALLED_FORCEFIELDS = list(_INSTALLED_FORCEFIELDS)
 
     def __init__(self, molecules=None, cache=None, forcefield=None, template_generator_kwargs=None):
         """
@@ -1395,53 +1400,57 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
         forcefield : str, bytes, file-like object, or iterable, optional, default=None
-            Names of installed SMIRNOFF force fields (without .offxml extensions), paths to force field files
-            (with .offxml extensions), or file-like objects, strings, or bytes to parse SMIRNOFF XML data from.
-            If not specified, the latest Open Force Field Initiative release is used.
+            Names of known SMIRNOFF force fields (those present in
+            `SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`), paths to OFFXML
+            force field files installed with OpenFF or present locally, or
+            file-like objects, strings, or bytes to parse SMIRNOFF XML from.
         template_generator_kwargs : dict, optional, default=None
             Additional parameters for the template generator (ignored by SMIRNOFFTemplateGenerator).
 
         Examples
         --------
 
-        Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+        Create a SMIRNOFF template generator for a predefined force field (here,
+        OpenFF Sage 2.3.0)
 
         >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
-        >>> from openmm.app import ForceField
-        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
-        >>> forcefield = ForceField(*amber_forcefields)
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff-2.3.0')
 
-        The latest Open Force Field Initiative release is used if none is specified.
+        You can see the list of predefined force field names with
 
-        >>> smirnoff.forcefield
-        'openff-2.2.1'
+        >>> SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS  # doctest: +ELLIPSIS
+        ['openff-1.0.0', 'openff-1.0.1', 'openff-1.1.0', 'openff-1.1.1', ...]
 
-        You can check which SMIRNOFF force field files are in use with
+        In addition to force field names, you can provide an explicit filename:
+
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff_unconstrained-2.3.0.offxml')
+
+        This can either be any OFFXML force field file installed with the OpenFF
+        Toolkit, or a relative or absolute path to a custom file:
+
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='my_custom_ff.offxml')  # doctest: +SKIP
+
+        The template generator will also recognize file objects, or strings or
+        bytes containing OFFXML data directly.  Any of these items can also be
+        provided as items in a list to load a SMIRNOFF force field from multiple
+        sources:
+
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=['openff-2.3.0', 'tip5p.offxml'])
+
+        You can check which force field files were actually loaded:
 
         >>> smirnoff.smirnoff_filenames  # doctest: +ELLIPSIS
-        ['/.../openff-2.2.1.offxml']
+        ['/.../openff_unconstrained-2.3.0.offxml', '/.../tip5p.offxml']
 
-        Create a template generator for a specific SMIRNOFF force field for multiple
-        molecules read from an SDF file:
-
-        >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.2.1')  # doctest: +SKIP
-
-        You can also add molecules later on after the generator has been registered:
-
-        >>> smirnoff.add_molecules(molecules)  # doctest: +SKIP
-
-        To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
-
-        >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)  # doctest: +SKIP
-        ['openff-2.2.1', 'openff-2.2.0', 'openff-2.1.0', 'openff-2.0.0', 'openff-1.3.1', ..., ]
+        Note that the predefined names default to the "unconstrained" variants
+        of OpenFF force fields.  You can explicitly load a "constrained" variant
+        by specifying its filename, *e.g.*, `openff-2.3.0.offxml`.
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.2.1')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, cache='smirnoff.json', forcefield='openff-2.3.0')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """  # noqa
@@ -1452,9 +1461,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         super().__init__(molecules=molecules, cache=cache)
 
         if forcefield is None:
-            # Use latest supported Open Force Field Initiative release if none is specified
-            # TODO: In the future, this behavior will be removed and no default will be set
-            forcefield = "openff-2.2.1"
+            raise ValueError("A SMIRNOFF force field name, path, file object, or XML string must be provided")
 
         # Make sure forcefield is iterable; check for a string, bytes, or a
         # file-like object first since they are already iterable as single items
@@ -1466,14 +1473,26 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             forcefield = [forcefield]
 
         # Set the name of the force field or make up a description for it
-        known_names = SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS
-        if len(forcefield) == 1 and forcefield[0] in known_names:
+        known_paths = SMIRNOFFTemplateGenerator._INSTALLED_FORCEFIELDS
+        if len(forcefield) == 1 and forcefield[0] in known_paths:
             self._forcefield = forcefield[0]
         else:
             self._forcefield = f"<SMIRNOFF forcefield from {len(forcefield)} sources>"
 
-        # Resolve any known force field names to their full paths
-        forcefield = [known_names[entry] if entry in known_names else entry for entry in forcefield]
+        # Resolve any known force field names to their full paths (exclude local
+        # paths, in case we are running in a directory that happens to have an
+        # OFFXML file identically named to an installed one).
+        def resolve_name(entry):
+            if entry not in known_paths:
+                return entry
+            full_path = self._search_paths(known_paths[entry], allow_local=False)
+            if full_path is None:
+                raise FileNotFoundError(
+                    f"No installed OFFXML with name {known_paths[entry]} was found for the force field {entry}"
+                )
+            return full_path
+
+        forcefield = list(map(resolve_name, forcefield))
 
         # Create ForceField object
         try:
@@ -1513,77 +1532,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
 
-    @classproperty
-    def INSTALLED_FORCEFIELD_PATHS(cls):
-        """
-        Return a list of the force fields shipped with the openff-forcefields
-        package along with full paths to the corresponding force field files.
-
-        OpenFF distributes some force fields with constrained and unconstrained
-        variants.  In the event that both variants of a given force field exist,
-        *e.g.*, `openff-2.0.0.offxml` and `openff_unconstrained-2.0.0.offxml`,
-        only the name `openff-2.0.0` will be present in the list, and it will
-        refer to the *unconstrained*, not the constrained, variant of the force
-        field.
-
-        Returns
-        -------
-        paths : dict[str, str]
-            The names of available force fields and paths to force field files.
-        """
-
-        import re
-        from openff.toolkit import get_available_force_fields
-
-        paths = {}
-        unconstrained_names = []
-
-        for path in get_available_force_fields(full_paths=True):
-            name = os.path.splitext(os.path.basename(path))[0]
-
-            # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
-            # impropers and one with Amber-style impropers. The latter requires a special handler
-            # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
-            # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
-            if name.startswith("ff14sb") and "off_impropers" not in name:
-                continue
-
-            # Keep track of what _unconstrained forcefields we have seen
-            if (match := re.fullmatch("(.*)_unconstrained(.*)", name)) is not None:
-                unconstrained_names.append(match.group(1, 2))
-
-            paths[name] = path
-
-        # Keep only the constrained forcefield names, with the unconstrained
-        # forcefield paths, when we find a constrained/unconstrained pair
-        for prefix, suffix in unconstrained_names:
-            constrained_name = prefix + suffix
-            if constrained_name in paths:
-                unconstrained_name = f"{prefix}_unconstrained{suffix}"
-                paths[constrained_name] = paths[unconstrained_name]
-                del paths[unconstrained_name]
-
-        return paths
-
-    @classproperty
-    def INSTALLED_FORCEFIELDS(cls):
-        """
-        Return a list of the force fields shipped with the openff-forcefields package.
-
-        In the event that constrained and unconstrained force field variants are
-        detected, only the name without `_unconstrained` will be returned, and
-        it will refer to the constrained variant.  For more information, see
-        `SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS`.
-
-        Returns
-        -------
-        names : str
-            The names of available force fields.
-        """
-
-        return sorted(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELD_PATHS)
-
-    def _search_paths(self, filename):
+    def _search_paths(self, filename, allow_local=True):
         """
         Search registered OpenFF plugin directories
 
@@ -1591,6 +1540,9 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         ----------
         filename : str
             The filename to find the full path for
+        allow_local: bool, optional, default=True
+            Whether or not to allow local filenames (and consider them first);
+            otherwise, only installed force field directories will be searched.
 
         Returns
         -------
@@ -1604,8 +1556,10 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         # Check whether this could be a file path
         if isinstance(filename, str):
-            # Try first the simple path.
-            searched_dirs_paths = [""]
+            searched_dirs_paths = []
+            if allow_local:
+                # Try to treat it as a path as is.
+                searched_dirs_paths.append("")
             # Then try a relative file path w.r.t. an installed directory.
             searched_dirs_paths.extend(_get_installed_offxml_dir_paths())
 
@@ -1615,6 +1569,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
                 file_path = os.path.join(dir_path, filename)
                 if os.path.isfile(file_path):
                     return file_path
+
         # No file found
         return None
 
