@@ -7,6 +7,8 @@ Residue template generators for GAFF, SMIRNOFF, and espaloma small molecule forc
 ################################################################################
 
 import contextlib
+import hashlib
+import io
 import logging
 import os
 import warnings
@@ -44,7 +46,7 @@ class SmallMoleculeTemplateGenerator:
 
     def __init__(self, molecules=None, cache=None):
         """
-        Create a tempalte generator with some OpenFF toolkit molecules
+        Create a template generator with some OpenFF toolkit molecules
 
         Requies the openff-toolkit toolkit: http://openforcefield.org
 
@@ -70,7 +72,7 @@ class SmallMoleculeTemplateGenerator:
         self._smiles_added_to_db = set()  # set of SMILES added to the database this session
         self._database_table_name = None  # this must be set by subclasses for cache to function
 
-        # Name of the force field
+        # Name of the force field (or a descriptive string if not a named force field)
         self._forcefield = None  # this must be set by subclasses
 
         # File to write ffxml to if requested
@@ -78,7 +80,7 @@ class SmallMoleculeTemplateGenerator:
 
     @property
     def forcefield(self):
-        """The current force field name in use"""
+        """The name or a description of the current force field in use"""
         return self._forcefield
 
     @contextlib.contextmanager
@@ -1017,8 +1019,10 @@ class OpenMMSystemMixin:
             The OpenMM ffxml contents for the given molecule.
         """
 
-        from openmm import CMMotionRemover
+        from openmm import CMMotionRemover, LocalCoordinatesSite
         from lxml import etree
+        import openmm.unit
+        import openff.units
 
         # Remove CMMotionRemover if present
         # See https://github.com/openmm/openmmforcefields/issues/365
@@ -1033,39 +1037,47 @@ class OpenMMSystemMixin:
 
         def as_attrib(quantity):
             """Format openff.units.Quantity or openmm.unit.Quantity as XML attribute."""
-            import openff.units
 
             if isinstance(quantity, str):
                 return quantity
             elif isinstance(quantity, (float, int)):
                 return str(quantity)
             elif isinstance(quantity, openff.units.Quantity):
-                # TODO: Match behavior of Quantity.value_in_unit_system
-                return str(quantity.m)
+                quantity = quantity.to_openmm()
+
+            if isinstance(quantity, openmm.unit.Quantity):
+                return str(quantity.value_in_unit_system(openmm.unit.md_unit_system))
             else:
-                from openmm.unit import Quantity as OpenMMQuantity
+                raise ValueError(f"Found unexpected type {type(quantity)}.")
 
-                if isinstance(quantity, OpenMMQuantity):
-                    from openmm import unit
-
-                    return str(quantity.value_in_unit_system(unit.md_unit_system))
-                else:
-                    raise ValueError(f"Found unexpected type {type(quantity)}.")
-
-        # Append unique type names to atoms
+        # Get SMILES and a hash of it (to use in atom names to prevent cached
+        # XML templates from having sizes quadratic in the molecule size)
         smiles = molecule.to_smiles()
-        for index, atom in enumerate(molecule.atoms):
-            setattr(atom, "typename", f"{smiles}${atom.name}#{index}")
+        smiles_hash = hashlib.sha256(smiles.encode()).hexdigest()
+
+        # Create unique names for atoms
+        names = [f"#{index}" for index in range(system.getNumParticles())]
+        typenames = [smiles_hash + name for name in names]
+
+        # Make mappings between molecule and system atoms (assumes that virtual
+        # sites can occur anywhere but that the order of real atoms matches)
+        mol_to_sys = [index for index in range(system.getNumParticles()) if not system.isVirtualSite(index)]
+        sys_to_mol = {sys_index: mol_index for mol_index, sys_index in enumerate(mol_to_sys)}
 
         # Generate atom types
         atom_types = etree.SubElement(root, "AtomTypes")
-        for atom_index, atom in enumerate(molecule.atoms):
+        for atom_index, typename in enumerate(typenames):
             # Create a new atom type for each atom in the molecule
-            element_symbol = atom.symbol
             atom_type = etree.SubElement(
-                atom_types, "Type", name=atom.typename, element=element_symbol, mass=as_attrib(atom.mass)
+                atom_types,
+                "Type",
+                name=typename,
+                mass=as_attrib(system.getParticleMass(atom_index)),
             )
-            atom_type.set("class", atom.typename)  # 'class' is a reserved Python keyword, so use alternative API
+            # 'class' is a reserved Python keyword, so use alternative API
+            atom_type.set("class", typename)
+            if atom_index in sys_to_mol:
+                atom_type.set("element", molecule.atoms[sys_to_mol[atom_index]].symbol)
 
         supported_forces = {
             "NonbondedForce",
@@ -1092,7 +1104,7 @@ class OpenMMSystemMixin:
             Parameters
             ----------
             atom_indices : list of int
-                Particle indices for molecule.atoms
+                Particle indices for the system
 
             Returns
             -------
@@ -1100,137 +1112,167 @@ class OpenMMSystemMixin:
                 Dict of format { 'class1' : typename1, ... }
             """
             return {
-                f"class{class_index + 1}": molecule.atoms[atom_index].typename
-                for class_index, atom_index in enumerate(atom_indices)
+                f"class{class_index + 1}": typenames[atom_index] for class_index, atom_index in enumerate(atom_indices)
             }
 
         # Lennard-Jones
-        # In case subclasses specifically set the 1-4 scaling factors, use those.
-        nonbonded_types = etree.SubElement(
-            root,
-            "NonbondedForce",
-            coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
-            lj14scale=getattr(self, "_lj14scale", "0.5"),
-        )
-        etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
-        for atom_index in range(forces["NonbondedForce"].getNumParticles()):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
-            nonbonded_type = etree.SubElement(
-                nonbonded_types,
-                "Atom",
-                sigma=as_attrib(sigma),
-                epsilon=as_attrib(epsilon),
+        if (nonbonded_force := forces.get("NonbondedForce")) is not None:
+            # In case subclasses specifically set the 1-4 scaling factors, use those.
+            nonbonded_types = etree.SubElement(
+                root,
+                "NonbondedForce",
+                coulomb14scale=getattr(self, "_coulomb14scale", "0.833333"),
+                lj14scale=getattr(self, "_lj14scale", "0.5"),
             )
-            nonbonded_type.set(
-                "class", molecule.atoms[atom_index].typename
-            )  # 'class' is a reserved Python keyword, so use alternative API
+            etree.SubElement(nonbonded_types, "UseAttributeFromResidue", name="charge")
+            for atom_index in range(nonbonded_force.getNumParticles()):
+                _, sigma, epsilon = nonbonded_force.getParticleParameters(atom_index)
+                nonbonded_type = etree.SubElement(
+                    nonbonded_types,
+                    "Atom",
+                    sigma=as_attrib(sigma),
+                    epsilon=as_attrib(epsilon),
+                )
+                # 'class' is a reserved Python keyword, so use alternative API
+                nonbonded_type.set("class", typenames[atom_index])
 
         # Bonds
-        bond_types = etree.SubElement(root, "HarmonicBondForce")
-        atom_indices = [-1] * 2
-        for bond_index in range(forces["HarmonicBondForce"].getNumBonds()):
-            atom_indices[0], atom_indices[1], length, k = forces["HarmonicBondForce"].getBondParameters(bond_index)
-
-            etree.SubElement(
-                bond_types,
-                "Bond",
-                **classes(atom_indices),
-                length=as_attrib(length),
-                k=as_attrib(k),
-            )
+        if (bond_force := forces.get("HarmonicBondForce")) is not None:
+            bond_types = etree.SubElement(root, "HarmonicBondForce")
+            for bond_index in range(bond_force.getNumBonds()):
+                *atom_indices, length, k = bond_force.getBondParameters(bond_index)
+                etree.SubElement(
+                    bond_types,
+                    "Bond",
+                    **classes(atom_indices),
+                    length=as_attrib(length),
+                    k=as_attrib(k),
+                )
 
         # Angles
-        angle_types = etree.SubElement(root, "HarmonicAngleForce")
-        atom_indices = [-1] * 3
-        for angle_index in range(forces["HarmonicAngleForce"].getNumAngles()):
-            atom_indices[0], atom_indices[1], atom_indices[2], angle, k = forces[
-                "HarmonicAngleForce"
-            ].getAngleParameters(angle_index)
-
-            etree.SubElement(
-                angle_types,
-                "Angle",
-                **classes(atom_indices),
-                angle=as_attrib(angle),
-                k=as_attrib(k),
-            )
+        if (angle_force := forces.get("HarmonicAngleForce")) is not None:
+            angle_types = etree.SubElement(root, "HarmonicAngleForce")
+            for angle_index in range(angle_force.getNumAngles()):
+                *atom_indices, angle, k = angle_force.getAngleParameters(angle_index)
+                etree.SubElement(
+                    angle_types,
+                    "Angle",
+                    **classes(atom_indices),
+                    angle=as_attrib(angle),
+                    k=as_attrib(k),
+                )
 
         # Torsions
         def torsion_tag(atom_indices):
             """Return 'Proper' or 'Improper' depending on torsion type"""
-            atoms = [molecule.atoms[atom_index] for atom_index in atom_indices]
-            # TODO: Check to make sure all atoms are in fact atoms and not virtual sites
+            # Torsions with virtual sites should never be generated by OpenFF.
+            # If a KeyError is raised here, this assumption was violated and may
+            # be a bug in openmmforcefields or OpenFF.
+            atoms = [molecule.atoms[sys_to_mol[atom_index]] for atom_index in atom_indices]
             if atoms[0].is_bonded_to(atoms[1]) and atoms[1].is_bonded_to(atoms[2]) and atoms[2].is_bonded_to(atoms[3]):
                 return "Proper"
             else:
                 return "Improper"
 
         # Collect torsions
-        torsions = dict()
-        for torsion_index in range(forces["PeriodicTorsionForce"].getNumTorsions()):
-            atom_indices = [-1] * 4
-            (
-                atom_indices[0],
-                atom_indices[1],
-                atom_indices[2],
-                atom_indices[3],
-                periodicity,
-                phase,
-                k,
-            ) = forces["PeriodicTorsionForce"].getTorsionParameters(torsion_index)
-            atom_indices = tuple(atom_indices)
-            if atom_indices in torsions.keys():
-                torsions[atom_indices].append((periodicity, phase, k))
-            else:
-                torsions[atom_indices] = [(periodicity, phase, k)]
+        if (torsion_force := forces.get("PeriodicTorsionForce")) is not None:
+            torsions = dict()
+            for torsion_index in range(torsion_force.getNumTorsions()):
+                *atom_indices, periodicity, phase, k = torsion_force.getTorsionParameters(torsion_index)
+                torsions.setdefault(tuple(atom_indices), []).append((periodicity, phase, k))
 
-        # Create torsion definitions
-        torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
-        for atom_indices in torsions.keys():
-            params = dict()  # build parameter dictionary
-            nterms = len(torsions[atom_indices])
-            for term in range(nterms):
-                periodicity, phase, k = torsions[atom_indices][term]
-                params[f"periodicity{term + 1}"] = as_attrib(periodicity)
-                params[f"phase{term + 1}"] = as_attrib(phase)
-                params[f"k{term + 1}"] = as_attrib(k)
+            # Create torsion definitions
+            torsion_types = etree.SubElement(root, "PeriodicTorsionForce", ordering=improper_atom_ordering)
+            for atom_indices, terms in torsions.items():
+                params = {}
+                for term_index, (periodicity, phase, k) in enumerate(terms, start=1):
+                    params[f"periodicity{term_index}"] = as_attrib(periodicity)
+                    params[f"phase{term_index}"] = as_attrib(phase)
+                    params[f"k{term_index}"] = as_attrib(k)
 
-            etree.SubElement(
-                torsion_types,
-                torsion_tag(atom_indices),
-                **classes(atom_indices),
-                **params,
-            )
+                etree.SubElement(
+                    torsion_types,
+                    torsion_tag(atom_indices),
+                    **classes(atom_indices),
+                    **params,
+                )
 
-        # TODO: Handle virtual sites
-        virtual_sites = [
-            atom_index for atom_index in range(system.getNumParticles()) if system.isVirtualSite(atom_index)
-        ]
-        if len(virtual_sites) > 0:
-            raise Exception("Virtual sites are not yet supported")
-
-        # Create residue definitions
-        # TODO: Handle non-Atom atoms too (virtual sites)
+        # Create residue definition
         residues = etree.SubElement(root, "Residues")
         residue = etree.SubElement(residues, "Residue", name=smiles)
-        for atom_index, atom in enumerate(molecule.atoms):
-            charge, sigma, epsilon = forces["NonbondedForce"].getParticleParameters(atom_index)
+
+        # Add atom specifications (for both regular atoms and virtual sites)
+        for atom_index, (name, typename) in enumerate(zip(names, typenames)):
+            if nonbonded_force is None:
+                charge = 0.0
+            else:
+                charge, _, _ = nonbonded_force.getParticleParameters(atom_index)
             etree.SubElement(
                 residue,
                 "Atom",
-                name=atom.name,
-                type=atom.typename,
+                name=name,
+                type=typename,
                 charge=as_attrib(charge),
             )
+
+        # Add virtual site specifications
+        for atom_index, name in enumerate(names):
+            if not system.isVirtualSite(atom_index):
+                continue
+            site = system.getVirtualSite(atom_index)
+
+            if isinstance(site, LocalCoordinatesSite):
+                origin_weights = site.getOriginWeights()
+                x_weights = site.getXWeights()
+                y_weights = site.getYWeights()
+                position = site.getLocalPosition()
+                attributes = dict(
+                    type="localCoords",
+                    p1=as_attrib(position[0]),
+                    p2=as_attrib(position[1]),
+                    p3=as_attrib(position[2]),
+                )
+                for frame_index in range(site.getNumParticles()):
+                    attributes[f"atomName{frame_index + 1}"] = names[site.getParticle(frame_index)]
+                    attributes[f"wo{frame_index + 1}"] = as_attrib(origin_weights[frame_index])
+                    attributes[f"wx{frame_index + 1}"] = as_attrib(x_weights[frame_index])
+                    attributes[f"wy{frame_index + 1}"] = as_attrib(y_weights[frame_index])
+            else:
+                # The only virtual site type we currently need to support is
+                # LocalCoordinatesSite for SMIRNOFF.  If this error is raised,
+                # OpenFF returned something else, and we need to add support for
+                # it here.
+                raise TypeError(f"Unsupported virtual site type {type(site).__name__}")
+
+            etree.SubElement(
+                residue,
+                "VirtualSite",
+                siteName=name,
+                **attributes,
+            )
+
+        # Add bond specifications
         for bond in molecule.bonds:
-            etree.SubElement(residue, "Bond", atomName1=bond.atom1.name, atomName2=bond.atom2.name)
+            etree.SubElement(
+                residue,
+                "Bond",
+                atomName1=names[mol_to_sys[bond.atom1_index]],
+                atomName2=names[mol_to_sys[bond.atom2_index]],
+            )
+
+        # Add constraint specifications
+        for constraint_index in range(system.getNumConstraints()):
+            atom_index_1, atom_index_2, length = system.getConstraintParameters(constraint_index)
+            etree.SubElement(
+                residue,
+                "Constraint",
+                atomName1=names[atom_index_1],
+                atomName2=names[atom_index_2],
+                distance=as_attrib(length),
+            )
 
         # Render XML into string
-        ffxml_contents = etree.tostring(root, pretty_print=True, encoding="unicode")
-
-        # _logger.debug(f'{ffxml_contents}') # DEBUG
-
-        return ffxml_contents
+        return etree.tostring(root, pretty_print=True, encoding="unicode")
 
 
 ################################################################################
@@ -1249,7 +1291,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     Examples
     --------
 
-    Create a template generator for a single Molecule using the latest Open Force Field Initiative
+    Create a template generator for a single Molecule using a selected OpenFF
     small molecule force field and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
@@ -1257,7 +1299,7 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the SMIRNOFF template generator
     >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule)
+    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff-2.3.0')
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -1265,38 +1307,45 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific pre-installed SMIRNOFF version ('openff-2.0.0')
-    and register multiple molecules:
-
-    >>> molecule1 = Molecule.from_smiles('c1ccccc1')
-    >>> molecule2 = Molecule.from_smiles('CCO')
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='openff-2.0.0')
-
-    Alternatively, you can specify a local .offxml file in the SMIRNOFF specification:
-
-    >>> template_generator = SMIRNOFFTemplateGenerator(molecules=[molecule1, molecule2], forcefield='mysmirnoff.offxml')  # doctest: +SKIP
-
     You can also add some Molecules later on after the generator has been registered:
 
-    >>> template_generator.add_molecules(molecule)
-    >>> template_generator.add_molecules([molecule1, molecule2])
+    >>> molecule1 = Molecule.from_smiles('CCO')
+    >>> molecule2 = Molecule.from_smiles('c1ccoc1')
+    >>> molecule3 = Molecule.from_smiles('C=CC')
+    >>> template_generator.add_molecules(molecule1)
+    >>> template_generator.add_molecules([molecule2, molecule3])
 
-    You can optionally create or use a tiny database cache of pre-parameterized molecules:
-
-    >>> template_generator = SMIRNOFFTemplateGenerator(cache='smirnoff-molecules.json')
-
-    Newly parameterized molecules will be written to the cache, saving time next time!
+    See `SMIRNOFFTemplateGenerator.__init__()` for more examples of customizing template generator creation.
     """  # noqa
+
+    _INSTALLED_FORCEFIELDS = {
+        "openff-1.0.0": "openff_unconstrained-1.0.0.offxml",
+        "openff-1.0.1": "openff_unconstrained-1.0.1.offxml",
+        "openff-1.1.0": "openff_unconstrained-1.1.0.offxml",
+        "openff-1.1.1": "openff_unconstrained-1.1.1.offxml",
+        "openff-1.2.0": "openff_unconstrained-1.2.0.offxml",
+        "openff-1.2.1": "openff_unconstrained-1.2.1.offxml",
+        "openff-1.3.0": "openff_unconstrained-1.3.0.offxml",
+        "openff-1.3.1": "openff_unconstrained-1.3.1.offxml",
+        "openff-2.0.0": "openff_unconstrained-2.0.0.offxml",
+        "openff-2.1.0": "openff_unconstrained-2.1.0.offxml",
+        "openff-2.1.1": "openff_unconstrained-2.1.1.offxml",
+        "openff-2.2.0": "openff_unconstrained-2.2.0.offxml",
+        "openff-2.2.1": "openff_unconstrained-2.2.1.offxml",
+        "openff-2.3.0": "openff_unconstrained-2.3.0.offxml",
+    }
+
+    INSTALLED_FORCEFIELDS = list(_INSTALLED_FORCEFIELDS)
 
     def __init__(self, molecules=None, cache=None, forcefield=None, template_generator_kwargs=None):
         """
         Create a SMIRNOFFTemplateGenerator with some OpenFF toolkit molecules
 
-        Requies the OpenFF toolkit: http://openforcefield.org
+        Requires the OpenFF toolkit: http://openforcefield.org
 
         Parameters
         ----------
-        molecules : openff.toolkit .Molecule or list, optional, default=None
+        molecules : openff.toolkit.Molecule or list, optional, default=None
             Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
             Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
             If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
@@ -1304,147 +1353,140 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         cache : str, optional, default=None
             Filename for global caching of parameters.
             If specified, parameterized molecules will be stored in a TinyDB instance as a JSON file.
-        forcefield : str, optional, default=None
-            Name of installed SMIRNOFF force field (without .offxml) or local .offxml filename (with extension).
-            If not specified, the latest Open Force Field Initiative release is used.
+        forcefield : str, bytes, file-like object, or iterable, optional, default=None
+            Names of known SMIRNOFF force fields (those present in
+            `SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`), paths to OFFXML
+            force field files installed with OpenFF or present locally, or
+            file-like objects, strings, or bytes to parse SMIRNOFF XML from.
         template_generator_kwargs : dict, optional, default=None
             Additional parameters for the template generator (ignored by SMIRNOFFTemplateGenerator).
 
         Examples
         --------
 
-        Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:
+        Create a SMIRNOFF template generator for a predefined force field (here,
+        OpenFF Sage 2.3.0)
 
         >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import SMIRNOFFTemplateGenerator
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule)
-        >>> from openmm.app import ForceField
-        >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
-        >>> forcefield = ForceField(*amber_forcefields)
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff-2.3.0')
 
-        The latest Open Force Field Initiative release is used if none is specified.
+        You can see the list of predefined force field names with
 
-        >>> smirnoff.forcefield
-        'openff-2.2.1'
+        >>> SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS  # doctest: +ELLIPSIS
+        ['openff-1.0.0', 'openff-1.0.1', 'openff-1.1.0', 'openff-1.1.1', ...]
 
-        You can check which SMIRNOFF force field filename is in use with
+        In addition to force field names, you can provide an explicit filename:
 
-        >>> smirnoff.smirnoff_filename  # doctest:+ELLIPSIS
-        '/.../openff-2.2.1.offxml'
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='openff_unconstrained-2.3.0.offxml')
 
-        Create a template generator for a specific SMIRNOFF force field for multiple
-        molecules read from an SDF file:
+        This can either be any OFFXML force field file installed with the OpenFF
+        Toolkit, or a relative or absolute path to a custom file:
 
-        >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
-        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield='openff-2.2.1')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield='my_custom_ff.offxml')  # doctest: +SKIP
 
-        You can also add molecules later on after the generator has been registered:
+        The template generator will also recognize file objects, or strings or
+        bytes containing OFFXML data directly.  Any of these items can also be
+        provided as items in a list to load a SMIRNOFF force field from multiple
+        sources:
 
-        >>> smirnoff.add_molecules(molecules)  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=['openff-2.3.0', 'tip5p.offxml'])
 
-        To check which SMIRNOFF versions are supported, check the `INSTALLED_FORCEFIELDS` attribute:
+        You can check which force field files were actually loaded:
 
-        >>> print(SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS)  # doctest: +SKIP
-        ['openff-2.2.1', 'openff-2.2.0', 'openff-2.1.0', 'openff-2.0.0', 'openff-1.3.1', ..., ]
+        >>> smirnoff.smirnoff_filenames  # doctest: +ELLIPSIS
+        ['/.../openff_unconstrained-2.3.0.offxml', '/.../tip5p.offxml']
+
+        Note that the predefined names default to the "unconstrained" variants
+        of OpenFF force fields.  You can explicitly load a "constrained" variant
+        by specifying its filename, *e.g.*, `openff-2.3.0.offxml`.
 
         You can optionally create or use a cache of pre-parameterized molecules:
 
-        >>> smirnoff = SMIRNOFFTemplateGenerator(cache='smirnoff.json', forcefield='openff-2.2.1')  # doctest: +SKIP
+        >>> smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, cache='smirnoff.json', forcefield='openff-2.3.0')
 
         Newly parameterized molecules will be written to the cache, saving time next time!
         """  # noqa
 
-        self._lj14scale = None
-        self._coulomb14scale = None
+        import openff.toolkit
 
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
         if forcefield is None:
-            # Use latest supported Open Force Field Initiative release if none is specified
-            forcefield = "openff-2.2.1"
-            # TODO: After toolkit provides date-ranked force fields,
-            # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
-        self._forcefield = forcefield
+            raise ValueError("A SMIRNOFF force field name, path, file object, or XML string must be provided")
 
-        # Track parameters by provided SMIRNOFF name
-        # TODO: Can we instead use the force field hash, or some other unique identifier?
-        # TODO: Use file hash instead of name?
-        import os
+        # Make sure forcefield is iterable; check for a string, bytes, or a
+        # file-like object first since they are already iterable as single items
+        if isinstance(forcefield, (str, bytes, io.IOBase)):
+            forcefield = [forcefield]
+        try:
+            forcefield = list(forcefield)
+        except Exception:
+            forcefield = [forcefield]
 
-        self._database_table_name = os.path.basename(forcefield)
+        # Set the name of the force field or make up a description for it
+        known_paths = SMIRNOFFTemplateGenerator._INSTALLED_FORCEFIELDS
+        if len(forcefield) == 1 and forcefield[0] in known_paths:
+            self._forcefield = forcefield[0]
+        else:
+            self._forcefield = f"<SMIRNOFF forcefield from {len(forcefield)} sources>"
+
+        # Resolve any known force field names to their full paths (exclude local
+        # paths, in case we are running in a directory that happens to have an
+        # OFFXML file identically named to an installed one).
+        def resolve_name(entry):
+            if entry not in known_paths:
+                return entry
+            full_path = self._search_paths(known_paths[entry], allow_local=False)
+            if full_path is None:
+                raise FileNotFoundError(
+                    f"No installed OFFXML with name {known_paths[entry]} was found for the force field {entry}"
+                )
+            return full_path
+
+        forcefield = list(map(resolve_name, forcefield))
 
         # Create ForceField object
-        import openff.toolkit.typing.engines.smirnoff
+        try:
+            self._smirnoff_forcefield = openff.toolkit.ForceField(*forcefield)
+        except Exception as e:
+            _logger.error(e)
+            raise ValueError(f"Can't load or parse specified SMIRNOFF force fields {forcefield}") from e
 
-        # check for an installed force field
-        available_force_fields = openff.toolkit.typing.engines.smirnoff.get_available_force_fields()
-        if (filename := forcefield + ".offxml") in available_force_fields or (
-            filename := forcefield
-        ) in available_force_fields:
-            self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(filename)
+        # Try to find paths corresponding to where ForceField loaded files from
+        self._smirnoff_filenames = [self._search_paths(entry) for entry in forcefield]
 
-        # just try parsing the input and let openff handle the error
-        else:
-            try:
-                self._smirnoff_forcefield = openff.toolkit.typing.engines.smirnoff.ForceField(forcefield)
-            except Exception as e:
-                _logger.error(e)
-                raise ValueError(
-                    f"Can't find specified SMIRNOFF force field ({forcefield}) in install paths "
-                    "or parse the input as a string."
-                ) from e
+        # Use a hash of the OFFXML of the force field for identifying it in the cache
+        self._database_table_name = hashlib.sha256(self._smirnoff_forcefield.to_string().encode()).hexdigest()
 
-        self._coulomb14scale = str(self._smirnoff_forcefield.get_parameter_handler("Electrostatics").scale14)
-        self._lj14scale = str(self._smirnoff_forcefield.get_parameter_handler("vdW").scale14)
+        # Get the 1-4 scaling factors and make sure that the other scalings are
+        # set to OpenMM-supported values (1 for 1-2 and 1-3, 0 for 1-5)
+        electrostatics_handler = self._smirnoff_forcefield.get_parameter_handler("Electrostatics")
+        vdw_handler = self._smirnoff_forcefield.get_parameter_handler("vdW")
 
-        # Delete constraints, if present
-        if "Constraints" in self._smirnoff_forcefield._parameter_handlers:
-            del self._smirnoff_forcefield._parameter_handlers["Constraints"]
+        if not (
+            electrostatics_handler.scale12 == 0.0
+            and electrostatics_handler.scale13 == 0.0
+            and electrostatics_handler.scale15 == 1.0
+        ):
+            raise ValueError("Unsupported scaling for adjacent Coulomb interactions")
+        if not (vdw_handler.scale12 == 0.0 and vdw_handler.scale13 == 0.0 and vdw_handler.scale15 == 1.0):
+            raise ValueError("Unsupported scaling for adjacent Lennard-Jones interactions")
 
-        # Find SMIRNOFF filename
-        smirnoff_filename = self._search_paths(filename)
-        self._smirnoff_filename = smirnoff_filename
+        self._coulomb14scale = str(electrostatics_handler.scale14)
+        self._lj14scale = str(vdw_handler.scale14)
+
+        # Make sure that the virtual site exclusion policy for this force field
+        # is set to the only value supported by OpenMM
+        if self._smirnoff_forcefield.get_parameter_handler("VirtualSites").exclusion_policy != "parents":
+            raise ValueError("Unsupported virtual site exclusion policy")
 
         # Cache a copy of the OpenMM System generated for each molecule for testing purposes
         self.clear_system_cache()
 
-    @classproperty
-    def INSTALLED_FORCEFIELDS(cls):
-        """
-        Return a list of the offxml files shipped with the openff-forcefields package.
-
-        Returns
-        -------
-        file_names : str
-           The file names of available force fields
-
-        .. todo ::
-
-           Replace this with an API call once this issue is addressed:
-           https://github.com/openforcefield/openff-toolkit/issues/477
-        """
-
-        from openff.toolkit.typing.engines.smirnoff import get_available_force_fields
-
-        file_names = list()
-        for filename in get_available_force_fields(full_paths=False):
-            root, ext = os.path.splitext(filename)
-            # Only add variants without '_unconstrained'
-            if "_unconstrained" in root:
-                continue
-            # The OpenFF Toolkit ships two versions of its ff14SB port, one with SMIRNOFF-style
-            # impropers and one with Amber-style impropers. The latter requires a special handler
-            # (`AmberImproperTorsionHandler`) that is not shipped with the toolkit. See
-            # https://github.com/openforcefield/amber-ff-porting/tree/0.0.3
-            if root.startswith("ff14sb") and "off_impropers" not in root:
-                continue
-            file_names.append(root)
-
-        return file_names
-
-    def _search_paths(self, filename):
+    def _search_paths(self, filename, allow_local=True):
         """
         Search registered OpenFF plugin directories
 
@@ -1452,28 +1494,26 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         ----------
         filename : str
             The filename to find the full path for
+        allow_local: bool, optional, default=True
+            Whether or not to allow local filenames (and consider them first);
+            otherwise, only installed force field directories will be searched.
 
         Returns
         -------
         fullpath : str
             Full path to identified file, or None if no file found
-
-        .. todo ::
-
-           Replace this with an API call once this issue is addressed:
-           https://github.com/openforcefield/openff-toolkit/issues/477
         """
 
         # TODO: Replace this method once there is a public API in the OpenFF toolkit for doing this
 
-        from openff.toolkit.typing.engines.smirnoff.forcefield import (
-            _get_installed_offxml_dir_paths,
-        )
+        from openff.toolkit.typing.engines.smirnoff.forcefield import _get_installed_offxml_dir_paths
 
         # Check whether this could be a file path
         if isinstance(filename, str):
-            # Try first the simple path.
-            searched_dirs_paths = [""]
+            searched_dirs_paths = []
+            if allow_local:
+                # Try to treat it as a path as is.
+                searched_dirs_paths.append("")
             # Then try a relative file path w.r.t. an installed directory.
             searched_dirs_paths.extend(_get_installed_offxml_dir_paths())
 
@@ -1483,13 +1523,19 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
                 file_path = os.path.join(dir_path, filename)
                 if os.path.isfile(file_path):
                     return file_path
+
         # No file found
         return None
 
     @property
-    def smirnoff_filename(self):
-        """Full path to the SMIRNOFF force field file"""
-        return self._smirnoff_filename
+    def smirnoff_filenames(self):
+        """
+        Full paths to the SMIRNOFF force field files for each force field item
+        given during SMIRNOFFTemplateGenerator creation.  If a path cannot be
+        identified for a given item, it will be None.
+        """
+
+        return self._smirnoff_filenames
 
     def generate_residue_template(self, molecule):
         """
