@@ -498,7 +498,7 @@ class TestSystemGenerator:
             # Add molecules for each test system separately
             for name, testsystem in test_systems.items():
                 molecules = testsystem["molecules"]
-                # We don't need to add molecules that are already defined in the cache
+                generator.add_molecules(molecules)
 
                 # Parameterize molecules
                 for molecule in molecules:

@@ -6,7 +6,9 @@ Residue template generators for GAFF, SMIRNOFF, and espaloma small molecule forc
 # IMPORTS
 ################################################################################
 
+import collections
 import contextlib
+import copy
 import hashlib
 import io
 import logging
@@ -53,9 +55,7 @@ class SmallMoleculeTemplateGenerator:
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : str, optional, default=None
@@ -67,9 +67,11 @@ class SmallMoleculeTemplateGenerator:
         self._molecules = dict()
         self.add_molecules(molecules)
 
-        # Set up cache
-        self._cache = cache
-        self._smiles_added_to_db = set()  # set of SMILES added to the database this session
+        # Set up in-memory cache
+        self._ffxml_cache = {}
+
+        # Set up on-disk cache
+        self._cache_path = cache
         self._database_table_name = None  # this must be set by subclasses for cache to function
 
         # Name of the force field (or a descriptive string if not a named force field)
@@ -93,7 +95,7 @@ class SmallMoleculeTemplateGenerator:
             "indent": 4,
             "separators": (",", ": "),
         }  # for pretty-printing
-        db = TinyDB(self._cache, **tinydb_kwargs)
+        db = TinyDB(self._cache_path, **tinydb_kwargs)
         try:
             yield db
         finally:
@@ -106,9 +108,7 @@ class SmallMoleculeTemplateGenerator:
         Parameters
         ----------
         molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
 
@@ -124,6 +124,8 @@ class SmallMoleculeTemplateGenerator:
         >>> generator.add_molecules([mol2, mol3])  # doctest: +SKIP
         """
 
+        from openmm.app import Element, ForceField
+
         # Return if empty
         if not molecules:
             return
@@ -134,144 +136,69 @@ class SmallMoleculeTemplateGenerator:
         except TypeError:
             molecules = [molecules]
 
-        # Create copies
-        # TODO: Do we need to try to construct molecules with other schemes, such as Molecule.from_smiles(), if needed?
-        import copy
+        for molecule in molecules:
+            # Create our own copy of this molecule
+            molecule = copy.deepcopy(molecule)
 
-        molecules = [copy.deepcopy(molecule) for molecule in molecules]
+            # Make a template (not a forcefield-specific one with, e.g., virtual
+            # sites, but only used to check for isomorphism to input residues).
+            matching_template = ForceField._TemplateData("")
+            for atom in molecule.atoms:
+                matching_template.addAtom(
+                    ForceField._TemplateAtomData("", "", Element.getByAtomicNumber(atom.atomic_number))
+                )
+            for bond in molecule.bonds:
+                matching_template.addBond(bond.atom1_index, bond.atom2_index)
 
-        # Cache molecules
-        self._molecules.update({molecule.to_smiles(): molecule for molecule in molecules})
+            # Store the molecule by its formula for faster lookup
+            formula = tuple(sorted(collections.Counter(atom.atomic_number for atom in molecule.atoms).items()))
+            self._molecules.setdefault(formula, []).append((molecule, matching_template))
 
-    @staticmethod
-    def _molecule_for_residue(residue):
+    def _preprocess_residue(self, residue):
         """
         Finds the whole molecule that a `Residue` is part of, and if the
         `Residue` is not already a whole molecule, constructs a `MergedResidue`
-        corresponding to all of the residues in this whole molecule.
+        corresponding to all of the residues in this whole molecule.  Also
+        returns "bondedToAtom" data for the residue that can be passed to OpenMM
+        for template matching.
         """
 
-        from collections import defaultdict
         from openmm.app.topology import MergedResidue
 
-        # TODO: performance of this will be very poor since we will be
-        # generating this data every time; fix this with some kind of caching
-
-        bondedResidues = defaultdict(set)
+        bondedResidues = collections.defaultdict(set)
         for atom1, atom2 in residue.chain.topology.bonds():
             if atom1.residue != atom2.residue:
                 bondedResidues[atom1.residue].add(atom2.residue)
                 bondedResidues[atom2.residue].add(atom1.residue)
         bondedResidues = {x: list(y) for x, y in bondedResidues.items()}
 
-        if residue not in bondedResidues:
-            return residue
+        if residue in bondedResidues:
+            visited = set()
+            molecule = set()
+            residueStack = [residue]
+            neighborStack = [0]
+            while len(residueStack) > 0:
+                currentRes = residueStack[-1]
+                bonded = bondedResidues[currentRes]
+                molecule.add(currentRes)
+                visited.add(currentRes)
+                while neighborStack[-1] < len(bonded) and bonded[neighborStack[-1]] in visited:
+                    neighborStack[-1] += 1
+                if neighborStack[-1] < len(bonded):
+                    residueStack.append(bonded[neighborStack[-1]])
+                    neighborStack.append(0)
+                else:
+                    residueStack.pop()
+                    neighborStack.pop()
+            residue = MergedResidue(list(molecule))
 
-        visited = set()
-        molecule = set()
-        residueStack = [residue]
-        neighborStack = [0]
-        while len(residueStack) > 0:
-            currentRes = residueStack[-1]
-            bonded = bondedResidues[currentRes]
-            molecule.add(currentRes)
-            visited.add(currentRes)
-            while neighborStack[-1] < len(bonded) and bonded[neighborStack[-1]] in visited:
-                neighborStack[-1] +=1
-            if neighborStack[-1] < len(bonded):
-                residueStack.append(bonded[neighborStack[-1]])
-                neighborStack.append(0)
-            else:
-                residueStack.pop()
-                neighborStack.pop()
+        bondedToAtom = {atom.index: set() for atom in residue.atoms()}
+        for bond in residue.bonds():
+            bondedToAtom[bond.atom1.index].add(bond.atom2.index)
+            bondedToAtom[bond.atom2.index].add(bond.atom1.index)
+        bondedToAtom = {index: sorted(bonded) for index, bonded in bondedToAtom.items()}
 
-        return MergedResidue(list(molecule))
-
-    @staticmethod
-    def _match_residue(residue, molecule_template):
-        """
-        Determine whether a residue matches a Molecule template and return a list of corresponding atoms.
-
-        This implementation uses NetworkX for graph isomorphism determination.
-
-        Parameters
-        ----------
-        residue : openmm.app.topology.Residue
-            The residue to check
-        molecule_template : openff.toolkit.Molecule
-            The Molecule template to compare it to
-
-        Returns
-        -------
-        matches : dict of int : int
-            matches[residue_atom_index] is the corresponding Molecule template atom index
-            or None if it does not match the template
-
-        .. todo :: Can this be replaced by an isomorphism matching call to the OpenFF toolkit?
-        """
-
-        residue = SmallMoleculeTemplateGenerator._molecule_for_residue(residue)
-
-        # TODO: Speed this up by rejecting molecules that do not have the same chemical formula
-
-        # TODO: Can this NetworkX implementation be replaced by an isomorphism
-        # matching call to the OpenFF toolkit?
-
-        import networkx as nx
-
-        # Build list of external bonds for residue
-        number_of_external_bonds = {atom: 0 for atom in residue.atoms()}
-        for bond in residue.external_bonds():
-            if bond[0] in number_of_external_bonds:
-                number_of_external_bonds[bond[0]] += 1
-            if bond[1] in number_of_external_bonds:
-                number_of_external_bonds[bond[1]] += 1
-
-        # Residue graph
-        residue_graph = nx.Graph()
-        for atom in residue.atoms():
-            residue_graph.add_node(
-                atom,
-                element=atom.element.atomic_number,
-                number_of_external_bonds=number_of_external_bonds[atom],
-            )
-        for bond in residue.internal_bonds():
-            residue_graph.add_edge(bond[0], bond[1])
-
-        # Template graph
-        # TODO: We can support templates with "external" bonds or atoms using attached string data in future
-        # See https://docs.eyesopen.com/toolkits/python/oechemtk/OEChemClasses/OEAtomBase.html
-        template_graph = nx.Graph()
-        for atom_index, atom in enumerate(molecule_template.atoms):
-            template_graph.add_node(atom_index, element=atom.atomic_number, number_of_external_bonds=0)
-        for bond in molecule_template.bonds:
-            template_graph.add_edge(bond.atom1_index, bond.atom2_index)
-
-        # DEBUG
-        # print(f'residue_graph: nodes {len(list(residue_graph.nodes))} edges {len(list(residue_graph.edges))}')
-        # print(f'template_graph: nodes {len(list(template_graph.nodes))} edges {len(list(template_graph.edges))}')
-
-        # Determine graph isomorphism
-        from networkx.algorithms import isomorphism
-
-        def node_match(n1, n2):
-            """Return True if nodes match, and False if not"""
-            return (n1["element"] == n2["element"]) and (
-                n1["number_of_external_bonds"] == n2["number_of_external_bonds"]
-            )
-
-        graph_matcher = isomorphism.GraphMatcher(residue_graph, template_graph, node_match=node_match)
-        if not graph_matcher.is_isomorphic():
-            return None
-
-        # Translate to local residue atom indices
-        atom_index_within_residue = {atom: index for (index, atom) in enumerate(residue.atoms())}
-        matches = {
-            atom_index_within_residue[residue_atom]: template_atom
-            for (residue_atom, template_atom) in graph_matcher.mapping.items()
-        }
-
-        return matches
+        return residue, bondedToAtom
 
     def _molecule_has_user_charges(self, molecule):
         """
@@ -319,9 +246,7 @@ class SmallMoleculeTemplateGenerator:
             The molecule whose atom names are to be modified in-place
         """
 
-        from collections import defaultdict
-
-        element_counts = defaultdict(int)
+        element_counts = collections.defaultdict(int)
         for atom in molecule.atoms:
             symbol = atom.symbol
             element_counts[symbol] += 1
@@ -345,76 +270,60 @@ class SmallMoleculeTemplateGenerator:
             If the generator cannot parameterize the residue, it should return `False` and not modify `forcefield`.
         """
 
+        from openmm.app.internal import compiled
+
         if self._database_table_name is None:
             raise NotImplementedError(
                 "SmallMoleculeTemplateGenerator is an abstract base class and cannot be used directly."
             )
 
-        from io import StringIO
+        residue, bonded_to_atom = self._preprocess_residue(residue)
+        formula = tuple(
+            sorted(
+                collections.Counter(
+                    atom.element.atomic_number for atom in residue.atoms() if atom.element is not None
+                ).items()
+            )
+        )
+        for molecule, matching_template in self._molecules.get(formula, []):
+            if compiled.matchResidueToTemplate(residue, matching_template, bonded_to_atom):
+                # We have a topology match to a known molecule; try to find an
+                # FFXML string already generated for it.
+                target_smiles = molecule.to_smiles()
+                ffxml_contents = None
 
-        # TODO: Refactor to reduce code duplication
+                # See if we have an FFXML in the in-memory cache.
+                if target_smiles in self._ffxml_cache:
+                    ffxml_contents = self._ffxml_cache[target_smiles]
 
-        _logger.info(f"Requested to generate parameters for residue {residue}")
+                # If not, try to look one up in the on-disk cache.
+                if ffxml_contents is None and self._cache_path is not None:
+                    with self._open_db() as db:
+                        for entry in db.table(self._database_table_name):
+                            if entry["smiles"] == target_smiles:
+                                ffxml_contents = entry["ffxml"]
+                                # Store it in the in-memory cache.
+                                self._ffxml_cache[target_smiles] = ffxml_contents
+                                break
 
-        # If a database is specified, check against molecules in the database
-        if self._cache is not None:
-            with self._open_db() as db:
-                table = db.table(self._database_table_name)
-                for entry in table:
-                    # Skip any molecules we've added to the database this session
-                    if entry["smiles"] in self._smiles_added_to_db:
-                        continue
+                # If we still couldn't find one, we have to generate it.
+                if ffxml_contents is None:
+                    ffxml_contents = self.generate_residue_template(molecule)
+                    # Store it in the in-memory cache and the on-disk cache.
+                    self._ffxml_cache[target_smiles] = ffxml_contents
+                    if self._cache_path is not None:
+                        with self._open_db() as db:
+                            db.table(self._database_table_name).insert(
+                                {"smiles": target_smiles, "ffxml": ffxml_contents}
+                            )
 
-                    # See if the template matches
-                    from openff.toolkit import Molecule
-
-                    molecule_template = Molecule.from_smiles(entry["smiles"], allow_undefined_stereo=True)
-                    _logger.debug(f"Checking against {entry['smiles']}")
-                    if self._match_residue(residue, molecule_template):
-                        ffxml_contents = entry["ffxml"]
-
-                        # Write to debug file if requested
-                        if self.debug_ffxml_filename is not None:
-                            with open(self.debug_ffxml_filename, "w") as outfile:
-                                _logger.debug(f"writing ffxml to {self.debug_ffxml_filename}")
-                                outfile.write(ffxml_contents)
-
-                        # Add parameters and residue template for this residue
-                        forcefield.loadFile(StringIO(ffxml_contents))
-                        # Signal success
-                        return True
-
-        # Check against the molecules we know about
-        for smiles, molecule in self._molecules.items():
-            # See if the template matches
-            if self._match_residue(residue, molecule):
-                # Generate template and parameters.
-                ffxml_contents = self.generate_residue_template(molecule)
-
-                # Write to debug file if requested
                 if self.debug_ffxml_filename is not None:
                     with open(self.debug_ffxml_filename, "w") as outfile:
                         _logger.debug(f"writing ffxml to {self.debug_ffxml_filename}")
                         outfile.write(ffxml_contents)
 
-                # Add the parameters and residue definition
-                forcefield.loadFile(StringIO(ffxml_contents))
-                # If a cache is specified, add this molecule
-                if self._cache is not None:
-                    with self._open_db() as db:
-                        table = db.table(self._database_table_name)
-                        _logger.debug(f"Writing residue template for {smiles} to cache {self._cache}")
-                        record = {"smiles": smiles, "ffxml": ffxml_contents}
-                        # Add the IUPAC name for convenience if we can
-                        try:
-                            record["iupac"] = molecule.to_iupac()
-                        except Exception:
-                            pass
-                        # Store the record
-                        table.insert(record)
-                        self._smiles_added_to_db.add(smiles)
+                forcefield.loadFile(io.StringIO(ffxml_contents))
 
-                # Signal success
                 return True
 
         # Report that we have failed to parameterize the residue
@@ -493,10 +402,8 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
         forcefield : str, optional, default=None
@@ -1391,9 +1298,8 @@ class SMIRNOFFTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized with SMIRNOFF as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : str, optional, default=None
@@ -1724,10 +1630,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
         Parameters
         ----------
-        molecules : openff.toolkit.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can
-            be used to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+        molecules : openff.toolkit.Molecule or list of Molecules, optional, default=None
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized with espaloma as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : str, optional, default=None
