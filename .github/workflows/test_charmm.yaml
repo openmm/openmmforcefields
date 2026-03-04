@@ -39,7 +39,7 @@ jobs:
           openmm=${{ matrix.openmm-version }}
 
     - name: Log into GitHub container registry
-      uses: docker/login-action@v3
+      uses: docker/login-action@v4
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
