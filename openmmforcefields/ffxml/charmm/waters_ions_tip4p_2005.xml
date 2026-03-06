@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
+    <DateGenerated>2026-03-04</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip4p_2005.str" md5hash="e2932421df3f88ec82c5a7b9b6c8292c" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip4p_2005.str</Source>
     <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="J.L.F. Abascal and C. Vega. A general purpose model for the condensed phases of water: TIP4P/2005 J. Chem. Phys. 123:234505, 2005." forcefield="tip4p-2005">J.L.F. Abascal and C. Vega. A general purpose model for the condensed phases of water: TIP4P/2005 J. Chem. Phys. 123:234505, 2005.</Reference>
