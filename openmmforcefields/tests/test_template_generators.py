@@ -1534,21 +1534,21 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_energies_multiple_residue(self):
         """Test parameterizing a multi-residue molecule"""
 
-        pdb = PDBFile(get_data_filename("test-ala-3.pdb"))
-        molecules = [Molecule.from_topology(Topology.from_pdb(get_data_filename("test-ala-3.pdb")))]
-        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff_unconstrained-2.3.0.offxml")
+        data_file = get_data_filename("test-ala-3.pdb")
+        ff_file = "openff_unconstrained-2.3.0.offxml"
+
+        pdb = PDBFile(data_file)
+        off_top = Topology.from_pdb(data_file)
+
+        molecules = [off_top.molecule(0)]
+        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=ff_file)
         openmm_forcefield = openmm.app.ForceField()
         openmm_forcefield.registerTemplateGenerator(generator.generator)
 
-        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
-        modeller.addExtraParticles(openmm_forcefield)
+        smirnoff_system = OFFForceField(ff_file).create_openmm_system(off_top)
+        openmm_system = openmm_forcefield.createSystem(pdb.topology, nonbondedMethod=NoCutoff)
 
-        smirnoff_system = generator._smirnoff_forcefield.create_openmm_system(
-            Topology.from_openmm(pdb.topology, molecules)
-        )
-        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
-
-        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
+        new_positions = self.propagate_dynamics(pdb.positions, openmm_system)
         self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
         new_positions = self.propagate_dynamics(new_positions, openmm_system)
         self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
