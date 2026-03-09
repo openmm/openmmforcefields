@@ -1534,24 +1534,25 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_energies_multiple_residue(self):
         """Test parameterizing a multi-residue molecule"""
 
-        data_file = get_data_filename("test-ala-3.pdb")
-        ff_file = "openff_unconstrained-2.3.0.offxml"
+        for test_file in ("test-ala-3.pdb", "test-aa.pdb"):
+            data_file = get_data_filename(test_file)
+            ff_file = "openff_unconstrained-2.3.0.offxml"
 
-        pdb = PDBFile(data_file)
-        off_top = Topology.from_pdb(data_file)
+            pdb = PDBFile(data_file)
+            off_top = Topology.from_pdb(data_file)
 
-        molecules = [off_top.molecule(0)]
-        generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=ff_file)
-        openmm_forcefield = openmm.app.ForceField()
-        openmm_forcefield.registerTemplateGenerator(generator.generator)
+            molecules = [off_top.molecule(0)]
+            generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=ff_file)
+            openmm_forcefield = openmm.app.ForceField()
+            openmm_forcefield.registerTemplateGenerator(generator.generator)
 
-        smirnoff_system = OFFForceField(ff_file).create_openmm_system(off_top)
-        openmm_system = openmm_forcefield.createSystem(pdb.topology, nonbondedMethod=NoCutoff)
+            smirnoff_system = OFFForceField(ff_file).create_openmm_system(off_top)
+            openmm_system = openmm_forcefield.createSystem(pdb.topology, nonbondedMethod=NoCutoff)
 
-        new_positions = self.propagate_dynamics(pdb.positions, openmm_system)
-        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
-        new_positions = self.propagate_dynamics(new_positions, openmm_system)
-        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+            new_positions = self.propagate_dynamics(pdb.positions, openmm_system)
+            self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+            new_positions = self.propagate_dynamics(new_positions, openmm_system)
+            self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
 
     def test_virtual_site_spans_residues(self):
         """Test parameterizing a multi-residue molecule with a virtual site"""
