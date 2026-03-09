@@ -21,7 +21,7 @@ from openmmforcefields.generators import (
     GAFFTemplateGenerator,
     SMIRNOFFTemplateGenerator,
 )
-from openmmforcefields.utils import get_data_filename
+from openmmforcefields.utils import Timer, get_data_filename
 
 if TYPE_CHECKING:
     import parmed
@@ -231,14 +231,14 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         generator.add_molecules(molecule)
         return forcefield.createSystem(molecule.to_topology().to_openmm(), nonbondedMethod=NoCutoff)
 
-    def _make_template_generator(self):
+    def _make_template_generator(self, **kwargs):
         """
         Makes a template generator for generic testing.  By default, calls
-        `TEMPLATE_GENERATOR` with no arguments.  Override in derived classes to
-        customize this behavior.
+        `TEMPLATE_GENERATOR` with the provided keyword arguments.  Override in
+        derived classes to customize this behavior.
         """
 
-        return self.TEMPLATE_GENERATOR()
+        return self.TEMPLATE_GENERATOR(**kwargs)
 
     @classmethod
     def get_permutation_indices(cls, system_1, system_2):
@@ -555,6 +555,79 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         return new_molecule
 
+    def test_cache(self):
+        """Test template generator cache capability"""
+        if type(self) is TemplateGeneratorBaseCase:
+            return  # Can only run in derived classes
+
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            # Create a generator that also has a database cache
+            cache = os.path.join(tmpdirname, "db.json")
+            generator = self._make_template_generator(molecules=self.molecules, cache=cache)
+            # Create a ForceField
+            forcefield = ForceField()
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+            # Parameterize the molecules
+            timings = []
+            for molecule in self.molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as timer:
+                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                timings.append(timer.interval())
+
+            # Check database contents
+            def check_cache(generator, n_expected):
+                """
+                Check database contains number of expected records
+
+                Parameters
+                ----------
+                generator : SmallMoleculeTemplateGenerator
+                    The generator whose cache should be examined
+                n_expected : int
+                    Number of expected records
+                """
+                from tinydb import TinyDB
+
+                db = TinyDB(generator._cache_path)
+                table = db.table(generator._database_table_name)
+                db_entries = table.all()
+                db.close()
+                n_entries = len(db_entries)
+                assert n_entries == n_expected, (
+                    f"Expected {n_expected} entries but database has {n_entries}\n db contents: {db_entries}"
+                )
+
+            check_cache(generator, len(self.molecules))
+
+            # Clean up, forcing closure of database
+            del forcefield, generator
+
+            # Create a generator that also uses the database cache but has no molecules
+            print("Creating new generator with just cache...")
+            generator = self._make_template_generator(cache=cache)
+            # Check database still contains the molecules we expect
+            check_cache(generator, len(self.molecules))
+            # Create a ForceField
+            forcefield = ForceField()
+            # Register the template generator
+            forcefield.registerTemplateGenerator(generator.generator)
+            # Parameterize the molecules; this should fail since we haven't added the molecules to the generator
+            for molecule in self.molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with pytest.raises(ValueError, match="No template found for residue"):
+                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+            # Add the molecules and try again; this should succeed and be faster once the molecules have been added
+            generator.add_molecules(self.molecules)
+            timings_cached = []
+            for molecule in self.molecules:
+                openmm_topology = molecule.to_topology().to_openmm()
+                with Timer() as timer:
+                    forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
+                timings_cached.append(timer.interval())
+            assert all(timing > timing_cached for timing, timing_cached in zip(timings, timings_cached, strict=True))
+
 
 @pytest.mark.gaff
 class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
@@ -745,63 +818,6 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             system2 = forcefield_from_ffxml.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
             # TODO: Test that systems are equivalent
             assert system.getNumParticles() == system2.getNumParticles()
-
-    def test_cache(self):
-        """Test template generator cache capability"""
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            # Create a generator that also has a database cache
-            cache = os.path.join(tmpdirname, "db.json")
-            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
-            # Create a ForceField
-            forcefield = ForceField()
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize the molecules
-            for molecule in self.molecules:
-                openmm_topology = molecule.to_topology().to_openmm()
-                forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
-
-            # Check database contents
-            def check_cache(generator, n_expected):
-                """
-                Check database contains number of expected records
-
-                Parameters
-                ----------
-                generator : SmallMoleculeTemplateGenerator
-                    The generator whose cache should be examined
-                n_expected : int
-                    Number of expected records
-                """
-                from tinydb import TinyDB
-
-                db = TinyDB(generator._cache)
-                table = db.table(generator._database_table_name)
-                db_entries = table.all()
-                db.close()
-                n_entries = len(db_entries)
-                assert n_entries == n_expected, (
-                    f"Expected {n_expected} entries but database has {n_entries}\n db contents: {db_entries}"
-                )
-
-            check_cache(generator, len(self.molecules))
-
-            # Clean up, forcing closure of database
-            del forcefield, generator
-
-            # Create a generator that also uses the database cache but has no molecules
-            print("Creating new generator with just cache...")
-            generator = self.TEMPLATE_GENERATOR(cache=cache)
-            # Check database still contains the molecules we expect
-            check_cache(generator, len(self.molecules))
-            # Create a ForceField
-            forcefield = ForceField()
-            # Register the template generator
-            forcefield.registerTemplateGenerator(generator.generator)
-            # Parameterize the molecules; this should succeed
-            for molecule in self.molecules:
-                openmm_topology = molecule.to_topology().to_openmm()
-                forcefield.createSystem(openmm_topology, nonbondedMethod=NoCutoff)
 
     def test_add_solvent(self):
         """Test using openmm.app.Modeller to add solvent to a small molecule parameterized by template generator"""
@@ -1043,12 +1059,12 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = SMIRNOFFTemplateGenerator
 
-    def _make_template_generator(self):
+    def _make_template_generator(self, **kwargs):
         """
         Makes a `SMIRNOFFTemplateGenerator` for generic testing.
         """
 
-        return SMIRNOFFTemplateGenerator(forcefield="openff-2.3.0")
+        return SMIRNOFFTemplateGenerator(forcefield="openff-2.3.0", **kwargs)
 
     def test_INSTALLED_FORCEFIELDS(self):
         """Test that names in INSTALLED_FORCEFIELDS resolve correctly"""
@@ -1514,6 +1530,82 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
             self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
             new_positions = self.propagate_dynamics(new_positions, openmm_system)
             self.compare_energies(molecules[0].to_hill_formula(), new_positions, openmm_system, smirnoff_system)
+
+    def test_energies_multiple_residue(self):
+        """Test parameterizing a multi-residue molecule"""
+
+        for test_file in ("test-ala-3.pdb", "test-aa.pdb"):
+            data_file = get_data_filename(test_file)
+            ff_file = "openff_unconstrained-2.3.0.offxml"
+
+            pdb = PDBFile(data_file)
+            off_top = Topology.from_pdb(data_file)
+
+            molecules = [off_top.molecule(0)]
+            generator = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield=ff_file)
+            openmm_forcefield = openmm.app.ForceField()
+            openmm_forcefield.registerTemplateGenerator(generator.generator)
+
+            smirnoff_system = OFFForceField(ff_file).create_openmm_system(off_top)
+            openmm_system = openmm_forcefield.createSystem(pdb.topology, nonbondedMethod=NoCutoff)
+
+            new_positions = self.propagate_dynamics(pdb.positions, openmm_system)
+            self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+            new_positions = self.propagate_dynamics(new_positions, openmm_system)
+            self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+
+    def test_virtual_site_spans_residues(self):
+        """Test parameterizing a multi-residue molecule with a virtual site"""
+        from openff.toolkit.typing.engines.smirnoff.parameters import VirtualSiteType
+
+        data_file = get_data_filename("test-ala-3.pdb")
+        ff_file = "openff_unconstrained-2.3.0.offxml"
+
+        pdb = PDBFile(data_file)
+        off_top = Topology.from_pdb(data_file)
+
+        openff_forcefield = OFFForceField(ff_file)
+        openff_forcefield.get_parameter_handler("VirtualSites")
+        openff_forcefield["VirtualSites"].add_parameter(
+            parameter=VirtualSiteType(
+                smirks="[#6X4:2][#7X3:1]([#1:3])[#6X3:4]",
+                type="TrivalentLonePair",
+                match="once",
+                distance="0.5 * nanometer ** 1",
+                outOfPlaneAngle="None",
+                inPlaneAngle="None",
+                epsilon="1.0 * kilocalories_per_mole",
+                sigma="3 * angstrom",
+                charge_increment1="0.01 * elementary_charge ** 1",
+                charge_increment2="-0.01 * elementary_charge ** 1",
+                charge_increment3="-0.02 * elementary_charge ** 1",
+                charge_increment4="-0.03 * elementary_charge ** 1",
+            ),
+        )
+        smirnoff_system = openff_forcefield.create_openmm_system(off_top)
+        # Assert there's at least one vsite in the output
+        assert 0 != sum([smirnoff_system.isVirtualSite(i) for i in range(smirnoff_system.getNumParticles())])
+
+        # Reverse the order of atoms in the molecule that will be fed to
+        # generate the template to test that parameters still get assigned
+        # correctly when the template and topology atom orders don't match
+        molecule = off_top.molecule(0)
+        molecule = molecule.remap({i: molecule.n_atoms - i - 1 for i in range(molecule.n_atoms)})
+
+        generator = SMIRNOFFTemplateGenerator(molecules=[molecule], forcefield=openff_forcefield.to_string())
+        openmm_forcefield = openmm.app.ForceField()
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+
+        # Add the virtual sites to the OpenMM topology before creating the
+        # system through the template generator
+        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
+        modeller.addExtraParticles(openmm_forcefield)
+        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
+
+        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+        new_positions = self.propagate_dynamics(new_positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
 
     def test_bespoke_force_field(self):
         """
