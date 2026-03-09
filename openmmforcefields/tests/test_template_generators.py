@@ -1556,6 +1556,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_virtual_site_spans_residues(self):
         """Test parameterizing a multi-residue molecule with a virtual site"""
         from openff.toolkit.typing.engines.smirnoff.parameters import VirtualSiteType
+
         data_file = get_data_filename("test-ala-3.pdb")
         ff_file = "openff_unconstrained-2.3.0.offxml"
 
