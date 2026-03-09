@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2026-03-04</DateGenerated>
+    <DateGenerated>2025-02-27</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip5p_ew.str" md5hash="f12096ec0aa691de80983a34cc5cce5a" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip5p_ew.str</Source>
     <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="Rick, S.W. A reoptimization of the five-site water potential (TIP5P) for use with Ewald sums. J Chem Phys 120: 6085-93, 2004." forcefield="tip5p-ew">Rick, S.W. A reoptimization of the five-site water potential (TIP5P) for use with Ewald sums. J Chem Phys 120: 6085-93, 2004.</Reference>

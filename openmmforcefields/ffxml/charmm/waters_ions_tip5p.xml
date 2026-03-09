@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2026-03-04</DateGenerated>
+    <DateGenerated>2025-02-27</DateGenerated>
     <Source Source="toppar/non_charmm/toppar_water_ions_tip5p.str" md5hash="9c77ba3236c2f10e5474bcbda612a486" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_tip5p.str</Source>
     <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="M.W. Mahoney and W.L. Jorgensen. A five-site model for liquid water and the reproduction of the density anomaly by rigid, nonpolarizable potential functions. J. Chem Phys. 112:8910-8922, 2000." forcefield="tip5p">M.W. Mahoney and W.L. Jorgensen. A five-site model for liquid water and the reproduction of the density anomaly by rigid, nonpolarizable potential functions. J. Chem Phys. 112:8910-8922, 2000.</Reference>
