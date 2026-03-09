@@ -1553,6 +1553,58 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         new_positions = self.propagate_dynamics(new_positions, openmm_system)
         self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
 
+    def test_virtual_site_spans_residues(self):
+        """Test parameterizing a multi-residue molecule with a virtual site"""
+        from openff.toolkit.typing.engines.smirnoff.parameters import VirtualSiteType
+        data_file = get_data_filename("test-ala-3.pdb")
+        ff_file = "openff_unconstrained-2.3.0.offxml"
+
+        pdb = PDBFile(data_file)
+        off_top = Topology.from_pdb(data_file)
+
+        openff_forcefield = OFFForceField(ff_file)
+        openff_forcefield.get_parameter_handler("VirtualSites")
+        openff_forcefield["VirtualSites"].add_parameter(
+            parameter=VirtualSiteType(
+                smirks="[#6X4:2][#7X3:1]([#1:3])[#6X3:4]",
+                type="TrivalentLonePair",
+                match="once",
+                distance="0.5 * nanometer ** 1",
+                outOfPlaneAngle="None",
+                inPlaneAngle="None",
+                epsilon="1.0 * kilocalories_per_mole",
+                sigma="3 * angstrom",
+                charge_increment1="0.01 * elementary_charge ** 1",
+                charge_increment2="-0.01 * elementary_charge ** 1",
+                charge_increment3="-0.02 * elementary_charge ** 1",
+                charge_increment4="-0.03 * elementary_charge ** 1",
+            ),
+        )
+        smirnoff_system = openff_forcefield.create_openmm_system(off_top)
+        # Assert there's at least one vsite in the output
+        assert 0 != sum([smirnoff_system.isVirtualSite(i) for i in range(smirnoff_system.getNumParticles())])
+
+        # Reverse the order of atoms in the molecule that will be fed to
+        # generate the template to test that parameters still get assigned
+        # correctly when the template and topology atom orders don't match
+        molecule = off_top.molecule(0)
+        molecule = molecule.remap({i: molecule.n_atoms - i - 1 for i in range(molecule.n_atoms)})
+
+        generator = SMIRNOFFTemplateGenerator(molecules=[molecule], forcefield=openff_forcefield.to_string())
+        openmm_forcefield = openmm.app.ForceField()
+        openmm_forcefield.registerTemplateGenerator(generator.generator)
+
+        # Add the virtual sites to the OpenMM topology before creating the
+        # system through the template generator
+        modeller = openmm.app.Modeller(pdb.topology, pdb.positions)
+        modeller.addExtraParticles(openmm_forcefield)
+        openmm_system = openmm_forcefield.createSystem(modeller.topology, nonbondedMethod=NoCutoff)
+
+        new_positions = self.propagate_dynamics(modeller.positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+        new_positions = self.propagate_dynamics(new_positions, openmm_system)
+        self.compare_energies("test_energies_multiple_residue", new_positions, openmm_system, smirnoff_system)
+
     def test_bespoke_force_field(self):
         """
         Make sure a molecule can be parameterised using a bespoke force field passed as a string to
