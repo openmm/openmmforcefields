@@ -107,7 +107,7 @@ jobs:
         pytest --doctest-modules openmmforcefields --ignore=openmmforcefields/tests
 
     - name: Upload coverage report to CodeCov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v6
       if: ${{ github.repository == 'openmm/openmmforcefields'
               && github.event != 'schedule' }}
       with:
