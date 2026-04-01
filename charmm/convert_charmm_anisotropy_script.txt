@@ -23,13 +23,11 @@ def extract_atom_name(raw_atom_name, templates):
 
 residue_data = []
 
-for residue_index, residue in enumerate(topology.residues()):
+for residue in topology.residues():
     # Extract the residue or patch names and atom names.
-    template_data = templateForResidue[residue_index]
     templates = set()
-    if template_data is None:
-        # Multi-residue patch; fall back to parsing atom names because OpenMM
-        # leaves None in templateForResidue in this case.
+    if residue not in templateForResidue:
+        # Multi-residue patch; fall back to parsing atom names.
         atom_names = []
         skip_residue = False
         for atom in residue.atoms():
@@ -45,6 +43,7 @@ for residue_index, residue in enumerate(topology.residues()):
             continue
     else:
         # Extract names from template name.
+        template_data = templateForResidue[residue]
         for template_index, template_name in enumerate(template_data.name.split("-")):
             if template_index:
                 # Patch name.
