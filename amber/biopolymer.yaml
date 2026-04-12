@@ -168,6 +168,15 @@
     J. Chem. Theory Comput., 2021, 17, 6292-6301.
   Test:
   - dna
+- Source: ./files/DNA.OL24/leaprc.DNA.OL24
+  Prefix: DNA
+  Reference:
+  - >-
+    Zgarbova, M.; Sponer, J.; Jurecka, P,
+    Refinement of the Sugar Puckering Torsion Potential in the AMBER DNA Force Field.
+    J. Chem. Theory Comput. 2025, https://doi.org/10.1021/acs.jctc.4c01100. 
+  Test:
+  - dna
 - Source: leaprc.DNA.bsc1
   Prefix: DNA
   Reference:
