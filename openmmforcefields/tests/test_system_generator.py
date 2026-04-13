@@ -525,7 +525,12 @@ class TestSystemGenerator:
             )
 
             # Create a system in vacuum
-            generator = SystemGenerator(forcefields=self.amber_forcefields, small_molecule_forcefield="openff-2.3.0", molecules=molecules, cache=cache)
+            generator = SystemGenerator(
+                forcefields=self.amber_forcefields,
+                small_molecule_forcefield="openff-2.3.0",
+                molecules=molecules,
+                cache=cache,
+            )
             system = generator.create_system(openmm_topology)
             assert system.getNumParticles() == len(complex_structure.atoms)
 
