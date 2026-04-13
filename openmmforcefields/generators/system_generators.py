@@ -264,8 +264,8 @@ class SystemGenerator:
                 raise ValueError(msg)
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
 
-        # Inform the template generator about any specified molecules
-        self.add_molecules(molecules)
+            # Inform the template generator about any specified molecules
+            self.add_molecules(molecules)
 
     @classproperty
     def SMALL_MOLECULE_FORCEFIELDS(cls):
@@ -293,8 +293,6 @@ class SystemGenerator:
             The parameters will be cached in case they are encountered again the future.
         """
 
-        if not molecules:
-            return
         if self.template_generator is None:
             raise ValueError(
                 "You must have a small molecule residue template generator registered to add small molecules"
