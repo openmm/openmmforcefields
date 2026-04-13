@@ -639,6 +639,13 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
         "amber/tip3p_HFE_multivalent.xml",
     ]
 
+    def _make_template_generator(self, **kwargs):
+        """
+        Makes a `GAFFTemplateGenerator` for generic testing.
+        """
+
+        return GAFFTemplateGenerator(forcefield="gaff-2.2.20", **kwargs)
+
     def test_version(self):
         """Test version"""
         for forcefield in GAFFTemplateGenerator.INSTALLED_FORCEFIELDS:
@@ -658,23 +665,23 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
     def test_create(self):
         """Test template generator creation"""
         # Create an empty generator
-        generator = self.TEMPLATE_GENERATOR()
+        generator = self._make_template_generator()
         # Create a generator that knows about a few molecules
-        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
+        generator = self._make_template_generator(molecules=self.molecules)
         # Create a generator that also has a database cache
         with tempfile.TemporaryDirectory() as tmpdirname:
             cache = os.path.join(tmpdirname, "db.json")
             # Create a new database file
-            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
+            generator = self._make_template_generator(molecules=self.molecules, cache=cache)
             del generator
             # Reopen it (with cache still empty)
-            generator = self.TEMPLATE_GENERATOR(molecules=self.molecules, cache=cache)
+            generator = self._make_template_generator(molecules=self.molecules, cache=cache)
             del generator
 
     def test_add_molecules(self):
         """Test that molecules can be added to template generator after its creation"""
         # Create a generator that does not know about any molecules
-        generator = self.TEMPLATE_GENERATOR()
+        generator = self._make_template_generator()
         # Create a ForceField
         forcefield = ForceField()
         # Register the template generator
@@ -794,7 +801,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             cache = os.path.join(tmpdirname, "db.json")
             # Create a generator that only knows about one molecule
             molecule = self.molecules[0]
-            generator = self.TEMPLATE_GENERATOR(molecules=molecule, cache=cache)
+            generator = self._make_template_generator(molecules=molecule, cache=cache)
             # Create a ForceField
             forcefield = ForceField()
             # Register the template generator
@@ -838,7 +845,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
             pass
 
         # Create a generator that knows about a few molecules
-        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
+        generator = self._make_template_generator(molecules=self.molecules)
         # Add to the forcefield object
         forcefield.registerTemplateGenerator(generator.generator)
         # Add solvent to a system containing a small molecule
@@ -882,7 +889,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 get_data_filename(os.path.join("perses_jacs_systems", system_name)),
                 "cache.json",
             )
-            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache)
+            generator = self._make_template_generator(molecules=molecules, cache=cache)
 
             # Create a ForceField
             forcefield = ForceField()
@@ -962,7 +969,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
                 get_data_filename(os.path.join("perses_jacs_systems", system_name)),
                 "cache.json",
             )
-            generator = self.TEMPLATE_GENERATOR(molecules=molecules, cache=cache)
+            generator = self._make_template_generator(molecules=molecules, cache=cache)
 
             # Create a ForceField
             forcefield = ForceField(*self.amber_forcefields)
@@ -1040,7 +1047,7 @@ class TestGAFFTemplateGenerator(TemplateGeneratorBaseCase):
 
     def test_multiple_registration(self):
         """Test registering the template generator with multiple force fields"""
-        generator = self.TEMPLATE_GENERATOR(molecules=self.molecules)
+        generator = self._make_template_generator(molecules=self.molecules)
         NUM_FORCEFIELDS = 2  # number of force fields to test
         forcefields = list()
         for index in range(NUM_FORCEFIELDS):
@@ -1809,6 +1816,13 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 @pytest.mark.espaloma
 class TestEspalomaTemplateGenerator(TemplateGeneratorBaseCase):
     TEMPLATE_GENERATOR = EspalomaTemplateGenerator
+
+    def _make_template_generator(self, **kwargs):
+        """
+        Makes an `EspalomaTemplateGenerator` for generic testing.
+        """
+
+        return EspalomaTemplateGenerator(forcefield="espaloma-0.3.2", **kwargs)
 
     def test_retrieve_forcefields(self):
         """Test a force field can be retrieved"""

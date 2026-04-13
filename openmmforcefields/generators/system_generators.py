@@ -67,7 +67,7 @@ class SystemGenerator:
     def __init__(
         self,
         forcefields=None,
-        small_molecule_forcefield="openff-2.2.0",
+        small_molecule_forcefield=None,
         forcefield_kwargs=None,
         nonperiodic_forcefield_kwargs=None,
         periodic_forcefield_kwargs=None,
@@ -86,15 +86,16 @@ class SystemGenerator:
         Parameters
         ----------
         forcefields : list of str, optional, default=None
-            List of the names of ffxml files that will be used in System creation for the biopolymer.
-        small_molecule_forcefield : str, optional, default='openff-2.2.0'
-            Small molecule force field to use.
-            Must be supported by one of the registered template generators:
-                [GAFFTemplateGenerator, SMIRNOFFTemplateGenerator]
-            Supported GAFF force fields include 'gaff-2.2.20', 'gaff-2.11', and others.
-            (See ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
-            Supported SMIRNOFF force fields include all installed force fields from Parsley and Sage lines, such as 'openff-1.0.0' and 'openff-2.2.1'.
-            (See ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS`` for a complete list.)
+            List of the names of ffxml force field files that will be used in
+            System creation to attempt to parameterize molecules.
+        small_molecule_forcefield : str, bytes, file-like object, or iterable, optional
+            Specification of the force field(s) to use for the template
+            generator that will attempt to parameterize any molecules that could
+            not be parameterized by the provided ffxml force fields.  Whatever
+            is provided must be a supported force field name or other object
+            that can be understood by one of `GAFFTemplateGenerator`,
+            `SMIRNOFFTemplateGenerator`, or `EspalomaTemplateGenerator`.  See
+            these classes for details of the force fields supported.
         forcefield_kwargs : dict, optional, default=None
             Keyword arguments to be passed to ``openmm.app.ForceField.createSystem()`` during ``System``
             object creation.
@@ -249,7 +250,7 @@ class SystemGenerator:
                         template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
-                except (ValueError,) as e:
+                except (ValueError, TypeError) as e:
                     _logger.debug(f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}")
                     _logger.debug(e)
             if self.template_generator is None:
@@ -292,6 +293,8 @@ class SystemGenerator:
             The parameters will be cached in case they are encountered again the future.
         """
 
+        if not molecules:
+            return
         if self.template_generator is None:
             raise ValueError(
                 "You must have a small molecule residue template generator registered to add small molecules"

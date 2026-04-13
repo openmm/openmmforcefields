@@ -123,7 +123,7 @@ from openmmforcefields.generators import (
     GAFFTemplateGenerator,
 )
 
-gaff = GAFFTemplateGenerator(molecules=molecule)
+gaff = GAFFTemplateGenerator(molecules=molecule, forcefield="gaff-2.2.20")
 # Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
 from openmm.app import ForceField
 
@@ -143,15 +143,7 @@ pdbfile = PDBFile("t4-lysozyme-L99A-with-benzene.pdb")
 system = forcefield.createSystem(pdbfile.topology)
 ```
 
-The latest available GAFF version is used if none is specified.
-You can check which GAFF version is in use with
-
-```pycon
->>> gaff.gaff_version
-'2.2.20'
-````
-
-Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
+Create a template generator for multiple molecules read from an SDF file:
 
 ```python
 molecules = Molecule.from_file("molecules.sdf")
