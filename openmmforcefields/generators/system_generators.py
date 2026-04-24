@@ -40,7 +40,7 @@ class SystemGenerator:
     def __init__(
         self,
         forcefields=None,
-        small_molecule_forcefield="openff-2.2.0",
+        small_molecule_forcefield=None,
         forcefield_kwargs=None,
         nonperiodic_forcefield_kwargs=None,
         periodic_forcefield_kwargs=None,
@@ -58,7 +58,7 @@ class SystemGenerator:
         forcefields : list of str, optional, default=None
             List of the names of ffxml force field files that will be used in
             System creation to attempt to parameterize molecules.
-        small_molecule_forcefield : str, bytes, file-like object, or iterable, optional, default='openff-2.2.0'
+        small_molecule_forcefield : str, bytes, file-like object, or iterable, optional
             Specification of the force field(s) to use for the template
             generator that will attempt to parameterize any molecules that could
             not be parameterized by the provided ffxml force fields.  Whatever
@@ -218,7 +218,7 @@ class SystemGenerator:
                         template_generator_kwargs=self.template_generator_kwargs,
                     )
                     break
-                except (ValueError,) as e:
+                except (ValueError, TypeError) as e:
                     _logger.debug(f"  {template_generator_cls.__name__} cannot load {small_molecule_forcefield}")
                     _logger.debug(e)
             if self.template_generator is None:
@@ -232,8 +232,8 @@ class SystemGenerator:
                 raise ValueError(msg)
             self.forcefield.registerTemplateGenerator(self.template_generator.generator)
 
-        # Inform the template generator about any specified molecules
-        self.add_molecules(molecules)
+            # Inform the template generator about any specified molecules
+            self.add_molecules(molecules)
 
     @classproperty
     def SMALL_MOLECULE_FORCEFIELDS(cls):

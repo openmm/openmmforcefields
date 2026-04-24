@@ -165,7 +165,7 @@ class TestSystemGenerator:
     def test_barostat(self, barostat_class, args):
         """Test that different barostats are correctly applied to the system"""
         # Create a protein SystemGenerator
-        generator = SystemGenerator(forcefields=self.amber_forcefields)
+        generator = SystemGenerator(forcefields=self.amber_forcefields, small_molecule_forcefield="openff-2.3.0")
 
         # Create the barostat
         generator.barostat = barostat_class(*args)
@@ -525,7 +525,12 @@ class TestSystemGenerator:
             )
 
             # Create a system in vacuum
-            generator = SystemGenerator(forcefields=self.amber_forcefields, molecules=molecules, cache=cache)
+            generator = SystemGenerator(
+                forcefields=self.amber_forcefields,
+                small_molecule_forcefield="openff-2.3.0",
+                molecules=molecules,
+                cache=cache,
+            )
             system = generator.create_system(openmm_topology)
             assert system.getNumParticles() == len(complex_structure.atoms)
 

@@ -354,7 +354,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the GAFF template generator
     >>> from openmmforcefields.generators import GAFFTemplateGenerator
-    >>> template_generator = GAFFTemplateGenerator(molecules=molecule)
+    >>> template_generator = GAFFTemplateGenerator(molecules=molecule, forcefield='gaff-2.2.20')
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -375,7 +375,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json')
+    >>> template_generator = GAFFTemplateGenerator(cache='gaff-molecules.json', forcefield='gaff-2.2.20')
 
     Newly parameterized molecules will be written to the cache, saving time next time!
 
@@ -406,10 +406,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
             Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized with antechamber as needed.
             The parameters will be cached in case they are encountered again the future.
-        forcefield : str, optional, default=None
+        forcefield : str
             GAFF force field to use, one of
             ['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']
-            If not specified, the latest GAFF supported version is used.
             GAFFTemplateGenerator.INSTALLED_FORCEFIELDS contains a complete up-to-date list of supported force fields.
         cache : str, optional, default=None
             Filename for global caching of parameters.
@@ -425,7 +424,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import GAFFTemplateGenerator
-        >>> gaff = GAFFTemplateGenerator(molecules=molecule)
+        >>> gaff = GAFFTemplateGenerator(molecules=molecule, forcefield='gaff-2.2.20')
         >>> from openmm.app import ForceField
         >>> amber_forcefields = [
         ...     'amber/protein.ff14SB.xml',
@@ -435,13 +434,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         >>> forcefield = ForceField(*amber_forcefields)
         >>> forcefield.registerTemplateGenerator(gaff)
 
-        The latest GAFF version is used if none is specified.
-        You can check which GAFF version is in use with
-
-        >>> gaff.forcefield
-        'gaff-2.2.20'
-
-        Create a template generator for a specific GAFF version for multiple molecules read from an SDF file:
+        Create a template generator for multiple molecules read from an SDF file:
 
         >>> molecules = Molecule.from_file('molecules.sdf')  # doctest: +SKIP
         >>> gaff = GAFFTemplateGenerator(molecules=molecules, forcefield='gaff-2.2.20')  # doctest: +SKIP
@@ -469,11 +462,9 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         # Initialize molecules and cache
         super().__init__(molecules=molecules, cache=cache)
 
-        # Use latest supported GAFF version if none is specified
-        if forcefield is None:
-            forcefield = self.INSTALLED_FORCEFIELDS[-1]
-
         # Ensure a valid GAFF version is specified
+        if not isinstance(forcefield, str):
+            raise TypeError("A GAFF force field name must be provided as a string")
         if forcefield not in self.INSTALLED_FORCEFIELDS:
             raise ValueError(f"Specified 'forcefield' ({forcefield}) must be one of {self.INSTALLED_FORCEFIELDS}")
 
@@ -1567,15 +1558,14 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     Examples
     --------
 
-    Create a template generator for a single Molecule using the latest Open Force Field Initiative
-    small molecule force field and register it with ForceField:
+    Create a template generator for a single Molecule and register it with ForceField:
 
     >>> # Define a Molecule using the OpenFF Molecule object
     >>> from openff.toolkit import Molecule
     >>> molecule = Molecule.from_smiles('c1ccccc1')
     >>> # Create the Espaloma template generator
     >>> from openmmforcefields.generators import EspalomaTemplateGenerator
-    >>> template_generator = EspalomaTemplateGenerator(molecules=molecule)
+    >>> template_generator = EspalomaTemplateGenerator(molecules=molecule, forcefield='espaloma-0.3.2')
     >>> # Create an OpenMM ForceField
     >>> from openmm.app import ForceField
     >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
@@ -1583,8 +1573,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
     >>> # Register the template generator
     >>> forcefield.registerTemplateGenerator(template_generator.generator)
 
-    Create a template generator for a specific Espaloma release ('espaloma-0.3.2')
-    and register multiple molecules:
+    Create a template generator and register multiple molecules:
 
     >>> molecule1 = Molecule.from_smiles('c1ccccc1')
     >>> molecule2 = Molecule.from_smiles('CCO')
@@ -1607,7 +1596,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
 
     You can optionally create or use a tiny database cache of pre-parameterized molecules:
 
-    >>> template_generator = EspalomaTemplateGenerator(cache='espaloma-molecules.json')
+    >>> template_generator = EspalomaTemplateGenerator(cache='espaloma-molecules.json', forcefield='espaloma-0.3.2')
 
     Newly parameterized molecules will be written to the cache, saving time next time!
     """
@@ -1663,7 +1652,7 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         >>> from openff.toolkit import Molecule
         >>> molecule = Molecule.from_smiles('c1ccccc1')
         >>> from openmmforcefields.generators import EspalomaTemplateGenerator
-        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecule)
+        >>> espaloma_generator = EspalomaTemplateGenerator(molecules=molecule, forcefield='espaloma-0.3.2')
         >>> from openmm.app import ForceField
         >>> amber_forcefields = ['amber/protein.ff14SB.xml', 'amber/tip3p_standard.xml', 'amber/tip3p_HFE_multivalent.xml']
         >>> forcefield = ForceField(*amber_forcefields)
@@ -1710,11 +1699,8 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
         else:
             self.ESPALOMA_MODEL_CACHE_PATH = model_cache_path
 
-        if forcefield is None:
-            # Use latest supported Espaloma force field release if none is specified
-            forcefield = "espaloma-0.3.2"
-            # TODO: After toolkit provides date-ranked force fields,
-            # use latest dated version if we can sort by date, such as self.INSTALLED_FORCEFIELDS[-1]
+        if not isinstance(forcefield, str):
+            raise TypeError("An Espaloma force field name must be provided as a string")
         self._forcefield = forcefield
 
         # Check that espaloma model parameters can be found or locally cached
