@@ -20,48 +20,21 @@ _logger = logging.getLogger("openmmforcefields.generators.system_generators")
 class SystemGenerator:
     """
     Common interface for generating OpenMM Systems from OpenMM Topology objects
-    that may contain both biopolymers (with parameters provided by OpenMM) and small molecules
-    (with parameters provided by residue template generators).
+    that may contain both molecules with parameters provided by OpenMM XML force
+    fields and molecules with parameters provided by template generators.
 
     Currently, this class supports
 
     * GAFF, via ``GAFFTemplateGenerator``: see ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS``
     * SMIRNOFF, via ``SMIRNOFFTemplateGenerator``: see ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS``
+    * Espaloma, via ``EspalomaTemplateGenerator``: see ``EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS``
 
     .. todo ::
 
        Once Open Force Field Topology objects support residue definitions, we will also be able
        to support Open Force Field Topology objects (which carry their own Molecule definitions).
 
-    Parameters
-    ----------
-    forcefield : openmm.app.ForceField
-        The ForceField object used to create new System objects.
-        New ffxml files can be read in at any time.
-    forcefield_kwargs : dict
-        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation.
-        These keyword arguments can be modified at any time.
-    periodic_forcefield_kwargs : dict
-        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation for
-        periodic systems.
-        These keyword arguments can be modified at any time.
-    nonperiodic_forcefield_kwargs : dict
-        Keyword arguments fed to ``openmm.app.ForceField.createSystem()`` during System generation for non-periodic
-        systems.
-        These keyword arguments can be modified at any time.
-    barostat : openmm.MonteCarloBarostat
-        If not None, this container holds the barostat parameters to use for newly created System objects.
-    molecules : openff.toolkit.topology.Molecule or list, optional, default=None
-        Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used to
-        construct a Molecule.
-        Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
-        If specified, these molecules will be recognized and parameterized as needed.
-        The parameters will be cached in case they are encountered again the future.
-    cache : filename, optional, default=None
-        If not None, filename for caching small molecule residue templates.
-    postprocess_system : method
-        If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the System
-        object for create_system(topology) before it is returned.
+    .. warning :: This API is experimental and subject to change.
     """
 
     def __init__(
@@ -78,10 +51,7 @@ class SystemGenerator:
         postprocess_system=None,
     ):
         """
-        This is a utility class to generate OpenMM Systems from Open Force Field Topology objects using AMBER
-        protein force fields and GAFF small molecule force fields.
-
-        .. warning :: This API is experimental and subject to change.
+        Initializes a `SystemGenerator`.
 
         Parameters
         ----------
@@ -112,14 +82,12 @@ class SystemGenerator:
             will be created and
             added to each newly created ``System``.
         molecules : openff.toolkit.topology.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
         cache : filename, optional, default=None
             If not None, filename for caching small molecule residue templates.
-        postprocess_system : method, optiona, default=None
+        postprocess_system : method, optional, default=None
             If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the
             System object for create_system(topology) before it is returned.
 
@@ -269,7 +237,7 @@ class SystemGenerator:
 
     @classproperty
     def SMALL_MOLECULE_FORCEFIELDS(cls):
-        """Return a listof available small molecule force fields"""
+        """Return a list of available small molecule force fields"""
         forcefields = list()
         from openmmforcefields.generators.template_generators import (
             SmallMoleculeTemplateGenerator,
@@ -286,9 +254,7 @@ class SystemGenerator:
         Parameters
         ----------
         molecules : openff.toolkit.topology.Molecule or list, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can
-            be used to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
         """
@@ -352,9 +318,7 @@ class SystemGenerator:
         topology : openmm.app.Topology object
             The topology describing the system to be created
         molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None
-            Can alternatively be an object (such as an OpenEye OEMol or RDKit Mol or SMILES string) that can be used
-            to construct a Molecule.
-            Can also be a list of Molecule objects or objects that can be used to construct a Molecule.
+            Can be a Molecule or a list of Molecule objects.
             If specified, these molecules will be recognized and parameterized as needed.
             The parameters will be cached in case they are encountered again the future.
 
