@@ -433,6 +433,14 @@ See the corresponding directories for information on how to use the provided con
 
 # [Changelog](https://github.com/openmm/openmmforcefields/releases)
 
+## 0.16.0 Template generator improvements
+
+This release adds support to `SMIRNOFFTemplateGenerator` for virtual sites and constraints in SMIRNOFF force fields, as well as for loading multiple SMIRNOFF force field files into one template generator.  It also adds support for parameterizing molecules spanning more than one residue in an OpenMM `Topology`.  In addition, this release improves the performance of residue template matching and caching.
+
+Note that this release changes the behavior of template generators when no `forcefield` argument is provided.  Previously, the latest supported force field for a given template generator, which could change from release to release, would be selected automatically.  Starting with this release of openmmforcefields, specifying the `forcefield` argument explicitly is mandatory for all template generators.
+
+With this release, openmmforcefields now requires an OpenMM version no earlier than 8.5.1.
+
 ## 0.15.1 More Force Field Updates!
 
 We added Lipid21 in [PR #390](https://github.com/openmm/openmmforcefields/pull/390) and updated the default SMIRNOFF force field to be `openff-2.2.1` in [PR #417](https://github.com/openmm/openmmforcefields/pull/417) 
