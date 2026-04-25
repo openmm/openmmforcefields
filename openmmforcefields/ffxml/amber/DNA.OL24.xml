@@ -1,7 +1,7 @@
 <ForceField>
   <Info>
-    <DateGenerated>2026-04-12</DateGenerated>
-    <Source Source="./files/DNA.OL24/leaprc.DNA.OL24" md5hash="aa7c32a2d5f56310eabd68aa609d5aa6" sourcePackage="AmberTools" sourcePackageVersion="24.8">./files/DNA.OL24/leaprc.DNA.OL24</Source>
+    <DateGenerated>2026-04-25</DateGenerated>
+    <Source Source="./files/DNA.OL24/leaprc.DNA.OL24" md5hash="37bf62c7d861cbfe0f4a42ab7fbdd255" sourcePackage="AmberTools" sourcePackageVersion="24.8">./files/DNA.OL24/leaprc.DNA.OL24</Source>
     <Reference>Zgarbova, M.; Sponer, J.; Jurecka, P, Refinement of the Sugar Puckering Torsion Potential in the AMBER DNA Force Field. J. Chem. Theory Comput. 2025, https://doi.org/10.1021/acs.jctc.4c01100. </Reference>
   </Info>
   <AtomTypes>
@@ -1556,16 +1556,16 @@
     <Improper class1="DNA-CM" class2="DNA-CM" class3="DNA-CT" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="DNA-C" class2="DNA-CM" class3="DNA-H4" class4="DNA-O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="DNA-C" class2="DNA-CA" class3="DNA-CA" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper class1="DNA-CB" class2="DNA-N*" class3="DNA-CB" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CB" class2="DNA-NB" class3="DNA-C" class4="DNA-CB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CB" class2="DNA-NB" class3="DNA-CA" class4="DNA-CB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CJ" class2="DNA-OH" class3="DNA-H1" class4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CJ" class2="DNA-OH" class3="DNA-H1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CJ" class2="DNA-H1" class3="DNA-H1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CJ" class2="DNA-OS" class3="DNA-H1" class4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="DNA-CJ" class2="DNA-OS" class3="DNA-H1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CB" class2="DNA-CB" class3="DNA-N*" class4="DNA-NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CB" class2="DNA-C" class3="DNA-CB" class4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CB" class2="DNA-CA" class3="DNA-CB" class4="DNA-NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-H1" class3="DNA-H1" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-H1" class3="DNA-H1" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="DNA-CJ" class2="DNA-CT" class3="DNA-H1" class4="DNA-OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper class1="DNA-C2" class2="" class3="" class4="DNA-H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper class1="DNA-N*" class2="DNA-CB" class3="DNA-C2" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="DNA-N*" class2="DNA-C2" class3="DNA-CB" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper class1="DNA-C1" class2="" class3="" class4="DNA-H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="DNA-C1" class2="" class3="" class4="DNA-HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="DNA-N*" class2="DNA-C" class3="DNA-C1" class4="DNA-CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
