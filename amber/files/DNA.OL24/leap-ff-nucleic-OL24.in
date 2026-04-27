@@ -1,0 +1,13 @@
+# source oldff/leaprc.ff14SB  # originally in here, but commented out because we do not wish to bundle it with ff14SB.
+
+addAtomTypes {
+	{ "C7"  "C" "sp3" }
+	{ "CJ"  "C" "sp3" }
+        { "C1"  "C" "sp2" }
+        { "C2"  "C" "sp2" }
+}
+
+loadoff files/DNA.OL24/ff-nucleic-OL24.lib 
+parm10 = loadamberparams parm10.dat
+loadamberparams files/DNA.OL24//ff-nucleic-OL24.frcmod
+
