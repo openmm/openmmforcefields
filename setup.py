@@ -25,7 +25,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
-    url="http://github.com/choderalab/openmm-forcefields",
+    url="https://github.com/openmm/openmmforcefields",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     license="MIT",
