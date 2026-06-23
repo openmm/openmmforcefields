@@ -1,5 +1,5 @@
 """
-openmmforcefields
+OpenMMForceFields
 Additional force fields for OpenMM.
 """
 
@@ -18,7 +18,7 @@ with open("README.md") as handle:
 
 setup(
     # Self-descriptive entries which should always be present
-    name="openmmforcefields",
+    name="OpenMMForceFields",
     author="Chodera lab // MSKCC",
     author_email="john.chodera@choderalab.org",
     description=short_description[0],

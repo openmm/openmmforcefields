@@ -1,4 +1,4 @@
-# For openmmforcefields conversion validation and testing only!
+# For OpenMMForceFields conversion validation and testing only!
 # Loads atom types only, not force field file!
 logFile leap.log
 #
