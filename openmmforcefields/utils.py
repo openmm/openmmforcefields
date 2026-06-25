@@ -37,7 +37,7 @@ def get_data_filename(relative_path):
     Parameters
     ----------
     relative_path : str
-        name of the file to load (with respect to the openmmforcefields data folder).
+        name of the file to load (with respect to the OpenMMForceFields data folder).
 
     Returns
     -------

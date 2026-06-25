@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "openmmforcefields"
+project = "OpenMMForceFields"
 copyright = (
     "2019, Chodera lab @ MSKCC. Project structure based on the "
     "Computational Molecular Science Python Cookiecutter version 1.1"
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "openmmforcefields.tex", "openmmforcefields Documentation", "openmmforcefields", "manual"),
+    (master_doc, "openmmforcefields.tex", "OpenMMForceFields Documentation", "OpenMMForceFields", "manual"),
 ]
 
 
@@ -149,7 +149,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "openmmforcefields", "openmmforcefields Documentation", [author], 1)]
+man_pages = [(master_doc, "openmmforcefields", "OpenMMForceFields Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -161,9 +161,9 @@ texinfo_documents = [
     (
         master_doc,
         "openmmforcefields",
-        "openmmforcefields Documentation",
+        "OpenMMForceFields Documentation",
         author,
-        "openmmforcefields",
+        "OpenMMForceFields",
         "Additional force fields for OpenMM",
         "Miscellaneous",
     ),

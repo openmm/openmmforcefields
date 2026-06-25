@@ -3,7 +3,7 @@
 [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmmforcefields.svg)](https://anaconda.org/conda-forge/openmmforcefields)
 [![DOI](https://zenodo.org/badge/70107487.svg)](https://zenodo.org/badge/latestdoi/70107487)
 
-# AMBER, CHARMM, OpenFF, and Espaloma force fields for OpenMM
+# OpenMMForceFields: AMBER, CHARMM, OpenFF, and Espaloma force fields for OpenMM
 
 This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force fields and small molecule parameterization with GAFF, Espaloma, and Open Force Field Toolkit for OpenMM.
 
@@ -21,14 +21,14 @@ This repository provides support for AMBER, CHARMM, OpenFF, and Espaloma force f
 
 ## Installation
 
-The `openmmforcefields` package provides additional AMBER and CHARMM biopolymer force fields, small molecule support through GAFF and the [Open Force Field toolkit](http://openforcefield.org), and force field conversion tools.
+The OpenMMForceFields package provides additional AMBER and CHARMM biopolymer force fields, small molecule support through GAFF and the [Open Force Field toolkit](http://openforcefield.org), and force field conversion tools.
 
 The easiest way to install this package and its requisite dependencies is via [`conda`](https://conda.io):
 ```bash
 conda install --yes -c conda-forge openmmforcefields
 ```
 
-If you optionally have the [OpenEye Toolkits](https://www.eyesopen.com/toolkit-development) installed, `openmmforcefields` will use these to accelerate small molecule parameterization.
+If you optionally have the [OpenEye Toolkits](https://www.eyesopen.com/toolkit-development) installed, OpenMMForceFields will use these to accelerate small molecule parameterization.
 Free academic licenses are available for [bona fide academic research](https://www.eyesopen.com/academic-licensing), while licenses for IP generation are available [for a fee](https://www.eyesopen.com/pricing).
 
 ## Using the AMBER and CHARMM biopolymer force fields
@@ -70,7 +70,7 @@ forcefield = ForceField("charmm/charmm36.xml")
 
 ## Using AMBER GAFF 1.x and 2.x for small molecules
 
-The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using [GAFF](http://ambermd.org/antechamber/gaff.html) versions 1 or 2.
+The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using [GAFF](http://ambermd.org/antechamber/gaff.html) versions 1 or 2.
 
 ### Cheminformatics toolkits
 
@@ -165,7 +165,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Using the Open Force Field Initiative SMIRNOFF small molecule force fields
 
-The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://openforcefield.github.io/standards/standards/smirnoff/) small molecule force fields.
+The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://openforcefield.github.io/standards/standards/smirnoff/) small molecule force fields.
 This includes the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) and [`openff-2.x.y` ("Sage")](https://pubs.acs.org/doi/10.1021/acs.jctc.3c00039) small molecule force field lines, including the [most recent force field in each lines](https://github.com/openforcefield/openff-forcefields).
 
 The `SMIRNOFFTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
@@ -278,7 +278,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Using espaloma to generate small molecule force fields
 
-The `openmmforcefields` package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
+The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
 `espaloma` uses a [graph convolutional model](https://arxiv.org/abs/2010.01196) to generate both valence parameters and fast partial charges.
 
 
@@ -344,7 +344,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Automating force field management with `SystemGenerator`
 
-The `openmmforcefields` package provides the `openmmforcefields.generators.SystemGenerator` class that handles management of common force fields transparently for you.
+The OpenMMForceFields package provides the `openmmforcefields.generators.SystemGenerator` class that handles management of common force fields transparently for you.
 
 ### Using `SystemGenerator` to automate the use of AMBER force fields with GAFF, OpenFF, or espaloma for small molecule parameterization
 
@@ -404,11 +404,11 @@ To use [espaloma](https://github.com/choderalab/espaloma) for assigning small mo
 
 **Q:** What is the minimum version of OpenMM required to use this package?
 <br>
-**A:** You need at least OpenMM 8.5.1 to use the `openmmforcefields` package.
+**A:** You need at least OpenMM 8.5.1 to use the OpenMMForceFields package.
 
 **Q:** Do you support the new [Amber ff19SB protein force field](https://doi.org/10.1021/acs.jctc.9b00591)?
 <br>
-**A:** ff19SB and phosaa19SB have now been added to openmmforcefields.
+**A:** ff19SB and phosaa19SB have now been added to OpenMMForceFields.
 
 **Q:** Do you plan to support other small molecule force fields?
 <br>
@@ -427,9 +427,9 @@ See the corresponding directories for information on how to use the provided con
 
 This release adds support to `SMIRNOFFTemplateGenerator` for virtual sites and constraints in SMIRNOFF force fields, as well as for loading multiple SMIRNOFF force field files into one template generator.  It also adds support for parameterizing molecules spanning more than one residue in an OpenMM `Topology`.  In addition, this release improves the performance of residue template matching and caching.
 
-Note that this release changes the behavior of template generators when no `forcefield` argument is provided.  Previously, the latest supported force field for a given template generator, which could change from release to release, would be selected automatically.  Starting with this release of openmmforcefields, specifying the `forcefield` argument explicitly is mandatory for all template generators.
+Note that this release changes the behavior of template generators when no `forcefield` argument is provided.  Previously, the latest supported force field for a given template generator, which could change from release to release, would be selected automatically.  Starting with this release of OpenMMForceFields, specifying the `forcefield` argument explicitly is mandatory for all template generators.
 
-With this release, openmmforcefields now requires an OpenMM version no earlier than 8.5.1.
+With this release, OpenMMForceFields now requires an OpenMM version no earlier than 8.5.1.
 
 ## 0.15.1 More Force Field Updates!
 

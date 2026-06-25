@@ -1,5 +1,5 @@
 """
-openmmforcefields
+OpenMMForceFields
 Additional force fields for OpenMM.
 """
 
@@ -18,14 +18,14 @@ with open("README.md") as handle:
 
 setup(
     # Self-descriptive entries which should always be present
-    name="openmmforcefields",
+    name="OpenMMForceFields",
     author="Chodera lab // MSKCC",
     author_email="john.chodera@choderalab.org",
     description=short_description[0],
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="molecular mechanics, forcefield, OpenMM, AMBER, CHARMM, GAFF",
-    url="http://github.com/choderalab/openmm-forcefields",
+    url="https://github.com/openmm/openmmforcefields",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     license="MIT",
