@@ -1,8 +1,9 @@
 name: openmmforcefields-test
 channels:
+  - mmh/label/amber25
   - conda-forge
 dependencies:
-  - ambertools >=24
+  - ambertools >=25
   - lxml
   - numpy <2.3
   - openff-toolkit >=0.11
