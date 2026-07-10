@@ -46,7 +46,7 @@ jobs:
           espaloma==0.4.0
 
     - name: Setup Conda Environment
-      if: matrix.python-version == '3.13'
+      if: matrix.python-version == '3.12'
       uses: mamba-org/setup-micromamba@v3
       with:
         environment-file: devtools/conda-envs/test_env.yaml
@@ -68,7 +68,7 @@ jobs:
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package (With Espaloma)
-      if: matrix.python-version != '3.13'
+      if: matrix.python-version != '3.12'
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
@@ -83,7 +83,7 @@ jobs:
           openmmforcefields/tests/
 
     - name: Test Installed Package
-      if: matrix.python-version == '3.13'
+      if: matrix.python-version == '3.12'
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
