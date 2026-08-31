@@ -2,7 +2,7 @@
 
 This directory contains files and scripts needed to convert the CHARMM forcefield to OpenMM `ffxml` files.
 
-Updated to July 2024 release from <http://mackerell.umaryland.edu/charmm_ff.shtml#charmm>.
+Updated to February 2026 release from <http://mackerell.umaryland.edu/charmm_ff.shtml#charmm>.
 
 ## Manifest
 
@@ -63,7 +63,7 @@ after the primary force field files:
 
 Retrieve and unpack the CHARMM files
 ```
-wget -O toppar.tgz http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/toppar_c36_jul24.tgz
+wget -O toppar.tgz http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/toppar_c36_feb26.tgz
 tar -xzf toppar.tgz
 (cd toppar/drude; tar -xzf drude_toppar_2023.tgz)
 ```

@@ -1,5 +1,5 @@
 - sourcePackage: charmm36
-  sourcePackageVersion: toppar_c36_jul24.tgz
+  sourcePackageVersion: toppar_c36_feb26.tgz
 
 - Destination: waters_ions_default.xml
   Source:
@@ -11,6 +11,8 @@
      - TM3P
      # Include regular TIP3P, not "MMFF" analog
      - TP3M
+     # Uses HC atom type from protein force field
+     - H3O
   References:
    tip3p:
      - >-

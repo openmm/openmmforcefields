@@ -4,7 +4,7 @@
 # clearer information on reasons why particular files are included vs. excluded.
 
 - sourcePackage: charmm36
-  sourcePackageVersion: toppar_c36_jul24.tgz
+  sourcePackageVersion: toppar_c36_feb26.tgz
 - Destination: charmm36_nowaters.xml
   Source:
     include:
