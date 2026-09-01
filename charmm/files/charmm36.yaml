@@ -69,7 +69,13 @@
       # The following file is intended only for use during hydrogen bonding
       # analysis and it is incorrect to use it for normal simulation
       - toppar/stream/misc/toppar_hbond.str
-    
+
+      # This file contains a parameter entry for the torsion HB1-CT1-CT3-HA3
+      # that is marked as applicable for N-methylalanine, but this overrides the
+      # torsion X-CT1-CT3-X from the standard protein force field (this might
+      # be a bug in the parameter files)
+      - toppar/stream/prot/toppar_all36_prot_modify_res.str
+
     exclude_residues:
       # Exclude DMPR (dimethylpropanamide) defined by CGenFF because the
       # reactive RNA stream file contains a patch entry for DMPR
@@ -89,12 +95,9 @@
 
     split:
       # D-amino acids are topologically equivalent to L-amino acids and make it
-      # difficult to create protein systems in OpenMM; many of these as well as
-      # topologically equivalent terminal patches are present in the modified
-      # residue stream file
+      # difficult to create protein systems in OpenMM.
       - input:
         - toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str
-        - toppar/stream/prot/toppar_all36_prot_modify_res.str
         output: charmm36_d_modified.xml
         fixes:
           # See nucleic acid fix comments below.

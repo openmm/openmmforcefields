@@ -1,8 +1,8 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
-    <Source Source="toppar/non_charmm/toppar_water_ions_spc.str" md5hash="56e9bad61beb634f3f68a0df8e03a917" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/non_charmm/toppar_water_ions_spc.str</Source>
-    <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
+    <DateGenerated>2026-08-31</DateGenerated>
+    <Source Source="toppar/non_charmm/toppar_water_ions_spc.str" md5hash="56e9bad61beb634f3f68a0df8e03a917" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/non_charmm/toppar_water_ions_spc.str</Source>
+    <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="H.J.C. Berendsen, J.P.M. Postma, W.F. van Gunsteren, and J. Hermans. INTERACTION MODELS FOR WATER IN RELATION TO PROTEIN HYDRATION In Intermolecular Forces, edited by B. Pullman (Reidel, Dordrecht, 1981), p. 331" forcefield="spc">H.J.C. Berendsen, J.P.M. Postma, W.F. van Gunsteren, and J. Hermans. INTERACTION MODELS FOR WATER IN RELATION TO PROTEIN HYDRATION In Intermolecular Forces, edited by B. Pullman (Reidel, Dordrecht, 1981), p. 331</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
     <Reference Reference="Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)" forcefield="ions">Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)</Reference>

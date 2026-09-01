@@ -1,6 +1,9 @@
 * Toplogy and parameter information for water and ions.
 *
 
+! NOTE: This file has been modified for use in the OpenMMForceFields test suite.
+! See comments below.
+
 !Testcase
 !test_water_ions.inp
 
@@ -48,6 +51,7 @@ MASS  -1  HT         1.00800 H ! TIPS3P WATER HYDROGEN
 MASS  -1  HX         1.00800 H ! hydroxide hydrogen
 MASS  -1  OT        15.99940 O ! TIPS3P WATER OXYGEN
 MASS  -1  OX        15.99940 O ! hydroxide oxygen
+MASS  -1  OH3       15.99940 O ! ionized oxygen, H3O (hydronium)
 MASS  -1  HPER       1.00800 H ! H of H2O2
 MASS  -1  OPER      15.99940 O ! O of H2O2
 MASS  -1  LIT        6.94100 LI ! Lithium ion
@@ -96,6 +100,33 @@ ATOM H1 HX     0.32
 BOND O1 H1
 DONOR H1 O1
 ACCEPTOR O1
+
+! NOTE: This residue causes problems for the OpenMMForceFields test suite
+! since it uses an atom type from the protein force field.  It is excluded from
+! the current conversion for technical reasons related to this, so it is not in
+! the test suite and is not needed here.
+
+! RESI H3O          1.000 ! hydronium ion, jlee 11/19/25
+! !
+! !   H2
+! !     \ +
+! !      O1--H1
+! !     /
+! !   H3
+! !
+! GROUP
+! ATOM O1    OH3     -0.755
+! ATOM H1     HC      0.585
+! ATOM H2     HC      0.585
+! ATOM H3     HC      0.585
+! 
+! BOND H1 O1 O1 H2 O1 H3
+! DONOR H1  O1
+! DONOR H2  O1
+! DONOR H3  O1
+! IC H1  H2  O1  H3   0.9517  110.4  180.0  110.4  0.9517
+! PATCH FIRST NONE LAST NONE
+
 
 RESI H2O2         0.000 ! hydrogen peroxide
                         ! Orabi and English, JCTC. 2018, 14, 2808-2821
@@ -178,6 +209,7 @@ GROUP
 ATOM CLA  CLA -1.00
 PATCHING FIRST NONE LAST NONE
 
+
 END
 
 read para card flex @app
@@ -189,6 +221,7 @@ MASS  -1  HT         1.00800 ! TIPS3P WATER HYDROGEN
 MASS  -1  HX         1.00800 ! hydroxide hydrogen
 MASS  -1  OT        15.99940 ! TIPS3P WATER OXYGEN
 MASS  -1  OX        15.99940 ! hydroxide oxygen
+MASS  -1  OH3       15.99940 ! ionized oxygen, H3O (hydronium)
 MASS  -1  HPER       1.00800 ! H of H2O2
 MASS  -1  OPER      15.99900 ! O of H2O2
 MASS  -1  LIT        6.94100 ! Lithium ion
@@ -217,6 +250,7 @@ HT    OT    450.0       0.9572  ! from TIPS3P geometry
 OX    HX    545.0       0.9700  ! hydroxide ion
 HPER  OPER  521.0       0.963   ! H2O2
 OPER  OPER  285.5       1.442   ! H2O2
+HC    OH3   530.0       0.9517  ! H3O, jlee 11/19/25 
 
 ANGLES
 !
@@ -233,6 +267,7 @@ ANGLES
 !
 HT   OT   HT     55.0      104.52   ! FROM TIPS3P GEOMETRY
 HPER OPER OPER   60.4       99.92   ! H2O2
+HC   OH3  HC     40.0      110.40   ! H3O, jlee 11/19/25 
 
 DIHEDRALS
 !
@@ -266,10 +301,13 @@ HT       0.0       -0.046     0.2245
 OT       0.0       -0.1521    1.7682
 
 !for hydroxide
-OX     0.000000  -0.120000     1.700000 ! ALLOW   POL ION
+!OX     0.000000  -0.120000     1.700000 ! ALLOW   POL ION
                 ! JG 8/27/89
+OX     0.000000  -0.960000     1.800000 ! OH, jlee updated, 11/19/25
 HX     0.000000  -0.046000     0.224500 ! ALLOW PEP POL SUL ARO ALC
                 ! same as TIP3P hydrogen, adm jr., 7/20/89
+! for hydronium
+OH3      0.0       -0.100     1.8000    ! H3O, jlee 11/19/25 
 
 !for hydrogen peroxide
 HPER     0.0       -0.046     0.2245

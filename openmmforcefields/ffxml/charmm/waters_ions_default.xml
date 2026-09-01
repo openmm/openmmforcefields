@@ -1,8 +1,8 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-02-27</DateGenerated>
-    <Source Source="toppar/toppar_water_ions.str" md5hash="1eba52cd9a244fa3df9a274a806d9128" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/toppar_water_ions.str</Source>
-    <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_jul24.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
+    <DateGenerated>2026-08-31</DateGenerated>
+    <Source Source="toppar/toppar_water_ions.str" md5hash="832acb10b17636eff5352f27eee8752b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/toppar_water_ions.str</Source>
+    <Source Source="toppar/stream/misc/toppar_ions_won.str" md5hash="f523f7727e7dfa25468cc75f9b880c5b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/misc/toppar_ions_won.str</Source>
     <Reference Reference="W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; &quot;Comparison of simple potential functions for simulating liquid water&quot;, J. Chem. Phys. 79 926-935 (1983)." forcefield="tip3p">W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey; M.L. Klein; "Comparison of simple potential functions for simulating liquid water", J. Chem. Phys. 79 926-935 (1983).</Reference>
     <Reference Reference="Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063" forcefield="ions">Beglov, D. and Roux, B., Finite Representation of an Infinite Bulk System: Solvent Boundary Potential for Computer Simulations, Journal of Chemical Physics, 1994, 100: 9050-9063</Reference>
     <Reference Reference="Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)" forcefield="ions">Stote, R.H. and Karplus, M. Zinc Binding in Proteins and Solution: A Simple but Accurate Nonbonded Representation, PROTEINS: Structure, Function, and Genetics 23:12-31 (1995)</Reference>
@@ -308,10 +308,12 @@
     <Bond class1="OX" class2="HX" k="456055.99999999994" length="0.097" />
     <Bond class1="HPER" class2="OPER" k="435972.79999999993" length="0.0963" />
     <Bond class1="OPER" class2="OPER" k="238906.39999999997" length="0.1442" />
+    <Bond class1="HC" class2="OH3" k="443503.99999999994" length="0.09517" />
   </HarmonicBondForce>
   <HarmonicAngleForce>
     <Angle angle="1.8242181341844732" class1="HT" class2="OT" class3="HT" k="460.24" />
     <Angle angle="1.7439329885927342" class1="HPER" class2="OPER" class3="OPER" k="505.4272" />
+    <Angle angle="1.9268434942017398" class1="HC" class2="OH3" class3="HC" k="334.72" />
   </HarmonicAngleForce>
   <AmoebaUreyBradleyForce />
   <PeriodicTorsionForce>
@@ -323,6 +325,7 @@
     <Atom class="HX" epsilon="0.0" sigma="1.0" />
     <Atom class="OT" epsilon="0.0" sigma="1.0" />
     <Atom class="OX" epsilon="0.0" sigma="1.0" />
+    <Atom class="OH3" epsilon="0.0" sigma="1.0" />
     <Atom class="HPER" epsilon="0.0" sigma="1.0" />
     <Atom class="OPER" epsilon="0.0" sigma="1.0" />
     <Atom class="LIT" epsilon="0.0" sigma="1.0" />
@@ -396,7 +399,8 @@
     <Atom class="HT" epsilon="0.192464" sigma="0.04000135244450124" />
     <Atom class="HX" epsilon="0.192464" sigma="0.04000135244450124" />
     <Atom class="OT" epsilon="0.6363864000000001" sigma="0.3150574226831496" />
-    <Atom class="OX" epsilon="0.50208" sigma="0.30290556416771536" />
+    <Atom class="OX" epsilon="4.01664" sigma="0.32072353853052216" />
+    <Atom class="OH3" epsilon="0.41840000000000005" sigma="0.32072353853052216" />
     <Atom class="HPER" epsilon="0.192464" sigma="0.04000135244450124" />
     <Atom class="OPER" epsilon="0.85286656" sigma="0.29831387217442007" />
     <Atom class="LIT" epsilon="0.00974872" sigma="0.23118821735741807" />
