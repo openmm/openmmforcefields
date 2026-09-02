@@ -35,6 +35,9 @@ other problems:
 * Thulium(III) ion from `toppar/stream/misc/toppar_ions_won.str` (TM3P) is
   excluded because it collides with the identically-named 4'-methyl,3'-phosphate
   tetrahydrofuran residue.
+* Hydronium ion (H3O) is excluded because it uses an atom type from the protein
+  force field, which the current conversion infrastructure cannot handle for
+  technical reasons.
 
 If you need parameters from these files that were excluded, you may download the
 CHARMM TOPPAR files, manually edit the offending entries, and regenerate the

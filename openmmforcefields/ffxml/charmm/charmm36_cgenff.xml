@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2026-08-31</DateGenerated>
+    <DateGenerated>2026-09-02</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/top_all36_na.rtf" md5hash="ffd9d681ff73591157e2458e336ab4a3" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/top_all36_na.rtf</Source>
@@ -18,6 +18,7 @@
     <Source Source="toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str" md5hash="d6eae27ee5a51f5b4b19ae5126200210" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_heme.str" md5hash="7433bc89e1594604ef622c9c75d42b9b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_heme.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_retinol.str" md5hash="75d80c5939810d5b714f214cd390e590" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_retinol.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_modify_res.str" md5hash="840b70c6202349a5847694fc45328134" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_modify_res.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_na_combined.str" md5hash="bd1c68121ac12952b78138e03df6c8cc" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_na_combined.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_pyridines.str" md5hash="1693884ee2f8b1a3015f0bc596cbf3f4" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_pyridines.str</Source>
     <Source Source="toppar/stream/na/toppar_all36_na_rna_modified.str" md5hash="4f6ee2582d547cb62dd3189c8c54e2ff" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/na/toppar_all36_na_rna_modified.str</Source>
@@ -236,7 +237,7 @@
       <Bond atomName1="C1" atomName2="H13" />
       <AllowPatch name="LSN_0" />
       <AllowPatch name="HYD1_4" />
-      <AllowPatch name="MET1_10" />
+      <AllowPatch name="MET1_12" />
     </Residue>
     <Residue name="ACEH">
       <Atom charge="-0.3" name="C2" type="ACEH-C2" />
@@ -676,10 +677,10 @@
       <Bond atomName1="ND1" atomName2="HD1" />
       <Bond atomName1="CD2" atomName2="HD2" />
       <Bond atomName1="CE1" atomName2="HE1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="MIMI">
       <Atom charge="-0.36" name="ND1" type="MIMI-ND1" />
@@ -707,10 +708,10 @@
       <Bond atomName1="CB" atomName2="HB2" />
       <Bond atomName1="CB" atomName2="HB3" />
       <AllowPatch name="HS2_0" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="EIMI">
       <Atom charge="-0.27" name="CA" type="EIMI-CA" />
@@ -744,10 +745,10 @@
       <Bond atomName1="CA" atomName2="HA2" />
       <Bond atomName1="CA" atomName2="HA3" />
       <AllowPatch name="HS2_0" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="IMIM">
       <Atom charge="0.19" name="CG" type="IMIM-CG" />
@@ -770,10 +771,10 @@
       <Bond atomName1="CD2" atomName2="HD2" />
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="NE2" atomName2="HE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="EIMM">
       <Atom charge="-0.27" name="CA" type="EIMM-CA" />
@@ -809,10 +810,10 @@
       <Bond atomName1="CA" atomName2="HA2" />
       <Bond atomName1="CA" atomName2="HA3" />
       <AllowPatch name="HS2_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="BENZ">
       <Atom charge="-0.115" name="CG" type="BENZ-CG" />
@@ -840,17 +841,17 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CZ" atomName2="HZ" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="EBEN">
       <Atom charge="0.0" name="CG" type="EBEN-CG" />
@@ -890,17 +891,17 @@
       <Bond atomName1="CA" atomName2="HA2" />
       <Bond atomName1="CA" atomName2="HA3" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="PHEN">
       <Atom charge="-0.115" name="CG" type="PHEN-CG" />
@@ -930,17 +931,17 @@
       <Bond atomName1="CE2" atomName2="CD2" />
       <Bond atomName1="CZ" atomName2="CE1" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
       <AllowPatch name="TP1_0" />
       <AllowPatch name="TP2_0" />
       <AllowPatch name="TMP1_0" />
@@ -988,17 +989,17 @@
       <Bond atomName1="CE2" atomName2="CD2" />
       <Bond atomName1="CZ" atomName2="CE1" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
       <AllowPatch name="TP1_0" />
       <AllowPatch name="TP2_0" />
       <AllowPatch name="TMP1_0" />
@@ -1032,17 +1033,17 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CZ" atomName2="OH" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="APNH">
       <Atom charge="-0.29" name="N" type="APNH-N" />
@@ -1095,8 +1096,8 @@
       <AllowPatch name="ACE_2" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
-      <AllowPatch name="CT2_4" />
+      <AllowPatch name="PCTE_5" />
+      <AllowPatch name="CT2_6" />
       <AllowPatch name="CT3_5" />
     </Residue>
     <Residue name="PDIP">
@@ -1199,12 +1200,12 @@
       <Bond atomName1="NT" atomName2="HT1" />
       <Bond atomName1="NT" atomName2="HT2" />
       <Bond atomName1="C" atomName2="O" />
-      <AllowPatch name="PROP_2" />
+      <AllowPatch name="PROP_4" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
-      <AllowPatch name="CT2_4" />
+      <AllowPatch name="PCTE_5" />
+      <AllowPatch name="CT2_6" />
       <AllowPatch name="CT3_5" />
     </Residue>
     <Residue name="ETHA">
@@ -1571,17 +1572,17 @@
       <AllowPatch name="CT2_0" />
       <AllowPatch name="CT3_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="FETH">
       <Atom charge="0.09" name="H13" type="FETH-H13" />
@@ -1720,17 +1721,17 @@
       <Bond atomName1="CG" atomName2="NG" />
       <Bond atomName1="NG" atomName2="HG11" />
       <Bond atomName1="NG" atomName2="HG12" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3APY">
       <Atom charge="-0.115" name="CG" type="3APY-CG" />
@@ -1759,12 +1760,12 @@
       <Bond atomName1="CD1" atomName2="ND1" />
       <Bond atomName1="ND1" atomName2="HD11" />
       <Bond atomName1="ND1" atomName2="HD12" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="34AP">
       <Atom charge="-0.68" name="NZ" type="34AP-NZ" />
@@ -1797,12 +1798,12 @@
       <Bond atomName1="CG" atomName2="NG" />
       <Bond atomName1="NG" atomName2="HG11" />
       <Bond atomName1="NG" atomName2="HG12" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3CPY">
       <Atom charge="-0.64" name="NZ" type="3CPY-NZ" />
@@ -1883,12 +1884,12 @@
       <Bond atomName1="CD2" atomName2="HD2" />
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CE2" atomName2="HE2" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3ALP">
       <Atom charge="-0.64" name="NZ" type="3ALP-NZ" />
@@ -1942,12 +1943,12 @@
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="OH" atomName2="HO1" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3MEP">
       <Atom charge="-0.64" name="NZ" type="3MEP-NZ" />
@@ -1978,12 +1979,12 @@
       <Bond atomName1="CD3" atomName2="H31" />
       <Bond atomName1="CD3" atomName2="H32" />
       <Bond atomName1="CD3" atomName2="H33" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3ETP">
       <Atom charge="-0.64" name="NZ" type="3ETP-NZ" />
@@ -2022,12 +2023,12 @@
       <Bond atomName1="H23" atomName2="C2" />
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3BPY">
       <Atom charge="-0.64" name="NZ" type="3BPY-NZ" />
@@ -2079,12 +2080,12 @@
       <AllowPatch name="HYD2_1" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3CYP">
       <Atom charge="-0.64" name="NZ" type="3CYP-NZ" />
@@ -2111,12 +2112,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CD1" atomName2="C3N" />
       <Bond atomName1="C3N" atomName2="N3C" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3ACP">
       <Atom charge="-0.64" name="NZ" type="3ACP-NZ" />
@@ -2219,12 +2220,12 @@
       <Bond atomName1="OH" atomName2="HO" />
       <Bond atomName1="CD3" atomName2="H11" />
       <Bond atomName1="CD3" atomName2="H12" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3PHP">
       <Atom charge="-0.64" name="NZ" type="3PHP-NZ" />
@@ -2270,12 +2271,12 @@
       <Bond atomName1="CA4" atomName2="HA4" />
       <Bond atomName1="CA5" atomName2="HA5" />
       <Bond atomName1="CA6" atomName2="HA6" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="3BNP">
       <Atom charge="-0.64" name="NZ" type="3BNP-NZ" />
@@ -2327,12 +2328,12 @@
       <Bond atomName1="CA4" atomName2="HA4" />
       <Bond atomName1="CA5" atomName2="HA5" />
       <Bond atomName1="CA6" atomName2="HA6" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="CLOL">
       <Atom charge="0.14" name="C3" type="CLOL-C3" />
@@ -2489,7 +2490,7 @@
       <AllowPatch name="OMEF_0" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="CLNS">
       <Atom charge="0.14" name="C1" type="CLNS-C1" />
@@ -2607,7 +2608,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_131" />
+      <AllowPatch name="G8AP_133" />
     </Residue>
     <Residue name="CLM1">
       <Atom charge="0.14" name="C1" type="CLM1-C1" />
@@ -3955,10 +3956,10 @@
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CD2" atomName2="HD2" />
       <Bond atomName1="CG" atomName2="HG" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="THNP">
       <Atom charge="-0.5" name="O4'" type="THNP-O4'" />
@@ -4028,10 +4029,10 @@
       <Bond atomName1="C5" atomName2="H51" />
       <Bond atomName1="C5" atomName2="H52" />
       <Bond atomName1="C5" atomName2="H53" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="CPEN">
       <Atom charge="-0.18" name="C1" type="CPEN-C1" />
@@ -5099,10 +5100,10 @@
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CD2" atomName2="HD2" />
       <Bond atomName1="CG" atomName2="HG" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="THMI">
       <Atom charge="-0.5" name="O4'" type="THMI-O4'" />
@@ -5152,10 +5153,10 @@
       <Bond atomName1="CG" atomName2="HG" />
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="THFC">
       <Atom charge="-0.4" name="O4'" type="THFC-O4'" />
@@ -5819,10 +5820,10 @@
       <Bond atomName1="CG" atomName2="HG" />
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="TN3T_0" />
     </Residue>
     <Residue name="ARAO">
@@ -5902,10 +5903,10 @@
       <Bond atomName1="CG" atomName2="HG" />
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="AR3P">
       <Atom charge="-0.4" name="O4'" type="AR3P-O4'" />
@@ -6373,10 +6374,10 @@
       <Bond atomName1="CG" atomName2="HG" />
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="TN3T_0" />
     </Residue>
     <Residue name="NUSA">
@@ -6779,10 +6780,10 @@
       <Bond atomName1="CG" atomName2="HG" />
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="TN3T_0" />
     </Residue>
     <Residue name="RNUA">
@@ -7073,10 +7074,10 @@
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE1" atomName2="NE2" />
       <AllowPatch name="CY35_0" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="NADE">
       <Atom charge="-0.4" name="O4'" type="NADE-O4'" />
@@ -8382,17 +8383,17 @@
       <Bond atomName1="P1" atomName2="O4" />
       <Bond atomName1="O2" atomName2="H2" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BMPH">
       <Atom charge="-0.115" name="CG" type="BMPH-CG" />
@@ -8434,17 +8435,17 @@
       <Bond atomName1="P1" atomName2="O4" />
       <Bond atomName1="O2" atomName2="H2" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BMPD">
       <Atom charge="-0.115" name="CG" type="BMPD-CG" />
@@ -8484,17 +8485,17 @@
       <Bond atomName1="P1" atomName2="O3" />
       <Bond atomName1="P1" atomName2="O4" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BDFP">
       <Atom charge="-0.115" name="CG" type="BDFP-CG" />
@@ -8536,17 +8537,17 @@
       <Bond atomName1="P1" atomName2="O4" />
       <Bond atomName1="O2" atomName2="H2" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BDFD">
       <Atom charge="-0.115" name="CG" type="BDFD-CG" />
@@ -8586,17 +8587,17 @@
       <Bond atomName1="P1" atomName2="O3" />
       <Bond atomName1="P1" atomName2="O4" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="EP_2">
       <Atom charge="1.1" name="P1" type="EP_2-P1" />
@@ -8766,7 +8767,7 @@
       <AllowPatch name="3PHO_2" />
       <AllowPatch name="3POM_0" />
       <AllowPatch name="3PO3_0" />
-      <AllowPatch name="MET2_4" />
+      <AllowPatch name="MET2_5" />
       <AllowPatch name="ADEP_0" />
       <AllowPatch name="ADEI_1" />
       <AllowPatch name="G8AP_9" />
@@ -8953,17 +8954,17 @@
       <Bond atomName1="CE4" atomName2="HE4" />
       <Bond atomName1="CZ1" atomName2="HZ1" />
       <Bond atomName1="CZ2" atomName2="HZ2" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BF6">
       <Atom charge="0.0" name="CG1" type="BF6-CG1" />
@@ -9035,19 +9036,19 @@
       <Bond atomName1="C4" atomName2="O4A" />
       <Bond atomName1="O4A" atomName2="H4A" />
       <Bond atomName1="C4" atomName2="O4B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BF7">
       <Atom charge="0.0" name="CG1" type="BF7-CG1" />
@@ -9111,19 +9112,19 @@
       <Bond atomName1="C3" atomName2="C4" />
       <Bond atomName1="C4" atomName2="O4A" />
       <Bond atomName1="C4" atomName2="O4B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BCA">
       <Atom charge="0.0" name="CG1" type="BCA-CG1" />
@@ -9179,19 +9180,19 @@
       <Bond atomName1="CZ2" atomName2="C2" />
       <Bond atomName1="C2" atomName2="O2A" />
       <Bond atomName1="C2" atomName2="O2B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="C36">
       <Atom charge="0.215" name="CG1" type="C36-CG1" />
@@ -9265,19 +9266,19 @@
       <Bond atomName1="C4" atomName2="O4A" />
       <Bond atomName1="O4A" atomName2="H4A" />
       <Bond atomName1="C4" atomName2="O4B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="C37">
       <Atom charge="0.215" name="CG1" type="C37-CG1" />
@@ -9343,19 +9344,19 @@
       <Bond atomName1="C3" atomName2="C4" />
       <Bond atomName1="C4" atomName2="O4A" />
       <Bond atomName1="C4" atomName2="O4B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="C3C">
       <Atom charge="0.215" name="CG1" type="C3C-CG1" />
@@ -9413,19 +9414,19 @@
       <Bond atomName1="CZ2" atomName2="C2" />
       <Bond atomName1="C2" atomName2="O2A" />
       <Bond atomName1="C2" atomName2="O2B" />
-      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET1_7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="HEX3">
       <Atom charge="-0.42" name="C1" type="HEX3-C1" />
@@ -11531,9 +11532,9 @@
       <Bond atomName1="CG" atomName2="CD2" />
       <Bond atomName1="CE3" atomName2="CZ3" />
       <Bond atomName1="CH2" atomName2="CZ2" />
-      <AllowPatch name="3MBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="INDA">
       <Atom charge="-0.05" name="N1" type="INDA-N1" />
@@ -12137,12 +12138,12 @@
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
       <AllowPatch name="OMEF_0" />
-      <AllowPatch name="GYCO_0" />
+      <AllowPatch name="GYCO_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="TAUR_2" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_129" />
+      <AllowPatch name="G8AP_131" />
     </Residue>
     <Residue name="DCA">
       <Atom charge="0.14" name="C3" type="DCA-C3" />
@@ -12283,12 +12284,12 @@
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
       <AllowPatch name="OMEF_0" />
-      <AllowPatch name="GYCO_0" />
+      <AllowPatch name="GYCO_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="TAUR_2" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_129" />
+      <AllowPatch name="G8AP_131" />
     </Residue>
     <Residue name="LCA">
       <Atom charge="0.14" name="C3" type="LCA-C3" />
@@ -12427,12 +12428,12 @@
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
       <AllowPatch name="OMEF_0" />
-      <AllowPatch name="GYCO_0" />
+      <AllowPatch name="GYCO_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="TAUR_2" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="CDCA">
       <Atom charge="0.14" name="C3" type="CDCA-C3" />
@@ -12573,12 +12574,12 @@
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
       <AllowPatch name="OMEF_0" />
-      <AllowPatch name="GYCO_0" />
+      <AllowPatch name="GYCO_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="TAUR_2" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="GA">
       <Atom charge="0.14" name="C3" type="GA-C3" />
@@ -12761,7 +12762,7 @@
       <AllowPatch name="AL_0" />
       <AllowPatch name="ALME_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_4" />
+      <AllowPatch name="MET2_5" />
       <AllowPatch name="2APP_0" />
       <AllowPatch name="3APP_0" />
       <AllowPatch name="4APP_0" />
@@ -12785,7 +12786,7 @@
       <AllowPatch name="3A46PD_0" />
       <AllowPatch name="2AEPD_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="BAB1">
       <Atom charge="0.14" name="C3" type="BAB1-C3" />
@@ -12970,7 +12971,7 @@
       <AllowPatch name="G3PR_0" />
       <AllowPatch name="G3PABR_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_4" />
+      <AllowPatch name="MET2_5" />
       <AllowPatch name="BPAB_0" />
       <AllowPatch name="BPAT_0" />
       <AllowPatch name="GBP_0" />
@@ -12981,7 +12982,7 @@
       <AllowPatch name="3MRB_0" />
       <AllowPatch name="2MSB_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="FBIB">
       <Atom charge="0.0" name="CG" type="FBIB-CG" />
@@ -13048,21 +13049,21 @@
       <AllowPatch name="OMEF_0" />
       <AllowPatch name="FBIA_0" />
       <AllowPatch name="FBICS_0" />
-      <AllowPatch name="MET1_3" />
-      <AllowPatch name="MET2_6" />
+      <AllowPatch name="MET1_4" />
+      <AllowPatch name="MET2_7" />
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="FBID_0" />
       <AllowPatch name="FBIE_0" />
       <AllowPatch name="FBIFR_0" />
       <AllowPatch name="2A3HPD_1" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
+      <AllowPatch name="23MD_2" />
     </Residue>
     <Residue name="2PDO">
       <Atom charge="-0.58" name="N1" type="2PDO-N1" />
@@ -13660,21 +13661,21 @@
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="3POMP_10" />
       <AllowPatch name="3A26PD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="4MBD_0" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="4XBD_0" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="4AMFD_0" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
+      <AllowPatch name="23MD_2" />
       <AllowPatch name="24MFD_0" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="2AMP">
       <Atom charge="-0.6" name="NZ" type="2AMP-NZ" />
@@ -13766,12 +13767,12 @@
       <AllowPatch name="PCTE_1" />
       <AllowPatch name="CT2_0" />
       <AllowPatch name="CT3_0" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_4" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_5" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_5" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_6" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="2AMF">
       <Atom charge="-0.27" name="CM" type="2AMF-CM" />
@@ -13822,15 +13823,15 @@
       <AllowPatch name="CT3_0" />
       <AllowPatch name="4FBD_0" />
       <AllowPatch name="3A26PD_0" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_4" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_5" />
       <AllowPatch name="4MBD_1" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="4XBD_0" />
-      <AllowPatch name="3AMFD_5" />
+      <AllowPatch name="3AMFD_6" />
       <AllowPatch name="4AMFD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="GABD">
       <Atom charge="0.14" name="C3" type="GABD-C3" />
@@ -14032,8 +14033,8 @@
       <AllowPatch name="3ASUF_0" />
       <AllowPatch name="AMGA_0" />
       <AllowPatch name="ABGA_1" />
-      <AllowPatch name="MET1_5" />
-      <AllowPatch name="MET2_4" />
+      <AllowPatch name="MET1_6" />
+      <AllowPatch name="MET2_5" />
       <AllowPatch name="4FBD_0" />
       <AllowPatch name="3FBD_0" />
       <AllowPatch name="2FBD_0" />
@@ -14041,25 +14042,25 @@
       <AllowPatch name="3FBP_0" />
       <AllowPatch name="2FBP_0" />
       <AllowPatch name="3A26PD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="4MBD_0" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="4XBD_0" />
       <AllowPatch name="4XEBD_0" />
       <AllowPatch name="3XBP_0" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="4AMFD_0" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
+      <AllowPatch name="23MD_2" />
       <AllowPatch name="24MFD_0" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="35MFD_3" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="MEOB">
       <Atom charge="-0.115" name="CG" type="MEOB-CG" />
@@ -14095,17 +14096,17 @@
       <Bond atomName1="CM" atomName2="HM2" />
       <Bond atomName1="CM" atomName2="HM3" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_5" />
-      <AllowPatch name="3MBD_4" />
+      <AllowPatch name="3MBD_5" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_5" />
-      <AllowPatch name="3AMFD_5" />
+      <AllowPatch name="3AMFD_6" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="ETOB">
       <Atom charge="-0.115" name="CG" type="ETOB-CG" />
@@ -14147,20 +14148,20 @@
       <Bond atomName1="C2" atomName2="H2B" />
       <Bond atomName1="C2" atomName2="H2C" />
       <AllowPatch name="OMEF_0" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="ACN">
       <Atom charge="-0.17" name="C1" type="ACN-C1" />
@@ -14573,7 +14574,7 @@
       <Bond atomName1="N12" atomName2="H12" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_97" />
+      <AllowPatch name="G8AP_98" />
     </Residue>
     <Residue name="FLRN">
       <Atom charge="-0.14" name="C1" type="FLRN-C1" />
@@ -14627,7 +14628,7 @@
       <AllowPatch name="HYD2_1" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_121" />
+      <AllowPatch name="G8AP_122" />
     </Residue>
     <Residue name="NAFT">
       <Atom charge="-0.115" name="C1" type="NAFT-C1" />
@@ -15019,7 +15020,7 @@
       <Bond atomName1="C13" atomName2="H13" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_132" />
+      <AllowPatch name="G8AP_135" />
     </Residue>
     <Residue name="ACRD">
       <Atom charge="-0.115" name="C1" type="ACRD-C1" />
@@ -15072,7 +15073,7 @@
       <Bond atomName1="C11" atomName2="H11" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_115" />
+      <AllowPatch name="G8AP_116" />
     </Residue>
     <Residue name="FENZ">
       <Atom charge="-0.115" name="C1" type="FENZ-C1" />
@@ -15123,7 +15124,7 @@
       <Bond atomName1="C11" atomName2="H11" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_115" />
+      <AllowPatch name="G8AP_116" />
     </Residue>
     <Residue name="FEOZ">
       <Atom charge="-0.115" name="C1" type="FEOZ-C1" />
@@ -15176,7 +15177,7 @@
       <Bond atomName1="N13" atomName2="H13" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_116" />
+      <AllowPatch name="G8AP_117" />
     </Residue>
     <Residue name="FETZ">
       <Atom charge="-0.115" name="C1" type="FETZ-C1" />
@@ -15229,7 +15230,7 @@
       <Bond atomName1="N13" atomName2="H13" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_116" />
+      <AllowPatch name="G8AP_117" />
     </Residue>
     <Residue name="DIOL">
       <Atom charge="-0.4" name="O1" type="DIOL-O1" />
@@ -15963,17 +15964,17 @@
       <Bond atomName1="CT" atomName2="H13" />
       <AllowPatch name="HYD1_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="BBEN">
       <Atom charge="0.0" name="CG" type="BBEN-CG" />
@@ -16026,21 +16027,21 @@
       <Bond atomName1="C4" atomName2="H43" />
       <AllowPatch name="HYD1_1" />
       <AllowPatch name="HYD2_1" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="OXYL">
       <Atom charge="-0.115" name="CG" type="OXYL-CG" />
@@ -16081,18 +16082,18 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD1_4" />
       <AllowPatch name="HYD2_3" />
-      <AllowPatch name="MET1_3" />
+      <AllowPatch name="MET1_4" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
+      <AllowPatch name="23MD_2" />
     </Residue>
     <Residue name="MXYL">
       <Atom charge="-0.115" name="CG" type="MXYL-CG" />
@@ -16133,18 +16134,18 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD1_4" />
       <AllowPatch name="HYD2_3" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="PXYL">
       <Atom charge="0.0" name="CG" type="PXYL-CG" />
@@ -16185,20 +16186,20 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD1_4" />
       <AllowPatch name="HYD2_3" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="PSCU">
       <Atom charge="0.0" name="CG" type="PSCU-CG" />
@@ -16245,19 +16246,19 @@
       <Bond atomName1="C3" atomName2="H33" />
       <AllowPatch name="HYD1_4" />
       <AllowPatch name="HYD2_3" />
-      <AllowPatch name="MET1_3" />
+      <AllowPatch name="MET1_4" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="3POMP_10" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
+      <AllowPatch name="23MD_2" />
     </Residue>
     <Residue name="PCRO">
       <Atom charge="0.11" name="CG" type="PCRO-CG" />
@@ -16293,19 +16294,19 @@
       <Bond atomName1="C1" atomName2="H12" />
       <Bond atomName1="C1" atomName2="H13" />
       <AllowPatch name="HYD1_4" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="PNPO">
       <Atom charge="-0.18" name="C1" type="PNPO-C1" />
@@ -16380,12 +16381,12 @@
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="4MEP">
       <Atom charge="-0.6" name="NZ" type="4MEP-NZ" />
@@ -16418,17 +16419,17 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="23MN">
       <Atom charge="-0.115" name="C1" type="23MN-C1" />
@@ -16536,7 +16537,7 @@
       <Bond atomName1="C41" atomName2="H413" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_90" />
+      <AllowPatch name="G8AP_91" />
     </Residue>
     <Residue name="FORA">
       <Atom charge="0.52" name="C1" type="FORA-C1" />
@@ -16750,17 +16751,17 @@
       <Bond atomName1="N7" atomName2="N8" />
       <Bond atomName1="N8" atomName2="H81" />
       <Bond atomName1="N8" atomName2="H82" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="THF2">
       <Atom charge="-0.4" name="O4'" type="THF2-O4'" />
@@ -17078,7 +17079,7 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
+      <AllowPatch name="PCTE_5" />
       <AllowPatch name="CT2_3" />
       <AllowPatch name="CT3_6" />
     </Residue>
@@ -17273,7 +17274,7 @@
       <Bond atomName1="C5" atomName2="H51" />
       <Bond atomName1="C5" atomName2="H52" />
       <AllowPatch name="HYD1_0" />
-      <AllowPatch name="G8AP_126" />
+      <AllowPatch name="G8AP_128" />
       <AllowPatch name="BCPE_1" />
     </Residue>
     <Residue name="OIRD">
@@ -17359,20 +17360,20 @@
       <Bond atomName1="C2" atomName2="H21" />
       <Bond atomName1="C2" atomName2="H22" />
       <AllowPatch name="HYD2_1" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="DMCA">
       <Atom charge="0.05" name="C1" type="DMCA-C1" />
@@ -17714,17 +17715,17 @@
       <Bond atomName1="C3N" atomName2="N3C" />
       <AllowPatch name="HYD1_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="TMAO">
       <Atom charge="-0.83" name="N" type="TMAO-N" />
@@ -18186,7 +18187,7 @@
       <AllowPatch name="MET2_0" />
       <AllowPatch name="B5H6_0" />
       <AllowPatch name="B5HE_0" />
-      <AllowPatch name="G8AP_126" />
+      <AllowPatch name="G8AP_128" />
     </Residue>
     <Residue name="MOET">
       <Atom charge="-0.53" name="C1" type="MOET-C1" />
@@ -18279,17 +18280,17 @@
       <Bond atomName1="N2" atomName2="H21" />
       <Bond atomName1="N2" atomName2="H22" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="MSAM">
       <Atom charge="-0.07" name="C3" type="MSAM-C3" />
@@ -18424,17 +18425,17 @@
       <Bond atomName1="C3" atomName2="H33" />
       <AllowPatch name="2FBD_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="PMSM">
       <Atom charge="-0.03" name="C3" type="PMSM-C3" />
@@ -18536,17 +18537,17 @@
       <Bond atomName1="C52" atomName2="H52" />
       <Bond atomName1="C6" atomName2="H6" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="MMST">
       <Atom charge="0.24" name="S1" type="MMST-S1" />
@@ -19154,17 +19155,17 @@
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="MSMT">
       <Atom charge="0.22" name="S1" type="MSMT-S1" />
@@ -19227,17 +19228,17 @@
       <Bond atomName1="CD2" atomName2="CG" />
       <Bond atomName1="CG" atomName2="HG" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="OBTZ">
       <Atom charge="0.33" name="S1" type="OBTZ-S1" />
@@ -19938,7 +19939,7 @@
       <Bond atomName1="C10" atomName2="H10" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_111" />
+      <AllowPatch name="G8AP_112" />
     </Residue>
     <Residue name="21QU">
       <Atom charge="-0.115" name="C1" type="21QU-C1" />
@@ -20030,7 +20031,7 @@
       <Bond atomName1="C12" atomName2="H12" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_111" />
+      <AllowPatch name="G8AP_112" />
     </Residue>
     <Residue name="3PHURA">
       <Atom charge="-0.53" name="N1" type="3PHURA-N1" />
@@ -20079,7 +20080,7 @@
       <Bond atomName1="C11" atomName2="C12" />
       <Bond atomName1="C12" atomName2="H12" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_111" />
+      <AllowPatch name="G8AP_112" />
     </Residue>
     <Residue name="URA2S">
       <Atom charge="-0.04" name="C2" type="URA2S-C2" />
@@ -20363,7 +20364,7 @@
       <Bond atomName1="C12" atomName2="H12" />
       <Bond atomName1="C12" atomName2="C7" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_111" />
+      <AllowPatch name="G8AP_112" />
     </Residue>
     <Residue name="43HSPY">
       <Atom charge="-0.03" name="C6" type="43HSPY-C6" />
@@ -21110,7 +21111,7 @@
       <Bond atomName1="C9" atomName2="H9" />
       <AllowPatch name="HYD1_1" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="G8AP_111" />
+      <AllowPatch name="G8AP_112" />
     </Residue>
     <Residue name="PYO2F">
       <Atom charge="0.16" name="C1" type="PYO2F-C1" />
@@ -21685,7 +21686,7 @@
       <AllowPatch name="B5HE_1" />
       <AllowPatch name="UENO_1" />
       <AllowPatch name="5MC2_0" />
-      <AllowPatch name="G8AP_134" />
+      <AllowPatch name="G8AP_137" />
     </Residue>
     <Residue name="WEI2">
       <Atom charge="0.09" name="C1" type="WEI2-C1" />
@@ -21775,7 +21776,7 @@
       <AllowPatch name="B5HE_2" />
       <AllowPatch name="UENO_2" />
       <AllowPatch name="5MC2_0" />
-      <AllowPatch name="G8AP_134" />
+      <AllowPatch name="G8AP_137" />
     </Residue>
     <Residue name="MSCH">
       <Atom charge="-0.219" name="C1" type="MSCH-C1" />
@@ -21852,7 +21853,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_3" />
-      <AllowPatch name="G8AP_136" />
+      <AllowPatch name="G8AP_139" />
     </Residue>
     <Residue name="WEI3">
       <Atom charge="-0.219" name="C1" type="WEI3-C1" />
@@ -21953,7 +21954,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_3" />
-      <AllowPatch name="G8AP_133" />
+      <AllowPatch name="G8AP_136" />
     </Residue>
     <Residue name="PIPA">
       <Atom charge="-0.38" name="C1" type="PIPA-C1" />
@@ -23611,7 +23612,7 @@
       <Bond atomName1="CA" atomName2="HA3" />
       <Bond atomName1="CM" atomName2="N1" />
       <AllowPatch name="ACE_0" />
-      <AllowPatch name="MET2_7" />
+      <AllowPatch name="MET2_8" />
       <AllowPatch name="5UNM_0" />
     </Residue>
     <Residue name="BU8U">
@@ -23664,7 +23665,7 @@
       <Bond atomName1="CA" atomName2="HA3" />
       <Bond atomName1="CM" atomName2="N1" />
       <AllowPatch name="ACE_0" />
-      <AllowPatch name="MET2_7" />
+      <AllowPatch name="MET2_8" />
       <AllowPatch name="5UNM_0" />
     </Residue>
     <Residue name="BSEU">
@@ -23717,7 +23718,7 @@
       <Bond atomName1="CA" atomName2="HA3" />
       <Bond atomName1="CM" atomName2="N1" />
       <AllowPatch name="ACE_0" />
-      <AllowPatch name="MET2_7" />
+      <AllowPatch name="MET2_8" />
       <AllowPatch name="5UNM_0" />
     </Residue>
     <Residue name="B5DU">
@@ -25557,7 +25558,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="HYD1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_91" />
+      <AllowPatch name="G8AP_92" />
     </Residue>
     <Residue name="B1MA">
       <Atom charge="-0.0" name="N9" type="B1MA-N9" />
@@ -25980,7 +25981,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_84" />
+      <AllowPatch name="G8AP_85" />
     </Residue>
     <Residue name="B26A">
       <Atom charge="-0.01" name="N9" type="B26A-N9" />
@@ -26069,7 +26070,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_84" />
+      <AllowPatch name="G8AP_85" />
     </Residue>
     <Residue name="B66A">
       <Atom charge="-0.01" name="N9" type="B66A-N9" />
@@ -26151,7 +26152,7 @@
       <AllowPatch name="ADEP_0" />
       <AllowPatch name="ADEI_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_84" />
+      <AllowPatch name="G8AP_85" />
     </Residue>
     <Residue name="BT6A">
       <Atom charge="-0.01" name="N9" type="BT6A-N9" />
@@ -26225,7 +26226,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_84" />
+      <AllowPatch name="G8AP_85" />
     </Residue>
     <Residue name="B12A">
       <Atom charge="-0.01" name="N9" type="B12A-N9" />
@@ -26308,7 +26309,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_84" />
+      <AllowPatch name="G8AP_85" />
     </Residue>
     <Residue name="B6GA">
       <Atom charge="-0.01" name="N9" type="B6GA-N9" />
@@ -26368,7 +26369,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="6AH_0" />
-      <AllowPatch name="G8AP_74" />
+      <AllowPatch name="G8AP_75" />
     </Residue>
     <Residue name="B1MG">
       <Atom charge="0.05" name="N9" type="B1MG-N9" />
@@ -26842,7 +26843,7 @@
       <AllowPatch name="MET2_0" />
       <AllowPatch name="7GNM_0" />
       <AllowPatch name="INO1_0" />
-      <AllowPatch name="G8AP_82" />
+      <AllowPatch name="G8AP_83" />
     </Residue>
     <Residue name="BEQG">
       <Atom charge="0.04" name="N9" type="BEQG-N9" />
@@ -26932,7 +26933,7 @@
       <AllowPatch name="MET2_0" />
       <AllowPatch name="7GNM_0" />
       <AllowPatch name="INO1_0" />
-      <AllowPatch name="G8AP_82" />
+      <AllowPatch name="G8AP_83" />
     </Residue>
     <Residue name="BDWG">
       <Atom charge="0.02" name="N9" type="BDWG-N9" />
@@ -26986,7 +26987,7 @@
       <Bond atomName1="C12" atomName2="H12" />
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_108" />
+      <AllowPatch name="G8AP_109" />
     </Residue>
     <Residue name="BIMG">
       <Atom charge="0.02" name="N9" type="BIMG-N9" />
@@ -27047,7 +27048,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="G8AP_108" />
+      <AllowPatch name="G8AP_109" />
     </Residue>
     <Residue name="BIWG">
       <Atom charge="0.02" name="N9" type="BIWG-N9" />
@@ -27107,7 +27108,7 @@
       <Bond atomName1="C13" atomName2="H133" />
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_120" />
+      <AllowPatch name="G8AP_121" />
     </Residue>
     <Residue name="BMWG">
       <Atom charge="0.02" name="N9" type="BMWG-N9" />
@@ -27174,7 +27175,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="G8AP_120" />
+      <AllowPatch name="G8AP_121" />
     </Residue>
     <Residue name="BYYG">
       <Atom charge="0.02" name="N9" type="BYYG-N9" />
@@ -27281,7 +27282,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="G8AP_127" />
+      <AllowPatch name="G8AP_129" />
     </Residue>
     <Residue name="BHWG">
       <Atom charge="0.02" name="N9" type="BHWG-N9" />
@@ -27390,7 +27391,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="BPBG">
       <Atom charge="0.02" name="N9" type="BPBG-N9" />
@@ -27501,7 +27502,7 @@
       <Bond atomName1="CM" atomName2="N9" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="BBUG">
       <Atom charge="0.02" name="N9" type="BBUG-N9" />
@@ -27593,7 +27594,7 @@
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_10" />
       <AllowPatch name="BUGN_0" />
-      <AllowPatch name="G8AP_128" />
+      <AllowPatch name="G8AP_130" />
     </Residue>
     <Residue name="AMPU">
       <Atom charge="-0.37" name="N9" type="AMPU-N9" />
@@ -27822,7 +27823,7 @@
       <Bond atomName1="C4" atomName2="N9" />
       <Bond atomName1="C8" atomName2="N9" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_90" />
+      <AllowPatch name="G8AP_91" />
     </Residue>
     <Residue name="BEPA">
       <Atom charge="-0.6" name="N1" type="BEPA-N1" />
@@ -28456,7 +28457,7 @@
       <Bond atomName1="C10" atomName2="H102" />
       <AllowPatch name="7GNM_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_81" />
+      <AllowPatch name="G8AP_82" />
     </Residue>
     <Residue name="PRNC">
       <Atom charge="-0.65" name="N1" type="PRNC-N1" />
@@ -28910,7 +28911,7 @@
       <Bond atomName1="C8" atomName2="H8" />
       <Bond atomName1="C15" atomName2="H15" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_83" />
+      <AllowPatch name="G8AP_84" />
     </Residue>
     <Residue name="BZAA">
       <Atom charge="-0.115" name="C1" type="BZAA-C1" />
@@ -32614,8 +32615,8 @@
       <Bond atomName1="OH" atomName2="HH" />
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
-      <AllowPatch name="GYCO_1" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="GYCO_4" />
+      <AllowPatch name="TAUR_2" />
     </Residue>
     <Residue name="SM015">
       <Atom charge="0.09" name="HB3" type="SM015-HB3" />
@@ -32887,7 +32888,7 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD1_1" />
       <AllowPatch name="HYD2_3" />
-      <AllowPatch name="MET1_9" />
+      <AllowPatch name="MET1_11" />
       <AllowPatch name="MET2_0" />
     </Residue>
     <Residue name="SM021">
@@ -32981,7 +32982,7 @@
       <Bond atomName1="C3" atomName2="H32" />
       <Bond atomName1="C3" atomName2="H33" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="3POMP_10" />
     </Residue>
     <Residue name="SM024">
@@ -33279,7 +33280,7 @@
       <Bond atomName1="C1" atomName2="O2" />
       <AllowPatch name="ASPP_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM033">
       <Atom charge="0.09" name="HA3" type="SM033-HA3" />
@@ -33342,7 +33343,7 @@
       <Bond atomName1="CA3" atomName2="HA32" />
       <Bond atomName1="CA3" atomName2="HA33" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_3" />
+      <AllowPatch name="MET2_4" />
     </Residue>
     <Residue name="SM036">
       <Atom charge="0.09" name="HA3" type="SM036-HA3" />
@@ -33384,17 +33385,17 @@
       <Bond atomName1="CE1" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM037">
       <Atom charge="0.09" name="HB3" type="SM037-HB3" />
@@ -33547,7 +33548,7 @@
       <Bond atomName1="C2" atomName2="H23" />
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM041">
       <Atom charge="0.09" name="HA3" type="SM041-HA3" />
@@ -33591,7 +33592,7 @@
       <Bond atomName1="CB2" atomName2="HB22" />
       <Bond atomName1="CB2" atomName2="HB23" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM042">
       <Atom charge="0.09" name="HB3" type="SM042-HB3" />
@@ -33846,7 +33847,7 @@
       <Bond atomName1="C4" atomName2="O4" />
       <Bond atomName1="C4" atomName2="O5" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="3POMP_10" />
     </Residue>
     <Residue name="SM050">
@@ -34040,7 +34041,7 @@
       <Bond atomName1="C3" atomName2="H33" />
       <AllowPatch name="HYD1_1" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="3POMP_10" />
     </Residue>
     <Residue name="SM058">
@@ -34148,7 +34149,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_4" />
-      <AllowPatch name="G8AP_130" />
+      <AllowPatch name="G8AP_132" />
     </Residue>
     <Residue name="SM060">
       <Atom charge="0.09" name="HA3" type="SM060-HA3" />
@@ -34178,7 +34179,7 @@
       <Bond atomName1="CG1" atomName2="HG13" />
       <Bond atomName1="CG1" atomName2="HG12" />
       <Bond atomName1="CG1" atomName2="HG1" />
-      <AllowPatch name="CYSD_0" />
+      <AllowPatch name="CYSD_1" />
     </Residue>
     <Residue name="SM061">
       <Atom charge="0.09" name="HB" type="SM061-HB" />
@@ -34318,7 +34319,7 @@
       <Bond atomName1="C5" atomName2="C4" />
       <Bond atomName1="C4" atomName2="H4" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="5MC2_4" />
     </Residue>
     <Residue name="SM065">
@@ -34499,8 +34500,8 @@
       <Bond atomName1="CB" atomName2="OG2" />
       <Bond atomName1="OG1" atomName2="HG1" />
       <Bond atomName1="OG2" atomName2="HG2" />
-      <AllowPatch name="THP1_0" />
-      <AllowPatch name="THPB_0" />
+      <AllowPatch name="THP1_1" />
+      <AllowPatch name="THPB_1" />
     </Residue>
     <Residue name="SM072">
       <Atom charge="-0.07" name="CA1" type="SM072-CA1" />
@@ -34640,8 +34641,8 @@
       <Bond atomName1="CG" atomName2="FG" />
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
-      <AllowPatch name="GYCO_1" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="GYCO_4" />
+      <AllowPatch name="TAUR_2" />
     </Residue>
     <Residue name="SM077">
       <Atom charge="0.09" name="HG3" type="SM077-HG3" />
@@ -34707,12 +34708,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM080">
       <Atom charge="0.09" name="HB3" type="SM080-HB3" />
@@ -34834,12 +34835,12 @@
       <Bond atomName1="CE2" atomName2="CE1" />
       <Bond atomName1="CE1" atomName2="HE1" />
       <AllowPatch name="ASPP_1" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM083">
       <Atom charge="0.09" name="HA3" type="SM083-HA3" />
@@ -34927,7 +34928,7 @@
       <Bond atomName1="C12" atomName2="H121" />
       <Bond atomName1="C12" atomName2="H122" />
       <Bond atomName1="C12" atomName2="H123" />
-      <AllowPatch name="G8AP_110" />
+      <AllowPatch name="G8AP_111" />
     </Residue>
     <Residue name="SM085">
       <Atom charge="-0.066" name="C5" type="SM085-C5" />
@@ -35088,10 +35089,10 @@
       <Bond atomName1="CZ" atomName2="HZ2" />
       <Bond atomName1="CZ" atomName2="HZ3" />
       <AllowPatch name="HS2_0" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="SM090">
       <Atom charge="0.09" name="HA3" type="SM090-HA3" />
@@ -35130,10 +35131,10 @@
       <Bond atomName1="P" atomName2="O3P" />
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="SM091">
       <Atom charge="0.09" name="HA3" type="SM091-HA3" />
@@ -35202,17 +35203,17 @@
       <Bond atomName1="NH" atomName2="HH1" />
       <Bond atomName1="NH" atomName2="HH2" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM093">
       <Atom charge="-0.162" name="CB" type="SM093-CB" />
@@ -35380,11 +35381,11 @@
       <Bond atomName1="CH1" atomName2="HH1" />
       <Bond atomName1="CH1" atomName2="CH2" />
       <Bond atomName1="CH2" atomName2="HH2" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM098">
       <Atom charge="0.09" name="HD3" type="SM098-HD3" />
@@ -35484,7 +35485,7 @@
       <Bond atomName1="C5" atomName2="H5" />
       <Bond atomName1="C5" atomName2="C6" />
       <Bond atomName1="C6" atomName2="H6" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="5MC2_4" />
     </Residue>
     <Residue name="SM100">
@@ -35618,7 +35619,7 @@
       <Bond atomName1="CX2" atomName2="O1" />
       <Bond atomName1="CX2" atomName2="O2" />
       <AllowPatch name="HYD1_4" />
-      <AllowPatch name="MET1_11" />
+      <AllowPatch name="MET1_13" />
     </Residue>
     <Residue name="SM103">
       <Atom charge="0.09" name="HA3" type="SM103-HA3" />
@@ -35665,9 +35666,9 @@
       <Bond atomName1="CZ1" atomName2="HZ1" />
       <Bond atomName1="CZ1" atomName2="CH" />
       <Bond atomName1="CH" atomName2="HH" />
-      <AllowPatch name="3MBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="SM104">
       <Atom charge="0.09" name="H53" type="SM104-H53" />
@@ -35865,8 +35866,8 @@
       <Bond atomName1="CG1" atomName2="CD" />
       <Bond atomName1="CD" atomName2="OE1" />
       <Bond atomName1="CD" atomName2="OE2" />
-      <AllowPatch name="GYCO_0" />
-      <AllowPatch name="TAUR_0" />
+      <AllowPatch name="GYCO_2" />
+      <AllowPatch name="TAUR_2" />
     </Residue>
     <Residue name="SM110">
       <Atom charge="0.09" name="HA3" type="SM110-HA3" />
@@ -36040,7 +36041,7 @@
       <Bond atomName1="CX2" atomName2="O1" />
       <Bond atomName1="CX2" atomName2="O2" />
       <AllowPatch name="HYD1_4" />
-      <AllowPatch name="MET1_9" />
+      <AllowPatch name="MET1_11" />
     </Residue>
     <Residue name="SM117">
       <Atom charge="0.09" name="HA3" type="SM117-HA3" />
@@ -36111,7 +36112,7 @@
       <Bond atomName1="CA3" atomName2="HA32" />
       <Bond atomName1="CA3" atomName2="HA33" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_6" />
+      <AllowPatch name="MET2_7" />
     </Residue>
     <Residue name="SM121">
       <Atom charge="0.09" name="HB3" type="SM121-HB3" />
@@ -36179,10 +36180,10 @@
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CE1" atomName2="NE2" />
       <Bond atomName1="NE2" atomName2="HE2" />
-      <AllowPatch name="3MBD_4" />
+      <AllowPatch name="3MBD_5" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_5" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_6" />
     </Residue>
     <Residue name="SM123">
       <Atom charge="0.09" name="HA3" type="SM123-HA3" />
@@ -36221,10 +36222,10 @@
       <Bond atomName1="CD2" atomName2="NE2" />
       <Bond atomName1="CE1" atomName2="HE1" />
       <Bond atomName1="CE1" atomName2="NE2" />
-      <AllowPatch name="3MBD_4" />
+      <AllowPatch name="3MBD_5" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_5" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_6" />
     </Residue>
     <Residue name="SM124">
       <Atom charge="0.09" name="HA3" type="SM124-HA3" />
@@ -36314,10 +36315,10 @@
       <Bond atomName1="P" atomName2="O1P" />
       <Bond atomName1="P" atomName2="O2P" />
       <Bond atomName1="P" atomName2="O3P" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
     </Residue>
     <Residue name="SM126">
       <Atom charge="0.09" name="HB3" type="SM126-HB3" />
@@ -36558,17 +36559,17 @@
       <Bond atomName1="CZ" atomName2="OH" />
       <Bond atomName1="OH" atomName2="HH" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
       <AllowPatch name="TP1_0" />
       <AllowPatch name="TP2_0" />
       <AllowPatch name="TMP1_0" />
@@ -36633,17 +36634,17 @@
       <Bond atomName1="CM2" atomName2="CL" />
       <Bond atomName1="CL" atomName2="HL" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_3" />
+      <AllowPatch name="2A46PD_4" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_4" />
-      <AllowPatch name="3MBD_3" />
+      <AllowPatch name="3MBD_4" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_4" />
-      <AllowPatch name="3AMFD_4" />
-      <AllowPatch name="26MD_3" />
-      <AllowPatch name="23MD_4" />
-      <AllowPatch name="35MFD_3" />
+      <AllowPatch name="3AMFD_5" />
+      <AllowPatch name="26MD_4" />
+      <AllowPatch name="23MD_5" />
+      <AllowPatch name="35MFD_6" />
     </Residue>
     <Residue name="SM133">
       <Atom charge="0.09" name="HB3" type="SM133-HB3" />
@@ -36798,15 +36799,15 @@
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM141">
       <Atom charge="0.09" name="HA3" type="SM141-HA3" />
@@ -36843,12 +36844,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM142">
       <Atom charge="0.09" name="HA3" type="SM142-HA3" />
@@ -36881,12 +36882,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CE1" />
       <Bond atomName1="CE1" atomName2="HE1" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM143">
       <Atom charge="0.09" name="HA3" type="SM143-HA3" />
@@ -37230,7 +37231,7 @@
       <AllowPatch name="HYD1_4" />
       <AllowPatch name="HYD2_3" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM151">
       <Atom charge="0.09" name="HB1" type="SM151-HB1" />
@@ -37662,12 +37663,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM165">
       <Atom charge="0.09" name="HB3" type="SM165-HB3" />
@@ -37750,17 +37751,17 @@
       <Bond atomName1="CH" atomName2="FH2" />
       <Bond atomName1="CH" atomName2="FH3" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM167">
       <Atom charge="-0.27" name="CA" type="SM167-CA" />
@@ -37868,12 +37869,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CE1" />
       <Bond atomName1="CE1" atomName2="HE1" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM171">
       <Atom charge="0.09" name="HA3" type="SM171-HA3" />
@@ -37969,7 +37970,7 @@
       <Bond atomName1="C5" atomName2="C6" />
       <Bond atomName1="C6" atomName2="H6" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM173">
       <Atom charge="0.09" name="HA3" type="SM173-HA3" />
@@ -38009,7 +38010,7 @@
       <Bond atomName1="C5" atomName2="C6" />
       <Bond atomName1="C6" atomName2="H6" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
     </Residue>
     <Residue name="SM174">
       <Atom charge="0.09" name="HA3" type="SM174-HA3" />
@@ -38236,8 +38237,8 @@
       <Bond atomName1="C5" atomName2="HC5" />
       <Bond atomName1="C5" atomName2="C6" />
       <Bond atomName1="C6" atomName2="HC6" />
-      <AllowPatch name="MET1_4" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
       <AllowPatch name="2AMFD_2" />
@@ -38417,13 +38418,13 @@
       <AllowPatch name="2FBD_1" />
       <AllowPatch name="2A3HPD_3" />
       <AllowPatch name="2MBD_3" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_3" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_2" />
-      <AllowPatch name="23MD_3" />
+      <AllowPatch name="23MD_4" />
     </Residue>
     <Residue name="SM182">
       <Atom charge="0.09" name="HA3" type="SM182-HA3" />
@@ -38471,17 +38472,17 @@
       <Bond atomName1="S" atomName2="O2" />
       <Bond atomName1="S" atomName2="O3" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM183">
       <Atom charge="0.09" name="HB3" type="SM183-HB3" />
@@ -38683,7 +38684,7 @@
       <Bond atomName1="C2" atomName2="C3" />
       <Bond atomName1="C2" atomName2="HC2" />
       <Bond atomName1="C3" atomName2="HC3" />
-      <AllowPatch name="MET1_2" />
+      <AllowPatch name="MET1_3" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2XBD_1" />
     </Residue>
@@ -38767,12 +38768,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM194">
       <Atom charge="0.09" name="H" type="SM194-H" />
@@ -38848,7 +38849,7 @@
       <Bond atomName1="C3" atomName2="H33" />
       <AllowPatch name="ASPP_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_5" />
+      <AllowPatch name="MET2_6" />
       <AllowPatch name="3POMP_10" />
     </Residue>
     <Residue name="SM204">
@@ -38887,17 +38888,17 @@
       <Bond atomName1="CZ" atomName2="OZ" />
       <Bond atomName1="OZ" atomName2="HZ" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="2A46PD_3" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_2" />
+      <AllowPatch name="3MBD_3" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3XBD_3" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="3AMFD_4" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_2" />
-      <AllowPatch name="35MFD_2" />
+      <AllowPatch name="23MD_3" />
+      <AllowPatch name="35MFD_5" />
     </Residue>
     <Residue name="SM208">
       <Atom charge="0.09" name="HA3" type="SM208-HA3" />
@@ -38960,7 +38961,7 @@
       <AllowPatch name="2A46PD_0" />
       <AllowPatch name="26MD_0" />
       <AllowPatch name="23MD_0" />
-      <AllowPatch name="35MFD_0" />
+      <AllowPatch name="35MFD_1" />
     </Residue>
     <Residue name="SM212">
       <Atom charge="0.09" name="HA3" type="SM212-HA3" />
@@ -39166,20 +39167,20 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CZ" />
       <Bond atomName1="CZ" atomName2="HZ" />
-      <AllowPatch name="MET1_5" />
+      <AllowPatch name="MET1_6" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="2FBD_0" />
-      <AllowPatch name="2A46PD_1" />
+      <AllowPatch name="2A46PD_2" />
       <AllowPatch name="2A3HPD_0" />
       <AllowPatch name="2MBD_2" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
+      <AllowPatch name="3XBD_2" />
       <AllowPatch name="2AMFD_2" />
-      <AllowPatch name="3AMFD_2" />
+      <AllowPatch name="3AMFD_3" />
       <AllowPatch name="26MD_1" />
-      <AllowPatch name="23MD_1" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="23MD_2" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM217">
       <Atom charge="0.09" name="HA3" type="SM217-HA3" />
@@ -39464,12 +39465,12 @@
       <Bond atomName1="CE2" atomName2="HE2" />
       <Bond atomName1="CE2" atomName2="CE1" />
       <Bond atomName1="CE1" atomName2="HE1" />
-      <AllowPatch name="2A46PD_1" />
-      <AllowPatch name="3MBD_1" />
+      <AllowPatch name="2A46PD_2" />
+      <AllowPatch name="3MBD_2" />
       <AllowPatch name="2XBD_1" />
-      <AllowPatch name="3XBD_1" />
-      <AllowPatch name="3AMFD_2" />
-      <AllowPatch name="35MFD_1" />
+      <AllowPatch name="3XBD_2" />
+      <AllowPatch name="3AMFD_3" />
+      <AllowPatch name="35MFD_3" />
     </Residue>
     <Residue name="SM227">
       <Atom charge="-0.186" name="CL" type="SM227-CL" />
@@ -39588,7 +39589,7 @@
       <Bond atomName1="C2AL" atomName2="H2A1" />
       <Bond atomName1="C2AL" atomName2="H2A2" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="MET2_3" />
+      <AllowPatch name="MET2_4" />
     </Residue>
     <Residue name="SM234">
       <Atom charge="-0.27" name="CA" type="SM234-CA" />
@@ -39976,7 +39977,7 @@
       <Bond atomName1="C1" atomName2="H11" />
       <Bond atomName1="C1" atomName2="H13" />
       <Bond atomName1="C1" atomName2="H14" />
-      <AllowPatch name="MET1_7" />
+      <AllowPatch name="MET1_8" />
     </Residue>
     <Residue name="230000">
       <Atom charge="-0.128" name="C02" type="230000-C02" />
@@ -40021,7 +40022,7 @@
       <Bond atomName1="C12" atomName2="H22" />
       <Bond atomName1="C12" atomName2="H23" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_103" />
+      <AllowPatch name="G8AP_104" />
     </Residue>
     <Residue name="230001">
       <Atom charge="-0.732" name="N1" type="230001-N1" />
@@ -40589,7 +40590,7 @@
       <Bond atomName1="C15" atomName2="O16" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_114" />
+      <AllowPatch name="G8AP_115" />
     </Residue>
     <Residue name="23000A">
       <Atom charge="-0.577" name="O1" type="23000A-O1" />
@@ -44243,7 +44244,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_124" />
+      <AllowPatch name="G8AP_126" />
     </Residue>
     <Residue name="230029">
       <Atom charge="-0.331" name="C1" type="230029-C1" />
@@ -44515,7 +44516,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_118" />
+      <AllowPatch name="G8AP_119" />
     </Residue>
     <Residue name="23002E">
       <Atom charge="0.356" name="H01" type="23002E-H01" />
@@ -44580,7 +44581,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_118" />
+      <AllowPatch name="G8AP_119" />
     </Residue>
     <Residue name="23002F">
       <Atom charge="-0.636" name="C1" type="23002F-C1" />
@@ -45039,7 +45040,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_2" />
-      <AllowPatch name="G8AP_112" />
+      <AllowPatch name="G8AP_113" />
     </Residue>
     <Residue name="23002N">
       <Atom charge="-0.309" name="C01" type="23002N-C01" />
@@ -47433,7 +47434,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_123" />
+      <AllowPatch name="G8AP_125" />
     </Residue>
     <Residue name="23003Y">
       <Atom charge="-0.262" name="C01" type="23003Y-C01" />
@@ -48732,7 +48733,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_1" />
-      <AllowPatch name="G8AP_92" />
+      <AllowPatch name="G8AP_93" />
     </Residue>
     <Residue name="23004N">
       <Atom charge="-0.05" name="C01" type="23004N-C01" />
@@ -50790,7 +50791,7 @@
       <Bond atomName1="O16" atomName2="H25" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_78" />
+      <AllowPatch name="G8AP_79" />
     </Residue>
     <Residue name="23005V">
       <Atom charge="0.418" name="H01" type="23005V-H01" />
@@ -50848,7 +50849,7 @@
       <Bond atomName1="O16" atomName2="H25" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_78" />
+      <AllowPatch name="G8AP_79" />
     </Residue>
     <Residue name="23005W">
       <Atom charge="-0.253" name="C1" type="23005W-C1" />
@@ -55451,7 +55452,7 @@
       <Bond atomName1="O15" atomName2="H32" />
       <AllowPatch name="HYD2_0" />
       <AllowPatch name="3POMP_5" />
-      <AllowPatch name="G8AP_114" />
+      <AllowPatch name="G8AP_115" />
     </Residue>
     <Residue name="23008C">
       <Atom charge="-0.458" name="O1" type="23008C-O1" />
@@ -56719,7 +56720,7 @@
       <Bond atomName1="C12" atomName2="H23" />
       <Bond atomName1="C12" atomName2="H24" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_106" />
+      <AllowPatch name="G8AP_107" />
     </Residue>
     <Residue name="230091">
       <Atom charge="-0.545" name="O1" type="230091-O1" />
@@ -61921,7 +61922,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_4" />
-      <AllowPatch name="G8AP_77" />
+      <AllowPatch name="G8AP_78" />
     </Residue>
     <Residue name="2300BU">
       <Atom charge="-0.646" name="N1" type="2300BU-N1" />
@@ -62542,7 +62543,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_1" />
-      <AllowPatch name="G8AP_122" />
+      <AllowPatch name="G8AP_124" />
     </Residue>
     <Residue name="2300C4">
       <Atom charge="-0.327" name="C01" type="2300C4-C01" />
@@ -64586,7 +64587,7 @@
       <Bond atomName1="C16" atomName2="H40" />
       <Bond atomName1="N17" atomName2="H18" />
       <Bond atomName1="N17" atomName2="H19" />
-      <AllowPatch name="G8AP_78" />
+      <AllowPatch name="G8AP_79" />
     </Residue>
     <Residue name="2300D8">
       <Atom charge="-0.332" name="C1" type="2300D8-C1" />
@@ -67204,7 +67205,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_14" />
-      <AllowPatch name="G8AP_104" />
+      <AllowPatch name="G8AP_105" />
     </Residue>
     <Residue name="2300EJ">
       <Atom charge="0.09" name="H33" type="2300EJ-H33" />
@@ -67272,7 +67273,7 @@
       <Bond atomName1="C16" atomName2="H36" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_104" />
+      <AllowPatch name="G8AP_105" />
     </Residue>
     <Residue name="2300EK">
       <Atom charge="-0.21" name="F1" type="2300EK-F1" />
@@ -68912,7 +68913,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="5MC2_6" />
-      <AllowPatch name="G8AP_109" />
+      <AllowPatch name="G8AP_110" />
     </Residue>
     <Residue name="2300FF">
       <Atom charge="-0.332" name="C1" type="2300FF-C1" />
@@ -69123,7 +69124,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_73" />
+      <AllowPatch name="G8AP_74" />
     </Residue>
     <Residue name="2300FJ">
       <Atom charge="-0.25" name="C1" type="2300FJ-C1" />
@@ -71261,7 +71262,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_88" />
+      <AllowPatch name="G8AP_89" />
     </Residue>
     <Residue name="2300GP">
       <Atom charge="0.057" name="C17" type="2300GP-C17" />
@@ -71302,7 +71303,7 @@
       <Bond atomName1="C11" atomName2="H12" />
       <Bond atomName1="C11" atomName2="H02" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_86" />
+      <AllowPatch name="G8AP_87" />
     </Residue>
     <Residue name="2300GQ">
       <Atom charge="-0.273" name="C1" type="2300GQ-C1" />
@@ -71357,7 +71358,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_86" />
+      <AllowPatch name="G8AP_87" />
     </Residue>
     <Residue name="2300GR">
       <Atom charge="-0.258" name="C1" type="2300GR-C1" />
@@ -72012,7 +72013,7 @@
       <Bond atomName1="C13" atomName2="H27" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_119" />
+      <AllowPatch name="G8AP_120" />
     </Residue>
     <Residue name="2300H3">
       <Atom charge="-0.677" name="N1" type="2300H3-N1" />
@@ -72636,7 +72637,7 @@
       <Bond atomName1="C14" atomName2="H28" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_122" />
+      <AllowPatch name="G8AP_124" />
     </Residue>
     <Residue name="2300HF">
       <Atom charge="-0.27" name="C01" type="2300HF-C01" />
@@ -72929,7 +72930,7 @@
       <Bond atomName1="C13" atomName2="H27" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_118" />
+      <AllowPatch name="G8AP_119" />
     </Residue>
     <Residue name="2300HK">
       <Atom charge="0.342" name="H18" type="2300HK-H18" />
@@ -76113,7 +76114,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_80" />
+      <AllowPatch name="G8AP_81" />
     </Residue>
     <Residue name="2300J8">
       <Atom charge="0.344" name="H01" type="2300J8-H01" />
@@ -79244,7 +79245,7 @@
       <Bond atomName1="N16" atomName2="H29" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_85" />
+      <AllowPatch name="G8AP_86" />
     </Residue>
     <Residue name="2300KV">
       <Atom charge="-0.553" name="O1" type="2300KV-O1" />
@@ -79308,7 +79309,7 @@
       <Bond atomName1="C15" atomName2="H27" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_101" />
+      <AllowPatch name="G8AP_102" />
     </Residue>
     <Residue name="2300KW">
       <Atom charge="-0.553" name="O1" type="2300KW-O1" />
@@ -83566,7 +83567,7 @@
       <Bond atomName1="C14" atomName2="C15" />
       <Bond atomName1="C15" atomName2="H16" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_93" />
+      <AllowPatch name="G8AP_94" />
     </Residue>
     <Residue name="2300N6">
       <Atom charge="0.09" name="H22" type="2300N6-H22" />
@@ -83669,7 +83670,7 @@
       <Bond atomName1="C15" atomName2="H16" />
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_93" />
+      <AllowPatch name="G8AP_94" />
     </Residue>
     <Residue name="2300N8">
       <Atom charge="0.372" name="H02" type="2300N8-H02" />
@@ -85322,7 +85323,7 @@
       <Bond atomName1="C17" atomName2="H31" />
       <AllowPatch name="HYD2_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="G8AP_96" />
+      <AllowPatch name="G8AP_97" />
     </Residue>
     <Residue name="2300O7">
       <Atom charge="-0.225" name="C1" type="2300O7-C1" />
@@ -85560,7 +85561,7 @@
       <Bond atomName1="C17" atomName2="H38" />
       <AllowPatch name="HYD2_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="G8AP_125" />
+      <AllowPatch name="G8AP_127" />
     </Residue>
     <Residue name="2300OB">
       <Atom charge="-0.842" name="O1" type="2300OB-O1" />
@@ -85723,7 +85724,7 @@
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_7" />
-      <AllowPatch name="G8AP_80" />
+      <AllowPatch name="G8AP_81" />
     </Residue>
     <Residue name="2300OE">
       <Atom charge="-0.348" name="N1" type="2300OE-N1" />
@@ -87301,7 +87302,7 @@
       <Bond atomName1="N15" atomName2="C16" />
       <Bond atomName1="C16" atomName2="H27" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_118" />
+      <AllowPatch name="G8AP_119" />
     </Residue>
     <Residue name="2300P9">
       <Atom charge="-0.827" name="N1" type="2300P9-N1" />
@@ -88123,7 +88124,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_107" />
+      <AllowPatch name="G8AP_108" />
     </Residue>
     <Residue name="2300PP">
       <Atom charge="-0.76" name="N1" type="2300PP-N1" />
@@ -90135,7 +90136,7 @@
       <Bond atomName1="C13" atomName2="H26" />
       <Bond atomName1="C13" atomName2="H27" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_117" />
+      <AllowPatch name="G8AP_118" />
     </Residue>
     <Residue name="2300QS">
       <Atom charge="-0.654" name="O1" type="2300QS-O1" />
@@ -90458,7 +90459,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_114" />
+      <AllowPatch name="G8AP_115" />
     </Residue>
     <Residue name="2300QX">
       <Atom charge="0.316" name="H01" type="2300QX-H01" />
@@ -91327,7 +91328,7 @@
       <Bond atomName1="N14" atomName2="H17" />
       <AllowPatch name="HYD2_0" />
       <AllowPatch name="MET1_0" />
-      <AllowPatch name="G8AP_104" />
+      <AllowPatch name="G8AP_105" />
     </Residue>
     <Residue name="2300RE">
       <Atom charge="-0.244" name="C1" type="2300RE-C1" />
@@ -91477,7 +91478,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_100" />
+      <AllowPatch name="G8AP_101" />
     </Residue>
     <Residue name="2300RH">
       <Atom charge="0.024" name="C1" type="2300RH-C1" />
@@ -91714,7 +91715,7 @@
       <Bond atomName1="C17" atomName2="H41" />
       <Bond atomName1="C18" atomName2="H42" />
       <Bond atomName1="C18" atomName2="H43" />
-      <AllowPatch name="G8AP_124" />
+      <AllowPatch name="G8AP_126" />
     </Residue>
     <Residue name="2300RL">
       <Atom charge="-0.667" name="O1" type="2300RL-O1" />
@@ -92671,7 +92672,7 @@
       <Bond atomName1="C23" atomName2="H35" />
       <AllowPatch name="MET2_0" />
       <AllowPatch name="3POMP_1" />
-      <AllowPatch name="G8AP_104" />
+      <AllowPatch name="G8AP_105" />
     </Residue>
     <Residue name="2300S1">
       <Atom charge="0.324" name="H01" type="2300S1-H01" />
@@ -94727,7 +94728,7 @@
       <Bond atomName1="C14" atomName2="H22" />
       <AllowPatch name="HYD2_1" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_95" />
+      <AllowPatch name="G8AP_96" />
     </Residue>
     <Residue name="2300T3">
       <Atom charge="-0.279" name="C1" type="2300T3-C1" />
@@ -99666,7 +99667,7 @@
       <Bond atomName1="C01" atomName2="C11" />
       <Bond atomName1="C11" atomName2="H12" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_87" />
+      <AllowPatch name="G8AP_88" />
     </Residue>
     <Residue name="2300VK">
       <Atom charge="-0.312" name="C1" type="2300VK-C1" />
@@ -99949,7 +99950,7 @@
       <AllowPatch name="HYD2_2" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_75" />
+      <AllowPatch name="G8AP_76" />
     </Residue>
     <Residue name="2300VO">
       <Atom charge="-0.259" name="C02" type="2300VO-C02" />
@@ -102543,7 +102544,7 @@
       <Bond atomName1="N13" atomName2="H16" />
       <Bond atomName1="C17" atomName2="H32" />
       <Bond atomName1="C17" atomName2="H33" />
-      <AllowPatch name="G8AP_89" />
+      <AllowPatch name="G8AP_90" />
     </Residue>
     <Residue name="2300X1">
       <Atom charge="-0.179" name="C02" type="2300X1-C02" />
@@ -102697,7 +102698,7 @@
       <Bond atomName1="C14" atomName2="N16" />
       <Bond atomName1="N16" atomName2="H34" />
       <Bond atomName1="N16" atomName2="H35" />
-      <AllowPatch name="G8AP_79" />
+      <AllowPatch name="G8AP_80" />
     </Residue>
     <Residue name="2300X4">
       <Atom charge="0.016" name="C1" type="2300X4-C1" />
@@ -104186,7 +104187,7 @@
       <Bond atomName1="C13" atomName2="C14" />
       <Bond atomName1="C14" atomName2="N15" />
       <Bond atomName1="N15" atomName2="C16" />
-      <AllowPatch name="G8AP_98" />
+      <AllowPatch name="G8AP_99" />
     </Residue>
     <Residue name="2300XY">
       <Atom charge="0.09" name="C01" type="2300XY-C01" />
@@ -104722,7 +104723,7 @@
       <Bond atomName1="C01" atomName2="N13" />
       <AllowPatch name="MET1_0" />
       <AllowPatch name="MET2_0" />
-      <AllowPatch name="G8AP_102" />
+      <AllowPatch name="G8AP_103" />
     </Residue>
     <Residue name="2300Y7">
       <Atom charge="-0.128" name="C01" type="2300Y7-C01" />
@@ -105769,7 +105770,7 @@
       <Bond atomName1="C14" atomName2="H33" />
       <Bond atomName1="C15" atomName2="H34" />
       <Bond atomName1="C15" atomName2="H35" />
-      <AllowPatch name="G8AP_76" />
+      <AllowPatch name="G8AP_77" />
     </Residue>
     <Residue name="2300YT">
       <Atom charge="-0.065" name="C01" type="2300YT-C01" />
@@ -109045,7 +109046,7 @@
       <Bond atomName1="C12" atomName2="H26" />
       <Bond atomName1="C12" atomName2="H27" />
       <AllowPatch name="HYD2_0" />
-      <AllowPatch name="G8AP_103" />
+      <AllowPatch name="G8AP_104" />
     </Residue>
     <Residue name="23010O">
       <Atom charge="-0.27" name="C01" type="23010O-C01" />
@@ -109735,7 +109736,7 @@
       <Bond atomName1="C16" atomName2="H36" />
       <Bond atomName1="C16" atomName2="H37" />
       <Bond atomName1="C16" atomName2="H38" />
-      <AllowPatch name="G8AP_99" />
+      <AllowPatch name="G8AP_100" />
     </Residue>
     <Residue name="230111">
       <Atom charge="-0.095" name="C01" type="230111-C01" />
@@ -110020,7 +110021,7 @@
       <Bond atomName1="N17" atomName2="C20" />
       <Bond atomName1="C20" atomName2="H42" />
       <Bond atomName1="C20" atomName2="H43" />
-      <AllowPatch name="G8AP_80" />
+      <AllowPatch name="G8AP_81" />
     </Residue>
     <Residue name="230116">
       <Atom charge="0.152" name="C01" type="230116-C01" />
@@ -111008,7 +111009,7 @@
       <Bond atomName1="C14" atomName2="H33" />
       <Bond atomName1="C16" atomName2="H34" />
       <Bond atomName1="C16" atomName2="H35" />
-      <AllowPatch name="G8AP_124" />
+      <AllowPatch name="G8AP_126" />
     </Residue>
     <Residue name="23011R">
       <Atom charge="0.356" name="H01" type="23011R-H01" />
@@ -111312,7 +111313,7 @@
       <Bond atomName1="C16" atomName2="H35" />
       <Bond atomName1="C17" atomName2="H36" />
       <Bond atomName1="C17" atomName2="H37" />
-      <AllowPatch name="G8AP_94" />
+      <AllowPatch name="G8AP_95" />
     </Residue>
     <Residue name="23011W">
       <Atom charge="0.112" name="C01" type="23011W-C01" />
@@ -111473,7 +111474,7 @@
       <Bond atomName1="C14" atomName2="C17" />
       <Bond atomName1="C17" atomName2="H36" />
       <Bond atomName1="C17" atomName2="H37" />
-      <AllowPatch name="G8AP_113" />
+      <AllowPatch name="G8AP_114" />
     </Residue>
     <Residue name="23011Z">
       <Atom charge="0.136" name="C01" type="23011Z-C01" />
@@ -111634,7 +111635,7 @@
       <Bond atomName1="C15" atomName2="C17" />
       <Bond atomName1="C17" atomName2="H34" />
       <Bond atomName1="C17" atomName2="H35" />
-      <AllowPatch name="G8AP_105" />
+      <AllowPatch name="G8AP_106" />
     </Residue>
     <Residue name="230122">
       <Atom charge="-0.221" name="C1" type="230122-C1" />
@@ -113248,7 +113249,6 @@
       <ApplyToResidue name="IMG" />
       <ApplyToResidue name="IWG" />
       <ApplyToResidue name="MWG" />
-      <ApplyToResidue name="BUG" />
       <ApplyToResidue name="E1X" />
     </Patch>
     <Patch name="5DP_1">
@@ -113317,6 +113317,48 @@
       <ApplyToResidue name="EQG" />
     </Patch>
     <Patch name="GYCO_0">
+      <AddAtom charge="0.51" name="CD" type="GYCO-CD" />
+      <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
+      <AddAtom charge="0.09" name="HG1" type="GYCO-HG1" />
+      <AddAtom charge="0.09" name="HG2" type="GYCO-HG2" />
+      <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
+      <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="CDG" atomName2="CG" />
+      <AddBond atomName1="CDG" atomName2="OEG1" />
+      <AddBond atomName1="CDG" atomName2="OEG2" />
+      <AddBond atomName1="CG" atomName2="HG1" />
+      <AddBond atomName1="CG" atomName2="HG2" />
+      <AddBond atomName1="CG" atomName2="N" />
+      <ChangeAtom charge="-0.28" name="CG" type="GYCO-CG" />
+      <ChangeAtom charge="0.47" name="HN" type="GYCO-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="GYCO-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="GYCO-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="CD1" atomName2="OE2" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="GYCO_1">
+      <AddAtom charge="0.51" name="CD" type="GYCO-CD" />
+      <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
+      <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
+      <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="CDG" atomName2="CG" />
+      <AddBond atomName1="CDG" atomName2="OEG1" />
+      <AddBond atomName1="CDG" atomName2="OEG2" />
+      <AddBond atomName1="CG" atomName2="N" />
+      <ChangeAtom charge="-0.28" name="CG" type="GYCO-CG" />
+      <ChangeAtom charge="0.09" name="HG1" type="GYCO-HG1" />
+      <ChangeAtom charge="0.09" name="HG2" type="GYCO-HG2" />
+      <ChangeAtom charge="0.47" name="HN" type="GYCO-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="GYCO-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="GYCO-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="OE2" atomName2="SD" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="GYCO_2">
       <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
       <AddAtom charge="-0.28" name="CG" type="GYCO-CG" />
       <AddAtom charge="0.09" name="HG1" type="GYCO-HG1" />
@@ -113338,7 +113380,29 @@
       <RemoveAtom name="OE2" />
       <RemoveBond atomName1="CD" atomName2="OE2" />
     </Patch>
-    <Patch name="GYCO_1">
+    <Patch name="GYCO_3">
+      <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
+      <AddAtom charge="-0.28" name="CG" type="GYCO-CG" />
+      <AddAtom charge="0.09" name="HG1" type="GYCO-HG1" />
+      <AddAtom charge="0.09" name="HG2" type="GYCO-HG2" />
+      <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
+      <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="CDG" atomName2="CG" />
+      <AddBond atomName1="CDG" atomName2="OEG1" />
+      <AddBond atomName1="CDG" atomName2="OEG2" />
+      <AddBond atomName1="CG" atomName2="HG1" />
+      <AddBond atomName1="CG" atomName2="HG2" />
+      <AddBond atomName1="CG" atomName2="N" />
+      <ChangeAtom charge="0.51" name="CD" type="GYCO-CD" />
+      <ChangeAtom charge="0.47" name="HN" type="GYCO-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="GYCO-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="GYCO-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="CD" atomName2="OE2" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="GYCO_4">
       <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
       <AddAtom charge="0.09" name="HG1" type="GYCO-HG1" />
       <AddAtom charge="0.09" name="HG2" type="GYCO-HG2" />
@@ -113360,7 +113424,29 @@
       <RemoveAtom name="OE2" />
       <RemoveBond atomName1="CD" atomName2="OE2" />
     </Patch>
-    <Patch name="GYCO_2">
+    <Patch name="GYCO_5">
+      <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
+      <AddAtom charge="0.09" name="HG1" type="GYCO-HG1" />
+      <AddAtom charge="0.09" name="HG2" type="GYCO-HG2" />
+      <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
+      <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="CDG" atomName2="CG" />
+      <AddBond atomName1="CDG" atomName2="OEG1" />
+      <AddBond atomName1="CDG" atomName2="OEG2" />
+      <AddBond atomName1="CG" atomName2="HG1" />
+      <AddBond atomName1="CG" atomName2="HG2" />
+      <AddBond atomName1="CG" atomName2="N" />
+      <ChangeAtom charge="0.51" name="CD" type="GYCO-CD" />
+      <ChangeAtom charge="-0.28" name="CG" type="GYCO-CG" />
+      <ChangeAtom charge="0.47" name="HN" type="GYCO-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="GYCO-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="GYCO-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="CD" atomName2="OE2" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="GYCO_6">
       <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
       <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
       <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
@@ -113386,7 +113472,7 @@
       <ApplyToResidue name="DHF" />
       <ApplyToResidue name="DHFN1" />
     </Patch>
-    <Patch name="GYCO_3">
+    <Patch name="GYCO_7">
       <AddAtom charge="0.62" name="CDG" type="GYCO-CDG" />
       <AddAtom charge="-0.76" name="OEG1" type="GYCO-OEG1" />
       <AddAtom charge="-0.76" name="OEG2" type="GYCO-OEG2" />
@@ -114786,6 +114872,16 @@
     <Patch name="MET1_2">
       <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
       <AddAtom charge="0.09" name="HE1" type="MET1-HE1" />
+      <AddAtom charge="0.09" name="HE2" type="MET1-HE2" />
+      <AddBond atomName1="C1" atomName2="CE" />
+      <AddBond atomName1="CE" atomName2="HE1" />
+      <AddBond atomName1="CE" atomName2="HE2" />
+      <AddBond atomName1="CE" atomName2="HE3" />
+      <ChangeAtom charge="0.09" name="HE3" type="MET1-HE3" />
+    </Patch>
+    <Patch name="MET1_3">
+      <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
+      <AddAtom charge="0.09" name="HE1" type="MET1-HE1" />
       <AddBond atomName1="C1" atomName2="CE" />
       <AddBond atomName1="CE" atomName2="HE1" />
       <AddBond atomName1="CE" atomName2="HE2" />
@@ -114793,7 +114889,7 @@
       <ChangeAtom charge="0.09" name="HE2" type="MET1-HE2" />
       <ChangeAtom charge="0.09" name="HE3" type="MET1-HE3" />
     </Patch>
-    <Patch name="MET1_3">
+    <Patch name="MET1_4">
       <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
       <AddAtom charge="0.09" name="HE2" type="MET1-HE2" />
       <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
@@ -114803,7 +114899,7 @@
       <AddBond atomName1="CE" atomName2="HE3" />
       <ChangeAtom charge="0.09" name="HE1" type="MET1-HE1" />
     </Patch>
-    <Patch name="MET1_4">
+    <Patch name="MET1_5">
       <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
       <AddAtom charge="0.09" name="HE2" type="MET1-HE2" />
       <AddBond atomName1="C1" atomName2="CE" />
@@ -114813,7 +114909,7 @@
       <ChangeAtom charge="0.09" name="HE1" type="MET1-HE1" />
       <ChangeAtom charge="0.09" name="HE3" type="MET1-HE3" />
     </Patch>
-    <Patch name="MET1_5">
+    <Patch name="MET1_6">
       <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
       <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
       <AddBond atomName1="C1" atomName2="CE" />
@@ -114825,7 +114921,7 @@
       <ApplyToResidue name="TRIPAO" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="MET1_6">
+    <Patch name="MET1_7">
       <AddAtom charge="-0.27" name="CE" type="MET1-CE" />
       <AddBond atomName1="C1" atomName2="CE" />
       <AddBond atomName1="CE" atomName2="HE1" />
@@ -114835,7 +114931,7 @@
       <ChangeAtom charge="0.09" name="HE2" type="MET1-HE2" />
       <ChangeAtom charge="0.09" name="HE3" type="MET1-HE3" />
     </Patch>
-    <Patch name="MET1_7">
+    <Patch name="MET1_8">
       <AddAtom charge="0.09" name="HE1" type="MET1-HE1" />
       <AddAtom charge="0.09" name="HE2" type="MET1-HE2" />
       <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
@@ -114845,7 +114941,7 @@
       <AddBond atomName1="CE" atomName2="HE3" />
       <ChangeAtom charge="-0.27" name="CE" type="MET1-CE" />
     </Patch>
-    <Patch name="MET1_8">
+    <Patch name="MET1_9">
       <AddAtom charge="0.09" name="HE1" type="MET1-HE1" />
       <AddBond atomName1="C1" atomName2="CE" />
       <AddBond atomName1="CE" atomName2="HE1" />
@@ -114854,7 +114950,17 @@
       <ChangeAtom charge="0.09" name="HE3" type="MET1-HE3" />
       <ApplyToResidue name="LYR" />
     </Patch>
-    <Patch name="MET1_9">
+    <Patch name="MET1_10">
+      <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
+      <AddBond atomName1="C1" atomName2="CE" />
+      <AddBond atomName1="CE" atomName2="HE1" />
+      <AddBond atomName1="CE" atomName2="HE2" />
+      <AddBond atomName1="CE" atomName2="HE3" />
+      <ChangeAtom charge="-0.27" name="CE" type="MET1-CE" />
+      <ChangeAtom charge="0.09" name="HE1" type="MET1-HE1" />
+      <ChangeAtom charge="0.09" name="HE2" type="MET1-HE2" />
+    </Patch>
+    <Patch name="MET1_11">
       <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
       <AddBond atomName1="C1" atomName2="CE" />
       <AddBond atomName1="CE" atomName2="HE3" />
@@ -114864,14 +114970,14 @@
       <ApplyToResidue name="DPPGK" />
       <ApplyToResidue name="LYSM" />
     </Patch>
-    <Patch name="MET1_10">
+    <Patch name="MET1_12">
       <AddAtom charge="0.09" name="HE3" type="MET1-HE3" />
       <AddBond atomName1="CE" atomName2="HE3" />
       <ChangeAtom charge="-0.27" name="CE" type="MET1-CE" />
       <ChangeAtom charge="0.09" name="HE1" type="MET1-HE1" />
       <ChangeAtom charge="0.09" name="HE2" type="MET1-HE2" />
     </Patch>
-    <Patch name="MET1_11">
+    <Patch name="MET1_13">
       <AddBond atomName1="C1" atomName2="CE" />
       <ChangeAtom charge="-0.27" name="CE" type="MET1-CE" />
       <ChangeAtom charge="0.09" name="HE1" type="MET1-HE1" />
@@ -115072,7 +115178,6 @@
       <ApplyToResidue name="YYG" />
       <ApplyToResidue name="HWG" />
       <ApplyToResidue name="PBG" />
-      <ApplyToResidue name="BUG" />
       <ApplyToResidue name="BMQG" />
       <ApplyToResidue name="CYPR" />
       <ApplyToResidue name="CYTH" />
@@ -115414,6 +115519,16 @@
     </Patch>
     <Patch name="MET2_3">
       <AddAtom charge="-0.27" name="CA" type="MET2-CA" />
+      <AddAtom charge="0.09" name="HA3" type="MET2-HA3" />
+      <AddBond atomName1="C2" atomName2="CA" />
+      <AddBond atomName1="CA" atomName2="HA1" />
+      <AddBond atomName1="CA" atomName2="HA2" />
+      <AddBond atomName1="CA" atomName2="HA3" />
+      <ChangeAtom charge="0.09" name="HA1" type="MET2-HA1" />
+      <ChangeAtom charge="0.09" name="HA2" type="MET2-HA2" />
+    </Patch>
+    <Patch name="MET2_4">
+      <AddAtom charge="-0.27" name="CA" type="MET2-CA" />
       <AddBond atomName1="C2" atomName2="CA" />
       <AddBond atomName1="CA" atomName2="HA1" />
       <AddBond atomName1="CA" atomName2="HA2" />
@@ -115422,7 +115537,7 @@
       <ChangeAtom charge="0.09" name="HA2" type="MET2-HA2" />
       <ChangeAtom charge="0.09" name="HA3" type="MET2-HA3" />
     </Patch>
-    <Patch name="MET2_4">
+    <Patch name="MET2_5">
       <AddAtom charge="0.09" name="HA1" type="MET2-HA1" />
       <AddAtom charge="0.09" name="HA2" type="MET2-HA2" />
       <AddAtom charge="0.09" name="HA3" type="MET2-HA3" />
@@ -115446,7 +115561,7 @@
       <ApplyToResidue name="CYSF" />
       <ApplyToResidue name="CYSG" />
     </Patch>
-    <Patch name="MET2_5">
+    <Patch name="MET2_6">
       <AddAtom charge="0.09" name="HA1" type="MET2-HA1" />
       <AddBond atomName1="C2" atomName2="CA" />
       <AddBond atomName1="CA" atomName2="HA1" />
@@ -115454,7 +115569,7 @@
       <ChangeAtom charge="0.09" name="HA2" type="MET2-HA2" />
       <ChangeAtom charge="0.09" name="HA3" type="MET2-HA3" />
     </Patch>
-    <Patch name="MET2_6">
+    <Patch name="MET2_7">
       <AddAtom charge="0.09" name="HA3" type="MET2-HA3" />
       <AddBond atomName1="C2" atomName2="CA" />
       <AddBond atomName1="CA" atomName2="HA3" />
@@ -115463,7 +115578,7 @@
       <ChangeAtom charge="0.09" name="HA2" type="MET2-HA2" />
       <ApplyToResidue name="GLYM" />
     </Patch>
-    <Patch name="MET2_7">
+    <Patch name="MET2_8">
       <AddBond atomName1="C2" atomName2="CA" />
       <ChangeAtom charge="-0.27" name="CA" type="MET2-CA" />
       <ChangeAtom charge="0.09" name="HA1" type="MET2-HA1" />
@@ -117445,7 +117560,6 @@
       <ApplyToResidue name="YYG" />
       <ApplyToResidue name="HWG" />
       <ApplyToResidue name="PBG" />
-      <ApplyToResidue name="BUG" />
       <ApplyToResidue name="SDS" />
       <ApplyToResidue name="LAPAO" />
       <ApplyToResidue name="LAPAOP" />
@@ -118384,6 +118498,30 @@
       <ChangeAtom charge="0.3" name="CE2" type="2A46PD-CE2" />
       <RemoveAtom name="HE1" />
       <RemoveAtom name="HE2" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
+      <RemoveBond atomName1="CE" atomName2="HE2" />
+    </Patch>
+    <Patch name="2A46PD_2">
+      <AddAtom charge="-0.27" name="CM1" type="2A46PD-CM1" />
+      <AddAtom charge="-0.27" name="CM2" type="2A46PD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="2A46PD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="2A46PD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="2A46PD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="2A46PD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="2A46PD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="2A46PD-HM23" />
+      <AddBond atomName1="CE1" atomName2="CM1" />
+      <AddBond atomName1="CE2" atomName2="CM2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <ChangeAtom charge="0.0" name="CE1" type="2A46PD-CE1" />
+      <ChangeAtom charge="0.3" name="CE2" type="2A46PD-CE2" />
+      <RemoveAtom name="HE1" />
+      <RemoveAtom name="HE2" />
       <RemoveBond atomName1="CE1" atomName2="HE1" />
       <RemoveBond atomName1="CE2" atomName2="HE2" />
       <ApplyToResidue name="PHE" />
@@ -118393,7 +118531,7 @@
       <ApplyToResidue name="TRIPAO" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="2A46PD_2">
+    <Patch name="2A46PD_3">
       <AddAtom charge="-0.27" name="CM1" type="2A46PD-CM1" />
       <AddAtom charge="-0.27" name="CM2" type="2A46PD-CM2" />
       <AddAtom charge="0.09" name="HM11" type="2A46PD-HM11" />
@@ -118417,7 +118555,7 @@
       <RemoveBond atomName1="CE2" atomName2="HE2" />
       <RemoveBond atomName1="HE1" atomName2="OE1" />
     </Patch>
-    <Patch name="2A46PD_3">
+    <Patch name="2A46PD_4">
       <AddAtom charge="0.09" name="HM11" type="2A46PD-HM11" />
       <AddAtom charge="0.09" name="HM12" type="2A46PD-HM12" />
       <AddAtom charge="0.09" name="HM13" type="2A46PD-HM13" />
@@ -118642,16 +118780,7 @@
       <AddBond atomName1="CM" atomName2="HM3" />
       <ChangeAtom charge="0.0" name="CE1" type="3MBD-CE1" />
       <RemoveAtom name="HE1" />
-      <RemoveBond atomName1="CE1" atomName2="HE1" />
-      <ApplyToResidue name="HSD" />
-      <ApplyToResidue name="HSE" />
-      <ApplyToResidue name="HSP" />
-      <ApplyToResidue name="PHE" />
-      <ApplyToResidue name="TYR" />
-      <ApplyToResidue name="PTR" />
-      <ApplyToResidue name="PYRE" />
-      <ApplyToResidue name="TRIPAO" />
-      <ApplyToResidue name="TRPAOP" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
     </Patch>
     <Patch name="3MBD_2">
       <AddAtom charge="-0.27" name="CM" type="3MBD-CM" />
@@ -118664,9 +118793,31 @@
       <AddBond atomName1="CM" atomName2="HM3" />
       <ChangeAtom charge="0.0" name="CE1" type="3MBD-CE1" />
       <RemoveAtom name="HE1" />
-      <RemoveBond atomName1="HE1" atomName2="OE1" />
+      <RemoveBond atomName1="CE1" atomName2="HE1" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="PTR" />
+      <ApplyToResidue name="PYRE" />
+      <ApplyToResidue name="TRIPAO" />
+      <ApplyToResidue name="TRPAOP" />
     </Patch>
     <Patch name="3MBD_3">
+      <AddAtom charge="-0.27" name="CM" type="3MBD-CM" />
+      <AddAtom charge="0.09" name="HM1" type="3MBD-HM1" />
+      <AddAtom charge="0.09" name="HM2" type="3MBD-HM2" />
+      <AddAtom charge="0.09" name="HM3" type="3MBD-HM3" />
+      <AddBond atomName1="CE1" atomName2="CM" />
+      <AddBond atomName1="CM" atomName2="HM1" />
+      <AddBond atomName1="CM" atomName2="HM2" />
+      <AddBond atomName1="CM" atomName2="HM3" />
+      <ChangeAtom charge="0.0" name="CE1" type="3MBD-CE1" />
+      <RemoveAtom name="HE1" />
+      <RemoveBond atomName1="HE1" atomName2="OE1" />
+    </Patch>
+    <Patch name="3MBD_4">
       <AddAtom charge="-0.27" name="CM" type="3MBD-CM" />
       <AddAtom charge="0.09" name="HM3" type="3MBD-HM3" />
       <AddBond atomName1="CE1" atomName2="CM" />
@@ -118679,7 +118830,7 @@
       <RemoveAtom name="HE1" />
       <RemoveBond atomName1="CE1" atomName2="HE1" />
     </Patch>
-    <Patch name="3MBD_4">
+    <Patch name="3MBD_5">
       <AddBond atomName1="CE1" atomName2="CM" />
       <ChangeAtom charge="0.0" name="CE1" type="3MBD-CE1" />
       <ChangeAtom charge="-0.27" name="CM" type="3MBD-CM" />
@@ -118747,6 +118898,28 @@
       <ApplyToResidue name="PALIPE" />
       <ApplyToResidue name="SELIPB" />
     </Patch>
+    <Patch name="2XBD_2">
+      <AddAtom charge="0.62" name="CX" type="2XBD-CX" />
+      <AddAtom charge="-0.76" name="OX1" type="2XBD-OX1" />
+      <AddAtom charge="-0.76" name="OX2" type="2XBD-OX2" />
+      <AddBond atomName1="CD2" atomName2="CX" />
+      <AddBond atomName1="CX" atomName2="OX1" />
+      <AddBond atomName1="CX" atomName2="OX2" />
+      <ChangeAtom charge="-0.1" name="CD2" type="2XBD-CD2" />
+      <RemoveAtom name="HD2" />
+      <RemoveBond atomName1="HD2" atomName2="OD2" />
+    </Patch>
+    <Patch name="2XBD_3">
+      <AddAtom charge="-0.76" name="OX1" type="2XBD-OX1" />
+      <AddAtom charge="-0.76" name="OX2" type="2XBD-OX2" />
+      <AddBond atomName1="CD2" atomName2="CX" />
+      <AddBond atomName1="CX" atomName2="OX1" />
+      <AddBond atomName1="CX" atomName2="OX2" />
+      <ChangeAtom charge="-0.1" name="CD2" type="2XBD-CD2" />
+      <ChangeAtom charge="0.62" name="CX" type="2XBD-CX" />
+      <RemoveAtom name="HD2" />
+      <RemoveBond atomName1="CD2" atomName2="HD2" />
+    </Patch>
     <Patch name="3XBD_0">
       <AddAtom charge="-0.1" name="CE1" type="3XBD-CE1" />
       <AddAtom charge="-0.76" name="OX1" type="3XBD-OX1" />
@@ -118767,6 +118940,17 @@
       <AddBond atomName1="CX" atomName2="OX2" />
       <ChangeAtom charge="-0.1" name="CE1" type="3XBD-CE1" />
       <RemoveAtom name="HE1" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
+    </Patch>
+    <Patch name="3XBD_2">
+      <AddAtom charge="0.62" name="CX" type="3XBD-CX" />
+      <AddAtom charge="-0.76" name="OX1" type="3XBD-OX1" />
+      <AddAtom charge="-0.76" name="OX2" type="3XBD-OX2" />
+      <AddBond atomName1="CE1" atomName2="CX" />
+      <AddBond atomName1="CX" atomName2="OX1" />
+      <AddBond atomName1="CX" atomName2="OX2" />
+      <ChangeAtom charge="-0.1" name="CE1" type="3XBD-CE1" />
+      <RemoveAtom name="HE1" />
       <RemoveBond atomName1="CE1" atomName2="HE1" />
       <ApplyToResidue name="HSD" />
       <ApplyToResidue name="HSE" />
@@ -118778,7 +118962,7 @@
       <ApplyToResidue name="TRIPAO" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="3XBD_2">
+    <Patch name="3XBD_3">
       <AddAtom charge="0.62" name="CX" type="3XBD-CX" />
       <AddAtom charge="-0.76" name="OX1" type="3XBD-OX1" />
       <AddAtom charge="-0.76" name="OX2" type="3XBD-OX2" />
@@ -118788,6 +118972,17 @@
       <ChangeAtom charge="-0.1" name="CE1" type="3XBD-CE1" />
       <RemoveAtom name="HE1" />
       <RemoveBond atomName1="HE1" atomName2="OE1" />
+    </Patch>
+    <Patch name="3XBD_4">
+      <AddAtom charge="-0.76" name="OX1" type="3XBD-OX1" />
+      <AddAtom charge="-0.76" name="OX2" type="3XBD-OX2" />
+      <AddBond atomName1="CE1" atomName2="CX" />
+      <AddBond atomName1="CX" atomName2="OX1" />
+      <AddBond atomName1="CX" atomName2="OX2" />
+      <ChangeAtom charge="-0.1" name="CE1" type="3XBD-CE1" />
+      <ChangeAtom charge="0.62" name="CX" type="3XBD-CX" />
+      <RemoveAtom name="HE1" />
+      <RemoveBond atomName1="CE1" atomName2="HE1" />
     </Patch>
     <Patch name="4XBD_0">
       <AddAtom charge="0.62" name="CX" type="4XBD-CX" />
@@ -119047,16 +119242,7 @@
       <AddBond atomName1="CM" atomName2="OE" />
       <ChangeAtom charge="0.11" name="CE1" type="3AMFD-CE1" />
       <RemoveAtom name="HE1" />
-      <RemoveBond atomName1="CE1" atomName2="HE1" />
-      <ApplyToResidue name="HSD" />
-      <ApplyToResidue name="HSE" />
-      <ApplyToResidue name="HSP" />
-      <ApplyToResidue name="PHE" />
-      <ApplyToResidue name="TYR" />
-      <ApplyToResidue name="PTR" />
-      <ApplyToResidue name="PYRE" />
-      <ApplyToResidue name="TRIPAO" />
-      <ApplyToResidue name="TRPAOP" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
     </Patch>
     <Patch name="3AMFD_3">
       <AddAtom charge="0.16" name="CM" type="3AMFD-CM" />
@@ -119071,9 +119257,33 @@
       <AddBond atomName1="CM" atomName2="OE" />
       <ChangeAtom charge="0.11" name="CE1" type="3AMFD-CE1" />
       <RemoveAtom name="HE1" />
-      <RemoveBond atomName1="HE1" atomName2="OE1" />
+      <RemoveBond atomName1="CE1" atomName2="HE1" />
+      <ApplyToResidue name="HSD" />
+      <ApplyToResidue name="HSE" />
+      <ApplyToResidue name="HSP" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="PTR" />
+      <ApplyToResidue name="PYRE" />
+      <ApplyToResidue name="TRIPAO" />
+      <ApplyToResidue name="TRPAOP" />
     </Patch>
     <Patch name="3AMFD_4">
+      <AddAtom charge="0.16" name="CM" type="3AMFD-CM" />
+      <AddAtom charge="0.09" name="HM1" type="3AMFD-HM1" />
+      <AddAtom charge="0.09" name="HM2" type="3AMFD-HM2" />
+      <AddAtom charge="0.09" name="HM3" type="3AMFD-HM3" />
+      <AddAtom charge="-0.54" name="OE" type="3AMFD-OE" />
+      <AddBond atomName1="CE1" atomName2="OE" />
+      <AddBond atomName1="CM" atomName2="HM1" />
+      <AddBond atomName1="CM" atomName2="HM2" />
+      <AddBond atomName1="CM" atomName2="HM3" />
+      <AddBond atomName1="CM" atomName2="OE" />
+      <ChangeAtom charge="0.11" name="CE1" type="3AMFD-CE1" />
+      <RemoveAtom name="HE1" />
+      <RemoveBond atomName1="HE1" atomName2="OE1" />
+    </Patch>
+    <Patch name="3AMFD_5">
       <AddAtom charge="0.16" name="CM" type="3AMFD-CM" />
       <AddAtom charge="0.09" name="HM3" type="3AMFD-HM3" />
       <AddAtom charge="-0.54" name="OE" type="3AMFD-OE" />
@@ -119088,7 +119298,7 @@
       <RemoveAtom name="HE1" />
       <RemoveBond atomName1="CE1" atomName2="HE1" />
     </Patch>
-    <Patch name="3AMFD_5">
+    <Patch name="3AMFD_6">
       <AddAtom charge="-0.54" name="OE" type="3AMFD-OE" />
       <AddBond atomName1="CE1" atomName2="OE" />
       <AddBond atomName1="CM" atomName2="OE" />
@@ -119204,6 +119414,30 @@
       <RemoveBond atomName1="HD1" atomName2="OD1" />
     </Patch>
     <Patch name="26MD_3">
+      <AddAtom charge="-0.27" name="CM1" type="26MD-CM1" />
+      <AddAtom charge="-0.27" name="CM2" type="26MD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="26MD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="26MD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="26MD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="26MD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="26MD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="26MD-HM23" />
+      <AddBond atomName1="CD1" atomName2="CM1" />
+      <AddBond atomName1="CD2" atomName2="CM2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <ChangeAtom charge="0.0" name="CD1" type="26MD-CD1" />
+      <ChangeAtom charge="0.0" name="CD2" type="26MD-CD2" />
+      <RemoveAtom name="HD1" />
+      <RemoveAtom name="HD2" />
+      <RemoveBond atomName1="HD1" atomName2="OD1" />
+      <RemoveBond atomName1="HD2" atomName2="OD2" />
+    </Patch>
+    <Patch name="26MD_4">
       <AddAtom charge="0.09" name="HM11" type="26MD-HM11" />
       <AddAtom charge="0.09" name="HM12" type="26MD-HM12" />
       <AddAtom charge="0.09" name="HM13" type="26MD-HM13" />
@@ -119267,13 +119501,7 @@
       <RemoveAtom name="HD1" />
       <RemoveAtom name="HE1" />
       <RemoveBond atomName1="CD1" atomName2="HD1" />
-      <RemoveBond atomName1="CE1" atomName2="HE1" />
-      <ApplyToResidue name="PHE" />
-      <ApplyToResidue name="TYR" />
-      <ApplyToResidue name="PTR" />
-      <ApplyToResidue name="PYRE" />
-      <ApplyToResidue name="TRIPAO" />
-      <ApplyToResidue name="TRPAOP" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
     </Patch>
     <Patch name="23MD_2">
       <AddAtom charge="-0.27" name="CM1" type="23MD-CM1" />
@@ -119297,9 +119525,39 @@
       <RemoveAtom name="HD1" />
       <RemoveAtom name="HE1" />
       <RemoveBond atomName1="CD1" atomName2="HD1" />
-      <RemoveBond atomName1="HE1" atomName2="OE1" />
+      <RemoveBond atomName1="CE1" atomName2="HE1" />
+      <ApplyToResidue name="PHE" />
+      <ApplyToResidue name="TYR" />
+      <ApplyToResidue name="PTR" />
+      <ApplyToResidue name="PYRE" />
+      <ApplyToResidue name="TRIPAO" />
+      <ApplyToResidue name="TRPAOP" />
     </Patch>
     <Patch name="23MD_3">
+      <AddAtom charge="-0.27" name="CM1" type="23MD-CM1" />
+      <AddAtom charge="-0.27" name="CM2" type="23MD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="23MD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="23MD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="23MD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="23MD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="23MD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="23MD-HM23" />
+      <AddBond atomName1="CD1" atomName2="CM1" />
+      <AddBond atomName1="CE1" atomName2="CM2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <ChangeAtom charge="0.0" name="CD1" type="23MD-CD1" />
+      <ChangeAtom charge="0.0" name="CE1" type="23MD-CE1" />
+      <RemoveAtom name="HD1" />
+      <RemoveAtom name="HE1" />
+      <RemoveBond atomName1="CD1" atomName2="HD1" />
+      <RemoveBond atomName1="HE1" atomName2="OE1" />
+    </Patch>
+    <Patch name="23MD_4">
       <AddAtom charge="-0.27" name="CM1" type="23MD-CM1" />
       <AddAtom charge="-0.27" name="CM2" type="23MD-CM2" />
       <AddAtom charge="0.09" name="HM11" type="23MD-HM11" />
@@ -119323,7 +119581,7 @@
       <RemoveBond atomName1="CE1" atomName2="HE1" />
       <RemoveBond atomName1="HD1" atomName2="OD1" />
     </Patch>
-    <Patch name="23MD_4">
+    <Patch name="23MD_5">
       <AddAtom charge="0.09" name="HM11" type="23MD-HM11" />
       <AddAtom charge="0.09" name="HM12" type="23MD-HM12" />
       <AddAtom charge="0.09" name="HM13" type="23MD-HM13" />
@@ -119378,6 +119636,34 @@
     <Patch name="35MFD_0">
       <AddAtom charge="0.11" name="CE1" type="35MFD-CE1" />
       <AddAtom charge="0.11" name="CE2" type="35MFD-CE2" />
+      <AddAtom charge="0.16" name="CM1" type="35MFD-CM1" />
+      <AddAtom charge="0.16" name="CM2" type="35MFD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="35MFD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="35MFD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="35MFD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="35MFD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="35MFD-HM23" />
+      <AddBond atomName1="CE1" atomName2="OE1" />
+      <AddBond atomName1="CE2" atomName2="OE2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM1" atomName2="OE1" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <AddBond atomName1="CM2" atomName2="OE2" />
+      <ChangeAtom charge="-0.54" name="OE1" type="35MFD-OE1" />
+      <ChangeAtom charge="-0.54" name="OE2" type="35MFD-OE2" />
+      <RemoveAtom name="HE1" />
+      <RemoveAtom name="HE2" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
+      <RemoveBond atomName1="CE" atomName2="HE2" />
+    </Patch>
+    <Patch name="35MFD_1">
+      <AddAtom charge="0.11" name="CE1" type="35MFD-CE1" />
+      <AddAtom charge="0.11" name="CE2" type="35MFD-CE2" />
       <AddAtom charge="-0.54" name="OE1" type="35MFD-OE1" />
       <AddAtom charge="-0.54" name="OE2" type="35MFD-OE2" />
       <AddBond atomName1="CE1" atomName2="OE1" />
@@ -119397,7 +119683,35 @@
       <RemoveBond atomName1="CE" atomName2="HE1" />
       <RemoveBond atomName1="CE" atomName2="HE2" />
     </Patch>
-    <Patch name="35MFD_1">
+    <Patch name="35MFD_2">
+      <AddAtom charge="0.16" name="CM1" type="35MFD-CM1" />
+      <AddAtom charge="0.16" name="CM2" type="35MFD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="35MFD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="35MFD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="35MFD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="35MFD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="35MFD-HM23" />
+      <AddAtom charge="-0.54" name="OE1" type="35MFD-OE1" />
+      <AddAtom charge="-0.54" name="OE2" type="35MFD-OE2" />
+      <AddBond atomName1="CE1" atomName2="OE1" />
+      <AddBond atomName1="CE2" atomName2="OE2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM1" atomName2="OE1" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <AddBond atomName1="CM2" atomName2="OE2" />
+      <ChangeAtom charge="0.11" name="CE1" type="35MFD-CE1" />
+      <ChangeAtom charge="0.11" name="CE2" type="35MFD-CE2" />
+      <RemoveAtom name="HE1" />
+      <RemoveAtom name="HE2" />
+      <RemoveBond atomName1="CE" atomName2="HE1" />
+      <RemoveBond atomName1="CE" atomName2="HE2" />
+    </Patch>
+    <Patch name="35MFD_3">
       <AddAtom charge="0.16" name="CM1" type="35MFD-CM1" />
       <AddAtom charge="0.16" name="CM2" type="35MFD-CM2" />
       <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
@@ -119431,7 +119745,35 @@
       <ApplyToResidue name="TRIPAO" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="35MFD_2">
+    <Patch name="35MFD_4">
+      <AddAtom charge="0.16" name="CM1" type="35MFD-CM1" />
+      <AddAtom charge="0.16" name="CM2" type="35MFD-CM2" />
+      <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
+      <AddAtom charge="0.09" name="HM12" type="35MFD-HM12" />
+      <AddAtom charge="0.09" name="HM13" type="35MFD-HM13" />
+      <AddAtom charge="0.09" name="HM21" type="35MFD-HM21" />
+      <AddAtom charge="0.09" name="HM22" type="35MFD-HM22" />
+      <AddAtom charge="0.09" name="HM23" type="35MFD-HM23" />
+      <AddAtom charge="-0.54" name="OE2" type="35MFD-OE2" />
+      <AddBond atomName1="CE1" atomName2="OE1" />
+      <AddBond atomName1="CE2" atomName2="OE2" />
+      <AddBond atomName1="CM1" atomName2="HM11" />
+      <AddBond atomName1="CM1" atomName2="HM12" />
+      <AddBond atomName1="CM1" atomName2="HM13" />
+      <AddBond atomName1="CM1" atomName2="OE1" />
+      <AddBond atomName1="CM2" atomName2="HM21" />
+      <AddBond atomName1="CM2" atomName2="HM22" />
+      <AddBond atomName1="CM2" atomName2="HM23" />
+      <AddBond atomName1="CM2" atomName2="OE2" />
+      <ChangeAtom charge="0.11" name="CE1" type="35MFD-CE1" />
+      <ChangeAtom charge="0.11" name="CE2" type="35MFD-CE2" />
+      <ChangeAtom charge="-0.54" name="OE1" type="35MFD-OE1" />
+      <RemoveAtom name="HE1" />
+      <RemoveAtom name="HE2" />
+      <RemoveBond atomName1="CE1" atomName2="HE1" />
+      <RemoveBond atomName1="CE2" atomName2="HE2" />
+    </Patch>
+    <Patch name="35MFD_5">
       <AddAtom charge="0.16" name="CM1" type="35MFD-CM1" />
       <AddAtom charge="0.16" name="CM2" type="35MFD-CM2" />
       <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
@@ -119458,7 +119800,7 @@
       <RemoveBond atomName1="CE2" atomName2="HE2" />
       <RemoveBond atomName1="HE1" atomName2="OE1" />
     </Patch>
-    <Patch name="35MFD_3">
+    <Patch name="35MFD_6">
       <AddAtom charge="0.09" name="HM11" type="35MFD-HM11" />
       <AddAtom charge="0.09" name="HM12" type="35MFD-HM12" />
       <AddAtom charge="0.09" name="HM13" type="35MFD-HM13" />
@@ -119995,6 +120337,66 @@
     <Patch name="TAUR_0">
       <AddAtom charge="-0.02" name="C1G" type="TAUR-C1G" />
       <AddAtom charge="-0.26" name="C2G" type="TAUR-C2G" />
+      <AddAtom charge="0.51" name="CD" type="TAUR-CD" />
+      <AddAtom charge="0.09" name="H1GA" type="TAUR-H1GA" />
+      <AddAtom charge="0.09" name="H1GB" type="TAUR-H1GB" />
+      <AddAtom charge="0.09" name="H2GA" type="TAUR-H2GA" />
+      <AddAtom charge="0.09" name="H2GB" type="TAUR-H2GB" />
+      <AddAtom charge="-0.55" name="O1S" type="TAUR-O1S" />
+      <AddAtom charge="-0.55" name="O2S" type="TAUR-O2S" />
+      <AddAtom charge="-0.55" name="O3S" type="TAUR-O3S" />
+      <AddAtom charge="0.73" name="S" type="TAUR-S" />
+      <AddBond atomName1="C1G" atomName2="C2G" />
+      <AddBond atomName1="C1G" atomName2="H1GA" />
+      <AddBond atomName1="C1G" atomName2="H1GB" />
+      <AddBond atomName1="C1G" atomName2="N" />
+      <AddBond atomName1="C2G" atomName2="H2GA" />
+      <AddBond atomName1="C2G" atomName2="H2GB" />
+      <AddBond atomName1="C2G" atomName2="S" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="O1S" atomName2="S" />
+      <AddBond atomName1="O2S" atomName2="S" />
+      <AddBond atomName1="O3S" atomName2="S" />
+      <ChangeAtom charge="0.31" name="HN" type="TAUR-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="TAUR-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="TAUR-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="CD1" atomName2="OE2" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="TAUR_1">
+      <AddAtom charge="-0.02" name="C1G" type="TAUR-C1G" />
+      <AddAtom charge="-0.26" name="C2G" type="TAUR-C2G" />
+      <AddAtom charge="0.51" name="CD" type="TAUR-CD" />
+      <AddAtom charge="0.09" name="H1GA" type="TAUR-H1GA" />
+      <AddAtom charge="0.09" name="H1GB" type="TAUR-H1GB" />
+      <AddAtom charge="0.09" name="H2GA" type="TAUR-H2GA" />
+      <AddAtom charge="0.09" name="H2GB" type="TAUR-H2GB" />
+      <AddAtom charge="-0.55" name="O1S" type="TAUR-O1S" />
+      <AddAtom charge="-0.55" name="O2S" type="TAUR-O2S" />
+      <AddAtom charge="-0.55" name="O3S" type="TAUR-O3S" />
+      <AddAtom charge="0.73" name="S" type="TAUR-S" />
+      <AddBond atomName1="C1G" atomName2="C2G" />
+      <AddBond atomName1="C1G" atomName2="H1GA" />
+      <AddBond atomName1="C1G" atomName2="H1GB" />
+      <AddBond atomName1="C1G" atomName2="N" />
+      <AddBond atomName1="C2G" atomName2="H2GA" />
+      <AddBond atomName1="C2G" atomName2="H2GB" />
+      <AddBond atomName1="C2G" atomName2="S" />
+      <AddBond atomName1="CD" atomName2="N" />
+      <AddBond atomName1="O1S" atomName2="S" />
+      <AddBond atomName1="O2S" atomName2="S" />
+      <AddBond atomName1="O3S" atomName2="S" />
+      <ChangeAtom charge="0.31" name="HN" type="TAUR-HN" />
+      <ChangeAtom charge="-0.47" name="N" type="TAUR-N" />
+      <ChangeAtom charge="-0.51" name="OE1" type="TAUR-OE1" />
+      <RemoveAtom name="OE2" />
+      <RemoveBond atomName1="OE2" atomName2="SD" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="TAUR_2">
+      <AddAtom charge="-0.02" name="C1G" type="TAUR-C1G" />
+      <AddAtom charge="-0.26" name="C2G" type="TAUR-C2G" />
       <AddAtom charge="0.09" name="H1GA" type="TAUR-H1GA" />
       <AddAtom charge="0.09" name="H1GB" type="TAUR-H1GB" />
       <AddAtom charge="0.09" name="H2GA" type="TAUR-H2GA" />
@@ -120022,7 +120424,7 @@
       <RemoveAtom name="OE2" />
       <RemoveBond atomName1="CD" atomName2="OE2" />
     </Patch>
-    <Patch name="TAUR_1">
+    <Patch name="TAUR_3">
       <AddAtom charge="-0.02" name="C1G" type="TAUR-C1G" />
       <AddAtom charge="-0.26" name="C2G" type="TAUR-C2G" />
       <AddAtom charge="0.09" name="H1GA" type="TAUR-H1GA" />
@@ -120058,7 +120460,7 @@
       <ApplyToResidue name="DHF" />
       <ApplyToResidue name="DHFN1" />
     </Patch>
-    <Patch name="TAUR_2">
+    <Patch name="TAUR_4">
       <AddAtom charge="-0.02" name="C1G" type="TAUR-C1G" />
       <AddAtom charge="-0.26" name="C2G" type="TAUR-C2G" />
       <AddAtom charge="0.09" name="H1GA" type="TAUR-H1GA" />

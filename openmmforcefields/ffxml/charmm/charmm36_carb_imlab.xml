@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2026-08-31</DateGenerated>
+    <DateGenerated>2026-09-02</DateGenerated>
     <Source Source="toppar/top_all36_prot.rtf" md5hash="4e53dc8450d0533691e95e37c2648d20" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/top_all36_prot.rtf</Source>
     <Source Source="toppar/par_all36m_prot.prm" md5hash="ff62b63c74f62fde2e1a458c0eaa29c9" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/par_all36m_prot.prm</Source>
     <Source Source="toppar/top_all36_na.rtf" md5hash="ffd9d681ff73591157e2458e336ab4a3" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/top_all36_na.rtf</Source>
@@ -18,6 +18,7 @@
     <Source Source="toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str" md5hash="d6eae27ee5a51f5b4b19ae5126200210" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_c36m_d_aminoacids.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_heme.str" md5hash="7433bc89e1594604ef622c9c75d42b9b" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_heme.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_retinol.str" md5hash="75d80c5939810d5b714f214cd390e590" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_retinol.str</Source>
+    <Source Source="toppar/stream/prot/toppar_all36_prot_modify_res.str" md5hash="840b70c6202349a5847694fc45328134" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_modify_res.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_na_combined.str" md5hash="bd1c68121ac12952b78138e03df6c8cc" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_na_combined.str</Source>
     <Source Source="toppar/stream/prot/toppar_all36_prot_pyridines.str" md5hash="1693884ee2f8b1a3015f0bc596cbf3f4" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/prot/toppar_all36_prot_pyridines.str</Source>
     <Source Source="toppar/stream/na/toppar_all36_na_rna_modified.str" md5hash="4f6ee2582d547cb62dd3189c8c54e2ff" sourcePackage="charmm36" sourcePackageVersion="toppar_c36_feb26.tgz">toppar/stream/na/toppar_all36_na_rna_modified.str</Source>
@@ -210,8 +211,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_6" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_8" />
       <AllowPatch name="1ANGF_1" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TC8_0" />
@@ -362,16 +363,16 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_8" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_10" />
       <AllowPatch name="1ANGF_1" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TC8_0" />
       <AllowPatch name="1ASC8_0" />
       <AllowPatch name="LIPAO1_3" />
-      <AllowPatch name="LIPAN1_0" />
+      <AllowPatch name="LIPAN1_1" />
       <AllowPatch name="LIPAO2_3" />
-      <AllowPatch name="LIPAN2_0" />
+      <AllowPatch name="LIPAN2_1" />
       <AllowPatch name="4ANSDB_0" />
       <AllowPatch name="4ANDHH_0" />
       <AllowPatch name="4ANRHP_0" />
@@ -651,8 +652,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TC8_0" />
@@ -759,8 +760,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="LIPAO1_3" />
       <AllowPatch name="LIPAO2_3" />
@@ -877,8 +878,8 @@
       <AllowPatch name="4ASUFF_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TSFO_3" />
@@ -957,7 +958,7 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
+      <AllowPatch name="PCTE_5" />
       <AllowPatch name="CT2_3" />
       <AllowPatch name="CT3_6" />
       <AllowPatch name="OMEA_0" />
@@ -1020,8 +1021,8 @@
       <AllowPatch name="4ASUFF_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_3" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TSFO_3" />
@@ -1135,8 +1136,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="LIPAO1_3" />
       <AllowPatch name="LIPAO2_3" />
@@ -1500,8 +1501,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_4" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_6" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -1663,8 +1664,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_5" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_7" />
       <AllowPatch name="1ANGF_2" />
       <AllowPatch name="6TC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -1822,8 +1823,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_5" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_7" />
       <AllowPatch name="1ANGF_2" />
       <AllowPatch name="6TC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -1964,8 +1965,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="6TC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -2381,7 +2382,7 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
+      <AllowPatch name="PCTE_5" />
       <AllowPatch name="CT2_3" />
       <AllowPatch name="CT3_4" />
       <AllowPatch name="OMEA_0" />
@@ -2391,8 +2392,8 @@
       <AllowPatch name="4ASUF_0" />
       <AllowPatch name="OB2AC_0" />
       <AllowPatch name="SUFMA_2" />
-      <AllowPatch name="THP1_0" />
-      <AllowPatch name="THPB_0" />
+      <AllowPatch name="THP1_1" />
+      <AllowPatch name="THPB_1" />
       <AllowPatch name="5MC2_4" />
       <AllowPatch name="2AAC_4" />
       <AllowPatch name="2BACF_4" />
@@ -2452,8 +2453,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_3" />
       <AllowPatch name="6TSFO_3" />
       <AllowPatch name="1ASC8_0" />
@@ -2527,9 +2528,9 @@
       <AllowPatch name="GLYP_0" />
       <AllowPatch name="ACE_0" />
       <AllowPatch name="NGNE_0" />
-      <AllowPatch name="CTER_3" />
-      <AllowPatch name="CNEU_3" />
-      <AllowPatch name="PCTE_3" />
+      <AllowPatch name="CTER_4" />
+      <AllowPatch name="CNEU_4" />
+      <AllowPatch name="PCTE_4" />
       <AllowPatch name="CT2_0" />
       <AllowPatch name="CT3_0" />
       <AllowPatch name="OMEA_0" />
@@ -2614,8 +2615,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_10" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_13" />
       <AllowPatch name="1ANGF_5" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -2711,8 +2712,8 @@
       <AllowPatch name="NNEU_2" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
-      <AllowPatch name="CT1_1" />
+      <AllowPatch name="PCTE_5" />
+      <AllowPatch name="CT1_2" />
       <AllowPatch name="CT2_3" />
       <AllowPatch name="CT3_6" />
       <AllowPatch name="OMEA_0" />
@@ -2793,8 +2794,8 @@
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="6COOME_0" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_9" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_11" />
       <AllowPatch name="1ANGF_4" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TC8_0" />
@@ -2873,7 +2874,7 @@
       <AllowPatch name="ACE_0" />
       <AllowPatch name="CTER_1" />
       <AllowPatch name="CNEU_1" />
-      <AllowPatch name="PCTE_4" />
+      <AllowPatch name="PCTE_5" />
       <AllowPatch name="CT2_3" />
       <AllowPatch name="CT3_6" />
       <AllowPatch name="OMEA_0" />
@@ -2940,8 +2941,8 @@
       <AllowPatch name="4ASUFF_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_3" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -3102,8 +3103,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_4" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_6" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="1ASC8_0" />
@@ -3409,8 +3410,8 @@
       <AllowPatch name="2AOME2_0" />
       <AllowPatch name="1ASPRO_2" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
       <AllowPatch name="1ANGF_0" />
       <AllowPatch name="3AC8_0" />
       <AllowPatch name="6TSFO_3" />
@@ -3859,10 +3860,10 @@
       <Bond atomName1="C320" atomName2="H20Z" />
       <AllowPatch name="OMEA_0" />
       <AllowPatch name="FOMEA_0" />
-      <AllowPatch name="1ASPRO_5" />
+      <AllowPatch name="1ASPRO_6" />
       <AllowPatch name="1AMGLY_2" />
-      <AllowPatch name="1AGLYA_2" />
-      <AllowPatch name="1AOS_4" />
+      <AllowPatch name="1AGLYA_3" />
+      <AllowPatch name="1AOS_6" />
     </Residue>
   </Residues>
   <Patches>
@@ -11269,6 +11270,15 @@
       <ApplyToResidue name="ARIB" />
       <ApplyToResidue name="AFRU" />
     </Patch>
+    <Patch name="2ACF2_3">
+      <AddAtom charge="-0.22" name="F22" type="2ACF2-F22" />
+      <AddBond atomName1="C2" atomName2="F22" />
+      <ChangeAtom charge="0.32" name="C2" type="2ACF2-C2" />
+      <RemoveAtom name="HO2" />
+      <RemoveAtom name="O2" />
+      <RemoveBond atomName1="C3" atomName2="O2" />
+      <RemoveBond atomName1="HO2" atomName2="O2" />
+    </Patch>
     <Patch name="3ACF_0">
       <AddAtom charge="-0.22" name="F32" type="3ACF-F32" />
       <AddAtom charge="0.11" name="H31" type="3ACF-H31" />
@@ -11767,7 +11777,6 @@
       <ApplyToResidue name="YYG" />
       <ApplyToResidue name="HWG" />
       <ApplyToResidue name="PBG" />
-      <ApplyToResidue name="BUG" />
       <ApplyToResidue name="SDS" />
       <ApplyToResidue name="LAPAO" />
       <ApplyToResidue name="LAPAOP" />
@@ -13314,13 +13323,42 @@
       <ChangeAtom charge="0.23" name="C1" type="1ASPRO-C1" />
       <RemoveAtom name="HO1" />
       <RemoveAtom name="O1" />
+      <RemoveBond atomName1="C2" atomName2="O1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1ASPRO_4">
+      <AddAtom charge="-0.27" name="C21" type="1ASPRO-C21" />
+      <AddAtom charge="-0.27" name="C22" type="1ASPRO-C22" />
+      <AddAtom charge="-0.11" name="CR" type="1ASPRO-CR" />
+      <AddAtom charge="0.09" name="H211" type="1ASPRO-H211" />
+      <AddAtom charge="0.09" name="H212" type="1ASPRO-H212" />
+      <AddAtom charge="0.09" name="H213" type="1ASPRO-H213" />
+      <AddAtom charge="0.09" name="H221" type="1ASPRO-H221" />
+      <AddAtom charge="0.09" name="H222" type="1ASPRO-H222" />
+      <AddAtom charge="0.09" name="H223" type="1ASPRO-H223" />
+      <AddAtom charge="0.09" name="HR" type="1ASPRO-HR" />
+      <AddAtom charge="-0.1" name="S1" type="1ASPRO-S1" />
+      <AddBond atomName1="C1" atomName2="S1" />
+      <AddBond atomName1="C21" atomName2="CR" />
+      <AddBond atomName1="C21" atomName2="H211" />
+      <AddBond atomName1="C21" atomName2="H212" />
+      <AddBond atomName1="C21" atomName2="H213" />
+      <AddBond atomName1="C22" atomName2="CR" />
+      <AddBond atomName1="C22" atomName2="H221" />
+      <AddBond atomName1="C22" atomName2="H222" />
+      <AddBond atomName1="C22" atomName2="H223" />
+      <AddBond atomName1="CR" atomName2="HR" />
+      <AddBond atomName1="CR" atomName2="S1" />
+      <ChangeAtom charge="0.23" name="C1" type="1ASPRO-C1" />
+      <RemoveAtom name="HO1" />
+      <RemoveAtom name="O1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
       <RemoveBond atomName1="N" atomName2="O1" />
       <ApplyToResidue name="DDAOP" />
       <ApplyToResidue name="UDAOP" />
       <ApplyToResidue name="LDAOP" />
     </Patch>
-    <Patch name="1ASPRO_4">
+    <Patch name="1ASPRO_5">
       <AddAtom charge="-0.27" name="C21" type="1ASPRO-C21" />
       <AddAtom charge="-0.11" name="CR" type="1ASPRO-CR" />
       <AddAtom charge="0.09" name="H211" type="1ASPRO-H211" />
@@ -13351,7 +13389,7 @@
       <ApplyToResidue name="LAPAOP" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="1ASPRO_5">
+    <Patch name="1ASPRO_6">
       <AddAtom charge="-0.11" name="CR" type="1ASPRO-CR" />
       <AddAtom charge="0.09" name="H211" type="1ASPRO-H211" />
       <AddAtom charge="0.09" name="H212" type="1ASPRO-H212" />
@@ -13568,6 +13606,39 @@
       <ChangeAtom charge="0.29" name="C1" type="1AMGLY-C1" />
       <RemoveAtom name="HO1" />
       <RemoveAtom name="O1" />
+      <RemoveBond atomName1="C2" atomName2="O1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1AMGLY_4">
+      <AddAtom charge="0.0" name="C7G" type="1AMGLY-C7G" />
+      <AddAtom charge="0.14" name="C8G" type="1AMGLY-C8G" />
+      <AddAtom charge="0.05" name="C9G" type="1AMGLY-C9G" />
+      <AddAtom charge="0.09" name="H71G" type="1AMGLY-H71G" />
+      <AddAtom charge="0.09" name="H72G" type="1AMGLY-H72G" />
+      <AddAtom charge="0.09" name="H8G" type="1AMGLY-H8G" />
+      <AddAtom charge="0.09" name="H91G" type="1AMGLY-H91G" />
+      <AddAtom charge="0.09" name="H92G" type="1AMGLY-H92G" />
+      <AddAtom charge="0.42" name="HO8G" type="1AMGLY-HO8G" />
+      <AddAtom charge="0.42" name="HO9G" type="1AMGLY-HO9G" />
+      <AddAtom charge="-0.36" name="O7G" type="1AMGLY-O7G" />
+      <AddAtom charge="-0.65" name="O8G" type="1AMGLY-O8G" />
+      <AddAtom charge="-0.65" name="O9G" type="1AMGLY-O9G" />
+      <AddBond atomName1="C1" atomName2="O7G" />
+      <AddBond atomName1="C7G" atomName2="C8G" />
+      <AddBond atomName1="C7G" atomName2="H71G" />
+      <AddBond atomName1="C7G" atomName2="H72G" />
+      <AddBond atomName1="C7G" atomName2="O7G" />
+      <AddBond atomName1="C8G" atomName2="C9G" />
+      <AddBond atomName1="C8G" atomName2="H8G" />
+      <AddBond atomName1="C8G" atomName2="O8G" />
+      <AddBond atomName1="C9G" atomName2="H91G" />
+      <AddBond atomName1="C9G" atomName2="H92G" />
+      <AddBond atomName1="C9G" atomName2="O9G" />
+      <AddBond atomName1="HO8G" atomName2="O8G" />
+      <AddBond atomName1="HO9G" atomName2="O9G" />
+      <ChangeAtom charge="0.29" name="C1" type="1AMGLY-C1" />
+      <RemoveAtom name="HO1" />
+      <RemoveAtom name="O1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
       <RemoveBond atomName1="N" atomName2="O1" />
       <ApplyToResidue name="LAPAOP" />
@@ -13604,6 +13675,33 @@
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
     <Patch name="1AGLYA_1">
+      <AddAtom charge="0.29" name="C1" type="1AGLYA-C1" />
+      <AddAtom charge="0.09" name="H91" type="1AGLYA-H91" />
+      <AddAtom charge="0.09" name="H92" type="1AGLYA-H92" />
+      <AddAtom charge="0.42" name="HO9" type="1AGLYA-HO9" />
+      <AddAtom charge="-0.76" name="O7A" type="1AGLYA-O7A" />
+      <AddAtom charge="-0.76" name="O7B" type="1AGLYA-O7B" />
+      <AddBond atomName1="C1" atomName2="O8" />
+      <AddBond atomName1="C7" atomName2="C8" />
+      <AddBond atomName1="C7" atomName2="O7A" />
+      <AddBond atomName1="C7" atomName2="O7B" />
+      <AddBond atomName1="C8" atomName2="O8" />
+      <AddBond atomName1="C9" atomName2="H91" />
+      <AddBond atomName1="C9" atomName2="H92" />
+      <AddBond atomName1="C9" atomName2="O9" />
+      <AddBond atomName1="HO9" atomName2="O9" />
+      <ChangeAtom charge="0.52" name="C7" type="1AGLYA-C7" />
+      <ChangeAtom charge="0.09" name="C8" type="1AGLYA-C8" />
+      <ChangeAtom charge="0.05" name="C9" type="1AGLYA-C9" />
+      <ChangeAtom charge="0.09" name="H8" type="1AGLYA-H8" />
+      <ChangeAtom charge="-0.36" name="O8" type="1AGLYA-O8" />
+      <ChangeAtom charge="-0.65" name="O9" type="1AGLYA-O9" />
+      <RemoveAtom name="HO1" />
+      <RemoveAtom name="O1" />
+      <RemoveBond atomName1="C9" atomName2="O1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1AGLYA_2">
       <AddAtom charge="0.52" name="C7" type="1AGLYA-C7" />
       <AddAtom charge="0.09" name="C8" type="1AGLYA-C8" />
       <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
@@ -13632,7 +13730,7 @@
       <RemoveBond atomName1="B1" atomName2="O1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AGLYA_2">
+    <Patch name="1AGLYA_3">
       <AddAtom charge="0.52" name="C7" type="1AGLYA-C7" />
       <AddAtom charge="0.09" name="C8" type="1AGLYA-C8" />
       <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
@@ -13680,7 +13778,36 @@
       <ApplyToResidue name="AFRU" />
       <ApplyToResidue name="CHM1" />
     </Patch>
-    <Patch name="1AGLYA_3">
+    <Patch name="1AGLYA_4">
+      <AddAtom charge="0.52" name="C7" type="1AGLYA-C7" />
+      <AddAtom charge="0.09" name="C8" type="1AGLYA-C8" />
+      <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
+      <AddAtom charge="0.09" name="H8" type="1AGLYA-H8" />
+      <AddAtom charge="0.09" name="H91" type="1AGLYA-H91" />
+      <AddAtom charge="0.09" name="H92" type="1AGLYA-H92" />
+      <AddAtom charge="0.42" name="HO9" type="1AGLYA-HO9" />
+      <AddAtom charge="-0.76" name="O7A" type="1AGLYA-O7A" />
+      <AddAtom charge="-0.76" name="O7B" type="1AGLYA-O7B" />
+      <AddAtom charge="-0.36" name="O8" type="1AGLYA-O8" />
+      <AddAtom charge="-0.65" name="O9" type="1AGLYA-O9" />
+      <AddBond atomName1="C1" atomName2="O8" />
+      <AddBond atomName1="C7" atomName2="C8" />
+      <AddBond atomName1="C7" atomName2="O7A" />
+      <AddBond atomName1="C7" atomName2="O7B" />
+      <AddBond atomName1="C8" atomName2="C9" />
+      <AddBond atomName1="C8" atomName2="H8" />
+      <AddBond atomName1="C8" atomName2="O8" />
+      <AddBond atomName1="C9" atomName2="H91" />
+      <AddBond atomName1="C9" atomName2="H92" />
+      <AddBond atomName1="C9" atomName2="O9" />
+      <AddBond atomName1="HO9" atomName2="O9" />
+      <ChangeAtom charge="0.29" name="C1" type="1AGLYA-C1" />
+      <RemoveAtom name="HO1" />
+      <RemoveAtom name="O1" />
+      <RemoveBond atomName1="C2" atomName2="O1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1AGLYA_5">
       <AddAtom charge="0.52" name="C7" type="1AGLYA-C7" />
       <AddAtom charge="0.09" name="C8" type="1AGLYA-C8" />
       <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
@@ -13711,7 +13838,7 @@
       <ApplyToResidue name="LAPAOP" />
       <ApplyToResidue name="TRPAOP" />
     </Patch>
-    <Patch name="1AGLYA_4">
+    <Patch name="1AGLYA_6">
       <AddAtom charge="0.09" name="C8" type="1AGLYA-C8" />
       <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
       <AddAtom charge="0.09" name="H8" type="1AGLYA-H8" />
@@ -13740,7 +13867,7 @@
       <RemoveBond atomName1="C1" atomName2="O1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AGLYA_5">
+    <Patch name="1AGLYA_7">
       <AddAtom charge="0.05" name="C9" type="1AGLYA-C9" />
       <AddAtom charge="0.09" name="H8" type="1AGLYA-H8" />
       <AddAtom charge="0.09" name="H91" type="1AGLYA-H91" />
@@ -13768,7 +13895,7 @@
       <RemoveBond atomName1="C1" atomName2="O1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AGLYA_6">
+    <Patch name="1AGLYA_8">
       <AddAtom charge="0.09" name="H8" type="1AGLYA-H8" />
       <AddAtom charge="0.42" name="HO9" type="1AGLYA-HO9" />
       <AddAtom charge="-0.76" name="O7A" type="1AGLYA-O7A" />
@@ -13796,7 +13923,7 @@
       <ApplyToResidue name="UDAOP" />
       <ApplyToResidue name="LDAOP" />
     </Patch>
-    <Patch name="1AGLYA_7">
+    <Patch name="1AGLYA_9">
       <AddAtom charge="0.09" name="H91" type="1AGLYA-H91" />
       <AddAtom charge="0.09" name="H92" type="1AGLYA-H92" />
       <AddAtom charge="0.42" name="HO9" type="1AGLYA-HO9" />
@@ -13886,6 +14013,37 @@
       <AddAtom charge="0.29" name="C1" type="1AOS-C1" />
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
+      <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
+      <AddAtom charge="0.1" name="HA1" type="1AOS-HA1" />
+      <AddAtom charge="0.33" name="HN1" type="1AOS-HN1" />
+      <AddAtom charge="0.33" name="HN2" type="1AOS-HN2" />
+      <AddAtom charge="0.33" name="HN3" type="1AOS-HN3" />
+      <AddAtom charge="-0.3" name="N1" type="1AOS-N1" />
+      <AddAtom charge="-0.67" name="OT1" type="1AOS-OT1" />
+      <AddAtom charge="-0.67" name="OT2" type="1AOS-OT2" />
+      <AddBond atomName1="C1" atomName2="O1" />
+      <AddBond atomName1="CA1" atomName2="CB1" />
+      <AddBond atomName1="CA1" atomName2="CP" />
+      <AddBond atomName1="CA1" atomName2="HA1" />
+      <AddBond atomName1="CA1" atomName2="N1" />
+      <AddBond atomName1="CB1" atomName2="HB1" />
+      <AddBond atomName1="CB1" atomName2="HB2" />
+      <AddBond atomName1="CB1" atomName2="O1" />
+      <AddBond atomName1="CP" atomName2="OT1" />
+      <AddBond atomName1="CP" atomName2="OT2" />
+      <AddBond atomName1="HN1" atomName2="N1" />
+      <AddBond atomName1="HN2" atomName2="N1" />
+      <AddBond atomName1="HN3" atomName2="N1" />
+      <ChangeAtom charge="0.09" name="HB1" type="1AOS-HB1" />
+      <ChangeAtom charge="0.09" name="HB2" type="1AOS-HB2" />
+      <ChangeAtom charge="-0.36" name="O1" type="1AOS-O1" />
+      <RemoveAtom name="HO1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1AOS_2">
+      <AddAtom charge="0.29" name="C1" type="1AOS-C1" />
+      <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
+      <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.1" name="HA1" type="1AOS-HA1" />
       <AddAtom charge="0.09" name="HB1" type="1AOS-HB1" />
       <AddAtom charge="0.09" name="HB2" type="1AOS-HB2" />
@@ -13913,7 +14071,38 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="CO" atomName2="HO1" />
     </Patch>
-    <Patch name="1AOS_2">
+    <Patch name="1AOS_3">
+      <AddAtom charge="0.29" name="C1" type="1AOS-C1" />
+      <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
+      <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
+      <AddAtom charge="0.1" name="HA1" type="1AOS-HA1" />
+      <AddAtom charge="0.33" name="HN1" type="1AOS-HN1" />
+      <AddAtom charge="0.33" name="HN3" type="1AOS-HN3" />
+      <AddAtom charge="-0.3" name="N1" type="1AOS-N1" />
+      <AddAtom charge="-0.36" name="O1" type="1AOS-O1" />
+      <AddAtom charge="-0.67" name="OT1" type="1AOS-OT1" />
+      <AddAtom charge="-0.67" name="OT2" type="1AOS-OT2" />
+      <AddBond atomName1="C1" atomName2="O1" />
+      <AddBond atomName1="CA1" atomName2="CB1" />
+      <AddBond atomName1="CA1" atomName2="CP" />
+      <AddBond atomName1="CA1" atomName2="HA1" />
+      <AddBond atomName1="CA1" atomName2="N1" />
+      <AddBond atomName1="CB1" atomName2="HB1" />
+      <AddBond atomName1="CB1" atomName2="HB2" />
+      <AddBond atomName1="CB1" atomName2="O1" />
+      <AddBond atomName1="CP" atomName2="OT1" />
+      <AddBond atomName1="CP" atomName2="OT2" />
+      <AddBond atomName1="HN1" atomName2="N1" />
+      <AddBond atomName1="HN2" atomName2="N1" />
+      <AddBond atomName1="HN3" atomName2="N1" />
+      <ChangeAtom charge="0.34" name="CP" type="1AOS-CP" />
+      <ChangeAtom charge="0.09" name="HB1" type="1AOS-HB1" />
+      <ChangeAtom charge="0.09" name="HB2" type="1AOS-HB2" />
+      <ChangeAtom charge="0.33" name="HN2" type="1AOS-HN2" />
+      <RemoveAtom name="HO1" />
+      <RemoveBond atomName1="CO" atomName2="HO1" />
+    </Patch>
+    <Patch name="1AOS_4">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -13944,7 +14133,7 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="HO1" atomName2="OH1" />
     </Patch>
-    <Patch name="1AOS_3">
+    <Patch name="1AOS_5">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -13980,7 +14169,7 @@
       <ApplyToResidue name="UDAOP" />
       <ApplyToResidue name="LDAOP" />
     </Patch>
-    <Patch name="1AOS_4">
+    <Patch name="1AOS_6">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14029,7 +14218,7 @@
       <ApplyToResidue name="CHNS" />
       <ApplyToResidue name="CHM1" />
     </Patch>
-    <Patch name="1AOS_5">
+    <Patch name="1AOS_7">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14059,7 +14248,7 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AOS_6">
+    <Patch name="1AOS_8">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14089,7 +14278,7 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AOS_7">
+    <Patch name="1AOS_9">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14120,7 +14309,7 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="HO1" atomName2="OH1" />
     </Patch>
-    <Patch name="1AOS_8">
+    <Patch name="1AOS_10">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14150,7 +14339,7 @@
       <RemoveAtom name="HO1" />
       <RemoveBond atomName1="HO1" atomName2="O1" />
     </Patch>
-    <Patch name="1AOS_9">
+    <Patch name="1AOS_11">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -14181,7 +14370,35 @@
       <RemoveBond atomName1="HO1" atomName2="O1" />
       <ApplyToResidue name="ARHMOA" />
     </Patch>
-    <Patch name="1AOS_10">
+    <Patch name="1AOS_12">
+      <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
+      <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
+      <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
+      <AddAtom charge="0.1" name="HA1" type="1AOS-HA1" />
+      <AddAtom charge="-0.67" name="OT1" type="1AOS-OT1" />
+      <AddAtom charge="-0.67" name="OT2" type="1AOS-OT2" />
+      <AddBond atomName1="C1" atomName2="O1" />
+      <AddBond atomName1="CA1" atomName2="CB1" />
+      <AddBond atomName1="CA1" atomName2="CP" />
+      <AddBond atomName1="CA1" atomName2="HA1" />
+      <AddBond atomName1="CA1" atomName2="N1" />
+      <AddBond atomName1="CB1" atomName2="HB1" />
+      <AddBond atomName1="CB1" atomName2="HB2" />
+      <AddBond atomName1="CB1" atomName2="O1" />
+      <AddBond atomName1="CP" atomName2="OT1" />
+      <AddBond atomName1="CP" atomName2="OT2" />
+      <ChangeAtom charge="0.29" name="C1" type="1AOS-C1" />
+      <ChangeAtom charge="0.09" name="HB1" type="1AOS-HB1" />
+      <ChangeAtom charge="0.09" name="HB2" type="1AOS-HB2" />
+      <ChangeAtom charge="0.33" name="HN1" type="1AOS-HN1" />
+      <ChangeAtom charge="0.33" name="HN2" type="1AOS-HN2" />
+      <ChangeAtom charge="0.33" name="HN3" type="1AOS-HN3" />
+      <ChangeAtom charge="-0.3" name="N1" type="1AOS-N1" />
+      <ChangeAtom charge="-0.36" name="O1" type="1AOS-O1" />
+      <RemoveAtom name="HO1" />
+      <RemoveBond atomName1="HO1" atomName2="O1" />
+    </Patch>
+    <Patch name="1AOS_13">
       <AddAtom charge="0.21" name="CA1" type="1AOS-CA1" />
       <AddAtom charge="0.0" name="CB1" type="1AOS-CB1" />
       <AddAtom charge="0.34" name="CP" type="1AOS-CP" />
@@ -15272,6 +15489,105 @@
       <AddBond atomName1="C18" atomName2="H18S" />
       <AddBond atomName1="C19" atomName2="H19R" />
       <AddBond atomName1="C19" atomName2="H19S" />
+      <AddBond atomName1="C2" atomName2="N" />
+      <AddBond atomName1="HN2" atomName2="N" />
+      <AddBond atomName1="HO13" atomName2="O13" />
+      <ChangeAtom charge="0.07" name="C2" type="LIPAN1-C2" />
+      <ChangeAtom charge="0.09" name="H2" type="LIPAN1-H2" />
+      <ChangeAtom charge="0.31" name="HN2" type="LIPAN1-HN2" />
+      <ChangeAtom charge="-0.47" name="N" type="LIPAN1-N" />
+      <RemoveAtom name="HN1" />
+      <RemoveAtom name="HN3" />
+      <RemoveBond atomName1="HN1" atomName2="N1" />
+      <RemoveBond atomName1="HN3" atomName2="N1" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="LIPAN1_1">
+      <AddAtom charge="0.55" name="C11" type="LIPAN1-C11" />
+      <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
+      <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
+      <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
+      <AddAtom charge="-0.18" name="C113" type="LIPAN1-C113" />
+      <AddAtom charge="-0.27" name="C114" type="LIPAN1-C114" />
+      <AddAtom charge="-0.18" name="C12" type="LIPAN1-C12" />
+      <AddAtom charge="0.14" name="C13" type="LIPAN1-C13" />
+      <AddAtom charge="-0.18" name="C14" type="LIPAN1-C14" />
+      <AddAtom charge="-0.18" name="C15" type="LIPAN1-C15" />
+      <AddAtom charge="-0.18" name="C16" type="LIPAN1-C16" />
+      <AddAtom charge="-0.18" name="C17" type="LIPAN1-C17" />
+      <AddAtom charge="-0.18" name="C18" type="LIPAN1-C18" />
+      <AddAtom charge="-0.18" name="C19" type="LIPAN1-C19" />
+      <AddAtom charge="0.09" name="H110R" type="LIPAN1-H110R" />
+      <AddAtom charge="0.09" name="H110S" type="LIPAN1-H110S" />
+      <AddAtom charge="0.09" name="H111R" type="LIPAN1-H111R" />
+      <AddAtom charge="0.09" name="H111S" type="LIPAN1-H111S" />
+      <AddAtom charge="0.09" name="H112R" type="LIPAN1-H112R" />
+      <AddAtom charge="0.09" name="H112S" type="LIPAN1-H112S" />
+      <AddAtom charge="0.09" name="H113R" type="LIPAN1-H113R" />
+      <AddAtom charge="0.09" name="H113S" type="LIPAN1-H113S" />
+      <AddAtom charge="0.09" name="H114R" type="LIPAN1-H114R" />
+      <AddAtom charge="0.09" name="H114S" type="LIPAN1-H114S" />
+      <AddAtom charge="0.09" name="H114T" type="LIPAN1-H114T" />
+      <AddAtom charge="0.09" name="H12R" type="LIPAN1-H12R" />
+      <AddAtom charge="0.09" name="H12S" type="LIPAN1-H12S" />
+      <AddAtom charge="0.09" name="H13R" type="LIPAN1-H13R" />
+      <AddAtom charge="0.09" name="H14R" type="LIPAN1-H14R" />
+      <AddAtom charge="0.09" name="H14S" type="LIPAN1-H14S" />
+      <AddAtom charge="0.09" name="H15R" type="LIPAN1-H15R" />
+      <AddAtom charge="0.09" name="H15S" type="LIPAN1-H15S" />
+      <AddAtom charge="0.09" name="H16R" type="LIPAN1-H16R" />
+      <AddAtom charge="0.09" name="H16S" type="LIPAN1-H16S" />
+      <AddAtom charge="0.09" name="H17R" type="LIPAN1-H17R" />
+      <AddAtom charge="0.09" name="H17S" type="LIPAN1-H17S" />
+      <AddAtom charge="0.09" name="H18R" type="LIPAN1-H18R" />
+      <AddAtom charge="0.09" name="H18S" type="LIPAN1-H18S" />
+      <AddAtom charge="0.09" name="H19R" type="LIPAN1-H19R" />
+      <AddAtom charge="0.09" name="H19S" type="LIPAN1-H19S" />
+      <AddAtom charge="0.43" name="HO13" type="LIPAN1-HO13" />
+      <AddAtom charge="-0.55" name="O11" type="LIPAN1-O11" />
+      <AddAtom charge="-0.66" name="O13" type="LIPAN1-O13" />
+      <AddBond atomName1="C11" atomName2="C12" />
+      <AddBond atomName1="C11" atomName2="N" />
+      <AddBond atomName1="C11" atomName2="O11" />
+      <AddBond atomName1="C110" atomName2="C111" />
+      <AddBond atomName1="C110" atomName2="C19" />
+      <AddBond atomName1="C110" atomName2="H110R" />
+      <AddBond atomName1="C110" atomName2="H110S" />
+      <AddBond atomName1="C111" atomName2="C112" />
+      <AddBond atomName1="C111" atomName2="H111R" />
+      <AddBond atomName1="C111" atomName2="H111S" />
+      <AddBond atomName1="C112" atomName2="C113" />
+      <AddBond atomName1="C112" atomName2="H112R" />
+      <AddBond atomName1="C112" atomName2="H112S" />
+      <AddBond atomName1="C113" atomName2="C114" />
+      <AddBond atomName1="C113" atomName2="H113R" />
+      <AddBond atomName1="C113" atomName2="H113S" />
+      <AddBond atomName1="C114" atomName2="H114R" />
+      <AddBond atomName1="C114" atomName2="H114S" />
+      <AddBond atomName1="C114" atomName2="H114T" />
+      <AddBond atomName1="C12" atomName2="C13" />
+      <AddBond atomName1="C12" atomName2="H12R" />
+      <AddBond atomName1="C12" atomName2="H12S" />
+      <AddBond atomName1="C13" atomName2="C14" />
+      <AddBond atomName1="C13" atomName2="H13R" />
+      <AddBond atomName1="C13" atomName2="O13" />
+      <AddBond atomName1="C14" atomName2="C15" />
+      <AddBond atomName1="C14" atomName2="H14R" />
+      <AddBond atomName1="C14" atomName2="H14S" />
+      <AddBond atomName1="C15" atomName2="C16" />
+      <AddBond atomName1="C15" atomName2="H15R" />
+      <AddBond atomName1="C15" atomName2="H15S" />
+      <AddBond atomName1="C16" atomName2="C17" />
+      <AddBond atomName1="C16" atomName2="H16R" />
+      <AddBond atomName1="C16" atomName2="H16S" />
+      <AddBond atomName1="C17" atomName2="C18" />
+      <AddBond atomName1="C17" atomName2="H17R" />
+      <AddBond atomName1="C17" atomName2="H17S" />
+      <AddBond atomName1="C18" atomName2="C19" />
+      <AddBond atomName1="C18" atomName2="H18R" />
+      <AddBond atomName1="C18" atomName2="H18S" />
+      <AddBond atomName1="C19" atomName2="H19R" />
+      <AddBond atomName1="C19" atomName2="H19S" />
       <AddBond atomName1="HO13" atomName2="O13" />
       <ChangeAtom charge="0.07" name="C2" type="LIPAN1-C2" />
       <ChangeAtom charge="0.09" name="H2" type="LIPAN1-H2" />
@@ -15282,7 +15598,7 @@
       <RemoveBond atomName1="HN1" atomName2="N" />
       <RemoveBond atomName1="HN3" atomName2="N" />
     </Patch>
-    <Patch name="LIPAN1_1">
+    <Patch name="LIPAN1_2">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15380,7 +15696,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="PVPE" />
     </Patch>
-    <Patch name="LIPAN1_2">
+    <Patch name="LIPAN1_3">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15479,7 +15795,7 @@
       <ApplyToResidue name="SAPE" />
       <ApplyToResidue name="DAPE" />
     </Patch>
-    <Patch name="LIPAN1_3">
+    <Patch name="LIPAN1_4">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15577,7 +15893,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="LLPE" />
     </Patch>
-    <Patch name="LIPAN1_4">
+    <Patch name="LIPAN1_5">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15677,7 +15993,7 @@
       <ApplyToResidue name="PLPE" />
       <ApplyToResidue name="DLIPE" />
     </Patch>
-    <Patch name="LIPAN1_5">
+    <Patch name="LIPAN1_6">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15775,7 +16091,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DGPE" />
     </Patch>
-    <Patch name="LIPAN1_6">
+    <Patch name="LIPAN1_7">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15873,7 +16189,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DLPE" />
     </Patch>
-    <Patch name="LIPAN1_7">
+    <Patch name="LIPAN1_8">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -15973,7 +16289,7 @@
       <ApplyToResidue name="DDOPE" />
       <ApplyToResidue name="PDOPE" />
     </Patch>
-    <Patch name="LIPAN1_8">
+    <Patch name="LIPAN1_9">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16071,7 +16387,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DEPE" />
     </Patch>
-    <Patch name="LIPAN1_9">
+    <Patch name="LIPAN1_10">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16170,7 +16486,7 @@
       <ApplyToResidue name="DMPE" />
       <ApplyToResidue name="DMPEE" />
     </Patch>
-    <Patch name="LIPAN1_10">
+    <Patch name="LIPAN1_11">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16268,7 +16584,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DNPE" />
     </Patch>
-    <Patch name="LIPAN1_11">
+    <Patch name="LIPAN1_12">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16371,7 +16687,7 @@
       <ApplyToResidue name="PYPE" />
       <ApplyToResidue name="DYPE" />
     </Patch>
-    <Patch name="LIPAN1_12">
+    <Patch name="LIPAN1_13">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16470,7 +16786,7 @@
       <ApplyToResidue name="PMPE" />
       <ApplyToResidue name="QMPE" />
     </Patch>
-    <Patch name="LIPAN1_13">
+    <Patch name="LIPAN1_14">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16574,7 +16890,7 @@
       <ApplyToResidue name="YOPE" />
       <ApplyToResidue name="SOPE" />
     </Patch>
-    <Patch name="LIPAN1_14">
+    <Patch name="LIPAN1_15">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16672,7 +16988,7 @@
       <ApplyToResidue name="SAPS" />
       <ApplyToResidue name="DAPS" />
     </Patch>
-    <Patch name="LIPAN1_15">
+    <Patch name="LIPAN1_16">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16769,7 +17085,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="LLPS" />
     </Patch>
-    <Patch name="LIPAN1_16">
+    <Patch name="LIPAN1_17">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16867,7 +17183,7 @@
       <ApplyToResidue name="SLPS" />
       <ApplyToResidue name="PLPS" />
     </Patch>
-    <Patch name="LIPAN1_17">
+    <Patch name="LIPAN1_18">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -16964,7 +17280,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DGPS" />
     </Patch>
-    <Patch name="LIPAN1_18">
+    <Patch name="LIPAN1_19">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17061,7 +17377,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DLPS" />
     </Patch>
-    <Patch name="LIPAN1_19">
+    <Patch name="LIPAN1_20">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17159,7 +17475,7 @@
       <ApplyToResidue name="SDPS" />
       <ApplyToResidue name="DDOPS" />
     </Patch>
-    <Patch name="LIPAN1_20">
+    <Patch name="LIPAN1_21">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17256,7 +17572,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DEPS" />
     </Patch>
-    <Patch name="LIPAN1_21">
+    <Patch name="LIPAN1_22">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17353,7 +17669,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DMPS" />
     </Patch>
-    <Patch name="LIPAN1_22">
+    <Patch name="LIPAN1_23">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17450,7 +17766,7 @@
       <RemoveBond atomName1="HN3" atomName2="N" />
       <ApplyToResidue name="DNPS" />
     </Patch>
-    <Patch name="LIPAN1_23">
+    <Patch name="LIPAN1_24">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -17548,7 +17864,7 @@
       <ApplyToResidue name="DPPS" />
       <ApplyToResidue name="DYPS" />
     </Patch>
-    <Patch name="LIPAN1_24">
+    <Patch name="LIPAN1_25">
       <AddAtom charge="-0.18" name="C110" type="LIPAN1-C110" />
       <AddAtom charge="-0.18" name="C111" type="LIPAN1-C111" />
       <AddAtom charge="-0.18" name="C112" type="LIPAN1-C112" />
@@ -18629,6 +18945,175 @@
       <AddAtom charge="-0.55" name="O31" type="LIPAN2-O31" />
       <AddAtom charge="-0.49" name="O33" type="LIPAN2-O33" />
       <AddAtom charge="-0.63" name="O41" type="LIPAN2-O41" />
+      <AddBond atomName1="C2" atomName2="N" />
+      <AddBond atomName1="C31" atomName2="C32" />
+      <AddBond atomName1="C31" atomName2="N" />
+      <AddBond atomName1="C31" atomName2="O31" />
+      <AddBond atomName1="C310" atomName2="C311" />
+      <AddBond atomName1="C310" atomName2="C39" />
+      <AddBond atomName1="C310" atomName2="H310R" />
+      <AddBond atomName1="C310" atomName2="H310S" />
+      <AddBond atomName1="C311" atomName2="C312" />
+      <AddBond atomName1="C311" atomName2="H311R" />
+      <AddBond atomName1="C311" atomName2="H311S" />
+      <AddBond atomName1="C312" atomName2="C313" />
+      <AddBond atomName1="C312" atomName2="H312R" />
+      <AddBond atomName1="C312" atomName2="H312S" />
+      <AddBond atomName1="C313" atomName2="C314" />
+      <AddBond atomName1="C313" atomName2="H313R" />
+      <AddBond atomName1="C313" atomName2="H313S" />
+      <AddBond atomName1="C314" atomName2="H314R" />
+      <AddBond atomName1="C314" atomName2="H314S" />
+      <AddBond atomName1="C314" atomName2="H314T" />
+      <AddBond atomName1="C32" atomName2="C33" />
+      <AddBond atomName1="C32" atomName2="H32R" />
+      <AddBond atomName1="C32" atomName2="H32S" />
+      <AddBond atomName1="C33" atomName2="C34" />
+      <AddBond atomName1="C33" atomName2="H33R" />
+      <AddBond atomName1="C33" atomName2="O33" />
+      <AddBond atomName1="C34" atomName2="C35" />
+      <AddBond atomName1="C34" atomName2="H34R" />
+      <AddBond atomName1="C34" atomName2="H34S" />
+      <AddBond atomName1="C35" atomName2="C36" />
+      <AddBond atomName1="C35" atomName2="H35R" />
+      <AddBond atomName1="C35" atomName2="H35S" />
+      <AddBond atomName1="C36" atomName2="C37" />
+      <AddBond atomName1="C36" atomName2="H36R" />
+      <AddBond atomName1="C36" atomName2="H36S" />
+      <AddBond atomName1="C37" atomName2="C38" />
+      <AddBond atomName1="C37" atomName2="H37R" />
+      <AddBond atomName1="C37" atomName2="H37S" />
+      <AddBond atomName1="C38" atomName2="C39" />
+      <AddBond atomName1="C38" atomName2="H38R" />
+      <AddBond atomName1="C38" atomName2="H38S" />
+      <AddBond atomName1="C39" atomName2="H39R" />
+      <AddBond atomName1="C39" atomName2="H39S" />
+      <AddBond atomName1="C41" atomName2="C42" />
+      <AddBond atomName1="C41" atomName2="O33" />
+      <AddBond atomName1="C41" atomName2="O41" />
+      <AddBond atomName1="C410" atomName2="C411" />
+      <AddBond atomName1="C410" atomName2="C49" />
+      <AddBond atomName1="C410" atomName2="H410R" />
+      <AddBond atomName1="C410" atomName2="H410S" />
+      <AddBond atomName1="C411" atomName2="C412" />
+      <AddBond atomName1="C411" atomName2="H411R" />
+      <AddBond atomName1="C411" atomName2="H411S" />
+      <AddBond atomName1="C412" atomName2="H412R" />
+      <AddBond atomName1="C412" atomName2="H412S" />
+      <AddBond atomName1="C412" atomName2="H412T" />
+      <AddBond atomName1="C42" atomName2="C43" />
+      <AddBond atomName1="C42" atomName2="H42R" />
+      <AddBond atomName1="C42" atomName2="H42S" />
+      <AddBond atomName1="C43" atomName2="C44" />
+      <AddBond atomName1="C43" atomName2="H43R" />
+      <AddBond atomName1="C43" atomName2="H43S" />
+      <AddBond atomName1="C44" atomName2="C45" />
+      <AddBond atomName1="C44" atomName2="H44R" />
+      <AddBond atomName1="C44" atomName2="H44S" />
+      <AddBond atomName1="C45" atomName2="C46" />
+      <AddBond atomName1="C45" atomName2="H45R" />
+      <AddBond atomName1="C45" atomName2="H45S" />
+      <AddBond atomName1="C46" atomName2="C47" />
+      <AddBond atomName1="C46" atomName2="H46R" />
+      <AddBond atomName1="C46" atomName2="H46S" />
+      <AddBond atomName1="C47" atomName2="C48" />
+      <AddBond atomName1="C47" atomName2="H47R" />
+      <AddBond atomName1="C47" atomName2="H47S" />
+      <AddBond atomName1="C48" atomName2="C49" />
+      <AddBond atomName1="C48" atomName2="H48R" />
+      <AddBond atomName1="C48" atomName2="H48S" />
+      <AddBond atomName1="C49" atomName2="H49R" />
+      <AddBond atomName1="C49" atomName2="H49S" />
+      <AddBond atomName1="HN2" atomName2="N" />
+      <ChangeAtom charge="0.07" name="C2" type="LIPAN2-C2" />
+      <ChangeAtom charge="0.09" name="H2" type="LIPAN2-H2" />
+      <ChangeAtom charge="0.31" name="HN2" type="LIPAN2-HN2" />
+      <ChangeAtom charge="-0.47" name="N" type="LIPAN2-N" />
+      <RemoveAtom name="HN1" />
+      <RemoveAtom name="HN3" />
+      <RemoveBond atomName1="HN1" atomName2="N1" />
+      <RemoveBond atomName1="HN3" atomName2="N1" />
+      <RemoveExternalBond atomName="N" />
+    </Patch>
+    <Patch name="LIPAN2_1">
+      <AddAtom charge="0.55" name="C31" type="LIPAN2-C31" />
+      <AddAtom charge="-0.18" name="C310" type="LIPAN2-C310" />
+      <AddAtom charge="-0.18" name="C311" type="LIPAN2-C311" />
+      <AddAtom charge="-0.18" name="C312" type="LIPAN2-C312" />
+      <AddAtom charge="-0.18" name="C313" type="LIPAN2-C313" />
+      <AddAtom charge="-0.27" name="C314" type="LIPAN2-C314" />
+      <AddAtom charge="-0.18" name="C32" type="LIPAN2-C32" />
+      <AddAtom charge="0.17" name="C33" type="LIPAN2-C33" />
+      <AddAtom charge="-0.18" name="C34" type="LIPAN2-C34" />
+      <AddAtom charge="-0.18" name="C35" type="LIPAN2-C35" />
+      <AddAtom charge="-0.18" name="C36" type="LIPAN2-C36" />
+      <AddAtom charge="-0.18" name="C37" type="LIPAN2-C37" />
+      <AddAtom charge="-0.18" name="C38" type="LIPAN2-C38" />
+      <AddAtom charge="-0.18" name="C39" type="LIPAN2-C39" />
+      <AddAtom charge="0.9" name="C41" type="LIPAN2-C41" />
+      <AddAtom charge="-0.18" name="C410" type="LIPAN2-C410" />
+      <AddAtom charge="-0.18" name="C411" type="LIPAN2-C411" />
+      <AddAtom charge="-0.27" name="C412" type="LIPAN2-C412" />
+      <AddAtom charge="-0.22" name="C42" type="LIPAN2-C42" />
+      <AddAtom charge="-0.18" name="C43" type="LIPAN2-C43" />
+      <AddAtom charge="-0.18" name="C44" type="LIPAN2-C44" />
+      <AddAtom charge="-0.18" name="C45" type="LIPAN2-C45" />
+      <AddAtom charge="-0.18" name="C46" type="LIPAN2-C46" />
+      <AddAtom charge="-0.18" name="C47" type="LIPAN2-C47" />
+      <AddAtom charge="-0.18" name="C48" type="LIPAN2-C48" />
+      <AddAtom charge="-0.18" name="C49" type="LIPAN2-C49" />
+      <AddAtom charge="0.09" name="H310R" type="LIPAN2-H310R" />
+      <AddAtom charge="0.09" name="H310S" type="LIPAN2-H310S" />
+      <AddAtom charge="0.09" name="H311R" type="LIPAN2-H311R" />
+      <AddAtom charge="0.09" name="H311S" type="LIPAN2-H311S" />
+      <AddAtom charge="0.09" name="H312R" type="LIPAN2-H312R" />
+      <AddAtom charge="0.09" name="H312S" type="LIPAN2-H312S" />
+      <AddAtom charge="0.09" name="H313R" type="LIPAN2-H313R" />
+      <AddAtom charge="0.09" name="H313S" type="LIPAN2-H313S" />
+      <AddAtom charge="0.09" name="H314R" type="LIPAN2-H314R" />
+      <AddAtom charge="0.09" name="H314S" type="LIPAN2-H314S" />
+      <AddAtom charge="0.09" name="H314T" type="LIPAN2-H314T" />
+      <AddAtom charge="0.09" name="H32R" type="LIPAN2-H32R" />
+      <AddAtom charge="0.09" name="H32S" type="LIPAN2-H32S" />
+      <AddAtom charge="0.09" name="H33R" type="LIPAN2-H33R" />
+      <AddAtom charge="0.09" name="H34R" type="LIPAN2-H34R" />
+      <AddAtom charge="0.09" name="H34S" type="LIPAN2-H34S" />
+      <AddAtom charge="0.09" name="H35R" type="LIPAN2-H35R" />
+      <AddAtom charge="0.09" name="H35S" type="LIPAN2-H35S" />
+      <AddAtom charge="0.09" name="H36R" type="LIPAN2-H36R" />
+      <AddAtom charge="0.09" name="H36S" type="LIPAN2-H36S" />
+      <AddAtom charge="0.09" name="H37R" type="LIPAN2-H37R" />
+      <AddAtom charge="0.09" name="H37S" type="LIPAN2-H37S" />
+      <AddAtom charge="0.09" name="H38R" type="LIPAN2-H38R" />
+      <AddAtom charge="0.09" name="H38S" type="LIPAN2-H38S" />
+      <AddAtom charge="0.09" name="H39R" type="LIPAN2-H39R" />
+      <AddAtom charge="0.09" name="H39S" type="LIPAN2-H39S" />
+      <AddAtom charge="0.09" name="H410R" type="LIPAN2-H410R" />
+      <AddAtom charge="0.09" name="H410S" type="LIPAN2-H410S" />
+      <AddAtom charge="0.09" name="H411R" type="LIPAN2-H411R" />
+      <AddAtom charge="0.09" name="H411S" type="LIPAN2-H411S" />
+      <AddAtom charge="0.09" name="H412R" type="LIPAN2-H412R" />
+      <AddAtom charge="0.09" name="H412S" type="LIPAN2-H412S" />
+      <AddAtom charge="0.09" name="H412T" type="LIPAN2-H412T" />
+      <AddAtom charge="0.09" name="H42R" type="LIPAN2-H42R" />
+      <AddAtom charge="0.09" name="H42S" type="LIPAN2-H42S" />
+      <AddAtom charge="0.09" name="H43R" type="LIPAN2-H43R" />
+      <AddAtom charge="0.09" name="H43S" type="LIPAN2-H43S" />
+      <AddAtom charge="0.09" name="H44R" type="LIPAN2-H44R" />
+      <AddAtom charge="0.09" name="H44S" type="LIPAN2-H44S" />
+      <AddAtom charge="0.09" name="H45R" type="LIPAN2-H45R" />
+      <AddAtom charge="0.09" name="H45S" type="LIPAN2-H45S" />
+      <AddAtom charge="0.09" name="H46R" type="LIPAN2-H46R" />
+      <AddAtom charge="0.09" name="H46S" type="LIPAN2-H46S" />
+      <AddAtom charge="0.09" name="H47R" type="LIPAN2-H47R" />
+      <AddAtom charge="0.09" name="H47S" type="LIPAN2-H47S" />
+      <AddAtom charge="0.09" name="H48R" type="LIPAN2-H48R" />
+      <AddAtom charge="0.09" name="H48S" type="LIPAN2-H48S" />
+      <AddAtom charge="0.09" name="H49R" type="LIPAN2-H49R" />
+      <AddAtom charge="0.09" name="H49S" type="LIPAN2-H49S" />
+      <AddAtom charge="-0.55" name="O31" type="LIPAN2-O31" />
+      <AddAtom charge="-0.49" name="O33" type="LIPAN2-O33" />
+      <AddAtom charge="-0.63" name="O41" type="LIPAN2-O41" />
       <AddBond atomName1="C31" atomName2="C32" />
       <AddBond atomName1="C31" atomName2="N" />
       <AddBond atomName1="C31" atomName2="O31" />
@@ -18716,7 +19201,7 @@
       <RemoveBond atomName1="HN1" atomName2="N" />
       <RemoveBond atomName1="HN3" atomName2="N" />
     </Patch>
-    <Patch name="LIPAN2_1">
+    <Patch name="LIPAN2_2">
       <AddAtom charge="-0.18" name="C313" type="LIPAN2-C313" />
       <AddAtom charge="-0.27" name="C314" type="LIPAN2-C314" />
       <AddAtom charge="0.9" name="C41" type="LIPAN2-C41" />
@@ -18874,7 +19359,7 @@
       <ApplyToResidue name="DLPE" />
       <ApplyToResidue name="DLPS" />
     </Patch>
-    <Patch name="LIPAN2_2">
+    <Patch name="LIPAN2_3">
       <AddAtom charge="0.9" name="C41" type="LIPAN2-C41" />
       <AddAtom charge="-0.18" name="C410" type="LIPAN2-C410" />
       <AddAtom charge="-0.18" name="C411" type="LIPAN2-C411" />
