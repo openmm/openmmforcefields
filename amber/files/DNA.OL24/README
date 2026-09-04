@@ -1,0 +1,8 @@
+The ff-nucleic-OL24.lib has 3 extra entries in the velocities table for DTN.
+ParmEd fails due to this even though they are ignored by Amber.  This may not
+actually be a ParmEd bug since the entries shouldn't be in the file.  Here the
+relevant file is copied and modified.
+
+The leaprc for OL24 sources ff14SB instead of only defining its own residues.
+To keep unwanted protein residues out of the XML, the relevant leaprc is copied
+into place in the input file and modified to not load its library files.
