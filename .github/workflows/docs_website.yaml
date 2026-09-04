@@ -1,0 +1,78 @@
+name: Documentation website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - uses: conda-incubator/setup-miniconda@v4
+        name: Install dependencies
+        with:
+          environment-file: devtools/conda-envs/docs_website.yaml
+          auto-activate-base: false
+          miniforge-version: latest
+          use-mamba: true
+
+      - name: Describe environment
+        run: |
+          pwd
+          ls
+          conda list
+
+      - name: Install OpenMMForceFields
+        run: |
+          pip install .
+
+      - name: Build Sphinx documentation
+        run: |
+          cd doc
+          make html
+
+      - name: Checkout gh-pages
+        if: success()
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: 'deploy'
+          clean: false
+
+      - name: Prepare development deployment
+        if: success() && github.event_name == 'push'
+        run: |
+          rm -rf deploy/dev
+          mv doc/build/html deploy/dev
+
+      - name: Prepare release deployment
+        if: success() && github.event_name == 'release'
+        run: |
+          rm -rf deploy/${{  github.ref_name }}
+          mkdir -p deploy/${{  github.ref_name }}
+          mv -T doc/build/html deploy/${{  github.ref_name }}
+          rm -rf deploy/latest
+          ln -s ${{  github.ref_name }} deploy/latest
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: deploy
+          jekyll: false
+          commit_message: "Deploy to GH Pages"
+          keep_history: true
+          follow_symlinks: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
