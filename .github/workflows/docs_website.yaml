@@ -38,7 +38,7 @@ jobs:
 
       - name: Build Sphinx documentation
         run: |
-          cd doc
+          cd docs
           make html
 
       - name: Checkout gh-pages
@@ -53,14 +53,14 @@ jobs:
         if: success() && github.event_name == 'push'
         run: |
           rm -rf deploy/dev
-          mv doc/build/html deploy/dev
+          mv docs/_build/html deploy/dev
 
       - name: Prepare release deployment
         if: success() && github.event_name == 'release'
         run: |
           rm -rf deploy/${{  github.ref_name }}
           mkdir -p deploy/${{  github.ref_name }}
-          mv -T doc/build/html deploy/${{  github.ref_name }}
+          mv -T docs/_build/html deploy/${{  github.ref_name }}
           rm -rf deploy/latest
           ln -s ${{  github.ref_name }} deploy/latest
 
