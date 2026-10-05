@@ -5,6 +5,11 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/stable/config
 
+import os
+import sys
+import importlib.metadata
+import git
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -12,25 +17,32 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
 # Incase the project was not installed
-import os
-import sys
-
 sys.path.insert(0, os.path.abspath(".."))
 
 
 # -- Project information -----------------------------------------------------
 
 project = "OpenMMForceFields"
-copyright = (
-    "2019, Chodera lab @ MSKCC. Project structure based on the "
-    "Computational Molecular Science Python Cookiecutter version 1.1"
-)
-author = "Chodera lab @ MSKCC"
+copyright = "2026 Stanford University and the Authors"
+author = "Stanford University"
 
-# The short X.Y version
-version = ""
-# The full version, including alpha/beta/rc tags
-release = ""
+# version specified in ../setup.py
+version = importlib.metadata.version("openmmforcefields")
+
+repo = git.Repo(search_parent_directories=True)
+short_sha = hash = repo.git.rev_parse(repo.head, short=True)
+
+# get the the current tag if this commit has one
+tag = next((tag for tag in repo.tags if tag.commit == repo.head.commit), None)
+
+if tag is None:
+    release = version + "dev_" + short_sha
+    version_match = "dev"
+    version = version_match
+else:
+    release = str(tag) + "_" + short_sha
+    version_match = str(tag)
+    version = version_match
 
 
 # -- General configuration ---------------------------------------------------
@@ -50,6 +62,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.intersphinx",
     "sphinx.ext.extlinks",
+    "sphinx.ext.todo",
+    "myst_parser",
 ]
 
 autosummary_generate = True
@@ -57,14 +71,19 @@ napoleon_google_docstring = False
 napoleon_use_param = False
 napoleon_use_ivar = True
 
+autodoc_default_options = {
+    "members": True,
+    "inherited-members": True,
+    "member-order": "bysource",
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = ".rst"
+source_suffix = [".rst", ".md"]
 
 # The master toctree document.
 master_doc = "index"
@@ -74,7 +93,7 @@ master_doc = "index"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -90,13 +109,25 @@ pygments_style = "default"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "logo": {
+        "text": "OpenMMForceFields docs",
+        "image_light": "_static/logo.svg",
+        "image_dark": "_static/logo.svg",
+    },
+    "external_links": [
+        {"name": "OpenMM.org", "url": "https://openmm.org/"},
+        {"name": "OpenMM docs", "url": "https://openmm.org/documentation"},
+        {"name": "GitHub", "url": "https://github.com/openmm/openmmforcefields"},
+    ],
+    "github_url": "https://github.com/openmm/openmmforcefields",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
