@@ -647,7 +647,7 @@ def convert_yaml(yaml_name, ffxml_dir, ignore=ignore):
         if verbose:
             print("Validating the conversion...")
         tested = False
-        test_source = entry.get("SourceWithCMAP", entry["Source"])
+        test_source = entry.get("SourceForTest", entry["Source"])
         for test in test_filename:
             if test == "protein":
                 validate_protein(ffxml_name, test_source)
