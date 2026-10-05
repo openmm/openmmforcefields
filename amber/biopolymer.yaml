@@ -4,7 +4,7 @@
 
 - MODE: LEAPRC
 - sourcePackage: AmberTools
-  sourcePackageVersion: "24.8"
+  sourcePackageVersion: "26.0"
 - Source: oldff/leaprc.ff14ipq
   Reference:
   - >-
@@ -107,7 +107,7 @@
   Test:
   - protein
 - Source: files/ff19SB/leaprc.protein.ff19SB
-  SourceWithCMAP: leaprc.protein.ff19SB
+  SourceForTest: leaprc.protein.ff19SB
   CMAPFRCMOD: files/ff19SB/frcmod.ff19SB_only_cmap
   Prefix: protein
   Options:
@@ -160,12 +160,23 @@
   Test:
   - dna
 - Source: ./files/DNA.OL21/leaprc.DNA.OL21
+  SourceForTest: leaprc.DNA.OL21
   Prefix: DNA
   Reference:
   - >-
     Zgarbova, M.; Sponer, J.; Jurecka, P.
     Z-DNA as a Touchstone for Additive Empirical Force Fields and a Refinement of the Alpha/Gamma DNA Torsions for AMBER.
     J. Chem. Theory Comput., 2021, 17, 6292-6301.
+  Test:
+  - dna
+- Source: ./files/DNA.OL24/leaprc.DNA.OL24
+  SourceForTest: leaprc.DNA.OL24
+  Prefix: DNA
+  Reference:
+  - >-
+    Zgarbova, M.; Sponer, J.; Jurecka, P,
+    Refinement of the Sugar Puckering Torsion Potential in the AMBER DNA Force Field.
+    J. Chem. Theory Comput. 2025, 21, 833-846.
   Test:
   - dna
 - Source: leaprc.DNA.bsc1
@@ -378,7 +389,7 @@
   Test:
   - protein_phospho
 - Source: files/ff19SB/leaprc.phosaa19SB
-  SourceWithCMAP: leaprc.phosaa19SB
+  SourceForTest: leaprc.phosaa19SB
   CMAPFRCMOD: files/ff19SB/frcmod.phosaa19SB_only_cmap
   CMAPExtraFFXML:
     - ../openmmforcefields/ffxml/amber/protein.ff19SB.xml
