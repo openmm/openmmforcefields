@@ -1,0 +1,41 @@
+﻿.. Overrides the default autosummary template to use the name as the page title
+   instead of the fullname (which includes the long module name).
+
+EspalomaTemplateGenerator
+=========================
+
+.. currentmodule:: openmmforcefields.generators
+
+.. autoclass:: EspalomaTemplateGenerator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EspalomaTemplateGenerator.__init__
+      ~EspalomaTemplateGenerator.add_molecules
+      ~EspalomaTemplateGenerator.cache_system
+      ~EspalomaTemplateGenerator.clear_system_cache
+      ~EspalomaTemplateGenerator.convert_system_to_ffxml
+      ~EspalomaTemplateGenerator.generate_residue_template
+      ~EspalomaTemplateGenerator.generator
+      ~EspalomaTemplateGenerator.get_openmm_system
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EspalomaTemplateGenerator.CHARGE_METHODS
+      ~EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS
+      ~EspalomaTemplateGenerator.espaloma_filename
+      ~EspalomaTemplateGenerator.forcefield
+   
+   

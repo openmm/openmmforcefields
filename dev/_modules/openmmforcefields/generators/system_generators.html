@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>openmmforcefields.generators.system_generators &#8212; OpenMMForceFields 0+untagged.1.g0f09793dev_0f09793 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="../../../_static/documentation_options.js?v=1b66de5c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/openmmforcefields/generators/system_generators';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dev" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">OpenMMForceFields docs</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">openmmforcefields.generators.system_generators</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for openmmforcefields.generators.system_generators</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">System generators that build an OpenMM System object from a Topology object.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">classproperty</span>
+
+<span class="c1">################################################################################</span>
+<span class="c1"># LOGGER</span>
+<span class="c1">################################################################################</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"openmmforcefields.generators.system_generators"</span><span class="p">)</span>
+
+<span class="c1">################################################################################</span>
+<span class="c1"># System generator base class</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="SystemGenerator">
+<a class="viewcode-back" href="../../../generated/openmmforcefields.generators.SystemGenerator.html#openmmforcefields.generators.SystemGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SystemGenerator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Common interface for generating OpenMM Systems from OpenMM Topology objects</span>
+<span class="sd">    that may contain both molecules with parameters provided by OpenMM XML force</span>
+<span class="sd">    fields and molecules with parameters provided by template generators.</span>
+
+<span class="sd">    Currently, this class supports</span>
+
+<span class="sd">    * GAFF, via ``GAFFTemplateGenerator``: see ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS``</span>
+<span class="sd">    * SMIRNOFF, via ``SMIRNOFFTemplateGenerator``: see ``SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS``</span>
+<span class="sd">    * Espaloma, via ``EspalomaTemplateGenerator``: see ``EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS``</span>
+
+<span class="sd">    .. todo ::</span>
+
+<span class="sd">       Once Open Force Field Topology objects support residue definitions, we will also be able</span>
+<span class="sd">       to support Open Force Field Topology objects (which carry their own Molecule definitions).</span>
+
+<span class="sd">    .. warning :: This API is experimental and subject to change.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="SystemGenerator.__init__">
+<a class="viewcode-back" href="../../../generated/openmmforcefields.generators.SystemGenerator.html#openmmforcefields.generators.SystemGenerator.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">forcefields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">small_molecule_forcefield</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">forcefield_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">nonperiodic_forcefield_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">periodic_forcefield_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">template_generator_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">barostat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">molecules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">postprocess_system</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initializes a `SystemGenerator`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        forcefields : list of str, optional, default=None</span>
+<span class="sd">            List of the names of ffxml force field files that will be used in</span>
+<span class="sd">            System creation to attempt to parameterize molecules.</span>
+<span class="sd">        small_molecule_forcefield : str, bytes, file-like object, or iterable, optional</span>
+<span class="sd">            Specification of the force field(s) to use for the template</span>
+<span class="sd">            generator that will attempt to parameterize any molecules that could</span>
+<span class="sd">            not be parameterized by the provided ffxml force fields.  Whatever</span>
+<span class="sd">            is provided must be a supported force field name or other object</span>
+<span class="sd">            that can be understood by one of `GAFFTemplateGenerator`,</span>
+<span class="sd">            `SMIRNOFFTemplateGenerator`, or `EspalomaTemplateGenerator`.  See</span>
+<span class="sd">            these classes for details of the force fields supported.</span>
+<span class="sd">        forcefield_kwargs : dict, optional, default=None</span>
+<span class="sd">            Keyword arguments to be passed to ``openmm.app.ForceField.createSystem()`` during ``System``</span>
+<span class="sd">            object creation.</span>
+<span class="sd">        nonperiodic_forcefield_kwargs : dict, optional, default={'nonbondedMethod' : NoCutoff}</span>
+<span class="sd">            Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.</span>
+<span class="sd">        periodic_forcefield_kwargs : NonbondedMethod, optional, default={'nonbondedMethod' : PME}</span>
+<span class="sd">            Keyword arguments added to forcefield_kwargs when the Topology is periodic.</span>
+<span class="sd">        template_generator_kwargs : dict, optional, default=None</span>
+<span class="sd">            The value of an extra keyword argument called `template_generator_kwargs` to be passed to subclasses of</span>
+<span class="sd">            ``openmmforcefields.generators.template_generators.SmallMoleculeTemplateGenerator``.</span>
+<span class="sd">            Currently only used for ``openmmforcefields.generators.template_generators.EspalomaTemplateGenerator``.</span>
+<span class="sd">        barostat : openmm.MonteCarloBarostat, optional, default=None</span>
+<span class="sd">            If not None, a new ``MonteCarloBarostat`` with matching parameters (but a different random number seed)</span>
+<span class="sd">            will be created and</span>
+<span class="sd">            added to each newly created ``System``.</span>
+<span class="sd">        molecules : openff.toolkit.topology.Molecule or list, optional, default=None</span>
+<span class="sd">            Can be a Molecule or a list of Molecule objects.</span>
+<span class="sd">            If specified, these molecules will be recognized and parameterized as needed.</span>
+<span class="sd">            The parameters will be cached in case they are encountered again the future.</span>
+<span class="sd">        cache : filename, optional, default=None</span>
+<span class="sd">            If not None, filename for caching small molecule residue templates.</span>
+<span class="sd">        postprocess_system : method, optional, default=None</span>
+<span class="sd">            If not None, this method will be called as ``system = postprocess_system(system)`` to post-process the</span>
+<span class="sd">            System object for create_system(topology) before it is returned.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        Here's an example that uses GAFF 2.2.20 along with the new ``ff14SB`` generation of AMBER force fields</span>
+<span class="sd">        (and compatible solvent models) to generate an OpenMM ``System`` object from an</span>
+<span class="sd">        `Open Force Field Topology &lt;https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology&gt;`_ object:</span>
+
+<span class="sd">        &gt;&gt;&gt; # Define the keyword arguments to feed to ForceField</span>
+<span class="sd">        &gt;&gt;&gt; from openmm import unit</span>
+<span class="sd">        &gt;&gt;&gt; from openmm import app</span>
+<span class="sd">        &gt;&gt;&gt; # Define standard OpenMM biopolymer and solvent force fields to use</span>
+
+<span class="sd">        To initialize the ``SystemGenerator``, we specify the OpenMM force fields, the small molecule force field, and</span>
+<span class="sd">        any ``kwargs`` to be fed to the OpenMM ``openmm.app.ForceField.createSystem()`` method:</span>
+
+<span class="sd">        &gt;&gt;&gt; from openmmforcefields.generators import SystemGenerator</span>
+<span class="sd">        &gt;&gt;&gt; amber_forcefields = [</span>
+<span class="sd">        ...     "amber/protein.ff14SB.xml",</span>
+<span class="sd">        ...     "amber/tip3p_standard.xml",</span>
+<span class="sd">        ...     "amber/tip3p_HFE_multivalent.xml",</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; small_molecule_forcefield = "gaff-2.2.20"</span>
+<span class="sd">        &gt;&gt;&gt; forcefield_kwargs = {</span>
+<span class="sd">        ...     "constraints": app.HBonds,</span>
+<span class="sd">        ...     "rigidWater": True,</span>
+<span class="sd">        ...     "removeCMMotion": False,</span>
+<span class="sd">        ...     "hydrogenMass": 4 * unit.amu,</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; system_generator = SystemGenerator(</span>
+<span class="sd">        ...     forcefields=amber_forcefields,</span>
+<span class="sd">        ...     small_molecule_forcefield=small_molecule_forcefield,</span>
+<span class="sd">        ...     forcefield_kwargs=forcefield_kwargs,</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        If the ``cache`` argument is specified, parameterized molecules are cached in the corresponding file.</span>
+
+<span class="sd">        &gt;&gt;&gt; cache = 'db.json'</span>
+<span class="sd">        &gt;&gt;&gt; system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield='gaff-2.2.20', forcefield_kwargs=forcefield_kwargs, cache=cache)  # doctest: +SKIP</span>
+
+<span class="sd">        To use a barostat, you need to define a barostat whose parameters will be copied into each system (with a different random number seed):</span>
+
+<span class="sd">        &gt;&gt;&gt; import openmm</span>
+<span class="sd">        &gt;&gt;&gt; from openmm import unit</span>
+<span class="sd">        &gt;&gt;&gt; pressure = 1.0 * unit.atmospheres</span>
+<span class="sd">        &gt;&gt;&gt; temperature = 298.0 * unit.kelvin</span>
+<span class="sd">        &gt;&gt;&gt; frequency = 25 # steps</span>
+<span class="sd">        &gt;&gt;&gt; system_generator.barostat = openmm.MonteCarloBarostat(pressure, temperature, frequency)</span>
+
+<span class="sd">        Now, you can create an OpenMM ``System`` object from an OpenMM ``Topology`` object and a list of OpenFF ``Molecule`` objects</span>
+
+<span class="sd">        &gt;&gt;&gt; from openff.toolkit import Molecule, Topology</span>
+<span class="sd">        &gt;&gt;&gt; molecules = [Molecule.from_smiles(smiles) for smiles in ["CCO", "c1ccccc1"]]</span>
+<span class="sd">        &gt;&gt;&gt; openmm_topology = Topology.from_molecules(molecules).to_openmm()</span>
+<span class="sd">        &gt;&gt;&gt; system = system_generator.create_system(openmm_topology, molecules=molecules)</span>
+
+<span class="sd">        Parameters for multiple force fields can be held in the same cache file.</span>
+
+<span class="sd">        To use the `Open Force Field 'openff-1.0.0' ("Parsley") force field &lt;https://openforcefield.org/news/introducing-openforcefield-1.0/&gt;`_ instead,</span>
+<span class="sd">        simply change the ``small_molecule_forcefield`` parameter to one of the supported ``GAFFTemplateGenerator.INSTALLED_FORCEFIELDS``:</span>
+
+<span class="sd">        &gt;&gt;&gt; small_molecule_forcefield = 'openff-1.0.0'</span>
+<span class="sd">        &gt;&gt;&gt; system_generator = SystemGenerator(forcefields=amber_forcefields, small_molecule_forcefield=small_molecule_forcefield, forcefield_kwargs=forcefield_kwargs)</span>
+
+<span class="sd">        For debugging convenience, you can also turn _off_ specific interactions during system creation, such as particle charges:</span>
+
+<span class="sd">        &gt;&gt;&gt; system_generator.particle_charges = False # will cause particle charges to be set to zero</span>
+<span class="sd">        &gt;&gt;&gt; system_generator.exception_charges = False # will zero out all 1-4 charge interactions</span>
+<span class="sd">        &gt;&gt;&gt; system_generator.particle_epsilons = False # will zero out Lennard-Jones particle-particle interactions</span>
+<span class="sd">        &gt;&gt;&gt; system_generator.particle_exceptions = False # will zero out all 1-4 Lennard-Jones interactions</span>
+<span class="sd">        &gt;&gt;&gt; system_generator.torsions = False # will zero out all torsion terms</span>
+<span class="sd">        """</span>  <span class="c1"># noqa</span>
+
+        <span class="c1"># Initialize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barostat</span> <span class="o">=</span> <span class="n">barostat</span>  <span class="c1"># barostat to copy, or None if no barostat is to be added</span>
+
+        <span class="c1"># Post-creation system transformations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_charges</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># include particle charges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exception_charges</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># include electrostatics nonzero exceptions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">particle_epsilons</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># include LJ particles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exception_epsilons</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># include LJ nonzero exceptions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torsions</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># include torsions</span>
+
+        <span class="c1"># Method to use for postprocessing system</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">postprocess_system</span> <span class="o">=</span> <span class="n">postprocess_system</span>
+
+        <span class="c1"># Create OpenMM ForceField object</span>
+        <span class="n">forcefields</span> <span class="o">=</span> <span class="n">forcefields</span> <span class="k">if</span> <span class="p">(</span><span class="n">forcefields</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">ForceField</span><span class="p">(</span><span class="o">*</span><span class="n">forcefields</span><span class="p">)</span>
+
+        <span class="c1"># Cache force fields and settings to use</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forcefield_kwargs</span> <span class="o">=</span> <span class="n">forcefield_kwargs</span> <span class="k">if</span> <span class="n">forcefield_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nonperiodic_forcefield_kwargs</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">nonperiodic_forcefield_kwargs</span>
+            <span class="k">if</span> <span class="n">nonperiodic_forcefield_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="p">{</span><span class="s2">"nonbondedMethod"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">NoCutoff</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">periodic_forcefield_kwargs</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">periodic_forcefield_kwargs</span> <span class="k">if</span> <span class="n">periodic_forcefield_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="s2">"nonbondedMethod"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">PME</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_generator_kwargs</span> <span class="o">=</span> <span class="n">template_generator_kwargs</span>
+
+        <span class="c1"># Raise an exception if nonbondedForce is specified in forcefield_kwargs</span>
+        <span class="k">if</span> <span class="s2">"nonbondedMethod"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield_kwargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">"""nonbondedMethod cannot be specified in forcefield_kwargs;</span>
+<span class="sd">                 must be specified in either periodic_forcefield_kwargs (if it should be applied to periodic systems)</span>
+<span class="sd">                 or nonperiodic_forcefield_kwargs (if it should be applied to non-periodic systems)"""</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Create and cache a residue template generator</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators.template_generators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+            <span class="n">SmallMoleculeTemplateGenerator</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">small_molecule_forcefield</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">template_generator_cls</span> <span class="ow">in</span> <span class="n">SmallMoleculeTemplateGenerator</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Trying </span><span class="si">{</span><span class="n">template_generator_cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> to load </span><span class="si">{</span><span class="n">small_molecule_forcefield</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span> <span class="o">=</span> <span class="n">template_generator_cls</span><span class="p">(</span>
+                        <span class="n">forcefield</span><span class="o">=</span><span class="n">small_molecule_forcefield</span><span class="p">,</span>
+                        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+                        <span class="n">template_generator_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_generator_kwargs</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">template_generator_cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> cannot load </span><span class="si">{</span><span class="n">small_molecule_forcefield</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">"No registered small molecule template generators could load force field "</span>
+                    <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">small_molecule_forcefield</span><span class="si">}</span><span class="s2">'</span><span class="se">\n</span><span class="s2">"</span>
+                    <span class="s2">"Available installed force fields are:</span><span class="se">\n</span><span class="s2">"</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">template_generator_cls</span> <span class="ow">in</span> <span class="n">SmallMoleculeTemplateGenerator</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">template_generator_cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">template_generator_cls</span><span class="o">.</span><span class="n">INSTALLED_FORCEFIELDS</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="o">.</span><span class="n">registerTemplateGenerator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span><span class="o">.</span><span class="n">generator</span><span class="p">)</span>
+
+            <span class="c1"># Inform the template generator about any specified molecules</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classproperty</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SMALL_MOLECULE_FORCEFIELDS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Return a list of available small molecule force fields"""</span>
+        <span class="n">forcefields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators.template_generators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+            <span class="n">SmallMoleculeTemplateGenerator</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">template_generator_cls</span> <span class="ow">in</span> <span class="n">SmallMoleculeTemplateGenerator</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+            <span class="n">forcefields</span> <span class="o">+=</span> <span class="n">template_generator_cls</span><span class="o">.</span><span class="n">INSTALLED_FORCEFIELDS</span>
+        <span class="k">return</span> <span class="n">forcefields</span>
+
+<div class="viewcode-block" id="SystemGenerator.add_molecules">
+<a class="viewcode-back" href="../../../generated/openmmforcefields.generators.SystemGenerator.html#openmmforcefields.generators.SystemGenerator.add_molecules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_molecules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecules</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Add molecules to registered template generator</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        molecules : openff.toolkit.topology.Molecule or list, optional, default=None</span>
+<span class="sd">            Can be a Molecule or a list of Molecule objects.</span>
+<span class="sd">            If specified, these molecules will be recognized and parameterized as needed.</span>
+<span class="sd">            The parameters will be cached in case they are encountered again the future.</span>
+<span class="sd">        """</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"You must have a small molecule residue template generator registered to add small molecules"</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_modify_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Add barostat and modify forces if requested.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Add barostat if requested and the system uses periodic boundary conditions</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">barostat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="n">system</span><span class="o">.</span><span class="n">usesPeriodicBoundaryConditions</span><span class="p">():</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+
+            <span class="n">MAXINT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+
+            <span class="c1"># Get the barostat</span>
+            <span class="n">barostat</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">barostat</span><span class="p">)</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">MAXINT</span><span class="p">)</span>
+            <span class="n">barostat</span><span class="o">.</span><span class="n">setRandomNumberSeed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">addForce</span><span class="p">(</span><span class="n">barostat</span><span class="p">)</span>
+
+        <span class="c1"># Modify forces if requested</span>
+        <span class="k">for</span> <span class="n">force</span> <span class="ow">in</span> <span class="n">system</span><span class="o">.</span><span class="n">getForces</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">force</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"NonbondedForce"</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">force</span><span class="o">.</span><span class="n">getNumParticles</span><span class="p">()):</span>
+                    <span class="n">charge</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="n">force</span><span class="o">.</span><span class="n">getParticleParameters</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_charges</span><span class="p">:</span>
+                        <span class="n">charge</span> <span class="o">*=</span> <span class="mi">0</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_epsilons</span><span class="p">:</span>
+                        <span class="n">epsilon</span> <span class="o">*=</span> <span class="mi">0</span>
+                    <span class="n">force</span><span class="o">.</span><span class="n">setParticleParameters</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">force</span><span class="o">.</span><span class="n">getNumExceptions</span><span class="p">()):</span>
+                    <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">chargeProd</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="n">force</span><span class="o">.</span><span class="n">getExceptionParameters</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception_charges</span><span class="p">:</span>
+                        <span class="n">chargeProd</span> <span class="o">*=</span> <span class="mi">0</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception_epsilons</span><span class="p">:</span>
+                        <span class="n">epsilon</span> <span class="o">*=</span> <span class="mi">0</span>
+                    <span class="n">force</span><span class="o">.</span><span class="n">setExceptionParameters</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">chargeProd</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">force</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"PeriodicTorsionForce"</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">force</span><span class="o">.</span><span class="n">getNumTorsions</span><span class="p">()):</span>
+                    <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">periodicity</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">force</span><span class="o">.</span><span class="n">getTorsionParameters</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">torsions</span><span class="p">:</span>
+                        <span class="n">K</span> <span class="o">*=</span> <span class="mi">0</span>
+                    <span class="n">force</span><span class="o">.</span><span class="n">setTorsionParameters</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">periodicity</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SystemGenerator.create_system">
+<a class="viewcode-back" href="../../../generated/openmmforcefields.generators.SystemGenerator.html#openmmforcefields.generators.SystemGenerator.create_system">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">molecules</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Create a system from the specified topology.</span>
+
+<span class="sd">        .. todo :: Add support for OpenFF Topology objects once they can be converted to OpenMM Topology objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        topology : openmm.app.Topology object</span>
+<span class="sd">            The topology describing the system to be created</span>
+<span class="sd">        molecules : openff.toolkit.topology.Molecule or list of Molecules, optional, default=None</span>
+<span class="sd">            Can be a Molecule or a list of Molecule objects.</span>
+<span class="sd">            If specified, these molecules will be recognized and parameterized as needed.</span>
+<span class="sd">            The parameters will be cached in case they are encountered again the future.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        system : openmm.System</span>
+<span class="sd">            A system object generated from the topology</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Inform the template generator about any specified molecules</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">molecules</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">template_generator</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span>
+
+        <span class="c1"># Build the kwargs to use</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+
+        <span class="n">forcefield_kwargs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forcefield_kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">topology</span><span class="o">.</span><span class="n">getPeriodicBoxVectors</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">forcefield_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nonperiodic_forcefield_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">forcefield_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">periodic_forcefield_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Build the System</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="o">**</span><span class="n">forcefield_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Modify other forces as requested</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modify_forces</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+
+        <span class="c1"># Post-process the System if requested</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocess_system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocess_system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">system</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Stanford University and the Authors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

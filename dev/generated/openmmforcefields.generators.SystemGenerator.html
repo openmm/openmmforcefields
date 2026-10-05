@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SystemGenerator &#8212; OpenMMForceFields 0+untagged.1.g0f09793dev_0f09793 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="../_static/documentation_options.js?v=1b66de5c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/openmmforcefields.generators.SystemGenerator';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="SMIRNOFFTemplateGenerator" href="openmmforcefields.generators.SMIRNOFFTemplateGenerator.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dev" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">OpenMMForceFields docs</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="openmmforcefields.generators.EspalomaTemplateGenerator.html">EspalomaTemplateGenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openmmforcefields.generators.GAFFTemplateGenerator.html">GAFFTemplateGenerator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openmmforcefields.generators.SMIRNOFFTemplateGenerator.html">SMIRNOFFTemplateGenerator</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">SystemGenerator</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SystemGenerator</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="systemgenerator">
+<h1>SystemGenerator<a class="headerlink" href="#systemgenerator" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="openmmforcefields.generators.SystemGenerator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">openmmforcefields.generators.</span></span><span class="sig-name descname"><span class="pre">SystemGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">forcefields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">small_molecule_forcefield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonperiodic_forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_generator_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barostat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocess_system</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openmmforcefields/generators/system_generators.html#SystemGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openmmforcefields.generators.SystemGenerator" title="Link to this definition">#</a></dt>
+<dd><p>Common interface for generating OpenMM Systems from OpenMM Topology objects
+that may contain both molecules with parameters provided by OpenMM XML force
+fields and molecules with parameters provided by template generators.</p>
+<p>Currently, this class supports</p>
+<ul class="simple">
+<li><p>GAFF, via <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code>: see <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator.INSTALLED_FORCEFIELDS</span></code></p></li>
+<li><p>SMIRNOFF, via <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator</span></code>: see <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS</span></code></p></li>
+<li><p>Espaloma, via <code class="docutils literal notranslate"><span class="pre">EspalomaTemplateGenerator</span></code>: see <code class="docutils literal notranslate"><span class="pre">EspalomaTemplateGenerator.INSTALLED_FORCEFIELDS</span></code></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This API is experimental and subject to change.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="openmmforcefields.generators.SystemGenerator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">forcefields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">small_molecule_forcefield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonperiodic_forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_forcefield_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_generator_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barostat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocess_system</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openmmforcefields/generators/system_generators.html#SystemGenerator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openmmforcefields.generators.SystemGenerator.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initializes a <cite>SystemGenerator</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>forcefields</strong> (<em>list of str, optional, default=None</em>) – List of the names of ffxml force field files that will be used in
+System creation to attempt to parameterize molecules.</p></li>
+<li><p><strong>small_molecule_forcefield</strong> (<em>str, bytes, file-like object, or iterable, optional</em>) – Specification of the force field(s) to use for the template
+generator that will attempt to parameterize any molecules that could
+not be parameterized by the provided ffxml force fields.  Whatever
+is provided must be a supported force field name or other object
+that can be understood by one of <cite>GAFFTemplateGenerator</cite>,
+<cite>SMIRNOFFTemplateGenerator</cite>, or <cite>EspalomaTemplateGenerator</cite>.  See
+these classes for details of the force fields supported.</p></li>
+<li><p><strong>forcefield_kwargs</strong> (<em>dict, optional, default=None</em>) – Keyword arguments to be passed to <code class="docutils literal notranslate"><span class="pre">openmm.app.ForceField.createSystem()</span></code> during <code class="docutils literal notranslate"><span class="pre">System</span></code>
+object creation.</p></li>
+<li><p><strong>nonperiodic_forcefield_kwargs</strong> (<em>dict, optional, default={‘nonbondedMethod’ : NoCutoff}</em>) – Keyword arguments added to forcefield_kwargs when the Topology is non-periodic.</p></li>
+<li><p><strong>periodic_forcefield_kwargs</strong> (<em>NonbondedMethod, optional, default={‘nonbondedMethod’ : PME}</em>) – Keyword arguments added to forcefield_kwargs when the Topology is periodic.</p></li>
+<li><p><strong>template_generator_kwargs</strong> (<em>dict, optional, default=None</em>) – The value of an extra keyword argument called <cite>template_generator_kwargs</cite> to be passed to subclasses of
+<code class="docutils literal notranslate"><span class="pre">openmmforcefields.generators.template_generators.SmallMoleculeTemplateGenerator</span></code>.
+Currently only used for <code class="docutils literal notranslate"><span class="pre">openmmforcefields.generators.template_generators.EspalomaTemplateGenerator</span></code>.</p></li>
+<li><p><strong>barostat</strong> (<em>openmm.MonteCarloBarostat, optional, default=None</em>) – If not None, a new <code class="docutils literal notranslate"><span class="pre">MonteCarloBarostat</span></code> with matching parameters (but a different random number seed)
+will be created and
+added to each newly created <code class="docutils literal notranslate"><span class="pre">System</span></code>.</p></li>
+<li><p><strong>molecules</strong> (<em>openff.toolkit.topology.Molecule or list, optional, default=None</em>) – Can be a Molecule or a list of Molecule objects.
+If specified, these molecules will be recognized and parameterized as needed.
+The parameters will be cached in case they are encountered again the future.</p></li>
+<li><p><strong>cache</strong> (<em>filename, optional, default=None</em>) – If not None, filename for caching small molecule residue templates.</p></li>
+<li><p><strong>postprocess_system</strong> (<em>method, optional, default=None</em>) – If not None, this method will be called as <code class="docutils literal notranslate"><span class="pre">system</span> <span class="pre">=</span> <span class="pre">postprocess_system(system)</span></code> to post-process the
+System object for create_system(topology) before it is returned.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Here’s an example that uses GAFF 2.2.20 along with the new <code class="docutils literal notranslate"><span class="pre">ff14SB</span></code> generation of AMBER force fields
+(and compatible solvent models) to generate an OpenMM <code class="docutils literal notranslate"><span class="pre">System</span></code> object from an
+<a class="reference external" href="https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology">Open Force Field Topology</a> object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define the keyword arguments to feed to ForceField</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define standard OpenMM biopolymer and solvent force fields to use</span>
+</pre></div>
+</div>
+<p>To initialize the <code class="docutils literal notranslate"><span class="pre">SystemGenerator</span></code>, we specify the OpenMM force fields, the small molecule force field, and
+any <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to be fed to the OpenMM <code class="docutils literal notranslate"><span class="pre">openmm.app.ForceField.createSystem()</span></code> method:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amber_forcefields</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s2">"amber/protein.ff14SB.xml"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"amber/tip3p_standard.xml"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"amber/tip3p_HFE_multivalent.xml"</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">small_molecule_forcefield</span> <span class="o">=</span> <span class="s2">"gaff-2.2.20"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forcefield_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">"constraints"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"rigidWater"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"removeCMMotion"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"hydrogenMass"</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">unit</span><span class="o">.</span><span class="n">amu</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span> <span class="o">=</span> <span class="n">SystemGenerator</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">forcefields</span><span class="o">=</span><span class="n">amber_forcefields</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">small_molecule_forcefield</span><span class="o">=</span><span class="n">small_molecule_forcefield</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">forcefield_kwargs</span><span class="o">=</span><span class="n">forcefield_kwargs</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">cache</span></code> argument is specified, parameterized molecules are cached in the corresponding file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="s1">'db.json'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span> <span class="o">=</span> <span class="n">SystemGenerator</span><span class="p">(</span><span class="n">forcefields</span><span class="o">=</span><span class="n">amber_forcefields</span><span class="p">,</span> <span class="n">small_molecule_forcefield</span><span class="o">=</span><span class="s1">'gaff-2.2.20'</span><span class="p">,</span> <span class="n">forcefield_kwargs</span><span class="o">=</span><span class="n">forcefield_kwargs</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To use a barostat, you need to define a barostat whose parameters will be copied into each system (with a different random number seed):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">openmm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pressure</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">unit</span><span class="o">.</span><span class="n">atmospheres</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">298.0</span> <span class="o">*</span> <span class="n">unit</span><span class="o">.</span><span class="n">kelvin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frequency</span> <span class="o">=</span> <span class="mi">25</span> <span class="c1"># steps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">barostat</span> <span class="o">=</span> <span class="n">openmm</span><span class="o">.</span><span class="n">MonteCarloBarostat</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, you can create an OpenMM <code class="docutils literal notranslate"><span class="pre">System</span></code> object from an OpenMM <code class="docutils literal notranslate"><span class="pre">Topology</span></code> object and a list of OpenFF <code class="docutils literal notranslate"><span class="pre">Molecule</span></code> objects</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">openff.toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">Topology</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">molecules</span> <span class="o">=</span> <span class="p">[</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span> <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"CCO"</span><span class="p">,</span> <span class="s2">"c1ccccc1"</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">openmm_topology</span> <span class="o">=</span> <span class="n">Topology</span><span class="o">.</span><span class="n">from_molecules</span><span class="p">(</span><span class="n">molecules</span><span class="p">)</span><span class="o">.</span><span class="n">to_openmm</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">system_generator</span><span class="o">.</span><span class="n">create_system</span><span class="p">(</span><span class="n">openmm_topology</span><span class="p">,</span> <span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Parameters for multiple force fields can be held in the same cache file.</p>
+<p>To use the <a class="reference external" href="https://openforcefield.org/news/introducing-openforcefield-1.0/">Open Force Field ‘openff-1.0.0’ (“Parsley”) force field</a> instead,
+simply change the <code class="docutils literal notranslate"><span class="pre">small_molecule_forcefield</span></code> parameter to one of the supported <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator.INSTALLED_FORCEFIELDS</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">small_molecule_forcefield</span> <span class="o">=</span> <span class="s1">'openff-1.0.0'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span> <span class="o">=</span> <span class="n">SystemGenerator</span><span class="p">(</span><span class="n">forcefields</span><span class="o">=</span><span class="n">amber_forcefields</span><span class="p">,</span> <span class="n">small_molecule_forcefield</span><span class="o">=</span><span class="n">small_molecule_forcefield</span><span class="p">,</span> <span class="n">forcefield_kwargs</span><span class="o">=</span><span class="n">forcefield_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For debugging convenience, you can also turn _off_ specific interactions during system creation, such as particle charges:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">particle_charges</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># will cause particle charges to be set to zero</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">exception_charges</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># will zero out all 1-4 charge interactions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">particle_epsilons</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># will zero out Lennard-Jones particle-particle interactions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">particle_exceptions</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># will zero out all 1-4 Lennard-Jones interactions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system_generator</span><span class="o">.</span><span class="n">torsions</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># will zero out all torsion terms</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#openmmforcefields.generators.SystemGenerator.__init__" title="openmmforcefields.generators.SystemGenerator.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([forcefields, ...])</p></td>
+<td><p>Initializes a <cite>SystemGenerator</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#openmmforcefields.generators.SystemGenerator.add_molecules" title="openmmforcefields.generators.SystemGenerator.add_molecules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_molecules</span></code></a>(molecules)</p></td>
+<td><p>Add molecules to registered template generator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#openmmforcefields.generators.SystemGenerator.create_system" title="openmmforcefields.generators.SystemGenerator.create_system"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_system</span></code></a>(topology[, molecules])</p></td>
+<td><p>Create a system from the specified topology.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attributes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SMALL_MOLECULE_FORCEFIELDS</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="openmmforcefields.generators.SystemGenerator.add_molecules">
+<span class="sig-name descname"><span class="pre">add_molecules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openmmforcefields/generators/system_generators.html#SystemGenerator.add_molecules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openmmforcefields.generators.SystemGenerator.add_molecules" title="Link to this definition">#</a></dt>
+<dd><p>Add molecules to registered template generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>molecules</strong> (<em>openff.toolkit.topology.Molecule or list, optional, default=None</em>) – Can be a Molecule or a list of Molecule objects.
+If specified, these molecules will be recognized and parameterized as needed.
+The parameters will be cached in case they are encountered again the future.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openmmforcefields.generators.SystemGenerator.create_system">
+<span class="sig-name descname"><span class="pre">create_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecules</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openmmforcefields/generators/system_generators.html#SystemGenerator.create_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openmmforcefields.generators.SystemGenerator.create_system" title="Link to this definition">#</a></dt>
+<dd><p>Create a system from the specified topology.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topology</strong> (<em>openmm.app.Topology object</em>) – The topology describing the system to be created</p></li>
+<li><p><strong>molecules</strong> (<em>openff.toolkit.topology.Molecule or list of Molecules, optional, default=None</em>) – Can be a Molecule or a list of Molecule objects.
+If specified, these molecules will be recognized and parameterized as needed.
+The parameters will be cached in case they are encountered again the future.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>system</strong> – A system object generated from the topology</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>openmm.System</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="openmmforcefields.generators.SMIRNOFFTemplateGenerator.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SMIRNOFFTemplateGenerator</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openmmforcefields.generators.SystemGenerator"><code class="docutils literal notranslate"><span class="pre">SystemGenerator</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmmforcefields.generators.SystemGenerator.__init__"><code class="docutils literal notranslate"><span class="pre">SystemGenerator.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmmforcefields.generators.SystemGenerator.add_molecules"><code class="docutils literal notranslate"><span class="pre">SystemGenerator.add_molecules()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmmforcefields.generators.SystemGenerator.create_system"><code class="docutils literal notranslate"><span class="pre">SystemGenerator.create_system()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/generated/openmmforcefields.generators.SystemGenerator.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Stanford University and the Authors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

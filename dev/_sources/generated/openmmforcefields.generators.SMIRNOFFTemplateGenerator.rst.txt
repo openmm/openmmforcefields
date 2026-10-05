@@ -1,0 +1,40 @@
+﻿.. Overrides the default autosummary template to use the name as the page title
+   instead of the fullname (which includes the long module name).
+
+SMIRNOFFTemplateGenerator
+=========================
+
+.. currentmodule:: openmmforcefields.generators
+
+.. autoclass:: SMIRNOFFTemplateGenerator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SMIRNOFFTemplateGenerator.__init__
+      ~SMIRNOFFTemplateGenerator.add_molecules
+      ~SMIRNOFFTemplateGenerator.cache_system
+      ~SMIRNOFFTemplateGenerator.clear_system_cache
+      ~SMIRNOFFTemplateGenerator.convert_system_to_ffxml
+      ~SMIRNOFFTemplateGenerator.generate_residue_template
+      ~SMIRNOFFTemplateGenerator.generator
+      ~SMIRNOFFTemplateGenerator.get_openmm_system
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SMIRNOFFTemplateGenerator.INSTALLED_FORCEFIELDS
+      ~SMIRNOFFTemplateGenerator.forcefield
+      ~SMIRNOFFTemplateGenerator.smirnoff_filenames
+   
+   

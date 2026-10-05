@@ -1,0 +1,40 @@
+﻿.. Overrides the default autosummary template to use the name as the page title
+   instead of the fullname (which includes the long module name).
+
+GAFFTemplateGenerator
+=====================
+
+.. currentmodule:: openmmforcefields.generators
+
+.. autoclass:: GAFFTemplateGenerator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GAFFTemplateGenerator.__init__
+      ~GAFFTemplateGenerator.add_molecules
+      ~GAFFTemplateGenerator.generate_residue_template
+      ~GAFFTemplateGenerator.generator
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GAFFTemplateGenerator.INSTALLED_FORCEFIELDS
+      ~GAFFTemplateGenerator.forcefield
+      ~GAFFTemplateGenerator.gaff_dat_filename
+      ~GAFFTemplateGenerator.gaff_major_version
+      ~GAFFTemplateGenerator.gaff_minor_version
+      ~GAFFTemplateGenerator.gaff_version
+      ~GAFFTemplateGenerator.gaff_xml_filename
+   
+   

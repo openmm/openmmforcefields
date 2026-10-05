@@ -1,0 +1,33 @@
+﻿.. Overrides the default autosummary template to use the name as the page title
+   instead of the fullname (which includes the long module name).
+
+SystemGenerator
+===============
+
+.. currentmodule:: openmmforcefields.generators
+
+.. autoclass:: SystemGenerator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SystemGenerator.__init__
+      ~SystemGenerator.add_molecules
+      ~SystemGenerator.create_system
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SystemGenerator.SMALL_MOLECULE_FORCEFIELDS
+   
+   

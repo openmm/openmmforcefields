@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>User Guide &#8212; OpenMMForceFields 0+untagged.1.g0f09793dev_0f09793 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+    <script src="_static/documentation_options.js?v=1b66de5c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'userguide';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="OpenMMForceFields" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dev" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt=""/>
+    <img src="_static/logo.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">OpenMMForceFields docs</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#" aria-current="page">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#" aria-current="page">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/">
+    OpenMM.org
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://openmm.org/documentation">
+    OpenMM docs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/openmm/openmmforcefields">
+    GitHub
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/openmm/openmmforcefields" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">User Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
+<section id="using-the-amber-and-charmm-biopolymer-force-fields">
+<h2>Using the Amber and CHARMM biopolymer force fields<a class="headerlink" href="#using-the-amber-and-charmm-biopolymer-force-fields" title="Link to this heading">#</a></h2>
+<p>This repository contains force fields for use with the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">ForceField</span></code></a> class for parameterizing biomolecular systems.
+If you’re not familiar with this approach to applying parameters to biomolecular systems, please see the <a class="reference external" href="https://docs.openmm.org/latest/userguide/application/02_running_sims.html">OpenMM User Guide</a>.
+Note that a selection of standard force fields from the Amber and CHARMM force field families is already bundled with the main OpenMM release, as also described <a class="reference external" href="https://docs.openmm.org/latest/userguide/application/02_running_sims.html#force-fields">in the User Guide</a>.
+Those force fields should be identical to the versions distributed with OpenMMForceFields but can be used directly without installing this package.  However, OpenMMForceFields provides a larger set of force fields from these families.</p>
+<section id="using-the-amber-force-fields">
+<h3>Using the Amber force fields<a class="headerlink" href="#using-the-amber-force-fields" title="Link to this heading">#</a></h3>
+<p>Once installed, the Amber force fields will be registered in the <code class="docutils literal notranslate"><span class="pre">amber/</span></code> relative path searched by <a class="reference external" href="http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">openmm.app.ForceField</span></code></a>.</p>
+<p>For example, to specify the <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00591"><code class="docutils literal notranslate"><span class="pre">ff19SB</span></code></a> protein force field (corresponding to the force field loaded by LEaP with <code class="docutils literal notranslate"><span class="pre">leaprc.protein.ff19SB</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"amber/protein.ff19SB.xml"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or to specifically access the older (now outdated) <a class="reference external" href="https://doi.org/10.1002/prot.22711"><code class="docutils literal notranslate"><span class="pre">ff99SBildn</span></code></a> force field converted from <code class="docutils literal notranslate"><span class="pre">oldff/leaprc.ff99SBildn</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"amber/ff99SBildn.xml"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Various water models and associated parameters for ions are also included.  For instance, to load the ff19SB force field for proteins, and the TIP3P water model with the <a class="reference external" href="https://doi.org/10.1021/jp8001614">Joung and Cheatham recommended salt models</a> (<code class="docutils literal notranslate"><span class="pre">parm/frcmod.ionsjc_tip3p</span></code>) and recommended multivalent ion parameters (<code class="docutils literal notranslate"><span class="pre">parm/frcmod.ions234lm_126_tip3p</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span>
+    <span class="s2">"amber/protein.ff19SB.xml"</span><span class="p">,</span>
+    <span class="s2">"amber/tip3p_standard.xml"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-the-charmm-force-fields">
+<h3>Using the CHARMM force fields<a class="headerlink" href="#using-the-charmm-force-fields" title="Link to this heading">#</a></h3>
+<p>Similarly, the CHARMM force fields will be registered in the <code class="docutils literal notranslate"><span class="pre">charmm/</span></code> relative path:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"charmm/charmm36.xml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-amber-gaff-1-x-and-2-x-for-small-molecules">
+<h2>Using Amber GAFF 1.x and 2.x for small molecules<a class="headerlink" href="#using-amber-gaff-1-x-and-2-x-for-small-molecules" title="Link to this heading">#</a></h2>
+<p>The OpenMMForceFields package includes a <a class="reference external" href="https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators">residue template generator</a> for the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">ForceField</span></code></a> class that automatically generates OpenMM residue templates for small molecules lacking parameters using <a class="reference external" href="https://ambermd.org/antechamber/gaff.html">GAFF</a> versions 1 or 2.</p>
+<section id="cheminformatics-toolkits">
+<h3>Cheminformatics toolkits<a class="headerlink" href="#cheminformatics-toolkits" title="Link to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://github.com/openforcefield/openff-toolkit">OpenFF Toolkit</a> is used to provide an interface with cheminformatics toolkits to interact with <a class="reference external" href="https://ambermd.org/antechamber/ac.html">Antechamber</a> from the <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> package to generate parameters for small molecules.
+By default, the OpenFF Toolkit will make use of the free and open source <a class="reference external" href="https://www.rdkit.org/">RDKit cheminformatics toolkit</a> that is installed automatically, but will optionally use the <a class="reference external" href="https://docs.eyesopen.com/toolkits/python/index.html">OpenEye toolkit</a> if it is installed and licensed.
+The OpenEye toolkit is available <a class="reference external" href="https://www.eyesopen.com/academic-licensing">for free for academics for non-IP-generating academic research</a>.</p>
+</section>
+<section id="on-the-fly-template-generation-for-small-molecules">
+<h3>On-the-fly template generation for small molecules<a class="headerlink" href="#on-the-fly-template-generation-for-small-molecules" title="Link to this heading">#</a></h3>
+<p>Generation of OpenMM-compatible parameters for small molecules encountered in an OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html"><code class="docutils literal notranslate"><span class="pre">Topology</span></code></a> is handled through <code class="docutils literal notranslate"><span class="pre">openmmforcefields.generators.GAFFTemplateGenerator</span></code>.
+Because the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html"><code class="docutils literal notranslate"><span class="pre">Topology</span></code></a> object used by the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">ForceField</span></code></a> class does not know the precise chemical identity of molecules represented in the topology—which contains only elements and bonds between them, without stereochemical or bond order information—it is necessary to instruct <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code> which small molecules it will encounter in processing the <code class="docutils literal notranslate"><span class="pre">Topology</span></code> object ahead of time; it then matches these by element and bond pattern.</p>
+</section>
+<section id="specifying-molecules">
+<h3>Specifying molecules<a class="headerlink" href="#specifying-molecules" title="Link to this heading">#</a></h3>
+<p>To do this, it is necessary to specify one or more <a class="reference external" href="https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html"><code class="docutils literal notranslate"><span class="pre">openff.toolkit.Molecule</span></code></a> objects which can easily be created from many different representations of small molecules, including SMILES strings and common molecule storage formats.
+There are many ways to create an OpenFF <a class="reference external" href="https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html"><code class="docutils literal notranslate"><span class="pre">Molecule</span></code></a> object: see the <a class="reference external" href="https://docs.openforcefield.org/projects/toolkit/en/stable/users/molecule_cookbook.html">OpenFF Toolkit documentation</a> for more details.</p>
+</section>
+<section id="partial-charges-for-small-molecules">
+<h3>Partial charges for small molecules<a class="headerlink" href="#partial-charges-for-small-molecules" title="Link to this heading">#</a></h3>
+<p>If the provided molecule(s) contain nonzero (user-specified) partial charges (stored in the <a class="reference external" href="https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html#openff.toolkit.topology.Molecule.partial_charges"><code class="docutils literal notranslate"><span class="pre">Molecule.partial_charges</span></code></a> attribute), those partial charges will be used.
+If they do <em>not</em> contain partial charges, <a class="reference external" href="https://ambermd.org/antechamber/ac.html">Antechamber</a> (which uses the <code class="docutils literal notranslate"><span class="pre">sqm</span></code> semiempirical quantum chemical package) is used to assign AM1-BCC charges (<code class="docutils literal notranslate"><span class="pre">antechamber</span> <span class="pre">-c</span> <span class="pre">bcc</span></code>). The conformers used in charge assignment are generated by RDKit.</p>
+<p><em>Note:</em> The <code class="docutils literal notranslate"><span class="pre">Molecule</span></code> object must have the all protons and stereochemistry explicitly specified, and must match the exact protonation and tautomeric state of the molecule that will be found in your OpenMM <code class="docutils literal notranslate"><span class="pre">Topology</span></code> object.
+The atom ordering need not be the same.</p>
+<p><em>Note:</em> The first time a <code class="docutils literal notranslate"><span class="pre">Molecule</span></code> is specified, added, or cached, if it lacks partial charges, the automatically generated charges will be cached and reused; if it contains user-specified partial charges, those charges will be used and cached. Adding the molecule again with a different set of charges will have no effect on changing which charges are assigned.</p>
+</section>
+<section id="caching">
+<h3>Caching<a class="headerlink" href="#caching" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code> also supports the ability to specify a cache filename, allowing parameters for small molecules to be computed only once and then cached in the specified cache file thereafter.</p>
+</section>
+<section id="examples-using-gafftemplategenerator-to-generate-small-molecule-gaff-parameters">
+<h3>Examples using <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code> to generate small molecule GAFF parameters<a class="headerlink" href="#examples-using-gafftemplategenerator-to-generate-small-molecule-gaff-parameters" title="Link to this heading">#</a></h3>
+<p>Create a GAFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an OpenFF Molecule object for benzene from SMILES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openff.toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Molecule</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">"c1ccccc1"</span><span class="p">)</span>
+<span class="c1"># Create the GAFF template generator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GAFFTemplateGenerator</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">gaff</span> <span class="o">=</span> <span class="n">GAFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"gaff-2.2.20"</span><span class="p">)</span>
+<span class="c1"># Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForceField</span>
+
+<span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"amber19-all.xml"</span><span class="p">,</span> <span class="s2">"amber19/tip3pfb.xml"</span><span class="p">)</span>
+<span class="c1"># Register the GAFF template generator</span>
+<span class="n">forcefield</span><span class="o">.</span><span class="n">registerTemplateGenerator</span><span class="p">(</span><span class="n">gaff</span><span class="o">.</span><span class="n">generator</span><span class="p">)</span>
+<span class="c1"># You can now parameterize an OpenMM Topology object that contains the specified molecule.</span>
+<span class="c1"># forcefield will load the appropriate GAFF parameters when needed, and antechamber</span>
+<span class="c1"># will be used to generate small molecule parameters on the fly.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDBFile</span>
+
+<span class="n">pdbfile</span> <span class="o">=</span> <span class="n">PDBFile</span><span class="p">(</span><span class="s2">"t4-lysozyme-L99A-with-benzene.pdb"</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">forcefield</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">topology</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create a template generator for multiple molecules read from an SDF file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">"molecules.sdf"</span><span class="p">)</span>
+<span class="n">gaff</span> <span class="o">=</span> <span class="n">GAFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"gaff-2.2.20"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also add molecules to the generator later, even after the generator has been registered:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gaff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+<span class="n">gaff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">([</span><span class="n">molecule1</span><span class="p">,</span> <span class="n">molecule2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>To check which GAFF versions are supported, examine the <code class="docutils literal notranslate"><span class="pre">INSTALLED_FORCEFIELDS</span></code> attribute:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">GAFFTemplateGenerator</span><span class="o">.</span><span class="n">INSTALLED_FORCEFIELDS</span><span class="p">)</span>
+<span class="go">['gaff-1.4', 'gaff-1.8', 'gaff-1.81', 'gaff-2.1', 'gaff-2.11', 'gaff-2.2.20']</span>
+</pre></div>
+</div>
+<p>You can optionally specify a file that contains a cache of pre-parameterized molecules:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">generator</span> <span class="o">=</span> <span class="n">GAFFTemplateGenerator</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s2">"gaff-molecules.json"</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"gaff-1.8"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.</p>
+</section>
+</section>
+<section id="using-the-open-force-field-initiative-smirnoff-small-molecule-force-fields">
+<h2>Using the Open Force Field Initiative SMIRNOFF small molecule force fields<a class="headerlink" href="#using-the-open-force-field-initiative-smirnoff-small-molecule-force-fields" title="Link to this heading">#</a></h2>
+<p>The OpenMMForceFields package includes a <a class="reference external" href="https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators">residue template generator</a> for the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">ForceField</span></code></a> class that automatically generates OpenMM residue templates for small molecules lacking parameters using the <a class="reference external" href="https://openforcefield.org/">Open Force Field Initiative</a> <a class="reference external" href="https://openforcefield.github.io/standards/standards/smirnoff/">SMIRNOFF</a> small molecule force fields.
+This includes the <a class="reference external" href="https://doi.org/10.1021/acs.jctc.1c00571"><code class="docutils literal notranslate"><span class="pre">openff-1.x.y</span></code> (“Parsley”)</a> and <a class="reference external" href="https://doi.org/10.1021/acs.jctc.3c00039"><code class="docutils literal notranslate"><span class="pre">openff-2.x.y</span></code> (“Sage”)</a> small molecule force field lines, including the <a class="reference external" href="https://github.com/openforcefield/openff-forcefields">most recent force field in each line</a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator</span></code> residue template generator operates in a manner very similar to <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code>, so we only highlight its differences here.</p>
+<p>Like <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code>, when user-specified partial charges are not present, partial charges will be assigned automatically.  For SMIRNOFF force fields, the charges are assigned by the OpenFF software using <a class="reference external" href="https://github.com/openforcefield/openff-nagl">OpenFF NAGL</a> or according to the <a class="reference external" href="https://openforcefield.github.io/standards/standards/smirnoff/#toolkitam1bcc-temporary-support-for-toolkit-based-am1-bcc-partial-charges">AM1-BCC settings of the SMIRNOFF specification</a> (depending on the force field in use).</p>
+<section id="examples-using-smirnofftemplategenerator-to-generate-small-molecule-smirnoff-parameters">
+<h3>Examples using <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator</span></code> to generate small molecule SMIRNOFF parameters<a class="headerlink" href="#examples-using-smirnofftemplategenerator-to-generate-small-molecule-smirnoff-parameters" title="Link to this heading">#</a></h3>
+<p>Create a SMIRNOFF template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an OpenFF Molecule object for benzene from SMILES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openff.toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Molecule</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">"c1ccccc1"</span><span class="p">)</span>
+<span class="c1"># Create the SMIRNOFF template generator with the openff-2.3.0 force field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMIRNOFFTemplateGenerator</span>
+
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"openff-2.3.0"</span><span class="p">)</span>
+<span class="c1"># Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForceField</span>
+
+<span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"amber19-all.xml"</span><span class="p">,</span> <span class="s2">"amber19/tip3pfb.xml"</span><span class="p">)</span>
+<span class="c1"># Register the SMIRNOFF template generator</span>
+<span class="n">forcefield</span><span class="o">.</span><span class="n">registerTemplateGenerator</span><span class="p">(</span><span class="n">smirnoff</span><span class="o">.</span><span class="n">generator</span><span class="p">)</span>
+
+<span class="c1"># create a System with the non-bonded settings of mainline OpenFF force fields</span>
+<span class="c1"># (9 Angstrom cut-off, switching distance applied at 8 Angstrom)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openmm.unit</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">forcefield</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span>
+    <span class="n">topology</span><span class="o">=</span><span class="n">molecule</span><span class="o">.</span><span class="n">to_topology</span><span class="p">()</span><span class="o">.</span><span class="n">to_openmm</span><span class="p">(),</span>
+    <span class="n">nonbondedCutoff</span><span class="o">=</span><span class="mf">0.9</span> <span class="o">*</span> <span class="n">openmm</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">nanometer</span><span class="p">,</span>
+    <span class="n">switchDistance</span><span class="o">=</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">openmm</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">nanometer</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can create a template generator capable of recognizing multiple molecules,
+<em>e.g.</em>, read from an SDF file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">"molecules.sdf"</span><span class="p">)</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"openff-2.3.0"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also add molecules to the generator later, even after the generator has been registered:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smirnoff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+<span class="n">smirnoff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">([</span><span class="n">molecule1</span><span class="p">,</span> <span class="n">molecule2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You must specify the desired SMIRNOFF force field with the <code class="docutils literal notranslate"><span class="pre">forcefield</span></code> keyword
+argument when you create a <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator</span></code> by providing at least one
+force field name, path to an OFFXML force field file, file object, or XML in a
+string.  An iterable can be provided to the <code class="docutils literal notranslate"><span class="pre">forcefield</span></code> argument to load from
+multiple sources if desired.  For exapmle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a SMIRNOFF residue template generator from an older Sage or Parsley version</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"openff-1.3.0"</span><span class="p">)</span>
+<span class="c1"># Request a specific SMIRNOFF force field installed with OpenFF by its full name</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"openff_unconstrained-1.3.0.offxml"</span><span class="p">)</span>
+<span class="c1"># Use a local .offxml file instead</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"local-file.offxml"</span><span class="p">)</span>
+<span class="c1"># Load from multiple sources at once</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="p">[</span><span class="s1">'openff-2.3.0'</span><span class="p">,</span> <span class="s1">'tip5p.offxml'</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You can check the full paths of the force field files that have been loaded:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smirnoff</span><span class="o">.</span><span class="n">smirnoff_filenames</span>
+<span class="go">['/.../offxml/openff_unconstrained-2.3.0.offxml', '/.../offxml/tip5p.offxml']</span>
+</pre></div>
+</div>
+<p>Any force field installed with the OpenFF Toolkit can be requested by its
+filename, <em>e.g.</em>, <code class="docutils literal notranslate"><span class="pre">openff_unconstrained-2.3.0.offxml</span></code>.  To see which force
+fields can be requested by an abbreviated name, examine <code class="docutils literal notranslate"><span class="pre">INSTALLED_FORCEFIELDS</span></code>:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SMIRNOFFTemplateGenerator</span><span class="o">.</span><span class="n">INSTALLED_FORCEFIELDS</span>
+<span class="go">['openff-1.0.0', 'openff-1.0.1', 'openff-1.1.0', 'openff-1.1.1', ...]</span>
+</pre></div>
+</div>
+<p>The names in this list are of the form <code class="docutils literal notranslate"><span class="pre">openff-x.y.z</span></code> and will resolve to the
+“unconstrained” variants of standard OpenFF force fields, which can also be
+loaded with filenames of the form <code class="docutils literal notranslate"><span class="pre">openff_unconstrained-x.y.z.offxml</span></code>.  To
+obtain the “constrained” variants, use filenames <code class="docutils literal notranslate"><span class="pre">openff-x.y.z.offxml</span></code>.  When
+the constrained variants are used, bonds to hydrogen atoms in molecules
+parameterized by the template generator will be constrained unconditionally,
+regardless of the constraint options given in <code class="docutils literal notranslate"><span class="pre">ForceField.createSystem()</span></code>.  The
+unconstrained variants, which are the defaults selected if one of the predefined
+names in <code class="docutils literal notranslate"><span class="pre">INSTALLED_FORCEFIELDS</span></code> is used, do not force these constraints to be
+present, and the option of which degrees of freedom should be constrained are
+left up to the user by passing any desired <code class="docutils literal notranslate"><span class="pre">constraint</span></code> setting to
+<a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField.createSystem"><code class="docutils literal notranslate"><span class="pre">ForceField.createSystem()</span></code></a>.</p>
+<p>You can optionally specify a file that contains a cache of pre-parameterized molecules:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span>
+    <span class="n">cache</span><span class="o">=</span><span class="s2">"smirnoff-molecules.json"</span><span class="p">,</span>
+    <span class="n">forcefield</span><span class="o">=</span><span class="s2">"openff-2.3.0"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.</p>
+</section>
+</section>
+<section id="using-espaloma-to-generate-small-molecule-force-fields">
+<h2>Using espaloma to generate small molecule force fields<a class="headerlink" href="#using-espaloma-to-generate-small-molecule-force-fields" title="Link to this heading">#</a></h2>
+<p>The OpenMMForceFields package includes a <a class="reference external" href="https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators">residue template generator</a> for the OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html"><code class="docutils literal notranslate"><span class="pre">ForceField</span></code></a> class that automatically generates OpenMM residue templates for small molecules lacking parameters using <a class="reference external" href="https://github.com/choderalab/espaloma">espaloma</a> via one of its released force fields, provided <code class="docutils literal notranslate"><span class="pre">espaloma</span></code> and its dependencies are installed.
+<code class="docutils literal notranslate"><span class="pre">espaloma</span></code> uses a <a class="reference external" href="https://arxiv.org/abs/2010.01196">graph convolutional model</a> to generate both valence parameters and fast partial charges.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">EspalomaTemplateGenerator</span></code> residue template generator operates in a manner very similar to <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code>, so we only highlight its differences here.</p>
+<p><strong>This feature is currently experimental and its API is subject to change.</strong></p>
+<section id="examples-using-espalomatemplategenerator-to-generate-small-molecule-parameters-with-espaloma">
+<h3>Examples using <code class="docutils literal notranslate"><span class="pre">EspalomaTemplateGenerator</span></code> to generate small molecule parameters with espaloma<a class="headerlink" href="#examples-using-espalomatemplategenerator-to-generate-small-molecule-parameters-with-espaloma" title="Link to this heading">#</a></h3>
+<p>Create an espaloma template generator for a single molecule (benzene, created from SMILES) and register it with ForceField:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an OpenFF Molecule object for benzene from SMILES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openff.toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Molecule</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">"c1ccccc1"</span><span class="p">)</span>
+<span class="c1"># Create the SMIRNOFF template generator with the released espaloma-0.3.2 force field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">EspalomaTemplateGenerator</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">espaloma</span> <span class="o">=</span> <span class="n">EspalomaTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"espaloma-0.3.2"</span><span class="p">)</span>
+<span class="c1"># Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForceField</span>
+
+<span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">"amber19-all.xml"</span><span class="p">,</span> <span class="s2">"amber19/tip3pfb.xml"</span><span class="p">)</span>
+<span class="c1"># Register the SMIRNOFF template generator</span>
+<span class="n">forcefield</span><span class="o">.</span><span class="n">registerTemplateGenerator</span><span class="p">(</span><span class="n">espaloma</span><span class="o">.</span><span class="n">generator</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create a template generator for a specific espaloma force field for multiple molecules read from an SDF file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">molecules</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">"molecules.sdf"</span><span class="p">)</span>
+<span class="c1"># Create an espaloma residue template generator from the espaloma-0.3.2 release,</span>
+<span class="c1"># retrieving it automatically from GitHub release artifacts</span>
+<span class="n">espaloma</span> <span class="o">=</span> <span class="n">EspalomaTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"espaloma-0.3.2"</span><span class="p">)</span>
+<span class="c1"># Create an espaloma residue template generator from an espaloma model retrieved from a URL</span>
+<span class="n">espaloma</span> <span class="o">=</span> <span class="n">EspalomaTemplateGenerator</span><span class="p">(</span>
+    <span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span>
+    <span class="n">forcefield</span><span class="o">=</span><span class="s2">"https://github.com/choderalab/espaloma/releases/download/0.3.2/espaloma-0.3.2.pt"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Create an espaloma residue template generator from an espaloma model stored in a local file</span>
+<span class="n">espaloma</span> <span class="o">=</span> <span class="n">EspalomaTemplateGenerator</span><span class="p">(</span>
+    <span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span>
+    <span class="n">forcefield</span><span class="o">=</span><span class="s2">"/path/to/espaloma-0.3.2.pt"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also add molecules to the generator later, even after the generator has been registered:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smirnoff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+<span class="n">smirnoff</span><span class="o">.</span><span class="n">add_molecules</span><span class="p">([</span><span class="n">molecule1</span><span class="p">,</span> <span class="n">molecule2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You can optionally specify a file that contains a cache of pre-parameterized molecules:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">espaloma</span> <span class="o">=</span> <span class="n">EspalomaTemplateGenerator</span><span class="p">(</span>
+    <span class="n">cache</span><span class="o">=</span><span class="s2">"espaloma-molecules.json"</span><span class="p">,</span>
+    <span class="n">forcefield</span><span class="o">=</span><span class="s2">"espaloma-0.3.2"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Newly parameterized molecules will be written to the cache, saving time next time these molecules are encountered.</p>
+</section>
+</section>
+<section id="automating-force-field-management-with-systemgenerator">
+<h2>Automating force field management with <code class="docutils literal notranslate"><span class="pre">SystemGenerator</span></code><a class="headerlink" href="#automating-force-field-management-with-systemgenerator" title="Link to this heading">#</a></h2>
+<p>The OpenMMForceFields package provides the <code class="docutils literal notranslate"><span class="pre">openmmforcefields.generators.SystemGenerator</span></code> class that handles management of common force fields transparently for you.
+Here’s an example that uses GAFF 2.2.20 along with the Amber <code class="docutils literal notranslate"><span class="pre">ff19SB</span></code> force field and TIP3P-FB water model to generate an OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.openmm.System.html"><code class="docutils literal notranslate"><span class="pre">System</span></code></a> from an OpenMM <a class="reference external" href="https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html"><code class="docutils literal notranslate"><span class="pre">Topology</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the keyword arguments to feed to ForceField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">forcefield_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"constraints"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span>
+    <span class="s2">"rigidWater"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"removeCMMotion"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"hydrogenMass"</span><span class="p">:</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">unit</span><span class="o">.</span><span class="n">amu</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1"># Initialize a SystemGenerator using GAFF</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openmmforcefields.generators</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemGenerator</span>
+
+<span class="n">system_generator</span> <span class="o">=</span> <span class="n">SystemGenerator</span><span class="p">(</span>
+    <span class="n">forcefields</span><span class="o">=</span><span class="p">[</span><span class="s2">"amber19-all.xml"</span><span class="p">,</span> <span class="s2">"amber19/tip3pfb.xml"</span><span class="p">],</span>
+    <span class="n">small_molecule_forcefield</span><span class="o">=</span><span class="s2">"gaff-2.2.20"</span><span class="p">,</span>
+    <span class="n">forcefield_kwargs</span><span class="o">=</span><span class="n">forcefield_kwargs</span><span class="p">,</span>
+    <span class="n">cache</span><span class="o">=</span><span class="s2">"db.json"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Create an OpenMM System from an OpenMM Topology object</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">system_generator</span><span class="o">.</span><span class="n">create_system</span><span class="p">(</span><span class="n">openmm_topology</span><span class="p">)</span>
+<span class="c1"># Alternatively, create an OpenMM System from an OpenMM Topology object and a list of OpenFF Molecule objects</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">"molecules.sdf"</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">"sdf"</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">system_generator</span><span class="o">.</span><span class="n">create_system</span><span class="p">(</span><span class="n">openmm_topology</span><span class="p">,</span> <span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Parameterized molecules are cached in <code class="docutils literal notranslate"><span class="pre">db.json</span></code>.
+Parameters for multiple force fields can be held in the same cache file.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">SystemGenerator</span></code> will use <code class="docutils literal notranslate"><span class="pre">PME</span></code> for periodic systems and <code class="docutils literal notranslate"><span class="pre">NoCutoff</span></code> for non-periodic systems.
+You can modify this behavior with the optional <code class="docutils literal notranslate"><span class="pre">periodic_forcefield_kwargs</span></code> and <code class="docutils literal notranslate"><span class="pre">nonperiodic_forcefield_kwargs</span></code> arguments, which are used to update <code class="docutils literal notranslate"><span class="pre">forcefield_kwargs</span></code> depending on whether the system is periodic or non-periodic:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openmm</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">system_generator</span> <span class="o">=</span> <span class="n">SystemGenerator</span><span class="p">(</span>
+    <span class="n">forcefields</span><span class="o">=</span><span class="p">[</span><span class="s2">"amber19-all.xml"</span><span class="p">,</span> <span class="s2">"amber19/tip3pfb.xml"</span><span class="p">],</span>
+    <span class="n">periodic_forcefield_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"nonbondedMethod"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">LJPME</span><span class="p">},</span>
+    <span class="n">nonperiodic_forcefield_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"nonbondedMethod"</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">CutoffNonPeriodic</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To use, for example, <a class="reference external" href="https://github.com/openforcefield/openff-forcefields">OpenFF’s Sage <code class="docutils literal notranslate"><span class="pre">openff-2.3.0</span></code></a> instead of GAFF 2.2.20, we would have instead specified <code class="docutils literal notranslate"><span class="pre">small_molecule_forcefield='openff-2.3.0'</span></code>.</p>
+<p>To use <a class="reference external" href="https://github.com/choderalab/espaloma">espaloma</a> for assigning small molecule parameters, for example with the <a class="reference external" href="https://github.com/choderalab/espaloma/releases/tag/0.3.2"><code class="docutils literal notranslate"><span class="pre">espaloma-0.3.2</span></code> model</a> released with the <a class="reference external" href="https://arxiv.org/abs/2307.07085">espaloma preprint</a>, you can specify <code class="docutils literal notranslate"><span class="pre">small_molecule_forcefield='espaloma-0.3.2'</span></code>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">OpenMMForceFields</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-amber-and-charmm-biopolymer-force-fields">Using the Amber and CHARMM biopolymer force fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-amber-force-fields">Using the Amber force fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-charmm-force-fields">Using the CHARMM force fields</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-amber-gaff-1-x-and-2-x-for-small-molecules">Using Amber GAFF 1.x and 2.x for small molecules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cheminformatics-toolkits">Cheminformatics toolkits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-the-fly-template-generation-for-small-molecules">On-the-fly template generation for small molecules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-molecules">Specifying molecules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-charges-for-small-molecules">Partial charges for small molecules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caching">Caching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-using-gafftemplategenerator-to-generate-small-molecule-gaff-parameters">Examples using <code class="docutils literal notranslate"><span class="pre">GAFFTemplateGenerator</span></code> to generate small molecule GAFF parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-open-force-field-initiative-smirnoff-small-molecule-force-fields">Using the Open Force Field Initiative SMIRNOFF small molecule force fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-using-smirnofftemplategenerator-to-generate-small-molecule-smirnoff-parameters">Examples using <code class="docutils literal notranslate"><span class="pre">SMIRNOFFTemplateGenerator</span></code> to generate small molecule SMIRNOFF parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-espaloma-to-generate-small-molecule-force-fields">Using espaloma to generate small molecule force fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-using-espalomatemplategenerator-to-generate-small-molecule-parameters-with-espaloma">Examples using <code class="docutils literal notranslate"><span class="pre">EspalomaTemplateGenerator</span></code> to generate small molecule parameters with espaloma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-force-field-management-with-systemgenerator">Automating force field management with <code class="docutils literal notranslate"><span class="pre">SystemGenerator</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/userguide.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Stanford University and the Authors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.22.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
