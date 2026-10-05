@@ -152,6 +152,7 @@ forcefield.registerTemplateGenerator(smirnoff.generator)
 # create a System with the non-bonded settings of mainline OpenFF force fields
 # (9 Angstrom cut-off, switching distance applied at 8 Angstrom)
 import openmm.unit
+
 system = forcefield.createSystem(
     topology=molecule.to_topology().to_openmm(),
     nonbondedCutoff=0.9 * openmm.unit.nanometer,
@@ -188,7 +189,7 @@ smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="openff_unc
 # Use a local .offxml file instead
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecules, forcefield="local-file.offxml")
 # Load from multiple sources at once
-smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=['openff-2.3.0', 'tip5p.offxml'])
+smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield=["openff-2.3.0", "tip5p.offxml"])
 ```
 
 You can check the full paths of the force field files that have been loaded:
