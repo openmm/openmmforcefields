@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>User Guide &#8212; OpenMMForceFields 0+untagged.1.g0f09793dev_0f09793 documentation</title>
+    <title>User Guide &#8212; OpenMMForceFields 0+untagged.1.gf0dfeffdev_f0dfeff documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
 
-    <script src="_static/documentation_options.js?v=1b66de5c"></script>
+    <script src="_static/documentation_options.js?v=2dba3585"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'userguide';</script>
@@ -557,6 +557,7 @@ This includes the <a class="reference external" href="https://doi.org/10.1021/ac
 <span class="c1"># create a System with the non-bonded settings of mainline OpenFF force fields</span>
 <span class="c1"># (9 Angstrom cut-off, switching distance applied at 8 Angstrom)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">openmm.unit</span>
+
 <span class="n">system</span> <span class="o">=</span> <span class="n">forcefield</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span>
     <span class="n">topology</span><span class="o">=</span><span class="n">molecule</span><span class="o">.</span><span class="n">to_topology</span><span class="p">()</span><span class="o">.</span><span class="n">to_openmm</span><span class="p">(),</span>
     <span class="n">nonbondedCutoff</span><span class="o">=</span><span class="mf">0.9</span> <span class="o">*</span> <span class="n">openmm</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">nanometer</span><span class="p">,</span>
@@ -587,7 +588,7 @@ multiple sources if desired.  For exapmle:</p>
 <span class="c1"># Use a local .offxml file instead</span>
 <span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecules</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="s2">"local-file.offxml"</span><span class="p">)</span>
 <span class="c1"># Load from multiple sources at once</span>
-<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="p">[</span><span class="s1">'openff-2.3.0'</span><span class="p">,</span> <span class="s1">'tip5p.offxml'</span><span class="p">])</span>
+<span class="n">smirnoff</span> <span class="o">=</span> <span class="n">SMIRNOFFTemplateGenerator</span><span class="p">(</span><span class="n">molecules</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">forcefield</span><span class="o">=</span><span class="p">[</span><span class="s2">"openff-2.3.0"</span><span class="p">,</span> <span class="s2">"tip5p.offxml"</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>You can check the full paths of the force field files that have been loaded:</p>
