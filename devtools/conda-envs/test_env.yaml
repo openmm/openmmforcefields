@@ -4,7 +4,7 @@ channels:
 dependencies:
   - ambertools >=24
   - lxml
-  - numpy <2.3
+  - numpy
   - openff-toolkit >=0.11
   - openmm
   - pip
