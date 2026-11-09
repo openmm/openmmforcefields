@@ -72,6 +72,9 @@ jobs:
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
       run: |
+        # espaloma requires dgl which requires an ancient version of PyTorch incompatible with recent glibc:
+        # https://github.com/conda-forge/pytorch-cpu-feedstock/issues/350
+        execstack -c $CONDA_PREFIX/lib/libtorch_cpu.so
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
         # https://github.com/openmm/openmmforcefields/issues/399
