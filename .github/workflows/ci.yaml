@@ -22,21 +22,19 @@ jobs:
   test:
     name: Test on ${{ matrix.os }}, Python ${{ matrix.python-version }}, OpenMM ${{ matrix.openmm-version }}
     runs-on: ${{ matrix.os }}
-    env:
-      OE_LICENSE: ${{ github.workspace }}/oe_license.txt
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13", "3.14"]
         amber-conversion: [false]
-        openmm-version: ["8.5.1"]
+        openmm-version: ["8.6.1"]
 
     steps:
     - uses: actions/checkout@v7
 
     - name: Setup Conda Environment with espaloma
-      if: matrix.python-version != '3.13'
+      if: matrix.python-version == '3.12'
       uses: mamba-org/setup-micromamba@v3
       with:
         environment-file: devtools/conda-envs/test_env.yaml
@@ -46,7 +44,7 @@ jobs:
           espaloma==0.4.0
 
     - name: Setup Conda Environment
-      if: matrix.python-version == '3.13'
+      if: matrix.python-version != '3.12'
       uses: mamba-org/setup-micromamba@v3
       with:
         environment-file: devtools/conda-envs/test_env.yaml
@@ -68,12 +66,16 @@ jobs:
         python -c "from openmmforcefields import __version__, __file__; print(__version__, __file__)"
 
     - name: Test Installed Package (With Espaloma)
-      if: matrix.python-version != '3.13'
+      if: matrix.python-version == '3.12'
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
+        MATRIX_OS: ${{ matrix.os }}
       run: |
+        # espaloma requires dgl which requires an ancient version of PyTorch incompatible with recent glibc:
+        # https://github.com/conda-forge/pytorch-cpu-feedstock/issues/350
+        if [ "$MATRIX_OS" == "ubuntu-latest" ]; then patchelf --clear-execstack $CONDA_PREFIX/lib/libtorch_cpu.so; fi
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
         # https://github.com/openmm/openmmforcefields/issues/399
@@ -83,7 +85,7 @@ jobs:
           openmmforcefields/tests/
 
     - name: Test Installed Package
-      if: matrix.python-version == '3.13'
+      if: matrix.python-version != '3.12'
       env:
         COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
@@ -92,7 +94,7 @@ jobs:
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
 
-        pytest -n logical --rungaff  --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
+        pytest -n logical --rungaff --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
           openmmforcefields/tests/
       
     - name: Test AMBER conversion

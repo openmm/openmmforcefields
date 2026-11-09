@@ -2,7 +2,7 @@ name: openmmforcefields-test-charmm
 channels:
   - conda-forge
 dependencies:
-  - numpy <2.3
+  - numpy
   - openmm
   - pip
   - python
