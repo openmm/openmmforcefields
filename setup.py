@@ -32,7 +32,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
-        "License :: OSI Approved :: MIT",
+        ""License :: OSI Approved :: MIT License",
     ],
     # Don't install as an egg, since OpenMM can't find ffxml files if we do
     zip_safe=False,
