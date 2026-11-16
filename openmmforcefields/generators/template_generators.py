@@ -576,6 +576,19 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         * This method preserves stereochemistry during AM1-BCC charge parameterization.
         * Atom names in molecules will be assigned Tripos atom names if any are blank or not unique.
         """
+        import shutil
+
+        missing = [
+            exe for exe in ("antechamber", "parmchk2")
+            if shutil.which(exe) is None
+        ]
+
+        if missing:
+            raise RuntimeError(
+                f"AmberTools is required for GAFF parameter assignment "
+                f"(missing from PATH: {', '.join(missing)}).\n"
+                "Install it with: conda install -c conda-forge 'ambertools>=22'"
+            )
 
         from openff.units import unit
 

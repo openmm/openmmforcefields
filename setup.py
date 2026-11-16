@@ -18,7 +18,7 @@ with open("README.md") as handle:
 
 setup(
     # Self-descriptive entries which should always be present
-    name="OpenMMForceFields",
+    name="mike-OpenMMForceFields",
     author="Chodera lab // MSKCC",
     author_email="john.chodera@choderalab.org",
     description=short_description[0],
@@ -53,4 +53,24 @@ setup(
         ],
     },
     package_data={"openmmforcefields": ["ffxml/amber/*.xml", "ffxml/amber/gaff/*.{xml,dat}", "ffxml/charmm/*.xml"]},
+    install_requires=[
+        "lxml",
+        "numpy",
+        "openff-interchange >=0.4",
+        "openff-toolkit >=0.16.1",
+        "openff-units >=0.2",
+        "openmm >=8.5.1",
+        "pyyaml",
+        "tinydb",
+        "validators",
+        "parmed", # might not need in this pass
+        ],
+    extras_require = {
+        'test':  [
+            "pytest",
+            "pytest-cov",
+            "pytest-randomly",
+            "pytest-xdist",
+            ],
+        },
 )
