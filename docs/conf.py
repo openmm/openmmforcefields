@@ -26,7 +26,7 @@ project = "OpenMMForceFields"
 copyright = "2026 Stanford University and the Authors"
 author = "Stanford University"
 
-# version specified in ../setup.py
+# Version determined by setuptools-scm from Git tags at build time.
 version = importlib.metadata.version("openmmforcefields")
 
 repo = git.Repo(search_parent_directories=True)
