@@ -8,9 +8,10 @@ dynamic = ["version"]
 readme = "README.md"
 authors = [
   { name = "Chodera lab // MSKCC", email = "john.chodera@choderalab.org" },
+  { name = "Peter Eastman", email = "peastman@stanford.edu" },
 ]
 license = "MIT"
-keywords = ["molecular mechanics", "forcefield", "OpenMM", "AMBER", "CHARMM", "GAFF"]
+keywords = ["molecular mechanics", "forcefield", "OpenMM", "AMBER", "CHARMM", "GAFF", "OpenFF"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Topic :: Utilities",
