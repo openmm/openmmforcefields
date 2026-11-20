@@ -578,10 +578,7 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         """
         import shutil
 
-        missing = [
-            exe for exe in ("antechamber", "parmchk2")
-            if shutil.which(exe) is None
-        ]
+        missing = [exe for exe in ("antechamber", "parmchk2") if shutil.which(exe) is None]
 
         if missing:
             raise RuntimeError(

@@ -104,10 +104,7 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
         # Older force fields require AM1-BCC, which NAGL cannot provide by name.
         if "ToolkitAM1BCC" in OFFForceField(force_field).registered_parameter_handlers:
-            if not (
-                AmberToolsToolkitWrapper.is_available()
-                or OpenEyeToolkitWrapper.is_available()
-            ):
+            if not (AmberToolsToolkitWrapper.is_available() or OpenEyeToolkitWrapper.is_available()):
                 return False
 
         return True
