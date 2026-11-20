@@ -13,6 +13,7 @@ import numpy as np
 import openmm
 import pytest
 from openff.toolkit import Molecule, Topology, ForceField as OFFForceField
+from openff.toolkit import AmberToolsToolkitWrapper, OpenEyeToolkitWrapper
 from openff.units import unit as OFFUnit
 from openmm.app import PME, ForceField, Modeller, NoCutoff, PDBFile
 
@@ -76,9 +77,13 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
     def _filter_openff(self, force_field: str) -> bool:
         """
-        Return True only for Parsley and force fields among SMIRNOFF force fields.
+        Return whether a force field should be included in parameterization tests.
 
-        Skips over (returns False) smirnoff99Frosst, ff14SB, water models, and 2.0.0rc1.
+        Skip protein and solvent force fields, smirnoff99Frosst, and OpenFF
+        2.0.0-rc.1. Also skip SMIRNOFF force fields requiring ToolkitAM1BCC
+        when neither AmberTools nor OpenEye is available.
+
+        GAFF force fields are accepted without SMIRNOFF validation.
         """
 
         if "ff14sb" in force_field:
@@ -100,6 +105,15 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # it's not so relevant today so skip over it in testing, though users can access it
         if "smirnoff99" in force_field:
             return False
+
+        # GAFF is not a SMIRNOFF force field.
+        if force_field.startswith("gaff-"):
+            return True
+
+        # Older force fields require AM1-BCC, which NAGL cannot provide by name.
+        if "ToolkitAM1BCC" in OFFForceField(force_field).registered_parameter_handlers:
+            if not (AmberToolsToolkitWrapper.is_available() or OpenEyeToolkitWrapper.is_available()):
+                return False
 
         return True
 
@@ -1144,11 +1158,11 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         """Test loading multiple force field components together"""
 
         generator = SMIRNOFFTemplateGenerator(
-            forcefield=["openff-2.0.0.offxml", "tip3p.offxml", OFFForceField().to_string()]
+            forcefield=["openff-2.3.0.offxml", "tip3p.offxml", OFFForceField().to_string()]
         )
         assert generator.forcefield
         assert len(generator.smirnoff_filenames) == 3
-        assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
+        assert generator.smirnoff_filenames[0].endswith("openff-2.3.0.offxml")
         assert generator.smirnoff_filenames[1].endswith("tip3p.offxml")
         assert generator.smirnoff_filenames[2] is None
         assert os.path.exists(generator.smirnoff_filenames[0])
@@ -1158,21 +1172,21 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         """Test that forcefield names resolve to unconstrained versions correctly"""
 
         # Should redirect to the unconstrained version
-        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0")
-        assert generator.forcefield == "openff-2.0.0"
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.3.0")
+        assert generator.forcefield == "openff-2.3.0"
         assert len(generator.smirnoff_filenames) == 1
-        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.0.0.offxml")
+        assert generator.smirnoff_filenames[0].endswith("openff_unconstrained-2.3.0.offxml")
         assert os.path.exists(generator.smirnoff_filenames[0])
 
         # Should not point to any valid force field
         with pytest.raises(ValueError, match="Can't load or parse specified SMIRNOFF"):
-            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0")
+            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.3.0")
 
         # Specifying a name with .offxml should never get modified
-        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.0.0.offxml")
+        generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.3.0.offxml")
         assert generator.forcefield
         assert len(generator.smirnoff_filenames) == 1
-        assert generator.smirnoff_filenames[0].endswith("openff-2.0.0.offxml")
+        assert generator.smirnoff_filenames[0].endswith("openff-2.3.0.offxml")
         assert os.path.exists(generator.smirnoff_filenames[0])
 
         generator = SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0.offxml")
@@ -1620,7 +1634,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
         the template generator.
         """
 
-        custom_sage = OFFForceField("openff-2.0.0.offxml")
+        custom_sage = OFFForceField("openff-2.3.0.offxml")
         # Create a simple molecule with one bond type
         ethane = Molecule.from_smiles("CC")
         # Label ethane to get the bond type (not hard coded incase this changes in future)
@@ -1658,7 +1672,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         from openmm import unit
 
-        custom_sage = OFFForceField("openff-2.0.0.offxml")
+        custom_sage = OFFForceField("openff-2.3.0.offxml")
         custom_sage.get_parameter_handler("vdW").scale14 = 0.7
         custom_sage.get_parameter_handler("Electrostatics").scale14 = 0.3
 
