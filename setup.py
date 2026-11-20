@@ -18,7 +18,7 @@ with open("README.md") as handle:
 
 setup(
     # Self-descriptive entries which should always be present
-    name="mike-OpenMMForceFields",
+    name="OpenMMForceFields",
     author="Chodera lab // MSKCC",
     author_email="john.chodera@choderalab.org",
     description=short_description[0],
@@ -32,7 +32,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: MIT",
     ],
     # Don't install as an egg, since OpenMM can't find ffxml files if we do
     zip_safe=False,
@@ -53,28 +53,4 @@ setup(
         ],
     },
     package_data={"openmmforcefields": ["ffxml/amber/*.xml", "ffxml/amber/gaff/*.{xml,dat}", "ffxml/charmm/*.xml"]},
-    install_requires=[
-        "lxml",
-        "numpy",
-        "openff-interchange >=0.4",
-        "openff-toolkit >=0.16.1",
-        "openff-units >=0.2",
-        "openmm >=8.5.1",
-        "pyyaml",
-        "tinydb",
-        "validators",
-        ],
-    extras_require = {
-        'test':  [
-            "pytest",
-            "pytest-cov",
-            "pytest-randomly",
-            "pytest-xdist",
-            "parmed",  # needed for some SMIRNOFF tests
-            ],
-        # If/when ambertools is on pypi, we can add it here
-        'gaff': [
-            "parmed",
-            ],
-        },
 )
