@@ -590,6 +590,15 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
                 "Install it with: conda install -c conda-forge 'ambertools>=22'"
             )
 
+        try:
+            import parmed
+        except ModuleNotFoundError as exc:
+            if exc.name != "parmed":
+                raise
+            raise RuntimeError(
+                "ParmEd is required for GAFF parameter assignment. Install it with: pip install parmed"
+            ) from exc
+
         from openff.units import unit
 
         # Use the canonical isomeric SMILES to uniquely name the template
@@ -644,7 +653,6 @@ class GAFFTemplateGenerator(SmallMoleculeTemplateGenerator):
         from io import StringIO
 
         leaprc = StringIO(f"parm = loadamberparams {frcmod_filename}")
-        import parmed
 
         params = parmed.amber.AmberParameterSet.from_leaprc(leaprc)
         kwargs = {}
