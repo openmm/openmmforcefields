@@ -15,6 +15,29 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Topic :: Utilities",
 ]
+dependencies = [
+    "lxml",
+    "numpy",
+    "openff-interchange>=0.4",
+    "openff-toolkit>=0.16.1",
+    "openff-units>=0.2",
+    "openmm>=8.5.1",
+    "pyyaml",
+    "tinydb",
+    "validators",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-randomly",
+    "pytest-xdist",
+    "parmed",  # Needed for some SMIRNOFF tests
+]
+gaff = [
+    "parmed",
+]
 
 [project.urls]
 Homepage = "https://github.com/openmm/openmmforcefields"
