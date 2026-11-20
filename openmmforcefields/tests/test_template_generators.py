@@ -1180,7 +1180,7 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
 
         # Should not point to any valid force field
         with pytest.raises(ValueError, match="Can't load or parse specified SMIRNOFF"):
-            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.0.0")
+            SMIRNOFFTemplateGenerator(forcefield="openff_unconstrained-2.3.0")
 
         # Specifying a name with .offxml should never get modified
         generator = SMIRNOFFTemplateGenerator(forcefield="openff-2.3.0.offxml")
