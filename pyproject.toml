@@ -12,7 +12,7 @@ authors = [
 license = "MIT"
 keywords = ["molecular mechanics", "forcefield", "OpenMM", "AMBER", "CHARMM", "GAFF"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 5 - Production/Stable",
   "Topic :: Utilities",
 ]
 dependencies = [
@@ -68,7 +68,7 @@ omit = ["*/tests/*", "openmmforcefields/_version.py"]
 
 [tool.ruff]
 line-length = 119
-extend-exclude = ["openmmforcefields/_version.py", "amber/", "charmm/"]
+extend-exclude = ["amber/", "charmm/"]
 
 [tool.ruff.lint]
 select = [
