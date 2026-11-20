@@ -10,7 +10,7 @@ from openmmforcefields.generators import GAFFTemplateGenerator
 
 
 def test_generators_import_without_parmed():
-    """Normal imports must not require the optional GAFF dependency."""
+    """Normal imports must not require the optional ParmEd dependency for GAFF."""
     subprocess.run(
         [
             sys.executable,
