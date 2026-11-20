@@ -53,19 +53,11 @@ def test_systems():
             n_molecules = MAX_MOLECULES
         molecules = [molecules[index] for index in range(n_molecules)]
 
-        # Create structures
-        import parmed
-
-        # NOTE: This does not work because parmed does not correctly assign bonds for HID
-        # protein_structure = parmed.load_file(pdb_filename)
-        # NOTE: This is the workaround
-        protein_structure = parmed.openmm.load_topology(pdbfile.topology, xyz=pdbfile.positions)
-
-        molecules_structure = parmed.load_file(sdf_filename)
-        molecules_structure = [molecules_structure[index] for index in range(n_molecules)]
-
-        complex_structures = [(molecules_structure[index] + protein_structure) for index in range(n_molecules)]
-        complex_structures = [molecules_structure[index] for index in range(n_molecules)]  # DEBUG
+        # The existing tests exercise ligand-only structures, so build them
+        # directly with OpenMM instead of requiring ParmEd.
+        complex_structures = [
+            Modeller(molecule.to_topology().to_openmm(), molecule.conformers[0].to_openmm()) for molecule in molecules
+        ]
 
         # Store
         testsystem = {
@@ -532,7 +524,7 @@ class TestSystemGenerator:
                 cache=cache,
             )
             system = generator.create_system(openmm_topology)
-            assert system.getNumParticles() == len(complex_structure.atoms)
+            assert system.getNumParticles() == len(list(complex_structure.topology.atoms()))
 
             # Create solvated structure
             modeller = Modeller(complex_structure.topology, complex_structure.positions)
