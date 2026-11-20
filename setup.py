@@ -63,7 +63,6 @@ setup(
         "pyyaml",
         "tinydb",
         "validators",
-        "parmed", # might not need in this pass
         ],
     extras_require = {
         'test':  [
@@ -71,6 +70,11 @@ setup(
             "pytest-cov",
             "pytest-randomly",
             "pytest-xdist",
+            "parmed",  # needed for some SMIRNOFF tests
+            ],
+        # If/when ambertools is on pypi, we can add it here
+        'gaff': [
+            "parmed",
             ],
         },
 )
