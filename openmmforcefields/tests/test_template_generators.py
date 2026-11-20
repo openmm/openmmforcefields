@@ -77,9 +77,13 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
 
     def _filter_openff(self, force_field: str) -> bool:
         """
-        Return True only for Parsley and force fields among SMIRNOFF force fields.
+        Return whether a force field should be included in parameterization tests.
 
-        Skips over (returns False) smirnoff99Frosst, ff14SB, water models, and 2.0.0rc1.
+        Skip protein and solvent force fields, smirnoff99Frosst, and OpenFF
+        2.0.0-rc.1. Also skip SMIRNOFF force fields requiring ToolkitAM1BCC
+        when neither AmberTools nor OpenEye is available.
+
+        GAFF force fields are accepted without SMIRNOFF validation.
         """
 
         if "ff14sb" in force_field:
@@ -101,6 +105,10 @@ class TemplateGeneratorBaseCase(unittest.TestCase):
         # it's not so relevant today so skip over it in testing, though users can access it
         if "smirnoff99" in force_field:
             return False
+
+        # GAFF is not a SMIRNOFF force field.
+        if force_field.startswith("gaff-"):
+            return True
 
         # Older force fields require AM1-BCC, which NAGL cannot provide by name.
         if "ToolkitAM1BCC" in OFFForceField(force_field).registered_parameter_handlers:
