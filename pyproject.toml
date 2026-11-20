@@ -1,6 +1,51 @@
+[build-system]
+requires = ["setuptools>=80", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "OpenMMForceFields"
+dynamic = ["version"]
+readme = "README.md"
+authors = [
+  { name = "Chodera lab // MSKCC", email = "john.chodera@choderalab.org" },
+]
+license = "MIT"
+keywords = ["molecular mechanics", "forcefield", "OpenMM", "AMBER", "CHARMM", "GAFF"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/openmm/openmmforcefields"
+
+[project.entry-points."openmm.forcefielddir"]
+ffxml = "openmmforcefields.utils:get_ffxml_path"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+namespaces = false
+
+[tool.setuptools.package-data]
+openmmforcefields = [
+  "ffxml/amber/*.xml",
+  "ffxml/amber/gaff/*.{xml,dat}",
+  "ffxml/charmm/*.xml",
+]
+
+[tool.setuptools_scm]
+version_file = "openmmforcefields/_version.py"
+
+[tool.coverage.run]
+omit = ["*/tests/*", "openmmforcefields/_version.py"]
+
 [tool.ruff]
 line-length = 119
-extend-exclude = ["openmmforcefields/_version.py", "versioneer.py", "amber/", "charmm/"]
+extend-exclude = ["openmmforcefields/_version.py", "amber/", "charmm/"]
 
 [tool.ruff.lint]
 select = [

@@ -33,13 +33,13 @@ This directory contains the files to setup the Conda environment for testing pur
    *  `git tag -a X.Y.Z [latest pushed commit] && git push --follow-tags`
 - [ ] Get the PR merged in
 
-## Versioneer Auto-version
-[Versioneer](https://github.com/warner/python-versioneer) will automatically infer what version 
-is installed by looking at the `git` tags and how many commits ahead this version is. The format follows 
-[PEP 440](https://www.python.org/dev/peps/pep-0440/) and has the regular expression of:
-```regexp
-\d+.\d+.\d+(?\+\d+-[a-z0-9]+)
-```
-If the version of this commit is the same as a `git` tag, the installed version is the same as the tag, 
-e.g. `openmmforcefields-0.1.2`, otherwise it will be appended with `+X` where `X` is the number of commits 
-ahead from the last tag, and then `-YYYYYY` where the `Y`'s are replaced with the `git` commit hash.
+## Git-derived versioning
+
+[setuptools-scm](https://setuptools-scm.readthedocs.io/) determines the package
+version from Git tags at build time. Builds at a release tag use the tagged
+version, e.g. 0.16.0. Commits after a tag use a PEP 440 development version,
+such as 0.16.1.dev11+g0edd3bb81; local builds from a dirty checkout can also
+include a dirty-tree suffix. The generated openmmforcefields/_version.py is
+included in the wheel but is not tracked in Git.
+
+Build requirements and version configuration are declared in pyproject.toml.

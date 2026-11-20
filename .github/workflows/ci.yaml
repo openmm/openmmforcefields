@@ -68,7 +68,7 @@ jobs:
     - name: Test Installed Package (With Espaloma)
       if: matrix.python-version == '3.12'
       env:
-        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        COV_ARGS: --cov=openmmforcefields --cov-config=pyproject.toml --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
         MATRIX_OS: ${{ matrix.os }}
@@ -87,7 +87,7 @@ jobs:
     - name: Test Installed Package
       if: matrix.python-version != '3.12'
       env:
-        COV_ARGS: --cov=openmmforcefields --cov-config=setup.cfg --cov-append --cov-report=xml
+        COV_ARGS: --cov=openmmforcefields --cov-config=pyproject.toml --cov-append --cov-report=xml
         LOGLEVEL: "INFO"
         KMP_DUPLICATE_LIB_OK: "True"
       run: |
